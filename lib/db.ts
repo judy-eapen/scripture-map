@@ -7,6 +7,10 @@ import type {
   NeighboringNation,
   NavChapter,
   TimelineKing,
+  QuizQuestion,
+  DifficultPassage,
+  GenealogyNode,
+  GenealogyEdge,
 } from './types'
 
 // Get full chapter data for the chapter study page
@@ -41,7 +45,7 @@ export async function getChapterData(
   if (chapterError || !chapter) return null
 
   // Fetch related data in parallel
-  const [peopleResult, placesResult, evidenceResult, nationsResult] =
+  const [peopleResult, placesResult, evidenceResult, nationsResult, passagesResult, quizCountResult] =
     await Promise.allSettled([
       supabase
         .from('chapter_people')
@@ -58,6 +62,15 @@ export async function getChapterData(
       supabase
         .from('chapter_nations')
         .select('context_note, neighboring_nations(id, name, color_hex, key_rulers)')
+        .eq('chapter_id', chapter.id),
+      supabase
+        .from('difficult_passages')
+        .select('id, verse_start, verse_end, topic, plain_language, theological_context')
+        .eq('chapter_id', chapter.id)
+        .order('verse_start'),
+      supabase
+        .from('quiz_questions')
+        .select('id', { count: 'exact', head: true })
         .eq('chapter_id', chapter.id),
     ])
 
@@ -134,6 +147,17 @@ export async function getChapterData(
         }))
       : []
 
+  // Map difficult passages
+  const difficultPassages: DifficultPassage[] =
+    passagesResult.status === 'fulfilled' && passagesResult.value.data
+      ? (passagesResult.value.data as DifficultPassage[])
+      : []
+
+  const quizCount =
+    quizCountResult.status === 'fulfilled'
+      ? (quizCountResult.value.count ?? 0)
+      : 0
+
   return {
     id: chapter.id,
     book: book.name as '1 Kings' | '2 Kings',
@@ -147,7 +171,79 @@ export async function getChapterData(
     places,
     evidence,
     nations,
+    difficultPassages,
+    quizCount,
+    quizBestScore: null,
   }
+}
+
+// Get quiz questions for a chapter (random order, up to 10)
+export async function getQuizQuestions(chapterId: string): Promise<QuizQuestion[]> {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from('quiz_questions')
+    .select('id, question, options, correct_index, explanation')
+    .eq('chapter_id', chapterId)
+    .limit(50) // fetch all, shuffle client-side for true randomness
+
+  if (error || !data) return []
+  return data as QuizQuestion[]
+}
+
+// Get quiz best score for authenticated user
+export async function getQuizBestScore(userId: string, chapterId: string): Promise<number | null> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('user_progress')
+    .select('quiz_best_score')
+    .eq('user_id', userId)
+    .eq('chapter_id', chapterId)
+    .single()
+  return data?.quiz_best_score ?? null
+}
+
+// Get genealogy nodes and edges
+export async function getGenealogyData(): Promise<{ nodes: GenealogyNode[]; edges: GenealogyEdge[] }> {
+  const supabase = await createClient()
+
+  const [nodesResult, edgesResult] = await Promise.all([
+    supabase
+      .from('genealogy_nodes')
+      .select('id, person_id, dynasty, dynasty_color, notes, people(name, verdict, type, kingdom, is_queen)'),
+    supabase
+      .from('genealogy_edges')
+      .select('id, parent_node_id, child_node_id, relationship_type, notes'),
+  ])
+
+  type NodeRow = {
+    id: string;
+    person_id: string;
+    dynasty?: string;
+    dynasty_color?: string;
+    notes?: string;
+    people: { name: string; verdict?: string; type?: string; kingdom?: string; is_queen?: boolean };
+  }
+
+  const nodes: GenealogyNode[] = nodesResult.data
+    ? (nodesResult.data as unknown as NodeRow[]).map(row => ({
+        id: row.id,
+        person_id: row.person_id,
+        name: row.people?.name ?? 'Unknown',
+        dynasty: row.dynasty,
+        dynasty_color: row.dynasty_color,
+        notes: row.notes,
+        verdict: row.people?.verdict as GenealogyNode['verdict'],
+        type: row.people?.type as GenealogyNode['type'],
+        kingdom: row.people?.kingdom as GenealogyNode['kingdom'],
+        is_queen: row.people?.is_queen,
+      }))
+    : []
+
+  const edges: GenealogyEdge[] = edgesResult.data
+    ? (edgesResult.data as GenealogyEdge[])
+    : []
+
+  return { nodes, edges }
 }
 
 // Get nav chapters with read status for a user

@@ -271,6 +271,9 @@ export const mockChapter: ChapterData = {
     },
   ],
   nations: mockNeighboringNations,
+  difficultPassages: [],
+  quizCount: 0,
+  quizBestScore: null,
 };
 
 export const mockNavChapters: { book: string; chapters: NavChapter[] }[] = [

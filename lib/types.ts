@@ -64,6 +64,9 @@ export type ChapterData = {
   places: TappablePlace[];
   evidence: ArchaeologicalEvidence[];
   nations?: NeighboringNation[];
+  difficultPassages: DifficultPassage[];
+  quizCount: number;
+  quizBestScore?: number | null;
 };
 
 export type NavChapter = {
@@ -93,4 +96,42 @@ export type NeighboringNation = {
   color: string; // hex
   context_note: string;
   key_rulers: { name: string; years: string; note: string }[];
+};
+
+export type QuizQuestion = {
+  id: string;
+  question: string;
+  options: string[];
+  correct_index: number;
+  explanation: string;
+};
+
+export type DifficultPassage = {
+  id: string;
+  verse_start: number;
+  verse_end: number;
+  topic: string;
+  plain_language: string;
+  theological_context: string;
+};
+
+export type GenealogyNode = {
+  id: string;
+  person_id: string;
+  name: string;
+  dynasty?: string;
+  dynasty_color?: string;
+  notes?: string;
+  verdict?: 'good' | 'evil' | 'mixed';
+  type?: 'king' | 'prophet' | 'official' | 'foreign_ruler' | 'other';
+  kingdom?: 'north' | 'south' | 'foreign';
+  is_queen?: boolean;
+};
+
+export type GenealogyEdge = {
+  id: string;
+  parent_node_id: string;
+  child_node_id: string;
+  relationship_type: 'biological' | 'marriage' | 'adoption' | 'political';
+  notes?: string;
 };

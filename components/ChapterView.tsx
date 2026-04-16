@@ -11,6 +11,7 @@ import MapPanel from '@/components/MapPanel';
 import ArchaeologicalBadges from '@/components/ArchaeologicalBadges';
 import NeighboringNationsPanel from '@/components/NeighboringNationsPanel';
 import { markChapterRead, unmarkChapterRead } from '@/app/actions/progress';
+import QuizModal from '@/components/QuizModal';
 
 type Props = {
   chapter: ChapterData;
@@ -50,6 +51,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   >(null);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [isRead, setIsRead] = useState(initialIsRead);
+  const [quizOpen, setQuizOpen] = useState(false);
+  const [quizKey, setQuizKey] = useState(0);
 
   const chapterTitle = `${chapter.book} · Ch. ${chapter.chapter_number}`;
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
@@ -189,6 +192,29 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               )}
             </div>
 
+            {/* Quiz button */}
+            {chapter.quizCount > 0 && (
+              <div className="mb-6">
+                <button
+                  onClick={() => { setQuizKey(k => k + 1); setQuizOpen(true); }}
+                  className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-all"
+                  style={{
+                    background: chapter.quizBestScore != null ? 'rgba(201,168,76,0.08)' : 'rgba(255,255,255,0.04)',
+                    border: `1px solid ${chapter.quizBestScore != null ? 'rgba(201,168,76,0.25)' : 'rgba(255,255,255,0.08)'}`,
+                    color: chapter.quizBestScore != null ? 'var(--gold-300)' : 'var(--muted-400)',
+                  }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 11l3 3L22 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {chapter.quizBestScore != null
+                    ? `Quiz · Best score ${chapter.quizBestScore}%`
+                    : 'Take chapter quiz'}
+                  <span className="text-xs opacity-60">{chapter.quizCount} questions</span>
+                </button>
+              </div>
+            )}
+
             {/* Legend */}
             <div className="flex items-center gap-4 mb-6 pb-5"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
@@ -212,6 +238,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               onPlaceClick={place => setActiveCard({ type: 'place', place })}
               activePersonId={activeCard?.type === 'person' ? activeCard.person.id : undefined}
               activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
+              difficultPassages={chapter.difficultPassages}
             />
 
             {/* People in this chapter */}
@@ -319,6 +346,17 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
         <PlaceCardModal
           place={activeCard.place}
           onClose={() => setActiveCard(null)}
+        />
+      )}
+      {quizOpen && (
+        <QuizModal
+          key={quizKey}
+          chapterId={chapter.id}
+          bookSlug={chapter.book_slug}
+          chapterNum={chapter.chapter_number}
+          chapterTitle={chapterTitle}
+          isAuthenticated={isAuthenticated}
+          onClose={() => setQuizOpen(false)}
         />
       )}
     </div>
