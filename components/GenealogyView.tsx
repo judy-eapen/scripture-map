@@ -89,7 +89,7 @@ function GenealogyNodeComponent({ data, selected }: NodeProps) {
 const nodeTypes = { genealogy: GenealogyNodeComponent };
 
 // -----------------------------------------------------------------------
-// Layout: layered horizontal layout by dynasty
+// Layout: dagre automatic layout
 // -----------------------------------------------------------------------
 
 const DYNASTY_ORDER = ['David', 'Omri', 'Jehu', 'Jeroboam', 'Baasha', 'other'];
@@ -102,70 +102,40 @@ const DYNASTY_COLORS: Record<string, string> = {
   other:    'rgba(255,255,255,0.25)',
 };
 
+const NODE_WIDTH = 150;
+const NODE_HEIGHT = 64;
+
 function buildFlowNodes(nodes: GenealogyNode[], edges: GenealogyEdge[]): Node[] {
-  // Group nodes by dynasty
-  const byDynasty: Record<string, GenealogyNode[]> = {};
+  // Use dagre for automatic non-overlapping layout
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const dagre = require('@dagrejs/dagre') as typeof import('@dagrejs/dagre');
+  const g = new dagre.graphlib.Graph();
+  g.setDefaultEdgeLabel(() => ({}));
+  g.setGraph({ rankdir: 'TB', nodesep: 50, ranksep: 70, marginx: 40, marginy: 40 });
+
   for (const n of nodes) {
-    const d = n.dynasty ?? 'other';
-    if (!byDynasty[d]) byDynasty[d] = [];
-    byDynasty[d].push(n);
+    g.setNode(n.id, { width: NODE_WIDTH, height: NODE_HEIGHT });
   }
-
-  // For each dynasty, do a simple topological sort by following edges
-  // Assign y-positions based on generation depth, x-positions by dynasty column
-  const childToParents: Record<string, string[]> = {};
-  const parentToChildren: Record<string, string[]> = {};
   for (const e of edges) {
+    // Only use biological/adoption for layout hierarchy; skip marriage/political to avoid cycles
     if (e.relationship_type === 'biological' || e.relationship_type === 'adoption') {
-      if (!childToParents[e.child_node_id]) childToParents[e.child_node_id] = [];
-      childToParents[e.child_node_id].push(e.parent_node_id);
-      if (!parentToChildren[e.parent_node_id]) parentToChildren[e.parent_node_id] = [];
-      parentToChildren[e.parent_node_id].push(e.child_node_id);
+      g.setEdge(e.parent_node_id, e.child_node_id);
     }
   }
 
-  // Compute depth via BFS from roots
-  const depths: Record<string, number> = {};
-  const roots = nodes.filter(n => !childToParents[n.id] || childToParents[n.id].length === 0);
-  const queue = roots.map(r => ({ id: r.id, depth: 0 }));
-  while (queue.length) {
-    const item = queue.shift()!;
-    if (depths[item.id] === undefined || item.depth > depths[item.id]) {
-      depths[item.id] = item.depth;
-    }
-    for (const childId of (parentToChildren[item.id] ?? [])) {
-      queue.push({ id: childId, depth: item.depth + 1 });
-    }
-  }
-
-  // Build positioned nodes
-  const dynastyXBase: Record<string, number> = {};
-  let xCursor = 0;
-  for (const dynasty of DYNASTY_ORDER) {
-    if (byDynasty[dynasty]?.length) {
-      dynastyXBase[dynasty] = xCursor;
-      xCursor += 180;
-    }
-  }
-
-  const dynastyCounters: Record<string, Record<number, number>> = {};
+  dagre.layout(g);
 
   return nodes.map(n => {
+    const pos = g.node(n.id);
     const dynasty = n.dynasty ?? 'other';
-    const depth = depths[n.id] ?? 0;
     const color = DYNASTY_COLORS[dynasty] ?? DYNASTY_COLORS.other;
-
-    if (!dynastyCounters[dynasty]) dynastyCounters[dynasty] = {};
-    const col = dynastyCounters[dynasty][depth] ?? 0;
-    dynastyCounters[dynasty][depth] = col + 1;
-
-    const x = (dynastyXBase[dynasty] ?? 0) + col * 30;
-    const y = depth * 110;
-
     return {
       id: n.id,
       type: 'genealogy',
-      position: { x, y },
+      position: {
+        x: pos ? pos.x - NODE_WIDTH / 2 : 0,
+        y: pos ? pos.y - NODE_HEIGHT / 2 : 0,
+      },
       data: {
         label: n.name,
         dynasty: n.dynasty,
