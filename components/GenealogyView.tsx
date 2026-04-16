@@ -18,6 +18,7 @@ import {
   MarkerType,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import dagre from '@dagrejs/dagre';
 import type { GenealogyNode, GenealogyEdge, Person } from '@/lib/types';
 import CharacterCardModal from '@/components/CharacterCardModal';
 
@@ -106,9 +107,6 @@ const NODE_WIDTH = 150;
 const NODE_HEIGHT = 64;
 
 function buildFlowNodes(nodes: GenealogyNode[], edges: GenealogyEdge[]): Node[] {
-  // Use dagre for automatic non-overlapping layout
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const dagre = require('@dagrejs/dagre') as typeof import('@dagrejs/dagre');
   const g = new dagre.graphlib.Graph();
   g.setDefaultEdgeLabel(() => ({}));
   g.setGraph({ rankdir: 'TB', nodesep: 50, ranksep: 70, marginx: 40, marginy: 40 });
