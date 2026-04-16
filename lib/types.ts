@@ -1,0 +1,96 @@
+export type VerseEntry = {
+  verse_number: number;
+  text: string;
+};
+
+export type Person = {
+  id: string;
+  name: string;
+  alt_names?: string[];
+  type: 'king' | 'prophet' | 'official' | 'foreign_ruler' | 'other';
+  kingdom?: 'north' | 'south' | 'foreign';
+  reign_start_bc?: number;
+  reign_end_bc?: number;
+  dates_approximate?: boolean;
+  verdict?: 'good' | 'evil' | 'mixed';
+  bio: string;
+  contemporary_events?: string;
+  image_url?: string;
+};
+
+export type Place = {
+  id: string;
+  ancient_name: string;
+  modern_name: string;
+  lat: number;
+  lng: number;
+  significance?: string;
+  ancient_description: string;
+  modern_description: string;
+  image_url?: string;
+};
+
+export type TappablePerson = {
+  person: Person;
+  tappable_terms: string[];
+};
+
+export type TappablePlace = {
+  place: Place;
+  tappable_terms: string[];
+  map_focus?: boolean;
+};
+
+export type ArchaeologicalEvidence = {
+  id: string;
+  name: string;
+  artifact_type: string;
+  date_bc: number;
+  description: string;
+  museum_location?: string;
+  relevance_note: string;
+};
+
+export type ChapterData = {
+  id: string;
+  book: '1 Kings' | '2 Kings';
+  book_slug: '1-kings' | '2-kings';
+  chapter_number: number;
+  summary: string;
+  year_start_bc?: number;
+  year_end_bc?: number;
+  verses: VerseEntry[];
+  people: TappablePerson[];
+  places: TappablePlace[];
+  evidence: ArchaeologicalEvidence[];
+  nations?: NeighboringNation[];
+};
+
+export type NavChapter = {
+  number: number;
+  is_read: boolean;
+};
+
+export type ActiveCard =
+  | { type: 'person'; person: Person }
+  | { type: 'place'; place: Place }
+  | null;
+
+export type TimelineKing = {
+  id: string;
+  name: string;
+  kingdom: 'north' | 'south';
+  reign_start_bc: number; // positive number, e.g. 874 means 874 BC
+  reign_end_bc: number;
+  verdict?: 'good' | 'evil' | 'mixed';
+  dates_approximate?: boolean;
+  is_queen?: boolean; // for Athaliah
+};
+
+export type NeighboringNation = {
+  id: string;
+  name: string;
+  color: string; // hex
+  context_note: string;
+  key_rulers: { name: string; years: string; note: string }[];
+};
