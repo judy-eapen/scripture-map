@@ -18,7 +18,6 @@ import {
   MarkerType,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import dagre from '@dagrejs/dagre';
 import type { GenealogyNode, GenealogyEdge, Person } from '@/lib/types';
 import CharacterCardModal from '@/components/CharacterCardModal';
 
@@ -103,37 +102,18 @@ const DYNASTY_COLORS: Record<string, string> = {
   other:    'rgba(255,255,255,0.25)',
 };
 
-const NODE_WIDTH = 150;
-const NODE_HEIGHT = 64;
-
-function buildFlowNodes(nodes: GenealogyNode[], edges: GenealogyEdge[]): Node[] {
-  const g = new dagre.graphlib.Graph();
-  g.setDefaultEdgeLabel(() => ({}));
-  g.setGraph({ rankdir: 'TB', nodesep: 50, ranksep: 70, marginx: 40, marginy: 40 });
-
-  for (const n of nodes) {
-    g.setNode(n.id, { width: NODE_WIDTH, height: NODE_HEIGHT });
-  }
-  for (const e of edges) {
-    // Only use biological/adoption for layout hierarchy; skip marriage/political to avoid cycles
-    if (e.relationship_type === 'biological' || e.relationship_type === 'adoption') {
-      g.setEdge(e.parent_node_id, e.child_node_id);
-    }
-  }
-
-  dagre.layout(g);
-
+function buildFlowNodes(
+  nodes: GenealogyNode[],
+  positions: Record<string, { x: number; y: number }>,
+): Node[] {
   return nodes.map(n => {
-    const pos = g.node(n.id);
+    const pos = positions[n.id] ?? { x: 0, y: 0 };
     const dynasty = n.dynasty ?? 'other';
     const color = DYNASTY_COLORS[dynasty] ?? DYNASTY_COLORS.other;
     return {
       id: n.id,
       type: 'genealogy',
-      position: {
-        x: pos ? pos.x - NODE_WIDTH / 2 : 0,
-        y: pos ? pos.y - NODE_HEIGHT / 2 : 0,
-      },
+      position: pos,
       data: {
         label: n.name,
         dynasty: n.dynasty,
@@ -183,10 +163,11 @@ function buildFlowEdges(edges: GenealogyEdge[]): Edge[] {
 type Props = {
   genealogyNodes: GenealogyNode[];
   genealogyEdges: GenealogyEdge[];
+  positions: Record<string, { x: number; y: number }>;
 };
 
-export default function GenealogyView({ genealogyNodes, genealogyEdges }: Props) {
-  const initialNodes = buildFlowNodes(genealogyNodes, genealogyEdges);
+export default function GenealogyView({ genealogyNodes, genealogyEdges, positions }: Props) {
+  const initialNodes = buildFlowNodes(genealogyNodes, positions);
   const initialEdges = buildFlowEdges(genealogyEdges);
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
