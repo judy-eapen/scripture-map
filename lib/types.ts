@@ -128,6 +128,8 @@ export type GenealogyNode = {
   type?: 'king' | 'prophet' | 'official' | 'foreign_ruler' | 'other';
   kingdom?: 'north' | 'south' | 'foreign';
   is_queen?: boolean;
+  reign_start_bc?: number | null;
+  reign_end_bc?: number | null;
 };
 
 export type GenealogyEdge = {

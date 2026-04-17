@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
@@ -21,10 +21,16 @@ export const metadata: Metadata = {
   description: 'Interactive study of 1 & 2 Kings with maps, timelines, and historical context.',
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full`}>
-      <body className="h-full antialiased font-sans">{children}</body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="antialiased font-sans">{children}</body>
     </html>
   );
 }

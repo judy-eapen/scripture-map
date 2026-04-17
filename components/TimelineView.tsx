@@ -30,7 +30,7 @@ export default function TimelineView({ kings, navData }: Props) {
   const [activeKing, setActiveKing] = useState<TimelineKing | null>(null);
 
   return (
-    <div className="flex h-screen overflow-hidden" style={{ background: 'var(--navy-950)' }}>
+    <div className="flex overflow-hidden" style={{ background: 'var(--navy-950)', height: '100dvh' }}>
 
       {/* Left sidebar nav */}
       <ChapterNav

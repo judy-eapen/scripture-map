@@ -53,19 +53,31 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [isRead, setIsRead] = useState(initialIsRead);
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizKey, setQuizKey] = useState(0);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const chapterTitle = `${chapter.book} · Ch. ${chapter.chapter_number}`;
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
   const totalChapters = chapter.book === '1 Kings' ? 22 : 25;
 
   return (
-    <div ref={containerRef} className="flex h-screen overflow-hidden" style={{ background: 'var(--navy-950)' }}>
+    <div ref={containerRef} className="flex overflow-hidden" style={{ background: 'var(--navy-950)', height: '100dvh' }}>
 
-      {/* Left sidebar nav */}
+      {/* Left sidebar nav — desktop: inline; mobile: hidden (opened via hamburger) */}
+      <div className="hidden md:block shrink-0">
+        <ChapterNav
+          currentBook={chapter.book}
+          currentChapter={chapter.chapter_number}
+          navData={navData}
+        />
+      </div>
+
+      {/* Mobile nav drawer */}
       <ChapterNav
         currentBook={chapter.book}
         currentChapter={chapter.chapter_number}
         navData={navData}
+        mobileOpen={mobileNavOpen}
+        onMobileClose={() => setMobileNavOpen(false)}
       />
 
       {/* Main content */}
@@ -73,12 +85,23 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
 
         {/* Reading column */}
         <div className="flex-1 overflow-y-auto min-w-0">
-          <div className="max-w-2xl mx-auto px-6 py-8 pb-24">
+          <div className="max-w-2xl mx-auto px-4 md:px-6 py-6 md:py-8 pb-24">
 
             {/* Chapter header */}
             <div className="mb-7">
               <div className="flex items-start justify-between gap-4 mb-4">
-                <div>
+                <div className="flex items-start gap-3">
+                  {/* Mobile hamburger */}
+                  <button
+                    className="md:hidden mt-1 shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--muted-400)' }}
+                    onClick={() => setMobileNavOpen(true)}
+                    aria-label="Open navigation">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                  <div>
                   <div className="flex items-center gap-3 mb-2">
                     <span className="text-xs font-semibold uppercase tracking-widest"
                       style={{ color: 'var(--gold-400)' }}>
@@ -98,7 +121,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                     style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>
                     Chapter {chapter.chapter_number}
                   </h1>
-                </div>
+                  </div>{/* close title div */}
+                </div>{/* close hamburger+title flex */}
 
                 {/* Mark as read / sign-in prompt */}
                 {isAuthenticated ? (

@@ -220,7 +220,7 @@ export async function getGenealogyData(): Promise<{ nodes: GenealogyNode[]; edge
   const [nodesResult, edgesResult] = await Promise.all([
     supabase
       .from('genealogy_nodes')
-      .select('id, person_id, dynasty, dynasty_color, notes, people(name, verdict, type, kingdom, is_queen)'),
+      .select('id, person_id, dynasty, dynasty_color, notes, people(name, verdict, type, kingdom, is_queen, reign_start_bc, reign_end_bc)'),
     supabase
       .from('genealogy_edges')
       .select('id, parent_node_id, child_node_id, relationship_type, notes'),
@@ -232,7 +232,7 @@ export async function getGenealogyData(): Promise<{ nodes: GenealogyNode[]; edge
     dynasty?: string;
     dynasty_color?: string;
     notes?: string;
-    people: { name: string; verdict?: string; type?: string; kingdom?: string; is_queen?: boolean };
+    people: { name: string; verdict?: string; type?: string; kingdom?: string; is_queen?: boolean; reign_start_bc?: number | null; reign_end_bc?: number | null };
   }
 
   const nodes: GenealogyNode[] = nodesResult.data
@@ -247,6 +247,8 @@ export async function getGenealogyData(): Promise<{ nodes: GenealogyNode[]; edge
         type: row.people?.type as GenealogyNode['type'],
         kingdom: row.people?.kingdom as GenealogyNode['kingdom'],
         is_queen: row.people?.is_queen,
+        reign_start_bc: row.people?.reign_start_bc,
+        reign_end_bc: row.people?.reign_end_bc,
       }))
     : []
 

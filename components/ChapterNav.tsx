@@ -8,6 +8,9 @@ type Props = {
   currentBook: string;
   currentChapter: number;
   navData: { book: string; chapters: NavChapter[] }[];
+  // Mobile: controlled open state from parent
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
 };
 
 const bookSlugs: Record<string, string> = {
@@ -15,7 +18,7 @@ const bookSlugs: Record<string, string> = {
   '2 Kings': '2-kings',
 };
 
-export default function ChapterNav({ currentBook, currentChapter, navData }: Props) {
+export default function ChapterNav({ currentBook, currentChapter, navData, mobileOpen, onMobileClose }: Props) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     '1 Kings': true,
     '2 Kings': false,
@@ -27,12 +30,31 @@ export default function ChapterNav({ currentBook, currentChapter, navData }: Pro
 
   return (
     <>
-      {/* Sidebar */}
+      {/* Mobile backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 md:hidden"
+          style={{ background: 'rgba(0,0,0,0.6)', zIndex: 49 }}
+          onClick={onMobileClose}
+        />
+      )}
+
+      {/* Sidebar — desktop: inline shrink-0; mobile: fixed overlay drawer */}
       <aside
         className="flex flex-col h-full transition-all duration-300 shrink-0"
         style={{
           width: sidebarOpen ? '272px' : '56px',
           background: 'var(--navy-900)',
+          // On mobile, render as a fixed drawer; hidden when mobileOpen is false
+          ...(mobileOpen !== undefined ? {
+            position: 'fixed' as const,
+            top: 0,
+            left: 0,
+            height: '100%',
+            zIndex: 50,
+            transform: mobileOpen ? 'translateX(0)' : 'translateX(-100%)',
+            transition: 'transform 0.3s ease, width 0.3s ease',
+          } : {}),
           borderRight: '1px solid rgba(201,168,76,0.1)',
         }}>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   ReactFlow,
   Background,
@@ -37,6 +38,18 @@ type NodeData = {
   personData?: Person;
 };
 
+// Kingdom → border color and background tint
+const KINGDOM_BORDER: Record<string, string> = {
+  south:   'rgba(201,168,76,0.55)',
+  north:   'rgba(96,165,250,0.55)',
+  foreign: 'rgba(239,68,68,0.45)',
+};
+const KINGDOM_BG_SELECTED: Record<string, string> = {
+  south:   'rgba(201,168,76,0.14)',
+  north:   'rgba(96,165,250,0.12)',
+  foreign: 'rgba(239,68,68,0.1)',
+};
+
 function GenealogyNodeComponent({ data, selected }: NodeProps) {
   const nodeData = data as NodeData;
   const verdictColor =
@@ -45,19 +58,27 @@ function GenealogyNodeComponent({ data, selected }: NodeProps) {
     nodeData.verdict === 'mixed' ? 'var(--verdict-mixed)' :
     'rgba(255,255,255,0.3)';
 
-  const dynastyColor = nodeData.dynastyColor ?? 'rgba(201,168,76,0.4)';
+  const dynastyColor = nodeData.dynastyColor ?? 'rgba(255,255,255,0.2)';
+  const isProphet = nodeData.type === 'prophet' || nodeData.type === 'official';
+  const kingdomBorder = nodeData.kingdom ? (KINGDOM_BORDER[nodeData.kingdom] ?? 'rgba(167,139,250,0.5)') : 'rgba(167,139,250,0.5)';
+  const borderColor = selected ? 'var(--gold-400)' : kingdomBorder;
+  const bgColor = selected
+    ? (KINGDOM_BG_SELECTED[nodeData.kingdom ?? ''] ?? 'rgba(201,168,76,0.14)')
+    : isProphet ? 'rgba(167,139,250,0.07)' : 'var(--navy-800)';
 
   return (
     <div
       className="rounded-xl px-3 py-2 text-center cursor-pointer transition-all"
       style={{
-        background: selected ? 'rgba(201,168,76,0.18)' : 'var(--navy-800)',
-        border: `1.5px solid ${selected ? 'var(--gold-400)' : dynastyColor}`,
-        boxShadow: selected ? '0 0 0 2px rgba(201,168,76,0.3)' : 'none',
+        background: bgColor,
+        border: `1.5px solid ${borderColor}`,
+        boxShadow: selected ? `0 0 0 2px ${kingdomBorder}` : 'none',
         minWidth: '110px',
-        maxWidth: '140px',
+        maxWidth: '145px',
       }}>
-      <Handle type="target" position={Position.Top} style={{ background: dynastyColor, border: 'none', width: 8, height: 8 }} />
+      <Handle type="target" position={Position.Top} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Left} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Right} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
 
       <div className="flex items-center justify-center gap-1.5 mb-0.5">
         {nodeData.verdict && (
@@ -69,19 +90,23 @@ function GenealogyNodeComponent({ data, selected }: NodeProps) {
         </span>
       </div>
 
-      {nodeData.dynasty && (
-        <span className="text-[10px]" style={{ color: dynastyColor, opacity: 0.9 }}>
-          {nodeData.dynasty}
+      {/* Dynasty badge (small, below name) */}
+      {nodeData.dynasty && nodeData.dynasty !== 'other' && !isProphet && (
+        <span className="text-[9px]" style={{ color: dynastyColor, opacity: 0.8 }}>
+          {nodeData.dynasty} dynasty
         </span>
       )}
 
-      {nodeData.type && nodeData.type !== 'king' && (
-        <span className="text-[10px] block" style={{ color: 'var(--muted-500)' }}>
-          {nodeData.type}
+      {/* Role label for prophets/priests */}
+      {isProphet && (
+        <span className="text-[9px] block" style={{ color: 'rgba(167,139,250,0.8)' }}>
+          {nodeData.type === 'prophet' ? 'Prophet' : 'Priest'}
         </span>
       )}
 
-      <Handle type="source" position={Position.Bottom} style={{ background: dynastyColor, border: 'none', width: 8, height: 8 }} />
+      <Handle type="source" position={Position.Bottom} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
+      <Handle type="source" position={Position.Left} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
+      <Handle type="source" position={Position.Right} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
     </div>
   );
 }
@@ -132,26 +157,29 @@ function buildFlowEdges(edges: GenealogyEdge[]): Edge[] {
   return edges.map(e => {
     const isMarriage = e.relationship_type === 'marriage';
     const isPolitical = e.relationship_type === 'political';
+    const isBio = e.relationship_type === 'biological' || e.relationship_type === 'adoption';
     return {
       id: e.id,
       source: e.parent_node_id,
       target: e.child_node_id,
       type: isMarriage ? 'straight' : 'smoothstep',
-      animated: isPolitical,
+      animated: false,
       style: {
-        stroke: isMarriage ? '#F472B6' : isPolitical ? '#94A3B8' : 'rgba(201,168,76,0.4)',
-        strokeWidth: isMarriage ? 1.5 : 1.5,
-        strokeDasharray: isMarriage ? '4 3' : undefined,
+        stroke: isMarriage ? '#F472B6' : isPolitical ? 'rgba(167,139,250,0.6)' : 'rgba(201,168,76,0.45)',
+        strokeWidth: isPolitical ? 1.5 : 1.5,
+        strokeDasharray: isMarriage ? '5 3' : isPolitical ? '3 3' : undefined,
+        opacity: isPolitical ? 0.75 : 1,
       },
-      markerEnd: isMarriage ? undefined : {
+      markerEnd: isBio ? {
         type: MarkerType.ArrowClosed,
-        color: 'rgba(201,168,76,0.4)',
-        width: 12,
-        height: 12,
-      },
-      label: e.notes,
-      labelStyle: { fontSize: 9, fill: 'rgba(255,255,255,0.4)' },
-      labelBgStyle: { fill: 'rgba(8,15,35,0.8)' },
+        color: 'rgba(201,168,76,0.5)',
+        width: 10,
+        height: 10,
+      } : undefined,
+      // Only show notes as label for marriages (keeps the graph clean)
+      label: isMarriage ? e.notes : undefined,
+      labelStyle: { fontSize: 9, fill: '#F472B6', opacity: 0.7 },
+      labelBgStyle: { fill: 'rgba(8,15,35,0.85)', padding: 2 },
     };
   });
 }
@@ -167,6 +195,7 @@ type Props = {
 };
 
 export default function GenealogyView({ genealogyNodes, genealogyEdges, positions }: Props) {
+  const router = useRouter();
   const initialNodes = buildFlowNodes(genealogyNodes, positions);
   const initialEdges = buildFlowEdges(genealogyEdges);
 
@@ -197,61 +226,89 @@ export default function GenealogyView({ genealogyNodes, genealogyEdges, position
     setActivePerson(person);
   }, [genealogyNodes]);
 
-  const DYNASTY_ORDER_DISPLAY = DYNASTY_ORDER.filter(d => genealogyNodes.some(n => (n.dynasty ?? 'other') === d));
-
   return (
-    <div className="flex h-screen overflow-hidden" style={{ background: 'var(--navy-950)' }}>
+    <div className="flex overflow-hidden" style={{ background: 'var(--navy-950)', height: '100dvh' }}>
       {/* Left legend */}
       <div className="shrink-0 flex flex-col border-r overflow-y-auto"
         style={{ width: 220, borderColor: 'rgba(255,255,255,0.06)', background: 'var(--navy-900)' }}>
         <div className="px-5 py-5">
-          <div className="flex items-center gap-2 mb-5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--gold-400)' }}>
-              <circle cx="12" cy="5" r="3" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="5" cy="19" r="3" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="19" cy="19" r="3" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M12 8v4M12 12l-7 4M12 12l7 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          {/* Back button */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 mb-5 text-xs transition-colors"
+            style={{ color: 'var(--muted-400)' }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--ivory-100)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted-400)')}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--gold-400)' }}>
-              Dynasties
-            </span>
-          </div>
+            Back
+          </button>
 
-          <div className="space-y-2">
-            {DYNASTY_ORDER_DISPLAY.map(d => (
+          {/* Kingdoms */}
+          <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--gold-400)' }}>
+            Kingdoms
+          </div>
+          <div className="space-y-2 mb-2">
+            <div className="flex items-center gap-2.5">
+              <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: 'rgba(201,168,76,0.25)', border: '1.5px solid rgba(201,168,76,0.6)' }} />
+              <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>Kingdom of Judah</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: 'rgba(96,165,250,0.2)', border: '1.5px solid rgba(96,165,250,0.6)' }} />
+              <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>Kingdom of Israel</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: 'rgba(167,139,250,0.15)', border: '1.5px solid rgba(167,139,250,0.5)' }} />
+              <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>Prophets & Priests</span>
+            </div>
+          </div>
+          <p className="text-xs mb-5" style={{ color: 'var(--muted-500)' }}>
+            Judah (left) · Prophets (center) · Israel (right)
+            <br />Y-axis = time, top to bottom
+          </p>
+
+          {/* Dynasties */}
+          <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--muted-400)' }}>
+            Dynasties
+          </div>
+          <div className="space-y-1.5 mb-5">
+            {DYNASTY_ORDER.filter(d => genealogyNodes.some(n => (n.dynasty ?? 'other') === d)).map(d => (
               <div key={d} className="flex items-center gap-2.5">
-                <div className="w-3 h-3 rounded-full shrink-0" style={{ background: DYNASTY_COLORS[d] ?? DYNASTY_COLORS.other }} />
-                <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>{d} dynasty</span>
+                <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: DYNASTY_COLORS[d] ?? DYNASTY_COLORS.other }} />
+                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>{d === 'other' ? 'Independent' : `${d}`}</span>
               </div>
             ))}
           </div>
 
-          <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          {/* Edge types */}
+          <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
-              Edge types
+              Lines
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
                 <div className="w-6 h-px" style={{ background: 'rgba(201,168,76,0.6)' }} />
-                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Biological</span>
+                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Parent → Child</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <div className="w-6 h-px" style={{ background: '#F472B6', borderTop: '1px dashed #F472B6', height: 0 }} />
+                <div className="w-6 h-px" style={{ borderTop: '1.5px dashed #F472B6' }} />
                 <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Marriage</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <div className="w-6 h-px" style={{ background: '#94A3B8' }} />
-                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Political</span>
+                <div className="w-6 h-px" style={{ borderTop: '1.5px dotted #94A3B8' }} />
+                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Prophet / Priest</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
-              Verdict
+          {/* Verdict */}
+          <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--muted-400)' }}>
+              Verdict dot
             </div>
             <div className="space-y-1.5">
-              {[['good', 'var(--verdict-good)', 'Good'], ['evil', 'var(--verdict-evil)', 'Evil'], ['mixed', 'var(--verdict-mixed)', 'Mixed']].map(([, color, label]) => (
+              {[['var(--verdict-good)', 'Faithful'], ['var(--verdict-evil)', 'Wicked'], ['var(--verdict-mixed)', 'Mixed']].map(([color, label]) => (
                 <div key={label} className="flex items-center gap-2.5">
                   <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color }} />
                   <span className="text-xs" style={{ color: 'var(--muted-400)' }}>{label}</span>
@@ -262,7 +319,7 @@ export default function GenealogyView({ genealogyNodes, genealogyEdges, position
 
           <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <p className="text-xs leading-relaxed" style={{ color: 'var(--muted-500)' }}>
-              Click any node to view their character card.
+              Click any node to view their card.
             </p>
             <p className="text-xs leading-relaxed mt-1" style={{ color: 'var(--muted-500)' }}>
               Scroll to zoom · Drag to pan
@@ -273,11 +330,32 @@ export default function GenealogyView({ genealogyNodes, genealogyEdges, position
 
       {/* Graph */}
       <div className="flex-1 relative">
+        {/* Kingdom column headers — fixed overlay */}
+        <div className="absolute top-0 left-0 right-0 flex pointer-events-none" style={{ zIndex: 5 }}>
+          <div className="absolute text-center" style={{ left: '10%', top: 10 }}>
+            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+              style={{ color: 'rgba(201,168,76,0.9)', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)' }}>
+              Kingdom of Judah
+            </span>
+          </div>
+          <div className="absolute text-center" style={{ left: '50%', transform: 'translateX(-50%)', top: 10 }}>
+            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+              style={{ color: 'rgba(167,139,250,0.8)', background: 'rgba(167,139,250,0.06)', border: '1px solid rgba(167,139,250,0.2)' }}>
+              Prophets & Priests
+            </span>
+          </div>
+          <div className="absolute text-center" style={{ right: '10%', top: 10 }}>
+            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+              style={{ color: 'rgba(96,165,250,0.9)', background: 'rgba(96,165,250,0.08)', border: '1px solid rgba(96,165,250,0.2)' }}>
+              Kingdom of Israel
+            </span>
+          </div>
+        </div>
+
         {genealogyNodes.length === 0 ? (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <p className="text-sm mb-2" style={{ color: 'var(--muted-400)' }}>Genealogy data not yet seeded.</p>
-              <p className="text-xs" style={{ color: 'var(--muted-500)' }}>Run: npx tsx scripts/seed-genealogy.ts</p>
             </div>
           </div>
         ) : (
@@ -290,11 +368,11 @@ export default function GenealogyView({ genealogyNodes, genealogyEdges, position
             onNodeClick={onNodeClick}
             nodeTypes={nodeTypes}
             fitView
-            fitViewOptions={{ padding: 0.15 }}
-            minZoom={0.2}
+            fitViewOptions={{ padding: 0.12 }}
+            minZoom={0.15}
             maxZoom={2}
             style={{ background: 'var(--navy-950)' }}>
-            <Background color="rgba(255,255,255,0.03)" gap={24} />
+            <Background color="rgba(255,255,255,0.025)" gap={32} />
             <Controls
               style={{
                 background: 'var(--navy-800)',
@@ -307,8 +385,10 @@ export default function GenealogyView({ genealogyNodes, genealogyEdges, position
                 border: '1px solid rgba(255,255,255,0.08)',
               }}
               nodeColor={node => {
-                const d = (node.data as NodeData).dynasty ?? 'other';
-                return DYNASTY_COLORS[d] ?? DYNASTY_COLORS.other;
+                const data = node.data as NodeData;
+                if (data.kingdom === 'south') return 'rgba(201,168,76,0.7)';
+                if (data.kingdom === 'north') return 'rgba(96,165,250,0.7)';
+                return 'rgba(167,139,250,0.6)';
               }}
             />
           </ReactFlow>
