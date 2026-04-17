@@ -1,407 +1,411 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  ReactFlow,
-  Background,
-  Controls,
-  MiniMap,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  type Node,
-  type Edge,
-  type Connection,
-  type NodeProps,
-  Handle,
-  Position,
-  MarkerType,
-} from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
 import type { GenealogyNode, GenealogyEdge, Person } from '@/lib/types';
-import CharacterCardModal from '@/components/CharacterCardModal';
+import CharacterCardModal from './CharacterCardModal';
 
-// -----------------------------------------------------------------------
-// Custom node
-// -----------------------------------------------------------------------
+// ─── Types ───────────────────────────────────────────────────────────────────
 
-type NodeData = {
-  label: string;
-  dynasty?: string;
-  dynastyColor?: string;
-  verdict?: string;
-  kingdom?: string;
-  isQueen?: boolean;
-  notes?: string;
-  type?: string;
-  personData?: Person;
+type SuccessionType = 'start' | 'son' | 'relative' | 'new-dynasty';
+
+type KingEntry = {
+  node: GenealogyNode;
+  spouses: GenealogyNode[];
+  succession: SuccessionType;
+  successionNote?: string;
 };
 
-// Kingdom → border color and background tint
-const KINGDOM_BORDER: Record<string, string> = {
-  south:   'rgba(201,168,76,0.55)',
-  north:   'rgba(96,165,250,0.55)',
-  foreign: 'rgba(239,68,68,0.45)',
-};
-const KINGDOM_BG_SELECTED: Record<string, string> = {
-  south:   'rgba(201,168,76,0.14)',
-  north:   'rgba(96,165,250,0.12)',
-  foreign: 'rgba(239,68,68,0.1)',
+// ─── Static data ─────────────────────────────────────────────────────────────
+
+// Notes shown on the succession break badge when a new dynasty starts
+const SUCCESSION_NOTES: Record<string, string> = {
+  'Jeroboam I': 'appointed by Israel',
+  Baasha: 'killed Nadab',
+  Zimri: 'killed Elah',
+  Omri: 'defeated Zimri',
+  Tibni: 'rival claimant',
+  Jehu: 'killed Joram',
+  Shallum: 'killed Zechariah',
+  Menahem: 'killed Shallum',
+  Pekah: 'killed Pekahiah',
+  Hoshea: 'killed Pekah',
+  Athaliah: 'killed royal heirs',
+  Joash: 'Jehoiada restored throne',
 };
 
-function GenealogyNodeComponent({ data, selected }: NodeProps) {
-  const nodeData = data as NodeData;
-  const verdictColor =
-    nodeData.verdict === 'good' ? 'var(--verdict-good)' :
-    nodeData.verdict === 'evil' ? 'var(--verdict-evil)' :
-    nodeData.verdict === 'mixed' ? 'var(--verdict-mixed)' :
-    'rgba(255,255,255,0.3)';
+// Dynasty → border accent color
+const DYNASTY_COLORS: Record<string, string> = {
+  Davidic:  '#C9A84C',
+  Jeroboam: '#60A5FA',
+  Baasha:   '#3B82F6',
+  Omri:     '#A78BFA',
+  Jehu:     '#2DD4BF',
+  Zimri:    '#94A3B8',
+  Shallum:  '#94A3B8',
+  Menahem:  '#6B7280',
+  Pekah:    '#6B7280',
+  Hoshea:   '#6B7280',
+};
 
-  const dynastyColor = nodeData.dynastyColor ?? 'rgba(255,255,255,0.2)';
-  const isProphet = nodeData.type === 'prophet' || nodeData.type === 'official';
-  const kingdomBorder = nodeData.kingdom ? (KINGDOM_BORDER[nodeData.kingdom] ?? 'rgba(167,139,250,0.5)') : 'rgba(167,139,250,0.5)';
-  const borderColor = selected ? 'var(--gold-400)' : kingdomBorder;
-  const bgColor = selected
-    ? (KINGDOM_BG_SELECTED[nodeData.kingdom ?? ''] ?? 'rgba(201,168,76,0.14)')
-    : isProphet ? 'rgba(167,139,250,0.07)' : 'var(--navy-800)';
+function dynastyAccent(d?: string | null): string {
+  if (!d) return '#64748B';
+  return DYNASTY_COLORS[d] ?? '#64748B';
+}
+
+function reignLabel(start?: number | null, end?: number | null): string {
+  if (start == null) return '';
+  return `${Math.abs(start)}–${end != null ? Math.abs(end) : '?'} BC`;
+}
+
+function toPersonStub(n: GenealogyNode): Person {
+  return {
+    id: n.person_id,
+    name: n.name,
+    type: (n.type ?? 'king') as Person['type'],
+    kingdom: n.kingdom as Person['kingdom'],
+    verdict: n.verdict,
+    bio: n.bio ?? '',
+    contemporary_events: n.contemporary_events,
+    reign_start_bc: n.reign_start_bc ?? undefined,
+    reign_end_bc: n.reign_end_bc ?? undefined,
+  };
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
+export default function GenealogyView({
+  nodes,
+  edges,
+}: {
+  nodes: GenealogyNode[];
+  edges: GenealogyEdge[];
+}) {
+  const router = useRouter();
+  const [activePersonId, setActivePersonId] = useState<string | null>(null);
+  const activePerson = activePersonId ? nodes.find(n => n.person_id === activePersonId) : null;
+
+  const { preUnified, judah, israel } = useMemo(() => {
+    // Spouse adjacency
+    const spouseMap = new Map<string, string[]>();
+    for (const e of edges) {
+      if (e.relationship_type !== 'marriage') continue;
+      const push = (from: string, to: string) => {
+        const arr = spouseMap.get(from) ?? [];
+        arr.push(to);
+        spouseMap.set(from, arr);
+      };
+      push(e.parent_node_id, e.child_node_id);
+      push(e.child_node_id, e.parent_node_id);
+    }
+
+    function spousesOf(n: GenealogyNode): GenealogyNode[] {
+      return (spouseMap.get(n.id) ?? [])
+        .map(id => nodes.find(x => x.id === id))
+        .filter(Boolean) as GenealogyNode[];
+    }
+
+    function isBioChild(parentId: string, childId: string): boolean {
+      return edges.some(
+        e =>
+          e.relationship_type === 'biological' &&
+          e.parent_node_id === parentId &&
+          e.child_node_id === childId
+      );
+    }
+
+    // All kings with reign dates, oldest first (most-negative BC value = most ancient)
+    const kings = nodes
+      .filter(n => n.type === 'king' && n.reign_start_bc != null)
+      .sort((a, b) => (a.reign_start_bc ?? 0) - (b.reign_start_bc ?? 0));
+
+    const pre = kings.filter(k => k.name === 'David' || k.name === 'Solomon');
+    const judahKings = kings.filter(k => k.kingdom === 'south' && !pre.includes(k));
+    const israelKings = kings.filter(k => k.kingdom === 'north');
+
+    function buildEntries(list: GenealogyNode[]): KingEntry[] {
+      return list.map((king, i) => {
+        const prev = i > 0 ? list[i - 1] : null;
+        let succession: SuccessionType = 'start';
+        let successionNote: string | undefined;
+
+        if (prev) {
+          if (isBioChild(prev.id, king.id)) {
+            succession = 'son';
+          } else if (prev.dynasty && king.dynasty && prev.dynasty === king.dynasty) {
+            succession = 'relative';
+          } else {
+            succession = 'new-dynasty';
+            successionNote = SUCCESSION_NOTES[king.name];
+          }
+        }
+
+        return { node: king, spouses: spousesOf(king), succession, successionNote };
+      });
+    }
+
+    return {
+      preUnified: buildEntries(pre),
+      judah:      buildEntries(judahKings),
+      israel:     buildEntries(israelKings),
+    };
+  }, [nodes, edges]);
 
   return (
-    <div
-      className="rounded-xl px-3 py-2 text-center cursor-pointer transition-all"
-      style={{
-        background: bgColor,
-        border: `1.5px solid ${borderColor}`,
-        boxShadow: selected ? `0 0 0 2px ${kingdomBorder}` : 'none',
-        minWidth: '110px',
-        maxWidth: '145px',
-      }}>
-      <Handle type="target" position={Position.Top} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
-      <Handle type="target" position={Position.Left} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
-      <Handle type="target" position={Position.Right} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
+    <div className="flex flex-col h-screen-safe" style={{ background: 'var(--navy-950)' }}>
 
-      <div className="flex items-center justify-center gap-1.5 mb-0.5">
-        {nodeData.verdict && (
-          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: verdictColor }} />
-        )}
-        <span className="text-xs font-semibold leading-tight" style={{ color: 'var(--ivory-100)' }}>
-          {nodeData.label}
-          {nodeData.isQueen && <span className="ml-1 opacity-60">♛</span>}
+      {/* ── Top bar ── */}
+      <div className="shrink-0 flex items-center px-4 py-3 gap-3"
+        style={{ background: 'var(--navy-900)', borderBottom: '1px solid rgba(201,168,76,0.12)' }}>
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-1.5 text-sm transition-colors"
+          style={{ color: 'var(--muted-400)' }}
+          onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'var(--ivory-100)')}
+          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'var(--muted-400)')}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Back
+        </button>
+        <span className="flex-1 text-center text-sm font-semibold"
+          style={{ color: 'var(--ivory-100)', fontFamily: 'var(--font-playfair)' }}>
+          Royal Succession
         </span>
+        {/* spacer balances the back button */}
+        <div style={{ width: 48 }} />
       </div>
 
-      {/* Dynasty badge (small, below name) */}
-      {nodeData.dynasty && nodeData.dynasty !== 'other' && !isProphet && (
-        <span className="text-[9px]" style={{ color: dynastyColor, opacity: 0.8 }}>
-          {nodeData.dynasty} dynasty
-        </span>
-      )}
+      {/* ── Legend ── */}
+      <div className="shrink-0 flex items-center gap-4 flex-wrap px-4 py-2"
+        style={{ background: 'var(--navy-900)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div className="flex items-center gap-1.5">
+          <div className="w-4 h-px" style={{ background: 'rgba(201,168,76,0.7)' }} />
+          <span className="text-[10px]" style={{ color: 'var(--muted-500)' }}>Son inherited</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-4" style={{ borderTop: '1px dashed rgba(139,154,181,0.6)', height: 1 }} />
+          <span className="text-[10px]" style={{ color: 'var(--muted-500)' }}>Relative/indirect</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded-sm" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.35)' }} />
+          <span className="text-[10px]" style={{ color: 'var(--muted-500)' }}>Coup / new dynasty</span>
+        </div>
+        <div className="flex items-center gap-1">
+          {(['var(--verdict-good)', 'var(--verdict-evil)', 'var(--verdict-mixed)'] as const).map(c => (
+            <span key={c} className="w-2 h-2 rounded-full inline-block" style={{ background: c }} />
+          ))}
+          <span className="text-[10px] ml-0.5" style={{ color: 'var(--muted-500)' }}>Verdict</span>
+        </div>
+      </div>
 
-      {/* Role label for prophets/priests */}
-      {isProphet && (
-        <span className="text-[9px] block" style={{ color: 'rgba(167,139,250,0.8)' }}>
-          {nodeData.type === 'prophet' ? 'Prophet' : 'Priest'}
-        </span>
-      )}
+      {/* ── Scrollable content ── */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-lg mx-auto px-3 pt-6 pb-16">
 
-      <Handle type="source" position={Position.Bottom} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Left} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Right} style={{ background: kingdomBorder, border: 'none', width: 7, height: 7 }} />
-    </div>
-  );
-}
-
-const nodeTypes = { genealogy: GenealogyNodeComponent };
-
-// -----------------------------------------------------------------------
-// Layout: dagre automatic layout
-// -----------------------------------------------------------------------
-
-const DYNASTY_ORDER = ['David', 'Omri', 'Jehu', 'Jeroboam', 'Baasha', 'other'];
-const DYNASTY_COLORS: Record<string, string> = {
-  David:    '#C9A84C',
-  Omri:     '#F87171',
-  Jehu:     '#60A5FA',
-  Jeroboam: '#A78BFA',
-  Baasha:   '#34D399',
-  other:    'rgba(255,255,255,0.25)',
-};
-
-function buildFlowNodes(
-  nodes: GenealogyNode[],
-  positions: Record<string, { x: number; y: number }>,
-): Node[] {
-  return nodes.map(n => {
-    const pos = positions[n.id] ?? { x: 0, y: 0 };
-    const dynasty = n.dynasty ?? 'other';
-    const color = DYNASTY_COLORS[dynasty] ?? DYNASTY_COLORS.other;
-    return {
-      id: n.id,
-      type: 'genealogy',
-      position: pos,
-      data: {
-        label: n.name,
-        dynasty: n.dynasty,
-        dynastyColor: color,
-        verdict: n.verdict,
-        kingdom: n.kingdom,
-        isQueen: n.is_queen,
-        notes: n.notes,
-        type: n.type,
-      } satisfies NodeData,
-    };
-  });
-}
-
-function buildFlowEdges(edges: GenealogyEdge[]): Edge[] {
-  return edges.map(e => {
-    const isMarriage = e.relationship_type === 'marriage';
-    const isPolitical = e.relationship_type === 'political';
-    const isBio = e.relationship_type === 'biological' || e.relationship_type === 'adoption';
-    return {
-      id: e.id,
-      source: e.parent_node_id,
-      target: e.child_node_id,
-      type: isMarriage ? 'straight' : 'smoothstep',
-      animated: false,
-      style: {
-        stroke: isMarriage ? '#F472B6' : isPolitical ? 'rgba(167,139,250,0.6)' : 'rgba(201,168,76,0.45)',
-        strokeWidth: isPolitical ? 1.5 : 1.5,
-        strokeDasharray: isMarriage ? '5 3' : isPolitical ? '3 3' : undefined,
-        opacity: isPolitical ? 0.75 : 1,
-      },
-      markerEnd: isBio ? {
-        type: MarkerType.ArrowClosed,
-        color: 'rgba(201,168,76,0.5)',
-        width: 10,
-        height: 10,
-      } : undefined,
-      // Only show notes as label for marriages (keeps the graph clean)
-      label: isMarriage ? e.notes : undefined,
-      labelStyle: { fontSize: 9, fill: '#F472B6', opacity: 0.7 },
-      labelBgStyle: { fill: 'rgba(8,15,35,0.85)', padding: 2 },
-    };
-  });
-}
-
-// -----------------------------------------------------------------------
-// Main component
-// -----------------------------------------------------------------------
-
-type Props = {
-  genealogyNodes: GenealogyNode[];
-  genealogyEdges: GenealogyEdge[];
-  positions: Record<string, { x: number; y: number }>;
-};
-
-export default function GenealogyView({ genealogyNodes, genealogyEdges, positions }: Props) {
-  const router = useRouter();
-  const initialNodes = buildFlowNodes(genealogyNodes, positions);
-  const initialEdges = buildFlowEdges(genealogyEdges);
-
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [activePersonId, setActivePersonId] = useState<string | null>(null);
-  const [activePerson, setActivePerson] = useState<Person | null>(null);
-
-  const onConnect = useCallback(
-    (params: Connection) => setEdges(eds => addEdge(params, eds)),
-    [setEdges]
-  );
-
-  const onNodeClick = useCallback((_: React.MouseEvent, node: Node) => {
-    const gNode = genealogyNodes.find(n => n.id === node.id);
-    if (!gNode) return;
-    setActivePersonId(node.id);
-    // Build a minimal Person object from the genealogy node data
-    const data = node.data as NodeData;
-    const person: Person = {
-      id: gNode.person_id,
-      name: gNode.name,
-      type: gNode.type ?? 'other',
-      kingdom: gNode.kingdom,
-      verdict: gNode.verdict,
-      bio: gNode.notes ?? '',
-    };
-    setActivePerson(person);
-  }, [genealogyNodes]);
-
-  return (
-    <div className="flex overflow-hidden h-screen-safe" style={{ background: 'var(--navy-950)' }}>
-      {/* Left legend */}
-      <div className="shrink-0 flex flex-col border-r overflow-y-auto"
-        style={{ width: 220, borderColor: 'rgba(255,255,255,0.06)', background: 'var(--navy-900)' }}>
-        <div className="px-5 py-5">
-          {/* Back button */}
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 mb-5 text-xs transition-colors"
-            style={{ color: 'var(--muted-400)' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--ivory-100)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted-400)')}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Back
-          </button>
-
-          {/* Kingdoms */}
-          <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--gold-400)' }}>
-            Kingdoms
-          </div>
-          <div className="space-y-2 mb-2">
-            <div className="flex items-center gap-2.5">
-              <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: 'rgba(201,168,76,0.25)', border: '1.5px solid rgba(201,168,76,0.6)' }} />
-              <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>Kingdom of Judah</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: 'rgba(96,165,250,0.2)', border: '1.5px solid rgba(96,165,250,0.6)' }} />
-              <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>Kingdom of Israel</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: 'rgba(167,139,250,0.15)', border: '1.5px solid rgba(167,139,250,0.5)' }} />
-              <span className="text-xs" style={{ color: 'var(--ivory-200)' }}>Prophets & Priests</span>
-            </div>
-          </div>
-          <p className="text-xs mb-5" style={{ color: 'var(--muted-500)' }}>
-            Judah (left) · Prophets (center) · Israel (right)
-            <br />Y-axis = time, top to bottom
-          </p>
-
-          {/* Dynasties */}
-          <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--muted-400)' }}>
-            Dynasties
-          </div>
-          <div className="space-y-1.5 mb-5">
-            {DYNASTY_ORDER.filter(d => genealogyNodes.some(n => (n.dynasty ?? 'other') === d)).map(d => (
-              <div key={d} className="flex items-center gap-2.5">
-                <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: DYNASTY_COLORS[d] ?? DYNASTY_COLORS.other }} />
-                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>{d === 'other' ? 'Independent' : `${d}`}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Edge types */}
-          <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
-              Lines
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2.5">
-                <div className="w-6 h-px" style={{ background: 'rgba(201,168,76,0.6)' }} />
-                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Parent → Child</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <div className="w-6 h-px" style={{ borderTop: '1.5px dashed #F472B6' }} />
-                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Marriage</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <div className="w-6 h-px" style={{ borderTop: '1.5px dotted #94A3B8' }} />
-                <span className="text-xs" style={{ color: 'var(--muted-400)' }}>Prophet / Priest</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Verdict */}
-          <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--muted-400)' }}>
-              Verdict dot
-            </div>
-            <div className="space-y-1.5">
-              {[['var(--verdict-good)', 'Faithful'], ['var(--verdict-evil)', 'Wicked'], ['var(--verdict-mixed)', 'Mixed']].map(([color, label]) => (
-                <div key={label} className="flex items-center gap-2.5">
-                  <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color }} />
-                  <span className="text-xs" style={{ color: 'var(--muted-400)' }}>{label}</span>
+          {/* David & Solomon — pre-split, centred */}
+          <div className="flex justify-center mb-3">
+            <div style={{ width: 200 }}>
+              {preUnified.map((entry, i) => (
+                <div key={entry.node.id}>
+                  {i > 0 && <SuccLine type={entry.succession} note={entry.successionNote} />}
+                  <KingCard entry={entry} onTap={id => setActivePersonId(id)} />
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <p className="text-xs leading-relaxed" style={{ color: 'var(--muted-500)' }}>
-              Click any node to view their card.
-            </p>
-            <p className="text-xs leading-relaxed mt-1" style={{ color: 'var(--muted-500)' }}>
-              Scroll to zoom · Drag to pan
-            </p>
+          {/* ── Kingdom split ── */}
+          <EventBanner color="gold" label="Kingdom splits · 930 BC" />
+
+          {/* Column headers */}
+          <div className="grid grid-cols-2 gap-2 mt-4 mb-2">
+            <div className="text-center">
+              <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: 'var(--gold-400)' }}>
+                Judah
+              </span>
+              <div className="text-[9px] mt-0.5" style={{ color: 'var(--muted-500)' }}>David&apos;s line · Jerusalem</div>
+            </div>
+            <div className="text-center">
+              <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: 'var(--kingdom-north)' }}>
+                Israel
+              </span>
+              <div className="text-[9px] mt-0.5" style={{ color: 'var(--muted-500)' }}>Many dynasties · Samaria</div>
+            </div>
+          </div>
+
+          {/* ── Two-column timeline ── */}
+          <div className="flex gap-2 items-start">
+
+            {/* Judah */}
+            <div className="flex-1 min-w-0">
+              {judah.map((entry, i) => (
+                <div key={entry.node.id}>
+                  {i > 0 && <SuccLine type={entry.succession} note={entry.successionNote} />}
+                  <KingCard entry={entry} onTap={id => setActivePersonId(id)} />
+                </div>
+              ))}
+              <FallBanner label="Falls to Babylon · 586 BC" />
+            </div>
+
+            {/* Divider */}
+            <div className="shrink-0 mt-2" style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,0.05)' }} />
+
+            {/* Israel */}
+            <div className="flex-1 min-w-0">
+              {israel.map((entry, i) => (
+                <div key={entry.node.id}>
+                  {i > 0 && <SuccLine type={entry.succession} note={entry.successionNote} />}
+                  <KingCard entry={entry} onTap={id => setActivePersonId(id)} />
+                </div>
+              ))}
+              <FallBanner label="Falls to Assyria · 722 BC" />
+            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Graph */}
-      <div className="flex-1 relative">
-        {/* Kingdom column headers — fixed overlay */}
-        <div className="absolute top-0 left-0 right-0 flex pointer-events-none" style={{ zIndex: 5 }}>
-          <div className="absolute text-center" style={{ left: '10%', top: 10 }}>
-            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-              style={{ color: 'rgba(201,168,76,0.9)', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)' }}>
-              Kingdom of Judah
-            </span>
-          </div>
-          <div className="absolute text-center" style={{ left: '50%', transform: 'translateX(-50%)', top: 10 }}>
-            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-              style={{ color: 'rgba(167,139,250,0.8)', background: 'rgba(167,139,250,0.06)', border: '1px solid rgba(167,139,250,0.2)' }}>
-              Prophets & Priests
-            </span>
-          </div>
-          <div className="absolute text-center" style={{ right: '10%', top: 10 }}>
-            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-              style={{ color: 'rgba(96,165,250,0.9)', background: 'rgba(96,165,250,0.08)', border: '1px solid rgba(96,165,250,0.2)' }}>
-              Kingdom of Israel
-            </span>
-          </div>
-        </div>
+      {activePerson && (
+        <CharacterCardModal
+          person={toPersonStub(activePerson)}
+          onClose={() => setActivePersonId(null)}
+        />
+      )}
+    </div>
+  );
+}
 
-        {genealogyNodes.length === 0 ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-sm mb-2" style={{ color: 'var(--muted-400)' }}>Genealogy data not yet seeded.</p>
-            </div>
-          </div>
-        ) : (
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            onNodeClick={onNodeClick}
-            nodeTypes={nodeTypes}
-            fitView
-            fitViewOptions={{ padding: 0.12 }}
-            minZoom={0.15}
-            maxZoom={2}
-            style={{ background: 'var(--navy-950)' }}>
-            <Background color="rgba(255,255,255,0.025)" gap={32} />
-            <Controls
-              style={{
-                background: 'var(--navy-800)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: 12,
-              }} />
-            <MiniMap
-              style={{
-                background: 'var(--navy-900)',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}
-              nodeColor={node => {
-                const data = node.data as NodeData;
-                if (data.kingdom === 'south') return 'rgba(201,168,76,0.7)';
-                if (data.kingdom === 'north') return 'rgba(96,165,250,0.7)';
-                return 'rgba(167,139,250,0.6)';
-              }}
-            />
-          </ReactFlow>
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function KingCard({ entry, onTap }: { entry: KingEntry; onTap: (personId: string) => void }) {
+  const { node, spouses } = entry;
+  const accent = dynastyAccent(node.dynasty);
+  const verdictColor =
+    node.verdict === 'good'  ? 'var(--verdict-good)'  :
+    node.verdict === 'evil'  ? 'var(--verdict-evil)'  :
+    node.verdict === 'mixed' ? 'var(--verdict-mixed)' :
+    'var(--muted-500)';
+
+  return (
+    <button
+      onClick={() => onTap(node.person_id)}
+      className="w-full text-left rounded-lg px-2.5 py-2 transition-colors"
+      style={{
+        background: 'var(--navy-800)',
+        border: '1px solid rgba(255,255,255,0.06)',
+        borderLeft: `3px solid ${accent}`,
+      }}
+      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = 'var(--navy-700)')}
+      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = 'var(--navy-800)')}>
+
+      {/* Name + verdict */}
+      <div className="flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full shrink-0" style={{ background: verdictColor }} />
+        <span className="text-xs font-semibold leading-tight truncate" style={{ color: 'var(--ivory-100)' }}>
+          {node.name}{node.is_queen ? ' ♛' : ''}
+        </span>
+      </div>
+
+      {/* Reign dates + dynasty */}
+      <div className="mt-0.5 pl-3.5 text-[10px] leading-tight" style={{ color: 'var(--muted-500)' }}>
+        {reignLabel(node.reign_start_bc, node.reign_end_bc)}
+        {node.dynasty && (
+          <span style={{ color: accent }}> · {node.dynasty}</span>
         )}
       </div>
 
-      {/* Character card modal */}
-      {activePerson && (
-        <CharacterCardModal
-          person={activePerson}
-          onClose={() => { setActivePerson(null); setActivePersonId(null); }}
-        />
+      {/* Spouses */}
+      {spouses.length > 0 && (
+        <div className="mt-1 pl-3.5 flex flex-wrap gap-1">
+          {spouses.map(s => (
+            <span key={s.id}
+              className="text-[9px] px-1.5 py-0.5 rounded-full"
+              style={{
+                background: 'rgba(244,114,182,0.08)',
+                color: 'rgba(244,114,182,0.75)',
+                border: '1px solid rgba(244,114,182,0.2)',
+              }}>
+              ♥ {s.name}
+            </span>
+          ))}
+        </div>
       )}
+    </button>
+  );
+}
+
+function SuccLine({ type, note }: { type: SuccessionType; note?: string }) {
+  if (type === 'new-dynasty') {
+    return (
+      <div className="my-1 px-0.5">
+        <div className="rounded-md px-2 py-1"
+          style={{ background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.25)' }}>
+          <div className="flex items-center gap-1">
+            <span className="text-[9px] font-semibold uppercase tracking-wide" style={{ color: 'rgba(239,68,68,0.7)' }}>
+              new dynasty
+            </span>
+          </div>
+          {note && (
+            <div className="text-[9px] mt-0.5 italic" style={{ color: 'rgba(239,68,68,0.55)' }}>
+              {note}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'relative') {
+    return (
+      <div className="flex justify-center py-1">
+        <div className="flex flex-col items-center" style={{ gap: 1 }}>
+          <div style={{ width: 1, height: 8, borderLeft: '1px dashed rgba(139,154,181,0.35)' }} />
+          <svg width="7" height="5" viewBox="0 0 7 5" fill="none">
+            <path d="M3.5 5L0 0h7L3.5 5z" fill="rgba(139,154,181,0.35)" />
+          </svg>
+        </div>
+      </div>
+    );
+  }
+
+  // 'son' — solid gold
+  return (
+    <div className="flex justify-center py-1">
+      <div className="flex flex-col items-center" style={{ gap: 1 }}>
+        <div style={{ width: 1, height: 8, background: 'rgba(201,168,76,0.4)' }} />
+        <svg width="7" height="5" viewBox="0 0 7 5" fill="none">
+          <path d="M3.5 5L0 0h7L3.5 5z" fill="rgba(201,168,76,0.4)" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+function EventBanner({ label, color }: { label: string; color: 'gold' | 'red' }) {
+  const c = color === 'gold'
+    ? { text: 'var(--gold-400)', bg: 'rgba(201,168,76,0.07)', border: 'rgba(201,168,76,0.2)', line: 'rgba(201,168,76,0.2)' }
+    : { text: 'rgba(239,68,68,0.75)', bg: 'rgba(239,68,68,0.06)', border: 'rgba(239,68,68,0.2)', line: 'rgba(239,68,68,0.15)' };
+
+  return (
+    <div className="flex items-center gap-2 my-3">
+      <div className="flex-1 h-px" style={{ background: c.line }} />
+      <span className="text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full whitespace-nowrap"
+        style={{ color: c.text, background: c.bg, border: `1px solid ${c.border}` }}>
+        {label}
+      </span>
+      <div className="flex-1 h-px" style={{ background: c.line }} />
+    </div>
+  );
+}
+
+function FallBanner({ label }: { label: string }) {
+  return (
+    <div className="mt-2 rounded-md px-2 py-1.5 text-center"
+      style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)' }}>
+      <span className="text-[9px] font-bold uppercase tracking-wide" style={{ color: 'rgba(239,68,68,0.65)' }}>
+        {label}
+      </span>
     </div>
   );
 }

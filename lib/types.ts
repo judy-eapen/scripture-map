@@ -130,6 +130,8 @@ export type GenealogyNode = {
   is_queen?: boolean;
   reign_start_bc?: number | null;
   reign_end_bc?: number | null;
+  bio?: string;
+  contemporary_events?: string;
 };
 
 export type GenealogyEdge = {
