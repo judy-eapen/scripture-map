@@ -12,6 +12,7 @@ import type {
   GenealogyNode,
   GenealogyEdge,
   PersonAppearance,
+  VerseNote,
 } from './types'
 
 // Get full chapter data for the chapter study page
@@ -335,6 +336,17 @@ export function defaultNavData(): { book: string; chapters: NavChapter[] }[] {
     { book: '1 Kings', chapters: Array.from({ length: 22 }, (_, i) => ({ number: i + 1, is_read: false })) },
     { book: '2 Kings', chapters: Array.from({ length: 25 }, (_, i) => ({ number: i + 1, is_read: false })) },
   ]
+}
+
+// Get all verse notes for a user on a specific chapter
+export async function getVerseNotes(userId: string, chapterId: string): Promise<VerseNote[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('verse_notes')
+    .select('verse_number, highlighted, note_text')
+    .eq('user_id', userId)
+    .eq('chapter_id', chapterId)
+  return (data ?? []) as VerseNote[]
 }
 
 // Get all chapters a person appears in, with optional read status for a user

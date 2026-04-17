@@ -148,3 +148,9 @@ export type PersonAppearance = {
   chapter_number: number;
   read_at: string | null;
 };
+
+export type VerseNote = {
+  verse_number: number;
+  highlighted: boolean;
+  note_text: string | null;
+};

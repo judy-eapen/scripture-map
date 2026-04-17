@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getChapterData, getNavChapters, getChapterReadStatus, defaultNavData } from '@/lib/db'
+import { getChapterData, getNavChapters, getChapterReadStatus, getVerseNotes, defaultNavData } from '@/lib/db'
 import { createClient } from '@/lib/supabase/server'
 import ChapterView from '@/components/ChapterView'
 
@@ -19,9 +19,10 @@ export default async function ChapterPage({ params }: { params: Promise<{ book: 
 
   if (!chapterData) notFound()
 
-  const initialIsRead = user
-    ? await getChapterReadStatus(user.id, chapterData.id)
-    : false
+  const [initialIsRead, initialNotes] = await Promise.all([
+    user ? getChapterReadStatus(user.id, chapterData.id) : Promise.resolve(false),
+    user ? getVerseNotes(user.id, chapterData.id) : Promise.resolve([]),
+  ])
 
   return (
     <ChapterView
@@ -29,6 +30,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ book: 
       navData={navData}
       initialIsRead={initialIsRead}
       isAuthenticated={!!user}
+      initialNotes={initialNotes}
     />
   )
 }
