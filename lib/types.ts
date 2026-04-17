@@ -74,6 +74,7 @@ export type NavChapter = {
   number: number;
   is_read: boolean;
   quiz_best_score?: number | null;
+  year_start_bc?: number;
 };
 
 export type ActiveCard =
@@ -90,6 +91,7 @@ export type TimelineKing = {
   verdict?: 'good' | 'evil' | 'mixed';
   dates_approximate?: boolean;
   is_queen?: boolean; // for Athaliah
+  bio?: string;
 };
 
 export type NeighboringNation = {
