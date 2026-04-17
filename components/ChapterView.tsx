@@ -54,7 +54,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizKey, setQuizKey] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  // Only mount MapPanel on large screens — Leaflet crashes when initialized in a display:none container
+  const [mobileMapOpen, setMobileMapOpen] = useState(false);
+  // Only mount MapPanel when container is visible — Leaflet crashes in display:none containers
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
@@ -108,6 +109,20 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                     aria-label="Open navigation">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                       <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                  {/* Mobile map toggle */}
+                  <button
+                    className="md:hidden mt-1 shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{
+                      background: mobileMapOpen ? 'rgba(96,165,250,0.15)' : 'rgba(255,255,255,0.05)',
+                      color: mobileMapOpen ? 'var(--kingdom-north)' : 'var(--muted-400)',
+                      border: mobileMapOpen ? '1px solid rgba(96,165,250,0.3)' : '1px solid transparent',
+                    }}
+                    onClick={() => setMobileMapOpen(o => !o)}
+                    aria-label="Toggle map">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0 0 21 18.382V7.618a1 1 0 0 0-.553-.894L15 4m0 13V4m0 0L9 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
                   <div>
@@ -191,6 +206,18 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               {/* Gold divider */}
               <div className="h-px" style={{ background: 'linear-gradient(90deg, var(--gold-500), transparent)' }} />
             </div>
+
+            {/* Mobile map panel — only mounted when open so Leaflet isn't in a hidden container */}
+            {!isLargeScreen && mobileMapOpen && (
+              <div className="mb-6 rounded-xl overflow-hidden" style={{ height: '280px', border: '1px solid rgba(96,165,250,0.2)' }}>
+                <MapPanel
+                  places={chapter.places}
+                  activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
+                  chapterTitle={chapterTitle}
+                  onPlaceClick={place => setActiveCard({ type: 'place', place })}
+                />
+              </div>
+            )}
 
             {/* Summary */}
             <div className="mb-8">
