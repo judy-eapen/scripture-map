@@ -56,10 +56,29 @@ function yearToPercent(year: number): number {
   return ((TIMELINE_START - year) / TOTAL_YEARS) * 100;
 }
 
-function KingBlock({ king, trackHeight, onClick }: {
+// For tick-mark kings that are within ~15px of each other, assign alternating
+// rows (0 = top half, 1 = bottom half) so they're both fully visible.
+function computeTickRows(tickKings: TimelineKing[]): Map<string, 0 | 1> {
+  const rows = new Map<string, 0 | 1>();
+  const sorted = [...tickKings].sort((a, b) => b.reign_start_bc - a.reign_start_bc); // oldest first
+  for (let i = 0; i < sorted.length; i++) {
+    const leftPx = (yearToPercent(sorted[i].reign_start_bc) / 100) * 960;
+    if (i === 0) {
+      rows.set(sorted[i].id, 0);
+    } else {
+      const prevLeftPx = (yearToPercent(sorted[i - 1].reign_start_bc) / 100) * 960;
+      const adjacent = Math.abs(leftPx - prevLeftPx) < 15;
+      rows.set(sorted[i].id, adjacent ? ((rows.get(sorted[i - 1].id) === 0 ? 1 : 0) as 0 | 1) : 0);
+    }
+  }
+  return rows;
+}
+
+function KingBlock({ king, trackHeight, onClick, tickRow = 0 }: {
   king: TimelineKing;
   trackHeight: number;
   onClick?: (king: TimelineKing) => void;
+  tickRow?: 0 | 1;
 }) {
   const [hovered, setHovered] = useState(false);
   const reignYears = Math.max(0, king.reign_start_bc - king.reign_end_bc);
@@ -81,9 +100,13 @@ function KingBlock({ king, trackHeight, onClick }: {
   const tooltip = `${king.name}${king.is_queen ? ' (Queen)' : ''} · ${king.reign_start_bc}–${king.reign_end_bc} BC${reignYears === 0 ? ' (<1 yr)' : reignYears === 1 ? ' (1 yr)' : ''}${king.dates_approximate ? ' (approx.)' : ''}`;
 
   // Tick mark — slim vertical stripe for very short reigns (days/months/~1 yr).
-  // 9px wide so vertical text fits; z-index above neighbours so it's visible at
-  // the correct year boundary rather than hidden inside the next king's block.
+  // Adjacent tick marks (e.g. Elah + Zimri both at ~885 BC) are assigned to
+  // alternating rows via computeTickRows: tickRow 0 = top half, 1 = bottom half.
+  // This prevents the fixed 9px width from causing one to cover the other.
   if (isTick) {
+    const topStyle    = tickRow === 0 ? '2px'  : '50%';
+    const bottomStyle = tickRow === 0 ? '50%'  : '2px';
+    const halfHeight  = trackHeight / 2 - 6;
     return (
       <div
         role="button"
@@ -97,7 +120,7 @@ function KingBlock({ king, trackHeight, onClick }: {
           position: 'absolute',
           left: `${leftPct}%`,
           width: '9px',
-          top: 0, bottom: 0,
+          top: topStyle, bottom: bottomStyle,
           background: hovered
             ? fill.replace(/[\d.]+\)$/, m => `${Math.min(1, parseFloat(m) + 0.25)})`)
             : fill,
@@ -116,11 +139,11 @@ function KingBlock({ king, trackHeight, onClick }: {
         <span style={{
           writingMode: 'vertical-rl',
           transform: 'rotate(180deg)',
-          fontSize: '7px',
+          fontSize: '6px',
           fontWeight: 700,
           color: 'rgba(255,255,255,0.92)',
           whiteSpace: 'nowrap',
-          maxHeight: `${trackHeight - 8}px`,
+          maxHeight: `${halfHeight}px`,
           overflow: 'hidden',
           lineHeight: 1.15,
           letterSpacing: '0.02em',
@@ -250,6 +273,15 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
   const northKings = kings.filter(k => k.kingdom === 'north');
   const southKings = kings.filter(k => k.kingdom === 'south');
 
+  // Identify which kings will render as tick marks, then assign rows so
+  // adjacent ones (Elah+Zimri, Zechariah+Shallum) split top/bottom half.
+  const isTickKing = (k: TimelineKing) =>
+    (Math.max(0, k.reign_start_bc - k.reign_end_bc) / TOTAL_YEARS * 960) < 8;
+  const tickRows = new Map([
+    ...computeTickRows(northKings.filter(isTickKing)),
+    ...computeTickRows(southKings.filter(isTickKing)),
+  ]);
+
   const northFallLeft   = yearToPercent(NORTH_FALL);
   const youAreHereLeft  = youAreHereYear !== undefined ? yearToPercent(youAreHereYear) : null;
 
@@ -338,7 +370,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
               background: 'rgba(255,255,255,0.02)', borderRadius: '0 6px 6px 0', pointerEvents: 'none',
             }} />
             {northKings.map(king => (
-              <KingBlock key={king.id} king={king} trackHeight={trackHeight} onClick={onKingClick} />
+              <KingBlock key={king.id} king={king} trackHeight={trackHeight} onClick={onKingClick} tickRow={tickRows.get(king.id) ?? 0} />
             ))}
             <div style={{
               position: 'absolute', left: `${northFallLeft}%`, top: '50%',
@@ -372,7 +404,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
             border: '1px solid rgba(167,139,250,0.15)', overflow: 'visible',
           }}>
             {southKings.map(king => (
-              <KingBlock key={king.id} king={king} trackHeight={trackHeight} onClick={onKingClick} />
+              <KingBlock key={king.id} king={king} trackHeight={trackHeight} onClick={onKingClick} tickRow={tickRows.get(king.id) ?? 0} />
             ))}
             <div style={{
               position: 'absolute', right: '4px', top: '50%', transform: 'translateY(-50%)',
