@@ -68,6 +68,9 @@ export type ChapterData = {
   difficultPassages: DifficultPassage[];
   quizCount: number;
   quizBestScore?: number | null;
+  connections?: ChapterConnection[];
+  prophecies?: Prophecy[];
+  themes?: ChapterTheme[];
 };
 
 export type NavChapter = {
@@ -136,6 +139,68 @@ export type GenealogyNode = {
   contemporary_events?: string;
 };
 
+export type ProphetProfile = {
+  id: string;
+  person_id: string;
+  biblical_echo?: string | null;
+  calling_narrative: string;
+  ministry_summary: string;
+  miracles: { title: string; chapter_ref: string; description: string }[];
+  biblical_parallels: { parallel_figure: string; this_event: string; parallel_event: string; significance: string }[];
+  key_themes: string[];
+};
+
+export type Theme = {
+  id: string;
+  name: string;
+  description: string;
+  color_hex: string;
+  icon: string;
+};
+
+export type ChapterTheme = {
+  theme: Theme;
+  note: string;
+};
+
+export type Prophecy = {
+  id: string;
+  title: string;
+  prophet?: string | null;
+  prophecy_chapter_id: string;
+  prophecy_verse_start: number;
+  prophecy_verse_end: number;
+  prophecy_summary: string;
+  prophecy_book?: string | null;
+  prophecy_chapter_number?: number | null;
+  fulfillment_chapter_id?: string | null;
+  fulfillment_verse_start?: number | null;
+  fulfillment_verse_end?: number | null;
+  fulfillment_summary?: string;
+  fulfillment_book?: string | null;
+  fulfillment_chapter_number?: number | null;
+  fulfilled: boolean;
+};
+
+export type VerseNote = {
+  id: string;
+  chapter_id: string;
+  verse_number: number;
+  note_text: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ChapterConnection = {
+  id: string;
+  type: 'previously' | 'sets_up' | 'callback';
+  description: string;
+  target_chapter_id?: string | null;
+  target_book?: string | null;
+  target_chapter_number?: number | null;
+  verse_number?: number | null;
+};
+
 export type GenealogyEdge = {
   id: string;
   parent_node_id: string;
@@ -151,8 +216,21 @@ export type PersonAppearance = {
   read_at: string | null;
 };
 
-export type VerseNote = {
-  verse_number: number;
-  highlighted: boolean;
-  note_text: string | null;
+export type Flashcard = {
+  id: string;
+  deck: string;
+  question: string;
+  answer: string;
+  hint: string | null;
+};
+
+export type FlashcardReview = {
+  id: string;
+  user_id: string;
+  flashcard_id: string;
+  interval: number;
+  ease_factor: number;
+  repetitions: number;
+  due_date: string;
+  last_reviewed: string | null;
 };

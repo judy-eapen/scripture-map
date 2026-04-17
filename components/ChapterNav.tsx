@@ -189,6 +189,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, mobil
             {[
               { href: '/timeline', label: 'Kingdom Timeline', icon: <><rect x="3" y="4" width="18" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" /><rect x="3" y="10" width="12" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" /><rect x="3" y="16" width="15" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" /></> },
               { href: '/genealogy', label: 'Dynasty Web', icon: <><circle cx="12" cy="5" r="2" stroke="currentColor" strokeWidth="1.5" /><circle cx="5" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" /><circle cx="19" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" /><path d="M12 7v4M12 11l-7 6M12 11l7 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></> },
+              { href: '/flashcards', label: 'Flashcards', icon: <><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M8 12h8M12 9v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></> },
             ].map(({ href, label, icon }) => (
               <Link key={href} href={href}
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors"

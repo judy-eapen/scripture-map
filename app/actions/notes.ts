@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
+import type { VerseNote } from '@/lib/types';
 
 export async function saveVerseNote(
   chapterId: string,
@@ -45,4 +46,19 @@ export async function deleteVerseNote(
     .eq('verse_number', verseNumber);
 
   revalidatePath(`/study/${bookSlug}/${chapterNum}`);
+}
+
+export async function getChapterNotes(chapterId: string): Promise<VerseNote[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data } = await supabase
+    .from('verse_notes')
+    .select('id, chapter_id, verse_number, note_text, created_at, updated_at')
+    .eq('user_id', user.id)
+    .eq('chapter_id', chapterId)
+    .order('verse_number');
+
+  return (data ?? []) as VerseNote[];
 }

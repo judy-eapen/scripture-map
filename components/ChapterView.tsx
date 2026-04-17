@@ -10,8 +10,14 @@ import PlaceCardModal from '@/components/PlaceCardModal';
 import MapPanel from '@/components/MapPanel';
 import ArchaeologicalBadges from '@/components/ArchaeologicalBadges';
 import NeighboringNationsPanel from '@/components/NeighboringNationsPanel';
+import StoryThreadPanel from '@/components/StoryThreadPanel';
+import NotesPanel from '@/components/NotesPanel';
+import NoteEditorModal from '@/components/NoteEditorModal';
+import PropheciesPanel from '@/components/PropheciesPanel';
+import ProphecyModal from '@/components/ProphecyModal';
+import ThemesPanel from '@/components/ThemesPanel';
+import ThemeChaptersModal from '@/components/ThemeChaptersModal';
 import { markChapterRead, unmarkChapterRead } from '@/app/actions/progress';
-import { saveVerseNote, deleteVerseNote } from '@/app/actions/notes';
 import QuizModal from '@/components/QuizModal';
 import type { VerseNote } from '@/lib/types';
 
@@ -23,7 +29,7 @@ type Props = {
   initialNotes: VerseNote[];
 };
 
-export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes }: Props) {
+export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes = [] }: Props) {
   // Resizable map panel
   const [mapWidth, setMapWidth] = useState(500);
   const isResizing = useRef(false);
@@ -47,22 +53,6 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
     window.addEventListener('mouseup', onUp);
   }, []);
 
-  const [notes, setNotes] = useState<VerseNote[]>(initialNotes);
-
-  const handleSaveNote = async (verseNumber: number, highlighted: boolean, noteText: string | null) => {
-    setNotes(prev => {
-      const existing = prev.find(n => n.verse_number === verseNumber);
-      if (existing) return prev.map(n => n.verse_number === verseNumber ? { ...n, highlighted, note_text: noteText } : n);
-      return [...prev, { verse_number: verseNumber, highlighted, note_text: noteText }];
-    });
-    await saveVerseNote(chapter.id, chapter.book_slug, chapter.chapter_number, verseNumber, highlighted, noteText);
-  };
-
-  const handleDeleteNote = async (verseNumber: number) => {
-    setNotes(prev => prev.filter(n => n.verse_number !== verseNumber));
-    await deleteVerseNote(chapter.id, chapter.book_slug, chapter.chapter_number, verseNumber);
-  };
-
   const [activeCard, setActiveCard] = useState<
     | { type: 'person'; person: Person }
     | { type: 'place'; place: Place }
@@ -83,6 +73,42 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
   }, []);
+
+  // Notes state — keyed by verse_number for O(1) lookup
+  const [notes, setNotes] = useState<Map<number, string>>(() => {
+    const m = new Map<number, string>()
+    initialNotes.forEach(n => m.set(n.verse_number, n.note_text))
+    return m
+  })
+  const [noteVerseOpen, setNoteVerseOpen] = useState<number | null>(null)
+
+  function handleVerseClick(verseNumber: number) {
+    if (!isAuthenticated) return
+    setNoteVerseOpen(verseNumber)
+  }
+
+  function handleNoteSaved(verseNumber: number, text: string) {
+    setNotes(prev => new Map(prev).set(verseNumber, text))
+  }
+
+  function handleNoteDeleted(verseNumber: number) {
+    setNotes(prev => { const m = new Map(prev); m.delete(verseNumber); return m })
+  }
+
+  const [activeProphecy, setActiveProphecy] = useState<import('@/lib/types').Prophecy | null>(null)
+  const [activeTheme, setActiveTheme] = useState<import('@/lib/types').Theme | null>(null)
+
+  const notedVerses = new Set(notes.keys())
+  const notesList = Array.from(notes.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([verse_number, note_text]) => ({
+      id: `${chapter.id}-${verse_number}`,
+      chapter_id: chapter.id,
+      verse_number,
+      note_text,
+      created_at: '',
+      updated_at: '',
+    }))
 
   const chapterTitle = `${chapter.book} · Ch. ${chapter.chapter_number}`;
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
@@ -337,10 +363,9 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               activePersonId={activeCard?.type === 'person' ? activeCard.person.id : undefined}
               activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
               difficultPassages={chapter.difficultPassages}
-              notes={notes}
-              isAuthenticated={isAuthenticated}
-              onSaveNote={handleSaveNote}
-              onDeleteNote={handleDeleteNote}
+              connections={chapter.connections}
+              notedVerses={notedVerses}
+              onVerseClick={isAuthenticated ? handleVerseClick : undefined}
             />
 
             {/* People in this chapter */}
@@ -380,6 +405,34 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               nations={chapter.nations ?? []}
               chapterYearBC={Math.abs(chapter.year_start_bc ?? 869)}
             />
+
+            {/* Story Thread panel */}
+            <StoryThreadPanel
+              connections={chapter.connections ?? []}
+              currentBook={chapter.book}
+              currentChapter={chapter.chapter_number}
+            />
+
+            {/* Themes panel */}
+            <ThemesPanel
+              themes={chapter.themes ?? []}
+              onThemeClick={t => setActiveTheme(t)}
+            />
+
+            {/* Prophetic Word panel */}
+            <PropheciesPanel
+              prophecies={chapter.prophecies ?? []}
+              currentChapterId={chapter.id}
+              onProphecyClick={p => setActiveProphecy(p)}
+            />
+
+            {/* My Notes panel */}
+            {isAuthenticated && notesList.length > 0 && (
+              <NotesPanel
+                notes={notesList}
+                onEditNote={(verseNumber, currentText) => setNoteVerseOpen(verseNumber)}
+              />
+            )}
 
             {/* Chapter nav footer */}
             <div className="mt-12 flex items-center justify-between">
@@ -463,6 +516,31 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           chapterTitle={chapterTitle}
           isAuthenticated={isAuthenticated}
           onClose={() => setQuizOpen(false)}
+        />
+      )}
+      {activeTheme && (
+        <ThemeChaptersModal
+          theme={activeTheme}
+          onClose={() => setActiveTheme(null)}
+        />
+      )}
+      {activeProphecy && (
+        <ProphecyModal
+          prophecy={activeProphecy}
+          currentChapterId={chapter.id}
+          onClose={() => setActiveProphecy(null)}
+        />
+      )}
+      {noteVerseOpen !== null && (
+        <NoteEditorModal
+          chapterId={chapter.id}
+          bookSlug={chapter.book_slug}
+          chapterNum={chapter.chapter_number}
+          verseNumber={noteVerseOpen}
+          initialNote={notes.get(noteVerseOpen) ?? ''}
+          onClose={() => setNoteVerseOpen(null)}
+          onSaved={handleNoteSaved}
+          onDeleted={handleNoteDeleted}
         />
       )}
     </div>

@@ -1,6 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
 import type {
   ChapterData,
+  ChapterConnection,
+  Prophecy,
+  Theme,
+  ChapterTheme,
   TappablePerson,
   TappablePlace,
   ArchaeologicalEvidence,
@@ -47,7 +51,7 @@ export async function getChapterData(
   if (chapterError || !chapter) return null
 
   // Fetch related data in parallel
-  const [peopleResult, placesResult, evidenceResult, nationsResult, passagesResult, quizCountResult, genealogyPersonIdsResult] =
+  const [peopleResult, placesResult, evidenceResult, nationsResult, passagesResult, quizCountResult, genealogyPersonIdsResult, connectionsResult, propheciesSourceResult, propheciesFulfillmentResult, themesResult] =
     await Promise.allSettled([
       supabase
         .from('chapter_people')
@@ -77,6 +81,26 @@ export async function getChapterData(
       supabase
         .from('genealogy_nodes')
         .select('person_id'),
+      supabase
+        .from('chapter_connections')
+        .select('id, type, description, target_chapter_id, verse_number, chapters!chapter_connections_target_chapter_id_fkey(chapter_number, book_id, books(name))')
+        .eq('chapter_id', chapter.id)
+        .order('type'),
+      // Prophecies where this chapter is the prophecy source
+      supabase
+        .from('prophecies')
+        .select('id, title, prophet, prophecy_chapter_id, prophecy_verse_start, prophecy_verse_end, prophecy_summary, fulfillment_chapter_id, fulfillment_verse_start, fulfillment_verse_end, fulfillment_summary, fulfilled, chapters!prophecies_fulfillment_chapter_id_fkey(chapter_number, books(name))')
+        .eq('prophecy_chapter_id', chapter.id),
+      // Prophecies where this chapter is the fulfillment
+      supabase
+        .from('prophecies')
+        .select('id, title, prophet, prophecy_chapter_id, prophecy_verse_start, prophecy_verse_end, prophecy_summary, fulfillment_chapter_id, fulfillment_verse_start, fulfillment_verse_end, fulfillment_summary, fulfilled, chapters!prophecies_prophecy_chapter_id_fkey(chapter_number, books(name))')
+        .eq('fulfillment_chapter_id', chapter.id),
+      // Themes for this chapter
+      supabase
+        .from('chapter_themes')
+        .select('note, themes(id, name, description, color_hex, icon)')
+        .eq('chapter_id', chapter.id),
     ])
 
   type PeopleRow = { tappable_terms: string[]; people: { id: string; name: string; alt_names?: string[]; type: 'king' | 'prophet' | 'official' | 'foreign_ruler' | 'other'; kingdom?: 'north' | 'south' | 'foreign'; reign_start_bc?: number; reign_end_bc?: number; dates_approximate?: boolean; verdict?: 'good' | 'evil' | 'mixed'; bio: string; contemporary_events?: string; image_url?: string } }
@@ -171,6 +195,93 @@ export async function getChapterData(
       ? (quizCountResult.value.count ?? 0)
       : 0
 
+  type ConnectionRow = {
+    id: string
+    type: 'previously' | 'sets_up' | 'callback'
+    description: string
+    target_chapter_id: string | null
+    verse_number: number | null
+    chapters: { chapter_number: number; book_id: string; books: { name: string } | null } | null
+  }
+
+  const connections: ChapterConnection[] =
+    connectionsResult.status === 'fulfilled' && connectionsResult.value.data
+      ? (connectionsResult.value.data as unknown as ConnectionRow[]).map(row => ({
+          id: row.id,
+          type: row.type,
+          description: row.description,
+          target_chapter_id: row.target_chapter_id,
+          target_book: row.chapters?.books?.name ?? null,
+          target_chapter_number: row.chapters?.chapter_number ?? null,
+          verse_number: row.verse_number,
+        }))
+      : []
+
+  type ProphecyRow = {
+    id: string
+    title: string
+    prophet?: string | null
+    prophecy_chapter_id: string
+    prophecy_verse_start: number
+    prophecy_verse_end: number
+    prophecy_summary: string
+    fulfillment_chapter_id?: string | null
+    fulfillment_verse_start?: number | null
+    fulfillment_verse_end?: number | null
+    fulfillment_summary?: string
+    fulfilled: boolean
+    chapters?: { chapter_number: number; books: { name: string } | null } | null
+  }
+
+  function mapProphecyRow(row: ProphecyRow, role: 'source' | 'fulfillment'): Prophecy {
+    return {
+      id: row.id,
+      title: row.title,
+      prophet: row.prophet,
+      prophecy_chapter_id: row.prophecy_chapter_id,
+      prophecy_verse_start: row.prophecy_verse_start,
+      prophecy_verse_end: row.prophecy_verse_end,
+      prophecy_summary: row.prophecy_summary,
+      fulfillment_chapter_id: row.fulfillment_chapter_id,
+      fulfillment_verse_start: row.fulfillment_verse_start,
+      fulfillment_verse_end: row.fulfillment_verse_end,
+      fulfillment_summary: row.fulfillment_summary,
+      fulfilled: row.fulfilled,
+      // Attach linked chapter info depending on role
+      ...(role === 'source'
+        ? { fulfillment_book: row.chapters?.books?.name, fulfillment_chapter_number: row.chapters?.chapter_number }
+        : { prophecy_book: row.chapters?.books?.name, prophecy_chapter_number: row.chapters?.chapter_number }
+      ),
+    }
+  }
+
+  const propheciesSource: Prophecy[] =
+    propheciesSourceResult.status === 'fulfilled' && propheciesSourceResult.value.data
+      ? (propheciesSourceResult.value.data as unknown as ProphecyRow[]).map(r => mapProphecyRow(r, 'source'))
+      : []
+
+  const propheciesFulfillment: Prophecy[] =
+    propheciesFulfillmentResult.status === 'fulfilled' && propheciesFulfillmentResult.value.data
+      ? (propheciesFulfillmentResult.value.data as unknown as ProphecyRow[]).map(r => mapProphecyRow(r, 'fulfillment'))
+      : []
+
+  // Merge and deduplicate by id
+  const prophecyMap = new Map<string, Prophecy>()
+  ;[...propheciesSource, ...propheciesFulfillment].forEach(p => prophecyMap.set(p.id, p))
+  const prophecies = Array.from(prophecyMap.values())
+
+  type ThemeRow = { note: string; themes: { id: string; name: string; description: string; color_hex: string; icon: string } | null }
+
+  const themes: ChapterTheme[] =
+    themesResult.status === 'fulfilled' && themesResult.value.data
+      ? (themesResult.value.data as unknown as ThemeRow[])
+          .filter(row => row.themes !== null)
+          .map(row => ({
+            theme: row.themes as Theme,
+            note: row.note,
+          }))
+      : []
+
   return {
     id: chapter.id,
     book: book.name as '1 Kings' | '2 Kings',
@@ -187,7 +298,35 @@ export async function getChapterData(
     difficultPassages,
     quizCount,
     quizBestScore: null,
+    connections,
+    prophecies,
+    themes,
   }
+}
+
+// Get all chapters tagged with a given theme (for ThemeChaptersModal)
+export async function getChaptersForTheme(themeId: string): Promise<{ book: string; chapter_number: number; note: string }[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('chapter_themes')
+    .select('note, chapters(chapter_number, books(name))')
+    .eq('theme_id', themeId)
+    .order('chapters(chapter_number)')
+
+  type Row = { note: string; chapters: { chapter_number: number; books: { name: string } | null } | null }
+  return (data ?? [])
+    .filter((r: unknown) => (r as Row).chapters !== null)
+    .map((r: unknown) => ({
+      book: ((r as Row).chapters?.books?.name ?? ''),
+      chapter_number: ((r as Row).chapters?.chapter_number ?? 0),
+      note: (r as Row).note,
+    }))
+    .sort((a, b) => {
+      const bookOrder = a.book === '1 Kings' ? 0 : 1
+      const bookOrderB = b.book === '1 Kings' ? 0 : 1
+      if (bookOrder !== bookOrderB) return bookOrder - bookOrderB
+      return a.chapter_number - b.chapter_number
+    })
 }
 
 // Get quiz questions for a chapter (random order, up to 10)

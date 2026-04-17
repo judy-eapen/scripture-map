@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { Person } from '@/lib/types';
-
-type PersonAppearance = {
-  book: '1 Kings' | '2 Kings';
-  book_slug: '1-kings' | '2-kings';
-  chapter_number: number;
-  read_at: string | null;
-};
+import type { Person, ProphetProfile, PersonAppearance } from '@/lib/types';
 
 const verdictConfig = {
   good: { label: 'Faithful', color: 'var(--verdict-good)', bg: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.3)' },
@@ -70,6 +63,18 @@ export default function CharacterCardModal({ person, onClose }: Props) {
         }))
         .filter(g => g.chapters.length > 0)
     : [];
+
+  const [prophetProfile, setProphetProfile] = useState<ProphetProfile | null>(null);
+  const [expandedMiracle, setExpandedMiracle] = useState<number | null>(null);
+  const [expandedParallel, setExpandedParallel] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (person.type !== 'prophet') return;
+    fetch(`/api/prophet-profile/${person.id}`)
+      .then(r => r.json())
+      .then(data => { if (data) setProphetProfile(data); })
+      .catch(() => {});
+  }, [person.id, person.type]);
 
   return (
     <>
@@ -268,6 +273,146 @@ export default function CharacterCardModal({ person, onClose }: Props) {
                 </p>
               )}
             </div>
+          </div>
+        )}
+
+        {/* Prophet profile sections */}
+        {prophetProfile && (
+          <div className="mt-4 space-y-0">
+
+            {/* Biblical Echo */}
+            {prophetProfile.biblical_echo && (
+              <div className="mx-6 mb-4 rounded-xl px-4 py-3"
+                style={{ background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)' }}>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'rgb(167,139,250)' }}>
+                  Biblical Echo
+                </p>
+                <p className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>
+                  {person.name} echoes <span style={{ color: 'rgb(196,181,253)' }}>{prophetProfile.biblical_echo}</span>
+                </p>
+              </div>
+            )}
+
+            {/* Ministry summary */}
+            <div className="px-6 pb-4">
+              <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--muted-400)' }}>
+                Ministry
+              </p>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--ivory-200)', lineHeight: '1.75' }}>
+                {prophetProfile.ministry_summary}
+              </p>
+            </div>
+
+            {/* Miracles */}
+            {prophetProfile.miracles.length > 0 && (
+              <div className="px-6 pb-4">
+                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
+                  Miracles & Acts ({prophetProfile.miracles.length})
+                </p>
+                <div className="space-y-1">
+                  {prophetProfile.miracles.map((miracle, i) => (
+                    <div key={i}
+                      className="rounded-lg overflow-hidden"
+                      style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+                      <button
+                        onClick={() => setExpandedMiracle(expandedMiracle === i ? null : i)}
+                        className="w-full flex items-center justify-between px-3 py-2.5 text-left transition-colors"
+                        style={{ background: expandedMiracle === i ? 'rgba(201,168,76,0.06)' : 'rgba(255,255,255,0.02)' }}>
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="text-xs font-medium shrink-0" style={{ color: 'var(--gold-400)' }}>
+                            {i + 1}
+                          </span>
+                          <span className="text-sm font-medium truncate" style={{ color: 'var(--ivory-100)' }}>
+                            {miracle.title}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0 ml-2">
+                          <span className="text-xs" style={{ color: 'var(--muted-500)' }}>
+                            {miracle.chapter_ref}
+                          </span>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            className="transition-transform"
+                            style={{ color: 'var(--muted-500)', transform: expandedMiracle === i ? 'rotate(180deg)' : 'rotate(0)' }}>
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div>
+                      </button>
+                      {expandedMiracle === i && (
+                        <div className="px-3 pb-3 pt-1"
+                          style={{ background: 'rgba(201,168,76,0.03)', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+                          <p className="text-sm leading-relaxed" style={{ color: 'var(--muted-400)', lineHeight: '1.75' }}>
+                            {miracle.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Biblical Parallels */}
+            {prophetProfile.biblical_parallels.length > 0 && (
+              <div className="px-6 pb-4">
+                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
+                  Parallels to {prophetProfile.biblical_echo ?? 'Scripture'}
+                </p>
+                <div className="space-y-1">
+                  {prophetProfile.biblical_parallels.map((p, i) => (
+                    <div key={i}
+                      className="rounded-lg overflow-hidden"
+                      style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+                      <button
+                        onClick={() => setExpandedParallel(expandedParallel === i ? null : i)}
+                        className="w-full flex items-start justify-between px-3 py-2.5 text-left transition-colors"
+                        style={{ background: expandedParallel === i ? 'rgba(139,92,246,0.06)' : 'rgba(255,255,255,0.02)' }}>
+                        <p className="text-sm font-medium leading-snug" style={{ color: 'var(--ivory-100)' }}>
+                          {p.this_event}
+                        </p>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                          className="shrink-0 ml-2 mt-0.5 transition-transform"
+                          style={{ color: 'var(--muted-500)', transform: expandedParallel === i ? 'rotate(180deg)' : 'rotate(0)' }}>
+                          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                      {expandedParallel === i && (
+                        <div className="px-3 pb-3 pt-2 space-y-2"
+                          style={{ background: 'rgba(139,92,246,0.03)', borderTop: '1px solid rgba(139,92,246,0.08)' }}>
+                          <div className="flex items-start gap-2">
+                            <span className="text-xs font-semibold shrink-0 mt-0.5" style={{ color: 'rgb(167,139,250)' }}>
+                              {p.parallel_figure}:
+                            </span>
+                            <p className="text-xs leading-relaxed" style={{ color: 'var(--muted-400)' }}>
+                              {p.parallel_event}
+                            </p>
+                          </div>
+                          <p className="text-xs leading-relaxed italic" style={{ color: 'var(--muted-500)', borderLeft: '2px solid rgba(139,92,246,0.3)', paddingLeft: '8px' }}>
+                            {p.significance}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Key themes */}
+            {prophetProfile.key_themes.length > 0 && (
+              <div className="px-6 pb-4">
+                <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--muted-400)' }}>
+                  Key Themes
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {prophetProfile.key_themes.map((theme, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full"
+                      style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.15)', color: 'var(--gold-300)' }}>
+                      {theme}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

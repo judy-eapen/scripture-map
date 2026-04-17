@@ -122,6 +122,9 @@ function computeTickRows(tickKings: TimelineKing[]): Map<string, 0 | 1> {
 
 function KingBlock({ king, trackHeight, onClick, tickRow = 0 }: {
   king: TimelineKing;
+  isSelected?: boolean;
+  isDimmed?: boolean;
+  isContemporary?: boolean;
   trackHeight: number;
   onClick?: (king: TimelineKing) => void;
   tickRow?: 0 | 1;
@@ -221,8 +224,8 @@ function KingBlock({ king, trackHeight, onClick, tickRow = 0 }: {
           : fill,
         border: `1px solid ${border}`,
         borderStyle: king.dates_approximate ? 'dashed' : 'solid',
-        borderRadius: '4px',
-        cursor: onClick ? 'pointer' : 'default',
+        borderRadius: '5px',
+        cursor: 'pointer',
         display: 'flex',
         flexDirection: showVertical ? 'column' : 'row',
         alignItems: 'center',
