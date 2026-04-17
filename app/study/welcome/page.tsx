@@ -207,10 +207,18 @@ export default function WelcomePage() {
           </div>
 
           {/* Scroll hint */}
-          <div className="mt-12 flex flex-col items-center gap-2" style={{ color: 'var(--muted-500)' }}>
-            <span className="text-sm">Understand what you&apos;re about to read</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--muted-500)', animation: 'bounce 2s infinite' }}>
-              <path d="M19 9l-7 7-7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <div className="mt-12 flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 rounded-full px-4 py-2"
+              style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)' }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--gold-400)' }}>
+                <path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="text-sm font-medium" style={{ color: 'var(--gold-300)' }}>
+                Understand what you&apos;re about to read
+              </span>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--gold-400)', animation: 'bounce 2s infinite' }}>
+              <path d="M19 9l-7 7-7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </div>
