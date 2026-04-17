@@ -12,6 +12,7 @@ import type {
   GenealogyNode,
   GenealogyEdge,
   PersonAppearance,
+  VerseNote,
 } from './types'
 
 // Get full chapter data for the chapter study page
@@ -272,7 +273,7 @@ export async function getNavChapters(
   // 3 queries total: books, all chapters, user_progress
   const [booksResult, chaptersResult, progressResult] = await Promise.all([
     supabase.from('books').select('id, name').order('name'),
-    supabase.from('chapters').select('id, chapter_number, book_id').order('chapter_number'),
+    supabase.from('chapters').select('id, chapter_number, book_id, year_start_bc').order('chapter_number'),
     supabase
       .from('user_progress')
       .select('chapter_id, read_at, quiz_best_score')
@@ -284,6 +285,7 @@ export async function getNavChapters(
   const progress = progressResult.data ?? []
 
   type ProgressRow = { chapter_id: string; read_at: string | null; quiz_best_score: number | null }
+  type ChapterRow = { id: string; chapter_number: number; book_id: string; year_start_bc: number | null }
 
   // Build maps from chapter_id for read status and quiz score
   const readIds = new Set(
@@ -296,12 +298,13 @@ export async function getNavChapters(
   )
 
   return books.map((book: { id: string; name: string }) => {
-    const bookChapters = allChapters
-      .filter((ch: { id: string; chapter_number: number; book_id: string }) => ch.book_id === book.id)
-      .map((ch: { id: string; chapter_number: number; book_id: string }) => ({
+    const bookChapters = (allChapters as ChapterRow[])
+      .filter(ch => ch.book_id === book.id)
+      .map(ch => ({
         number: ch.chapter_number,
         is_read: readIds.has(ch.id),
         quiz_best_score: quizScoreMap.get(ch.id) ?? null,
+        year_start_bc: ch.year_start_bc ? Math.abs(ch.year_start_bc) : undefined,
       }))
 
     return {
@@ -336,6 +339,18 @@ export function defaultNavData(): { book: string; chapters: NavChapter[] }[] {
     { book: '2 Kings', chapters: Array.from({ length: 25 }, (_, i) => ({ number: i + 1, is_read: false })) },
   ]
 }
+
+// Get all verse notes for a user on a specific chapter
+export async function getVerseNotes(userId: string, chapterId: string): Promise<VerseNote[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('verse_notes')
+    .select('verse_number, highlighted, note_text')
+    .eq('user_id', userId)
+    .eq('chapter_id', chapterId)
+  return (data ?? []) as VerseNote[]
+}
+
 
 // Get all chapters a person appears in, with optional read status for a user
 export async function getPersonAppearances(
@@ -399,7 +414,7 @@ export async function getTimelineKings(): Promise<TimelineKing[]> {
   const { data, error } = await supabase
     .from('people')
     .select(
-      'id, name, kingdom, reign_start_bc, reign_end_bc, verdict, dates_approximate, is_queen'
+      'id, name, kingdom, reign_start_bc, reign_end_bc, verdict, dates_approximate, is_queen, bio'
     )
     .eq('type', 'king')
     .not('reign_start_bc', 'is', null)
@@ -415,6 +430,7 @@ export async function getTimelineKings(): Promise<TimelineKing[]> {
     verdict?: 'good' | 'evil' | 'mixed';
     dates_approximate?: boolean;
     is_queen?: boolean;
+    bio?: string;
   }[])
     .map((row) => ({
       id: row.id,
@@ -425,6 +441,7 @@ export async function getTimelineKings(): Promise<TimelineKing[]> {
       verdict: row.verdict,
       dates_approximate: row.dates_approximate,
       is_queen: row.is_queen,
+      bio: row.bio,
     }))
     .sort((a, b) => a.reign_start_bc - b.reign_start_bc)
 }
