@@ -11,16 +11,19 @@ import MapPanel from '@/components/MapPanel';
 import ArchaeologicalBadges from '@/components/ArchaeologicalBadges';
 import NeighboringNationsPanel from '@/components/NeighboringNationsPanel';
 import { markChapterRead, unmarkChapterRead } from '@/app/actions/progress';
+import { saveVerseNote, deleteVerseNote } from '@/app/actions/notes';
 import QuizModal from '@/components/QuizModal';
+import type { VerseNote } from '@/lib/types';
 
 type Props = {
   chapter: ChapterData;
   navData: { book: string; chapters: NavChapter[] }[];
   initialIsRead: boolean;
   isAuthenticated: boolean;
+  initialNotes: VerseNote[];
 };
 
-export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated }: Props) {
+export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes }: Props) {
   // Resizable map panel
   const [mapWidth, setMapWidth] = useState(500);
   const isResizing = useRef(false);
@@ -43,6 +46,22 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
   }, []);
+
+  const [notes, setNotes] = useState<VerseNote[]>(initialNotes);
+
+  const handleSaveNote = async (verseNumber: number, highlighted: boolean, noteText: string | null) => {
+    setNotes(prev => {
+      const existing = prev.find(n => n.verse_number === verseNumber);
+      if (existing) return prev.map(n => n.verse_number === verseNumber ? { ...n, highlighted, note_text: noteText } : n);
+      return [...prev, { verse_number: verseNumber, highlighted, note_text: noteText }];
+    });
+    await saveVerseNote(chapter.id, chapter.book_slug, chapter.chapter_number, verseNumber, highlighted, noteText);
+  };
+
+  const handleDeleteNote = async (verseNumber: number) => {
+    setNotes(prev => prev.filter(n => n.verse_number !== verseNumber));
+    await deleteVerseNote(chapter.id, chapter.book_slug, chapter.chapter_number, verseNumber);
+  };
 
   const [activeCard, setActiveCard] = useState<
     | { type: 'person'; person: Person }
@@ -289,7 +308,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
             </div>
 
             {/* Legend */}
-            <div className="flex items-center gap-4 mb-6 pb-5"
+            <div className="flex items-center gap-4 mb-6 pb-5 flex-wrap"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
               <span className="text-xs" style={{ color: 'var(--muted-500)' }}>Tap to view:</span>
               <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--gold-300)' }}>
@@ -300,6 +319,12 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                 <span className="inline-block w-8 h-px" style={{ borderBottom: '1px dashed var(--kingdom-north)' }} />
                 Place
               </div>
+              {isAuthenticated && (
+                <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--muted-500)' }}>
+                  <span className="inline-block w-5 text-right text-xs font-semibold" style={{ color: 'var(--gold-500)' }}>12</span>
+                  Tap # to note
+                </div>
+              )}
             </div>
 
             {/* Verse text */}
@@ -312,6 +337,10 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               activePersonId={activeCard?.type === 'person' ? activeCard.person.id : undefined}
               activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
               difficultPassages={chapter.difficultPassages}
+              notes={notes}
+              isAuthenticated={isAuthenticated}
+              onSaveNote={handleSaveNote}
+              onDeleteNote={handleDeleteNote}
             />
 
             {/* People in this chapter */}
