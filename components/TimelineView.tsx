@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import type { TimelineKing, NavChapter, Person } from '@/lib/types';
 import ChapterNav from '@/components/ChapterNav';
-import KingdomTimeline from '@/components/KingdomTimeline';
+import KingdomTimeline, { type ProphetEntry } from '@/components/KingdomTimeline';
 import CharacterCardModal from '@/components/CharacterCardModal';
 
 type Props = {
@@ -26,8 +26,21 @@ function kingToPerson(king: TimelineKing): Person {
   };
 }
 
+function prophetToPerson(prophet: ProphetEntry): Person {
+  return {
+    id: prophet.id,
+    name: prophet.name,
+    type: 'prophet',
+    kingdom: prophet.kingdom,
+    reign_start_bc: prophet.start,
+    reign_end_bc: prophet.end,
+    bio: prophet.bio,
+  };
+}
+
 export default function TimelineView({ kings, navData }: Props) {
   const [activeKing, setActiveKing] = useState<TimelineKing | null>(null);
+  const [activeProphet, setActiveProphet] = useState<ProphetEntry | null>(null);
 
   // Find the furthest read chapter by narrative order, then use its year
   const youAreHereYear = useMemo(() => {
@@ -88,7 +101,7 @@ export default function TimelineView({ kings, navData }: Props) {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ width: '12px', height: '12px', borderRadius: '2px', background: 'rgba(245,158,11,0.3)', border: '1px solid rgba(245,158,11,0.6)' }} />
-                <span style={{ fontSize: '12px', color: 'var(--muted-400)' }}>Prophet active</span>
+                <span style={{ fontSize: '12px', color: 'var(--muted-400)' }}>Prophet active (click for bio)</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ width: '9px', height: '14px', borderRadius: '2px', background: 'rgba(239,68,68,0.65)', border: '1.5px solid rgba(239,68,68,0.85)' }} />
@@ -107,14 +120,15 @@ export default function TimelineView({ kings, navData }: Props) {
             kings={kings}
             youAreHereYear={youAreHereYear}
             onKingClick={setActiveKing}
+            onProphetClick={setActiveProphet}
           />
 
           <p style={{
             marginTop: '28px', fontSize: '13px', color: 'var(--muted-500)',
             lineHeight: '1.7', maxWidth: '700px',
           }}>
-            Timeline spans from the division of the kingdom under Rehoboam (930 BC) through the fall
-            of Jerusalem under Nebuchadnezzar (586 BC). Click any king to view their character card.
+            Timeline spans from Solomon's Temple (966 BC) through the fall of Jerusalem under
+            Nebuchadnezzar (586 BC). Click any king or prophet to view their character card.
             Dashed borders indicate dates that are debated or reconstructed from overlapping regnal records.
           </p>
         </div>
@@ -124,6 +138,12 @@ export default function TimelineView({ kings, navData }: Props) {
         <CharacterCardModal
           person={kingToPerson(activeKing)}
           onClose={() => setActiveKing(null)}
+        />
+      )}
+      {activeProphet && (
+        <CharacterCardModal
+          person={prophetToPerson(activeProphet)}
+          onClose={() => setActiveProphet(null)}
         />
       )}
     </div>

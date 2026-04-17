@@ -3,10 +3,21 @@
 import { useState } from 'react';
 import type { TimelineKing } from '@/lib/types';
 
+export type ProphetEntry = {
+  id: string;
+  name: string;
+  start: number;
+  end: number;
+  row: 0 | 1 | 2;
+  bio: string;
+  kingdom?: 'north' | 'south';
+};
+
 type Props = {
   kings: TimelineKing[];
   youAreHereYear?: number;
   onKingClick?: (king: TimelineKing) => void;
+  onProphetClick?: (prophet: ProphetEntry) => void;
   compact?: boolean;
 };
 
@@ -19,26 +30,61 @@ const NORTH_FALL = 722;
 const TICK_YEARS = [970, 930, 880, 830, 780, 730, 680, 630, 586];
 
 const MAJOR_EVENTS = [
-  { year: 966, label: 'Temple built',         above: true  },
-  { year: 930, label: 'Kingdom divides',       above: false },
-  { year: 848, label: 'Elijah taken up',       above: true  },
-  { year: 701, label: 'Sennacherib invades',   above: false },
-  { year: 621, label: "Josiah's reform",       above: true  },
+  { year: 966, label: 'Temple built',       above: true  },
+  { year: 930, label: 'Kingdom divides',    above: false },
+  { year: 848, label: 'Elijah taken up',    above: true  },
+  { year: 701, label: 'Sennacherib',        above: false },
+  { year: 621, label: "Josiah's reform",    above: true  },
+  { year: 612, label: 'Nineveh falls',      above: false },
+  { year: 605, label: 'Exile begins',       above: true  },
 ] as const;
 
-type ProphetEntry = { name: string; start: number; end: number; row: 0 | 1 };
-
-// Active periods hardcoded — DB schema constrains date fields to kings only
+// Active periods hardcoded — DB schema constrains date fields to kings only.
+// Row layout (3 rows to avoid overlaps):
+//   Row 0: Elijah, Elisha, Hosea, Nahum
+//   Row 1: Jonah, Amos, Isaiah, Zephaniah
+//   Row 2: Micah, Jeremiah  (Micah overlaps Isaiah era; Jeremiah overlaps Zephaniah)
 const TIMELINE_PROPHETS: ProphetEntry[] = [
-  { name: 'Elijah',    start: 875, end: 848, row: 0 },
-  { name: 'Elisha',    start: 848, end: 797, row: 0 },
-  { name: 'Hosea',     start: 755, end: 715, row: 0 },
-  { name: 'Nahum',     start: 663, end: 612, row: 0 },
-  { name: 'Jonah',     start: 785, end: 760, row: 1 },
-  { name: 'Amos',      start: 762, end: 750, row: 1 },
-  { name: 'Isaiah',    start: 740, end: 700, row: 1 },
-  { name: 'Zephaniah', start: 640, end: 610, row: 1 },
-  { name: 'Jeremiah',  start: 627, end: 586, row: 1 },
+  {
+    id: 'elijah', name: 'Elijah', start: 875, end: 848, row: 0, kingdom: 'north',
+    bio: 'Confronted Ahab and Jezebel over Baal worship during the Northern Kingdom\'s most corrupt era. Called fire from heaven on Mount Carmel, raised the widow\'s son, and was taken to heaven in a whirlwind without dying. His ministry is the dramatic centrepiece of 1 Kings 17 – 2 Kings 2.',
+  },
+  {
+    id: 'elisha', name: 'Elisha', start: 848, end: 797, row: 0, kingdom: 'north',
+    bio: 'Elijah\'s successor, who inherited a double portion of his spirit. Performed twice as many recorded miracles as Elijah — healing Naaman\'s leprosy, raising the Shunammite\'s son, multiplying oil, and feeding 100 men. His ministry spans 2 Kings 2–13.',
+  },
+  {
+    id: 'hosea', name: 'Hosea', start: 755, end: 715, row: 0, kingdom: 'north',
+    bio: 'Prophesied to the Northern Kingdom through its final turbulent decades. His marriage to the unfaithful Gomer became a living metaphor for Israel\'s spiritual adultery — chasing Baal while the covenant God waited with steadfast love.',
+  },
+  {
+    id: 'nahum', name: 'Nahum', start: 663, end: 612, row: 0,
+    bio: 'Prophesied the complete destruction of Nineveh, which came to pass in 612 BC when Babylon and the Medes overran the Assyrian capital. His book is an extended poem of fierce joy over the fall of the empire that devastated Israel in 722 BC.',
+  },
+  {
+    id: 'jonah', name: 'Jonah', start: 785, end: 760, row: 1, kingdom: 'north',
+    bio: 'Reluctant prophet sent to Nineveh, the Assyrian capital, during the reign of Jeroboam II. Initially fled by ship, was swallowed by a great fish, and ultimately preached repentance to the Ninevites — who believed him. His mission precedes Assyria\'s rise as the instrument of Israel\'s judgment.',
+  },
+  {
+    id: 'amos', name: 'Amos', start: 762, end: 750, row: 1,
+    bio: 'A shepherd from Tekoa in Judah, called to prophesy against the Northern Kingdom during the prosperity of Jeroboam II\'s reign. He exposed the gap between religious observance and social justice, warning that Israel\'s wealth was built on exploiting the poor.',
+  },
+  {
+    id: 'isaiah', name: 'Isaiah', start: 740, end: 700, row: 1, kingdom: 'south',
+    bio: 'The greatest writing prophet, active in Jerusalem through the reigns of Uzziah, Jotham, Ahaz, and Hezekiah. He personally counselled Hezekiah during the Assyrian crisis recorded in 2 Kings 18–19. His prophecies both interpret the events of 2 Kings and look far beyond them to exile and restoration.',
+  },
+  {
+    id: 'zephaniah', name: 'Zephaniah', start: 640, end: 610, row: 1, kingdom: 'south',
+    bio: 'Prophesied in the early years of Josiah\'s reign, warning that the "Day of the LORD" would sweep away the deep idolatry that Manasseh had entrenched across Judah. His fierce warnings set the stage for Josiah\'s sweeping reforms recorded in 2 Kings 22–23.',
+  },
+  {
+    id: 'micah', name: 'Micah', start: 735, end: 700, row: 2,
+    bio: 'Contemporary of Isaiah, Hosea, and Amos. A rural prophet from Moresheth who spoke against the powerful in Jerusalem and Samaria alike. Foretold the destruction of both capitals — and also the birth of a ruler from Bethlehem who would restore the scattered flock.',
+  },
+  {
+    id: 'jeremiah', name: 'Jeremiah', start: 627, end: 586, row: 2, kingdom: 'south',
+    bio: 'The "weeping prophet," called in Josiah\'s thirteenth year and active until after Jerusalem fell. He lived through the events of 2 Kings 23–25 in real time — the final kings, the Babylonian sieges, the deportations, and the burning of the Temple. He composed Lamentations over the ruined city.',
+  },
 ];
 
 const verdictFill: Record<string, string> = {
@@ -226,29 +272,39 @@ function KingBlock({ king, trackHeight, onClick, tickRow = 0 }: {
   );
 }
 
-function ProphetBlock({ prophet, rowHeight }: { prophet: ProphetEntry; rowHeight: number }) {
+function ProphetBlock({ prophet, rowHeight, onClick }: {
+  prophet: ProphetEntry;
+  rowHeight: number;
+  onClick?: (prophet: ProphetEntry) => void;
+}) {
   const [hovered, setHovered] = useState(false);
   const years = Math.max(1, prophet.start - prophet.end);
   const widthPct = Math.max(1.5, (years / TOTAL_YEARS) * 100);
   const leftPct = yearToPercent(prophet.start);
-  const topOffset = prophet.row === 0 ? 3 : rowHeight + 3;
-  const approxPx = (widthPct / 100) * 900;
+  const topOffset = prophet.row === 0 ? 3 : prophet.row === 1 ? rowHeight + 3 : rowHeight * 2 + 3;
+  const approxPx = (widthPct / 100) * 960;
 
   return (
     <div
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onClick={() => onClick?.(prophet)}
+      onKeyDown={e => e.key === 'Enter' && onClick?.(prophet)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'absolute',
         left: `${leftPct}%`, width: `${widthPct}%`,
         top: `${topOffset}px`, height: `${rowHeight - 6}px`,
-        background: hovered ? 'rgba(245,158,11,0.45)' : 'rgba(245,158,11,0.28)',
+        background: hovered ? 'rgba(245,158,11,0.5)' : 'rgba(245,158,11,0.28)',
         border: '1px solid rgba(245,158,11,0.65)',
         borderRadius: '3px',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden', padding: '0 3px',
         transition: 'background 0.15s',
-        boxSizing: 'border-box', cursor: 'default',
+        boxSizing: 'border-box',
+        cursor: onClick ? 'pointer' : 'default',
+        userSelect: 'none',
       }}
       title={`${prophet.name} · active ~${prophet.start}–${prophet.end} BC`}
     >
@@ -256,7 +312,7 @@ function ProphetBlock({ prophet, rowHeight }: { prophet: ProphetEntry; rowHeight
         <span style={{
           fontSize: '9px', fontWeight: 600, color: 'rgba(253,230,138,0.95)',
           whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-          letterSpacing: '0.01em',
+          letterSpacing: '0.01em', pointerEvents: 'none',
         }}>
           {prophet.name}
         </span>
@@ -265,7 +321,7 @@ function ProphetBlock({ prophet, rowHeight }: { prophet: ProphetEntry; rowHeight
   );
 }
 
-export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, compact = false }: Props) {
+export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, onProphetClick, compact = false }: Props) {
   const trackHeight    = compact ? 48 : 80;
   const prophetRowHeight = compact ? 22 : 28;
   const axisHeight     = 24;
@@ -418,13 +474,13 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
           {/* Prophets track */}
           {!compact && (
             <div style={{
-              position: 'relative', height: `${prophetRowHeight * 2 + 4}px`,
+              position: 'relative', height: `${prophetRowHeight * 3 + 4}px`,
               marginTop: '8px',
               background: 'rgba(245,158,11,0.03)', borderRadius: '6px',
               border: '1px solid rgba(245,158,11,0.12)', overflow: 'visible',
             }}>
               {TIMELINE_PROPHETS.map(prophet => (
-                <ProphetBlock key={prophet.name} prophet={prophet} rowHeight={prophetRowHeight} />
+                <ProphetBlock key={prophet.id} prophet={prophet} rowHeight={prophetRowHeight} onClick={onProphetClick} />
               ))}
             </div>
           )}
