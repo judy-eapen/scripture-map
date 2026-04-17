@@ -23,7 +23,7 @@ export default function NoteEditorModal({
   function handleSave() {
     if (!text.trim()) return
     startTransition(async () => {
-      await saveVerseNote(chapterId, verseNumber, text.trim(), bookSlug, chapterNum)
+      await saveVerseNote(chapterId, bookSlug, chapterNum, verseNumber, false, text.trim())
       onSaved(verseNumber, text.trim())
       onClose()
     })
@@ -31,7 +31,7 @@ export default function NoteEditorModal({
 
   function handleDelete() {
     startTransition(async () => {
-      await deleteVerseNote(chapterId, verseNumber, bookSlug, chapterNum)
+      await deleteVerseNote(chapterId, bookSlug, chapterNum, verseNumber)
       onDeleted(verseNumber)
       onClose()
     })

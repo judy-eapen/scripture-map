@@ -484,10 +484,10 @@ export async function getVerseNotes(userId: string, chapterId: string): Promise<
   const supabase = await createClient()
   const { data } = await supabase
     .from('verse_notes')
-    .select('verse_number, highlighted, note_text')
+    .select('id, chapter_id, verse_number, note_text, created_at, updated_at')
     .eq('user_id', userId)
     .eq('chapter_id', chapterId)
-  return (data ?? []) as VerseNote[]
+  return (data ?? []) as unknown as VerseNote[]
 }
 
 // Get all chapters a person appears in, with optional read status for a user
