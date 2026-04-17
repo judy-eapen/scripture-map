@@ -81,8 +81,8 @@ function KingBlock({ king, trackHeight, onClick }: {
   const tooltip = `${king.name}${king.is_queen ? ' (Queen)' : ''} · ${king.reign_start_bc}–${king.reign_end_bc} BC${reignYears === 0 ? ' (<1 yr)' : reignYears === 1 ? ' (1 yr)' : ''}${king.dates_approximate ? ' (approx.)' : ''}`;
 
   // Tick mark — slim vertical stripe for very short reigns (days/months/~1 yr).
-  // Positioned at the correct year with z-index above neighbouring blocks so it's
-  // clearly visible at the boundary rather than hidden inside the next king's block.
+  // 9px wide so vertical text fits; z-index above neighbours so it's visible at
+  // the correct year boundary rather than hidden inside the next king's block.
   if (isTick) {
     return (
       <div
@@ -96,7 +96,7 @@ function KingBlock({ king, trackHeight, onClick }: {
         style={{
           position: 'absolute',
           left: `${leftPct}%`,
-          width: '6px',
+          width: '9px',
           top: 0, bottom: 0,
           background: hovered
             ? fill.replace(/[\d.]+\)$/, m => `${Math.min(1, parseFloat(m) + 0.25)})`)
@@ -107,13 +107,27 @@ function KingBlock({ king, trackHeight, onClick }: {
           zIndex: 4,
           boxSizing: 'border-box',
           display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'flex-start',
-          padding: '4px 0 0',
+          alignItems: 'center', justifyContent: 'center',
+          overflow: 'visible',
           transition: 'background 0.15s',
           userSelect: 'none',
         }}
       >
-        <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: border, flexShrink: 0 }} />
+        <span style={{
+          writingMode: 'vertical-rl',
+          transform: 'rotate(180deg)',
+          fontSize: '7px',
+          fontWeight: 700,
+          color: 'rgba(255,255,255,0.92)',
+          whiteSpace: 'nowrap',
+          maxHeight: `${trackHeight - 8}px`,
+          overflow: 'hidden',
+          lineHeight: 1.15,
+          letterSpacing: '0.02em',
+          pointerEvents: 'none',
+        }}>
+          {king.name}
+        </span>
       </div>
     );
   }
