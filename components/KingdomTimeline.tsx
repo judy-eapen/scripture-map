@@ -10,39 +10,30 @@ type Props = {
   compact?: boolean;
 };
 
-const TIMELINE_START = 930;
+// Extended back to 970 BC to show Solomon and the Temple
+const TIMELINE_START = 970;
 const TIMELINE_END = 586;
-const TOTAL_YEARS = TIMELINE_START - TIMELINE_END; // 344
+const TOTAL_YEARS = TIMELINE_START - TIMELINE_END; // 384
 const NORTH_FALL = 722;
 
-const TICK_YEARS = [930, 880, 830, 780, 730, 680, 630, 586];
+const TICK_YEARS = [970, 930, 880, 830, 780, 730, 680, 630, 586];
 
-// Key events to mark as vertical lines (excluding 722 and 586 which are on the tracks)
 const MAJOR_EVENTS = [
-  { year: 853, label: 'Battle of Qarqar', above: true },
-  { year: 841, label: "Jehu's revolt", above: false },
-  { year: 701, label: "Sennacherib invades", above: true },
-  { year: 640, label: "Josiah crowned", above: false },
-  { year: 621, label: "Josiah's reform", above: true },
-  { year: 609, label: "Josiah at Megiddo", above: false },
+  { year: 966, label: 'Temple built',         above: true  },
+  { year: 930, label: 'Kingdom divides',       above: false },
+  { year: 848, label: 'Elijah taken up',       above: true  },
+  { year: 701, label: 'Sennacherib invades',   above: false },
+  { year: 621, label: "Josiah's reform",       above: true  },
 ] as const;
 
-type ProphetEntry = {
-  name: string;
-  start: number;
-  end: number;
-  row: 0 | 1;
-};
+type ProphetEntry = { name: string; start: number; end: number; row: 0 | 1 };
 
-// Active periods sourced from scholarly consensus; hardcoded since DB schema
-// constrains date fields to kings only
+// Active periods hardcoded — DB schema constrains date fields to kings only
 const TIMELINE_PROPHETS: ProphetEntry[] = [
-  // Row 0
   { name: 'Elijah',    start: 875, end: 848, row: 0 },
   { name: 'Elisha',    start: 848, end: 797, row: 0 },
   { name: 'Hosea',     start: 755, end: 715, row: 0 },
   { name: 'Nahum',     start: 663, end: 612, row: 0 },
-  // Row 1
   { name: 'Jonah',     start: 785, end: 760, row: 1 },
   { name: 'Amos',      start: 762, end: 750, row: 1 },
   { name: 'Isaiah',    start: 740, end: 700, row: 1 },
@@ -51,13 +42,13 @@ const TIMELINE_PROPHETS: ProphetEntry[] = [
 ];
 
 const verdictFill: Record<string, string> = {
-  good: 'rgba(16,185,129,0.7)',
-  evil: 'rgba(239,68,68,0.65)',
+  good:  'rgba(16,185,129,0.7)',
+  evil:  'rgba(239,68,68,0.65)',
   mixed: 'rgba(245,158,11,0.65)',
 };
 const verdictBorder: Record<string, string> = {
-  good: 'rgba(16,185,129,0.9)',
-  evil: 'rgba(239,68,68,0.85)',
+  good:  'rgba(16,185,129,0.9)',
+  evil:  'rgba(239,68,68,0.85)',
   mixed: 'rgba(245,158,11,0.85)',
 };
 
@@ -72,13 +63,15 @@ function KingBlock({ king, trackHeight, onClick }: {
 }) {
   const [hovered, setHovered] = useState(false);
   const reignYears = Math.max(1, king.reign_start_bc - king.reign_end_bc);
-  const widthPct = Math.max(1.5, (reignYears / TOTAL_YEARS) * 100);
+  const widthPct = Math.max(0.8, (reignYears / TOTAL_YEARS) * 100);
   const leftPct = yearToPercent(king.reign_start_bc);
-  const fill = king.verdict ? verdictFill[king.verdict] : 'rgba(100,116,139,0.5)';
+  const fill   = king.verdict ? verdictFill[king.verdict]   : 'rgba(100,116,139,0.5)';
   const border = king.verdict ? verdictBorder[king.verdict] : 'rgba(100,116,139,0.7)';
-  const blockWidthApprox = (widthPct / 100) * 900;
-  const showName = blockWidthApprox >= 30;
-  const truncateName = blockWidthApprox < 60;
+
+  // Approximate block width in px (at min-width 900px container)
+  const approxPx = (widthPct / 100) * 900;
+  const showHorizontal = approxPx >= 28;
+  const showVertical   = !showHorizontal && approxPx >= 7;
 
   return (
     <div
@@ -91,29 +84,58 @@ function KingBlock({ king, trackHeight, onClick }: {
       style={{
         position: 'absolute',
         left: `${leftPct}%`, width: `${widthPct}%`,
-        top: '4px', bottom: '4px',
-        background: hovered ? fill.replace(/[\d.]+\)$/, m => `${Math.min(1, parseFloat(m) + 0.2)})`) : fill,
+        top: '3px', bottom: '3px',
+        background: hovered
+          ? fill.replace(/[\d.]+\)$/, m => `${Math.min(1, parseFloat(m) + 0.2)})`)
+          : fill,
         border: `1px solid ${border}`,
         borderStyle: king.dates_approximate ? 'dashed' : 'solid',
         borderRadius: '4px',
         cursor: onClick ? 'pointer' : 'default',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px',
-        overflow: 'hidden', padding: '0 4px',
+        display: 'flex',
+        flexDirection: showVertical ? 'column' : 'row',
+        alignItems: 'center',
+        justifyContent: showVertical ? 'flex-end' : 'center',
+        gap: showVertical ? '0' : '3px',
+        overflow: 'hidden',
+        padding: showVertical ? '0 2px 4px' : '0 4px',
         transition: 'background 0.15s',
         boxSizing: 'border-box', userSelect: 'none',
-        minHeight: `${trackHeight - 8}px`,
+        minHeight: `${trackHeight - 6}px`,
+        zIndex: 2,
       }}
       title={`${king.name}${king.is_queen ? ' (Queen)' : ''} · ${king.reign_start_bc}–${king.reign_end_bc} BC${king.dates_approximate ? ' (approx.)' : ''}`}
     >
-      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: border, flexShrink: 0 }} />
-      {showName && (
+      {/* Verdict indicator */}
+      {showVertical ? (
+        <div style={{ width: '80%', height: '2px', background: border, borderRadius: '1px', marginBottom: '3px', flexShrink: 0 }} />
+      ) : (
+        <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: border, flexShrink: 0 }} />
+      )}
+
+      {/* Name — horizontal for wide blocks, vertical for narrow */}
+      {showHorizontal && (
         <span style={{
           fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.92)',
           whiteSpace: 'nowrap', overflow: 'hidden',
-          textOverflow: truncateName ? 'clip' : 'ellipsis',
+          textOverflow: approxPx < 60 ? 'clip' : 'ellipsis',
           letterSpacing: '0.01em', lineHeight: 1.2,
         }}>
           {king.name}{king.is_queen && <span style={{ fontSize: '8px', opacity: 0.8, marginLeft: '2px' }}>Q</span>}
+        </span>
+      )}
+      {showVertical && (
+        <span style={{
+          fontSize: '9px', fontWeight: 600, color: 'rgba(255,255,255,0.88)',
+          writingMode: 'vertical-rl',
+          transform: 'rotate(180deg)',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          maxHeight: `${trackHeight - 22}px`,
+          lineHeight: 1.2,
+          letterSpacing: '0.01em',
+        }}>
+          {king.name}
         </span>
       )}
     </div>
@@ -126,8 +148,7 @@ function ProphetBlock({ prophet, rowHeight }: { prophet: ProphetEntry; rowHeight
   const widthPct = Math.max(1.5, (years / TOTAL_YEARS) * 100);
   const leftPct = yearToPercent(prophet.start);
   const topOffset = prophet.row === 0 ? 3 : rowHeight + 3;
-  const blockWidthApprox = (widthPct / 100) * 900;
-  const showName = blockWidthApprox >= 28;
+  const approxPx = (widthPct / 100) * 900;
 
   return (
     <div
@@ -143,12 +164,11 @@ function ProphetBlock({ prophet, rowHeight }: { prophet: ProphetEntry; rowHeight
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden', padding: '0 3px',
         transition: 'background 0.15s',
-        boxSizing: 'border-box',
-        cursor: 'default',
+        boxSizing: 'border-box', cursor: 'default',
       }}
       title={`${prophet.name} · active ~${prophet.start}–${prophet.end} BC`}
     >
-      {showName && (
+      {approxPx >= 28 && (
         <span style={{
           fontSize: '9px', fontWeight: 600, color: 'rgba(253,230,138,0.95)',
           whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
@@ -162,15 +182,15 @@ function ProphetBlock({ prophet, rowHeight }: { prophet: ProphetEntry; rowHeight
 }
 
 export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, compact = false }: Props) {
-  const trackHeight = compact ? 36 : 56;
+  const trackHeight    = compact ? 48 : 80;
   const prophetRowHeight = compact ? 22 : 28;
-  const axisHeight = 24;
+  const axisHeight     = 24;
 
   const northKings = kings.filter(k => k.kingdom === 'north');
   const southKings = kings.filter(k => k.kingdom === 'south');
 
-  const northFallLeft = yearToPercent(NORTH_FALL);
-  const youAreHereLeft = youAreHereYear !== undefined ? yearToPercent(youAreHereYear) : null;
+  const northFallLeft   = yearToPercent(NORTH_FALL);
+  const youAreHereLeft  = youAreHereYear !== undefined ? yearToPercent(youAreHereYear) : null;
 
   return (
     <div style={{
@@ -178,7 +198,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
       borderRadius: '12px', border: '1px solid rgba(255,255,255,0.07)',
       background: 'var(--navy-900)',
     }}>
-      <div style={{ minWidth: '900px', position: 'relative', padding: '16px 20px 20px' }}>
+      <div style={{ minWidth: '960px', position: 'relative', padding: '16px 20px 20px' }}>
 
         {/* Northern Kingdom label */}
         {!compact && (
@@ -191,7 +211,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
           </div>
         )}
 
-        {/* Event label strip — rendered above the tracks so labels are never behind king blocks */}
+        {/* Event label strip — above tracks so labels are never behind king blocks */}
         {!compact && (
           <div style={{ position: 'relative', height: '28px', marginBottom: '2px' }}>
             {MAJOR_EVENTS.map(event => (
@@ -201,7 +221,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
                 top: event.above ? '2px' : '15px',
                 transform: 'translateX(-4px)',
                 fontSize: '8px', fontWeight: 600,
-                color: 'rgba(255,255,255,0.5)',
+                color: 'rgba(255,255,255,0.55)',
                 whiteSpace: 'nowrap', letterSpacing: '0.03em',
                 pointerEvents: 'none',
               }}>
@@ -211,37 +231,33 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
           </div>
         )}
 
-        {/* All tracks share this container so event overlays span everything */}
+        {/* All tracks share this container so overlays span everything */}
         <div style={{ position: 'relative' }}>
 
-          {/* Major event markers — vertical lines only, no labels */}
-          {!compact && MAJOR_EVENTS.map(event => {
-            const left = yearToPercent(event.year);
-            return (
-              <div key={event.year} style={{
-                position: 'absolute', left: `${left}%`,
-                top: 0, bottom: 0, zIndex: 1, pointerEvents: 'none',
-                borderLeft: '1px dashed rgba(255,255,255,0.18)',
-              }} />
-            );
-          })}
+          {/* Event vertical lines */}
+          {!compact && MAJOR_EVENTS.map(event => (
+            <div key={event.year} style={{
+              position: 'absolute', left: `${yearToPercent(event.year)}%`,
+              top: 0, bottom: 0, zIndex: 1, pointerEvents: 'none',
+              borderLeft: '1px dashed rgba(255,255,255,0.2)',
+            }} />
+          ))}
 
           {/* "You are here" marker */}
           {youAreHereLeft !== null && (
             <div style={{
               position: 'absolute', left: `${youAreHereLeft}%`,
               top: 0, bottom: 0, zIndex: 4, pointerEvents: 'none',
-              display: 'flex', flexDirection: 'column', alignItems: 'center',
             }}>
               <div style={{
                 width: '2px', height: '100%',
-                background: 'linear-gradient(to bottom, var(--gold-400), rgba(201,168,76,0.3))',
+                background: 'linear-gradient(to bottom, var(--gold-400), rgba(201,168,76,0.25))',
                 borderRadius: '1px',
               }} />
+              {/* Year badge below the line */}
               <div style={{
-                position: 'absolute', top: '-18px', left: '50%', transform: 'translateX(-50%)',
-                background: 'var(--gold-500)', borderRadius: '3px',
-                padding: '1px 5px',
+                position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%)',
+                background: 'var(--gold-500)', borderRadius: '3px', padding: '1px 5px',
                 fontSize: '8px', fontWeight: 700, color: 'var(--navy-950)',
                 whiteSpace: 'nowrap', letterSpacing: '0.04em',
               }}>
@@ -267,7 +283,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
               position: 'absolute', left: `${northFallLeft}%`, top: '50%',
               transform: 'translate(4px, -50%)',
               fontSize: '9px', fontWeight: 600, color: 'rgba(96,165,250,0.6)',
-              letterSpacing: '0.04em', whiteSpace: 'nowrap', pointerEvents: 'none',
+              letterSpacing: '0.04em', whiteSpace: 'nowrap', pointerEvents: 'none', zIndex: 1,
             }}>
               722 BC — Fall of Samaria
             </div>
@@ -300,7 +316,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
             <div style={{
               position: 'absolute', right: '4px', top: '50%', transform: 'translateY(-50%)',
               fontSize: '9px', fontWeight: 600, color: 'rgba(167,139,250,0.6)',
-              letterSpacing: '0.04em', whiteSpace: 'nowrap', pointerEvents: 'none',
+              letterSpacing: '0.04em', whiteSpace: 'nowrap', pointerEvents: 'none', zIndex: 1,
             }}>
               586 BC — Fall of Jerusalem
             </div>
@@ -324,7 +340,7 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
 
         {/* Southern Kingdom label */}
         {!compact && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: youAreHereLeft !== null ? '28px' : '8px' }}>
             <div style={{ flex: 1, height: '1px', background: 'rgba(167,139,250,0.15)' }} />
             <span style={{
               fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
