@@ -320,9 +320,12 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                 Place
               </div>
               {isAuthenticated && (
-                <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--muted-500)' }}>
-                  <span className="inline-block w-5 text-right text-xs font-semibold" style={{ color: 'var(--gold-500)' }}>12</span>
-                  Tap # to note
+                <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--muted-400)' }}>
+                  <span className="inline-block text-xs font-semibold px-1 rounded"
+                    style={{ color: 'var(--gold-400)', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)' }}>
+                    12
+                  </span>
+                  Click a verse number to highlight or add a note
                 </div>
               )}
             </div>

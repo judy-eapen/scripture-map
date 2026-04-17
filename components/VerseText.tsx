@@ -293,14 +293,45 @@ export default function VerseText({
               {isAuthenticated ? (
                 <button
                   onClick={() => setActiveNoteVerse(n => n === verse.verse_number ? null : verse.verse_number)}
-                  className="shrink-0 text-xs font-semibold mt-[5px] w-5 text-right select-none relative group"
-                  style={{ color: noteOpen ? 'var(--gold-300)' : isHighlighted ? 'var(--gold-400)' : 'var(--gold-500)', fontVariantNumeric: 'tabular-nums' }}
-                  title="Add highlight or note">
-                  {verse.verse_number}
+                  className="shrink-0 text-xs font-semibold mt-[3px] select-none relative group/vnum flex items-center gap-0.5"
+                  style={{
+                    color: noteOpen ? 'var(--gold-300)' : isHighlighted ? 'var(--gold-400)' : 'var(--gold-500)',
+                    fontVariantNumeric: 'tabular-nums',
+                    background: noteOpen ? 'rgba(201,168,76,0.12)' : 'transparent',
+                    border: noteOpen ? '1px solid rgba(201,168,76,0.25)' : '1px solid transparent',
+                    borderRadius: '4px',
+                    padding: '1px 4px',
+                    minWidth: '28px',
+                    justifyContent: 'flex-end',
+                  }}
+                  onMouseEnter={e => {
+                    if (!noteOpen) {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.08)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.18)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!noteOpen) {
+                      (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'transparent';
+                    }
+                  }}
+                  title="Click to highlight or add a note">
+                  <span>{verse.verse_number}</span>
                   {hasNote && !noteOpen && (
                     <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full"
                       style={{ background: 'var(--gold-400)' }} />
                   )}
+                  {/* Pencil icon — visible on hover or when open */}
+                  <svg
+                    width="9" height="9" viewBox="0 0 24 24" fill="none"
+                    className="opacity-0 group-hover/vnum:opacity-60 transition-opacity"
+                    style={{ opacity: noteOpen ? 0.7 : undefined, flexShrink: 0 }}>
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </button>
               ) : (
                 <span
