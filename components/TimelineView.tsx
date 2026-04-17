@@ -5,6 +5,7 @@ import type { TimelineKing, NavChapter, Person } from '@/lib/types';
 import ChapterNav from '@/components/ChapterNav';
 import KingdomTimeline, { type ProphetEntry } from '@/components/KingdomTimeline';
 import CharacterCardModal from '@/components/CharacterCardModal';
+import ProphetModal from '@/components/ProphetModal';
 
 type Props = {
   kings: TimelineKing[];
@@ -23,18 +24,6 @@ function kingToPerson(king: TimelineKing): Person {
     verdict: king.verdict,
     dates_approximate: king.dates_approximate,
     bio: king.bio ?? `${king.name} ruled ${kingdomLabel} from approximately ${king.reign_start_bc} to ${king.reign_end_bc} BC${king.dates_approximate ? ' (dates approximate)' : ''}.`,
-  };
-}
-
-function prophetToPerson(prophet: ProphetEntry): Person {
-  return {
-    id: prophet.id,
-    name: prophet.name,
-    type: 'prophet',
-    kingdom: prophet.kingdom,
-    reign_start_bc: prophet.start,
-    reign_end_bc: prophet.end,
-    bio: prophet.bio,
   };
 }
 
@@ -141,8 +130,9 @@ export default function TimelineView({ kings, navData }: Props) {
         />
       )}
       {activeProphet && (
-        <CharacterCardModal
-          person={prophetToPerson(activeProphet)}
+        <ProphetModal
+          prophet={activeProphet}
+          navData={navData}
           onClose={() => setActiveProphet(null)}
         />
       )}
