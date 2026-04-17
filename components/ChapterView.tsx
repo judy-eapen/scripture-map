@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import type { Person, Place, ChapterData, NavChapter } from '@/lib/types';
 import ChapterNav from '@/components/ChapterNav';
@@ -54,6 +54,15 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizKey, setQuizKey] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  // Only mount MapPanel on large screens — Leaflet crashes when initialized in a display:none container
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    setIsLargeScreen(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   const chapterTitle = `${chapter.book} · Ch. ${chapter.chapter_number}`;
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
@@ -347,29 +356,33 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           </div>
         </div>
 
-        {/* Drag handle */}
-        <div
-          onMouseDown={startResize}
-          className="hidden lg:flex shrink-0 items-center justify-center cursor-col-resize group"
-          style={{ width: '8px', background: 'transparent', position: 'relative' }}
-          title="Drag to resize">
-          <div className="w-[2px] h-12 rounded-full transition-all duration-150 group-hover:h-20"
-            style={{ background: 'rgba(201,168,76,0.2)' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.5)'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.2)'; }}
-          />
-        </div>
+        {/* Drag handle — desktop only */}
+        {isLargeScreen && (
+          <div
+            onMouseDown={startResize}
+            className="shrink-0 flex items-center justify-center cursor-col-resize group"
+            style={{ width: '8px', background: 'transparent', position: 'relative' }}
+            title="Drag to resize">
+            <div className="w-[2px] h-12 rounded-full transition-all duration-150 group-hover:h-20"
+              style={{ background: 'rgba(201,168,76,0.2)' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.5)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.2)'; }}
+            />
+          </div>
+        )}
 
-        {/* Right panel — map (isolation: isolate contains Leaflet stacking context) */}
-        <div className="shrink-0 flex-col hidden lg:flex overflow-hidden"
-          style={{ width: `${mapWidth}px`, borderLeft: '1px solid rgba(255,255,255,0.06)', isolation: 'isolate' }}>
-          <MapPanel
-            places={chapter.places}
-            activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
-            chapterTitle={chapterTitle}
-            onPlaceClick={place => setActiveCard({ type: 'place', place })}
-          />
-        </div>
+        {/* Right panel — map. Only mounted on large screens; Leaflet crashes in display:none containers */}
+        {isLargeScreen && (
+          <div className="shrink-0 flex flex-col overflow-hidden"
+            style={{ width: `${mapWidth}px`, borderLeft: '1px solid rgba(255,255,255,0.06)', isolation: 'isolate' }}>
+            <MapPanel
+              places={chapter.places}
+              activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
+              chapterTitle={chapterTitle}
+              onPlaceClick={place => setActiveCard({ type: 'place', place })}
+            />
+          </div>
+        )}
       </main>
 
       {/* Modals */}
