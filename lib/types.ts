@@ -141,3 +141,10 @@ export type GenealogyEdge = {
   relationship_type: 'biological' | 'marriage' | 'adoption' | 'political';
   notes?: string;
 };
+
+export type PersonAppearance = {
+  book: '1 Kings' | '2 Kings';
+  book_slug: '1-kings' | '2-kings';
+  chapter_number: number;
+  read_at: string | null;
+};

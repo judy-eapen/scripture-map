@@ -11,6 +11,7 @@ import type {
   DifficultPassage,
   GenealogyNode,
   GenealogyEdge,
+  PersonAppearance,
 } from './types'
 
 // Get full chapter data for the chapter study page
@@ -334,6 +335,60 @@ export function defaultNavData(): { book: string; chapters: NavChapter[] }[] {
     { book: '1 Kings', chapters: Array.from({ length: 22 }, (_, i) => ({ number: i + 1, is_read: false })) },
     { book: '2 Kings', chapters: Array.from({ length: 25 }, (_, i) => ({ number: i + 1, is_read: false })) },
   ]
+}
+
+// Get all chapters a person appears in, with optional read status for a user
+export async function getPersonAppearances(
+  personId: string,
+  userId?: string
+): Promise<PersonAppearance[]> {
+  const supabase = await createClient()
+
+  const { data: cpData } = await supabase
+    .from('chapter_people')
+    .select('chapters(id, chapter_number, books(name))')
+    .eq('person_id', personId)
+
+  if (!cpData || cpData.length === 0) return []
+
+  type CpRow = { chapters: { id: string; chapter_number: number; books: { name: string } } }
+
+  const chapters = (cpData as unknown as CpRow[])
+    .map(row => row.chapters)
+    .filter(Boolean)
+    .sort((a, b) =>
+      a.books.name !== b.books.name
+        ? a.books.name.localeCompare(b.books.name)
+        : a.chapter_number - b.chapter_number
+    )
+
+  if (!userId) {
+    return chapters.map(ch => ({
+      book: ch.books.name as '1 Kings' | '2 Kings',
+      book_slug: (ch.books.name === '1 Kings' ? '1-kings' : '2-kings') as '1-kings' | '2-kings',
+      chapter_number: ch.chapter_number,
+      read_at: null,
+    }))
+  }
+
+  const chapterIds = chapters.map(ch => ch.id)
+  const { data: progress } = await supabase
+    .from('user_progress')
+    .select('chapter_id, read_at')
+    .eq('user_id', userId)
+    .in('chapter_id', chapterIds)
+
+  type ProgressRow = { chapter_id: string; read_at: string | null }
+  const readMap = new Map<string, string | null>(
+    ((progress ?? []) as ProgressRow[]).map(p => [p.chapter_id, p.read_at])
+  )
+
+  return chapters.map(ch => ({
+    book: ch.books.name as '1 Kings' | '2 Kings',
+    book_slug: (ch.books.name === '1 Kings' ? '1-kings' : '2-kings') as '1-kings' | '2-kings',
+    chapter_number: ch.chapter_number,
+    read_at: readMap.get(ch.id) ?? null,
+  }))
 }
 
 // Get all kings for the timeline page
