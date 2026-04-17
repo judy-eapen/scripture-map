@@ -153,34 +153,18 @@ export default function KingdomTimeline({
       {/* Inner fixed-width container */}
       <div style={{ minWidth: '900px', position: 'relative', padding: '16px 20px 20px' }}>
 
-        {/* Track header labels */}
+        {/* ── Northern Kingdom section ── */}
         {!compact && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <span
-              style={{
-                fontSize: '10px',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--kingdom-north)',
-                opacity: 0.85,
-              }}
-            >
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px',
+          }}>
+            <span style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
+              textTransform: 'uppercase', color: 'var(--kingdom-north)', opacity: 0.85, whiteSpace: 'nowrap',
+            }}>
               Northern Kingdom (Israel)
             </span>
-            <span
-              style={{
-                fontSize: '10px',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--kingdom-south)',
-                opacity: 0.85,
-                textAlign: 'right',
-              }}
-            >
-              Southern Kingdom (Judah)
-            </span>
+            <div style={{ flex: 1, height: '1px', background: 'rgba(96,165,250,0.15)' }} />
           </div>
         )}
 
@@ -212,8 +196,7 @@ export default function KingdomTimeline({
               height: `${trackHeight}px`,
               background: 'rgba(96,165,250,0.04)',
               borderRadius: '6px',
-              border: '1px solid rgba(96,165,250,0.1)',
-              marginBottom: '2px',
+              border: '1px solid rgba(96,165,250,0.15)',
               overflow: 'visible',
             }}
           >
@@ -230,25 +213,18 @@ export default function KingdomTimeline({
                 pointerEvents: 'none',
               }}
             />
-
-            {/* North king blocks */}
             {northKings.map((king) => (
               <KingBlock key={king.id} king={king} trackHeight={trackHeight} onClick={onKingClick} />
             ))}
-
-            {/* 722 BC label */}
             <div
               style={{
                 position: 'absolute',
                 left: `${northFallLeft}%`,
                 top: '50%',
                 transform: 'translate(4px, -50%)',
-                fontSize: '9px',
-                fontWeight: 600,
+                fontSize: '9px', fontWeight: 600,
                 color: 'rgba(96,165,250,0.6)',
-                letterSpacing: '0.04em',
-                whiteSpace: 'nowrap',
-                pointerEvents: 'none',
+                letterSpacing: '0.04em', whiteSpace: 'nowrap', pointerEvents: 'none',
               }}
             >
               722 BC — Fall of Samaria
@@ -256,38 +232,19 @@ export default function KingdomTimeline({
           </div>
 
           {/* Year axis */}
-          <div
-            style={{
-              position: 'relative',
-              height: `${axisHeight}px`,
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
+          <div style={{ position: 'relative', height: `${axisHeight}px`, display: 'flex', alignItems: 'center' }}>
             {TICK_YEARS.map((year) => {
               const pct = yearToPercent(year);
               return (
                 <div
                   key={year}
                   style={{
-                    position: 'absolute',
-                    left: `${pct}%`,
-                    transform: 'translateX(-50%)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '2px',
+                    position: 'absolute', left: `${pct}%`, transform: 'translateX(-50%)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px',
                   }}
                 >
                   <div style={{ width: '1px', height: '5px', background: 'rgba(255,255,255,0.15)' }} />
-                  <span
-                    style={{
-                      fontSize: '9px',
-                      color: 'var(--muted-500)',
-                      whiteSpace: 'nowrap',
-                      fontVariantNumeric: 'tabular-nums',
-                    }}
-                  >
+                  <span style={{ fontSize: '9px', color: 'var(--muted-500)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}>
                     {year} BC
                   </span>
                 </div>
@@ -302,34 +259,41 @@ export default function KingdomTimeline({
               height: `${trackHeight}px`,
               background: 'rgba(167,139,250,0.04)',
               borderRadius: '6px',
-              border: '1px solid rgba(167,139,250,0.1)',
-              marginTop: '2px',
+              border: '1px solid rgba(167,139,250,0.15)',
               overflow: 'visible',
             }}
           >
             {southKings.map((king) => (
               <KingBlock key={king.id} king={king} trackHeight={trackHeight} onClick={onKingClick} />
             ))}
-
-            {/* 586 BC label */}
             <div
               style={{
-                position: 'absolute',
-                right: '4px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                fontSize: '9px',
-                fontWeight: 600,
+                position: 'absolute', right: '4px', top: '50%', transform: 'translateY(-50%)',
+                fontSize: '9px', fontWeight: 600,
                 color: 'rgba(167,139,250,0.6)',
-                letterSpacing: '0.04em',
-                whiteSpace: 'nowrap',
-                pointerEvents: 'none',
+                letterSpacing: '0.04em', whiteSpace: 'nowrap', pointerEvents: 'none',
               }}
             >
               586 BC — Fall of Jerusalem
             </div>
           </div>
         </div>
+
+        {/* ── Southern Kingdom label (below south track) ── */}
+        {!compact && (
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px',
+          }}>
+            <div style={{ flex: 1, height: '1px', background: 'rgba(167,139,250,0.15)' }} />
+            <span style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
+              textTransform: 'uppercase', color: 'var(--kingdom-south)', opacity: 0.85, whiteSpace: 'nowrap',
+            }}>
+              Southern Kingdom (Judah)
+            </span>
+          </div>
+        )}
+
       </div>
     </div>
   );
