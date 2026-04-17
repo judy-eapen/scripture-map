@@ -150,7 +150,25 @@ export default function CharacterCardModal({ person, onClose }: Props) {
         <div className="flex-1" />
 
         {/* Footer */}
-        <div className="p-6 shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div className="p-6 shrink-0 space-y-3" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          {person.hasGenealogyNode && (
+            <a
+              href="/genealogy"
+              className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-2.5 text-sm font-medium transition-all"
+              style={{
+                background: 'rgba(201,168,76,0.06)',
+                border: '1px solid rgba(201,168,76,0.2)',
+                color: 'var(--gold-300)',
+              }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="5" r="2" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="5" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="19" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M12 7v4M12 11l-7 6M12 11l7 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              See in Dynasty Web
+            </a>
+          )}
           <p className="text-xs text-center" style={{ color: 'var(--muted-500)' }}>
             Tap any highlighted name in the text to view their card
           </p>

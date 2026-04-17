@@ -192,9 +192,9 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               )}
             </div>
 
-            {/* Quiz button */}
-            {chapter.quizCount > 0 && (
-              <div className="mb-6">
+            {/* Quiz button / coming soon */}
+            <div className="mb-6">
+              {chapter.quizCount > 0 ? (
                 <button
                   onClick={() => { setQuizKey(k => k + 1); setQuizOpen(true); }}
                   className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-all"
@@ -212,8 +212,21 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                     : 'Take chapter quiz'}
                   <span className="text-xs opacity-60">{chapter.quizCount} questions</span>
                 </button>
-              </div>
-            )}
+              ) : (
+                <div className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm"
+                  style={{
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.06)',
+                    color: 'var(--muted-500)',
+                  }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 11l3 3L22 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  Quiz coming soon
+                </div>
+              )}
+            </div>
 
             {/* Legend */}
             <div className="flex items-center gap-4 mb-6 pb-5"

@@ -16,6 +16,7 @@ export type Person = {
   bio: string;
   contemporary_events?: string;
   image_url?: string;
+  hasGenealogyNode?: boolean;
 };
 
 export type Place = {
@@ -72,6 +73,7 @@ export type ChapterData = {
 export type NavChapter = {
   number: number;
   is_read: boolean;
+  quiz_best_score?: number | null;
 };
 
 export type ActiveCard =

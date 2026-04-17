@@ -45,7 +45,7 @@ export async function getChapterData(
   if (chapterError || !chapter) return null
 
   // Fetch related data in parallel
-  const [peopleResult, placesResult, evidenceResult, nationsResult, passagesResult, quizCountResult] =
+  const [peopleResult, placesResult, evidenceResult, nationsResult, passagesResult, quizCountResult, genealogyPersonIdsResult] =
     await Promise.allSettled([
       supabase
         .from('chapter_people')
@@ -72,12 +72,22 @@ export async function getChapterData(
         .from('quiz_questions')
         .select('id', { count: 'exact', head: true })
         .eq('chapter_id', chapter.id),
+      supabase
+        .from('genealogy_nodes')
+        .select('person_id'),
     ])
 
   type PeopleRow = { tappable_terms: string[]; people: { id: string; name: string; alt_names?: string[]; type: 'king' | 'prophet' | 'official' | 'foreign_ruler' | 'other'; kingdom?: 'north' | 'south' | 'foreign'; reign_start_bc?: number; reign_end_bc?: number; dates_approximate?: boolean; verdict?: 'good' | 'evil' | 'mixed'; bio: string; contemporary_events?: string; image_url?: string } }
   type PlacesRow = { tappable_terms: string[]; map_focus?: boolean; places: { id: string; ancient_name: string; modern_name: string; lat: number; lng: number; significance?: string; ancient_description: string; modern_description: string; image_url?: string } }
   type EvidenceRow = { relevance_note: string; archaeological_evidence: { id: string; name: string; artifact_type: string; date_bc: number; description: string; museum_location?: string } }
   type NationsRow = { context_note: string; neighboring_nations: { id: string; name: string; color_hex: string; key_rulers: { name: string; years: string; note: string }[] } }
+
+  // Build set of person_ids in genealogy_nodes
+  const genealogyPersonIds = new Set<string>(
+    genealogyPersonIdsResult.status === 'fulfilled' && genealogyPersonIdsResult.value.data
+      ? (genealogyPersonIdsResult.value.data as { person_id: string }[]).map(r => r.person_id)
+      : []
+  )
 
   // Map people
   const people: TappablePerson[] =
@@ -96,6 +106,7 @@ export async function getChapterData(
             bio: row.people.bio,
             contemporary_events: row.people.contemporary_events,
             image_url: row.people.image_url,
+            hasGenealogyNode: genealogyPersonIds.has(row.people.id),
           },
           tappable_terms: row.tappable_terms,
         }))
@@ -259,7 +270,7 @@ export async function getNavChapters(
     supabase.from('chapters').select('id, chapter_number, book_id').order('chapter_number'),
     supabase
       .from('user_progress')
-      .select('chapter_id, read_at')
+      .select('chapter_id, read_at, quiz_best_score')
       .eq('user_id', userId),
   ])
 
@@ -267,11 +278,16 @@ export async function getNavChapters(
   const allChapters = chaptersResult.data ?? []
   const progress = progressResult.data ?? []
 
-  // Build set of read chapter IDs
+  type ProgressRow = { chapter_id: string; read_at: string | null; quiz_best_score: number | null }
+
+  // Build maps from chapter_id for read status and quiz score
   const readIds = new Set(
-    progress
-      .filter((p: { chapter_id: string; read_at: string | null }) => p.read_at !== null)
-      .map((p: { chapter_id: string; read_at: string | null }) => p.chapter_id)
+    (progress as ProgressRow[])
+      .filter(p => p.read_at !== null)
+      .map(p => p.chapter_id)
+  )
+  const quizScoreMap = new Map<string, number | null>(
+    (progress as ProgressRow[]).map(p => [p.chapter_id, p.quiz_best_score])
   )
 
   return books.map((book: { id: string; name: string }) => {
@@ -280,6 +296,7 @@ export async function getNavChapters(
       .map((ch: { id: string; chapter_number: number; book_id: string }) => ({
         number: ch.chapter_number,
         is_read: readIds.has(ch.id),
+        quiz_best_score: quizScoreMap.get(ch.id) ?? null,
       }))
 
     return {

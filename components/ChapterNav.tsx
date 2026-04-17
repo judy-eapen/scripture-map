@@ -115,13 +115,14 @@ export default function ChapterNav({ currentBook, currentChapter, navData }: Pro
                   <div className={sidebarOpen ? 'grid grid-cols-5 gap-1 px-3 pb-3' : 'flex flex-col items-center gap-1 pb-2'}>
                     {chapters.map(ch => {
                       const isActive = currentBook === book && currentChapter === ch.number;
+                      const hasScore = ch.quiz_best_score != null;
                       return (
                         <Link
                           key={ch.number}
                           href={`/study/${slug}/${ch.number}`}
-                          className="flex items-center justify-center rounded-lg text-xs font-medium transition-all"
+                          className="flex flex-col items-center justify-center rounded-lg text-xs font-medium transition-all relative"
                           style={{
-                            height: '32px',
+                            height: hasScore && sidebarOpen ? '38px' : '32px',
                             width: sidebarOpen ? '100%' : '36px',
                             background: isActive
                               ? 'rgba(201,168,76,0.2)'
@@ -137,11 +138,18 @@ export default function ChapterNav({ currentBook, currentChapter, navData }: Pro
                                 ? 'var(--verdict-good)'
                                 : 'var(--muted-500)',
                           }}
-                          title={`${book} ${ch.number}`}
+                          title={`${book} ${ch.number}${hasScore ? ` · Quiz: ${ch.quiz_best_score}%` : ''}`}
                         >
-                          {ch.number}
-                          {ch.is_read && !isActive && (
-                            <span className="ml-0.5 text-[8px]" style={{ color: 'var(--verdict-good)' }}>✓</span>
+                          <span className="flex items-center gap-0.5">
+                            {ch.number}
+                            {ch.is_read && !isActive && (
+                              <span className="text-[8px]" style={{ color: 'var(--verdict-good)' }}>✓</span>
+                            )}
+                          </span>
+                          {hasScore && sidebarOpen && (
+                            <span className="text-[9px] leading-none" style={{ color: isActive ? 'var(--gold-400)' : 'rgba(201,168,76,0.6)' }}>
+                              {ch.quiz_best_score}%
+                            </span>
                           )}
                         </Link>
                       );
