@@ -227,7 +227,7 @@ export default function GenealogyView({ genealogyNodes, genealogyEdges, position
   }, [genealogyNodes]);
 
   return (
-    <div className="flex overflow-hidden" style={{ background: 'var(--navy-950)', height: '100dvh' }}>
+    <div className="flex overflow-hidden h-screen-safe" style={{ background: 'var(--navy-950)' }}>
       {/* Left legend */}
       <div className="shrink-0 flex flex-col border-r overflow-y-auto"
         style={{ width: 220, borderColor: 'rgba(255,255,255,0.06)', background: 'var(--navy-900)' }}>

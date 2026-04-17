@@ -52,6 +52,12 @@ html, body {
   color: var(--ivory-100);
 }
 
+/* Full viewport height with dvh fallback for older iOS (< 15.4) */
+.h-screen-safe {
+  height: 100vh;
+  height: 100dvh;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;

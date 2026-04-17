@@ -60,7 +60,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const totalChapters = chapter.book === '1 Kings' ? 22 : 25;
 
   return (
-    <div ref={containerRef} className="flex overflow-hidden" style={{ background: 'var(--navy-950)', height: '100dvh' }}>
+    <div ref={containerRef} className="flex overflow-hidden h-screen-safe" style={{ background: 'var(--navy-950)' }}>
 
       {/* Left sidebar nav — desktop: inline; mobile: hidden (opened via hamburger) */}
       <div className="hidden md:block shrink-0">
