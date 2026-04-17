@@ -62,16 +62,61 @@ function KingBlock({ king, trackHeight, onClick }: {
   onClick?: (king: TimelineKing) => void;
 }) {
   const [hovered, setHovered] = useState(false);
-  const reignYears = Math.max(1, king.reign_start_bc - king.reign_end_bc);
-  const widthPct = Math.max(0.8, (reignYears / TOTAL_YEARS) * 100);
+  const reignYears = Math.max(0, king.reign_start_bc - king.reign_end_bc);
+  // Use actual width — no JS minimum. CSS minWidth handles visibility without
+  // bleeding into the next king's territory (the old Math.max(0.8,...) caused 7.7px
+  // overflow which made short-reign kings appear visually inside their successors).
+  const actualWidthPct = (reignYears / TOTAL_YEARS) * 100;
   const leftPct = yearToPercent(king.reign_start_bc);
   const fill   = king.verdict ? verdictFill[king.verdict]   : 'rgba(100,116,139,0.5)';
   const border = king.verdict ? verdictBorder[king.verdict] : 'rgba(100,116,139,0.7)';
 
-  // Approximate block width in px (at min-width 900px container)
-  const approxPx = (widthPct / 100) * 900;
-  const showHorizontal = approxPx >= 28;
-  const showVertical   = !showHorizontal && approxPx >= 7;
+  // Approx px at min-width 960px — based on actual dates, not CSS minimum
+  const approxPx = (actualWidthPct / 100) * 960;
+  // Kings with < ~3-year reigns (<8px) become tick marks so they never overlap neighbours
+  const isTick = approxPx < 8;
+  const showHorizontal = !isTick && approxPx >= 28;
+  const showVertical   = !isTick && approxPx < 28;
+
+  const tooltip = `${king.name}${king.is_queen ? ' (Queen)' : ''} · ${king.reign_start_bc}–${king.reign_end_bc} BC${reignYears === 0 ? ' (<1 yr)' : reignYears === 1 ? ' (1 yr)' : ''}${king.dates_approximate ? ' (approx.)' : ''}`;
+
+  // Tick mark — slim vertical stripe for very short reigns (days/months/~1 yr).
+  // Positioned at the correct year with z-index above neighbouring blocks so it's
+  // clearly visible at the boundary rather than hidden inside the next king's block.
+  if (isTick) {
+    return (
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => onClick?.(king)}
+        onKeyDown={e => e.key === 'Enter' && onClick?.(king)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        title={tooltip}
+        style={{
+          position: 'absolute',
+          left: `${leftPct}%`,
+          width: '6px',
+          top: 0, bottom: 0,
+          background: hovered
+            ? fill.replace(/[\d.]+\)$/, m => `${Math.min(1, parseFloat(m) + 0.25)})`)
+            : fill,
+          border: `1.5px solid ${border}`,
+          borderRadius: '2px',
+          cursor: onClick ? 'pointer' : 'default',
+          zIndex: 4,
+          boxSizing: 'border-box',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'flex-start',
+          padding: '4px 0 0',
+          transition: 'background 0.15s',
+          userSelect: 'none',
+        }}
+      >
+        <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: border, flexShrink: 0 }} />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -81,9 +126,12 @@ function KingBlock({ king, trackHeight, onClick }: {
       onKeyDown={e => e.key === 'Enter' && onClick?.(king)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      title={tooltip}
       style={{
         position: 'absolute',
-        left: `${leftPct}%`, width: `${widthPct}%`,
+        left: `${leftPct}%`,
+        width: `${actualWidthPct}%`,
+        minWidth: '5px',
         top: '3px', bottom: '3px',
         background: hovered
           ? fill.replace(/[\d.]+\)$/, m => `${Math.min(1, parseFloat(m) + 0.2)})`)
@@ -104,7 +152,6 @@ function KingBlock({ king, trackHeight, onClick }: {
         minHeight: `${trackHeight - 6}px`,
         zIndex: 2,
       }}
-      title={`${king.name}${king.is_queen ? ' (Queen)' : ''} · ${king.reign_start_bc}–${king.reign_end_bc} BC${king.dates_approximate ? ' (approx.)' : ''}`}
     >
       {/* Verdict indicator */}
       {showVertical ? (

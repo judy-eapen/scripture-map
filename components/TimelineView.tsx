@@ -90,6 +90,10 @@ export default function TimelineView({ kings, navData }: Props) {
                 <div style={{ width: '12px', height: '12px', borderRadius: '2px', background: 'rgba(245,158,11,0.3)', border: '1px solid rgba(245,158,11,0.6)' }} />
                 <span style={{ fontSize: '12px', color: 'var(--muted-400)' }}>Prophet active</span>
               </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '6px', height: '14px', borderRadius: '2px', background: 'rgba(239,68,68,0.65)', border: '1.5px solid rgba(239,68,68,0.85)' }} />
+                <span style={{ fontSize: '12px', color: 'var(--muted-400)' }}>Short reign (&lt;3 yrs) — hover for name</span>
+              </div>
               {youAreHereYear && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div style={{ width: '2px', height: '14px', background: 'var(--gold-400)', borderRadius: '1px' }} />
