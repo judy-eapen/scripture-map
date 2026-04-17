@@ -191,31 +191,38 @@ export default function KingdomTimeline({ kings, youAreHereYear, onKingClick, co
           </div>
         )}
 
+        {/* Event label strip — rendered above the tracks so labels are never behind king blocks */}
+        {!compact && (
+          <div style={{ position: 'relative', height: '28px', marginBottom: '2px' }}>
+            {MAJOR_EVENTS.map(event => (
+              <div key={`lbl-${event.year}`} style={{
+                position: 'absolute',
+                left: `${yearToPercent(event.year)}%`,
+                top: event.above ? '2px' : '15px',
+                transform: 'translateX(-4px)',
+                fontSize: '8px', fontWeight: 600,
+                color: 'rgba(255,255,255,0.5)',
+                whiteSpace: 'nowrap', letterSpacing: '0.03em',
+                pointerEvents: 'none',
+              }}>
+                {event.label}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* All tracks share this container so event overlays span everything */}
         <div style={{ position: 'relative' }}>
 
-          {/* Major event markers */}
+          {/* Major event markers — vertical lines only, no labels */}
           {!compact && MAJOR_EVENTS.map(event => {
             const left = yearToPercent(event.year);
             return (
               <div key={event.year} style={{
                 position: 'absolute', left: `${left}%`,
-                top: 0, bottom: 0, zIndex: 3, pointerEvents: 'none',
-                width: '1px', background: 'rgba(255,255,255,0.12)',
+                top: 0, bottom: 0, zIndex: 1, pointerEvents: 'none',
                 borderLeft: '1px dashed rgba(255,255,255,0.18)',
-              }}>
-                <span style={{
-                  position: 'absolute',
-                  [event.above ? 'top' : 'bottom']: event.above ? '2px' : '2px',
-                  left: '4px',
-                  fontSize: '8px', fontWeight: 600,
-                  color: 'rgba(255,255,255,0.45)',
-                  whiteSpace: 'nowrap', letterSpacing: '0.03em',
-                  lineHeight: 1.2,
-                }}>
-                  {event.label}
-                </span>
-              </div>
+              }} />
             );
           })}
 
