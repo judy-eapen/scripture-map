@@ -59,7 +59,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
     | { type: 'place'; place: Place }
     | null
   >(null);
-  const [summaryOpen, setSummaryOpen] = useState(false);
+
   const [isRead, setIsRead] = useState(initialIsRead);
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizKey, setQuizKey] = useState(0);
@@ -285,38 +285,6 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               </div>
             )}
 
-            {/* Summary */}
-            <div className="mb-8">
-              <button
-                onClick={() => setSummaryOpen(o => !o)}
-                className="w-full flex items-center justify-between rounded-xl px-4 py-3 transition-all text-left"
-                style={{
-                  background: summaryOpen ? 'rgba(201,168,76,0.07)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${summaryOpen ? 'rgba(201,168,76,0.2)' : 'rgba(255,255,255,0.06)'}`,
-                }}>
-                <div className="flex items-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--gold-400)' }}>
-                    <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>
-                    Chapter summary
-                  </span>
-                </div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                  style={{ color: 'var(--muted-400)', transform: summaryOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
-                  <path d="M19 9l-7 7-7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-
-              {summaryOpen && (
-                <div className="mt-2 rounded-xl px-5 py-4"
-                  style={{ background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(201,168,76,0.12)' }}>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--ivory-200)', lineHeight: '1.85' }}>
-                    {chapter.summary}
-                  </p>
-                </div>
-              )}
-            </div>
 
             {/* Quiz button / coming soon */}
             <div className="mb-6">
