@@ -273,31 +273,65 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               </Link>
             )}
 
-            {/* People in this chapter — top chips */}
+            {/* People in this chapter */}
             {chapter.people.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
-                {chapter.people.map(({ person }) => (
-                  <button
-                    key={person.id}
-                    onClick={() => setActiveCard({ type: 'person', person })}
-                    className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all"
-                    style={{
-                      background: activeCard?.type === 'person' && activeCard.person.id === person.id
-                        ? 'rgba(201,168,76,0.18)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${activeCard?.type === 'person' && activeCard.person.id === person.id ? 'rgba(201,168,76,0.4)' : 'rgba(255,255,255,0.08)'}`,
-                      color: activeCard?.type === 'person' && activeCard.person.id === person.id ? 'var(--gold-300)' : 'var(--ivory-200)',
-                    }}>
-                    {person.verdict && (
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{
-                          background: person.verdict === 'good' ? 'var(--verdict-good)' : person.verdict === 'evil' ? 'var(--verdict-evil)' : 'var(--verdict-mixed)'
-                        }} />
-                    )}
-                    {person.name}
-                  </button>
-                ))}
+              <div className="mb-4 pb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                <h3 className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
+                  People in this chapter
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {chapter.people.map(({ person }) => (
+                    <button
+                      key={person.id}
+                      onClick={() => setActiveCard({ type: 'person', person })}
+                      className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all"
+                      style={{
+                        background: activeCard?.type === 'person' && activeCard.person.id === person.id
+                          ? 'rgba(201,168,76,0.18)' : 'rgba(255,255,255,0.04)',
+                        border: `1px solid ${activeCard?.type === 'person' && activeCard.person.id === person.id ? 'rgba(201,168,76,0.4)' : 'rgba(255,255,255,0.08)'}`,
+                        color: activeCard?.type === 'person' && activeCard.person.id === person.id ? 'var(--gold-300)' : 'var(--ivory-200)',
+                      }}>
+                      {person.verdict && (
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{
+                            background: person.verdict === 'good' ? 'var(--verdict-good)' : person.verdict === 'evil' ? 'var(--verdict-evil)' : 'var(--verdict-mixed)'
+                          }} />
+                      )}
+                      {person.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
+
+            {/* Archaeological badges */}
+            <ArchaeologicalBadges evidence={chapter.evidence} />
+
+            {/* Neighboring Nations panel */}
+            <NeighboringNationsPanel
+              nations={chapter.nations ?? []}
+              chapterYearBC={Math.abs(chapter.year_start_bc ?? 869)}
+            />
+
+            {/* Story Thread panel */}
+            <StoryThreadPanel
+              connections={chapter.connections ?? []}
+              currentBook={chapter.book}
+              currentChapter={chapter.chapter_number}
+            />
+
+            {/* Themes panel */}
+            <ThemesPanel
+              themes={chapter.themes ?? []}
+              onThemeClick={t => setActiveTheme(t)}
+            />
+
+            {/* Prophetic Word panel */}
+            <PropheciesPanel
+              prophecies={chapter.prophecies ?? []}
+              currentChapterId={chapter.id}
+              onProphecyClick={p => setActiveProphecy(p)}
+            />
 
             {/* Mobile map panel — only mounted when open so Leaflet isn't in a hidden container */}
             {!isLargeScreen && mobileMapOpen && (
@@ -381,64 +415,6 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               connections={chapter.connections}
               notedVerses={notedVerses}
               onVerseClick={isAuthenticated ? handleVerseClick : undefined}
-            />
-
-            {/* People in this chapter */}
-            <div className="mt-10 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
-                People in this chapter
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {chapter.people.map(({ person }) => (
-                  <button
-                    key={person.id}
-                    onClick={() => setActiveCard({ type: 'person', person })}
-                    className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all"
-                    style={{
-                      background: activeCard?.type === 'person' && activeCard.person.id === person.id
-                        ? 'rgba(201,168,76,0.18)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${activeCard?.type === 'person' && activeCard.person.id === person.id ? 'rgba(201,168,76,0.4)' : 'rgba(255,255,255,0.08)'}`,
-                      color: activeCard?.type === 'person' && activeCard.person.id === person.id ? 'var(--gold-300)' : 'var(--ivory-200)',
-                    }}>
-                    {person.verdict && (
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{
-                          background: person.verdict === 'good' ? 'var(--verdict-good)' : person.verdict === 'evil' ? 'var(--verdict-evil)' : 'var(--verdict-mixed)'
-                        }} />
-                    )}
-                    {person.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Archaeological badges */}
-            <ArchaeologicalBadges evidence={chapter.evidence} />
-
-            {/* Neighboring Nations panel */}
-            <NeighboringNationsPanel
-              nations={chapter.nations ?? []}
-              chapterYearBC={Math.abs(chapter.year_start_bc ?? 869)}
-            />
-
-            {/* Story Thread panel */}
-            <StoryThreadPanel
-              connections={chapter.connections ?? []}
-              currentBook={chapter.book}
-              currentChapter={chapter.chapter_number}
-            />
-
-            {/* Themes panel */}
-            <ThemesPanel
-              themes={chapter.themes ?? []}
-              onThemeClick={t => setActiveTheme(t)}
-            />
-
-            {/* Prophetic Word panel */}
-            <PropheciesPanel
-              prophecies={chapter.prophecies ?? []}
-              currentChapterId={chapter.id}
-              onProphecyClick={p => setActiveProphecy(p)}
             />
 
             {/* My Notes panel */}
