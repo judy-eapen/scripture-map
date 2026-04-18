@@ -155,9 +155,6 @@ function ScenePanel({ scene }: { scene: Scene }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function StoryMap({ data = STORY_MAP_1K18 }: { data?: StoryMapData }) {
-  const regularScenes = data.scenes.filter(s => !s.wide)
-  const wideScenes = data.scenes.filter(s => s.wide)
-
   return (
     <div style={{ background: 'var(--navy-950)', color: 'var(--ivory-100)', minHeight: '100vh' }}>
       <div className="max-w-2xl mx-auto px-4 py-8 pb-24">
@@ -189,26 +186,12 @@ export default function StoryMap({ data = STORY_MAP_1K18 }: { data?: StoryMapDat
         </div>
 
         {/* ── Scene grid ── */}
-        <div className="flex flex-col gap-4 mb-8">
-
-          {/* First 2 scenes — side by side */}
-          <div className="grid grid-cols-2 gap-4">
-            {regularScenes.slice(0, 2).map(scene => (
-              <ScenePanel key={scene.number} scene={scene} />
-            ))}
-          </div>
-
-          {/* Wide climax scene — full width */}
-          {wideScenes.map(scene => (
-            <ScenePanel key={scene.number} scene={scene} />
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {data.scenes.map(scene => (
+            <div key={scene.number} className={scene.wide ? 'col-span-2' : ''}>
+              <ScenePanel scene={scene} />
+            </div>
           ))}
-
-          {/* Last 2 scenes — side by side */}
-          <div className="grid grid-cols-2 gap-4">
-            {regularScenes.slice(2).map(scene => (
-              <ScenePanel key={scene.number} scene={scene} />
-            ))}
-          </div>
         </div>
 
         {/* ── Flow arrows between panels ── */}
