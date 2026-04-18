@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import StoryMap from '@/components/StoryMap'
+import { STORY_MAP_DATA } from '@/lib/story-map-data'
 
 export default async function StoryMapPage({
   params,
@@ -8,15 +9,13 @@ export default async function StoryMapPage({
   params: Promise<{ book: string; chapter: string }>
 }) {
   const { book, chapter } = await params
-  const chapterNum = parseInt(chapter, 10)
+  const key = `${book}-${chapter}`
+  const data = STORY_MAP_DATA[key]
 
-  // Prototype: only 1 Kings 18 has data
-  const isPrototype = book === '1-kings' && chapterNum === 18
-  if (!isPrototype) notFound()
+  if (!data) notFound()
 
   return (
     <div style={{ background: 'var(--navy-950)', minHeight: '100vh' }}>
-      {/* Back nav */}
       <div className="sticky top-0 z-10 flex items-center gap-3 px-4 py-3 border-b"
         style={{ background: 'rgba(12,18,32,0.95)', borderColor: 'rgba(45,58,85,0.5)', backdropFilter: 'blur(8px)' }}>
         <Link href={`/study/${book}/${chapter}`}
@@ -29,11 +28,11 @@ export default async function StoryMapPage({
         </Link>
         <span style={{ color: 'var(--navy-600)' }}>·</span>
         <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gold-400)' }}>
-          Story Map — Prototype
+          Story Map
         </span>
       </div>
 
-      <StoryMap />
+      <StoryMap data={data} />
     </div>
   )
 }

@@ -18,6 +18,7 @@ import ProphecyModal from '@/components/ProphecyModal';
 import ThemesPanel from '@/components/ThemesPanel';
 import ThemeChaptersModal from '@/components/ThemeChaptersModal';
 import { markChapterRead, unmarkChapterRead } from '@/app/actions/progress';
+import { STORY_MAP_DATA } from '@/lib/story-map-data';
 import QuizModal from '@/components/QuizModal';
 import type { VerseNote } from '@/lib/types';
 
@@ -252,8 +253,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               <div className="h-px" style={{ background: 'linear-gradient(90deg, var(--gold-500), transparent)' }} />
             </div>
 
-            {/* Story Map banner — prototype for 1 Kings 18 */}
-            {chapter.book === '1 Kings' && chapter.chapter_number === 18 && (
+            {/* Story Map banner */}
+            {STORY_MAP_DATA[`${chapter.book_slug}-${chapter.chapter_number}`] && (
               <Link
                 href={`/study/${chapter.book_slug}/${chapter.chapter_number}/story-map`}
                 className="flex items-center gap-3 rounded-xl px-4 py-3 mb-4 transition-all"
