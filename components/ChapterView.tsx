@@ -239,7 +239,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
             )}
 
             {/* Summary */}
-            <div className="mb-8">
+            {chapter.summary && <div className="mb-8">
               <button
                 onClick={() => setSummaryOpen(o => !o)}
                 className="w-full flex items-center justify-between rounded-xl px-4 py-3 transition-all text-left"
@@ -269,7 +269,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                   </p>
                 </div>
               )}
-            </div>
+            </div>}
 
             {/* Quiz button / coming soon */}
             <div className="mb-6">
