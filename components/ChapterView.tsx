@@ -252,6 +252,26 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               <div className="h-px" style={{ background: 'linear-gradient(90deg, var(--gold-500), transparent)' }} />
             </div>
 
+            {/* Story Map banner — prototype for 1 Kings 18 */}
+            {chapter.book === '1 Kings' && chapter.chapter_number === 18 && (
+              <Link
+                href={`/study/${chapter.book_slug}/${chapter.chapter_number}/story-map`}
+                className="flex items-center gap-3 rounded-xl px-4 py-3 mb-4 transition-all"
+                style={{
+                  background: 'rgba(167,139,250,0.06)',
+                  border: '1px solid rgba(167,139,250,0.2)',
+                }}>
+                <span className="text-lg leading-none">🗺</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold" style={{ color: '#a78bfa' }}>Story Map</p>
+                  <p className="text-xs" style={{ color: 'var(--muted-500)' }}>Visual cast, sequence & connections for this chapter</p>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: '#a78bfa', flexShrink: 0 }}>
+                  <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            )}
+
             {/* Mobile map panel — only mounted when open so Leaflet isn't in a hidden container */}
             {!isLargeScreen && mobileMapOpen && (
               <div className="mb-6 rounded-xl overflow-hidden" style={{ height: '280px', border: '1px solid rgba(96,165,250,0.2)' }}>
