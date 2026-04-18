@@ -66,6 +66,7 @@ const STORY_MAP_1K18: StoryMapData = {
       title: 'Baal Is Silent',
       summary: '450 prophets cry out from morning to noon. They cut themselves. They dance. Nothing. Elijah mocks: maybe he\'s asleep, or on a trip.',
       energy: 'failure',
+      wide: true,
     },
     {
       number: 4,
@@ -81,6 +82,7 @@ const STORY_MAP_1K18: StoryMapData = {
       title: 'Rain Returns',
       summary: 'The 3-year drought breaks. A small cloud rises from the sea. Elijah outruns Ahab\'s chariot 17 miles to Jezreel in the storm.',
       energy: 'resolution',
+      wide: true,
     },
   ],
   connections: [
@@ -132,7 +134,7 @@ function ScenePanel({ scene }: { scene: Scene }) {
 
         {/* Icon — big visual anchor */}
         <div className="flex items-center justify-center py-4"
-          style={{ fontSize: scene.wide ? '80px' : '64px', lineHeight: 1 }}>
+          style={{ fontSize: scene.energy === 'climax' ? '96px' : scene.wide ? '72px' : '64px', lineHeight: 1 }}>
           {scene.icon}
         </div>
 
