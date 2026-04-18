@@ -273,6 +273,32 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               </Link>
             )}
 
+            {/* People in this chapter — top chips */}
+            {chapter.people.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {chapter.people.map(({ person }) => (
+                  <button
+                    key={person.id}
+                    onClick={() => setActiveCard({ type: 'person', person })}
+                    className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all"
+                    style={{
+                      background: activeCard?.type === 'person' && activeCard.person.id === person.id
+                        ? 'rgba(201,168,76,0.18)' : 'rgba(255,255,255,0.04)',
+                      border: `1px solid ${activeCard?.type === 'person' && activeCard.person.id === person.id ? 'rgba(201,168,76,0.4)' : 'rgba(255,255,255,0.08)'}`,
+                      color: activeCard?.type === 'person' && activeCard.person.id === person.id ? 'var(--gold-300)' : 'var(--ivory-200)',
+                    }}>
+                    {person.verdict && (
+                      <span className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{
+                          background: person.verdict === 'good' ? 'var(--verdict-good)' : person.verdict === 'evil' ? 'var(--verdict-evil)' : 'var(--verdict-mixed)'
+                        }} />
+                    )}
+                    {person.name}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Mobile map panel — only mounted when open so Leaflet isn't in a hidden container */}
             {!isLargeScreen && mobileMapOpen && (
               <div className="mb-6 rounded-xl overflow-hidden" style={{ height: '280px', border: '1px solid rgba(96,165,250,0.2)' }}>
