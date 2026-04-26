@@ -25,8 +25,8 @@ function parseDocx(raw: string, book: '1 Kings' | '2 Kings'): ChapterData[] {
       continue
     }
 
-    // Verse line e.g. "[1] Now King David..."
-    const verseMatch = line.match(/^\[(\d+)\]\s+(.+)$/)
+    // Verse line e.g. "[1] Now King David..." or "[1]Now..." (no space)
+    const verseMatch = line.match(/^\[(\d+)\]\s*(.+)$/)
     if (verseMatch && current) {
       current.verses.push({
         verse_number: parseInt(verseMatch[1]),
