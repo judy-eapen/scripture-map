@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { NavChapter } from '@/lib/types';
+import { QUIZ_ENABLED } from '@/lib/flags';
 
 type Props = {
   currentBook: string;
@@ -137,7 +138,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, mobil
                   <div className={sidebarOpen ? 'grid grid-cols-5 gap-1 px-3 pb-3' : 'flex flex-col items-center gap-1 pb-2'}>
                     {chapters.map(ch => {
                       const isActive = currentBook === book && currentChapter === ch.number;
-                      const hasScore = ch.quiz_best_score != null;
+                      const hasScore = QUIZ_ENABLED && ch.quiz_best_score != null;
                       return (
                         <Link
                           key={ch.number}

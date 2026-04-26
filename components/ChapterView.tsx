@@ -21,6 +21,7 @@ import { markChapterRead, unmarkChapterRead } from '@/app/actions/progress';
 import { STORY_MAP_DATA } from '@/lib/story-map-data';
 import QuizModal from '@/components/QuizModal';
 import type { VerseNote } from '@/lib/types';
+import { QUIZ_ENABLED } from '@/lib/flags';
 
 type Props = {
   chapter: ChapterData;
@@ -347,7 +348,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
 
 
             {/* Quiz button / coming soon */}
-            <div className="mb-6">
+            {QUIZ_ENABLED && <div className="mb-6">
               {chapter.quizCount > 0 ? (
                 <button
                   onClick={() => { setQuizKey(k => k + 1); setQuizOpen(true); }}
@@ -380,7 +381,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                   Quiz coming soon
                 </div>
               )}
-            </div>
+            </div>}
 
             {/* Legend */}
             <div className="flex items-center gap-4 mb-6 pb-5 flex-wrap"
@@ -498,7 +499,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           onClose={() => setActiveCard(null)}
         />
       )}
-      {quizOpen && (
+      {QUIZ_ENABLED && quizOpen && (
         <QuizModal
           key={quizKey}
           chapterId={chapter.id}
