@@ -4,11 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { NavChapter } from '@/lib/types';
 import { QUIZ_ENABLED } from '@/lib/flags';
+import { signOut } from '@/app/actions/auth';
 
 type Props = {
   currentBook: string;
   currentChapter: number;
   navData: { book: string; chapters: NavChapter[] }[];
+  isAuthenticated?: boolean;
   // Mobile: controlled open state from parent
   mobileOpen?: boolean;
   onMobileClose?: () => void;
@@ -19,7 +21,7 @@ const bookSlugs: Record<string, string> = {
   '2 Kings': '2-kings',
 };
 
-export default function ChapterNav({ currentBook, currentChapter, navData, mobileOpen, onMobileClose }: Props) {
+export default function ChapterNav({ currentBook, currentChapter, navData, isAuthenticated, mobileOpen, onMobileClose }: Props) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     '1 Kings': true,
     '2 Kings': false,
@@ -201,6 +203,32 @@ export default function ChapterNav({ currentBook, currentChapter, navData, mobil
                 <span>{label}</span>
               </Link>
             ))}
+
+            {isAuthenticated ? (
+              <form action={signOut}>
+                <button type="submit"
+                  className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors text-left"
+                  style={{ color: 'var(--muted-400)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#f87171'; (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.06)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--muted-400)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span>Sign out</span>
+                </button>
+              </form>
+            ) : (
+              <Link href="/login"
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors"
+                style={{ color: 'var(--muted-400)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--ivory-100)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--muted-400)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>Sign in</span>
+              </Link>
+            )}
           </div>
         )}
       </aside>

@@ -125,6 +125,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           currentBook={chapter.book}
           currentChapter={chapter.chapter_number}
           navData={navData}
+          isAuthenticated={isAuthenticated}
         />
       </div>
 
@@ -133,6 +134,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
         currentBook={chapter.book}
         currentChapter={chapter.chapter_number}
         navData={navData}
+        isAuthenticated={isAuthenticated}
         mobileOpen={mobileNavOpen}
         onMobileClose={() => setMobileNavOpen(false)}
       />
