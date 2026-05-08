@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import ChapterNav from '@/components/ChapterNav';
+import NoteEditorModal from '@/components/NoteEditorModal';
 import type { NavChapter } from '@/lib/types';
 import type { NoteWithContext } from '@/app/actions/notes';
 
@@ -24,14 +26,12 @@ type GroupedBook = {
 
 function groupNotes(notes: NoteWithContext[]): GroupedBook[] {
   const bookMap = new Map<string, Map<number, NoteWithContext[]>>();
-
   for (const note of notes) {
     if (!bookMap.has(note.book_name)) bookMap.set(note.book_name, new Map());
     const chapterMap = bookMap.get(note.book_name)!;
     if (!chapterMap.has(note.chapter_number)) chapterMap.set(note.chapter_number, []);
     chapterMap.get(note.chapter_number)!.push(note);
   }
-
   return Array.from(bookMap.entries()).map(([book_name, chapterMap]) => ({
     book_name,
     chapters: Array.from(chapterMap.entries()).map(([chapter_number, chNotes]) => ({
@@ -42,8 +42,26 @@ function groupNotes(notes: NoteWithContext[]): GroupedBook[] {
   }));
 }
 
-export default function NotesPageView({ notes, navData, isAuthenticated }: Props) {
+export default function NotesPageView({ notes: initialNotes, navData, isAuthenticated }: Props) {
+  const [notes, setNotes] = useState<NoteWithContext[]>(initialNotes);
+  const [editingNote, setEditingNote] = useState<NoteWithContext | null>(null);
+
+  function handleSaved(verseNumber: number, noteText: string) {
+    setNotes(prev => prev.map(n =>
+      n.chapter_id === editingNote?.chapter_id && n.verse_number === verseNumber
+        ? { ...n, note_text: noteText }
+        : n
+    ));
+  }
+
+  function handleDeleted(verseNumber: number) {
+    setNotes(prev => prev.filter(n =>
+      !(n.chapter_id === editingNote?.chapter_id && n.verse_number === verseNumber)
+    ));
+  }
+
   const grouped = groupNotes(notes);
+  const totalChapters = grouped.reduce((sum, b) => sum + b.chapters.length, 0);
 
   return (
     <div className="flex h-screen overflow-hidden" style={{ background: 'var(--navy-950)' }}>
@@ -74,7 +92,7 @@ export default function NotesPageView({ notes, navData, isAuthenticated }: Props
             <p className="text-sm" style={{ color: 'var(--muted-400)' }}>
               {notes.length === 0
                 ? 'Notes you write on verses will appear here.'
-                : `${notes.length} note${notes.length === 1 ? '' : 's'} across ${grouped.reduce((sum, b) => sum + b.chapters.length, 0)} chapter${grouped.reduce((sum, b) => sum + b.chapters.length, 0) === 1 ? '' : 's'}`
+                : `${notes.length} note${notes.length === 1 ? '' : 's'} across ${totalChapters} chapter${totalChapters === 1 ? '' : 's'}`
               }
             </p>
           </div>
@@ -143,15 +161,25 @@ export default function NotesPageView({ notes, navData, isAuthenticated }: Props
                         {/* Verse notes */}
                         <div className="divide-y" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
                           {chapter.notes.map(note => (
-                            <div key={note.id} className="px-5 py-4">
+                            <div key={note.id} className="px-5 py-4 group">
                               <div className="flex items-start gap-3">
                                 <span className="shrink-0 text-xs font-semibold mt-0.5 w-12"
                                   style={{ color: 'var(--gold-400)' }}>
                                   v. {note.verse_number}
                                 </span>
-                                <p className="text-sm leading-relaxed" style={{ color: 'var(--ivory-200)' }}>
+                                <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--ivory-200)' }}>
                                   {note.note_text}
                                 </p>
+                                <button
+                                  onClick={() => setEditingNote(note)}
+                                  className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                  style={{ background: 'rgba(201,168,76,0.1)', color: 'var(--gold-400)' }}
+                                  title="Edit note">
+                                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                  </svg>
+                                </button>
                               </div>
                             </div>
                           ))}
@@ -166,6 +194,20 @@ export default function NotesPageView({ notes, navData, isAuthenticated }: Props
 
         </div>
       </main>
+
+      {/* Edit modal */}
+      {editingNote && (
+        <NoteEditorModal
+          chapterId={editingNote.chapter_id}
+          bookSlug={editingNote.book_slug}
+          chapterNum={editingNote.chapter_number}
+          verseNumber={editingNote.verse_number}
+          initialNote={editingNote.note_text}
+          onClose={() => setEditingNote(null)}
+          onSaved={handleSaved}
+          onDeleted={handleDeleted}
+        />
+      )}
     </div>
   );
 }
