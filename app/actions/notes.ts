@@ -66,37 +66,30 @@ export async function getAllNotes(): Promise<NoteWithContext[]> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return [];
 
-  // Step 1: fetch notes with chapter info
-  const { data: notesData, error: notesError } = await supabase
+  const { data: notesData } = await supabase
     .from('verse_notes')
     .select('id, verse_number, note_text, created_at, chapter_id')
     .eq('user_id', user.id)
     .not('note_text', 'is', null)
     .neq('note_text', '');
 
-  if (notesError) {
-    console.error('getAllNotes notes error:', notesError);
-    return [];
-  }
   if (!notesData || notesData.length === 0) return [];
 
-  // Step 2: fetch chapter + book info for the chapter ids we have
   const chapterIds = [...new Set(notesData.map(n => n.chapter_id))];
-  const { data: chaptersData, error: chaptersError } = await supabase
-    .from('chapters')
-    .select('id, chapter_number, books(name)')
-    .in('id', chapterIds);
 
-  if (chaptersError) {
-    console.error('getAllNotes chapters error:', chaptersError);
-    return [];
-  }
+  const [{ data: chaptersData }, { data: booksData }] = await Promise.all([
+    supabase.from('chapters').select('id, chapter_number, book_id').in('id', chapterIds),
+    supabase.from('books').select('id, name'),
+  ]);
+
+  const bookMap = new Map<string, string>(
+    (booksData ?? []).map(b => [b.id, b.name])
+  );
 
   const chapterMap = new Map<string, { chapter_number: number; book_name: string }>();
-  for (const ch of (chaptersData ?? []) as any[]) {
-    if (ch.books) {
-      chapterMap.set(ch.id, { chapter_number: ch.chapter_number, book_name: ch.books.name });
-    }
+  for (const ch of (chaptersData ?? [])) {
+    const book_name = bookMap.get(ch.book_id);
+    if (book_name) chapterMap.set(ch.id, { chapter_number: ch.chapter_number, book_name });
   }
 
   const notes: NoteWithContext[] = notesData
