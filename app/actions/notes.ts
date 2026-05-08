@@ -26,6 +26,7 @@ export async function saveVerseNote(
     );
 
   revalidatePath(`/study/${bookSlug}/${chapterNum}`);
+  revalidatePath('/notes');
 }
 
 export async function deleteVerseNote(
@@ -46,6 +47,7 @@ export async function deleteVerseNote(
     .eq('verse_number', verseNumber);
 
   revalidatePath(`/study/${bookSlug}/${chapterNum}`);
+  revalidatePath('/notes');
 }
 
 export type NoteWithContext = {
@@ -64,33 +66,54 @@ export async function getAllNotes(): Promise<NoteWithContext[]> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return [];
 
-  const { data } = await supabase
+  // Step 1: fetch notes with chapter info
+  const { data: notesData, error: notesError } = await supabase
     .from('verse_notes')
-    .select(`
-      id, verse_number, note_text, created_at, chapter_id,
-      chapters (
-        chapter_number,
-        books ( name )
-      )
-    `)
+    .select('id, verse_number, note_text, created_at, chapter_id')
     .eq('user_id', user.id)
     .not('note_text', 'is', null)
     .neq('note_text', '');
 
-  if (!data) return [];
+  if (notesError) {
+    console.error('getAllNotes notes error:', notesError);
+    return [];
+  }
+  if (!notesData || notesData.length === 0) return [];
 
-  const notes: NoteWithContext[] = (data as any[])
-    .filter(row => row.chapters && row.chapters.books)
-    .map(row => ({
-      id: row.id,
-      verse_number: row.verse_number,
-      note_text: row.note_text,
-      created_at: row.created_at,
-      chapter_id: row.chapter_id,
-      chapter_number: row.chapters.chapter_number,
-      book_name: row.chapters.books.name,
-      book_slug: (row.chapters.books.name as string).toLowerCase().replace(' ', '-'),
-    }));
+  // Step 2: fetch chapter + book info for the chapter ids we have
+  const chapterIds = [...new Set(notesData.map(n => n.chapter_id))];
+  const { data: chaptersData, error: chaptersError } = await supabase
+    .from('chapters')
+    .select('id, chapter_number, books(name)')
+    .in('id', chapterIds);
+
+  if (chaptersError) {
+    console.error('getAllNotes chapters error:', chaptersError);
+    return [];
+  }
+
+  const chapterMap = new Map<string, { chapter_number: number; book_name: string }>();
+  for (const ch of (chaptersData ?? []) as any[]) {
+    if (ch.books) {
+      chapterMap.set(ch.id, { chapter_number: ch.chapter_number, book_name: ch.books.name });
+    }
+  }
+
+  const notes: NoteWithContext[] = notesData
+    .filter(n => chapterMap.has(n.chapter_id))
+    .map(n => {
+      const chapter = chapterMap.get(n.chapter_id)!;
+      return {
+        id: n.id,
+        verse_number: n.verse_number,
+        note_text: n.note_text,
+        created_at: n.created_at,
+        chapter_id: n.chapter_id,
+        chapter_number: chapter.chapter_number,
+        book_name: chapter.book_name,
+        book_slug: chapter.book_name.toLowerCase().replace(' ', '-'),
+      };
+    });
 
   notes.sort((a, b) => {
     const bookOrder = (n: NoteWithContext) => n.book_name === '1 Kings' ? 0 : 1;
