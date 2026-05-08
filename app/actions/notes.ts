@@ -48,6 +48,60 @@ export async function deleteVerseNote(
   revalidatePath(`/study/${bookSlug}/${chapterNum}`);
 }
 
+export type NoteWithContext = {
+  id: string;
+  verse_number: number;
+  note_text: string;
+  created_at: string;
+  chapter_id: string;
+  chapter_number: number;
+  book_name: string;
+  book_slug: string;
+};
+
+export async function getAllNotes(): Promise<NoteWithContext[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data } = await supabase
+    .from('verse_notes')
+    .select(`
+      id, verse_number, note_text, created_at, chapter_id,
+      chapters (
+        chapter_number,
+        books ( name )
+      )
+    `)
+    .eq('user_id', user.id)
+    .not('note_text', 'is', null)
+    .neq('note_text', '');
+
+  if (!data) return [];
+
+  const notes: NoteWithContext[] = (data as any[])
+    .filter(row => row.chapters && row.chapters.books)
+    .map(row => ({
+      id: row.id,
+      verse_number: row.verse_number,
+      note_text: row.note_text,
+      created_at: row.created_at,
+      chapter_id: row.chapter_id,
+      chapter_number: row.chapters.chapter_number,
+      book_name: row.chapters.books.name,
+      book_slug: (row.chapters.books.name as string).toLowerCase().replace(' ', '-'),
+    }));
+
+  notes.sort((a, b) => {
+    const bookOrder = (n: NoteWithContext) => n.book_name === '1 Kings' ? 0 : 1;
+    if (bookOrder(a) !== bookOrder(b)) return bookOrder(a) - bookOrder(b);
+    if (a.chapter_number !== b.chapter_number) return a.chapter_number - b.chapter_number;
+    return a.verse_number - b.verse_number;
+  });
+
+  return notes;
+}
+
 export async function getChapterNotes(chapterId: string): Promise<VerseNote[]> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
