@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import ChapterNav from '@/components/ChapterNav';
-import NoteEditorModal from '@/components/NoteEditorModal';
+import { saveVerseNote, deleteVerseNote } from '@/app/actions/notes';
 import type { NavChapter } from '@/lib/types';
 import type { NoteWithContext } from '@/app/actions/notes';
 
@@ -42,22 +42,125 @@ function groupNotes(notes: NoteWithContext[]): GroupedBook[] {
   }));
 }
 
-export default function NotesPageView({ notes: initialNotes, navData, isAuthenticated }: Props) {
-  const [notes, setNotes] = useState<NoteWithContext[]>(initialNotes);
-  const [editingNote, setEditingNote] = useState<NoteWithContext | null>(null);
+function NoteRow({ note, onSaved, onDeleted }: {
+  note: NoteWithContext;
+  onSaved: (id: string, text: string) => void;
+  onDeleted: (id: string) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [text, setText] = useState(note.note_text);
+  const [isPending, startTransition] = useTransition();
 
-  function handleSaved(verseNumber: number, noteText: string) {
-    setNotes(prev => prev.map(n =>
-      n.chapter_id === editingNote?.chapter_id && n.verse_number === verseNumber
-        ? { ...n, note_text: noteText }
-        : n
-    ));
+  function handleSave() {
+    if (!text.trim()) return;
+    startTransition(async () => {
+      await saveVerseNote(note.chapter_id, note.book_slug, note.chapter_number, note.verse_number, text.trim());
+      onSaved(note.id, text.trim());
+      setEditing(false);
+    });
   }
 
-  function handleDeleted(verseNumber: number) {
-    setNotes(prev => prev.filter(n =>
-      !(n.chapter_id === editingNote?.chapter_id && n.verse_number === verseNumber)
-    ));
+  function handleDelete() {
+    startTransition(async () => {
+      await deleteVerseNote(note.chapter_id, note.book_slug, note.chapter_number, note.verse_number);
+      onDeleted(note.id);
+    });
+  }
+
+  function handleCancel() {
+    setText(note.note_text);
+    setEditing(false);
+  }
+
+  return (
+    <div className="px-5 py-4 group">
+      <div className="flex items-start gap-3">
+        <span className="shrink-0 text-xs font-semibold mt-1 w-12" style={{ color: 'var(--gold-400)' }}>
+          v. {note.verse_number}
+        </span>
+
+        <div className="flex-1 min-w-0">
+          {editing ? (
+            <div className="flex flex-col gap-2">
+              <textarea
+                autoFocus
+                value={text}
+                onChange={e => setText(e.target.value)}
+                rows={3}
+                className="w-full rounded-xl px-3 py-2.5 text-sm leading-relaxed resize-none outline-none"
+                style={{
+                  background: 'var(--navy-900)',
+                  border: '1px solid rgba(201,168,76,0.3)',
+                  color: 'var(--ivory-100)',
+                }}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleSave();
+                  if (e.key === 'Escape') handleCancel();
+                }}
+              />
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleSave}
+                  disabled={!text.trim() || isPending}
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold transition-all"
+                  style={{
+                    background: text.trim() ? 'var(--gold-400)' : 'rgba(201,168,76,0.2)',
+                    color: text.trim() ? 'var(--navy-950)' : 'var(--muted-500)',
+                    cursor: text.trim() ? 'pointer' : 'not-allowed',
+                  }}>
+                  {isPending ? 'Saving…' : 'Save'}
+                </button>
+                <button
+                  onClick={handleDelete}
+                  disabled={isPending}
+                  className="rounded-lg px-3 py-1.5 text-xs font-medium transition-all"
+                  style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: 'rgba(239,68,68,0.8)' }}>
+                  Delete
+                </button>
+                <button
+                  onClick={handleCancel}
+                  className="rounded-lg px-3 py-1.5 text-xs font-medium"
+                  style={{ color: 'var(--muted-400)' }}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <p
+              className="text-sm leading-relaxed cursor-text"
+              style={{ color: 'var(--ivory-200)' }}
+              onClick={() => setEditing(true)}>
+              {note.note_text}
+            </p>
+          )}
+        </div>
+
+        {!editing && (
+          <button
+            onClick={() => setEditing(true)}
+            className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            style={{ background: 'rgba(201,168,76,0.1)', color: 'var(--gold-400)' }}
+            title="Edit note">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function NotesPageView({ notes: initialNotes, navData, isAuthenticated }: Props) {
+  const [notes, setNotes] = useState<NoteWithContext[]>(initialNotes);
+
+  function handleSaved(id: string, text: string) {
+    setNotes(prev => prev.map(n => n.id === id ? { ...n, note_text: text } : n));
+  }
+
+  function handleDeleted(id: string) {
+    setNotes(prev => prev.filter(n => n.id !== id));
   }
 
   const grouped = groupNotes(notes);
@@ -161,27 +264,12 @@ export default function NotesPageView({ notes: initialNotes, navData, isAuthenti
                         {/* Verse notes */}
                         <div className="divide-y" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
                           {chapter.notes.map(note => (
-                            <div key={note.id} className="px-5 py-4 group">
-                              <div className="flex items-start gap-3">
-                                <span className="shrink-0 text-xs font-semibold mt-0.5 w-12"
-                                  style={{ color: 'var(--gold-400)' }}>
-                                  v. {note.verse_number}
-                                </span>
-                                <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--ivory-200)' }}>
-                                  {note.note_text}
-                                </p>
-                                <button
-                                  onClick={() => setEditingNote(note)}
-                                  className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                                  style={{ background: 'rgba(201,168,76,0.1)', color: 'var(--gold-400)' }}
-                                  title="Edit note">
-                                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                  </svg>
-                                </button>
-                              </div>
-                            </div>
+                            <NoteRow
+                              key={note.id}
+                              note={note}
+                              onSaved={handleSaved}
+                              onDeleted={handleDeleted}
+                            />
                           ))}
                         </div>
                       </div>
@@ -194,20 +282,6 @@ export default function NotesPageView({ notes: initialNotes, navData, isAuthenti
 
         </div>
       </main>
-
-      {/* Edit modal */}
-      {editingNote && (
-        <NoteEditorModal
-          chapterId={editingNote.chapter_id}
-          bookSlug={editingNote.book_slug}
-          chapterNum={editingNote.chapter_number}
-          verseNumber={editingNote.verse_number}
-          initialNote={editingNote.note_text}
-          onClose={() => setEditingNote(null)}
-          onSaved={handleSaved}
-          onDeleted={handleDeleted}
-        />
-      )}
     </div>
   );
 }
