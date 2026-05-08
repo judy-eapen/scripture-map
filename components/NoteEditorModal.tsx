@@ -23,7 +23,7 @@ export default function NoteEditorModal({
   function handleSave() {
     if (!text.trim()) return
     startTransition(async () => {
-      await saveVerseNote(chapterId, bookSlug, chapterNum, verseNumber, false, text.trim())
+      await saveVerseNote(chapterId, bookSlug, chapterNum, verseNumber, text.trim())
       onSaved(verseNumber, text.trim())
       onClose()
     })

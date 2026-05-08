@@ -9,7 +9,6 @@ export async function saveVerseNote(
   bookSlug: string,
   chapterNum: number,
   verseNumber: number,
-  highlighted: boolean,
   noteText: string | null
 ): Promise<void> {
   const supabase = await createClient();
@@ -17,13 +16,19 @@ export async function saveVerseNote(
   if (!user) return;
 
   const trimmed = noteText?.trim() || null;
+  if (!trimmed) return;
 
-  await supabase
+  const { error } = await supabase
     .from('verse_notes')
     .upsert(
-      { user_id: user.id, chapter_id: chapterId, verse_number: verseNumber, highlighted, note_text: trimmed, updated_at: new Date().toISOString() },
+      { user_id: user.id, chapter_id: chapterId, verse_number: verseNumber, note_text: trimmed, updated_at: new Date().toISOString() },
       { onConflict: 'user_id,chapter_id,verse_number' }
     );
+
+  if (error) {
+    console.error('saveVerseNote error:', error);
+    return;
+  }
 
   revalidatePath(`/study/${bookSlug}/${chapterNum}`);
   revalidatePath('/notes');
