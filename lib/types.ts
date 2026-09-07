@@ -52,10 +52,13 @@ export type ArchaeologicalEvidence = {
   relevance_note: string;
 };
 
+export type ScriptureBook = '1 Kings' | '2 Kings' | 'Mark';
+export type ScriptureBookSlug = '1-kings' | '2-kings' | 'mark';
+
 export type ChapterData = {
   id: string;
-  book: '1 Kings' | '2 Kings';
-  book_slug: '1-kings' | '2-kings';
+  book: ScriptureBook;
+  book_slug: ScriptureBookSlug;
   chapter_number: number;
   summary: string;
   year_start_bc?: number;
@@ -224,8 +227,8 @@ export type GenealogyEdge = {
 };
 
 export type PersonAppearance = {
-  book: '1 Kings' | '2 Kings';
-  book_slug: '1-kings' | '2-kings';
+  book: ScriptureBook;
+  book_slug: ScriptureBookSlug;
   chapter_number: number;
   read_at: string | null;
 };

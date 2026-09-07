@@ -17,11 +17,24 @@ import type {
   GenealogyEdge,
   PersonAppearance,
   VerseNote,
+  ScriptureBook,
+  ScriptureBookSlug,
 } from './types'
 
+const BOOK_BY_SLUG: Record<ScriptureBookSlug, ScriptureBook> = {
+  '1-kings': '1 Kings',
+  '2-kings': '2 Kings',
+  mark: 'Mark',
+}
+
+function slugForBook(name: string): ScriptureBookSlug {
+  if (name === '1 Kings') return '1-kings'
+  if (name === '2 Kings') return '2-kings'
+  return 'mark'
+}
+
 // Get full chapter data for the chapter study page
-// bookSlug: '1-kings' or '2-kings'
-// chapterNum: 1-22 (1 Kings) or 1-25 (2 Kings)
+// bookSlug: '1-kings', '2-kings', or 'mark'
 // Returns null if not found
 export async function getChapterData(
   bookSlug: string,
@@ -29,7 +42,8 @@ export async function getChapterData(
 ): Promise<ChapterData | null> {
   const supabase = await createClient()
 
-  const bookName = bookSlug === '1-kings' ? '1 Kings' : '2 Kings'
+  const bookName = BOOK_BY_SLUG[bookSlug as ScriptureBookSlug]
+  if (!bookName) return null
 
   // Get book
   const { data: book, error: bookError } = await supabase
@@ -284,8 +298,8 @@ export async function getChapterData(
 
   return {
     id: chapter.id,
-    book: book.name as '1 Kings' | '2 Kings',
-    book_slug: bookSlug as '1-kings' | '2-kings',
+    book: book.name as ScriptureBook,
+    book_slug: bookSlug as ScriptureBookSlug,
     chapter_number: chapter.chapter_number,
     summary: chapter.summary,
     year_start_bc: chapter.year_start_bc,
@@ -476,6 +490,7 @@ export function defaultNavData(): { book: string; chapters: NavChapter[] }[] {
   return [
     { book: '1 Kings', chapters: Array.from({ length: 22 }, (_, i) => ({ number: i + 1, is_read: false })) },
     { book: '2 Kings', chapters: Array.from({ length: 25 }, (_, i) => ({ number: i + 1, is_read: false })) },
+    { book: 'Mark', chapters: Array.from({ length: 16 }, (_, i) => ({ number: i + 1, is_read: false })) },
   ]
 }
 
@@ -517,8 +532,8 @@ export async function getPersonAppearances(
 
   if (!userId) {
     return chapters.map(ch => ({
-      book: ch.books.name as '1 Kings' | '2 Kings',
-      book_slug: (ch.books.name === '1 Kings' ? '1-kings' : '2-kings') as '1-kings' | '2-kings',
+      book: ch.books.name as ScriptureBook,
+      book_slug: slugForBook(ch.books.name),
       chapter_number: ch.chapter_number,
       read_at: null,
     }))
@@ -537,8 +552,8 @@ export async function getPersonAppearances(
   )
 
   return chapters.map(ch => ({
-    book: ch.books.name as '1 Kings' | '2 Kings',
-    book_slug: (ch.books.name === '1 Kings' ? '1-kings' : '2-kings') as '1-kings' | '2-kings',
+    book: ch.books.name as ScriptureBook,
+    book_slug: slugForBook(ch.books.name),
     chapter_number: ch.chapter_number,
     read_at: readMap.get(ch.id) ?? null,
   }))
@@ -589,7 +604,7 @@ export async function getTimelineKings(): Promise<TimelineKing[]> {
 // ---------------------------------------------------------------------------
 export type QuizChapterSummary = {
   id: string
-  bookSlug: '1-kings' | '2-kings'
+  bookSlug: ScriptureBookSlug
   bookName: string
   chapterNumber: number
   counts: { 1: number; 2: number; 3: number; total: number }
@@ -635,7 +650,7 @@ export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
       const bookName = book?.name ?? ''
       return {
         id: ch.id,
-        bookSlug: (bookName === '1 Kings' ? '1-kings' : '2-kings') as '1-kings' | '2-kings',
+        bookSlug: slugForBook(bookName),
         bookName,
         chapterNumber: ch.chapter_number,
         counts: counts.get(ch.id) ?? { 1: 0, 2: 0, 3: 0, total: 0 },

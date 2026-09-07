@@ -19,12 +19,14 @@ type Props = {
 const bookSlugs: Record<string, string> = {
   '1 Kings': '1-kings',
   '2 Kings': '2-kings',
+  'Mark': 'mark',
 };
 
 export default function ChapterNav({ currentBook, currentChapter, navData, isAuthenticated, mobileOpen, onMobileClose }: Props) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     '1 Kings': true,
     '2 Kings': false,
+    'Mark': false,
   });
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -131,7 +133,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, isAut
                     </>
                   ) : (
                     <span className="text-xs font-bold" style={{ color: isExpanded ? 'var(--gold-400)' : 'var(--muted-500)' }}>
-                      {book === '1 Kings' ? '1K' : '2K'}
+                      {book === '1 Kings' ? '1K' : book === '2 Kings' ? '2K' : 'Mk'}
                     </span>
                   )}
                 </button>

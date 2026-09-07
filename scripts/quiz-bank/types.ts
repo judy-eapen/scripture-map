@@ -10,7 +10,7 @@ export type BankRow = {
   verse_number: number;
   explanation?: string;
 };
-export type ChapterBank = { book: '1 Kings' | '2 Kings'; chapter: number; tag: string; rows: BankRow[] };
+export type ChapterBank = { book: '1 Kings' | '2 Kings' | 'Mark'; chapter: number; tag: string; rows: BankRow[] };
 
 export const mc = (difficulty: Level, question: string, options: string[], verse_number: number, explanation = ''): BankRow =>
   ({ type: 'multiple_choice', difficulty, question, options, verse_number, explanation });

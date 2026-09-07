@@ -203,7 +203,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
           <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
         ) : !selectedChapter ? (
           <div className="space-y-8">
-            {(['1 Kings', '2 Kings'] as const).map(bookName => (
+            {(['1 Kings', '2 Kings', 'Mark'] as const).map(bookName => (
               <section key={bookName}>
                 <h2 className="text-lg font-medium mb-3" style={{ color: 'var(--ivory-100)' }}>{bookName}</h2>
                 <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">

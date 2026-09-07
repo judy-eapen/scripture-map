@@ -129,7 +129,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
 
   const chapterTitle = `${chapter.book} · Ch. ${chapter.chapter_number}`;
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
-  const totalChapters = chapter.book === '1 Kings' ? 22 : 25;
+  const totalChapters = chapter.book === '1 Kings' ? 22 : chapter.book === '2 Kings' ? 25 : 16;
 
   return (
     <div ref={containerRef} className="flex overflow-hidden h-screen-safe" style={{ background: 'var(--navy-950)' }}>
@@ -460,7 +460,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                 {chapter.book} · {chapter.chapter_number} of {totalChapters}
               </span>
               <Link
-                href={`/study/${chapter.book_slug}/${chapter.chapter_number + 1}`}
+                href={chapter.chapter_number < totalChapters ? `/study/${chapter.book_slug}/${chapter.chapter_number + 1}` : '#'}
                 className="flex items-center gap-2 text-sm transition-colors"
                 style={{ color: 'var(--muted-400)' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--ivory-200)'; }}
