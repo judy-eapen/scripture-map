@@ -152,10 +152,10 @@ export default function GenealogyView({
   }, [nodes, edges]);
 
   return (
-    <div className="flex flex-col h-screen-safe" style={{ background: 'var(--navy-950)' }}>
+    <div className="flex flex-col h-full" style={{ background: 'var(--navy-950)' }}>
 
       {/* ── Top bar ── */}
-      <div className="shrink-0 flex items-center px-4 py-3 gap-3"
+      <div className="shrink-0 flex items-center px-4 py-3 gap-3 pl-14 md:pl-4"
         style={{ background: 'var(--navy-900)', borderBottom: '1px solid rgba(201,168,76,0.12)' }}>
         <button
           onClick={() => router.back()}
