@@ -17,6 +17,13 @@ export type Person = {
   contemporary_events?: string;
   image_url?: string;
   hasGenealogyNode?: boolean;
+  scripture_references?: {
+    mark?: string[];
+    other_gospels?: string[];
+    new_testament?: string[];
+    old_testament?: string[];
+  };
+  mark_chapters?: number[];
 };
 
 export type Place = {
@@ -29,6 +36,8 @@ export type Place = {
   ancient_description: string;
   modern_description: string;
   image_url?: string;
+  mark_chapters?: number[];
+  bible_references?: string[];
 };
 
 export type TappablePerson = {
@@ -137,6 +146,8 @@ export type DifficultPassage = {
   topic: string;
   plain_language: string;
   theological_context: string;
+  source_text?: string;
+  source_label?: string;
 };
 
 export type GenealogyNode = {

@@ -23,11 +23,11 @@ const bookSlugs: Record<string, string> = {
 };
 
 export default function ChapterNav({ currentBook, currentChapter, navData, isAuthenticated, mobileOpen, onMobileClose }: Props) {
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    '1 Kings': true,
-    '2 Kings': false,
-    'Mark': false,
-  });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(() => ({
+    '1 Kings': currentBook === '1 Kings',
+    '2 Kings': currentBook === '2 Kings',
+    'Mark': currentBook === 'Mark',
+  }));
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const totalRead = navData.flatMap(b => b.chapters).filter(c => c.is_read).length;
@@ -196,6 +196,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, isAut
               { href: '/genealogy', label: 'Dynasty Web', icon: <><circle cx="12" cy="5" r="2" stroke="currentColor" strokeWidth="1.5" /><circle cx="5" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" /><circle cx="19" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" /><path d="M12 7v4M12 11l-7 6M12 11l7 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></> },
               { href: '/quiz', label: 'Quiz', icon: <><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="12" cy="17" r=".8" fill="currentColor" /></> },
               { href: '/flashcards', label: 'Flashcards', icon: <><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M8 12h8M12 9v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></> },
+              { href: '/resources/mark', label: 'Mark Teacher Slides', icon: <><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M7 8h10M7 12h7M7 16h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></> },
               ...(isAuthenticated ? [{ href: '/notes', label: 'My Notes', icon: <><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></> }] : []),
             ].map(({ href, label, icon }) => (
               <Link key={href} href={href}

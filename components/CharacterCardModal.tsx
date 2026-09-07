@@ -55,10 +55,10 @@ export default function CharacterCardModal({ person, onClose }: Props) {
 
   // Group appearances by book
   const byBook = appearances
-    ? (['1 Kings', '2 Kings'] as const)
+    ? (['1 Kings', '2 Kings', 'Mark'] as const)
         .map(book => ({
           book,
-          book_slug: book === '1 Kings' ? '1-kings' : '2-kings',
+          book_slug: book === '1 Kings' ? '1-kings' : book === '2 Kings' ? '2-kings' : 'mark',
           chapters: appearances.filter(a => a.book === book),
         }))
         .filter(g => g.chapters.length > 0)
@@ -172,6 +172,39 @@ export default function CharacterCardModal({ person, onClose }: Props) {
             {person.bio}
           </p>
         </div>
+
+        {person.scripture_references && (
+          <div className="px-6 mt-4">
+            <div className="rounded-xl px-4 py-4 space-y-4"
+              style={{ background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(201,168,76,0.14)' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gold-400)' }}>
+                Where this person appears in Scripture
+              </p>
+              {([
+                ['mark', 'In Mark'],
+                ['other_gospels', 'Other Gospels'],
+                ['new_testament', 'Elsewhere in the New Testament'],
+                ['old_testament', 'Old Testament connections'],
+              ] as const).map(([key, label]) => {
+                const references = person.scripture_references?.[key]
+                if (!references?.length) return null
+                return (
+                  <div key={key}>
+                    <p className="text-xs font-medium mb-1.5" style={{ color: 'var(--ivory-100)' }}>{label}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {references.map(reference => (
+                        <span key={reference} className="text-xs rounded-md px-2 py-1"
+                          style={{ color: 'var(--muted-400)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                          {reference}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Contemporary events */}
         {person.contemporary_events && (

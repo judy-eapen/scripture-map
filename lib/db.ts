@@ -20,6 +20,10 @@ import type {
   ScriptureBook,
   ScriptureBookSlug,
 } from './types'
+import markSource from '@/data/mark-source.json'
+import { johnTheBaptistStudyNote, markIntroduction } from '@/data/mark-orthodox-notes'
+import { getMarkStudyData } from '@/data/mark-study-data'
+import { buildMarkBank } from '@/scripts/quiz-bank/mark-builder'
 
 const BOOK_BY_SLUG: Record<ScriptureBookSlug, ScriptureBook> = {
   '1-kings': '1 Kings',
@@ -31,6 +35,22 @@ function slugForBook(name: string): ScriptureBookSlug {
   if (name === '1 Kings') return '1-kings'
   if (name === '2 Kings') return '2-kings'
   return 'mark'
+}
+
+function localMarkPreview(chapterNum: number): ChapterData | null {
+  const local = markSource.chapters.find(ch => ch.chapter === chapterNum)
+  if (!local) return null
+  const studyData = getMarkStudyData(chapterNum)
+  return {
+    id: `preview-mark-${chapterNum}`, book: 'Mark', book_slug: 'mark', chapter_number: chapterNum,
+    summary: local.summary, verses: local.verses,
+    people: studyData.people, places: studyData.places, evidence: [], nations: [], connections: [], prophecies: [], themes: [],
+    difficultPassages: chapterNum === 1 ? [
+      { id: 'preview-mark-introduction', verse_start: 1, verse_end: 1, topic: 'Orthodox Study Bible: Introduction', plain_language: `${markIntroduction.author} ${markIntroduction.date}`, theological_context: `${markIntroduction.majorTheme} ${markIntroduction.subthemes.join(' ')} ${markIntroduction.background} ${markIntroduction.endingNote}`, source_text: markIntroduction.sourceText, source_label: markIntroduction.sourceLabel },
+      { id: 'preview-mark-john', verse_start: johnTheBaptistStudyNote.verseStart, verse_end: johnTheBaptistStudyNote.verseEnd, topic: `Orthodox Study Bible: ${johnTheBaptistStudyNote.title}`, plain_language: johnTheBaptistStudyNote.plainLanguage, theological_context: johnTheBaptistStudyNote.theologicalContext, source_text: johnTheBaptistStudyNote.sourceText, source_label: johnTheBaptistStudyNote.sourceLabel },
+    ] : [],
+    quizCount: Math.max(120, local.verses.length * 4), quizBestScore: null,
+  }
 }
 
 // Get full chapter data for the chapter study page
@@ -52,7 +72,10 @@ export async function getChapterData(
     .eq('name', bookName)
     .single()
 
-  if (bookError || !book) return null
+  if (bookError || !book) {
+    if (bookSlug === 'mark') return localMarkPreview(chapterNum)
+    return null
+  }
 
   // Get chapter
   const { data: chapter, error: chapterError } = await supabase
@@ -62,7 +85,10 @@ export async function getChapterData(
     .eq('chapter_number', chapterNum)
     .single()
 
-  if (chapterError || !chapter) return null
+  if (chapterError || !chapter) {
+    if (bookSlug === 'mark') return localMarkPreview(chapterNum)
+    return null
+  }
 
   // Fetch related data in parallel
   const [peopleResult, placesResult, evidenceResult, nationsResult, passagesResult, quizCountResult, genealogyPersonIdsResult, connectionsResult, propheciesSourceResult, propheciesFulfillmentResult, themesResult] =
@@ -172,6 +198,14 @@ export async function getChapterData(
         }))
       : []
 
+  // Until the Mark entity migration is deployed, enrich the local preview with
+  // the same people/place cards and map pins used by the Kings reader.
+  if (bookSlug === 'mark') {
+    const localStudy = getMarkStudyData(chapterNum)
+    if (localStudy.people.length) people.splice(0, people.length, ...localStudy.people)
+    if (localStudy.places.length) places.splice(0, places.length, ...localStudy.places)
+  }
+
   // Map archaeological evidence
   const evidence: ArchaeologicalEvidence[] =
     evidenceResult.status === 'fulfilled' && evidenceResult.value.data
@@ -199,10 +233,24 @@ export async function getChapterData(
       : []
 
   // Map difficult passages
-  const difficultPassages: DifficultPassage[] =
+  let difficultPassages: DifficultPassage[] =
     passagesResult.status === 'fulfilled' && passagesResult.value.data
       ? (passagesResult.value.data as DifficultPassage[])
       : []
+
+  // The source articles are bundled with the Mark preview so readers can always
+  // distinguish our summaries from the Orthodox Study Bible's original wording.
+  if (bookSlug === 'mark' && chapterNum === 1) {
+    difficultPassages = difficultPassages.map(passage => {
+      if (passage.topic.includes('Introduction')) {
+        return { ...passage, source_text: markIntroduction.sourceText, source_label: markIntroduction.sourceLabel }
+      }
+      if (passage.topic.includes('John the Baptist')) {
+        return { ...passage, source_text: johnTheBaptistStudyNote.sourceText, source_label: johnTheBaptistStudyNote.sourceLabel }
+      }
+      return passage
+    })
+  }
 
   const quizCount =
     quizCountResult.status === 'fulfilled'
@@ -450,7 +498,7 @@ export async function getNavChapters(
     (progress as ProgressRow[]).map(p => [p.chapter_id, p.quiz_best_score])
   )
 
-  return books.map((book: { id: string; name: string }) => {
+  const nav = books.map((book: { id: string; name: string }) => {
     const bookChapters = (allChapters as ChapterRow[])
       .filter(ch => ch.book_id === book.id)
       .map(ch => ({
@@ -465,6 +513,10 @@ export async function getNavChapters(
       chapters: bookChapters,
     }
   })
+  if (!nav.some(book => book.book === 'Mark')) {
+    nav.push({ book: 'Mark', chapters: Array.from({ length: 16 }, (_, i) => ({ number: i + 1, is_read: false, quiz_best_score: null, year_start_bc: undefined })) })
+  }
+  return nav
 }
 
 // Check if a specific chapter is marked read by user
@@ -644,7 +696,7 @@ export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
   type Row = { id: string; chapter_number: number; books: { name: string } | { name: string }[] | null }
   const rows = (chapters ?? []) as unknown as Row[]
 
-  return rows
+  const summaries = rows
     .map(ch => {
       const book = Array.isArray(ch.books) ? ch.books[0] : ch.books
       const bookName = book?.name ?? ''
@@ -656,5 +708,19 @@ export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
         counts: counts.get(ch.id) ?? { 1: 0, 2: 0, 3: 0, total: 0 },
       }
     })
-    .sort((a, b) => a.bookName.localeCompare(b.bookName) || a.chapterNumber - b.chapterNumber)
+  if (!summaries.some(ch => ch.bookName === 'Mark')) {
+    summaries.push(...markSource.chapters.map(ch => {
+      const rows = buildMarkBank(ch.chapter).rows
+      return {
+        id: `preview-mark-${ch.chapter}`, bookSlug: 'mark' as const, bookName: 'Mark', chapterNumber: ch.chapter,
+        counts: {
+          1: rows.filter(row => row.difficulty === 1).length,
+          2: rows.filter(row => row.difficulty === 2).length,
+          3: rows.filter(row => row.difficulty === 3).length,
+          total: rows.length,
+        },
+      }
+    }))
+  }
+  return summaries.sort((a, b) => a.bookName.localeCompare(b.bookName) || a.chapterNumber - b.chapterNumber)
 }

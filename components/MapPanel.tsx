@@ -27,6 +27,7 @@ type Props = {
   activePlaceId?: string;
   chapterTitle: string;
   onPlaceClick?: (place: Place) => void;
+  ancientLabel?: string;
 };
 
 const DEFAULT_CENTER: LatLngTuple = [32.5, 35.3];
@@ -35,7 +36,7 @@ const FOCUSED_ZOOM = 9;   // zoomed in when a specific place is active
 const MIN_MAP_HEIGHT = 160;
 const MAX_MAP_HEIGHT = 780;
 
-export default function MapPanel({ places, activePlaceId, chapterTitle, onPlaceClick }: Props) {
+export default function MapPanel({ places, activePlaceId, chapterTitle, onPlaceClick, ancientLabel = 'Ancient (~870 BC)' }: Props) {
   const handlePinClick = (id: string) => {
     const tappable = places.find(p => p.place.id === id);
     if (tappable && onPlaceClick) onPlaceClick(tappable.place);
@@ -118,7 +119,7 @@ export default function MapPanel({ places, activePlaceId, chapterTitle, onPlaceC
         {mode === 'split' ? (
           <div className="flex h-full">
             <div className="flex-1 h-full overflow-hidden">
-              <LeafletMap mode="ancient" places={pins} activeCenter={center} zoom={mapZoom} label="Ancient (~870 BC)" onPinClick={handlePinClick} />
+              <LeafletMap mode="ancient" places={pins} activeCenter={center} zoom={mapZoom} label={ancientLabel} onPinClick={handlePinClick} />
             </div>
             <div style={{ width: '1px', background: 'rgba(201,168,76,0.25)', flexShrink: 0 }} />
             <div className="flex-1 h-full overflow-hidden">
@@ -131,7 +132,7 @@ export default function MapPanel({ places, activePlaceId, chapterTitle, onPlaceC
             places={pins}
             activeCenter={center}
             zoom={mapZoom}
-            label={mode === 'ancient' ? 'Ancient (~870 BC)' : 'Modern'}
+            label={mode === 'ancient' ? ancientLabel : 'Modern'}
             onPinClick={handlePinClick}
           />
         )}

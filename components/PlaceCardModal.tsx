@@ -131,6 +131,37 @@ export default function PlaceCardModal({ place, onClose }: Props) {
             </p>
           </div>
 
+          {(place.mark_chapters?.length || place.bible_references?.length) && (
+            <div className="rounded-xl p-4 space-y-3"
+              style={{ background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(201,168,76,0.12)' }}>
+              <h3 className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gold-400)' }}>
+                Where this place appears
+              </h3>
+              {place.mark_chapters && place.mark_chapters.length > 0 && (
+                <div>
+                  <p className="text-xs mb-1.5" style={{ color: 'var(--ivory-100)' }}>In Mark</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {place.mark_chapters.map(chapter => (
+                      <a key={chapter} href={`/study/mark/${chapter}`} className="text-xs rounded-md px-2 py-1"
+                        style={{ color: 'var(--gold-300)', background: 'rgba(201,168,76,0.07)' }}>Mark {chapter}</a>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {place.bible_references && place.bible_references.length > 0 && (
+                <div>
+                  <p className="text-xs mb-1.5" style={{ color: 'var(--ivory-100)' }}>Elsewhere in Scripture</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {place.bible_references.map(reference => (
+                      <span key={reference} className="text-xs rounded-md px-2 py-1"
+                        style={{ color: 'var(--muted-400)', background: 'rgba(255,255,255,0.04)' }}>{reference}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Coordinates */}
           <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--muted-500)' }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">

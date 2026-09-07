@@ -294,8 +294,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
             {/* People in this chapter */}
             {chapter.people.length > 0 && (
               <div className="mb-4 pb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                <h3 className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--muted-400)' }}>
-                  People in this chapter
+                <h3 className="text-xs font-semibold uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: 'var(--gold-400)' }}>
+                  People in this chapter <span className="normal-case tracking-normal font-normal" style={{ color: 'var(--muted-500)' }}>— tap a name for details</span>
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {chapter.people.map(({ person }) => (
@@ -316,6 +316,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                           }} />
                       )}
                       {person.name}
+                      <span aria-hidden="true" style={{ color: 'var(--gold-400)' }}>›</span>
                     </button>
                   ))}
                 </div>
@@ -358,6 +359,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                   places={chapter.places}
                   activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
                   chapterTitle={chapterTitle}
+                  ancientLabel={chapter.book === 'Mark' ? 'Ancient (1st century AD)' : 'Ancient (~870 BC)'}
                   onPlaceClick={place => setActiveCard({ type: 'place', place })}
                 />
               </div>
@@ -497,6 +499,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               places={chapter.places}
               activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
               chapterTitle={chapterTitle}
+              ancientLabel={chapter.book === 'Mark' ? 'Ancient (1st century AD)' : 'Ancient (~870 BC)'}
               onPlaceClick={place => setActiveCard({ type: 'place', place })}
             />
           </div>

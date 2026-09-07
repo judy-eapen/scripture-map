@@ -14,6 +14,7 @@ import {
   type ChapterProgress, type OpenSession,
 } from '@/app/actions/quiz';
 import { saveQuizScore } from '@/app/actions/progress';
+import { markSectionForVerse } from '@/lib/mark-sections';
 
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete';
 type Level = 1 | 2 | 3 | 'mixed';
@@ -337,6 +338,13 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
     const masteryPct = m.total ? Math.round((m.mastered / m.total) * 100) : 0;
     const missed = answered.filter(a => !a.correct);
     const unseen = pool.filter(q => priorityRank(stats[q.id]) === 0).length;
+    const reviewSections = chapter?.bookSlug === 'mark'
+      ? Array.from(missed.reduce((groups, { q }) => {
+          const title = markSectionForVerse(chapter.chapterNumber, q.verse_number)
+          groups.set(title, (groups.get(title) ?? 0) + 1)
+          return groups
+        }, new Map<string, number>()).entries()).sort((a, b) => b[1] - a[1])
+      : [];
 
     return (
       <div>
@@ -370,6 +378,23 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
             </p>
           </div>
         </div>
+
+        {reviewSections.length > 0 && chapter && (
+          <div className="rounded-2xl px-5 py-5 mb-4" style={{ ...card, borderColor: 'rgba(201,168,76,0.25)' }}>
+            <p className="text-sm font-medium mb-1" style={{ color: 'var(--gold-300)' }}>What to study next</p>
+            <p className="text-xs mb-3" style={{ color: 'var(--muted-500)' }}>Your missed answers point to these parts of Mark {chapter.chapterNumber}.</p>
+            <div className="space-y-2">
+              {reviewSections.map(([title, count]) => (
+                <Link key={title} href={`/study/mark/${chapter.chapterNumber}`}
+                  className="flex items-center justify-between rounded-xl px-4 py-3"
+                  style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.12)' }}>
+                  <span className="text-sm" style={{ color: 'var(--ivory-100)' }}>{title}</span>
+                  <span className="text-xs ml-3 shrink-0" style={{ color: '#f87171' }}>{count} missed →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {missed.length > 0 && (
           <div className="rounded-2xl px-5 py-5 mb-4" style={{ ...card, borderColor: 'rgba(239,68,68,0.25)' }}>
