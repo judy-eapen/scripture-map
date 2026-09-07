@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalizeAnswer, gradeText, gradeTrueFalse, buildRound, countRemaining } from '../../lib/quiz-grading'
+import { normalizeAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, buildRound, countRemaining } from '../../lib/quiz-grading'
 import type { QuizQuestion } from '../../lib/types'
 
 const base: QuizQuestion = {
@@ -36,6 +36,14 @@ describe('gradeTrueFalse', () => {
     const q = { ...base, type: 'true_false' as const, answer: 'false' }
     expect(gradeTrueFalse(q, false)).toBe(true)
     expect(gradeTrueFalse(q, true)).toBe(false)
+  })
+})
+
+describe('gradeMultipleChoice', () => {
+  it('uses the stored correct option index', () => {
+    const q = { ...base, type: 'multiple_choice' as const, options: ['wrong', 'right', 'wrong again', 'also wrong'], correct_index: 1 }
+    expect(gradeMultipleChoice(q, 1)).toBe(true)
+    expect(gradeMultipleChoice(q, 0)).toBe(false)
   })
 })
 

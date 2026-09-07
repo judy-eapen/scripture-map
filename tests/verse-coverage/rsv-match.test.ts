@@ -1,10 +1,23 @@
 import { describe, it, expect, beforeAll } from 'vitest'
+import fs from 'node:fs'
 import { parseRsvDocx, type ParsedChapter } from '../utils/parse-rsv'
 import { getDbVersesByBook, type VerseEntry } from '../utils/db-verses'
 
+function findRsvDocument(book: '1 Kings' | '2 Kings') {
+  const envName = book === '1 Kings' ? 'RSV_1_KINGS_DOCX' : 'RSV_2_KINGS_DOCX'
+  const candidates = [
+    process.env[envName],
+    `/Users/judydarvin/Desktop/Areas/Personal/Faith/STG/${book} RSV (1).docx`,
+    `/Users/judydarvin/Desktop/STG/${book} RSV.docx`,
+  ].filter((candidate): candidate is string => !!candidate)
+  const found = candidates.find(candidate => fs.existsSync(candidate))
+  if (!found) throw new Error(`Missing ${book} RSV source document. Set ${envName} to its path.`)
+  return found
+}
+
 const DOCX = {
-  '1 Kings': '/Users/judydarvin/Desktop/STG/1 Kings RSV.docx',
-  '2 Kings': '/Users/judydarvin/Desktop/STG/2 Kings RSV.docx',
+  '1 Kings': findRsvDocument('1 Kings'),
+  '2 Kings': findRsvDocument('2 Kings'),
 }
 
 function runBookTests(book: '1 Kings' | '2 Kings', totalChapters: number) {

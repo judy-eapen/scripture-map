@@ -12,15 +12,23 @@ export async function parseRsvDocx(docxPath: string, book: '1 Kings' | '2 Kings'
   let current: ParsedChapter | null = null
 
   for (const line of lines) {
+    if (/^_{5,}$/.test(line)) continue
     const chapterMatch = line.match(new RegExp(`^${prefix}\\.(\\d+)$`))
     if (chapterMatch) {
       if (current) chapters.push(current)
       current = { book, chapter_number: parseInt(chapterMatch[1]), verses: [] }
       continue
     }
-    const verseMatch = line.match(/^\[(\d+)\]\s*(.+)$/)
+    const verseMatch = line.match(/^\[(\d+)\](?:\s*(.*))?$/)
     if (verseMatch && current) {
-      current.verses.push({ verse_number: parseInt(verseMatch[1]), text: verseMatch[2].trim() })
+      current.verses.push({ verse_number: parseInt(verseMatch[1]), text: (verseMatch[2] ?? '').trim() })
+      continue
+    }
+    // DOCX paragraph boundaries do not always coincide with verse boundaries.
+    // Preserve unnumbered continuation paragraphs as part of the preceding verse.
+    if (current?.verses.length) {
+      const previous = current.verses[current.verses.length - 1]
+      previous.text = `${previous.text} ${line}`.trim()
     }
   }
 
