@@ -11,10 +11,13 @@ import { createClient } from '@supabase/supabase-js';
     const k = t.slice(0, i).trim(), v = t.slice(i + 1).trim(); if (!process.env[k]) process.env[k] = v;
   }
 })();
-const [book, ch] = [process.argv[2], Number(process.argv[3])];
-const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
-const { data: b } = await sb.from('books').select('id').eq('name', book).single();
-const { data: c } = await sb.from('chapters').select('verses').eq('book_id', b!.id).eq('chapter_number', ch).single();
-const verses = c!.verses as Array<{ verse_number: number; text: string }>;
-console.log(`${book} ${ch} — ${verses.length} verses (RSV)\n`);
-for (const v of verses) console.log(`${v.verse_number}. ${v.text}`);
+async function main() {
+  const [book, ch] = [process.argv[2], Number(process.argv[3])];
+  const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+  const { data: b } = await sb.from('books').select('id').eq('name', book).single();
+  const { data: c } = await sb.from('chapters').select('verses').eq('book_id', b!.id).eq('chapter_number', ch).single();
+  const verses = c!.verses as Array<{ verse_number: number; text: string }>;
+  console.log(`${book} ${ch} — ${verses.length} verses (RSV)\n`);
+  for (const v of verses) console.log(`${v.verse_number}. ${v.text}`);
+}
+main().catch(e => { console.error(e); process.exit(1); });
