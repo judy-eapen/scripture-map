@@ -70,39 +70,6 @@ export default function PlaceCardModal({ place, onClose }: Props) {
           </div>
         )}
 
-        {/* Map placeholder */}
-        <div className="mx-6 mt-4 rounded-xl overflow-hidden"
-          style={{
-            height: '200px',
-            background: 'linear-gradient(135deg, #1a2a1a 0%, #0d1a2a 40%, #1a1a0d 100%)',
-            border: '1px solid rgba(96,165,250,0.15)',
-            position: 'relative',
-          }}>
-          {/* Simulated map grid */}
-          <div className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `linear-gradient(rgba(96,165,250,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.4) 1px, transparent 1px)`,
-              backgroundSize: '40px 40px',
-            }} />
-          {/* Map pin */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex flex-col items-center">
-              <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center mb-1"
-                style={{ background: 'var(--kingdom-north)', borderColor: 'white' }}>
-                <div className="w-1.5 h-1.5 rounded-full bg-white" />
-              </div>
-              <div className="text-xs font-semibold px-2 py-0.5 rounded-full"
-                style={{ background: 'rgba(0,0,0,0.7)', color: 'white', backdropFilter: 'blur(4px)' }}>
-                {place.ancient_name}
-              </div>
-            </div>
-          </div>
-          <div className="absolute bottom-3 right-3 text-xs px-2 py-1 rounded-lg"
-            style={{ background: 'rgba(0,0,0,0.6)', color: 'var(--muted-400)', backdropFilter: 'blur(4px)' }}>
-            Mapbox loads in execute phase
-          </div>
-        </div>
-
         {/* Content */}
         <div className="px-6 pt-5 pb-4 space-y-5">
           {/* Ancient */}
