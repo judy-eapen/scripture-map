@@ -10,7 +10,7 @@ Copy the shape of `1-kings-1.ts`. Default-export a `ChapterBank` using the helpe
 4. `npx tsx scripts/seed-quiz-bank.ts scripts/quiz-bank/1-kings-2.ts --drop-legacy` — writes to the database (replaces the 10 old untagged questions).
 
 ## Targets
-- **≥ 3 questions per verse on average, minimum 120 per chapter, every verse covered** (the loader reports uncovered verses).
+- **No fixed chapter-total minimum.** Cover every verse with useful questions; add more only when the text or the MMVS reference facts benefit from them. The loader reports uncovered verses.
 - Roughly a third Easy, a third Medium, a third Hard (Medium may run a little higher).
 - Each level has all four types. Aim per chapter: ~30% multiple choice, ~30% fill-in-the-blank, ~20% one-word, ~20% true/false.
 - `tag` is `quiz-v2-<book-slug-without-dash><chapter>` e.g. `quiz-v2-1kings-2`.

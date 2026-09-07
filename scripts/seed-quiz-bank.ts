@@ -119,7 +119,10 @@ async function main() {
   const existing = existingResult.data ?? [];
 
   if (existing.length) {
-    const key = (row: { verse_number: number; type: string }) => `${row.verse_number}:${row.type}`;
+    // Match within the cited verse, rather than by question type. Re-authoring may
+    // legitimately change a weak template into another type; the stable database
+    // ID is what preserves answers and open-session references.
+    const key = (row: { verse_number: number }) => `${row.verse_number}`;
     const oldGroups = new Map<string, typeof existing>();
     for (const row of existing) {
       const group = oldGroups.get(key(row)) ?? [];
@@ -141,7 +144,7 @@ async function main() {
     if (mismatches.length) {
       const details = mismatches.map(groupKey =>
         `${groupKey} existing=${oldGroups.get(groupKey)?.length ?? 0} new=${nextGroups.get(groupKey)?.length ?? 0}`);
-      throw new Error(`Refusing to delete question IDs because a verse/type group became smaller:\n${details.join('\n')}`);
+      throw new Error(`Refusing to delete question IDs because a verse group became smaller:\n${details.join('\n')}`);
     }
 
     const updates = [...nextGroups.entries()].flatMap(([groupKey, rows]) =>
