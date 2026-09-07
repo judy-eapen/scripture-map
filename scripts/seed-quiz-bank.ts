@@ -1,7 +1,8 @@
 // Generic quiz-bank loader.
 // Run: npx tsx scripts/seed-quiz-bank.ts scripts/quiz-bank/1-kings-1.ts [--dry] [--drop-legacy]
 // Validates every row against the RSV verse text stored in `chapters.verses`,
-// then replaces all rows carrying the bank's tag for that chapter.
+// then updates tagged rows in place so learner answers and open sessions retain
+// valid question IDs. A new tagged bank is inserted only when no tagged rows exist.
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -95,12 +96,8 @@ async function main() {
   console.table(Object.fromEntries(Object.entries(tally).map(([t, d]) => [t, { easy: d[1], medium: d[2], hard: d[3], total: d[1] + d[2] + d[3] }])));
   if (dry) { console.log('dry run — nothing written'); return; }
 
-  const del = await sb.from('quiz_questions').delete().eq('chapter_id', chapter.id).eq('tag', bank.tag);
-  if (del.error) throw del.error;
   if (dropLegacy) {
-    const legacy = await sb.from('quiz_questions').delete().eq('chapter_id', chapter.id).is('tag', null).select('id');
-    if (legacy.error) throw legacy.error;
-    console.log(`removed ${legacy.data?.length ?? 0} legacy untagged row(s)`);
+    throw new Error('--drop-legacy is disabled: deleting questions can cascade-delete learner answers');
   }
 
   const payload = bank.rows.map((r: BankRow) => {
@@ -113,12 +110,56 @@ async function main() {
     if (r.type === 'multiple_choice') Object.assign(base, shuffleOptions(r.options!));
     return base;
   });
-  for (let i = 0; i < payload.length; i += 100) {
-    const ins = await sb.from('quiz_questions').insert(payload.slice(i, i + 100));
-    if (ins.error) throw ins.error;
+  const existingResult = await sb
+    .from('quiz_questions')
+    .select('id, verse_number, type')
+    .eq('chapter_id', chapter.id)
+    .eq('tag', bank.tag);
+  if (existingResult.error) throw existingResult.error;
+  const existing = existingResult.data ?? [];
+
+  if (existing.length) {
+    const key = (row: { verse_number: number; type: string }) => `${row.verse_number}:${row.type}`;
+    const oldGroups = new Map<string, typeof existing>();
+    for (const row of existing) {
+      const group = oldGroups.get(key(row)) ?? [];
+      group.push(row);
+      oldGroups.set(key(row), group);
+    }
+    for (const group of oldGroups.values()) group.sort((a, b) => a.id.localeCompare(b.id));
+
+    const nextGroups = new Map<string, Array<(typeof payload)[number]>>();
+    for (const row of payload) {
+      const group = nextGroups.get(key(row)) ?? [];
+      group.push(row);
+      nextGroups.set(key(row), group);
+    }
+
+    const groupKeys = new Set([...oldGroups.keys(), ...nextGroups.keys()]);
+    const mismatches = [...groupKeys].filter(groupKey =>
+      (oldGroups.get(groupKey)?.length ?? 0) !== (nextGroups.get(groupKey)?.length ?? 0));
+    if (mismatches.length) {
+      const details = mismatches.map(groupKey =>
+        `${groupKey} existing=${oldGroups.get(groupKey)?.length ?? 0} new=${nextGroups.get(groupKey)?.length ?? 0}`);
+      throw new Error(`Refusing to replace question IDs because verse/type counts changed:\n${details.join('\n')}`);
+    }
+
+    const updates = [...nextGroups.entries()].flatMap(([groupKey, rows]) =>
+      rows.map((row, index) => ({ ...row, id: oldGroups.get(groupKey)![index].id })));
+    for (let i = 0; i < updates.length; i += 100) {
+      const upsert = await sb.from('quiz_questions').upsert(updates.slice(i, i + 100), { onConflict: 'id' });
+      if (upsert.error) throw upsert.error;
+    }
+    console.log(`✓ updated ${updates.length} tagged rows in place; learner question IDs preserved`);
+  } else {
+    for (let i = 0; i < payload.length; i += 100) {
+      const ins = await sb.from('quiz_questions').insert(payload.slice(i, i + 100));
+      if (ins.error) throw ins.error;
+    }
+    console.log(`✓ inserted ${payload.length} new tagged rows`);
   }
   const { count } = await sb.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id);
-  console.log(`✓ wrote ${payload.length} rows; chapter now has ${count} questions total (incl. legacy)`);
+  console.log(`chapter now has ${count} questions total (incl. legacy)`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
