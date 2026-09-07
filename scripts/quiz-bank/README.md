@@ -24,3 +24,7 @@ Copy the shape of `1-kings-1.ts`. Default-export a `ChapterBank` using the helpe
 - **Difficulty**: Easy = main characters, places, headline events. Medium = supporting names, sequence, who-said-what, quoted phrases. Hard = exact wording, numbers, lists, less-noticed details, multi-part quotes.
 - No two questions may have the same normalized wording (loader rejects duplicates). Vary phrasing; asking the same fact as MC + fill-blank + TF is fine and encouraged.
 - Keep `explanation` short (one sentence) and only where it adds something (why false, or the fuller quote).
+
+## Reference quiz coverage
+`scripts/quiz-bank/mmvs-questions.md` holds the questions from the real MMVS Bible Quiz prep document, per chapter.
+Before finalizing a chapter bank, open that file's section for your chapter and make sure **every fact listed is covered by at least one question** (any type, any level) — ideally by two or three phrased differently. Those are the facts most likely to be asked.
