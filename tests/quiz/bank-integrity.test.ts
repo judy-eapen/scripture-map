@@ -107,8 +107,9 @@ describe('Kings quiz banks match the stored RSV text', () => {
   it('guards the reported 1 Kings 20:15 wording regression', () => {
     const rows = banks.find(bank => bank.book === '1 Kings' && bank.chapter === 20)!.rows.filter(row => row.verse_number === 15)
     expect(rows).toHaveLength(4)
-    expect(rows.every(row => !row.question.includes('“hundred and thirty-two'))).toBe(true)
-    expect(rows.every(row => row.question.includes('two hundred and thirty-two'))).toBe(true)
+    const serialized = JSON.stringify(rows)
+    expect(serialized).not.toContain('“hundred and thirty-two')
+    expect(serialized).toContain('two hundred and thirty-two')
   })
 })
 
