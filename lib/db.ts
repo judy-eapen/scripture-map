@@ -598,16 +598,27 @@ export type QuizChapterSummary = {
 export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
   const supabase = await createClient()
 
-  const [{ data: chapters }, { data: questions }] = await Promise.all([
-    supabase
-      .from('chapters')
-      .select('id, chapter_number, books(name)')
-      .order('chapter_number'),
-    supabase.from('quiz_questions').select('chapter_id, difficulty'),
-  ])
+  const { data: chapters } = await supabase
+    .from('chapters')
+    .select('id, chapter_number, books(name)')
+    .order('chapter_number')
+
+  // Supabase caps responses at 1,000 rows by default. Page through the full
+  // bank so every chapter gets an accurate question count.
+  const questions: { chapter_id: string; difficulty: number | null }[] = []
+  const pageSize = 1000
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from('quiz_questions')
+      .select('chapter_id, difficulty')
+      .range(from, from + pageSize - 1)
+    if (error) break
+    questions.push(...(data ?? []))
+    if (!data || data.length < pageSize) break
+  }
 
   const counts = new Map<string, { 1: number; 2: number; 3: number; total: number }>()
-  for (const q of questions ?? []) {
+  for (const q of questions) {
     const c = counts.get(q.chapter_id) ?? { 1: 0, 2: 0, 3: 0, total: 0 }
     const d = (q.difficulty ?? 1) as 1 | 2 | 3
     c[d] += 1

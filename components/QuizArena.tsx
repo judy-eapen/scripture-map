@@ -47,6 +47,7 @@ function saveLocalStats(chapterId: string, stats: StatsMap) {
 export default function QuizArena({ chapters, isAuthenticated, progress: initialProgress }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [progress, setProgress] = useState(initialProgress);
+  const [selectedChapterId, setSelectedChapterId] = useState<string | null>(null);
   const [chapter, setChapter] = useState<QuizChapterSummary | null>(null);
   const [mode, setMode] = useState<SessionMode | 'review'>('session');
   const [drillOpen, setDrillOpen] = useState<string | null>(null);
@@ -181,6 +182,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
 
   // ==================================================================== SETUP
   if (phase === 'setup') {
+    const selectedChapter = withQuestions.find(ch => ch.id === selectedChapterId) ?? null;
     return (
       <>
         <div className="mb-8">
@@ -199,9 +201,42 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
 
         {withQuestions.length === 0 ? (
           <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
+        ) : !selectedChapter ? (
+          <div className="space-y-8">
+            {(['1 Kings', '2 Kings'] as const).map(bookName => (
+              <section key={bookName}>
+                <h2 className="text-lg font-medium mb-3" style={{ color: 'var(--ivory-100)' }}>{bookName}</h2>
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+                  {withQuestions.filter(ch => ch.bookName === bookName).map(ch => {
+                    const hasProgress = (progress[ch.id]?.attempted ?? 0) > 0;
+                    return (
+                      <button
+                        key={ch.id}
+                        onClick={() => setSelectedChapterId(ch.id)}
+                        className="rounded-xl px-2 py-3 text-center transition-colors"
+                        style={hasProgress ? goldBtn : card}
+                        aria-label={`${bookName} chapter ${ch.chapterNumber}, ${ch.counts.total} questions`}
+                      >
+                        <span className="block text-base font-medium" style={{ color: hasProgress ? 'var(--gold-300)' : 'var(--ivory-100)' }}>{ch.chapterNumber}</span>
+                        <span className="block text-[10px] mt-0.5" style={{ color: 'var(--muted-500)' }}>{ch.counts.total} Qs</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
+          </div>
         ) : (
+          <div>
+            <button
+              onClick={() => { setSelectedChapterId(null); setDrillOpen(null); setConfirmReset(null); }}
+              className="mb-4 text-sm"
+              style={{ color: 'var(--gold-300)' }}
+            >
+              ← Choose another chapter
+            </button>
           <div className="space-y-3">
-            {withQuestions.map(ch => {
+            {[selectedChapter].map(ch => {
               const p = progress[ch.id];
               const total = ch.counts.total;
               const mastered = p?.mastered ?? 0;
@@ -285,6 +320,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
                 </div>
               );
             })}
+          </div>
           </div>
         )}
       </>
