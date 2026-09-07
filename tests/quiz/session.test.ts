@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank } from '../../lib/quiz-session'
+import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank, poolRemaining } from '../../lib/quiz-session'
 import type { QuizQuestion } from '../../lib/types'
 
 const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
@@ -57,5 +57,10 @@ describe('mastery + priority', () => {
     expect(priorityRank(undefined)).toBe(0)
     expect(priorityRank(stats[pool[1].id])).toBe(1)
     expect(priorityRank(stats[pool[0].id])).toBe(2)
+    expect(poolRemaining(pool, stats)).toBe(11) // 12 total, one currently out
+    // a later wrong answer puts it back in the pool
+    stats = applyAnswer(stats, pool[0].id, false)
+    expect(poolRemaining(pool, stats)).toBe(12)
+    expect(computeMastery(pool, stats).mastered).toBe(0)
   })
 })

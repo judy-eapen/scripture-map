@@ -6,7 +6,7 @@ import type { QuizQuestion, QuizType } from '@/lib/types';
 import type { QuizChapterSummary } from '@/lib/db';
 import { displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, DIFFICULTY_LABEL, TYPE_LABEL } from '@/lib/quiz-grading';
 import {
-  applyAnswer, buildSession, computeMastery, verseHref, priorityRank,
+  applyAnswer, buildSession, computeMastery, verseHref, priorityRank, poolRemaining,
   SESSION_SIZE, QUICK_SIZE, type StatsMap, type SessionMode,
 } from '@/lib/quiz-session';
 import {
@@ -217,17 +217,20 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
                         {total} questions · Easy {ch.counts[1]} · Medium {ch.counts[2]} · Hard {ch.counts[3]}
                       </p>
                     </div>
-                    {p && (
-                      <div className="text-right shrink-0">
-                        <p className="text-sm font-semibold" style={{ color: 'var(--gold-300)' }}>{pct}% mastered</p>
-                        <p className="text-xs" style={{ color: 'var(--muted-500)' }}>{p.correctAnswers} right · {p.wrongAnswers} wrong</p>
-                      </div>
-                    )}
+                    <div className="text-right shrink-0">
+                      <p className="text-sm font-semibold" style={{ color: 'var(--gold-300)' }}>{total - mastered} left in the pool</p>
+                      <p className="text-xs" style={{ color: 'var(--muted-500)' }}>
+                        {p ? `${mastered} out · ${p.correctAnswers} right · ${p.wrongAnswers} wrong` : `${total} to master`}
+                      </p>
+                    </div>
                   </div>
-                  {/* mastery bar */}
-                  <div className="h-1.5 rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                  {/* pool bar: gold = taken out of the pool */}
+                  <div className="h-1.5 rounded-full mb-1.5" style={{ background: 'rgba(255,255,255,0.06)' }} title={`${pct}% of the pool cleared`}>
                     <div className="h-1.5 rounded-full transition-all" style={{ width: `${pct}%`, background: 'var(--gold-400)' }} />
                   </div>
+                  <p className="text-[11px] mb-4" style={{ color: 'var(--muted-500)' }}>
+                    Right answers take a question out of the pool · wrong answers put it back
+                  </p>
 
                   <div className="flex flex-wrap gap-2">
                     {open && (
@@ -318,14 +321,15 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
           )}
           <div className="mt-6 text-left">
             <div className="flex items-center justify-between text-xs mb-1.5" style={{ color: 'var(--muted-400)' }}>
-              <span>Chapter mastery</span>
-              <span style={{ color: 'var(--gold-300)' }}>{m.mastered} of {m.total} · {masteryPct}%</span>
+              <span>Question pool</span>
+              <span style={{ color: 'var(--gold-300)' }}>{m.total - m.mastered} of {m.total} left · {masteryPct}% cleared</span>
             </div>
             <div className="h-2 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }}>
               <div className="h-2 rounded-full transition-all" style={{ width: `${masteryPct}%`, background: 'var(--gold-400)' }} />
             </div>
             <p className="text-xs mt-2" style={{ color: 'var(--muted-500)' }}>
-              {m.correctAnswers} right · {m.wrongAnswers} wrong overall · {unseen} never seen · {m.toReview} to review
+              This {mode === 'quick' ? 'round' : 'session'}: {answered.filter(a => a.correct).length} taken out · {missed.length} back in the pool
+              {' · '}Overall: {m.correctAnswers} right · {m.wrongAnswers} wrong · {unseen} never seen
               {!isAuthenticated && ' · sign in to keep this'}
             </p>
           </div>
@@ -386,7 +390,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
     <div>
       <div className="flex items-center justify-between mb-3 text-xs" style={{ color: 'var(--muted-500)' }}>
         <span>{chapter?.bookName} {chapter?.chapterNumber} · {DIFFICULTY_LABEL[current.difficulty]}</span>
-        <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span></span>
+        <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span> · <span data-testid="pool-count" style={{ color: 'var(--gold-300)' }}>Pool {poolRemaining(pool, stats)} / {pool.length}</span></span>
       </div>
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
         <div className="h-1 rounded-full transition-all" style={{ width: `${(answeredCount / round.length) * 100}%`, background: 'var(--gold-400)' }} />
@@ -436,7 +440,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
       {revealed && (
         <div className="rounded-2xl px-5 py-4 mb-4 text-sm" style={lastCorrect ? { ...okStyle, color: undefined } : { ...badStyle, color: undefined }}>
           <p className="font-medium mb-1" style={{ color: lastCorrect ? '#34d399' : '#f87171' }}>
-            {lastCorrect ? 'Correct' : `Not quite — the answer is “${displayAnswer(current)}”`}
+            {lastCorrect ? 'Correct — out of the pool' : `Not quite — the answer is “${displayAnswer(current)}”. Back in the pool.`}
           </p>
           {current.explanation && <p style={{ color: 'var(--muted-400)' }}>{current.explanation}</p>}
           {current.verse_ref && chapter && (

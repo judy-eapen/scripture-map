@@ -75,8 +75,8 @@ export async function getQuizProgress(): Promise<Record<string, ChapterProgress>
     c.attempted += 1
     c.correctAnswers += s.correct
     c.wrongAnswers += s.wrong
-    if (s.correct > 0) c.mastered += 1
-    if (!s.last) c.toReview += 1
+    if (s.last) c.mastered += 1
+    else c.toReview += 1
   }
   for (const o of sessions ?? []) {
     ensure(o.chapter_id).openSession = { id: o.id, chapterId: o.chapter_id, mode: o.mode as SessionMode, questionIds: o.question_ids, position: o.position, correctCount: o.correct_count }

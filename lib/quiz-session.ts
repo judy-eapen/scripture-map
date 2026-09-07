@@ -43,7 +43,7 @@ export function priorityRank(stat: QuestionStat | undefined): 0 | 1 | 2 {
 export type ChapterMastery = {
   total: number
   attempted: number
-  mastered: number // answered correctly at least once
+  mastered: number // currently OUT of the pool: last answer was right
   toReview: number // last answer wrong
   correctAnswers: number
   wrongAnswers: number
@@ -62,7 +62,7 @@ export function computeMastery(pool: QuizQuestion[], stats: StatsMap): ChapterMa
     m.attempted += 1
     m.correctAnswers += s.correct
     m.wrongAnswers += s.wrong
-    if (s.correct > 0) { m.mastered += 1; m.byLevel[q.difficulty].mastered += 1 }
+    if (s.lastCorrect === true) { m.mastered += 1; m.byLevel[q.difficulty].mastered += 1 }
     if (s.lastCorrect === false) m.toReview += 1
   }
   return m
@@ -156,6 +156,11 @@ export function buildSession(pool: QuizQuestion[], stats: StatsMap, opts: Sessio
     picked.push(...dealBalanced(inScope.filter(q => !taken.has(q.id)), opts.size - picked.length, stats))
   }
   return picked.sort((a, b) => a.difficulty - b.difficulty)
+}
+
+/** Questions still in the pool: never seen, or answered wrong last time. Right answers take a question out; wrong answers put it back. */
+export function poolRemaining(pool: QuizQuestion[], stats: StatsMap): number {
+  return pool.filter(q => stats[q.id]?.lastCorrect !== true).length
 }
 
 export function verseHref(bookSlug: string, chapterNumber: number, verseNumber: number | null): string {
