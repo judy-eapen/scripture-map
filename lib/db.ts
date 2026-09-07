@@ -583,3 +583,52 @@ export async function getTimelineKings(): Promise<TimelineKing[]> {
     }))
     .sort((a, b) => a.reign_start_bc - b.reign_start_bc)
 }
+
+// ---------------------------------------------------------------------------
+// Quiz landing page: every chapter with its question counts by difficulty
+// ---------------------------------------------------------------------------
+export type QuizChapterSummary = {
+  id: string
+  bookSlug: '1-kings' | '2-kings'
+  bookName: string
+  chapterNumber: number
+  counts: { 1: number; 2: number; 3: number; total: number }
+}
+
+export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
+  const supabase = await createClient()
+
+  const [{ data: chapters }, { data: questions }] = await Promise.all([
+    supabase
+      .from('chapters')
+      .select('id, chapter_number, books(name)')
+      .order('chapter_number'),
+    supabase.from('quiz_questions').select('chapter_id, difficulty'),
+  ])
+
+  const counts = new Map<string, { 1: number; 2: number; 3: number; total: number }>()
+  for (const q of questions ?? []) {
+    const c = counts.get(q.chapter_id) ?? { 1: 0, 2: 0, 3: 0, total: 0 }
+    const d = (q.difficulty ?? 1) as 1 | 2 | 3
+    c[d] += 1
+    c.total += 1
+    counts.set(q.chapter_id, c)
+  }
+
+  type Row = { id: string; chapter_number: number; books: { name: string } | { name: string }[] | null }
+  const rows = (chapters ?? []) as unknown as Row[]
+
+  return rows
+    .map(ch => {
+      const book = Array.isArray(ch.books) ? ch.books[0] : ch.books
+      const bookName = book?.name ?? ''
+      return {
+        id: ch.id,
+        bookSlug: (bookName === '1 Kings' ? '1-kings' : '2-kings') as '1-kings' | '2-kings',
+        bookName,
+        chapterNumber: ch.chapter_number,
+        counts: counts.get(ch.id) ?? { 1: 0, 2: 0, 3: 0, total: 0 },
+      }
+    })
+    .sort((a, b) => a.bookName.localeCompare(b.bookName) || a.chapterNumber - b.chapterNumber)
+}

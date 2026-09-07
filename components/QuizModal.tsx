@@ -53,7 +53,7 @@ export default function QuizModal({
   useEffect(() => {
     async function load() {
       // Fetch questions via API route
-      const res = await fetch(`/api/quiz/${chapterId}`);
+      const res = await fetch(`/api/quiz/${chapterId}?types=multiple_choice`);
       if (!res.ok) {
         setState(s => ({ ...s, phase: 'complete' }));
         return;
@@ -225,7 +225,7 @@ export default function QuizModal({
 
               {/* Options */}
               <div className="space-y-2.5">
-                {current.options.map((option, i) => {
+                {(current.options ?? []).map((option, i) => {
                   const isSelected = state.selectedAnswer === i;
                   const isCorrect = i === current.correct_index;
                   const revealed = state.phase === 'revealed';

@@ -105,11 +105,25 @@ export type NeighboringNation = {
   key_rulers: { name: string; years: string; note: string }[];
 };
 
+export type QuizType = 'multiple_choice' | 'fill_blank' | 'one_word' | 'true_false';
+export type QuizDifficulty = 1 | 2 | 3;
+
 export type QuizQuestion = {
   id: string;
+  type: QuizType;
+  difficulty: QuizDifficulty;
   question: string;
-  options: string[];
-  correct_index: number;
+  /** multiple_choice only (4 options) */
+  options: string[] | null;
+  /** multiple_choice only */
+  correct_index: number | null;
+  /** fill_blank / one_word / true_false: canonical answer ('true' | 'false' for true_false) */
+  answer: string | null;
+  /** extra spellings accepted for fill_blank / one_word */
+  accepted_answers: string[];
+  /** e.g. "1 Kings 1:39" */
+  verse_ref: string | null;
+  verse_number: number | null;
   explanation: string;
 };
 
