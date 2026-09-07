@@ -143,3 +143,9 @@ html, body {
 .leaflet-tooltip.kingdom-label::before {
   display: none !important;
 }
+
+/* Quiz review deep-link: briefly highlight the verse the learner missed */
+.verse-anchor.verse-flash {
+  background: rgba(201, 168, 76, 0.14);
+  box-shadow: 0 0 0 6px rgba(201, 168, 76, 0.14);
+}

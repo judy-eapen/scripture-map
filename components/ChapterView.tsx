@@ -37,6 +37,21 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const isResizing = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Deep link: /study/1-kings/1#v39 scrolls to verse 39 and highlights it briefly (used by quiz review links)
+  useEffect(() => {
+    const m = window.location.hash.match(/^#v(\d+)$/);
+    if (!m) return;
+    const el = document.getElementById(`v${m[1]}`);
+    if (!el) return;
+    // scroll now, and again once the map / fonts have settled the layout
+    const center = () => el.scrollIntoView({ block: 'center' });
+    center();
+    const again = [300, 1200].map(ms => setTimeout(center, ms));
+    el.classList.add('verse-flash');
+    const t = setTimeout(() => el.classList.remove('verse-flash'), 4500);
+    return () => { clearTimeout(t); again.forEach(clearTimeout); };
+  }, []);
+
   const startResize = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     isResizing.current = true;

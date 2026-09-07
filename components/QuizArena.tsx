@@ -1,281 +1,284 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { QuizQuestion } from '@/lib/types';
+import Link from 'next/link';
+import type { QuizQuestion, QuizType } from '@/lib/types';
 import type { QuizChapterSummary } from '@/lib/db';
+import { displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, DIFFICULTY_LABEL, TYPE_LABEL } from '@/lib/quiz-grading';
 import {
-  buildRound, countRemaining, displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse,
-  DIFFICULTY_LABEL, TYPE_LABEL,
-} from '@/lib/quiz-grading';
-import type { QuizType } from '@/lib/types';
+  applyAnswer, buildSession, computeMastery, verseHref, priorityRank,
+  SESSION_SIZE, QUICK_SIZE, type StatsMap, type SessionMode,
+} from '@/lib/quiz-session';
+import {
+  getChapterStats, createSession, recordAnswer, abandonSession, resetChapterProgress,
+  type ChapterProgress, type OpenSession,
+} from '@/app/actions/quiz';
 import { saveQuizScore } from '@/app/actions/progress';
 
-type Difficulty = 1 | 2 | 3 | 'mixed';
-type TypeFilter = 'all' | QuizType;
-
-const TYPE_ICON: Record<QuizType, string> = {
-  multiple_choice: 'ⓐ',
-  fill_blank: '▁',
-  one_word: '✎',
-  true_false: '✓✗',
-};
-const TYPE_ORDER: QuizType[] = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'];
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete';
+type Level = 1 | 2 | 3 | 'mixed';
+type TypeFilter = 'all' | QuizType;
+type Answered = { q: QuizQuestion; correct: boolean; given: string };
 
-type Props = { chapters: QuizChapterSummary[]; isAuthenticated: boolean };
-
-const ROUND_SIZE = 10;
-const PASS_MARK = 70;
-const seenKey = (chapterId: string) => `quiz2_seen_${chapterId}`;
-
-type SeenMap = Record<string, number>; // question id -> difficulty
-
-function loadSeenMap(chapterId: string): SeenMap {
-  try {
-    const raw = sessionStorage.getItem(seenKey(chapterId));
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    // migrate old array format
-    if (Array.isArray(parsed)) return Object.fromEntries(parsed.map((id: string) => [id, 0]));
-    return parsed as SeenMap;
-  } catch { return {}; }
-}
-function loadSeen(chapterId: string): Set<string> {
-  return new Set(Object.keys(loadSeenMap(chapterId)));
-}
-function saveSeenMap(chapterId: string, seen: SeenMap) {
-  try { sessionStorage.setItem(seenKey(chapterId), JSON.stringify(seen)); } catch { /* ignore */ }
-}
-function seenCountAt(chapterId: string, diff: Difficulty): number {
-  return Object.values(loadSeenMap(chapterId)).filter(d => diff === 'mixed' || d === diff).length;
-}
-/** Forget seen questions for one chapter at one level (or all levels when mixed). */
-function clearSeenAt(chapterId: string, diff: Difficulty) {
-  const seen = loadSeenMap(chapterId);
-  for (const [id, d] of Object.entries(seen)) if (diff === 'mixed' || d === diff) delete seen[id];
-  saveSeenMap(chapterId, seen);
-}
-
-const card: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.07)',
-};
-const goldBtn: React.CSSProperties = {
-  background: 'rgba(201,168,76,0.14)',
-  border: '1px solid rgba(201,168,76,0.35)',
-  color: 'var(--gold-300)',
-};
-const ghostBtn: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.04)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  color: 'var(--muted-400)',
+type Props = {
+  chapters: QuizChapterSummary[];
+  isAuthenticated: boolean;
+  progress: Record<string, ChapterProgress>;
 };
 
-export default function QuizArena({ chapters, isAuthenticated }: Props) {
+const TYPE_ICON: Record<QuizType, string> = { multiple_choice: 'ⓐ', fill_blank: '▁', one_word: '✎', true_false: '✓✗' };
+const TYPE_ORDER: QuizType[] = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'];
+
+const card: React.CSSProperties = { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' };
+const goldBtn: React.CSSProperties = { background: 'rgba(201,168,76,0.14)', border: '1px solid rgba(201,168,76,0.35)', color: 'var(--gold-300)' };
+const ghostBtn: React.CSSProperties = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--muted-400)' };
+const okStyle: React.CSSProperties = { background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.4)', color: '#34d399' };
+const badStyle: React.CSSProperties = { background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.35)', color: '#f87171' };
+
+// Signed-out fallback: keep history in this tab only
+const localKey = (chapterId: string) => `quiz3_stats_${chapterId}`;
+function loadLocalStats(chapterId: string): StatsMap {
+  try { return JSON.parse(sessionStorage.getItem(localKey(chapterId)) ?? '{}'); } catch { return {}; }
+}
+function saveLocalStats(chapterId: string, stats: StatsMap) {
+  try { sessionStorage.setItem(localKey(chapterId), JSON.stringify(stats)); } catch { /* ignore */ }
+}
+
+export default function QuizArena({ chapters, isAuthenticated, progress: initialProgress }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
+  const [progress, setProgress] = useState(initialProgress);
   const [chapter, setChapter] = useState<QuizChapterSummary | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>(1);
-  const [typeFilter, setTypeFilter] = useState<TypeFilter>('all');
-  // bump to re-read sessionStorage after a refresh
-  const [, setSeenVersion] = useState(0);
+  const [mode, setMode] = useState<SessionMode | 'review'>('session');
+  const [drillOpen, setDrillOpen] = useState<string | null>(null);
+  const [drillLevel, setDrillLevel] = useState<Level>('mixed');
+  const [drillType, setDrillType] = useState<TypeFilter>('all');
+  const [confirmReset, setConfirmReset] = useState<string | null>(null);
+
   const [pool, setPool] = useState<QuizQuestion[]>([]);
+  const [stats, setStats] = useState<StatsMap>({});
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [round, setRound] = useState<QuizQuestion[]>([]);
   const [index, setIndex] = useState(0);
-  const [results, setResults] = useState<boolean[]>([]);
+  const [priorCorrect, setPriorCorrect] = useState(0); // from a resumed session
+  const [answered, setAnswered] = useState<Answered[]>([]);
   const [lastCorrect, setLastCorrect] = useState<boolean | null>(null);
-  const [scoreSaved, setScoreSaved] = useState(false);
-
-  // per-question input state
   const [choice, setChoice] = useState<number | null>(null);
   const [typed, setTyped] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const withQuestions = useMemo(() => chapters.filter(c => c.counts.total > 0), [chapters]);
   const current = round[index];
+  const revealed = phase === 'revealed';
 
-  // Autofocus the text field on typed questions
   useEffect(() => {
-    if (phase === 'question' && (current?.type === 'fill_blank' || current?.type === 'one_word')) {
-      inputRef.current?.focus();
-    }
+    if (phase === 'question' && (current?.type === 'fill_blank' || current?.type === 'one_word')) inputRef.current?.focus();
   }, [phase, current]);
 
+  // ------------------------------------------------------------ data loading
   async function loadPool(ch: QuizChapterSummary): Promise<QuizQuestion[]> {
     const res = await fetch(`/api/quiz/${ch.id}`);
-    if (!res.ok) return [];
-    return (await res.json()) as QuizQuestion[];
+    return res.ok ? ((await res.json()) as QuizQuestion[]) : [];
+  }
+  async function loadStats(ch: QuizChapterSummary): Promise<{ stats: StatsMap; openSession: OpenSession | null }> {
+    if (isAuthenticated) return getChapterStats(ch.id);
+    return { stats: loadLocalStats(ch.id), openSession: null };
   }
 
-  function startRound(qs: QuizQuestion[], ch: QuizChapterSummary, diff: Difficulty) {
-    const seen = loadSeen(ch.id);
-    const r = buildRound(qs, diff, seen, ROUND_SIZE, typeFilter === 'all' ? 'all' : [typeFilter]);
-    setRound(r);
-    setIndex(0);
-    setResults([]);
-    setChoice(null);
-    setTyped('');
-    setLastCorrect(null);
-    setScoreSaved(false);
-    setPhase(r.length ? 'question' : 'complete');
+  function startRound(qs: QuizQuestion[], startIndex = 0, prior = 0, sid: string | null = null) {
+    setRound(qs); setIndex(startIndex); setPriorCorrect(prior); setSessionId(sid);
+    setAnswered([]); setChoice(null); setTyped(''); setLastCorrect(null);
+    setPhase(qs.length ? 'question' : 'complete');
   }
 
-  async function begin(ch: QuizChapterSummary, diff: Difficulty) {
-    setChapter(ch);
-    setDifficulty(diff);
-    setPhase('loading');
-    const qs = await loadPool(ch);
-    setPool(qs);
-    startRound(qs, ch, diff);
+  async function begin(ch: QuizChapterSummary, m: SessionMode | 'review', drill?: { level: Level; type: TypeFilter }) {
+    setChapter(ch); setMode(m); setPhase('loading');
+    const [qs, { stats: st }] = await Promise.all([loadPool(ch), loadStats(ch)]);
+    setPool(qs); setStats(st);
+
+    let picked: QuizQuestion[];
+    if (m === 'review') {
+      picked = buildSession(qs.filter(q => priorityRank(st[q.id]) === 1), st, { size: SESSION_SIZE, difficulty: 'mixed', types: 'all' });
+    } else if (m === 'drill' && drill) {
+      picked = buildSession(qs, st, { size: QUICK_SIZE, difficulty: drill.level, types: drill.type === 'all' ? 'all' : [drill.type] });
+    } else {
+      picked = buildSession(qs, st, { size: m === 'quick' ? QUICK_SIZE : SESSION_SIZE, difficulty: 'adaptive', types: 'all' });
+    }
+    const sid = isAuthenticated && picked.length ? await createSession(ch.id, m === 'review' ? 'drill' : m, picked.map(q => q.id)) : null;
+    startRound(picked, 0, 0, sid);
   }
 
-  function remainingAt(diff: Difficulty): number {
-    if (!chapter) return 0;
-    return countRemaining(pool, diff, loadSeen(chapter.id), typeFilter === 'all' ? 'all' : [typeFilter]).remaining;
+  async function resume(ch: QuizChapterSummary, open: OpenSession) {
+    setChapter(ch); setMode(open.mode); setPhase('loading');
+    const [qs, { stats: st }] = await Promise.all([loadPool(ch), loadStats(ch)]);
+    setPool(qs); setStats(st);
+    const byId = new Map(qs.map(q => [q.id, q]));
+    const ordered = open.questionIds.map(id => byId.get(id)).filter((q): q is QuizQuestion => !!q);
+    if (open.position >= ordered.length) { // nothing left — treat as complete
+      await abandonSession(open.id);
+      return quit();
+    }
+    startRound(ordered, open.position, open.correctCount, open.id);
   }
 
-  /** Forget which questions were seen at this level so they can all be asked again. */
-  function refreshLevel(diff: Difficulty = difficulty) {
-    if (!chapter) return;
-    clearSeenAt(chapter.id, diff);
-    setSeenVersion(v => v + 1);
-  }
-
+  // ------------------------------------------------------------- answering
   function submit() {
     if (!current || !chapter) return;
-    let ok = false;
-    if (current.type === 'multiple_choice') {
-      if (choice === null) return;
-      ok = gradeMultipleChoice(current, choice);
-    } else if (current.type === 'true_false') {
-      if (choice === null) return;
-      ok = gradeTrueFalse(current, choice === 1);
-    } else {
-      if (!typed.trim()) return;
-      ok = gradeText(current, typed);
-    }
-    const seen = loadSeenMap(chapter.id);
-    seen[current.id] = current.difficulty;
-    saveSeenMap(chapter.id, seen);
-    setResults(r => [...r, ok]);
+    let ok = false, given = '';
+    if (current.type === 'multiple_choice') { if (choice === null) return; ok = gradeMultipleChoice(current, choice); given = current.options?.[choice] ?? ''; }
+    else if (current.type === 'true_false') { if (choice === null) return; ok = gradeTrueFalse(current, choice === 1); given = choice === 1 ? 'True' : 'False'; }
+    else { if (!typed.trim()) return; ok = gradeText(current, typed); given = typed.trim(); }
+
+    const nextStats = applyAnswer(stats, current.id, ok);
+    setStats(nextStats);
+    const nextAnswered = [...answered, { q: current, correct: ok, given }];
+    setAnswered(nextAnswered);
     setLastCorrect(ok);
     setPhase('revealed');
+
+    const position = index + 1;
+    const correctCount = priorCorrect + nextAnswered.filter(a => a.correct).length;
+    const completed = position >= round.length;
+    if (isAuthenticated) {
+      recordAnswer({ sessionId, chapterId: chapter.id, questionId: current.id, correct: ok, givenAnswer: given, position, correctCount, completed }).catch(() => {});
+    } else {
+      saveLocalStats(chapter.id, nextStats);
+    }
   }
 
   function next() {
+    if (!chapter) return;
     if (index + 1 >= round.length) {
-      // Persist best score once per completed round (same user_progress field the chapter page reads)
-      if (chapter && isAuthenticated && !scoreSaved && round.length > 0) {
-        const finalPct = Math.round((results.filter(Boolean).length / round.length) * 100);
-        setScoreSaved(true);
-        saveQuizScore(chapter.id, finalPct, chapter.bookSlug, chapter.chapterNumber).catch(() => {});
+      const correctCount = priorCorrect + answered.filter(a => a.correct).length;
+      if (isAuthenticated) {
+        saveQuizScore(chapter.id, Math.round((correctCount / round.length) * 100), chapter.bookSlug, chapter.chapterNumber).catch(() => {});
+        const m = computeMastery(pool, stats);
+        setProgress(p => ({ ...p, [chapter.id]: { chapterId: chapter.id, attempted: m.attempted, mastered: m.mastered, toReview: m.toReview, correctAnswers: m.correctAnswers, wrongAnswers: m.wrongAnswers, openSession: null } }));
       }
       setPhase('complete');
       return;
     }
-    setIndex(i => i + 1);
-    setChoice(null);
-    setTyped('');
-    setLastCorrect(null);
-    setPhase('question');
+    setIndex(i => i + 1); setChoice(null); setTyped(''); setLastCorrect(null); setPhase('question');
   }
 
-  function resetSession() {
-    if (!chapter) return;
-    refreshLevel();
-    startRound(pool, chapter, difficulty);
+  function quit() {
+    if (chapter && isAuthenticated && sessionId && phase !== 'complete') {
+      // keep it resumable: refresh the card's open-session marker
+      setProgress(p => ({
+        ...p,
+        [chapter.id]: { ...(p[chapter.id] ?? { chapterId: chapter.id, attempted: 0, mastered: 0, toReview: 0, correctAnswers: 0, wrongAnswers: 0 }),
+          openSession: { id: sessionId, chapterId: chapter.id, mode: mode === 'review' ? 'drill' : mode, questionIds: round.map(q => q.id), position: index + (phase === 'revealed' ? 1 : 0), correctCount: priorCorrect + answered.filter(a => a.correct).length } },
+      }));
+    }
+    setPhase('setup');
   }
 
-  const correctCount = results.filter(Boolean).length;
-  const pct = round.length ? Math.round((correctCount / round.length) * 100) : 0;
+  async function doReset(ch: QuizChapterSummary) {
+    if (isAuthenticated) await resetChapterProgress(ch.id);
+    else saveLocalStats(ch.id, {});
+    setProgress(p => { const n = { ...p }; delete n[ch.id]; return n; });
+    setConfirmReset(null);
+  }
 
-
-  // ------------------------------------------------------------------ setup
+  // ==================================================================== SETUP
   if (phase === 'setup') {
     return (
       <>
         <div className="mb-8">
-          <h1 className="text-3xl font-medium mb-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>
-            Quiz
-          </h1>
+          <h1 className="text-3xl font-medium mb-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Quiz</h1>
           <p className="text-sm" style={{ color: 'var(--muted-400)' }}>
-            Pick a chapter and a level. Questions come straight from the text: multiple choice,
-            fill in the blank from the exact verse, one-word answers, and true or false.
+            Every question comes straight from the chapter text. A session is {SESSION_SIZE} questions that ramp from Easy to Hard
+            and mix multiple choice, fill in the blank, one-word answers, and true or false. You never see a question again until
+            you have seen every other one, and the ones you miss come back first.
           </p>
+          {!isAuthenticated && (
+            <p className="text-xs mt-3 px-3 py-2 rounded-lg" style={{ ...goldBtn, display: 'inline-block' }}>
+              <Link href="/login" className="underline underline-offset-2">Sign in</Link> to save your progress across visits and devices.
+            </p>
+          )}
         </div>
 
-        <p className="text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--muted-500)' }}>Level</p>
-        <div className="grid grid-cols-4 gap-2 mb-8">
-          {([1, 2, 3, 'mixed'] as Difficulty[]).map(d => {
-            const active = difficulty === d;
-            return (
-              <button key={String(d)} onClick={() => setDifficulty(d)}
-                className="rounded-xl px-3 py-2.5 text-sm font-medium transition-all"
-                style={active ? goldBtn : ghostBtn}>
-                {d === 'mixed' ? 'Mixed' : DIFFICULTY_LABEL[d]}
-              </button>
-            );
-          })}
-        </div>
-
-        <p className="text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--muted-500)' }}>Question types</p>
-        <div className="flex flex-wrap gap-2 mb-8">
-          {(['all', ...TYPE_ORDER] as TypeFilter[]).map(t => {
-            const active = typeFilter === t;
-            return (
-              <button key={t} onClick={() => setTypeFilter(t)}
-                className="rounded-full px-3.5 py-1.5 text-xs font-medium transition-all"
-                style={active ? goldBtn : ghostBtn}>
-                {t === 'all' ? 'All four types' : `${TYPE_ICON[t]} ${TYPE_LABEL[t]}`}
-              </button>
-            );
-          })}
-        </div>
-        {typeFilter === 'all' && (
-          <p className="text-xs -mt-6 mb-8" style={{ color: 'var(--muted-500)' }}>
-            Every round mixes all four types. Pick one type to drill it on its own.
-          </p>
-        )}
-
-        <p className="text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--muted-500)' }}>Chapter</p>
         {withQuestions.length === 0 ? (
-          <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>
-            No quiz questions loaded yet.
-          </div>
+          <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {withQuestions.map(ch => {
-              const n = difficulty === 'mixed' ? ch.counts.total : ch.counts[difficulty];
-              const seenN = Math.min(seenCountAt(ch.id, difficulty), n);
-              const disabled = n === 0;
-              const allSeen = !disabled && seenN >= n;
+              const p = progress[ch.id];
+              const total = ch.counts.total;
+              const mastered = p?.mastered ?? 0;
+              const pct = total ? Math.round((mastered / total) * 100) : 0;
+              const open = p?.openSession ?? null;
+              const isDrill = drillOpen === ch.id;
               return (
-                <div key={ch.id} className="rounded-2xl transition-all" style={{ ...card, opacity: disabled ? 0.4 : 1 }}>
-                  <div className="flex items-center gap-3 px-5 py-4">
-                    <button disabled={disabled} onClick={() => begin(ch, difficulty)} className="flex-1 text-left min-w-0">
-                      <p className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>
-                        {ch.bookName} {ch.chapterNumber}
-                      </p>
+                <div key={ch.id} className="rounded-2xl px-5 py-4" style={card}>
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>{ch.bookName} {ch.chapterNumber}</p>
                       <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>
-                        Easy {ch.counts[1]} · Medium {ch.counts[2]} · Hard {ch.counts[3]}
-                        {seenN > 0 && <span> · <span style={{ color: allSeen ? 'var(--gold-400)' : undefined }}>{seenN} of {n} seen</span></span>}
+                        {total} questions · Easy {ch.counts[1]} · Medium {ch.counts[2]} · Hard {ch.counts[3]}
                       </p>
+                    </div>
+                    {p && (
+                      <div className="text-right shrink-0">
+                        <p className="text-sm font-semibold" style={{ color: 'var(--gold-300)' }}>{pct}% mastered</p>
+                        <p className="text-xs" style={{ color: 'var(--muted-500)' }}>{p.correctAnswers} right · {p.wrongAnswers} wrong</p>
+                      </div>
+                    )}
+                  </div>
+                  {/* mastery bar */}
+                  <div className="h-1.5 rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                    <div className="h-1.5 rounded-full transition-all" style={{ width: `${pct}%`, background: 'var(--gold-400)' }} />
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {open && (
+                      <button onClick={() => resume(ch, open)} className="rounded-xl px-4 py-2 text-sm font-medium" style={goldBtn}>
+                        ▶ Resume · {open.position}/{open.questionIds.length}
+                      </button>
+                    )}
+                    <button onClick={() => begin(ch, 'session')} className="rounded-xl px-4 py-2 text-sm font-medium" style={open ? ghostBtn : goldBtn}>
+                      {open ? 'New session' : 'Start session'} · {SESSION_SIZE}
                     </button>
-                    <div className="flex items-center gap-2 shrink-0">
-                      {seenN > 0 && (
-                        <button
-                          onClick={() => { clearSeenAt(ch.id, difficulty); setSeenVersion(v => v + 1); }}
-                          title="Forget which questions you have seen at this level"
-                          className="text-xs font-medium px-2.5 py-1 rounded-full"
-                          style={allSeen ? goldBtn : ghostBtn}>
-                          ↻ Refresh
-                        </button>
-                      )}
-                      <button disabled={disabled} onClick={() => begin(ch, difficulty)}
-                        className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>
-                        {disabled ? 'None at this level' : allSeen ? 'Start over' : `${n - seenN} left`}
+                    <button onClick={() => begin(ch, 'quick')} className="rounded-xl px-4 py-2 text-sm font-medium" style={ghostBtn}>Quick · {QUICK_SIZE}</button>
+                    {(p?.toReview ?? 0) > 0 && (
+                      <button onClick={() => begin(ch, 'review')} className="rounded-xl px-4 py-2 text-sm font-medium" style={badStyle}>
+                        Review {p!.toReview} missed
+                      </button>
+                    )}
+                    <button onClick={() => setDrillOpen(isDrill ? null : ch.id)} className="rounded-xl px-3 py-2 text-xs" style={ghostBtn}>
+                      {isDrill ? 'Hide drill' : 'Drill a level or type'}
+                    </button>
+                    {p && (confirmReset === ch.id ? (
+                      <span className="flex items-center gap-2 text-xs ml-auto">
+                        <span style={{ color: '#f87171' }}>Erase all progress for this chapter?</span>
+                        <button onClick={() => doReset(ch)} className="px-2.5 py-1 rounded-full" style={badStyle}>Yes, erase</button>
+                        <button onClick={() => setConfirmReset(null)} className="px-2.5 py-1 rounded-full" style={ghostBtn}>Cancel</button>
+                      </span>
+                    ) : (
+                      <button onClick={() => setConfirmReset(ch.id)} className="text-xs ml-auto" style={{ color: 'var(--muted-500)' }}>Reset progress</button>
+                    ))}
+                  </div>
+
+                  {isDrill && (
+                    <div className="mt-4 pt-4 space-y-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                      <div className="flex flex-wrap gap-2">
+                        {(['mixed', 1, 2, 3] as Level[]).map(l => (
+                          <button key={String(l)} onClick={() => setDrillLevel(l)} className="rounded-full px-3 py-1.5 text-xs font-medium" style={drillLevel === l ? goldBtn : ghostBtn}>
+                            {l === 'mixed' ? 'Any level' : DIFFICULTY_LABEL[l]}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {(['all', ...TYPE_ORDER] as TypeFilter[]).map(t => (
+                          <button key={t} onClick={() => setDrillType(t)} className="rounded-full px-3 py-1.5 text-xs font-medium" style={drillType === t ? goldBtn : ghostBtn}>
+                            {t === 'all' ? 'All types' : `${TYPE_ICON[t]} ${TYPE_LABEL[t]}`}
+                          </button>
+                        ))}
+                      </div>
+                      <button onClick={() => begin(ch, 'drill', { level: drillLevel, type: drillType })} className="rounded-xl px-4 py-2 text-sm font-medium" style={goldBtn}>
+                        Drill {QUICK_SIZE} questions
                       </button>
                     </div>
-                  </div>
+                  )}
                 </div>
               );
             })}
@@ -285,199 +288,180 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
     );
   }
 
-  if (phase === 'loading') {
-    return <div className="h-40 rounded-2xl animate-pulse" style={{ background: 'rgba(255,255,255,0.04)' }} />;
-  }
+  if (phase === 'loading') return <div className="h-40 rounded-2xl animate-pulse" style={{ background: 'rgba(255,255,255,0.04)' }} />;
 
-  // --------------------------------------------------------------- complete
+  // ================================================================= COMPLETE
   if (phase === 'complete') {
-    const nextDiff: Difficulty | null =
-      difficulty === 1 ? 2 : difficulty === 2 ? 3 : null;
-    const canAdvance = nextDiff !== null && pct >= PASS_MARK && remainingAt(nextDiff) > 0;
-    const remainingHere = remainingAt(difficulty);
-    const exhausted = round.length === 0;
+    const correctCount = priorCorrect + answered.filter(a => a.correct).length;
+    const pct = round.length ? Math.round((correctCount / round.length) * 100) : 0;
+    const m = computeMastery(pool, stats);
+    const masteryPct = m.total ? Math.round((m.mastered / m.total) * 100) : 0;
+    const missed = answered.filter(a => !a.correct);
+    const unseen = pool.filter(q => priorityRank(stats[q.id]) === 0).length;
 
     return (
-      <div className="rounded-2xl px-6 py-8 text-center" style={card}>
-        <p className="text-xs uppercase tracking-wider mb-2" style={{ color: 'var(--muted-500)' }}>
-          {chapter?.bookName} {chapter?.chapterNumber} · {difficulty === 'mixed' ? 'Mixed' : DIFFICULTY_LABEL[difficulty]}
-          {chapter && (() => { const c = countRemaining(pool, difficulty, loadSeen(chapter.id), typeFilter === 'all' ? 'all' : [typeFilter]); return ` · ${c.total - c.remaining} of ${c.total} seen`; })()}
-        </p>
-        {exhausted ? (
-          <>
-            <h2 className="text-2xl font-medium mb-3" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>
-              You&apos;ve seen every {difficulty === 'mixed' ? '' : DIFFICULTY_LABEL[difficulty] + ' '}question in this chapter
-            </h2>
-            <p className="text-sm mb-6" style={{ color: 'var(--muted-400)' }}>
-              Nothing repeats until you refresh. Refresh to go through them all again, or move up a level.
+      <div>
+        <div className="rounded-2xl px-6 py-8 text-center mb-4" style={card}>
+          <p className="text-xs uppercase tracking-wider mb-2" style={{ color: 'var(--muted-500)' }}>
+            {chapter?.bookName} {chapter?.chapterNumber} · {mode === 'quick' ? 'Quick' : mode === 'review' ? 'Review' : mode === 'drill' ? 'Drill' : 'Session'}
+          </p>
+          {round.length === 0 ? (
+            <>
+              <h2 className="text-2xl font-medium mb-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Nothing to review</h2>
+              <p className="text-sm" style={{ color: 'var(--muted-400)' }}>You have no missed questions outstanding in this chapter.</p>
+            </>
+          ) : (
+            <>
+              <h2 className="text-4xl font-medium mb-1" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--gold-300)' }}>{pct}%</h2>
+              <p className="text-sm" style={{ color: 'var(--muted-400)' }}>{correctCount} of {round.length} correct this {mode === 'quick' ? 'quick round' : 'session'}</p>
+            </>
+          )}
+          <div className="mt-6 text-left">
+            <div className="flex items-center justify-between text-xs mb-1.5" style={{ color: 'var(--muted-400)' }}>
+              <span>Chapter mastery</span>
+              <span style={{ color: 'var(--gold-300)' }}>{m.mastered} of {m.total} · {masteryPct}%</span>
+            </div>
+            <div className="h-2 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }}>
+              <div className="h-2 rounded-full transition-all" style={{ width: `${masteryPct}%`, background: 'var(--gold-400)' }} />
+            </div>
+            <p className="text-xs mt-2" style={{ color: 'var(--muted-500)' }}>
+              {m.correctAnswers} right · {m.wrongAnswers} wrong overall · {unseen} never seen · {m.toReview} to review
+              {!isAuthenticated && ' · sign in to keep this'}
             </p>
-          </>
-        ) : (
-          <>
-            <h2 className="text-4xl font-medium mb-1" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--gold-300)' }}>
-              {pct}%
-            </h2>
-            <p className="text-sm mb-6" style={{ color: 'var(--muted-400)' }}>
-              {correctCount} of {round.length} correct
-              {isAuthenticated ? '' : ' · sign in to save your best score'}
+          </div>
+        </div>
+
+        {missed.length > 0 && (
+          <div className="rounded-2xl px-5 py-5 mb-4" style={{ ...card, borderColor: 'rgba(239,68,68,0.25)' }}>
+            <p className="text-sm font-medium mb-1" style={{ color: '#f87171' }}>Go back and fix these ({missed.length})</p>
+            <p className="text-xs mb-4" style={{ color: 'var(--muted-500)' }}>
+              Each one links to the verse it comes from. They will come back at the start of your next session.
             </p>
-          </>
+            <ul className="space-y-3">
+              {missed.map(({ q, given }) => (
+                <li key={q.id} className="rounded-xl px-4 py-3" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <p className="text-sm mb-1.5" style={{ color: 'var(--ivory-100)' }}>
+                    {q.type === 'fill_blank' ? q.question.replace(/_{3,}/, `[${displayAnswer(q)}]`) : q.question}
+                  </p>
+                  <p className="text-xs" style={{ color: 'var(--muted-400)' }}>
+                    You said <span style={{ color: '#f87171' }}>“{given.replace(/^["“]|["”]$/g, '') || '—'}”</span> · Answer: <span style={{ color: '#34d399' }}>{displayAnswer(q)}</span>
+                  </p>
+                  {q.explanation && <p className="text-xs mt-1" style={{ color: 'var(--muted-500)' }}>{q.explanation}</p>}
+                  {q.verse_ref && chapter && (
+                    <Link href={verseHref(chapter.bookSlug, chapter.chapterNumber, q.verse_number)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color: 'var(--gold-300)' }}>
+                      Read {q.verse_ref} →
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
-        <div className="flex flex-wrap justify-center gap-2">
-          {canAdvance && nextDiff && (
-            <button onClick={() => chapter && startRoundAt(nextDiff)} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={goldBtn}>
-              Advance to {DIFFICULTY_LABEL[nextDiff]} →
-            </button>
+        <div className="flex flex-wrap gap-2">
+          {chapter && (
+            <>
+              <button onClick={() => begin(chapter, mode === 'quick' ? 'quick' : 'session')} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={goldBtn}>
+                Next {mode === 'quick' ? 'quick round' : 'session'}{unseen > 0 ? ` · ${unseen} new left` : ''}
+              </button>
+              {m.toReview > 0 && (
+                <button onClick={() => begin(chapter, 'review')} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={badStyle}>
+                  Review {m.toReview} missed
+                </button>
+              )}
+            </>
           )}
-          {remainingHere > 0 && (
-            <button onClick={() => chapter && startRound(pool, chapter, difficulty)} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={canAdvance ? ghostBtn : goldBtn}>
-              Shuffle new round ({Math.min(remainingHere, ROUND_SIZE)} left)
-            </button>
-          )}
-          <button onClick={resetSession} className="rounded-xl px-4 py-2.5 text-sm font-medium"
-            style={remainingHere === 0 ? goldBtn : ghostBtn}
-            title="Forget which questions you have seen at this level and start a fresh round">
-            ↻ Refresh {difficulty === 'mixed' ? 'all' : DIFFICULTY_LABEL[difficulty]} questions
-          </button>
-          <button onClick={() => setPhase('setup')} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={ghostBtn}>
-            Change chapter
-          </button>
+          <button onClick={() => setPhase('setup')} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={ghostBtn}>All chapters</button>
         </div>
-        {nextDiff && !canAdvance && !exhausted && pct < PASS_MARK && (
-          <p className="text-xs mt-5" style={{ color: 'var(--muted-500)' }}>
-            Score {PASS_MARK}% or better to unlock {DIFFICULTY_LABEL[nextDiff]}.
-          </p>
-        )}
       </div>
     );
   }
 
-  function startRoundAt(diff: Difficulty) {
-    if (!chapter) return;
-    setDifficulty(diff);
-    startRound(pool, chapter, diff);
-  }
-
-  // --------------------------------------------------------- question/reveal
+  // ========================================================= QUESTION / REVEAL
   if (!current) return null;
-  const revealed = phase === 'revealed';
+  const answeredCount = index + (revealed ? 1 : 0);
+  const runningCorrect = priorCorrect + answered.filter(a => a.correct).length;
 
   return (
     <div>
-      {/* progress */}
-      <div className="flex items-center justify-between mb-4 text-xs" style={{ color: 'var(--muted-500)' }}>
+      <div className="flex items-center justify-between mb-3 text-xs" style={{ color: 'var(--muted-500)' }}>
         <span>{chapter?.bookName} {chapter?.chapterNumber} · {DIFFICULTY_LABEL[current.difficulty]}</span>
-        <span>{index + 1} / {round.length}</span>
+        <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span></span>
       </div>
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
-        <div className="h-1 rounded-full transition-all" style={{ width: `${((index + (revealed ? 1 : 0)) / round.length) * 100}%`, background: 'var(--gold-400)' }} />
+        <div className="h-1 rounded-full transition-all" style={{ width: `${(answeredCount / round.length) * 100}%`, background: 'var(--gold-400)' }} />
       </div>
 
       <div className="rounded-2xl px-6 py-6 mb-4" style={card}>
         <div className="flex items-center gap-2 mb-3">
-          <span data-testid="type-badge" className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>
-            {TYPE_ICON[current.type]} {TYPE_LABEL[current.type]}
-          </span>
-          {current.type === 'fill_blank' && current.verse_ref && (
-            <span className="text-xs" style={{ color: 'var(--muted-500)' }}>{current.verse_ref} · type the missing word(s)</span>
-          )}
+          <span data-testid="type-badge" className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>{TYPE_ICON[current.type]} {TYPE_LABEL[current.type]}</span>
+          {current.type === 'fill_blank' && current.verse_ref && <span className="text-xs" style={{ color: 'var(--muted-500)' }}>{current.verse_ref} · type the missing word(s)</span>}
         </div>
         <p className="text-lg leading-relaxed" style={{ color: 'var(--ivory-100)', fontFamily: current.type === 'fill_blank' ? 'var(--font-playfair)' : undefined }}>
           {current.type === 'fill_blank' ? renderBlank(current.question, revealed ? displayAnswer(current) : null, lastCorrect) : current.question}
         </p>
       </div>
 
-      {/* answer controls */}
       {current.type === 'multiple_choice' && (
         <div className="space-y-2 mb-4">
           {(current.options ?? []).map((opt, i) => {
-            const isPick = choice === i;
-            const isRight = current.correct_index === i;
-            let style: React.CSSProperties = ghostBtn;
-            if (revealed && isRight) style = { background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.4)', color: '#34d399' };
-            else if (revealed && isPick && !isRight) style = { background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.35)', color: '#f87171' };
-            else if (isPick) style = goldBtn;
+            const isPick = choice === i, isRight = current.correct_index === i;
+            const style = revealed && isRight ? okStyle : revealed && isPick ? badStyle : isPick ? goldBtn : ghostBtn;
             return (
-              <button key={i} disabled={revealed} onClick={() => setChoice(i)}
-                className="w-full text-left rounded-xl px-4 py-3 text-sm transition-all" style={style}>
+              <button key={i} disabled={revealed} onClick={() => setChoice(i)} className="w-full text-left rounded-xl px-4 py-3 text-sm transition-all" style={style}>
                 <span className="opacity-50 mr-3">{String.fromCharCode(65 + i)}</span>{opt}
               </button>
             );
           })}
         </div>
       )}
-
       {current.type === 'true_false' && (
         <div className="grid grid-cols-2 gap-2 mb-4">
           {[1, 0].map(v => {
-            const label = v ? 'True' : 'False';
-            const isPick = choice === v;
-            const isRight = (current.answer === 'true') === (v === 1);
-            let style: React.CSSProperties = ghostBtn;
-            if (revealed && isRight) style = { background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.4)', color: '#34d399' };
-            else if (revealed && isPick) style = { background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.35)', color: '#f87171' };
-            else if (isPick) style = goldBtn;
-            return (
-              <button key={v} disabled={revealed} onClick={() => setChoice(v)}
-                className="rounded-xl px-4 py-3 text-sm font-medium transition-all" style={style}>{label}</button>
-            );
+            const isPick = choice === v, isRight = (current.answer === 'true') === (v === 1);
+            const style = revealed && isRight ? okStyle : revealed && isPick ? badStyle : isPick ? goldBtn : ghostBtn;
+            return <button key={v} disabled={revealed} onClick={() => setChoice(v)} className="rounded-xl px-4 py-3 text-sm font-medium transition-all" style={style}>{v ? 'True' : 'False'}</button>;
           })}
         </div>
       )}
-
       {(current.type === 'fill_blank' || current.type === 'one_word') && (
         <form className="mb-4" onSubmit={e => { e.preventDefault(); if (revealed) next(); else submit(); }}>
           <input ref={inputRef} value={typed} disabled={revealed} onChange={e => setTyped(e.target.value)}
-            placeholder={current.type === 'one_word' ? 'One word…' : 'Type the missing word(s)…'}
-            autoComplete="off" autoCapitalize="off" spellCheck={false}
+            placeholder={current.type === 'one_word' ? 'One word…' : 'Type the missing word(s)…'} autoComplete="off" autoCapitalize="off" spellCheck={false}
             className="w-full rounded-xl px-4 py-3 text-sm outline-none"
-            style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: `1px solid ${revealed ? (lastCorrect ? 'rgba(16,185,129,0.5)' : 'rgba(239,68,68,0.5)') : 'rgba(201,168,76,0.3)'}`,
-              color: 'var(--ivory-100)',
-            }} />
+            style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--ivory-100)', border: `1px solid ${revealed ? (lastCorrect ? 'rgba(16,185,129,0.5)' : 'rgba(239,68,68,0.5)') : 'rgba(201,168,76,0.3)'}` }} />
         </form>
       )}
 
-      {/* reveal */}
       {revealed && (
-        <div className="rounded-2xl px-5 py-4 mb-4 text-sm" style={{
-          background: lastCorrect ? 'rgba(16,185,129,0.06)' : 'rgba(239,68,68,0.06)',
-          border: `1px solid ${lastCorrect ? 'rgba(16,185,129,0.25)' : 'rgba(239,68,68,0.25)'}`,
-        }}>
+        <div className="rounded-2xl px-5 py-4 mb-4 text-sm" style={lastCorrect ? { ...okStyle, color: undefined } : { ...badStyle, color: undefined }}>
           <p className="font-medium mb-1" style={{ color: lastCorrect ? '#34d399' : '#f87171' }}>
             {lastCorrect ? 'Correct' : `Not quite — the answer is “${displayAnswer(current)}”`}
           </p>
           {current.explanation && <p style={{ color: 'var(--muted-400)' }}>{current.explanation}</p>}
-          {current.verse_ref && current.type !== 'fill_blank' && (
-            <p className="text-xs mt-2" style={{ color: 'var(--muted-500)' }}>{current.verse_ref}</p>
+          {current.verse_ref && chapter && (
+            <Link href={verseHref(chapter.bookSlug, chapter.chapterNumber, current.verse_number)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color: lastCorrect ? 'var(--muted-500)' : 'var(--gold-300)' }}>
+              {lastCorrect ? current.verse_ref : `Read ${current.verse_ref} to fix this →`}
+            </Link>
           )}
         </div>
       )}
 
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <button onClick={() => setPhase('setup')} className="text-xs" style={{ color: 'var(--muted-500)' }}>Quit</button>
-          <button onClick={resetSession} className="text-xs" style={{ color: 'var(--muted-500)' }}
-            title="Forget which questions you have seen at this level and start a fresh round">↻ Refresh questions</button>
-        </div>
+        <button onClick={quit} className="text-xs" style={{ color: 'var(--muted-500)' }}>
+          {isAuthenticated && sessionId ? 'Save & exit' : 'Quit'}
+        </button>
         {revealed ? (
-          <button onClick={next} className="rounded-xl px-5 py-2.5 text-sm font-medium" style={goldBtn}>
-            {index + 1 >= round.length ? 'See results' : 'Next →'}
-          </button>
+          <button onClick={next} className="rounded-xl px-5 py-2.5 text-sm font-medium" style={goldBtn}>{index + 1 >= round.length ? 'See results' : 'Next →'}</button>
         ) : (
           <button onClick={submit} className="rounded-xl px-5 py-2.5 text-sm font-medium" style={goldBtn}
-            disabled={current.type === 'fill_blank' || current.type === 'one_word' ? !typed.trim() : choice === null}>
-            Check
-          </button>
+            disabled={current.type === 'fill_blank' || current.type === 'one_word' ? !typed.trim() : choice === null}>Check</button>
         )}
       </div>
     </div>
   );
 }
 
-/** Render "…found _____ the Shunammite" with the blank as a highlighted slot. */
 function renderBlank(text: string, answer: string | null, correct: boolean | null) {
   const parts = text.split(/_{3,}/);
   return parts.map((p, i) => (
@@ -485,11 +469,7 @@ function renderBlank(text: string, answer: string | null, correct: boolean | nul
       {p}
       {i < parts.length - 1 && (
         <span className="inline-block min-w-[6ch] px-2 mx-0.5 rounded border-b-2 text-center"
-          style={{
-            borderColor: answer ? (correct ? '#34d399' : '#f87171') : 'var(--gold-400)',
-            color: answer ? (correct ? '#34d399' : '#f87171') : 'transparent',
-            background: 'rgba(201,168,76,0.06)',
-          }}>
+          style={{ borderColor: answer ? (correct ? '#34d399' : '#f87171') : 'var(--gold-400)', color: answer ? (correct ? '#34d399' : '#f87171') : 'transparent', background: 'rgba(201,168,76,0.06)' }}>
           {answer ?? '_____'}
         </span>
       )}

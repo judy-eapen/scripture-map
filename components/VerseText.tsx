@@ -162,7 +162,7 @@ export default function VerseText({
         const callouts = difficultPassages.filter(p => p.verse_start === verse.verse_number);
         const verseCallbacks = callbacksByVerse.get(verse.verse_number) ?? []
         return (
-          <div key={verse.verse_number}>
+          <div key={verse.verse_number} id={`v${verse.verse_number}`} className="verse-anchor rounded-lg transition-colors">
             <p className="flex gap-3 leading-relaxed">
               {/* Verse number — clickable to add/edit note */}
               <button
