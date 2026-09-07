@@ -49,11 +49,15 @@ function validate(bank: ChapterBank, verses: Array<{ verse_number: number; text:
       errors.push(`${where} — missing answer`);
     }
     if (r.type === 'true_false' && r.answer !== 'true' && r.answer !== 'false') errors.push(`${where} — answer must be true/false`);
-    if (r.type === 'fill_blank') {
-      if (!/_{3,}/.test(r.question)) errors.push(`${where} — no blank (_____) in question`);
+    const quotedBlank = r.question.match(/[“\"]([^“”\"]*_{3,}[^“”\"]*)[”\"]/)?.[1];
+    const isQuotedVerseCompletion = /(?:completes? this RSV wording|what word completes this phrase)/i.test(r.question);
+    if (r.type === 'fill_blank' || ((r.type === 'one_word' || r.type === 'multiple_choice') && quotedBlank && isQuotedVerseCompletion)) {
+      if (r.type === 'fill_blank' && !/_{3,}/.test(r.question)) errors.push(`${where} — no blank (_____) in question`);
       const v = byVerse.get(r.verse_number);
       if (v) {
-        const rebuilt = norm(r.question.replace(/_{3,}/, r.answer ?? ''));
+        const quoted = quotedBlank ?? r.question;
+        const canonical = r.type === 'multiple_choice' ? r.options?.[0] ?? '' : r.answer ?? '';
+        const rebuilt = norm(quoted.replace(/_{3,}/, canonical));
         if (!norm(v).includes(rebuilt)) errors.push(`${where} — does not reconstruct to verse ${r.verse_number} text`);
       }
     }

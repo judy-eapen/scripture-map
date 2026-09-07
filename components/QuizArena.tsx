@@ -16,7 +16,7 @@ import {
 import { saveQuizScore } from '@/app/actions/progress';
 import { markSectionForVerse } from '@/lib/mark-sections';
 
-type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete';
+type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete' | 'browse';
 type Level = 1 | 2 | 3 | 'mixed';
 type TypeFilter = 'all' | QuizType;
 type Answered = { q: QuizQuestion; correct: boolean; given: string };
@@ -55,6 +55,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
   const [drillLevel, setDrillLevel] = useState<Level>('mixed');
   const [drillType, setDrillType] = useState<TypeFilter>('all');
   const [confirmReset, setConfirmReset] = useState<string | null>(null);
+  const [browseSearch, setBrowseSearch] = useState('');
 
   const [pool, setPool] = useState<QuizQuestion[]>([]);
   const [stats, setStats] = useState<StatsMap>({});
@@ -120,6 +121,15 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
       return quit();
     }
     startRound(ordered, open.position, open.correctCount, open.id);
+  }
+
+  async function browse(ch: QuizChapterSummary) {
+    setChapter(ch); setPhase('loading'); setBrowseSearch('');
+    const qs = await loadPool(ch);
+    setPool([...qs].sort((a, b) =>
+      (a.verse_number ?? 0) - (b.verse_number ?? 0) || TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || a.question.localeCompare(b.question)
+    ));
+    setPhase('browse');
   }
 
   // ------------------------------------------------------------- answering
@@ -278,6 +288,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
                       {open ? 'New session' : 'Start session'} · {SESSION_SIZE}
                     </button>
                     <button onClick={() => begin(ch, 'quick')} className="rounded-xl px-4 py-2 text-sm font-medium" style={ghostBtn}>Quick · {QUICK_SIZE}</button>
+                    <button onClick={() => browse(ch)} className="rounded-xl px-4 py-2 text-sm font-medium" style={ghostBtn}>Browse question bank</button>
                     {(p?.toReview ?? 0) > 0 && (
                       <button onClick={() => begin(ch, 'review')} className="rounded-xl px-4 py-2 text-sm font-medium" style={badStyle}>
                         Review {p!.toReview} missed
@@ -329,6 +340,40 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
   }
 
   if (phase === 'loading') return <div className="h-40 rounded-2xl animate-pulse" style={{ background: 'rgba(255,255,255,0.04)' }} />;
+
+  if (phase === 'browse' && chapter) {
+    const needle = browseSearch.trim().toLowerCase();
+    const filtered = pool.filter(q => !needle || [q.question, displayAnswer(q), q.verse_ref, q.id, TYPE_LABEL[q.type]].some(value => value?.toLowerCase().includes(needle)));
+    return (
+      <div>
+        <button onClick={() => setPhase('setup')} className="mb-4 text-sm" style={{ color: 'var(--gold-300)' }}>← Back to {chapter.bookName} {chapter.chapterNumber}</button>
+        <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
+          <div>
+            <h2 className="text-2xl font-medium" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Browse question bank</h2>
+            <p className="text-xs mt-1" style={{ color: 'var(--muted-500)' }}>{chapter.bookName} {chapter.chapterNumber} · {pool.length} questions · answers are shown</p>
+          </div>
+          <input value={browseSearch} onChange={e => setBrowseSearch(e.target.value)} placeholder="Search wording, answer, verse, or ID…" className="w-full sm:w-80 rounded-xl px-4 py-2.5 text-sm outline-none" style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--ivory-100)', border: '1px solid rgba(201,168,76,0.25)' }} />
+        </div>
+        <p className="text-xs mb-3" style={{ color: 'var(--muted-500)' }}>{filtered.length} matching question{filtered.length === 1 ? '' : 's'}</p>
+        <div className="space-y-3">
+          {filtered.map(q => {
+            const bankNumber = pool.indexOf(q) + 1;
+            return (
+              <article key={q.id} className="rounded-2xl px-5 py-4" style={card}>
+                <div className="flex flex-wrap items-center gap-2 mb-2 text-xs" style={{ color: 'var(--muted-500)' }}>
+                  <span style={{ color: 'var(--gold-300)' }}>Bank #{bankNumber}</span><span>·</span><span>{q.verse_ref}</span><span>·</span><span>{TYPE_LABEL[q.type]}</span><span>·</span><span>ID {q.id}</span>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--ivory-100)' }}>{q.question}</p>
+                <p className="text-sm mt-2" style={{ color: '#34d399' }}>Answer: {displayAnswer(q)}</p>
+                {q.explanation && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{q.explanation}</p>}
+              </article>
+            );
+          })}
+          {!filtered.length && <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No questions match that search.</div>}
+        </div>
+      </div>
+    );
+  }
 
   // ================================================================= COMPLETE
   if (phase === 'complete') {
@@ -453,6 +498,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
         <span>{chapter?.bookName} {chapter?.chapterNumber} · {DIFFICULTY_LABEL[current.difficulty]}</span>
         <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span> · <span data-testid="pool-count" style={{ color: 'var(--gold-300)' }}>Pool {poolRemaining(pool, stats)} / {pool.length}</span></span>
       </div>
+      <p className="text-[11px] -mt-4 mb-5" style={{ color: 'var(--muted-500)' }}>Support reference: {current.verse_ref} · ID {current.id}</p>
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
         <div className="h-1 rounded-full transition-all" style={{ width: `${(answeredCount / round.length) * 100}%`, background: 'var(--gold-400)' }} />
       </div>
