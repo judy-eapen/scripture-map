@@ -177,6 +177,12 @@ const bank: ChapterBank = {
     word(3, 'How many doors of olivewood were covered with carvings of cherubim, palm trees, and open flowers?', 'two', 32, ['2']),
     tf(3, 'Gold was spread upon the cherubim and upon the palm trees of the olivewood doors.', true, 32),
 
+    // ══════════════════════════════════ v33 · Nave entrance
+    mc(1, 'What kind of wood did Solomon use for the doorposts at the entrance to the nave?', ['Olivewood', 'Cypress', 'Cedar', 'Acacia'], 33),
+    blank(2, 'So also he made for the entrance to the nave doorposts of _____, in the form of a square,', 'olivewood', 33),
+    word(2, 'What shape did the olivewood doorposts at the nave entrance form?', 'square', 33, ['a square']),
+    tf(3, 'The olivewood doorposts at the entrance to the nave were in the form of a pentagon.', false, 33, 'They were in the form of a square.'),
+
     // ══════════════════════════════════ v34–36 · Cypress doors and the inner court
     mc(1, 'The two doors in verse 34 were made of what wood?', ['Cypress wood', 'Olivewood', 'Cedar', 'Oak'], 34),
     word(2, 'Each door of cypress wood had two folding what?', 'leaves', 34, ['leaf']),
