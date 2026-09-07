@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalizeAnswer, gradeText, gradeTrueFalse, buildRound } from '../../lib/quiz-grading'
+import { normalizeAnswer, gradeText, gradeTrueFalse, buildRound, countRemaining } from '../../lib/quiz-grading'
 import type { QuizQuestion } from '../../lib/types'
 
 const base: QuizQuestion = {
@@ -52,5 +52,22 @@ describe('buildRound', () => {
     expect(round).toHaveLength(4)
     const diffs = round.map(q => q.difficulty)
     expect([...diffs].sort()).toEqual(diffs)
+  })
+  it('balances across question types', () => {
+    const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
+    const big: QuizQuestion[] = []
+    types.forEach((t, ti) => { for (let i = 0; i < 8; i++) big.push({ ...base, id: `${t}-${i}`, type: t, difficulty: 1 }) })
+    // heavily skewed: 20 extra multiple choice
+    for (let i = 0; i < 20; i++) big.push({ ...base, id: `mc-extra-${i}`, type: 'multiple_choice', difficulty: 1 })
+    const round = buildRound(big, 1, new Set(), 10)
+    const counts = new Map<string, number>()
+    for (const q of round) counts.set(q.type, (counts.get(q.type) ?? 0) + 1)
+    expect(round).toHaveLength(10)
+    for (const t of types) expect(counts.get(t)).toBeGreaterThanOrEqual(2)
+  })
+  it('honours a type filter and reports remaining', () => {
+    const round = buildRound(pool, 1, new Set(), 10, ['one_word'])
+    expect(round.every(q => q.type === 'one_word')).toBe(true)
+    expect(countRemaining(pool, 1, new Set(['q0']))).toEqual({ remaining: 1, total: 2 })
   })
 })

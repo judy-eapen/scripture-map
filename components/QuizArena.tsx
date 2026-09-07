@@ -4,12 +4,22 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { QuizQuestion } from '@/lib/types';
 import type { QuizChapterSummary } from '@/lib/db';
 import {
-  buildRound, displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse,
+  buildRound, countRemaining, displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse,
   DIFFICULTY_LABEL, TYPE_LABEL,
 } from '@/lib/quiz-grading';
+import type { QuizType } from '@/lib/types';
 import { saveQuizScore } from '@/app/actions/progress';
 
 type Difficulty = 1 | 2 | 3 | 'mixed';
+type TypeFilter = 'all' | QuizType;
+
+const TYPE_ICON: Record<QuizType, string> = {
+  multiple_choice: 'ⓐ',
+  fill_blank: '▁',
+  one_word: '✎',
+  true_false: '✓✗',
+};
+const TYPE_ORDER: QuizType[] = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'];
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete';
 
 type Props = { chapters: QuizChapterSummary[]; isAuthenticated: boolean };
@@ -47,6 +57,9 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [chapter, setChapter] = useState<QuizChapterSummary | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>(1);
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>('all');
+  // bump to re-read sessionStorage after a refresh
+  const [, setSeenVersion] = useState(0);
   const [pool, setPool] = useState<QuizQuestion[]>([]);
   const [round, setRound] = useState<QuizQuestion[]>([]);
   const [index, setIndex] = useState(0);
@@ -77,7 +90,7 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
 
   function startRound(qs: QuizQuestion[], ch: QuizChapterSummary, diff: Difficulty) {
     const seen = loadSeen(ch.id);
-    const r = buildRound(qs, diff, seen, ROUND_SIZE);
+    const r = buildRound(qs, diff, seen, ROUND_SIZE, typeFilter === 'all' ? 'all' : [typeFilter]);
     setRound(r);
     setIndex(0);
     setResults([]);
@@ -99,8 +112,18 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
 
   function remainingAt(diff: Difficulty): number {
     if (!chapter) return 0;
+    return countRemaining(pool, diff, loadSeen(chapter.id), typeFilter === 'all' ? 'all' : [typeFilter]).remaining;
+  }
+
+  /** Forget which questions were seen at this level so they can all be asked again. */
+  function refreshLevel(diff: Difficulty = difficulty) {
+    if (!chapter) return;
     const seen = loadSeen(chapter.id);
-    return pool.filter(q => !seen.has(q.id) && (diff === 'mixed' || q.difficulty === diff)).length;
+    for (const q of pool) {
+      if ((diff === 'mixed' || q.difficulty === diff) && (typeFilter === 'all' || q.type === typeFilter)) seen.delete(q.id);
+    }
+    saveSeen(chapter.id, seen);
+    setSeenVersion(v => v + 1);
   }
 
   function submit() {
@@ -144,7 +167,7 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
 
   function resetSession() {
     if (!chapter) return;
-    saveSeen(chapter.id, new Set());
+    refreshLevel();
     startRound(pool, chapter, difficulty);
   }
 
@@ -179,6 +202,25 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
             );
           })}
         </div>
+
+        <p className="text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--muted-500)' }}>Question types</p>
+        <div className="flex flex-wrap gap-2 mb-8">
+          {(['all', ...TYPE_ORDER] as TypeFilter[]).map(t => {
+            const active = typeFilter === t;
+            return (
+              <button key={t} onClick={() => setTypeFilter(t)}
+                className="rounded-full px-3.5 py-1.5 text-xs font-medium transition-all"
+                style={active ? goldBtn : ghostBtn}>
+                {t === 'all' ? 'All four types' : `${TYPE_ICON[t]} ${TYPE_LABEL[t]}`}
+              </button>
+            );
+          })}
+        </div>
+        {typeFilter === 'all' && (
+          <p className="text-xs -mt-6 mb-8" style={{ color: 'var(--muted-500)' }}>
+            Every round mixes all four types. Pick one type to drill it on its own.
+          </p>
+        )}
 
         <p className="text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--muted-500)' }}>Chapter</p>
         {withQuestions.length === 0 ? (
@@ -232,14 +274,15 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
       <div className="rounded-2xl px-6 py-8 text-center" style={card}>
         <p className="text-xs uppercase tracking-wider mb-2" style={{ color: 'var(--muted-500)' }}>
           {chapter?.bookName} {chapter?.chapterNumber} · {difficulty === 'mixed' ? 'Mixed' : DIFFICULTY_LABEL[difficulty]}
+          {chapter && (() => { const c = countRemaining(pool, difficulty, loadSeen(chapter.id), typeFilter === 'all' ? 'all' : [typeFilter]); return ` · ${c.total - c.remaining} of ${c.total} seen`; })()}
         </p>
         {exhausted ? (
           <>
             <h2 className="text-2xl font-medium mb-3" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>
-              You&apos;ve answered every question at this level
+              You&apos;ve seen every {difficulty === 'mixed' ? '' : DIFFICULTY_LABEL[difficulty] + ' '}question in this chapter
             </h2>
             <p className="text-sm mb-6" style={{ color: 'var(--muted-400)' }}>
-              Nothing repeats within a session. Reset to see them again, or move up a level.
+              Nothing repeats until you refresh. Refresh to go through them all again, or move up a level.
             </p>
           </>
         ) : (
@@ -266,8 +309,8 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
             </button>
           )}
           {remainingHere === 0 && (
-            <button onClick={resetSession} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={ghostBtn}>
-              Reset this level
+            <button onClick={resetSession} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={goldBtn}>
+              ↻ Refresh {difficulty === 'mixed' ? 'all' : DIFFICULTY_LABEL[difficulty]} questions
             </button>
           )}
           <button onClick={() => setPhase('setup')} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={ghostBtn}>
@@ -297,7 +340,7 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
     <div>
       {/* progress */}
       <div className="flex items-center justify-between mb-4 text-xs" style={{ color: 'var(--muted-500)' }}>
-        <span>{chapter?.bookName} {chapter?.chapterNumber} · {DIFFICULTY_LABEL[current.difficulty]} · {TYPE_LABEL[current.type]}</span>
+        <span>{chapter?.bookName} {chapter?.chapterNumber} · {DIFFICULTY_LABEL[current.difficulty]}</span>
         <span>{index + 1} / {round.length}</span>
       </div>
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
@@ -305,9 +348,14 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
       </div>
 
       <div className="rounded-2xl px-6 py-6 mb-4" style={card}>
-        {current.type === 'fill_blank' && current.verse_ref && (
-          <p className="text-xs mb-3" style={{ color: 'var(--gold-400)' }}>{current.verse_ref} · fill in the missing word(s)</p>
-        )}
+        <div className="flex items-center gap-2 mb-3">
+          <span data-testid="type-badge" className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>
+            {TYPE_ICON[current.type]} {TYPE_LABEL[current.type]}
+          </span>
+          {current.type === 'fill_blank' && current.verse_ref && (
+            <span className="text-xs" style={{ color: 'var(--muted-500)' }}>{current.verse_ref} · type the missing word(s)</span>
+          )}
+        </div>
         <p className="text-lg leading-relaxed" style={{ color: 'var(--ivory-100)', fontFamily: current.type === 'fill_blank' ? 'var(--font-playfair)' : undefined }}>
           {current.type === 'fill_blank' ? renderBlank(current.question, revealed ? displayAnswer(current) : null, lastCorrect) : current.question}
         </p>

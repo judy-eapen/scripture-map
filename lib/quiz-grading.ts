@@ -76,18 +76,53 @@ export function shuffle<T>(arr: readonly T[]): T[] {
 
 /**
  * Build a round: questions at the chosen difficulty (or all, when mixed) that
- * have not been seen this session, shuffled, capped at `size`. Mixed rounds
- * are ordered easy → hard so the round itself ramps up.
+ * have not been seen this session, balanced across question types so every
+ * round mixes multiple choice, fill-in-the-blank, one-word and true/false
+ * whenever the pool allows. Capped at `size`. Mixed rounds are ordered
+ * easy → hard so the round itself ramps up.
  */
 export function buildRound(
   pool: QuizQuestion[],
   difficulty: 1 | 2 | 3 | 'mixed',
   seenIds: Set<string>,
-  size = 10
+  size = 10,
+  types: QuizQuestion['type'][] | 'all' = 'all'
 ): QuizQuestion[] {
   const eligible = pool.filter(
-    q => !seenIds.has(q.id) && (difficulty === 'mixed' || q.difficulty === difficulty)
+    q =>
+      !seenIds.has(q.id) &&
+      (difficulty === 'mixed' || q.difficulty === difficulty) &&
+      (types === 'all' || types.includes(q.type))
   )
-  const picked = shuffle(eligible).slice(0, size)
+
+  // Group by type, shuffle each group, then deal round-robin so types interleave.
+  const groups = new Map<QuizQuestion['type'], QuizQuestion[]>()
+  for (const q of shuffle(eligible)) {
+    const g = groups.get(q.type) ?? []
+    g.push(q)
+    groups.set(q.type, g)
+  }
+  const order = shuffle([...groups.keys()])
+  const picked: QuizQuestion[] = []
+  while (picked.length < size && order.some(t => (groups.get(t)?.length ?? 0) > 0)) {
+    for (const t of order) {
+      const g = groups.get(t)
+      if (g && g.length && picked.length < size) picked.push(g.shift()!)
+    }
+  }
+
   return difficulty === 'mixed' ? picked.sort((a, b) => a.difficulty - b.difficulty) : picked
+}
+
+/** How many questions remain unseen for a level (and optional type filter). */
+export function countRemaining(
+  pool: QuizQuestion[],
+  difficulty: 1 | 2 | 3 | 'mixed',
+  seenIds: Set<string>,
+  types: QuizQuestion['type'][] | 'all' = 'all'
+): { remaining: number; total: number } {
+  const inScope = pool.filter(
+    q => (difficulty === 'mixed' || q.difficulty === difficulty) && (types === 'all' || types.includes(q.type))
+  )
+  return { remaining: inScope.filter(q => !seenIds.has(q.id)).length, total: inScope.length }
 }
