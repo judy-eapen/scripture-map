@@ -88,7 +88,9 @@ describe('Kings quiz banks match the stored RSV text', () => {
 
   it('covers all 47 chapters and validates every question through the real grading functions', () => {
     expect(banks).toHaveLength(47)
-    expect(banks.reduce((sum, bank) => sum + bank.rows.length, 0)).toBe(7362)
+    // Guard against accidental question loss while allowing reviewed chapters to
+    // gain additional hand-authored coverage.
+    expect(banks.reduce((sum, bank) => sum + bank.rows.length, 0)).toBeGreaterThanOrEqual(7362)
     for (const bank of banks) {
       const byVerse = new Map((verses[bank.book].get(bank.chapter) ?? []).map(verse => [verse.verse_number, verse.text]))
       expect(byVerse.size, `${bank.book} ${bank.chapter}: chapter text missing`).toBeGreaterThan(0)

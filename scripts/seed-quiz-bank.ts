@@ -137,20 +137,27 @@ async function main() {
 
     const groupKeys = new Set([...oldGroups.keys(), ...nextGroups.keys()]);
     const mismatches = [...groupKeys].filter(groupKey =>
-      (oldGroups.get(groupKey)?.length ?? 0) !== (nextGroups.get(groupKey)?.length ?? 0));
+      (oldGroups.get(groupKey)?.length ?? 0) > (nextGroups.get(groupKey)?.length ?? 0));
     if (mismatches.length) {
       const details = mismatches.map(groupKey =>
         `${groupKey} existing=${oldGroups.get(groupKey)?.length ?? 0} new=${nextGroups.get(groupKey)?.length ?? 0}`);
-      throw new Error(`Refusing to replace question IDs because verse/type counts changed:\n${details.join('\n')}`);
+      throw new Error(`Refusing to delete question IDs because a verse/type group became smaller:\n${details.join('\n')}`);
     }
 
     const updates = [...nextGroups.entries()].flatMap(([groupKey, rows]) =>
-      rows.map((row, index) => ({ ...row, id: oldGroups.get(groupKey)![index].id })));
+      rows.slice(0, oldGroups.get(groupKey)?.length ?? 0)
+        .map((row, index) => ({ ...row, id: oldGroups.get(groupKey)![index].id })));
     for (let i = 0; i < updates.length; i += 100) {
       const upsert = await sb.from('quiz_questions').upsert(updates.slice(i, i + 100), { onConflict: 'id' });
       if (upsert.error) throw upsert.error;
     }
-    console.log(`✓ updated ${updates.length} tagged rows in place; learner question IDs preserved`);
+    const additions = [...nextGroups.entries()].flatMap(([groupKey, rows]) =>
+      rows.slice(oldGroups.get(groupKey)?.length ?? 0));
+    for (let i = 0; i < additions.length; i += 100) {
+      const ins = await sb.from('quiz_questions').insert(additions.slice(i, i + 100));
+      if (ins.error) throw ins.error;
+    }
+    console.log(`✓ updated ${updates.length} tagged rows in place and inserted ${additions.length}; learner question IDs preserved`);
   } else {
     for (let i = 0; i < payload.length; i += 100) {
       const ins = await sb.from('quiz_questions').insert(payload.slice(i, i + 100));
