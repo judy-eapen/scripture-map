@@ -28,14 +28,32 @@ const ROUND_SIZE = 10;
 const PASS_MARK = 70;
 const seenKey = (chapterId: string) => `quiz2_seen_${chapterId}`;
 
-function loadSeen(chapterId: string): Set<string> {
+type SeenMap = Record<string, number>; // question id -> difficulty
+
+function loadSeenMap(chapterId: string): SeenMap {
   try {
     const raw = sessionStorage.getItem(seenKey(chapterId));
-    return new Set(raw ? (JSON.parse(raw) as string[]) : []);
-  } catch { return new Set(); }
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    // migrate old array format
+    if (Array.isArray(parsed)) return Object.fromEntries(parsed.map((id: string) => [id, 0]));
+    return parsed as SeenMap;
+  } catch { return {}; }
 }
-function saveSeen(chapterId: string, seen: Set<string>) {
-  try { sessionStorage.setItem(seenKey(chapterId), JSON.stringify([...seen])); } catch { /* ignore */ }
+function loadSeen(chapterId: string): Set<string> {
+  return new Set(Object.keys(loadSeenMap(chapterId)));
+}
+function saveSeenMap(chapterId: string, seen: SeenMap) {
+  try { sessionStorage.setItem(seenKey(chapterId), JSON.stringify(seen)); } catch { /* ignore */ }
+}
+function seenCountAt(chapterId: string, diff: Difficulty): number {
+  return Object.values(loadSeenMap(chapterId)).filter(d => diff === 'mixed' || d === diff).length;
+}
+/** Forget seen questions for one chapter at one level (or all levels when mixed). */
+function clearSeenAt(chapterId: string, diff: Difficulty) {
+  const seen = loadSeenMap(chapterId);
+  for (const [id, d] of Object.entries(seen)) if (diff === 'mixed' || d === diff) delete seen[id];
+  saveSeenMap(chapterId, seen);
 }
 
 const card: React.CSSProperties = {
@@ -118,11 +136,7 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
   /** Forget which questions were seen at this level so they can all be asked again. */
   function refreshLevel(diff: Difficulty = difficulty) {
     if (!chapter) return;
-    const seen = loadSeen(chapter.id);
-    for (const q of pool) {
-      if ((diff === 'mixed' || q.difficulty === diff) && (typeFilter === 'all' || q.type === typeFilter)) seen.delete(q.id);
-    }
-    saveSeen(chapter.id, seen);
+    clearSeenAt(chapter.id, diff);
     setSeenVersion(v => v + 1);
   }
 
@@ -139,9 +153,9 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
       if (!typed.trim()) return;
       ok = gradeText(current, typed);
     }
-    const seen = loadSeen(chapter.id);
-    seen.add(current.id);
-    saveSeen(chapter.id, seen);
+    const seen = loadSeenMap(chapter.id);
+    seen[current.id] = current.difficulty;
+    saveSeenMap(chapter.id, seen);
     setResults(r => [...r, ok]);
     setLastCorrect(ok);
     setPhase('revealed');
@@ -231,25 +245,38 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
           <div className="space-y-2">
             {withQuestions.map(ch => {
               const n = difficulty === 'mixed' ? ch.counts.total : ch.counts[difficulty];
+              const seenN = Math.min(seenCountAt(ch.id, difficulty), n);
               const disabled = n === 0;
+              const allSeen = !disabled && seenN >= n;
               return (
-                <button key={ch.id} disabled={disabled} onClick={() => begin(ch, difficulty)}
-                  className="w-full text-left rounded-2xl px-5 py-4 transition-all disabled:opacity-40"
-                  style={card}>
-                  <div className="flex items-center justify-between">
-                    <div>
+                <div key={ch.id} className="rounded-2xl transition-all" style={{ ...card, opacity: disabled ? 0.4 : 1 }}>
+                  <div className="flex items-center gap-3 px-5 py-4">
+                    <button disabled={disabled} onClick={() => begin(ch, difficulty)} className="flex-1 text-left min-w-0">
                       <p className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>
                         {ch.bookName} {ch.chapterNumber}
                       </p>
                       <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>
                         Easy {ch.counts[1]} · Medium {ch.counts[2]} · Hard {ch.counts[3]}
+                        {seenN > 0 && <span> · <span style={{ color: allSeen ? 'var(--gold-400)' : undefined }}>{seenN} of {n} seen</span></span>}
                       </p>
+                    </button>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {seenN > 0 && (
+                        <button
+                          onClick={() => { clearSeenAt(ch.id, difficulty); setSeenVersion(v => v + 1); }}
+                          title="Forget which questions you have seen at this level"
+                          className="text-xs font-medium px-2.5 py-1 rounded-full"
+                          style={allSeen ? goldBtn : ghostBtn}>
+                          ↻ Refresh
+                        </button>
+                      )}
+                      <button disabled={disabled} onClick={() => begin(ch, difficulty)}
+                        className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>
+                        {disabled ? 'None at this level' : allSeen ? 'Start over' : `${n - seenN} left`}
+                      </button>
                     </div>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>
-                      {disabled ? 'None at this level' : `${n} questions`}
-                    </span>
                   </div>
-                </button>
+                </div>
               );
             })}
           </div>
@@ -308,11 +335,11 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
               Shuffle new round ({Math.min(remainingHere, ROUND_SIZE)} left)
             </button>
           )}
-          {remainingHere === 0 && (
-            <button onClick={resetSession} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={goldBtn}>
-              ↻ Refresh {difficulty === 'mixed' ? 'all' : DIFFICULTY_LABEL[difficulty]} questions
-            </button>
-          )}
+          <button onClick={resetSession} className="rounded-xl px-4 py-2.5 text-sm font-medium"
+            style={remainingHere === 0 ? goldBtn : ghostBtn}
+            title="Forget which questions you have seen at this level and start a fresh round">
+            ↻ Refresh {difficulty === 'mixed' ? 'all' : DIFFICULTY_LABEL[difficulty]} questions
+          </button>
           <button onClick={() => setPhase('setup')} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={ghostBtn}>
             Change chapter
           </button>
@@ -430,7 +457,11 @@ export default function QuizArena({ chapters, isAuthenticated }: Props) {
       )}
 
       <div className="flex items-center justify-between">
-        <button onClick={() => setPhase('setup')} className="text-xs" style={{ color: 'var(--muted-500)' }}>Quit</button>
+        <div className="flex items-center gap-4">
+          <button onClick={() => setPhase('setup')} className="text-xs" style={{ color: 'var(--muted-500)' }}>Quit</button>
+          <button onClick={resetSession} className="text-xs" style={{ color: 'var(--muted-500)' }}
+            title="Forget which questions you have seen at this level and start a fresh round">↻ Refresh questions</button>
+        </div>
         {revealed ? (
           <button onClick={next} className="rounded-xl px-5 py-2.5 text-sm font-medium" style={goldBtn}>
             {index + 1 >= round.length ? 'See results' : 'Next →'}
