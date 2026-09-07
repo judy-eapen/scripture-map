@@ -44,7 +44,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, isAut
 
       {/* Sidebar — desktop: inline shrink-0; mobile: fixed overlay drawer */}
       <aside
-        className="flex flex-col h-full transition-all duration-300 shrink-0"
+        className="flex flex-col h-full overflow-hidden transition-all duration-300 shrink-0"
         style={{
           width: sidebarOpen ? '272px' : '56px',
           background: 'var(--navy-900)',
@@ -108,7 +108,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, isAut
         )}
 
         {/* Chapter list */}
-        <nav className="flex-1 overflow-y-auto py-2">
+        <nav className="flex-1 min-h-0 overflow-y-auto py-2">
           {navData.map(({ book, chapters }) => {
             const slug = bookSlugs[book];
             const isExpanded = expanded[book];
@@ -188,7 +188,7 @@ export default function ChapterNav({ currentBook, currentChapter, navData, isAut
 
         {/* Nav links */}
         {sidebarOpen && (
-          <div className="p-3 space-y-1" style={{ borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+          <div className="p-3 space-y-1 shrink-0" style={{ borderTop: '1px solid rgba(201,168,76,0.08)' }}>
             {[
               { href: '/timeline', label: 'Kingdom Timeline', icon: <><rect x="3" y="4" width="18" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" /><rect x="3" y="10" width="12" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" /><rect x="3" y="16" width="15" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" /></> },
               { href: '/genealogy', label: 'Dynasty Web', icon: <><circle cx="12" cy="5" r="2" stroke="currentColor" strokeWidth="1.5" /><circle cx="5" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" /><circle cx="19" cy="19" r="2" stroke="currentColor" strokeWidth="1.5" /><path d="M12 7v4M12 11l-7 6M12 11l7 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></> },
