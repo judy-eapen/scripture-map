@@ -3,22 +3,14 @@ import Image from 'next/image'
 import ChapterNav from '@/components/ChapterNav'
 import { createClient } from '@/lib/supabase/server'
 import { defaultNavData, getNavChapters } from '@/lib/db'
-
-const decks = [
-  { chapter: 1, title: 'Prepare the Way', pages: 19, file: '/resources/mark/mark-chapter-1-teacher-slides.pdf' },
-  { chapter: 2, title: 'Jesus Meets People Where They Are', pages: 9, file: '/resources/mark/mark-chapter-2-teacher-slides.pdf' },
-  { chapter: 3, title: 'Courage, Compassion & Calling', pages: 8, file: '/resources/mark/mark-chapter-3-teacher-slides.pdf' },
-  { chapter: 4, title: 'Listen. Grow. Shine. Trust.', pages: 11, file: '/resources/mark/mark-chapter-4-teacher-slides.pdf' },
-  { chapter: 5, title: 'Jesus Brings Peace, Healing & Life', pages: 9, file: '/resources/mark/mark-chapter-5-teacher-slides.pdf' },
-]
+import { MARK_SLIDE_DECKS as decks, markSlideImage } from '@/lib/mark-slides'
 
 export default async function MarkResourcesPage({ searchParams }: { searchParams: Promise<{ chapter?: string; slide?: string }> }) {
   const params = await searchParams
   const requested = Number(params.chapter ?? 1)
   const selected = decks.find(deck => deck.chapter === requested) ?? decks[0]
   const slide = Math.max(1, Math.min(selected.pages, Number(params.slide ?? 1) || 1))
-  const slideNumber = String(slide).padStart(2, '0')
-  const slideImage = `/resources/mark/chapter-${selected.chapter}/slide-${slideNumber}.jpg`
+  const slideImage = markSlideImage(selected, slide)
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   const navData = user ? await getNavChapters(user.id) : defaultNavData()

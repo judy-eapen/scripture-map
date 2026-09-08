@@ -22,6 +22,8 @@ import { STORY_MAP_DATA } from '@/lib/story-map-data';
 import QuizModal from '@/components/QuizModal';
 import type { VerseNote } from '@/lib/types';
 import { QUIZ_ENABLED } from '@/lib/flags';
+import MarkSlidesPanel from '@/components/MarkSlidesPanel';
+import { markSlideDeck } from '@/lib/mark-slides';
 
 type Props = {
   chapter: ChapterData;
@@ -34,6 +36,7 @@ type Props = {
 export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes = [] }: Props) {
   // Resizable map panel
   const [mapWidth, setMapWidth] = useState(500);
+  const mapWidthBeforeSlides = useRef(500);
   const isResizing = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -81,6 +84,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [quizKey, setQuizKey] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mobileMapOpen, setMobileMapOpen] = useState(false);
+  const [slidesOpen, setSlidesOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(1);
   // Only mount MapPanel when container is visible — Leaflet crashes in display:none containers
   const [isLargeScreen, setIsLargeScreen] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches);
   useEffect(() => {
@@ -129,6 +134,22 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const chapterTitle = `${chapter.book} · Ch. ${chapter.chapter_number}`;
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
   const totalChapters = chapter.book === '1 Kings' ? 22 : chapter.book === '2 Kings' ? 25 : 16;
+  const slideDeck = chapter.book === 'Mark' ? markSlideDeck(chapter.chapter_number) : undefined;
+
+  function openSlides() {
+    setCurrentSlide(1);
+    setSlidesOpen(true);
+    setMobileMapOpen(false);
+    if (isLargeScreen) {
+      mapWidthBeforeSlides.current = mapWidth;
+      setMapWidth(width => Math.max(width, 620));
+    }
+  }
+
+  function closeSlides() {
+    setSlidesOpen(false);
+    if (isLargeScreen) setMapWidth(mapWidthBeforeSlides.current);
+  }
 
   return (
     <div ref={containerRef} className="flex overflow-hidden h-screen-safe" style={{ background: 'var(--navy-950)' }}>
@@ -288,6 +309,19 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                   <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
+            )}
+
+            {slideDeck && (
+              <button onClick={openSlides}
+                className="w-full flex items-center gap-3 rounded-xl px-4 py-3 mb-4 text-left transition-all"
+                style={{ background: slidesOpen ? 'rgba(201,168,76,0.12)' : 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.22)' }}>
+                <span className="text-lg leading-none">▣</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold" style={{ color: 'var(--gold-300)' }}>Teacher Slides</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>{slideDeck.title} · {slideDeck.pages} slides</p>
+                </div>
+                <span className="text-xs" style={{ color: 'var(--gold-300)' }}>{slidesOpen ? 'Open →' : 'View →'}</span>
+              </button>
             )}
 
             {/* People in this chapter */}
@@ -490,22 +524,31 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           </div>
         )}
 
-        {/* Right panel — map. Only mounted on large screens; Leaflet crashes in display:none containers */}
+        {/* Right panel — teacher slides temporarily replace the map. */}
         {isLargeScreen && (
           <div className="shrink-0 flex flex-col overflow-hidden"
             style={{ width: `${mapWidth}px`, borderLeft: '1px solid rgba(255,255,255,0.06)', isolation: 'isolate' }}>
-            <MapPanel
-              places={chapter.places}
-              activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
-              chapterTitle={chapterTitle}
-              ancientLabel={chapter.book === 'Mark' ? 'Ancient (1st century AD)' : 'Ancient (~870 BC)'}
-              onPlaceClick={place => setActiveCard({ type: 'place', place })}
-            />
+            {slidesOpen && slideDeck ? (
+              <MarkSlidesPanel deck={slideDeck} slide={currentSlide} onSlideChange={setCurrentSlide} onClose={closeSlides} />
+            ) : (
+              <MapPanel
+                places={chapter.places}
+                activePlaceId={activeCard?.type === 'place' ? activeCard.place.id : undefined}
+                chapterTitle={chapterTitle}
+                ancientLabel={chapter.book === 'Mark' ? 'Ancient (1st century AD)' : 'Ancient (~870 BC)'}
+                onPlaceClick={place => setActiveCard({ type: 'place', place })}
+              />
+            )}
           </div>
         )}
       </main>
 
       {/* Modals */}
+      {!isLargeScreen && slidesOpen && slideDeck && (
+        <div className="fixed inset-0 z-[70]" style={{ background: 'var(--navy-950)' }}>
+          <MarkSlidesPanel deck={slideDeck} slide={currentSlide} onSlideChange={setCurrentSlide} onClose={closeSlides} />
+        </div>
+      )}
       {activeCard?.type === 'person' && (
         <CharacterCardModal
           person={activeCard.person}
