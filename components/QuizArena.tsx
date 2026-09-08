@@ -218,7 +218,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           <h1 className="text-3xl font-medium mb-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Quiz</h1>
           <p className="text-sm" style={{ color: 'var(--muted-400)' }}>
             Every question comes straight from the chapter text. A session is {SESSION_SIZE} questions that ramp from Easy to Hard
-            and mix multiple choice, fill in the blank, one-word answers, and true or false. You never see a question again until
+            and mix multiple choice, fill in the blank, short answers, and true or false. You never see a question again until
             you have seen every other one, and the ones you miss come back first.
           </p>
           {!isAuthenticated && (
