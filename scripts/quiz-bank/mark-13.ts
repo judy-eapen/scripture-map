@@ -1,4 +1,41 @@
-// Mark 13 — NKJV/Orthodox Study Bible verse-anchored quiz bank.
-import { buildMarkBank } from './mark-builder';
-
-export default buildMarkBank(13);
+import { mc, blank, word, tf, type ChapterBank } from './types';
+const bank: ChapterBank = { book: 'Mark', chapter: 13, tag: 'quiz-v2-mark-13', rows: [
+mc(1,'What did a disciple admire as Jesus left the temple?',['Its stones and buildings','Its treasury offerings','Its priests’ robes','Its fig trees'],1),blank(2,'Teacher, see what manner of stones and what _____ are here!','buildings',1),
+word(1,'What would remain stacked in the great buildings?','not one stone upon another',2,['no stone upon another']),tf(3,'Jesus predicted that the temple buildings would remain intact.',false,2,'He said every stone would be thrown down.'),
+mc(2,'Which four disciples questioned Jesus privately?',['Peter, James, John, and Andrew','Philip, Thomas, Matthew, and Simon','Judas, Thaddaeus, James, and Bartholomew','All twelve together'],3),blank(1,'He sat on the Mount of Olives _____ the temple','opposite',3),
+word(2,'What two things did the disciples ask to know?','when these things would happen and their sign',4,['the time and the sign']),tf(3,'The disciples asked their questions publicly in the temple.',false,4,'They asked privately on the Mount of Olives.'),
+mc(1,'What was Jesus’ first warning?',['Do not be deceived','Flee immediately','Build stronger walls','Seek a sign'],5),blank(2,'Take heed that no one _____ you.','deceives',5),
+word(2,'What claim would many make in Jesus’ name?','I am He',6),tf(1,'Jesus said false claimants would deceive many.',true,6),
+mc(1,'How should disciples react to wars and rumors of wars?',['Do not be troubled','Assume the end has arrived','Join every conflict','Flee to the temple'],7),blank(3,'such things must happen, but the _____ is not yet.','end',7),
+word(3,'What did Jesus call wars, earthquakes, famines, and troubles?','the beginnings of sorrows',8,['beginnings of sorrows']),tf(1,'Jesus predicted earthquakes in various places.',true,8),
+mc(2,'Why would followers be brought before rulers and kings?',['For Jesus’ sake as a testimony','For refusing to pay taxes','To admire the temple','To choose a new apostle'],9),blank(1,'you will be beaten in the _____.','synagogues',9),
+word(1,'To whom must the gospel first be preached?','all the nations',10),tf(3,'The gospel was to remain limited to Judea.',false,10,'It must be preached to all nations.'),
+mc(2,'Who would speak through arrested disciples?',['The Holy Spirit','Their lawyers','The rulers','The doorkeeper'],11),blank(3,'do not worry beforehand, or _____ what you will speak.','premeditate',11),
+word(2,'Whom would a brother betray?','his brother',12),tf(1,'Jesus warned that children would rise against parents.',true,12),
+mc(1,'Who will be saved amid hatred?',['The one who endures to the end','The one who hides first','Anyone claiming to be Christ','Only the rulers'],13),blank(2,'you will be hated by all for My name’s _____.','sake',13),
+word(3,'Which prophet spoke of the abomination of desolation?','Daniel',14),tf(1,'Those in Judea were told to flee to the mountains.',true,14),
+mc(1,'What should someone on the housetop avoid doing?',['Going inside to take belongings','Watching for the master','Praying for the flight','Looking toward the mountains'],15),blank(2,'not go down into the house, nor enter to take _____ out of his house.','anything',15),
+word(2,'What should a person in the field not return for?','his clothes',16,['clothes']),tf(2,'People in the field were told to return home for clothing.',false,16,'They were told not to go back.'),
+mc(2,'For whom did Jesus pronounce particular woe?',['Pregnant women and nursing mothers','Temple builders','Roman rulers','The Twelve only'],17),blank(1,'woe to those who are pregnant and to those who are _____ babies','nursing',17),
+word(1,'In what season should they pray their flight will not occur?','winter',18),tf(3,'Jesus instructed them to pray that the flight would be in winter.',false,18,'They should pray it would not be in winter.'),
+mc(2,'How severe would the coming tribulation be?',['Unmatched since creation','Less severe than past troubles','Limited to one household','Only a rumor of war'],19),blank(3,'there will be _____, such as has not been since the beginning','tribulation',19),
+word(2,'For whose sake were the days shortened?','the elect',20,['the elect’s sake']),tf(1,'No flesh would be saved unless the Lord shortened those days.',true,20),
+mc(1,'How should disciples respond to claims that Christ is here or there?',['Do not believe them','Run toward them','Ask for a sign','Tell every nation'],21),blank(2,'Look, here is the Christ! or, Look, He is there! do not _____ it.','believe',21),
+word(3,'Whom would false christs and prophets try to deceive?','even the elect',22,['the elect']),tf(1,'False prophets would show signs and wonders.',true,22),
+mc(1,'Why could the disciples take heed?',['Jesus had told them beforehand','The angels gave them a date','The rulers would protect them','The temple would stand'],23),blank(2,'I have told you all things _____.','beforehand',23),
+word(2,'What will happen to the sun after the tribulation?','it will be darkened',24,['darkened']),tf(3,'The moon will shine more brightly in those days.',false,24,'It will not give its light.'),
+mc(2,'What will happen to heaven’s stars and powers?',['Stars will fall and powers will be shaken','They will remain unchanged','They will announce the exact hour','They will gather the elect'],25),blank(1,'the powers in the heavens will be _____.','shaken',25),
+word(1,'How will the Son of Man come?','in the clouds with great power and glory',26,['in the clouds']),tf(3,'The Son of Man’s coming will be hidden and powerless.',false,26,'He comes with great power and glory.'),
+mc(1,'Who will gather the elect from the four winds?',['The Son of Man’s angels','The temple priests','False prophets','The disciples alone'],27),blank(3,'gather together His elect from the four _____.','winds',27),
+word(2,'What season does a tender, leafing fig branch indicate?','summer',28),tf(1,'The fig tree provides an illustration of recognizing nearness.',true,28),
+mc(2,'Where did Jesus say the approaching event was?',['At the doors','In a far country','Only in heaven','Inside the temple'],29),blank(1,'know that it is near—at the _____!','doors',29),
+word(1,'What would not pass before all these things occurred?','this generation',30),tf(3,'Jesus said that generation would certainly pass before any event occurred.',false,30,'It would not pass until all took place.'),
+mc(1,'What will never pass away?',['Jesus’ words','Heaven and earth','The temple stones','The present generation'],31),blank(2,'Heaven and earth will pass away, but My _____ will by no means pass away.','words',31),
+word(3,'Who alone knows the day and hour?','the Father',32,['Father']),tf(1,'Even the angels in heaven do not know the day and hour.',true,32),
+mc(2,'What three commands did Jesus give because the time is unknown?',['Take heed, watch, and pray','Run, hide, and sleep','Build, store, and wait','Teach, baptize, and sail'],33),blank(3,'Take heed, watch and _____','pray',33),
+word(2,'Who was specifically commanded to watch in the household comparison?','the doorkeeper',34),tf(1,'Each servant received authority and assigned work.',true,34),
+mc(3,'Which four possible arrival times did Jesus name?',['Evening, midnight, rooster-crowing, or morning','Noon, afternoon, sunset, or dawn','Spring, summer, autumn, or winter','First, second, third, or fourth year'],35),blank(1,'you do not know when the _____ of the house is coming','master',35),
+word(1,'What must the master not find the servants doing?','sleeping',36),tf(3,'A sudden arrival would always give the servants time to prepare.',false,36,'He might come suddenly.'),
+mc(1,'To whom did Jesus extend His final command to watch?',['Everyone','Only Peter','Only the doorkeeper','Only the four questioners'],37),blank(2,'what I say to you, I say to all: _____!','Watch',37),
+]};
+export default bank;
