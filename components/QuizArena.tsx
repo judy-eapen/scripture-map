@@ -232,7 +232,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
         ) : !selectedChapter ? (
           <div className="space-y-8">
-            {collectionSources.map(collection => {
+            {collectionSources.filter(collection => collection.counts.total > 0).map(collection => {
               const p = progress[collection.id];
               return (
                 <section key={collection.id} className="rounded-2xl px-5 py-5" style={{ ...card, borderColor: 'rgba(201,168,76,0.38)', background: 'rgba(201,168,76,0.06)' }}>

@@ -10,6 +10,7 @@ for (const line of fs.readFileSync(path.resolve('.env.local'), 'utf8').split('\n
   if (!process.env[key]) process.env[key] = content
 }
 const dry = process.argv.includes('--dry')
+const retireDraft = process.argv.includes('--retire-draft')
 const norm = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 
 function shuffled(options: string[]) {
@@ -57,6 +58,17 @@ async function main() {
 
   const { data: collection, error: collectionError } = await supabase.from('quiz_collections').select('id').eq('slug', bank.slug).single()
   if (collectionError || !collection) throw new Error('Apply supabase/migrations/012_comprehensive_quizzes.sql before loading this bank')
+  if (retireDraft) {
+    const { count, error } = await supabase
+      .from('quiz_questions')
+      .delete({ count: 'exact' })
+      .eq('collection_id', collection.id)
+      .eq('tag', bank.tag)
+    if (error) throw error
+    console.log(`Retired ${count ?? 0} draft All of Kings questions. Chapter quizzes and their progress were untouched.`)
+    return
+  }
+  if (bank.status === 'draft') throw new Error('Refusing to publish: the All of Kings bank is still marked as a draft')
 
   const payload = bank.rows.map((row: ComprehensiveRow) => {
     const result = {

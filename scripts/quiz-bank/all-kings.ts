@@ -91,5 +91,5 @@ const synthesisRows: ComprehensiveRow[] = [
 
 export const rows: ComprehensiveRow[] = [...connectedRows, ...synthesisRows]
 
-const bank = { slug: 'all-kings', tag: 'all-kings-v1', rows }
+const bank = { slug: 'all-kings', tag: 'all-kings-v1', status: 'draft' as const, rows }
 export default bank
