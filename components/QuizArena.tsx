@@ -28,6 +28,7 @@ type Props = {
   isAuthenticated: boolean;
   allowAdminBrowse: boolean;
   progress: Record<string, ChapterProgress>;
+  initialBook?: string;
 };
 
 type QuizSource = QuizChapterSummary & {
@@ -55,7 +56,7 @@ function saveLocalStats(chapterId: string, stats: StatsMap) {
   try { sessionStorage.setItem(localKey(chapterId), JSON.stringify(stats)); } catch { /* ignore */ }
 }
 
-export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, progress: initialProgress }: Props) {
+export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, progress: initialProgress, initialBook }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [progress, setProgress] = useState(initialProgress);
   const [selectedChapterId, setSelectedChapterId] = useState<string | null>(null);
@@ -66,6 +67,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   const [drillType, setDrillType] = useState<TypeFilter>('all');
   const [confirmReset, setConfirmReset] = useState<string | null>(null);
   const [browseSearch, setBrowseSearch] = useState('');
+  const [bookFilter, setBookFilter] = useState(initialBook ?? chapters[0]?.bookSlug ?? '');
 
   const [pool, setPool] = useState<QuizQuestion[]>([]);
   const [stats, setStats] = useState<StatsMap>({});
@@ -90,6 +92,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   const withQuestions = useMemo(() => [...collectionSources, ...chapterSources].filter(c => c.counts.total > 0), [collectionSources, chapterSources]);
   const current = round[index];
   const revealed = phase === 'revealed';
+  const bookTabs = useMemo(() => Array.from(new Map(chapters.map(ch => [ch.bookSlug, ch.bookName])).entries()), [chapters]);
 
   useEffect(() => {
     if (phase === 'question' && (current?.type === 'fill_blank' || current?.type === 'one_word')) inputRef.current?.focus();
@@ -230,11 +233,18 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           )}
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Quiz books">
+          {collectionSources.filter(collection => collection.slug === 'all-kings' || collection.title === 'All of Kings').map(collection => (
+            <button key={collection.id} role="tab" aria-selected={bookFilter === 'all-kings'} onClick={() => { setBookFilter('all-kings'); setSelectedChapterId(null); }} className="rounded-full px-3.5 py-2 text-xs font-medium" style={bookFilter === 'all-kings' ? goldBtn : ghostBtn}>All of Kings</button>
+          ))}
+          {bookTabs.map(([slug, name]) => <button key={slug} role="tab" aria-selected={bookFilter === slug} onClick={() => { setBookFilter(slug); setSelectedChapterId(null); }} className="rounded-full px-3.5 py-2 text-xs font-medium" style={bookFilter === slug ? goldBtn : ghostBtn}>{name}</button>)}
+        </div>
+
         {withQuestions.length === 0 ? (
           <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
         ) : !selectedChapter ? (
           <div className="space-y-8">
-            {collectionSources.filter(collection => collection.counts.total > 0).map(collection => {
+            {bookFilter === 'all-kings' && collectionSources.filter(collection => collection.counts.total > 0).map(collection => {
               const p = progress[collection.id];
               return (
                 <section key={collection.id} className="rounded-2xl px-5 py-5" style={{ ...card, borderColor: 'rgba(201,168,76,0.38)', background: 'rgba(201,168,76,0.06)' }}>
@@ -254,7 +264,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
                 </section>
               );
             })}
-            {(['1 Kings', '2 Kings', 'Mark'] as const).map(bookName => (
+            {bookTabs.filter(([slug]) => slug === bookFilter).map(([, bookName]) => (
               <section key={bookName}>
                 <h2 className="text-lg font-medium mb-3" style={{ color: 'var(--ivory-100)' }}>{bookName}</h2>
                 <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">

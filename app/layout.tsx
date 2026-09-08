@@ -17,8 +17,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'ScriptureMap — Study 1 & 2 Kings',
-  description: 'Interactive study of 1 & 2 Kings with maps, timelines, and historical context.',
+  title: 'ScriptureMap',
+  description: 'Read Scripture with connected people, places, context, and quizzes that help you learn what you missed.',
 };
 
 export const viewport: Viewport = {

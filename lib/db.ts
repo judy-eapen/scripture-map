@@ -721,3 +721,20 @@ export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
     })
   return summaries.sort((a, b) => a.bookName.localeCompare(b.bookName) || a.chapterNumber - b.chapterNumber)
 }
+
+export async function getMostRecentlyQuizzedBook(userId: string): Promise<string | null> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('quiz_answers')
+    .select('quiz_questions(chapters(books(name)))')
+    .eq('user_id', userId)
+    .not('chapter_id', 'is', null)
+    .order('answered_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+  type Recent = { quiz_questions: { chapters: { books: { name: string } | { name: string }[] | null } | null } | null }
+  const recent = data as unknown as Recent | null
+  const books = recent?.quiz_questions?.chapters?.books
+  const name = Array.isArray(books) ? books[0]?.name : books?.name
+  return name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : null
+}
