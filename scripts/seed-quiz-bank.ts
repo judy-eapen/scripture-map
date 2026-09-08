@@ -94,8 +94,6 @@ async function main() {
   for (const r of bank.rows) { (tally[r.type] ??= { 1: 0, 2: 0, 3: 0 })[r.difficulty]++; }
   console.log(`${bank.book} ${bank.chapter}: ${bank.rows.length} rows, ${covered.size}/${verses.length} verses covered${uncovered.length ? ` (uncovered: ${uncovered.join(', ')})` : ''}`);
   console.table(Object.fromEntries(Object.entries(tally).map(([t, d]) => [t, { easy: d[1], medium: d[2], hard: d[3], total: d[1] + d[2] + d[3] }])));
-  if (dry) { console.log('dry run — nothing written'); return; }
-
   if (dropLegacy) {
     throw new Error('--drop-legacy is disabled: deleting questions can cascade-delete learner answers');
   }
@@ -115,22 +113,25 @@ async function main() {
   const canRetire = !(await sb.from('quiz_questions').select('retired_at').limit(1)).error;
   const existingResult = await sb
     .from('quiz_questions')
-    .select(`id, verse_number, type, question, options, correct_index${canRetire ? ', retired_at' : ''}`)
+    .select(`id, verse_number, type, question, options, correct_index, answer${canRetire ? ', retired_at' : ''}`)
     .eq('chapter_id', chapter.id)
     .eq('tag', bank.tag);
   if (existingResult.error) throw existingResult.error;
-  const existing = ((existingResult.data ?? []) as Array<{ id: string; verse_number: number; type: string; question: string; options: string[] | null; correct_index: number | null; retired_at?: string | null }>).map(r => ({ ...r, retired_at: r.retired_at ?? null }));
+  const existing = ((existingResult.data ?? []) as Array<{ id: string; verse_number: number; type: string; question: string; options: string[] | null; correct_index: number | null; answer:string|null; retired_at?: string | null }>).map(r => ({ ...r, retired_at: r.retired_at ?? null }));
 
   const matched = new Map<string, (typeof payload)[number]>(); // existing id -> new row
   const unmatched: Array<(typeof payload)[number]> = [];
-  const freeByVerse = new Map<number, typeof existing>();
   const byText = new Map<string, typeof existing>();
   for (const row of existing) {
     (byText.get(norm(row.question)) ?? byText.set(norm(row.question), []).get(norm(row.question))!).push(row);
   }
   // 1. exact wording match keeps the ID (and, for multiple choice, the stored option order)
   for (const row of payload) {
-    const cands = byText.get(norm(row.question))?.filter(r => !matched.has(r.id));
+    const expectedAnswer = row.type === 'multiple_choice' ? row.options?.[row.correct_index ?? -1] ?? '' : row.answer ?? '';
+    const cands = byText.get(norm(row.question))?.filter(r => {
+      const storedAnswer = r.type === 'multiple_choice' ? r.options?.[r.correct_index ?? -1] ?? '' : r.answer ?? '';
+      return !matched.has(r.id) && r.type === row.type && norm(storedAnswer) === norm(expectedAnswer);
+    });
     const hit = cands?.find(r => !r.retired_at) ?? cands?.[0];
     if (hit) {
       const keepOptions = hit.type === 'multiple_choice' && row.type === 'multiple_choice' && hit.options
@@ -138,19 +139,15 @@ async function main() {
       matched.set(hit.id, keepOptions ? { ...row, options: hit.options, correct_index: hit.correct_index } : row);
     } else unmatched.push(row);
   }
-  // 2. remaining new rows take over an unmatched ACTIVE row on the same verse (a rewrite of that question)
-  for (const row of existing) if (!matched.has(row.id) && !row.retired_at) (freeByVerse.get(row.verse_number) ?? freeByVerse.set(row.verse_number, []).get(row.verse_number)!).push(row);
-  const additions: typeof payload = [];
-  for (const row of unmatched) {
-    const pool = freeByVerse.get(row.verse_number);
-    const hit = pool?.shift();
-    if (hit) matched.set(hit.id, row); else additions.push(row);
-  }
-  // 3. anything still unmatched and active is retired (never deleted)
+  // Changed meaning/wording always gets a new ID. Old IDs are retired so prior
+  // learner answers can never be reinterpreted as answers to a different question.
+  const additions = unmatched;
   const toRetire = existing.filter(r => !matched.has(r.id) && !r.retired_at).map(r => r.id);
   if (toRetire.length && !canRetire) throw new Error(`${toRetire.length} question(s) would be removed but quiz_questions has no retired_at column — apply supabase/migrations/013_retire_questions.sql first.`);
 
   const updates = [...matched.entries()].map(([id, row]) => ({ ...row, id, ...(canRetire ? { retired_at: null } : {}) }));
+  console.log(`dry-run safety: ${toRetire.length} rows to retire, 0 rows to delete; ${updates.length} exact-wording IDs retained, ${additions.length} new IDs required`);
+  if (dry) { console.log('dry run — nothing written'); return; }
   for (let i = 0; i < updates.length; i += 100) {
     const up = await sb.from('quiz_questions').upsert(updates.slice(i, i + 100), { onConflict: 'id' });
     if (up.error) throw up.error;

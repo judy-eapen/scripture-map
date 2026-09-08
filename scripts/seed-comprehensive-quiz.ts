@@ -54,18 +54,20 @@ async function main() {
 
   const tally = bank.rows.reduce((out, row) => { out[row.difficulty] += 1; return out }, { 1: 0, 2: 0, 3: 0 })
   console.log(`${bank.slug}: ${bank.rows.length} verified cross-chapter questions (easy ${tally[1]}, medium ${tally[2]}, hard ${tally[3]})`)
-  if (dry) return
 
   const { data: collection, error: collectionError } = await supabase.from('quiz_collections').select('id').eq('slug', bank.slug).single()
   if (collectionError || !collection) throw new Error('Apply supabase/migrations/012_comprehensive_quizzes.sql before loading this bank')
+  const canRetire = !(await supabase.from('quiz_questions').select('retired_at').limit(1)).error
   if (retireDraft) {
+    if (!canRetire) throw new Error('Apply supabase/migrations/013_retire_questions.sql before retiring draft questions')
     const { count, error } = await supabase
       .from('quiz_questions')
-      .delete({ count: 'exact' })
+      .update({ retired_at: new Date().toISOString() }, { count: 'exact' })
       .eq('collection_id', collection.id)
       .eq('tag', bank.tag)
+      .is('retired_at', null)
     if (error) throw error
-    console.log(`Retired ${count ?? 0} draft All of Kings questions. Chapter quizzes and their progress were untouched.`)
+    console.log(`Retired ${count ?? 0} draft All of Kings questions without deleting learner history.`)
     return
   }
   if (bank.status === 'draft') throw new Error('Refusing to publish: the All of Kings bank is still marked as a draft')
@@ -81,18 +83,44 @@ async function main() {
     if (row.type === 'multiple_choice') Object.assign(result, shuffled(row.options!))
     return result
   })
-  const { data: existing, error: existingError } = await supabase.from('quiz_questions').select('id').eq('collection_id', collection.id).eq('tag', bank.tag).order('id')
+  const { data: existingRows, error: existingError } = await supabase.from('quiz_questions')
+    .select(`id, type, question, options, correct_index, answer${canRetire ? ', retired_at' : ''}`)
+    .eq('collection_id', collection.id).eq('tag', bank.tag)
   if (existingError) throw existingError
-  if ((existing?.length ?? 0) > payload.length) throw new Error('Refusing to delete existing learner question IDs')
-  const updates = payload.slice(0, existing?.length ?? 0).map((row, index) => ({ ...row, id: existing![index].id }))
-  const additions = payload.slice(existing?.length ?? 0)
+  const existing = (existingRows ?? []) as Array<{ id:string; type:string; question:string; options:string[]|null; correct_index:number|null; answer:string|null; retired_at?:string|null }>
+  const byText = new Map<string, typeof existing>()
+  for (const row of existing) (byText.get(norm(row.question)) ?? byText.set(norm(row.question), []).get(norm(row.question))!).push(row)
+  const matched = new Map<string, (typeof payload)[number]>()
+  const additions: typeof payload = []
+  for (const row of payload) {
+    const expectedAnswer = row.type === 'multiple_choice' ? row.options?.[row.correct_index ?? -1] ?? '' : row.answer ?? ''
+    const candidates = byText.get(norm(row.question))?.filter(candidate => {
+      const storedAnswer = candidate.type === 'multiple_choice' ? candidate.options?.[candidate.correct_index ?? -1] ?? '' : candidate.answer ?? ''
+      return !matched.has(candidate.id) && candidate.type === row.type && norm(storedAnswer) === norm(expectedAnswer)
+    })
+    const hit = candidates?.find(candidate => !candidate.retired_at) ?? candidates?.[0]
+    if (!hit) { additions.push(row); continue }
+    const keepOptions = hit.type === 'multiple_choice' && row.type === 'multiple_choice' && hit.options
+      && new Set(hit.options.map(norm)).size === 4
+      && hit.options.map(norm).sort().join('|') === (row.options ?? []).map(norm).sort().join('|')
+    matched.set(hit.id, keepOptions ? { ...row, options: hit.options, correct_index: hit.correct_index } : row)
+  }
+  const toRetire = existing.filter(row => !matched.has(row.id) && !row.retired_at).map(row => row.id)
+  if (toRetire.length && !canRetire) throw new Error(`${toRetire.length} question(s) require retirement — apply supabase/migrations/013_retire_questions.sql first`)
+  const updates = [...matched.entries()].map(([id, row]) => ({ ...row, id, ...(canRetire ? { retired_at: null } : {}) }))
+  console.log(`dry-run safety: ${toRetire.length} rows to retire, 0 rows to delete; ${updates.length} exact-wording IDs retained, ${additions.length} new IDs required`)
+  if (dry) { console.log('dry run — nothing written'); return }
   for (let index = 0; index < updates.length; index += 100) {
     const { error } = await supabase.from('quiz_questions').upsert(updates.slice(index, index + 100), { onConflict: 'id' }); if (error) throw error
   }
   for (let index = 0; index < additions.length; index += 100) {
     const { error } = await supabase.from('quiz_questions').insert(additions.slice(index, index + 100)); if (error) throw error
   }
-  console.log(`Loaded ${updates.length} existing and ${additions.length} new questions; learner IDs preserved.`)
+  if (toRetire.length) {
+    const { error } = await supabase.from('quiz_questions').update({ retired_at: new Date().toISOString() }).in('id', toRetire)
+    if (error) throw error
+  }
+  console.log(`Loaded ${updates.length} exact-wording questions, ${additions.length} new questions, and retired ${toRetire.length}; learner history preserved.`)
 }
 
 main().catch(error => { console.error(error); process.exit(1) })

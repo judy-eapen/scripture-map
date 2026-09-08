@@ -835,7 +835,7 @@ async function main() {
     if (!book) { console.warn(`Book not found: ${bookName}`); continue; }
     const { data: chapter } = await supabase.from('chapters').select('id').eq('book_id', book.id).eq('chapter_number', parseInt(chNum)).single();
     if (!chapter) { console.warn(`Chapter not found: ${key}`); continue; }
-    await supabase.from('quiz_questions').delete().eq('chapter_id', chapter.id);
+    throw new Error('Legacy destructive quiz seeding is disabled; use scripts/seed-quiz-bank.ts');
     const { error } = await supabase.from('quiz_questions').insert(questions.map(q => ({ chapter_id: chapter.id, ...q })));
     if (error) console.error(`Quiz error ${key}:`, error.message);
     else console.log(`✓ Quiz: ${key} (${questions.length} questions)`);
