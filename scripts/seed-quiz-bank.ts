@@ -165,8 +165,10 @@ async function main() {
   }
   const revived = existing.filter(r => matched.has(r.id) && r.retired_at).length;
   console.log(`✓ ${updates.length} kept/updated in place (${revived} revived), ${additions.length} inserted, ${toRetire.length} retired; learner answers preserved`);
-  const active = await sb.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id).is('retired_at', null);
-  console.log(`chapter now has ${active.count ?? '?'} active questions`);
+  let active = sb.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id);
+  if (canRetire) active = active.is('retired_at', null);
+  const { count } = await active;
+  console.log(`chapter now has ${count ?? '?'} active questions`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

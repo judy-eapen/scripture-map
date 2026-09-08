@@ -93,8 +93,7 @@ export async function getChapterData(
       supabase
         .from('quiz_questions')
         .select('id', { count: 'exact', head: true })
-        .eq('chapter_id', chapter.id)
-        .is('retired_at', null),
+        .eq('chapter_id', chapter.id),
       supabase
         .from('genealogy_nodes')
         .select('person_id'),
@@ -375,7 +374,6 @@ export async function getQuizQuestions(chapterId: string): Promise<QuizQuestion[
     .from('quiz_questions')
     .select('id, question, options, correct_index, explanation')
     .eq('chapter_id', chapterId)
-    .is('retired_at', null)
     .limit(50) // fetch all, shuffle client-side for true randomness
 
   if (error || !data) return []
@@ -653,7 +651,7 @@ export async function getQuizCollectionSummaries(): Promise<QuizCollectionSummar
   const supabase = await createClient()
   const [{ data: collections }, { data: questions }] = await Promise.all([
     supabase.from('quiz_collections').select('id, slug, title, description, books, position').order('position'),
-    supabase.from('quiz_questions').select('collection_id, difficulty').not('collection_id', 'is', null).is('retired_at', null),
+    supabase.from('quiz_questions').select('collection_id, difficulty').not('collection_id', 'is', null),
   ])
   if (!collections) return []
   const counts = new Map<string, { 1: number; 2: number; 3: number; total: number }>()
@@ -691,7 +689,6 @@ export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
     const { data, error } = await supabase
       .from('quiz_questions')
       .select('chapter_id, difficulty')
-      .is('retired_at', null)
       .range(from, from + pageSize - 1)
     if (error) break
     questions.push(...(data ?? []))

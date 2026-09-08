@@ -62,13 +62,13 @@ export async function getQuizProgress(): Promise<Record<string, ChapterProgress>
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return {}
 
-  const [{ data: answers }, { data: sessions }, { data: retiredRows }] = await Promise.all([
+  const [{ data: answers }, { data: sessions }, retiredResult] = await Promise.all([
     supabase.from('quiz_answers').select('question_id, chapter_id, collection_id, correct, answered_at').eq('user_id', user.id).order('answered_at'),
     supabase.from('quiz_sessions').select('id, chapter_id, collection_id, mode, question_ids, position, correct_count').eq('user_id', user.id).is('completed_at', null),
+    // TODO(after migration 013): retired questions no longer count toward mastery. Tolerates the column not existing yet.
     supabase.from('quiz_questions').select('id').not('retired_at', 'is', null),
   ])
-  // answers to retired questions still exist (history) but no longer count toward mastery
-  const retired = new Set((retiredRows ?? []).map(r => r.id))
+  const retired = new Set(retiredResult.error ? [] : (retiredResult.data ?? []).map(r => r.id))
 
   const perQ = new Map<string, { chapter: string; correct: number; wrong: number; last: boolean }>()
   for (const a of answers ?? []) {
