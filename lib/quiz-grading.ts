@@ -60,7 +60,7 @@ export const DIFFICULTY_LABEL: Record<1 | 2 | 3, string> = {
 export const TYPE_LABEL: Record<QuizQuestion['type'], string> = {
   multiple_choice: 'Multiple choice',
   fill_blank: 'Fill in the blank',
-  one_word: 'One-word answer',
+  one_word: 'Short answer',
   true_false: 'True or false',
 }
 

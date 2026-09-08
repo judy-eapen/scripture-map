@@ -603,7 +603,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
       {(current.type === 'fill_blank' || current.type === 'one_word') && (
         <form className="mb-4" onSubmit={e => { e.preventDefault(); if (revealed) next(); else submit(); }}>
           <input ref={inputRef} value={typed} disabled={revealed} onChange={e => setTyped(e.target.value)}
-            placeholder={current.type === 'one_word' ? 'One word…' : 'Type the missing word(s)…'} autoComplete="off" autoCapitalize="off" spellCheck={false}
+            placeholder={current.type === 'one_word' ? 'Type a short answer…' : 'Type the missing word(s)…'} autoComplete="off" autoCapitalize="off" spellCheck={false}
             className="w-full rounded-xl px-4 py-3 text-sm outline-none"
             style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--ivory-100)', border: `1px solid ${revealed ? (lastCorrect ? 'rgba(16,185,129,0.5)' : 'rgba(239,68,68,0.5)') : 'rgba(201,168,76,0.3)'}` }} />
         </form>

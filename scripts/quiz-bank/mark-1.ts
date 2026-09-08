@@ -3,7 +3,7 @@ import { mc, blank, word, tf, type ChapterBank } from './types';
 const bank: ChapterBank = { book: 'Mark', chapter: 1, tag: 'quiz-v2-mark-1', rows: [
   mc(1, 'Whose gospel begins in Mark 1?', ['Jesus Christ, the Son of God', 'John the Baptist', 'Simon and Andrew', 'James and John'], 1),
   blank(2, 'The beginning of the gospel of Jesus Christ, the _____ of God.', 'Son', 1),
-  word(1, 'Where was the promised messenger sent?', 'before Your face', 2, ['before your face']),
+  blank(1, 'Behold, I send My messenger _____, Who will prepare Your way before You.', 'before Your face', 2, ['before your face']),
   tf(3, 'The messenger would prepare the Lord’s way.', true, 2),
   mc(1, 'Where was the crying voice heard?', ['In the wilderness', 'In the synagogue', 'Beside the sea', 'In Jerusalem'], 3),
   tf(2, 'The voice called people to make the Lord’s paths crooked.', false, 3, 'The voice said to make His paths straight.'),

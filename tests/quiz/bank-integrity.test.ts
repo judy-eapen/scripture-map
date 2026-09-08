@@ -78,8 +78,8 @@ describe('Kings quiz banks match the stored RSV text', () => {
     const directory = path.resolve('scripts/quiz-bank')
     const files = fs.readdirSync(directory).filter(file => /^(1|2)-kings-\d+\.ts$/.test(file))
     banks = await Promise.all(files.map(async file => {
-      const module = await import(pathToFileURL(path.join(directory, file)).href)
-      return (module.default?.default ?? module.default) as KingsBank
+      const bankModule = await import(pathToFileURL(path.join(directory, file)).href)
+      return (bankModule.default?.default ?? bankModule.default) as KingsBank
     }))
     const [first, second] = await Promise.all([getDbVersesByBook('1 Kings'), getDbVersesByBook('2 Kings')])
     verses = { '1 Kings': first, '2 Kings': second }
@@ -116,12 +116,23 @@ describe('Mark quiz bank matches the Orthodox Study Bible New Testament text use
   it('validates all 16 hand-authored chapters and every answer through the real grading functions', async () => {
     let total = 0
     for (const chapter of markSource.chapters) {
-      const module = await import(`../../scripts/quiz-bank/mark-${chapter.chapter}.ts`)
-      const bank = (module.default?.default ?? module.default) as ChapterBank
+      const bankModule = await import(`../../scripts/quiz-bank/mark-${chapter.chapter}.ts`)
+      const bank = (bankModule.default?.default ?? bankModule.default) as ChapterBank
       const byVerse = new Map(chapter.verses.map(verse => [verse.verse_number, verse.text]))
       total += bank.rows.length
       bank.rows.forEach((row, index) => verifyRow(row, byVerse.get(row.verse_number) ?? '', `Mark ${chapter.chapter} row ${index + 1}`))
     }
     expect(total).toBeGreaterThanOrEqual(markSource.chapters.reduce((sum, chapter) => sum + chapter.verses.length, 0))
+  })
+
+  it('guards the Mark 1:2 messenger prompt regression', async () => {
+    const bankModule = await import('../../scripts/quiz-bank/mark-1')
+    const bank = bankModule.default as ChapterBank
+    const rows = bank.rows.filter(row => row.verse_number === 2)
+    expect(rows.some(row => row.question === 'Where was the promised messenger sent?')).toBe(false)
+    expect(rows).toContainEqual(expect.objectContaining({
+      type: 'fill_blank',
+      answer: 'before Your face',
+    }))
   })
 })

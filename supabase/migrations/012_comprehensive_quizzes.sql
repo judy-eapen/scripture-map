@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS quiz_collections (
 );
 
 ALTER TABLE quiz_collections ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "public read quiz_collections" ON quiz_collections;
 CREATE POLICY "public read quiz_collections" ON quiz_collections FOR SELECT USING (true);
 
 ALTER TABLE quiz_questions
