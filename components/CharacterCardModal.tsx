@@ -38,14 +38,16 @@ export default function CharacterCardModal({ person, onClose }: Props) {
   const verdict = person.verdict ? verdictConfig[person.verdict] : null;
   const hasReignDates = person.reign_start_bc !== undefined;
 
-  const [appearances, setAppearances] = useState<PersonAppearance[] | null>(null);
+  const [appearanceState, setAppearanceState] = useState<{ personId: string; data: PersonAppearance[] } | null>(null);
+  const appearances = appearanceState?.personId === person.id ? appearanceState.data : null;
 
   useEffect(() => {
-    setAppearances(null);
+    let active = true;
     fetch(`/api/person/${person.id}/appearances`)
       .then(r => r.json())
-      .then(setAppearances)
-      .catch(() => setAppearances([]));
+      .then(data => { if (active) setAppearanceState({ personId: person.id, data }); })
+      .catch(() => { if (active) setAppearanceState({ personId: person.id, data: [] }); });
+    return () => { active = false; };
   }, [person.id]);
 
   // Find the most recently read chapter

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { QuizQuestion } from '@/lib/types';
 import { saveQuizScore } from '@/app/actions/progress';
 
@@ -47,7 +47,7 @@ export default function QuizModal({
     answers: [],
     phase: 'loading',
   });
-  const [scoreSaved, setScoreSaved] = useState(false);
+  const scoreSaved = useRef(false);
 
   // Load questions and restore mid-quiz state from localStorage
   useEffect(() => {
@@ -116,13 +116,13 @@ export default function QuizModal({
 
   // Save score when quiz completes
   useEffect(() => {
-    if (state.phase === 'complete' && !scoreSaved && state.questions.length > 0) {
-      setScoreSaved(true);
+    if (state.phase === 'complete' && !scoreSaved.current && state.questions.length > 0) {
+      scoreSaved.current = true;
       const correct = state.answers.filter((a, i) => a === state.questions[i]?.correct_index).length;
       const pct = Math.round((correct / state.questions.length) * 100);
       saveQuizScore(chapterId, pct, bookSlug, chapterNum).catch(() => { /* silent */ });
     }
-  }, [state.phase, scoreSaved, state.answers, state.questions, chapterId, bookSlug, chapterNum]);
+  }, [state.phase, state.answers, state.questions, chapterId, bookSlug, chapterNum]);
 
   const selectAnswer = useCallback((idx: number) => {
     if (state.phase !== 'question') return;

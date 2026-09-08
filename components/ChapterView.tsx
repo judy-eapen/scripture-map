@@ -82,10 +82,9 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mobileMapOpen, setMobileMapOpen] = useState(false);
   // Only mount MapPanel when container is visible — Leaflet crashes in display:none containers
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches);
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
-    setIsLargeScreen(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
@@ -441,7 +440,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
             {isAuthenticated && notesList.length > 0 && (
               <NotesPanel
                 notes={notesList}
-                onEditNote={(verseNumber, currentText) => setNoteVerseOpen(verseNumber)}
+                onEditNote={(verseNumber) => setNoteVerseOpen(verseNumber)}
               />
             )}
 

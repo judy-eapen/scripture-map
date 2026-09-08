@@ -181,7 +181,7 @@ export default function ProphetModal({ prophet, navData, onClose }: Props) {
                             color: 'rgba(255,255,255,0.88)',
                             fontStyle: 'italic', marginBottom: '4px',
                           }}>
-                            "{p.prophecy_text}"
+                            &ldquo;{p.prophecy_text}&rdquo;
                           </p>
                           <p style={{ fontSize: '11px', color: 'var(--muted-500)' }}>
                             {p.prophecy_reference}

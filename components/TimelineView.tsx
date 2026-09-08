@@ -116,7 +116,7 @@ export default function TimelineView({ kings, navData }: Props) {
             marginTop: '28px', fontSize: '13px', color: 'var(--muted-500)',
             lineHeight: '1.7', maxWidth: '700px',
           }}>
-            Timeline spans from Solomon's Temple (966 BC) through the fall of Jerusalem under
+            Timeline spans from Solomon&apos;s Temple (966 BC) through the fall of Jerusalem under
             Nebuchadnezzar (586 BC). Click any king or prophet to view their character card.
             Dashed borders indicate dates that are debated or reconstructed from overlapping regnal records.
           </p>

@@ -18,7 +18,7 @@ const QUALITY_BUTTONS: { quality: SM2Quality; label: string; color: string; bg: 
 ];
 
 export default function FlashcardStudy({ initialCards, onExit }: Props) {
-  const [cards, setCards] = useState<FlashcardWithState[]>(initialCards);
+  const [cards] = useState<FlashcardWithState[]>(initialCards);
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [showHint, setShowHint] = useState(false);

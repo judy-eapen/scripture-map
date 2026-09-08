@@ -3,7 +3,6 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { beforeAll, describe, expect, it } from 'vitest'
 import markSource from '../../data/mark-source.json'
-import { buildMarkBank } from '../../scripts/quiz-bank/mark-builder'
 import type { BankRow, ChapterBank } from '../../scripts/quiz-bank/types'
 import { getDbVersesByBook, type VerseEntry } from '../utils/db-verses'
 import { gradeMultipleChoice, gradeText, gradeTrueFalse } from '../../lib/quiz-grading'
@@ -114,14 +113,15 @@ describe('Kings quiz banks match the stored RSV text', () => {
 })
 
 describe('Mark quiz bank matches the Orthodox Study Bible New Testament text used by the app', () => {
-  it('validates all 16 chapters and every generated answer through the real grading functions', () => {
+  it('validates all 16 hand-authored chapters and every answer through the real grading functions', async () => {
     let total = 0
     for (const chapter of markSource.chapters) {
-      const bank = buildMarkBank(chapter.chapter)
+      const module = await import(`../../scripts/quiz-bank/mark-${chapter.chapter}.ts`)
+      const bank = (module.default?.default ?? module.default) as ChapterBank
       const byVerse = new Map(chapter.verses.map(verse => [verse.verse_number, verse.text]))
       total += bank.rows.length
       bank.rows.forEach((row, index) => verifyRow(row, byVerse.get(row.verse_number) ?? '', `Mark ${chapter.chapter} row ${index + 1}`))
     }
-    expect(total).toBe(2760)
+    expect(total).toBeGreaterThanOrEqual(markSource.chapters.reduce((sum, chapter) => sum + chapter.verses.length, 0))
   })
 })

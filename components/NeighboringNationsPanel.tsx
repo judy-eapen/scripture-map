@@ -230,7 +230,7 @@ export default function NeighboringNationsPanel({ nations, chapterYearBC }: Prop
               marginBottom: '14px',
             }}
           >
-            Nations and rulers active during this chapter's period, drawn from contemporary
+            Nations and rulers active during this chapter&apos;s period, drawn from contemporary
             historical records.
           </p>
 

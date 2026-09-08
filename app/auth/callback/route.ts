@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import type { EmailOtpType } from '@supabase/supabase-js'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest) {
   const next = searchParams.get('next') ?? '/study/welcome'
 
   const cookieStore = await cookies()
-  const newCookies: { name: string; value: string; options: any }[] = []
+  const newCookies: { name: string; value: string; options: Parameters<typeof cookieStore.set>[2] }[] = []
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) redirectTo = `${origin}${next}`
   } else if (token_hash && type) {
-    const { error } = await supabase.auth.verifyOtp({ token_hash, type: type as any })
+    const { error } = await supabase.auth.verifyOtp({ token_hash, type: type as EmailOtpType })
     if (!error) redirectTo = `${origin}${next}`
   }
 

@@ -34,3 +34,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Content licensing
+
+The teacher-slide PDFs and rendered JPGs under `public/resources/mark/`, together with the quoted source material in `data/mark-orthodox-notes.ts`, contain Orthodox Study Bible material supplied for this study project. Their inclusion here is not a declaration that those materials are freely licensed. Before distributing the application publicly, confirm permission for those assets and quotations or place the relevant content behind sign-in.
