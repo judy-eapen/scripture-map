@@ -113,24 +113,46 @@ export default function WelcomePageClient({ isAuthenticated }: Props) {
           </div>
 
           <p className="text-lg leading-relaxed mb-3 max-w-xl mx-auto" style={{ color: 'var(--ivory-200)' }}>
-            An interactive guide to 1 & 2 Kings — two books, four centuries, thirty-nine kings,
-            and a story of faithfulness and failure that still echoes today.
+            An interactive guide to 1 Kings, 2 Kings, and the Gospel of Mark — connecting Scripture,
+            people, places, history, maps, and study tools.
           </p>
           <p className="text-base max-w-lg mx-auto" style={{ color: 'var(--muted-400)' }}>
             Read each chapter with tappable characters, side-by-side ancient and modern maps,
             and historical context from archaeology and neighboring nations.
           </p>
+
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+            <Link href="/study/1-kings/1" className="rounded-2xl px-4 py-4 transition-colors"
+              style={{ background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.2)' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: 'var(--ivory-100)' }}>1 &amp; 2 Kings</p>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--muted-400)' }}>
+                Scripture text and chapter quizzes use the <strong style={{ color: 'var(--gold-300)' }}>Revised Standard Version (RSV)</strong>.
+              </p>
+            </Link>
+            <Link href="/study/mark/1" className="rounded-2xl px-4 py-4 transition-colors"
+              style={{ background: 'rgba(167,112,239,0.06)', border: '1px solid rgba(167,112,239,0.22)' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: 'var(--ivory-100)' }}>Gospel of Mark</p>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--muted-400)' }}>
+                Scripture text and chapter quizzes use the <strong style={{ color: '#c594f5' }}>Orthodox Study Bible</strong> text.
+              </p>
+            </Link>
+          </div>
         </div>
 
         {/* CTA */}
-        <div className="flex items-center justify-center mb-4">
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
           <Link href="/study/1-kings/1"
             className="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-semibold transition-all duration-200"
             style={{ background: 'var(--gold-400)', color: 'var(--navy-950)', boxShadow: '0 8px 24px rgba(201,168,76,0.35)' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            Start studying
+            Start with 1 Kings
+          </Link>
+          <Link href="/study/mark/1"
+            className="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-semibold transition-all duration-200"
+            style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--ivory-100)', border: '1px solid rgba(255,255,255,0.12)' }}>
+            Read the Gospel of Mark
           </Link>
         </div>
 
@@ -154,6 +176,7 @@ export default function WelcomePageClient({ isAuthenticated }: Props) {
             { label: 'Verse notes' },
             { label: 'Flashcards' },
             { label: 'Theological themes' },
+            { label: 'Mark teacher slides' },
           ].map(f => (
             <span key={f.label} className="text-xs px-3 py-1.5 rounded-full"
               style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--muted-400)' }}>
