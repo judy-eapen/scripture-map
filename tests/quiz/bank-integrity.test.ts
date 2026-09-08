@@ -152,4 +152,19 @@ describe('All of Kings draft quality', () => {
       expect(new Set(row.options?.map(normalize)).size, `row ${index + 1}: duplicate options`).toBe(4)
     }
   })
+
+  it('points every study reference to verses present in the stored RSV text', async () => {
+    const bankModule = await import('../../scripts/quiz-bank/all-kings')
+    const bank = bankModule.default
+    const [first, second] = await Promise.all([getDbVersesByBook('1 Kings'), getDbVersesByBook('2 Kings')])
+    const verses = { '1 Kings': first, '2 Kings': second }
+    for (const [index, row] of bank.rows.entries()) {
+      for (const ref of row.supporting_refs) {
+        const chapter = verses[ref.book].get(ref.chapter) ?? []
+        const verseNumbers = new Set(chapter.map(verse => verse.verse_number))
+        expect(verseNumbers.has(ref.verse_start), `row ${index + 1}: missing ${ref.label} start`).toBe(true)
+        expect(verseNumbers.has(ref.verse_end ?? ref.verse_start), `row ${index + 1}: missing ${ref.label} end`).toBe(true)
+      }
+    }
+  })
 })
