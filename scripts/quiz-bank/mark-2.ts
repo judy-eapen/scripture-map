@@ -1,4 +1,32 @@
-// Mark 2 — NKJV/Orthodox Study Bible verse-anchored quiz bank.
-import { buildMarkBank } from './mark-builder';
-
-export default buildMarkBank(2);
+import { mc, blank, word, tf, type ChapterBank } from './types';
+const bank: ChapterBank = { book: 'Mark', chapter: 2, tag: 'quiz-v2-mark-2', rows: [
+mc(1,'Where did Jesus return after some days?',['Capernaum','Nazareth','Jerusalem','Jericho'],1),blank(2,'And again He entered _____ after some days','Capernaum',1),
+word(1,'What did Jesus preach to the crowded house?','the word',2,['word']),tf(3,'There was still plenty of room near the door.',false,2,'There was no room even near the door.'),
+mc(1,'How many men carried the paralytic?',['Four','Two','Seven','Twelve'],3),blank(2,'bringing a paralytic who was carried by _____ men.','four',3,['4']),
+word(2,'What part of the house did the men uncover?','the roof',4,['roof']),tf(1,'The men lowered the paralytic on his bed through the roof.',true,4),
+mc(1,'What did Jesus first say to the paralytic?',['Your sins are forgiven you','Take up your bed and walk','Follow Me','Be quiet'],5),blank(3,'Son, your _____ are forgiven you.','sins',5),
+word(1,'Who reasoned silently in their hearts?','the scribes',6,['scribes']),tf(2,'The scribes spoke their reasoning aloud at first.',false,6,'They were reasoning in their hearts.'),
+mc(2,'Who did the scribes say could forgive sins?',['God alone','The high priest alone','Any scribe','The paralytic’s friends'],7),blank(1,'Who can forgive sins but God _____?','alone',7),
+word(2,'How did Jesus know what the scribes were thinking?','He perceived it in His spirit',8,['perceived in His spirit']),tf(3,'Jesus asked why they reasoned these things in their hearts.',true,8),
+mc(2,'What physical command did Jesus contrast with forgiving sins?',['Arise, take up your bed and walk','Wash in the Jordan','Stretch out your hand','Go show yourself to the priest'],9),blank(1,'Arise, take up your bed and _____.','walk',9),
+word(1,'What title did Jesus use for Himself?','Son of Man',10,['the Son of Man']),tf(3,'Jesus said the Son of Man has power on earth to forgive sins.',true,10),
+mc(1,'Where did Jesus tell the paralytic to go?',['To his house','To the synagogue','To Jerusalem','To the sea'],11),blank(2,'arise, take up your bed, and go to your _____.','house',11),
+word(2,'What did the healed man carry out?','the bed',12,['his bed','bed']),tf(1,'The crowd glorified God and said they had never seen anything like it.',true,12),
+mc(1,'Where did Jesus teach the multitude next?',['By the sea','In Levi’s house','In the grainfields','At the tax office'],13),blank(3,'all the multitude came to Him, and He _____ them.','taught',13),
+word(1,'Who was sitting at the tax office?','Levi',14,['Levi son of Alphaeus']),tf(2,'Levi ignored Jesus’ command to follow Him.',false,14,'Levi arose and followed Him.'),
+mc(1,'In whose house did Jesus dine?',['Levi’s house','Simon’s house','Alphaeus’s house','Abiathar’s house'],15),blank(2,'many tax collectors and sinners also sat together with Jesus and His _____.','disciples',15),
+word(2,'Who questioned Jesus’ disciples about His dinner companions?','the scribes and Pharisees',16,['scribes and Pharisees']),tf(3,'Jesus ate only with religious leaders at Levi’s house.',false,16,'He ate with tax collectors and sinners.'),
+mc(1,'Who needs a physician in Jesus’ comparison?',['Those who are sick','Those who are well','The righteous only','The Pharisees only'],17),blank(3,'I did not come to call the righteous, but sinners, to _____.','repentance',17),
+word(1,'Whose disciples were fasting besides the Pharisees’ disciples?','John’s',18,['disciples of John','John']),tf(2,'Jesus’ disciples were fasting with John’s disciples.',false,18,'The questioners said Jesus’ disciples did not fast.'),
+mc(2,'Why could the bridegroom’s friends not fast?',['The bridegroom was with them','They had no food','It was the Sabbath','They were traveling'],19),blank(1,'As long as they have the _____ with them they cannot fast.','bridegroom',19),
+word(2,'When would the bridegroom’s friends fast?','when the bridegroom was taken away',20,['when the bridegroom is taken away']),tf(3,'Jesus said the friends would never fast.',false,20,'They would fast when the bridegroom was taken away.'),
+mc(1,'What happens when unshrunk cloth is sewn onto an old garment?',['The tear becomes worse','The garment becomes new','The patch never moves','The garment turns into a wineskin'],21),blank(2,'the new piece pulls away from the old, and the _____ is made worse.','tear',21),
+word(1,'What must hold new wine?','new wineskins',22),tf(3,'Putting new wine into old wineskins preserves both perfectly.',false,22,'The wine spills and the wineskins are ruined.'),
+mc(1,'What did the disciples pluck in the grainfields?',['Heads of grain','Figs','Olives','Grapes'],23),blank(2,'His disciples began to pluck the heads of _____.','grain',23),
+word(2,'Who challenged the disciples’ Sabbath action?','the Pharisees',24,['Pharisees']),tf(1,'The Pharisees called the disciples’ action unlawful on the Sabbath.',true,24),
+mc(3,'Whose example did Jesus cite when answering the Pharisees?',['David’s','Moses’','Elijah’s','John’s'],25),blank(3,'what David did when he was in need and _____','hungry',25),
+word(3,'Who was high priest when David entered God’s house?','Abiathar',26),tf(1,'David shared the showbread with those who were with him.',true,26),
+mc(1,'For whom did Jesus say the Sabbath was made?',['Man','The angels','The scribes only','The priests only'],27),blank(2,'The Sabbath was made for man, and not man for the _____.','Sabbath',27),
+word(1,'Who is Lord of the Sabbath?','the Son of Man',28,['Son of Man']),tf(3,'Jesus denied that the Son of Man had authority over the Sabbath.',false,28,'He said the Son of Man is Lord of the Sabbath.'),
+]};
+export default bank;
