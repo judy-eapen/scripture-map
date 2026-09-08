@@ -18,6 +18,14 @@ describe('All of Kings comprehensive bank', () => {
     }
   })
 
+  it('never requires learners to identify or memorize reference numbers', () => {
+    for (const row of bank.rows) {
+      expect(row.question).not.toMatch(/sequence traced by/i)
+      expect(row.question).not.toMatch(/how do (?:1|2) Kings \d+:/i)
+      expect(row.question).not.toMatch(/which pair of passages/i)
+    }
+  })
+
   it('covers the requested famines across both books', () => {
     const famineRows = bank.rows.filter(row => row.review_topic.toLowerCase().includes('famine'))
     expect(famineRows.length).toBeGreaterThanOrEqual(6)

@@ -562,7 +562,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
         <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span> · <span data-testid="pool-count" style={{ color: 'var(--gold-300)' }}>Pool {poolRemaining(pool, stats)} / {pool.length}</span></span>
       </div>
       <p className="text-[11px] -mt-4 mb-5" style={{ color: 'var(--muted-500)' }}>
-        Support: {current.supporting_refs?.map(ref => ref.label).join(' · ') || current.verse_ref} · ID {current.id}
+        {chapter?.scopeKind === 'collection' ? `Topic: ${current.review_topic ?? 'All of Kings'}` : `Support reference: ${current.verse_ref}`} · ID {current.id}
       </p>
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
         <div className="h-1 rounded-full transition-all" style={{ width: `${(answeredCount / round.length) * 100}%`, background: 'var(--gold-400)' }} />

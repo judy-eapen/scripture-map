@@ -73,8 +73,8 @@ const connectedRows: ComprehensiveRow[] = links.flatMap(link => {
   const refs = [link.a, link.b]
   const guidance = `Study ${refsText(link)} and trace how the earlier event leads to, parallels, or is fulfilled by the later event.`
   return [
-    {type:'multiple_choice',difficulty:2,question:`How do ${link.a.label} and ${link.b.label} connect?`,options:[link.connection,'They describe one identical event from two viewpoints','The later passage cancels the earlier passage without fulfilling it','They share no narrative or theological connection'],explanation:link.connection,supporting_refs:refs,review_topic:link.topic,review_guidance:guidance},
-    {type:'multiple_choice',difficulty:1,question:`In the sequence traced by ${refsText(link)}, what happened first?`,options:[link.aEvent,link.bEvent,'Both events happened simultaneously','Neither event appears in Kings'],explanation:`First, ${link.aEvent.toLowerCase()}. Later, ${link.bEvent.toLowerCase()}.`,supporting_refs:refs,review_topic:link.topic,review_guidance:guidance},
+    {type:'multiple_choice',difficulty:2,question:`Which statement correctly describes “${link.topic}” across Kings?`,options:[link.connection,'The two passages describe exactly the same moment from different viewpoints','The later event reverses the earlier event and makes it irrelevant','Kings presents no connection between these events'],explanation:link.connection,supporting_refs:refs,review_topic:link.topic,review_guidance:guidance},
+    {type:'multiple_choice',difficulty:1,question:`Which sequence correctly traces “${link.topic}”?`,options:[`${link.aEvent}; later, ${link.bEvent}.`,`${link.bEvent}; later, ${link.aEvent}.`,'Both events happened simultaneously.','Neither event is recorded in Kings.'],explanation:`${link.aEvent}. Later, ${link.bEvent}.`,supporting_refs:refs,review_topic:link.topic,review_guidance:guidance},
   ] as ComprehensiveRow[]
 })
 
