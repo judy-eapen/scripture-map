@@ -4,6 +4,9 @@ import { createClient } from '@/lib/supabase/server'
 import type { StatsMap } from '@/lib/quiz-session'
 import { emptyStat, type SessionMode } from '@/lib/quiz-session'
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+const isUuid = (value: string) => UUID.test(value)
+
 export type OpenSession = {
   id: string
   chapterId: string
@@ -25,6 +28,7 @@ export type ChapterProgress = {
 
 /** Per-question history for the signed-in user in one chapter. Empty when signed out. */
 export async function getChapterStats(chapterId: string): Promise<{ stats: StatsMap; openSession: OpenSession | null }> {
+  if (!isUuid(chapterId)) return { stats: {}, openSession: null }
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { stats: {}, openSession: null }
@@ -86,6 +90,7 @@ export async function getQuizProgress(): Promise<Record<string, ChapterProgress>
 
 /** Store a freshly built session so it can be resumed. Returns null when signed out. */
 export async function createSession(chapterId: string, mode: SessionMode, questionIds: string[]): Promise<string | null> {
+  if (!isUuid(chapterId)) return null
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return null
@@ -110,6 +115,7 @@ export async function recordAnswer(params: {
   correctCount: number
   completed: boolean
 }): Promise<void> {
+  if (!isUuid(params.chapterId) || !isUuid(params.questionId)) return
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return
@@ -134,6 +140,7 @@ export async function abandonSession(sessionId: string): Promise<void> {
 
 /** Wipe all answers + sessions for one chapter (user asked to start over). */
 export async function resetChapterProgress(chapterId: string): Promise<void> {
+  if (!isUuid(chapterId)) return
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return

@@ -35,15 +35,12 @@ async function main() {
     }, { onConflict: 'book_id,chapter_number' }).select('id').single();
     if (error || !row) throw error ?? new Error(`Could not upsert Mark ${chapter.chapter}`);
     if (chapter.chapter === 1) {
-      const topics = ['Orthodox Study Bible: Introduction', `Orthodox Study Bible: ${johnTheBaptistStudyNote.title}`];
-      const deleted = await sb.from('difficult_passages').delete().eq('chapter_id', row.id).in('topic', topics);
-      if (deleted.error) throw deleted.error;
-      const inserted = await sb.from('difficult_passages').insert([
+      const passages = [
         {
           chapter_id: row.id,
           verse_start: 1,
           verse_end: 1,
-          topic: topics[0],
+          topic: 'Orthodox Study Bible: Introduction',
           plain_language: `${markIntroduction.author} ${markIntroduction.date}`,
           theological_context: `${markIntroduction.majorTheme} ${markIntroduction.subthemes.join(' ')} ${markIntroduction.background} ${markIntroduction.endingNote}`,
         },
@@ -51,12 +48,24 @@ async function main() {
           chapter_id: row.id,
           verse_start: johnTheBaptistStudyNote.verseStart,
           verse_end: johnTheBaptistStudyNote.verseEnd,
-          topic: topics[1],
+          topic: `Orthodox Study Bible: ${johnTheBaptistStudyNote.title}`,
           plain_language: johnTheBaptistStudyNote.plainLanguage,
           theological_context: johnTheBaptistStudyNote.theologicalContext,
         },
-      ]);
-      if (inserted.error) throw inserted.error;
+      ];
+      for (const passage of passages) {
+        const { data: existing, error: readError } = await sb
+          .from('difficult_passages')
+          .select('id')
+          .eq('chapter_id', row.id)
+          .eq('topic', passage.topic)
+          .maybeSingle();
+        if (readError) throw readError;
+        const result = existing
+          ? await sb.from('difficult_passages').update(passage).eq('id', existing.id)
+          : await sb.from('difficult_passages').insert(passage);
+        if (result.error) throw result.error;
+      }
     }
     console.log(`seeded Mark ${chapter.chapter}`);
   }

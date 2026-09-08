@@ -24,6 +24,7 @@ type Answered = { q: QuizQuestion; correct: boolean; given: string };
 type Props = {
   chapters: QuizChapterSummary[];
   isAuthenticated: boolean;
+  allowAdminBrowse: boolean;
   progress: Record<string, ChapterProgress>;
 };
 
@@ -45,7 +46,7 @@ function saveLocalStats(chapterId: string, stats: StatsMap) {
   try { sessionStorage.setItem(localKey(chapterId), JSON.stringify(stats)); } catch { /* ignore */ }
 }
 
-export default function QuizArena({ chapters, isAuthenticated, progress: initialProgress }: Props) {
+export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse, progress: initialProgress }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [progress, setProgress] = useState(initialProgress);
   const [selectedChapterId, setSelectedChapterId] = useState<string | null>(null);
@@ -124,6 +125,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
   }
 
   async function browse(ch: QuizChapterSummary) {
+    if (!allowAdminBrowse) return;
     setChapter(ch); setPhase('loading'); setBrowseSearch('');
     const qs = await loadPool(ch);
     setPool([...qs].sort((a, b) =>
@@ -288,7 +290,7 @@ export default function QuizArena({ chapters, isAuthenticated, progress: initial
                       {open ? 'New session' : 'Start session'} · {SESSION_SIZE}
                     </button>
                     <button onClick={() => begin(ch, 'quick')} className="rounded-xl px-4 py-2 text-sm font-medium" style={ghostBtn}>Quick · {QUICK_SIZE}</button>
-                    <button onClick={() => browse(ch)} className="rounded-xl px-4 py-2 text-sm font-medium" style={ghostBtn}>Browse question bank</button>
+                    {allowAdminBrowse && <button onClick={() => browse(ch)} className="rounded-xl px-4 py-2 text-sm font-medium" style={ghostBtn}>Browse question bank</button>}
                     {(p?.toReview ?? 0) > 0 && (
                       <button onClick={() => begin(ch, 'review')} className="rounded-xl px-4 py-2 text-sm font-medium" style={badStyle}>
                         Review {p!.toReview} missed
