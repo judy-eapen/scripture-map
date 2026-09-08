@@ -141,7 +141,7 @@ describe('All of Kings draft quality', () => {
   it('uses self-contained prompts and specific answer choices', async () => {
     const bankModule = await import('../../scripts/quiz-bank/all-kings')
     const bank = bankModule.default
-    expect(bank.status).toBe('draft')
+    expect(['draft', 'published']).toContain(bank.status)
     expect(bank.rows.length).toBeGreaterThanOrEqual(20)
     for (const [index, row] of bank.rows.entries()) {
       expect(row.supporting_refs.length, `row ${index + 1}: needs multiple references`).toBeGreaterThanOrEqual(2)

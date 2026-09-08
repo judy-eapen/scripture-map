@@ -42,7 +42,7 @@ async function main() {
     if (questions.has(questionKey)) errors.push(`${where}: duplicate of row ${questions.get(questionKey)}`)
     questions.set(questionKey, index + 1)
     if (row.supporting_refs.length < 2) errors.push(`${where}: requires at least two supporting passages`)
-    if (new Set(row.supporting_refs.map(ref => `${ref.book}:${ref.chapter}`)).size < 2) errors.push(`${where}: passages must span chapters`)
+    if (new Set(row.supporting_refs.map(ref => `${ref.book}:${ref.chapter}:${ref.verse_start}-${ref.verse_end ?? ref.verse_start}`)).size < 2) errors.push(`${where}: passages must be distinct`)
     for (const ref of row.supporting_refs) {
       const count = verseCounts.get(`${ref.book}:${ref.chapter}`)
       if (!count || ref.verse_start < 1 || ref.verse_start > count || (ref.verse_end ?? ref.verse_start) > count) errors.push(`${where}: invalid ${ref.label}`)

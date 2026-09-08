@@ -115,11 +115,11 @@ async function main() {
   const canRetire = !(await sb.from('quiz_questions').select('retired_at').limit(1)).error;
   const existingResult = await sb
     .from('quiz_questions')
-    .select('id, verse_number, type, question, options, correct_index, retired_at')
+    .select(`id, verse_number, type, question, options, correct_index${canRetire ? ', retired_at' : ''}`)
     .eq('chapter_id', chapter.id)
     .eq('tag', bank.tag);
   if (existingResult.error) throw existingResult.error;
-  const existing = existingResult.data ?? [];
+  const existing = ((existingResult.data ?? []) as Array<{ id: string; verse_number: number; type: string; question: string; options: string[] | null; correct_index: number | null; retired_at?: string | null }>).map(r => ({ ...r, retired_at: r.retired_at ?? null }));
 
   const matched = new Map<string, (typeof payload)[number]>(); // existing id -> new row
   const unmatched: Array<(typeof payload)[number]> = [];
