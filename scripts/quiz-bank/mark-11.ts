@@ -1,4 +1,37 @@
-// Mark 11 — NKJV/Orthodox Study Bible verse-anchored quiz bank.
-import { buildMarkBank } from './mark-builder';
-
-export default buildMarkBank(11);
+import { mc, blank, word, tf, type ChapterBank } from './types';
+const bank: ChapterBank = { book: 'Mark', chapter: 11, tag: 'quiz-v2-mark-11', rows: [
+mc(1,'How many disciples did Jesus send near the Mount of Olives?',['Two','Three','Seven','Twelve'],1),blank(2,'at the Mount of Olives, He sent _____ of His disciples','two',1,['2']),
+word(1,'What animal would the disciples find tied?','a colt',2,['colt']),tf(3,'Jesus said the colt had been ridden many times.',false,2,'No one had sat on it.'),
+mc(2,'What reason were the disciples to give for taking the colt?',['The Lord has need of it','It belongs to the temple','The Twelve purchased it','It must be returned to Bethany'],3),blank(1,'The Lord has _____ of it','need',3),
+word(2,'Where was the colt tied?','by the door outside on the street',4,['by the door','on the street']),tf(1,'The disciples found and untied the colt as Jesus said.',true,4),
+mc(1,'What did bystanders ask the disciples?',['Why are you loosing the colt?','Where is Jesus going?','Who owns your clothes?','Why are you entering Jerusalem?'],5),blank(3,'What are you doing, _____ the colt?','loosing',5),
+word(1,'Why did the bystanders let the disciples go?','they answered as Jesus commanded',6,['they spoke as Jesus commanded']),tf(2,'The bystanders prevented the disciples from taking the colt.',false,6,'They let them go.'),
+mc(1,'What did the disciples place on the colt?',['Their clothes','Leafy branches','A saddle from the temple','Money changers’ tables'],7),blank(2,'they brought the colt to Jesus and threw their _____ on it','clothes',7),
+word(2,'What two things did people spread on the road?','clothes and leafy branches',8,['their clothes and leafy branches']),tf(3,'Everyone kept the road completely clear before Jesus.',false,8,'They spread clothes and branches on it.'),
+mc(1,'What word did the people cry as Jesus entered?',['Hosanna','Ephphatha','Rabboni','Corban'],9),blank(2,'Blessed is He who comes in the name of the _____!','Lord',9),
+word(3,'Whose coming kingdom did the crowd bless?','our father David’s',10,['David','the kingdom of our father David']),tf(1,'The crowd cried, “Hosanna in the highest!”',true,10),
+mc(2,'Where did Jesus look around after entering Jerusalem?',['The temple','Herod’s palace','The Mount of Olives','The marketplace'],11),blank(3,'He went out to Bethany with the _____.','twelve',11,['12']),
+word(1,'How did Jesus feel after leaving Bethany the next day?','hungry',12),tf(2,'Jesus was hungry when He came out from Bethany.',true,12),
+mc(1,'What did Jesus find on the fig tree?',['Nothing but leaves','Many ripe figs','One fig','No leaves or fruit'],13),blank(2,'it was not the _____ for figs.','season',13),
+word(2,'What did Jesus say would never again be eaten from the tree?','fruit',14),tf(3,'The disciples did not hear Jesus speak to the fig tree.',false,14,'They heard Him.'),
+mc(1,'Whose tables did Jesus overturn in the temple?',['The money changers’','The scribes’','The disciples’','The fig sellers’'],15),blank(3,'overturned the tables of the money _____','changers',15),
+word(1,'What did Jesus prevent people from carrying through the temple?','wares',16),tf(2,'Jesus permitted commerce to continue through the temple.',false,16,'He would not allow anyone to carry wares through it.'),
+mc(2,'What should God’s house be called?',['A house of prayer for all nations','A den of thieves','A house of trade','A royal court'],17),blank(1,'you have made it a “den of _____.”','thieves',17),
+word(2,'Why did the religious leaders fear Jesus?','the people were astonished at His teaching',18,['all the people were astonished']),tf(3,'The scribes and chief priests sought how to destroy Jesus.',true,18),
+mc(1,'When did Jesus leave the city?',['When evening came','At noon','Before entering the temple','At dawn'],19),blank(2,'When _____ had come, He went out of the city.','evening',19),
+word(1,'How had the fig tree dried up?','from the roots',20),tf(3,'The fig tree appeared healthier the next morning.',false,20,'It was dried up from the roots.'),
+mc(1,'Who pointed out the withered fig tree?',['Peter','John','James','A scribe'],21),blank(2,'The fig tree which You cursed has _____ away.','withered',21),
+word(2,'In whom did Jesus tell the disciples to have faith?','God',22),tf(1,'Jesus answered the fig-tree observation by saying, “Have faith in God.”',true,22),
+mc(3,'What two inner responses accompany the command to a mountain?',['Not doubting and believing','Fear and silence','Anger and grief','Fasting and sleep'],23),blank(3,'Be removed and be cast into the _____','sea',23),
+word(1,'What should a person do when asking in prayer?','believe that they receive',24,['believe']),tf(2,'Jesus connected believing prayer with receiving.',true,24),
+mc(1,'What must a praying person do when holding something against another?',['Forgive','Seek revenge','Leave the temple','Make an offering first'],25),blank(2,'that your Father in heaven may also _____ you your trespasses.','forgive',25),
+word(2,'What happens if a person refuses to forgive?','the Father will not forgive their trespasses',26,['the Father will not forgive']),tf(3,'Jesus taught that forgiving others is unrelated to receiving forgiveness.',false,26,'He explicitly connected them.'),
+mc(1,'Who approached Jesus while He walked in the temple?',['Chief priests, scribes, and elders','The Twelve only','Money changers','People from Bethany'],27),blank(3,'as He was walking in the _____','temple',27),
+word(1,'What did the leaders challenge?','Jesus’ authority',28,['His authority','the authority for His actions']),tf(2,'They asked who gave Jesus authority to do these things.',true,28),
+mc(2,'What did Jesus require before answering their authority question?',['They must answer His question','They must leave the temple','They must forgive Him','They must find the colt'],29),blank(1,'I also will ask you one _____','question',29),
+word(3,'What subject did Jesus ask whether it came from heaven or men?','John’s baptism',30,['the baptism of John']),tf(1,'Jesus asked directly about the origin of John’s baptism.',true,30),
+mc(2,'What challenge would follow if they answered “from heaven”?',['Why then did you not believe him?','Why did you enter the temple?','Why did you free the colt?','Why did you fear Rome?'],31),blank(3,'Why then did you not _____ him?','believe',31),
+word(2,'Why were the leaders afraid to answer “from men”?','they feared the people',32,['the people counted John a prophet']),tf(1,'The people regarded John as a prophet.',true,32),
+mc(1,'What answer did the leaders finally give?',['We do not know','From heaven','From men','From Jerusalem'],33),blank(2,'Neither will I tell you by what _____ I do these things.','authority',33),
+]};
+export default bank;
