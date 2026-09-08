@@ -10,7 +10,7 @@ mc(1,'Where would the disciples see Jesus?',['Galilee','Jerusalem’s temple','B
 word(2,'Why did the women initially say nothing to anyone?','they were afraid',8,['fear','afraid']),tf(1,'The women left trembling and amazed.',true,8),
 mc(1,'To whom did the risen Jesus appear first?',['Mary Magdalene','Peter','Salome','The Eleven'],9),blank(2,'out of whom He had cast _____ demons.','seven',9,['7']),
 word(2,'What were Jesus’ former companions doing when Mary told them?','mourning and weeping',10,['they mourned and wept']),tf(3,'Mary kept the appearance entirely to herself.',false,10,'She went and told those who had been with Jesus.'),
-mc(2,'How did the mourners respond to Mary’s report?',['They did not believe','They immediately went to Galilee','They celebrated','They returned to the tomb with her'],11),blank(1,'He was alive and had been seen by her, they did not _____.','believe',11),
+mc(3,'How did the mourners respond to Mary’s report?',['They did not believe','They immediately went to Galilee','They celebrated','They returned to the tomb with her'],11),blank(1,'He was alive and had been seen by her, they did not _____.','believe',11),
 word(3,'To how many people did Jesus appear in another form?','two',12,['2']),tf(1,'The two were walking into the country.',true,12),
 mc(1,'How did the others receive the two witnesses’ report?',['They did not believe them either','They believed immediately','They accused Mary','They went preaching'],13),blank(2,'they went and told it to the _____','rest',13),
 word(2,'What two faults did Jesus rebuke in the Eleven?','unbelief and hardness of heart',14),tf(3,'Jesus praised the Eleven for believing every resurrection witness.',false,14,'He rebuked their unbelief and hardness of heart.'),
