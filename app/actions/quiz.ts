@@ -153,6 +153,21 @@ export async function abandonSession(sessionId: string): Promise<void> {
   await supabase.from('quiz_sessions').update({ completed_at: new Date().toISOString() }).eq('id', sessionId).eq('user_id', user.id)
 }
 
+/** Durable resume cursor: answer rows are authoritative; quiz_sessions.position is only display metadata. */
+export async function getSessionAnsweredQuestionIds(sessionId: string): Promise<string[]> {
+  if (!isUuid(sessionId)) return []
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return []
+  const { data, error } = await supabase
+    .from('quiz_answers')
+    .select('question_id')
+    .eq('user_id', user.id)
+    .eq('session_id', sessionId)
+  if (error) return []
+  return [...new Set((data ?? []).map(row => row.question_id))]
+}
+
 /** Wipe all answers + sessions for one chapter (user asked to start over). */
 export async function resetChapterProgress(chapterId: string, scopeKind: QuizScopeKind = 'chapter'): Promise<void> {
   if (!isUuid(chapterId)) return

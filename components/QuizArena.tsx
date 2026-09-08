@@ -6,15 +6,16 @@ import type { QuizQuestion, QuizType } from '@/lib/types';
 import type { QuizChapterSummary, QuizCollectionSummary } from '@/lib/db';
 import { displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, DIFFICULTY_LABEL, TYPE_LABEL } from '@/lib/quiz-grading';
 import {
-  applyAnswer, buildSession, computeMastery, verseHref, priorityRank, poolRemaining,
+  applyAnswer, buildSession, computeMastery, verseHref, priorityRank, poolRemaining, isSupportedQuizType, resumeStartIndex,
   SESSION_SIZE, QUICK_SIZE, type StatsMap, type SessionMode,
 } from '@/lib/quiz-session';
 import {
-  getChapterStats, createSession, recordAnswer, abandonSession, resetChapterProgress,
+  getChapterStats, createSession, recordAnswer, abandonSession, resetChapterProgress, getSessionAnsweredQuestionIds,
   type ChapterProgress, type OpenSession, type QuizScopeKind,
 } from '@/app/actions/quiz';
 import { saveQuizScore } from '@/app/actions/progress';
 import { markSectionForVerse } from '@/lib/mark-sections';
+import UnsupportedQuizQuestion from '@/components/UnsupportedQuizQuestion';
 
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete' | 'browse';
 type Level = 1 | 2 | 3 | 'mixed';
@@ -129,15 +130,16 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
 
   async function resume(ch: QuizSource, open: OpenSession) {
     setChapter(ch); setMode(open.mode); setPhase('loading');
-    const [qs, { stats: st }] = await Promise.all([loadPool(ch), loadStats(ch)]);
+    const [qs, { stats: st }, answeredIds] = await Promise.all([loadPool(ch), loadStats(ch), getSessionAnsweredQuestionIds(open.id)]);
     setPool(qs); setStats(st);
     const byId = new Map(qs.map(q => [q.id, q]));
     const ordered = open.questionIds.map(id => byId.get(id)).filter((q): q is QuizQuestion => !!q);
-    if (open.position >= ordered.length) { // nothing left — treat as complete
+    const startIndex = resumeStartIndex(open.questionIds, ordered.map(q => q.id), answeredIds);
+    if (startIndex >= ordered.length) { // missing/retired IDs are skipped; durable answers say the rest is complete
       await abandonSession(open.id);
       return quit();
     }
-    startRound(ordered, open.position, open.correctCount, open.id);
+    startRound(ordered, startIndex, open.correctCount, open.id);
   }
 
   async function browse(ch: QuizSource) {
@@ -552,6 +554,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
 
   // ========================================================= QUESTION / REVEAL
   if (!current) return null;
+  if (!isSupportedQuizType(current.type)) return <UnsupportedQuizQuestion question={current.question} />;
   const answeredCount = index + (revealed ? 1 : 0);
   const runningCorrect = priorCorrect + answered.filter(a => a.correct).length;
 

@@ -64,7 +64,7 @@ describe('buildRound', () => {
   it('balances across question types', () => {
     const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
     const big: QuizQuestion[] = []
-    types.forEach((t, ti) => { for (let i = 0; i < 8; i++) big.push({ ...base, id: `${t}-${i}`, type: t, difficulty: 1 }) })
+    types.forEach(t => { for (let i = 0; i < 8; i++) big.push({ ...base, id: `${t}-${i}`, type: t, difficulty: 1 }) })
     // heavily skewed: 20 extra multiple choice
     for (let i = 0; i < 20; i++) big.push({ ...base, id: `mc-extra-${i}`, type: 'multiple_choice', difficulty: 1 })
     const round = buildRound(big, 1, new Set(), 10)

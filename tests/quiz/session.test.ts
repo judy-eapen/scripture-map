@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank, poolRemaining } from '../../lib/quiz-session'
+import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank, poolRemaining, resumeStartIndex, isSupportedQuizType } from '../../lib/quiz-session'
 import type { QuizQuestion } from '../../lib/types'
 
 const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
@@ -62,5 +62,18 @@ describe('mastery + priority', () => {
     stats = applyAnswer(stats, pool[0].id, false)
     expect(poolRemaining(pool, stats)).toBe(12)
     expect(computeMastery(pool, stats).mastered).toBe(0)
+  })
+})
+
+describe('safe session resume', () => {
+  it('uses answer rows rather than position and skips retired or missing questions', () => {
+    const stored = ['q1', 'retired', 'q2', 'q3']
+    expect(resumeStartIndex(stored, ['q1', 'q2', 'q3'], ['q1', 'retired'])).toBe(1)
+    expect(resumeStartIndex(stored, ['q1', 'q2', 'q3'], ['q1', 'q2'])).toBe(2)
+  })
+
+  it('recognises supported types and rejects a future unknown type', () => {
+    expect(isSupportedQuizType('multiple_choice')).toBe(true)
+    expect(isSupportedQuizType('future_question_type')).toBe(false)
   })
 })

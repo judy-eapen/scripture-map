@@ -14,6 +14,19 @@ export type StatsMap = Record<string, QuestionStat>
 export const SESSION_SIZE = 25
 export const QUICK_SIZE = 10
 
+export const SUPPORTED_QUIZ_TYPES = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
+
+export function isSupportedQuizType(value: unknown): value is QuizType {
+  return typeof value === 'string' && (SUPPORTED_QUIZ_TYPES as readonly string[]).includes(value)
+}
+
+/** Resume from durable answer rows, never from the advisory session.position field. */
+export function resumeStartIndex(questionIds: string[], availableIds: Iterable<string>, answeredIds: Iterable<string>): number {
+  const available = new Set(availableIds)
+  const answered = new Set(answeredIds)
+  return questionIds.filter(id => available.has(id) && answered.has(id)).length
+}
+
 export type SessionMode = 'session' | 'quick' | 'drill'
 export type SessionOptions = {
   size: number
