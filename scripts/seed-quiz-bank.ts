@@ -110,66 +110,63 @@ async function main() {
     if (r.type === 'multiple_choice') Object.assign(base, shuffleOptions(r.options!));
     return base;
   });
+  // Learner answers reference question IDs (quiz_answers cascades on delete), so rows are
+  // never deleted: matching rows are updated in place, new rows inserted, missing rows retired.
+  const canRetire = !(await sb.from('quiz_questions').select('retired_at').limit(1)).error;
   const existingResult = await sb
     .from('quiz_questions')
-    .select('id, verse_number, type')
+    .select('id, verse_number, type, question, options, correct_index, retired_at')
     .eq('chapter_id', chapter.id)
     .eq('tag', bank.tag);
   if (existingResult.error) throw existingResult.error;
   const existing = existingResult.data ?? [];
 
-  if (existing.length) {
-    // Match within the cited verse, rather than by question type. Re-authoring may
-    // legitimately change a weak template into another type; the stable database
-    // ID is what preserves answers and open-session references.
-    const key = (row: { verse_number: number }) => `${row.verse_number}`;
-    const oldGroups = new Map<string, typeof existing>();
-    for (const row of existing) {
-      const group = oldGroups.get(key(row)) ?? [];
-      group.push(row);
-      oldGroups.set(key(row), group);
-    }
-    for (const group of oldGroups.values()) group.sort((a, b) => a.id.localeCompare(b.id));
-
-    const nextGroups = new Map<string, Array<(typeof payload)[number]>>();
-    for (const row of payload) {
-      const group = nextGroups.get(key(row)) ?? [];
-      group.push(row);
-      nextGroups.set(key(row), group);
-    }
-
-    const groupKeys = new Set([...oldGroups.keys(), ...nextGroups.keys()]);
-    const mismatches = [...groupKeys].filter(groupKey =>
-      (oldGroups.get(groupKey)?.length ?? 0) > (nextGroups.get(groupKey)?.length ?? 0));
-    if (mismatches.length) {
-      const details = mismatches.map(groupKey =>
-        `${groupKey} existing=${oldGroups.get(groupKey)?.length ?? 0} new=${nextGroups.get(groupKey)?.length ?? 0}`);
-      throw new Error(`Refusing to delete question IDs because a verse group became smaller:\n${details.join('\n')}`);
-    }
-
-    const updates = [...nextGroups.entries()].flatMap(([groupKey, rows]) =>
-      rows.slice(0, oldGroups.get(groupKey)?.length ?? 0)
-        .map((row, index) => ({ ...row, id: oldGroups.get(groupKey)![index].id })));
-    for (let i = 0; i < updates.length; i += 100) {
-      const upsert = await sb.from('quiz_questions').upsert(updates.slice(i, i + 100), { onConflict: 'id' });
-      if (upsert.error) throw upsert.error;
-    }
-    const additions = [...nextGroups.entries()].flatMap(([groupKey, rows]) =>
-      rows.slice(oldGroups.get(groupKey)?.length ?? 0));
-    for (let i = 0; i < additions.length; i += 100) {
-      const ins = await sb.from('quiz_questions').insert(additions.slice(i, i + 100));
-      if (ins.error) throw ins.error;
-    }
-    console.log(`✓ updated ${updates.length} tagged rows in place and inserted ${additions.length}; learner question IDs preserved`);
-  } else {
-    for (let i = 0; i < payload.length; i += 100) {
-      const ins = await sb.from('quiz_questions').insert(payload.slice(i, i + 100));
-      if (ins.error) throw ins.error;
-    }
-    console.log(`✓ inserted ${payload.length} new tagged rows`);
+  const matched = new Map<string, (typeof payload)[number]>(); // existing id -> new row
+  const unmatched: Array<(typeof payload)[number]> = [];
+  const freeByVerse = new Map<number, typeof existing>();
+  const byText = new Map<string, typeof existing>();
+  for (const row of existing) {
+    (byText.get(norm(row.question)) ?? byText.set(norm(row.question), []).get(norm(row.question))!).push(row);
   }
-  const { count } = await sb.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id);
-  console.log(`chapter now has ${count} questions total (incl. legacy)`);
+  // 1. exact wording match keeps the ID (and, for multiple choice, the stored option order)
+  for (const row of payload) {
+    const cands = byText.get(norm(row.question))?.filter(r => !matched.has(r.id));
+    const hit = cands?.find(r => !r.retired_at) ?? cands?.[0];
+    if (hit) {
+      const keepOptions = hit.type === 'multiple_choice' && row.type === 'multiple_choice' && hit.options
+        && new Set(hit.options.map(norm)).size === 4 && hit.options.map(norm).sort().join('|') === (row.options ?? []).map(norm).sort().join('|');
+      matched.set(hit.id, keepOptions ? { ...row, options: hit.options, correct_index: hit.correct_index } : row);
+    } else unmatched.push(row);
+  }
+  // 2. remaining new rows take over an unmatched ACTIVE row on the same verse (a rewrite of that question)
+  for (const row of existing) if (!matched.has(row.id) && !row.retired_at) (freeByVerse.get(row.verse_number) ?? freeByVerse.set(row.verse_number, []).get(row.verse_number)!).push(row);
+  const additions: typeof payload = [];
+  for (const row of unmatched) {
+    const pool = freeByVerse.get(row.verse_number);
+    const hit = pool?.shift();
+    if (hit) matched.set(hit.id, row); else additions.push(row);
+  }
+  // 3. anything still unmatched and active is retired (never deleted)
+  const toRetire = existing.filter(r => !matched.has(r.id) && !r.retired_at).map(r => r.id);
+  if (toRetire.length && !canRetire) throw new Error(`${toRetire.length} question(s) would be removed but quiz_questions has no retired_at column — apply supabase/migrations/013_retire_questions.sql first.`);
+
+  const updates = [...matched.entries()].map(([id, row]) => ({ ...row, id, ...(canRetire ? { retired_at: null } : {}) }));
+  for (let i = 0; i < updates.length; i += 100) {
+    const up = await sb.from('quiz_questions').upsert(updates.slice(i, i + 100), { onConflict: 'id' });
+    if (up.error) throw up.error;
+  }
+  for (let i = 0; i < additions.length; i += 100) {
+    const ins = await sb.from('quiz_questions').insert(additions.slice(i, i + 100));
+    if (ins.error) throw ins.error;
+  }
+  if (toRetire.length) {
+    const ret = await sb.from('quiz_questions').update({ retired_at: new Date().toISOString() }).in('id', toRetire);
+    if (ret.error) throw ret.error;
+  }
+  const revived = existing.filter(r => matched.has(r.id) && r.retired_at).length;
+  console.log(`✓ ${updates.length} kept/updated in place (${revived} revived), ${additions.length} inserted, ${toRetire.length} retired; learner answers preserved`);
+  const active = await sb.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id).is('retired_at', null);
+  console.log(`chapter now has ${active.count ?? '?'} active questions`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

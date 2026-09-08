@@ -53,4 +53,4 @@ mc(2,'What common sign of covenant renewal appears in Solomon’s dedication and
 mc(3,'What progression links Jeroboam’s fear, Israel’s repeated royal sin, and the northern kingdom’s exile?','Political fear produced rival worship, later kings continued it, and persistent idolatry helped bring removal from the land',['Jeroboam’s fear led him to rebuild the temple, and Assyria rewarded Israel','Later kings rejected Jeroboam’s worship, but Judah forced Israel into exile','The calves protected Israel until Babylon destroyed Samaria'],'Kings traces Israel’s defining idolatry from Jeroboam’s decision through its repetition and finally into the explanation of exile.',[r('1 Kings',12,26,33),r('1 Kings',16,25,26),r('2 Kings',17,21,23)],'From false worship to exile','Trace the narrator’s repeated references to Jeroboam from the division to Israel’s fall.'),
 ]
 
-export default {slug:'all-kings',tag:'all-kings-v2',status:'draft' as const,rows}
+export default {slug:'all-kings',tag:'all-kings-v2',status:'published' as const,rows}

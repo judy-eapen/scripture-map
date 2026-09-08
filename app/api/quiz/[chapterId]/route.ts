@@ -18,7 +18,7 @@ export async function GET(
   const sp = req.nextUrl.searchParams
 
   const ownerColumn = sp.get('scope') === 'collection' ? 'collection_id' : 'chapter_id'
-  let query = supabase.from('quiz_questions').select(QUIZ_SELECT).eq(ownerColumn, chapterId)
+  let query = supabase.from('quiz_questions').select(QUIZ_SELECT).eq(ownerColumn, chapterId).is('retired_at', null)
 
   const difficulty = Number(sp.get('difficulty'))
   if (difficulty >= 1 && difficulty <= 3) query = query.eq('difficulty', difficulty)

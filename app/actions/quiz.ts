@@ -62,15 +62,18 @@ export async function getQuizProgress(): Promise<Record<string, ChapterProgress>
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return {}
 
-  const [{ data: answers }, { data: sessions }] = await Promise.all([
+  const [{ data: answers }, { data: sessions }, { data: retiredRows }] = await Promise.all([
     supabase.from('quiz_answers').select('question_id, chapter_id, collection_id, correct, answered_at').eq('user_id', user.id).order('answered_at'),
     supabase.from('quiz_sessions').select('id, chapter_id, collection_id, mode, question_ids, position, correct_count').eq('user_id', user.id).is('completed_at', null),
+    supabase.from('quiz_questions').select('id').not('retired_at', 'is', null),
   ])
+  // answers to retired questions still exist (history) but no longer count toward mastery
+  const retired = new Set((retiredRows ?? []).map(r => r.id))
 
   const perQ = new Map<string, { chapter: string; correct: number; wrong: number; last: boolean }>()
   for (const a of answers ?? []) {
     const ownerId = a.chapter_id ?? a.collection_id
-    if (!ownerId) continue
+    if (!ownerId || retired.has(a.question_id)) continue
     const s = perQ.get(a.question_id) ?? { chapter: ownerId, correct: 0, wrong: 0, last: a.correct }
     if (a.correct) s.correct += 1; else s.wrong += 1
     s.last = a.correct
