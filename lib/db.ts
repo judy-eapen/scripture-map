@@ -90,10 +90,11 @@ export async function getChapterData(
         .select('id, verse_start, verse_end, topic, plain_language, theological_context')
         .eq('chapter_id', chapter.id)
         .order('verse_start'),
-      supabase
-        .from('quiz_questions')
-        .select('id', { count: 'exact', head: true })
-        .eq('chapter_id', chapter.id),
+      (async () => {
+        let result = await supabase.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id).is('retired_at', null)
+        if (result.error) result = await supabase.from('quiz_questions').select('id', { count: 'exact', head: true }).eq('chapter_id', chapter.id)
+        return result
+      })(),
       supabase
         .from('genealogy_nodes')
         .select('person_id'),
@@ -370,11 +371,13 @@ export async function getChaptersForTheme(themeId: string): Promise<{ book: stri
 // Get quiz questions for a chapter (random order, up to 10)
 export async function getQuizQuestions(chapterId: string): Promise<QuizQuestion[]> {
   const supabase = await createClient()
-  const { data, error } = await supabase
-    .from('quiz_questions')
-    .select('id, question, options, correct_index, explanation')
-    .eq('chapter_id', chapterId)
-    .limit(50) // fetch all, shuffle client-side for true randomness
+  const run = (filterRetired:boolean) => {
+    let query = supabase.from('quiz_questions').select('id, question, options, correct_index, explanation').eq('chapter_id', chapterId)
+    if (filterRetired) query = query.is('retired_at', null)
+    return query.limit(50)
+  }
+  let { data, error } = await run(true)
+  if (error) ({ data, error } = await run(false))
 
   if (error || !data) return []
   return data as QuizQuestion[]
@@ -649,10 +652,15 @@ export type QuizCollectionSummary = {
 
 export async function getQuizCollectionSummaries(): Promise<QuizCollectionSummary[]> {
   const supabase = await createClient()
-  const [{ data: collections }, { data: questions }] = await Promise.all([
+  const [{ data: collections }, questionResult] = await Promise.all([
     supabase.from('quiz_collections').select('id, slug, title, description, books, position').order('position'),
-    supabase.from('quiz_questions').select('collection_id, difficulty').not('collection_id', 'is', null),
+    (async () => {
+      let result = await supabase.from('quiz_questions').select('collection_id, difficulty').not('collection_id', 'is', null).is('retired_at', null)
+      if (result.error) result = await supabase.from('quiz_questions').select('collection_id, difficulty').not('collection_id', 'is', null)
+      return result
+    })(),
   ])
+  const questions = questionResult.data
   if (!collections) return []
   const counts = new Map<string, { 1: number; 2: number; 3: number; total: number }>()
   for (const q of questions ?? []) {
@@ -686,10 +694,8 @@ export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
   const questions: { chapter_id: string; difficulty: number | null }[] = []
   const pageSize = 1000
   for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
-      .from('quiz_questions')
-      .select('chapter_id, difficulty')
-      .range(from, from + pageSize - 1)
+    let { data, error } = await supabase.from('quiz_questions').select('chapter_id, difficulty').is('retired_at', null).range(from, from + pageSize - 1)
+    if (error) ({ data, error } = await supabase.from('quiz_questions').select('chapter_id, difficulty').range(from, from + pageSize - 1))
     if (error) break
     questions.push(...(data ?? []))
     if (!data || data.length < pageSize) break

@@ -117,7 +117,7 @@ export type NeighboringNation = {
   key_rulers: { name: string; years: string; note: string }[];
 };
 
-export type QuizType = 'multiple_choice' | 'fill_blank' | 'one_word' | 'true_false';
+export type QuizType = 'multiple_choice' | 'fill_blank' | 'one_word' | 'true_false' | 'short_answer';
 export type QuizDifficulty = 1 | 2 | 3;
 
 export type QuizQuestion = {

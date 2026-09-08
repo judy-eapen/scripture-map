@@ -6,7 +6,7 @@ import type { QuizQuestion, QuizType } from '@/lib/types';
 import type { QuizChapterSummary, QuizCollectionSummary } from '@/lib/db';
 import { displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, DIFFICULTY_LABEL, TYPE_LABEL } from '@/lib/quiz-grading';
 import {
-  applyAnswer, buildSession, computeMastery, verseHref, priorityRank, poolRemaining, isSupportedQuizType, resumeStartIndex,
+  applyAnswer, buildSession, computeMastery, priorityRank, poolRemaining, isSupportedQuizType, resumeStartIndex,
   SESSION_SIZE, QUICK_SIZE, type StatsMap, type SessionMode,
 } from '@/lib/quiz-session';
 import {
@@ -16,6 +16,7 @@ import {
 import { saveQuizScore } from '@/app/actions/progress';
 import { markSectionForVerse } from '@/lib/mark-sections';
 import UnsupportedQuizQuestion from '@/components/UnsupportedQuizQuestion';
+import QuestionSource from '@/components/QuestionSource';
 
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete' | 'browse';
 type Level = 1 | 2 | 3 | 'mixed';
@@ -38,8 +39,8 @@ type QuizSource = QuizChapterSummary & {
   slug?: string;
 };
 
-const TYPE_ICON: Record<QuizType, string> = { multiple_choice: 'ⓐ', fill_blank: '▁', one_word: '✎', true_false: '✓✗' };
-const TYPE_ORDER: QuizType[] = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'];
+const TYPE_ICON: Record<QuizType, string> = { multiple_choice: 'ⓐ', fill_blank: '▁', one_word: '✎', true_false: '✓✗', short_answer:'✎' };
+const TYPE_ORDER: QuizType[] = ['multiple_choice', 'fill_blank', 'one_word', 'true_false', 'short_answer'];
 
 const card: React.CSSProperties = { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' };
 const goldBtn: React.CSSProperties = { background: 'rgba(201,168,76,0.14)', border: '1px solid rgba(201,168,76,0.35)', color: 'var(--gold-300)' };
@@ -79,6 +80,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   const [lastCorrect, setLastCorrect] = useState<boolean | null>(null);
   const [choice, setChoice] = useState<number | null>(null);
   const [typed, setTyped] = useState('');
+  const [awaitingSelfGrade, setAwaitingSelfGrade] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const chapterSources = useMemo<QuizSource[]>(() => chapters.map(ch => ({
@@ -95,7 +97,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   const bookTabs = useMemo(() => Array.from(new Map(chapters.map(ch => [ch.bookSlug, ch.bookName])).entries()), [chapters]);
 
   useEffect(() => {
-    if (phase === 'question' && (current?.type === 'fill_blank' || current?.type === 'one_word')) inputRef.current?.focus();
+    if (phase === 'question' && (current?.type === 'fill_blank' || current?.type === 'one_word' || current?.type === 'short_answer')) inputRef.current?.focus();
   }, [phase, current]);
 
   // ------------------------------------------------------------ data loading
@@ -110,7 +112,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
 
   function startRound(qs: QuizQuestion[], startIndex = 0, prior = 0, sid: string | null = null) {
     setRound(qs); setIndex(startIndex); setPriorCorrect(prior); setSessionId(sid);
-    setAnswered([]); setChoice(null); setTyped(''); setLastCorrect(null);
+    setAnswered([]); setChoice(null); setTyped(''); setLastCorrect(null); setAwaitingSelfGrade(false);
     setPhase(qs.length ? 'question' : 'complete');
   }
 
@@ -158,16 +160,28 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   // ------------------------------------------------------------- answering
   function submit() {
     if (!current || !chapter) return;
+    if (current.type === 'short_answer') {
+      if (!typed.trim()) return;
+      setAwaitingSelfGrade(true);
+      setPhase('revealed');
+      return;
+    }
     let ok = false, given = '';
     if (current.type === 'multiple_choice') { if (choice === null) return; ok = gradeMultipleChoice(current, choice); given = current.options?.[choice] ?? ''; }
     else if (current.type === 'true_false') { if (choice === null) return; ok = gradeTrueFalse(current, choice === 1); given = choice === 1 ? 'True' : 'False'; }
     else { if (!typed.trim()) return; ok = gradeText(current, typed); given = typed.trim(); }
 
+    finishAnswer(ok, given);
+  }
+
+  function finishAnswer(ok: boolean, given: string) {
+    if (!current || !chapter) return;
     const nextStats = applyAnswer(stats, current.id, ok);
     setStats(nextStats);
     const nextAnswered = [...answered, { q: current, correct: ok, given }];
     setAnswered(nextAnswered);
     setLastCorrect(ok);
+    setAwaitingSelfGrade(false);
     setPhase('revealed');
 
     const position = index + 1;
@@ -192,7 +206,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
       setPhase('complete');
       return;
     }
-    setIndex(i => i + 1); setChoice(null); setTyped(''); setLastCorrect(null); setPhase('question');
+    setIndex(i => i + 1); setChoice(null); setTyped(''); setLastCorrect(null); setAwaitingSelfGrade(false); setPhase('question');
   }
 
   function quit() {
@@ -530,13 +544,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
                     You said <span style={{ color: '#f87171' }}>“{given.replace(/^["“]|["”]$/g, '') || '—'}”</span> · Answer: <span style={{ color: '#34d399' }}>{displayAnswer(q)}</span>
                   </p>
                   {q.explanation && <p className="text-xs mt-1" style={{ color: 'var(--muted-500)' }}>{q.explanation}</p>}
-                  {q.supporting_refs?.length ? (
-                    <ReferenceLinks references={q.supporting_refs} prompt="Study" />
-                  ) : q.verse_ref && chapter && (
-                    <Link href={verseHref(chapter.bookSlug, chapter.chapterNumber, q.verse_number)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color: 'var(--gold-300)' }}>
-                      Read {q.verse_ref} →
-                    </Link>
-                  )}
+                  <QuestionSource question={q} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} />
                 </li>
               ))}
             </ul>
@@ -621,22 +629,24 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
             style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--ivory-100)', border: `1px solid ${revealed ? (lastCorrect ? 'rgba(16,185,129,0.5)' : 'rgba(239,68,68,0.5)') : 'rgba(201,168,76,0.3)'}` }} />
         </form>
       )}
+      {current.type === 'short_answer' && (
+        <form className="mb-4" onSubmit={e => { e.preventDefault(); if (!revealed) submit(); }}>
+          <textarea value={typed} disabled={revealed} onChange={e => setTyped(e.target.value)} rows={4}
+            placeholder="Write your answer in your own words…" className="w-full rounded-xl px-4 py-3 text-sm outline-none resize-y"
+            style={{ background:'rgba(255,255,255,0.04)', color:'var(--ivory-100)', border:'1px solid rgba(201,168,76,0.3)' }} />
+        </form>
+      )}
 
       {revealed && (
         <div className="rounded-2xl px-5 py-4 mb-4 text-sm" style={lastCorrect ? { ...okStyle, color: undefined } : { ...badStyle, color: undefined }}>
-          <p className="font-medium mb-1" style={{ color: lastCorrect ? '#34d399' : '#f87171' }}>
-            {lastCorrect ? 'Correct — out of the pool' : `Not quite — the answer is “${displayAnswer(current)}”. Back in the pool.`}
+          <p className="font-medium mb-1" style={{ color: lastCorrect ? '#34d399' : awaitingSelfGrade ? 'var(--gold-300)' : '#f87171' }}>
+            {awaitingSelfGrade ? 'Compare your response with the model answer.' : lastCorrect ? 'Correct — out of the pool' : `Not quite — the answer is “${displayAnswer(current)}”. Back in the pool.`}
           </p>
+          {awaitingSelfGrade && <p className="mt-2" style={{ color:'var(--ivory-100)' }}><span style={{ color:'var(--muted-400)' }}>Model answer:</span> {displayAnswer(current)}</p>}
           {current.explanation && <p style={{ color: 'var(--muted-400)' }}>{current.explanation}</p>}
           {!lastCorrect && current.review_topic && <p className="text-xs mt-3 font-medium" style={{ color: 'var(--gold-300)' }}>What to review: {current.review_topic}</p>}
           {!lastCorrect && current.review_guidance && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{current.review_guidance}</p>}
-          {current.supporting_refs?.length ? (
-            <ReferenceLinks references={current.supporting_refs} prompt={lastCorrect ? 'Reference' : 'Study'} />
-          ) : current.verse_ref && chapter && (
-            <Link href={verseHref(chapter.bookSlug, chapter.chapterNumber, current.verse_number)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color: lastCorrect ? 'var(--muted-500)' : 'var(--gold-300)' }}>
-              {lastCorrect ? current.verse_ref : `Read ${current.verse_ref} to fix this →`}
-            </Link>
-          )}
+          <QuestionSource question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} />
         </div>
       )}
 
@@ -644,11 +654,16 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
         <button onClick={quit} className="text-xs" style={{ color: 'var(--muted-500)' }}>
           {isAuthenticated && sessionId ? 'Save & exit' : 'Quit'}
         </button>
-        {revealed ? (
+        {awaitingSelfGrade ? (
+          <div className="flex gap-2">
+            <button onClick={() => finishAnswer(false, typed.trim())} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={badStyle}>I got it wrong</button>
+            <button onClick={() => finishAnswer(true, typed.trim())} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={okStyle}>I got it right</button>
+          </div>
+        ) : revealed ? (
           <button onClick={next} className="rounded-xl px-5 py-2.5 text-sm font-medium" style={goldBtn}>{index + 1 >= round.length ? 'See results' : 'Next →'}</button>
         ) : (
           <button onClick={submit} className="rounded-xl px-5 py-2.5 text-sm font-medium" style={goldBtn}
-            disabled={current.type === 'fill_blank' || current.type === 'one_word' ? !typed.trim() : choice === null}>Check</button>
+            disabled={current.type === 'fill_blank' || current.type === 'one_word' || current.type === 'short_answer' ? !typed.trim() : choice === null}>Check</button>
         )}
       </div>
     </div>
@@ -668,16 +683,4 @@ function renderBlank(text: string, answer: string | null, correct: boolean | nul
       )}
     </span>
   ));
-}
-
-function ReferenceLinks({ references, prompt }: { references: NonNullable<QuizQuestion['supporting_refs']>; prompt: string }) {
-  return (
-    <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2">
-      {references.map(ref => (
-        <Link key={`${ref.label}-${ref.verse_start}`} href={verseHref(ref.book_slug, ref.chapter, ref.verse_start)} className="text-xs underline underline-offset-2" style={{ color: 'var(--gold-300)' }}>
-          {prompt} {ref.label} →
-        </Link>
-      ))}
-    </div>
-  );
 }

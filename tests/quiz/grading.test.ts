@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalizeAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, buildRound, countRemaining } from '../../lib/quiz-grading'
+import { normalizeAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, buildRound, countRemaining, TYPE_LABEL } from '../../lib/quiz-grading'
 import type { QuizQuestion } from '../../lib/types'
 
 const base: QuizQuestion = {
@@ -7,6 +7,10 @@ const base: QuizQuestion = {
   correct_index: null, answer: "Ab'ishag", accepted_answers: ['Abishag the Shunammite'],
   verse_ref: '1 Kings 1:3', verse_number: 3, explanation: '',
 }
+
+it('labels self-graded responses as short answers', () => {
+  expect(TYPE_LABEL.short_answer).toBe('Short answer')
+})
 
 describe('normalizeAnswer', () => {
   it('drops RSV apostrophes and case', () => {
@@ -62,7 +66,7 @@ describe('buildRound', () => {
     expect([...diffs].sort()).toEqual(diffs)
   })
   it('balances across question types', () => {
-    const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
+    const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false', 'short_answer'] as const
     const big: QuizQuestion[] = []
     types.forEach(t => { for (let i = 0; i < 8; i++) big.push({ ...base, id: `${t}-${i}`, type: t, difficulty: 1 }) })
     // heavily skewed: 20 extra multiple choice

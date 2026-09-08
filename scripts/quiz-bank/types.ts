@@ -1,6 +1,6 @@
 export type Level = 1 | 2 | 3;
 export type BankRow = {
-  type: 'multiple_choice' | 'fill_blank' | 'one_word' | 'true_false';
+  type: 'multiple_choice' | 'fill_blank' | 'one_word' | 'true_false' | 'short_answer';
   difficulty: Level;
   question: string;
   /** multiple choice: correct answer FIRST, then 3 distractors (shuffled on insert) */
@@ -19,5 +19,7 @@ export const blank = (difficulty: Level, question: string, answer: string, verse
   ({ type: 'fill_blank', difficulty, question, answer, accepted_answers, verse_number });
 export const word = (difficulty: Level, question: string, answer: string, verse_number: number, accepted_answers: string[] = [], explanation = ''): BankRow =>
   ({ type: 'one_word', difficulty, question, answer, accepted_answers, verse_number, explanation });
+export const sa = (difficulty: Level, question: string, answer: string, verse_number: number, explanation = ''): BankRow =>
+  ({ type: 'short_answer', difficulty, question, answer, verse_number, explanation });
 export const tf = (difficulty: Level, question: string, answer: boolean, verse_number: number, explanation = ''): BankRow =>
   ({ type: 'true_false', difficulty, question, answer: answer ? 'true' : 'false', verse_number, explanation });

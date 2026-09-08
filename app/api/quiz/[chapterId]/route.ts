@@ -18,15 +18,18 @@ export async function GET(
   const sp = req.nextUrl.searchParams
 
   const ownerColumn = sp.get('scope') === 'collection' ? 'collection_id' : 'chapter_id'
-  let query = supabase.from('quiz_questions').select(QUIZ_SELECT).eq(ownerColumn, chapterId)
-
   const difficulty = Number(sp.get('difficulty'))
-  if (difficulty >= 1 && difficulty <= 3) query = query.eq('difficulty', difficulty)
-
   const types = sp.get('types')?.split(',').filter(Boolean)
-  if (types?.length) query = query.in('type', types)
-
-  const { data, error } = await query
+  const run = (filterRetired: boolean) => {
+    let query = supabase.from('quiz_questions').select(QUIZ_SELECT).eq(ownerColumn, chapterId)
+    if (filterRetired) query = query.is('retired_at', null)
+    if (difficulty >= 1 && difficulty <= 3) query = query.eq('difficulty', difficulty)
+    if (types?.length) query = query.in('type', types)
+    return query
+  }
+  let { data, error } = await run(true)
+  // Safe before migration 013: retry the identical runtime query without retired_at.
+  if (error) ({ data, error } = await run(false))
   if (error) return NextResponse.json([], { status: 200 })
   return NextResponse.json(data ?? [])
 }

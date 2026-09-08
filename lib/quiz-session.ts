@@ -14,7 +14,7 @@ export type StatsMap = Record<string, QuestionStat>
 export const SESSION_SIZE = 25
 export const QUICK_SIZE = 10
 
-export const SUPPORTED_QUIZ_TYPES = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
+export const SUPPORTED_QUIZ_TYPES = ['multiple_choice', 'fill_blank', 'one_word', 'true_false', 'short_answer'] as const
 
 export function isSupportedQuizType(value: unknown): value is QuizType {
   return typeof value === 'string' && (SUPPORTED_QUIZ_TYPES as readonly string[]).includes(value)

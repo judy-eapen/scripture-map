@@ -29,9 +29,13 @@ async function main() {
   const bookIds = new Map((books ?? []).map(book => [book.name, book.id]))
   const { data: chapters } = await supabase.from('chapters').select('chapter_number, verses, book_id').in('book_id', [...bookIds.values()])
   const verseCounts = new Map<string, number>()
+  const verseTexts = new Map<string, Array<{ verse_number:number; text:string }>>()
   for (const chapter of chapters ?? []) {
     const book = [...bookIds].find(([, id]) => id === chapter.book_id)?.[0]
-    if (book) verseCounts.set(`${book}:${chapter.chapter_number}`, (chapter.verses as unknown[]).length)
+    if (book) {
+      verseCounts.set(`${book}:${chapter.chapter_number}`, (chapter.verses as unknown[]).length)
+      verseTexts.set(`${book}:${chapter.chapter_number}`, chapter.verses as Array<{ verse_number:number; text:string }>)
+    }
   }
 
   const errors: string[] = [], questions = new Map<string, number>()
@@ -41,14 +45,22 @@ async function main() {
     const questionKey = norm(row.question)
     if (questions.has(questionKey)) errors.push(`${where}: duplicate of row ${questions.get(questionKey)}`)
     questions.set(questionKey, index + 1)
-    if (row.supporting_refs.length < 2) errors.push(`${where}: requires at least two supporting passages`)
-    if (new Set(row.supporting_refs.map(ref => `${ref.book}:${ref.chapter}:${ref.verse_start}-${ref.verse_end ?? ref.verse_start}`)).size < 2) errors.push(`${where}: passages must be distinct`)
+    if (row.supporting_refs.length < 1) errors.push(`${where}: requires at least one supporting passage`)
     for (const ref of row.supporting_refs) {
       const count = verseCounts.get(`${ref.book}:${ref.chapter}`)
       if (!count || ref.verse_start < 1 || ref.verse_start > count || (ref.verse_end ?? ref.verse_start) > count) errors.push(`${where}: invalid ${ref.label}`)
     }
     if (row.type === 'multiple_choice' && (row.options?.length !== 4 || new Set(row.options.map(norm)).size !== 4)) errors.push(`${where}: needs four unique options`)
     if (row.type !== 'multiple_choice' && !row.answer) errors.push(`${where}: answer missing`)
+    if (row.type === 'fill_blank') {
+      if ((row.question.match(/_{3,}/g) ?? []).length !== 1) errors.push(`${where}: fill_blank needs exactly one blank`)
+      const ref = row.supporting_refs[0]
+      const source = (verseTexts.get(`${ref.book}:${ref.chapter}`) ?? [])
+        .filter(verse => verse.verse_number >= ref.verse_start && verse.verse_number <= (ref.verse_end ?? ref.verse_start))
+        .map(verse => verse.text).join(' ')
+      const rebuilt = norm(row.question.replace(/_{3,}/, row.answer ?? ''))
+      if (!norm(source).includes(rebuilt)) errors.push(`${where}: fill_blank does not reconstruct against ${ref.label}`)
+    }
   })
   if (errors.length) throw new Error(errors.join('\n'))
 

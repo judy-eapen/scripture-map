@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank, poolRemaining, resumeStartIndex, isSupportedQuizType } from '../../lib/quiz-session'
 import type { QuizQuestion } from '../../lib/types'
 
-const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false'] as const
+const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false', 'short_answer'] as const
 function makePool(perLevelPerType = 5): QuizQuestion[] {
   const pool: QuizQuestion[] = []
   for (const d of [1, 2, 3] as const) for (const t of types) for (let i = 0; i < perLevelPerType; i++)
@@ -12,7 +12,7 @@ function makePool(perLevelPerType = 5): QuizQuestion[] {
 }
 
 describe('buildSession (adaptive)', () => {
-  it('fresh learner: 25 questions, ramp 10/10/5, all four types present', () => {
+  it('fresh learner: 25 questions, ramp 10/10/5, all five types present', () => {
     const s = buildSession(makePool(), {}, { size: 25, difficulty: 'adaptive', types: 'all' })
     expect(s).toHaveLength(25)
     const byLevel = [1, 2, 3].map(d => s.filter(q => q.difficulty === d).length)
@@ -30,7 +30,7 @@ describe('buildSession (adaptive)', () => {
     expect(second.filter(q => firstIds.has(q.id))).toHaveLength(0)
   })
   it('wrong answers come back before right ones once everything is seen', () => {
-    const pool = makePool(2) // 24 questions total
+    const pool = makePool(2)
     let stats = {}
     pool.forEach((q, i) => { stats = applyAnswer(stats, q.id, i % 4 !== 0, 1000 + i) }) // every 4th wrong
     const s = buildSession(pool, stats, { size: 6, difficulty: 'mixed', types: 'all' })
@@ -53,14 +53,14 @@ describe('mastery + priority', () => {
     stats = applyAnswer(stats, pool[0].id, true)
     stats = applyAnswer(stats, pool[1].id, false)
     const m = computeMastery(pool, stats)
-    expect(m).toMatchObject({ total: 12, attempted: 2, mastered: 1, toReview: 1, correctAnswers: 1, wrongAnswers: 2 })
+    expect(m).toMatchObject({ total: 15, attempted: 2, mastered: 1, toReview: 1, correctAnswers: 1, wrongAnswers: 2 })
     expect(priorityRank(undefined)).toBe(0)
     expect(priorityRank(stats[pool[1].id])).toBe(1)
     expect(priorityRank(stats[pool[0].id])).toBe(2)
-    expect(poolRemaining(pool, stats)).toBe(11) // 12 total, one currently out
+    expect(poolRemaining(pool, stats)).toBe(14)
     // a later wrong answer puts it back in the pool
     stats = applyAnswer(stats, pool[0].id, false)
-    expect(poolRemaining(pool, stats)).toBe(12)
+    expect(poolRemaining(pool, stats)).toBe(15)
     expect(computeMastery(pool, stats).mastered).toBe(0)
   })
 })

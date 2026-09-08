@@ -4,8 +4,11 @@ export type CrossReference = { book:'1 Kings'|'2 Kings'; book_slug:ScriptureBook
 export type ComprehensiveRow = { type:QuizType; difficulty:QuizDifficulty; question:string; options?:string[]; answer?:string; accepted_answers?:string[]; explanation:string; supporting_refs:CrossReference[]; review_topic:string; review_guidance:string }
 const r=(book:'1 Kings'|'2 Kings',chapter:number,verse_start:number,verse_end?:number):CrossReference=>({book,book_slug:book==='1 Kings'?'1-kings':'2-kings',chapter,verse_start,verse_end,label:`${book} ${chapter}:${verse_start}${verse_end&&verse_end!==verse_start?`–${verse_end}`:''}`})
 const mc=(difficulty:QuizDifficulty,question:string,correct:string,distractors:[string,string,string],explanation:string,supporting_refs:CrossReference[],review_topic:string,review_guidance:string):ComprehensiveRow=>({type:'multiple_choice',difficulty,question,options:[correct,...distractors],explanation,supporting_refs,review_topic,review_guidance})
+const sa=(difficulty:QuizDifficulty,question:string,answer:string,supporting_refs:CrossReference[],review_topic:string,explanation=answer):ComprehensiveRow=>({type:'short_answer',difficulty,question,answer,explanation,supporting_refs,review_topic,review_guidance:`Review ${supporting_refs.map(ref=>ref.label).join(' and ')}.`})
+const fb=(difficulty:QuizDifficulty,question:string,answer:string,supporting_ref:CrossReference,review_topic:string):ComprehensiveRow=>({type:'fill_blank',difficulty,question,answer,explanation:`The missing word is “${answer}.”`,supporting_refs:[supporting_ref],review_topic,review_guidance:`Read ${supporting_ref.label} in full.`})
+const tf=(difficulty:QuizDifficulty,question:string,answer:boolean,supporting_refs:CrossReference[],review_topic:string,explanation:string):ComprehensiveRow=>({type:'true_false',difficulty,question,answer:answer?'true':'false',explanation,supporting_refs,review_topic,review_guidance:`Review ${supporting_refs.map(ref=>ref.label).join(' and ')}.`})
 
-export const rows:ComprehensiveRow[]=[
+const draftedRows:ComprehensiveRow[]=[
 mc(1,'Which two prophets in Kings restored a woman’s son to life?','Elijah and Elisha',['Nathan and Ahijah','Micaiah and Isaiah','Jehu and Huldah'],'Elijah restored the widow of Zarephath’s son, and Elisha restored the Shunammite woman’s son.',[r('1 Kings',17,17,24),r('2 Kings',4,32,37)],'Children restored to life','Compare how Elijah and Elisha responded when each mother’s son died.'),
 mc(2,'What did Elijah’s and Elisha’s miracles for widows in financial danger have in common?','God multiplied a small household supply so it met an urgent need',['Each widow found treasure buried in her field','A king supported each widow permanently from his treasury','Each widow was told to sell her home and leave Israel'],'The widow at Zarephath’s meal and oil did not fail, while Elisha’s widow filled vessels from one jar of oil and sold it to pay her debt.',[r('1 Kings',17,8,16),r('2 Kings',4,1,7)],'Provision for widows','Review what each widow possessed initially and how God provided through it.'),
 mc(2,'Which statement correctly compares Elijah’s drought with the famine Elisha announced to the Shunammite woman?','Elijah said rain would cease, while Elisha warned of a famine lasting seven years',['Both were seven-year famines caused by a siege','Elisha announced the drought first and Elijah later ended it','Both warnings were given directly to Ahab in Samaria'],'Elijah announced that dew and rain would cease; Elisha later warned that the LORD had called for a seven-year famine.',[r('1 Kings',17,1),r('2 Kings',8,1,2)],'Prophetic warnings of famine','Study what each prophet announced, how the crisis was described, and who received the warning.'),
@@ -16,7 +19,7 @@ mc(2,'How did Jehu’s reform remain incomplete after he destroyed Baal worship 
 mc(2,'Which later king of Judah fulfilled the prophecy against Jeroboam’s altar at Bethel?','Josiah',['Hezekiah','Jehoshaphat','Joash'],'A man of God named Josiah long before his birth; Josiah later demolished and defiled the altar.',[r('1 Kings',13,1,3),r('2 Kings',23,15,20)],'Josiah and Bethel','Compare the prediction during Jeroboam’s reign with Josiah’s actions at Bethel.'),
 mc(2,'How was Elijah’s judgment against Jezebel eventually fulfilled?','She was thrown from a window at Jezreel, and dogs consumed her body',['She died in exile in Babylon and received a royal burial','She was killed on Mount Carmel with the prophets of Baal','She fled to Sidon and died during the drought'],'Elijah foretold that dogs would eat Jezebel by the wall of Jezreel; her death under Jehu fulfilled it.',[r('1 Kings',21,23),r('2 Kings',9,30,37)],'Judgment on Jezebel','Review Elijah’s sentence after Naboth’s murder and the account of Jezebel’s death.'),
 mc(2,'What earlier sin explains why dogs licking Ahab’s blood was presented as divine judgment?','Ahab and Jezebel arranged Naboth’s death and seized his vineyard',['Ahab refused to build the temple in Jerusalem','Ahab stole Naaman’s gifts from Elisha','Ahab destroyed the book of the law'],'After Naboth was falsely accused and killed, Elijah pronounced judgment on Ahab’s house.',[r('1 Kings',21,7,24),r('1 Kings',22,34,38)],'Naboth and Ahab','Connect the seizure of Naboth’s vineyard with Elijah’s sentence and Ahab’s death.'),
-mc(2,'What did Baasha and Zimri have in common in the way they gained power and were judged?','Each seized Israel’s throne violently, destroyed the previous royal house, and faced judgment on his own house',['Each inherited Judah’s throne peacefully','Each removed the golden calves and restored Jerusalem worship','Each was appointed king by Jezebel'],'Baasha destroyed Jeroboam’s house, and Zimri later destroyed Baasha’s house.',[r('1 Kings',15,27,30),r('1 Kings',16,9,13)],'Violent dynastic cycles','Trace how Jeroboam’s house ended and how the same pattern overtook Baasha’s house.'),
+mc(2,'What did Baasha and Zimri have in common in the way they gained power and were judged?','Each seized Israel’s throne violently, destroyed the previous royal house, and faced judgment on his own house',['Each inherited Israel’s throne peacefully, protected the previous royal house, and received a promise for his heirs','Each seized Judah’s throne violently, removed the high places, and established his own family in Jerusalem','Each was appointed over Israel by a prophet, spared the previous royal house, and died peacefully in Samaria'],'Baasha destroyed Jeroboam’s house, and Zimri later destroyed Baasha’s house.',[r('1 Kings',15,27,30),r('1 Kings',16,9,13)],'Violent dynastic cycles','Trace how Jeroboam’s house ended and how the same pattern overtook Baasha’s house.'),
 mc(1,'Which two kings of Judah were commended for doing right, yet failed to remove the high places?','Asa and Jehoshaphat',['Ahaz and Manasseh','Ahab and Jehu','Zedekiah and Jehoahaz'],'Asa and Jehoshaphat were evaluated positively, but the high places remained.',[r('1 Kings',15,9,15),r('1 Kings',22,41,44)],'Qualified reform','Compare the narrator’s evaluation of Asa and Jehoshaphat.'),
 mc(2,'How did Manasseh treat the religious reforms made by his father Hezekiah?','He reversed them by rebuilding high places and restoring idolatrous worship',['He completed them by destroying the temple','He extended them into Israel after defeating Assyria','He preserved them unchanged'],'Hezekiah removed high places and idols, but Manasseh rebuilt high places and erected altars to other gods.',[r('2 Kings',18,1,6),r('2 Kings',21,1,9)],'Hezekiah and Manasseh','List what Hezekiah removed and which practices Manasseh restored.'),
 mc(3,'What contrast does Kings draw between Ahaz and his son Hezekiah in responding to Assyria?','Ahaz sought Assyria’s help and gave it treasure, while Hezekiah trusted the LORD and rebelled',['Ahaz defeated Assyria, while Hezekiah became its servant','Both trusted Assyria and emptied the temple treasury','Both refused either political action or prayer'],'Ahaz appealed to Tiglath-pileser and sent treasure; Hezekiah trusted the LORD and refused submission.',[r('2 Kings',16,5,9),r('2 Kings',18,1,8)],'Ahaz and Hezekiah','Compare each king’s source of security when facing stronger nations.'),
@@ -51,6 +54,214 @@ mc(2,'What connection joins Elisha’s final prophecy to Israel’s later victor
 mc(3,'How did Hezekiah’s display of wealth foreshadow a reversal of Solomon’s international glory?','Nations once brought treasures to Solomon, but Babylon later saw and carried Judah’s treasures away',['Hezekiah’s display caused Solomon to lose his wisdom','Babylon returned all the wealth Egypt had taken from Solomon','The envoys crowned Hezekiah king over every nation'],'Solomon’s wealth drew admiring visitors; Hezekiah displayed his wealth to Babylon, which later removed the treasures.',[r('1 Kings',10,23,25),r('2 Kings',20,12,19),r('2 Kings',24,10,13)],'Royal wealth and Babylon','Compare visitors bringing gifts to Solomon with Hezekiah showing treasure to Babylon’s envoys.'),
 mc(2,'What common sign of covenant renewal appears in Solomon’s dedication and Josiah’s reform?','The king assembled the people around the temple and publicly centered them on the LORD’s covenant',['The king replaced the ark with a golden calf','The people abandoned Jerusalem for Bethel','The king invited Assyria to appoint the priests'],'Solomon gathered Israel for the ark and dedication; Josiah gathered Judah to hear the book and renew the covenant.',[r('1 Kings',8,1,21),r('2 Kings',23,1,3)],'Assembly and covenant','Compare why the people assembled and what covenant symbols or words stood at the center.'),
 mc(3,'What progression links Jeroboam’s fear, Israel’s repeated royal sin, and the northern kingdom’s exile?','Political fear produced rival worship, later kings continued it, and persistent idolatry helped bring removal from the land',['Jeroboam’s fear led him to rebuild the temple, and Assyria rewarded Israel','Later kings rejected Jeroboam’s worship, but Judah forced Israel into exile','The calves protected Israel until Babylon destroyed Samaria'],'Kings traces Israel’s defining idolatry from Jeroboam’s decision through its repetition and finally into the explanation of exile.',[r('1 Kings',12,26,33),r('1 Kings',16,25,26),r('2 Kings',17,21,23)],'From false worship to exile','Trace the narrator’s repeated references to Jeroboam from the division to Israel’s fall.'),
+
+// Reviewed whole-book design: tallies
+sa(2,'How many separate famines or droughts does Kings describe?','Five: Elijah’s drought; famine at Gilgal; Samaria’s siege famine; the seven-year famine; and Jerusalem’s siege famine. Four is also defensible if the Gilgal and seven-year famines are understood as the same famine.',[r('1 Kings',17,1),r('2 Kings',4,38),r('2 Kings',6,25),r('2 Kings',8,1),r('2 Kings',25,3)],'Famines across Kings'),
+sa(2,'How many times does fire come down from heaven in Kings?','Three: once on Elijah’s sacrifice at Carmel and twice on companies of fifty sent by Ahaziah.',[r('1 Kings',18,38),r('2 Kings',1,10,12)],'Fire from heaven'),
+sa(1,'How many people are raised from the dead in Kings?','Three: the widow of Zarephath’s son, the Shunammite woman’s son, and the man thrown into Elisha’s grave.',[r('1 Kings',17,22),r('2 Kings',4,35),r('2 Kings',13,21)],'People raised from death'),
+mc(2,'How many of the three people raised from the dead in Kings were raised through Elisha?','Two: one directly and one through contact with his bones',['One: only the Shunammite woman’s son','Three: every resurrection in Kings','None: both were raised through Elijah'],'Elisha restored the Shunammite’s son, and a dead man revived upon touching Elisha’s bones.',[r('2 Kings',4,35),r('2 Kings',13,21)],'Elisha and resurrection','Compare Elisha’s direct miracle with the event at his grave.'),
+sa(3,'How many lion attacks does Kings record?','Three: the man of God from Judah, a prophet’s disobedient companion, and settlers placed in Samaria.',[r('1 Kings',13,24),r('1 Kings',20,36),r('2 Kings',17,25)],'Lion attacks'),
+sa(2,'How many people does Kings say were healed of leprosy, and how many were struck with it?','One was healed: Naaman. Two were struck: Gehazi and King Azariah.',[r('2 Kings',5,14,27),r('2 Kings',15,5)],'Leprosy in Kings'),
+sa(3,'How many kings of Judah are said to have done what was right in the eyes of the LORD?','Eight: Asa, Jehoshaphat, Joash, Amaziah, Azariah, Jotham, Hezekiah, and Josiah.',[r('1 Kings',15,11),r('1 Kings',22,43),r('2 Kings',12,2),r('2 Kings',14,3),r('2 Kings',15,3,34),r('2 Kings',18,3),r('2 Kings',22,2)],'Kings who did right'),
+tf(1,'Every king of the northern kingdom of Israel is judged to have done evil in the sight of the LORD.',true,[r('1 Kings',12,25,33),r('2 Kings',17,21,23)],'Northern kings’ verdicts','True. No northern king receives the narrator’s verdict that he did right in the LORD’s sight.'),
+sa(2,'How many times does Elijah’s mantle part the waters of the Jordan?','Twice: once in Elijah’s hand and once in Elisha’s hand.',[r('2 Kings',2,8),r('2 Kings',2,14)],'Elijah’s mantle'),
+sa(2,'How many royal houses in Israel were told that dogs would eat their dead?','Three: the houses of Jeroboam, Baasha, and Ahab; Jezebel was also named individually.',[r('1 Kings',14,11),r('1 Kings',16,4),r('1 Kings',21,23,24)],'Dogs in dynastic judgments'),
+mc(3,'How many kings of Israel were killed by the man who then took the throne?','Seven: Nadab, Elah, Joram, Zechariah, Shallum, Pekahiah, and Pekah',['Five: Nadab, Elah, Joram, Zechariah, and Shallum','Nine: every king who followed Jeroboam','Three: Nadab, Joram, and Pekah'],'Seven northern kings were killed by their successors; Zimri killed himself rather than being killed by Omri.',[r('1 Kings',15,27,28),r('1 Kings',16,9,10),r('2 Kings',9,24),r('2 Kings',15,10,14),r('2 Kings',15,25),r('2 Kings',15,30)],'Violent accessions','Trace each assassination followed by the killer taking the throne.'),
+sa(3,'How many sons of Ahab did the elders put to death at Jehu’s order?','Seventy.',[r('2 Kings',10,1,7),r('2 Kings',10,10,11)],'Ahab’s sons'),
+sa(2,'How many relatives of Ahaziah did Jehu slaughter at Beth-eked?','Forty-two.',[r('2 Kings',10,12,14),r('2 Kings',2,24)],'The number forty-two'),
+tf(2,'Two she-bears tore forty-two boys who mocked Elisha at Bethel.',true,[r('2 Kings',2,23,24),r('2 Kings',10,14)],'Forty-two in Kings','True. The text says two she-bears tore forty-two of the boys.'),
+sa(3,'How many kings of Judah were assassinated?','Three: Joash, Amaziah, and Amon. Queen Athaliah was also executed.',[r('2 Kings',12,20),r('2 Kings',14,19),r('2 Kings',21,23),r('2 Kings',11,16)],'Assassinations in Judah'),
+sa(2,'How many pairs of kings share the same name across Israel and Judah?','Four pairs: Jehoram or Joram, Ahaziah, Jehoash or Joash, and Jehoahaz.',[r('1 Kings',22,50,51),r('2 Kings',1,17),r('2 Kings',8,16,25),r('2 Kings',10,35),r('2 Kings',11,21),r('2 Kings',13,1,10),r('2 Kings',23,31)],'Shared royal names'),
+mc(1,'How many tribes did Ahijah tell Jeroboam he would rule?','Ten tribes',['Two tribes','Twelve tribes','Seven tribes'],'Ahijah tore the garment into twelve pieces and told Jeroboam to take ten.',[r('1 Kings',11,29,31),r('1 Kings',12,20)],'Ten northern tribes','Compare Ahijah’s sign with the later division.'),
+
+// Who said it
+sa(1,'Who asked, “How long will you go limping with two different opinions?”','Elijah, speaking to the people on Mount Carmel.',[r('1 Kings',18,20,21),r('1 Kings',18,38,39)],'Elijah at Carmel'),
+sa(1,'Who cried, “The LORD, he is God; the LORD, he is God”?','All the people at Mount Carmel after the fire fell.',[r('1 Kings',18,38,39),r('1 Kings',18,21)],'Israel’s confession at Carmel'),
+sa(2,'Who said, “Have you found me, O my enemy?” and to whom?','Ahab said it to Elijah in Naboth’s vineyard.',[r('1 Kings',21,17,20),r('1 Kings',21,1,16)],'Ahab and Elijah'),
+sa(2,'Who said, “Am I God, to kill and to make alive?” and on what occasion?','The king of Israel, when he read Syria’s letter asking that Naaman be healed.',[r('2 Kings',5,5,8),r('2 Kings',5,14,15)],'Naaman’s letter'),
+sa(2,'Who said, “Fear not, for those who are with us are more than those who are with them”?','Elisha, speaking to his servant at Dothan.',[r('2 Kings',6,13,17),r('2 Kings',6,18,23)],'Elisha at Dothan'),
+sa(1,'Who first cried, “My father, my father! the chariots of Israel and its horsemen”?','Elisha, as Elijah was taken up.',[r('2 Kings',2,11,12),r('2 Kings',13,14)],'Chariots of Israel'),
+sa(3,'Who repeats, “My father, my father! the chariots of Israel and its horsemen” later in Kings?','King Joash of Israel, weeping over the dying Elisha.',[r('2 Kings',2,12),r('2 Kings',13,14)],'Joash at Elisha’s deathbed'),
+sa(2,'Who called Jehu “Zimri, murderer of your master”?','Jezebel, speaking from her window.',[r('2 Kings',9,30,33),r('1 Kings',16,9,20)],'Jezebel confronts Jehu'),
+sa(2,'Who cried, “Alas, my master! It was borrowed”?','One of the sons of the prophets whose axe head fell into the Jordan.',[r('2 Kings',6,1,7),r('2 Kings',4,38,44)],'The borrowed axe'),
+sa(1,'Who said, “Behold, the half was not told me”?','The queen of Sheba, after seeing Solomon’s wisdom and prosperity.',[r('1 Kings',10,1,9),r('1 Kings',10,23,25)],'Queen of Sheba'),
+sa(2,'Who asked God for “an understanding mind to govern thy people”?','Solomon at Gibeon.',[r('1 Kings',3,5,12),r('1 Kings',3,16,28)],'Solomon asks for wisdom'),
+sa(1,'Who asked Naboth, “Give me your vineyard, that I may have it for a vegetable garden”?','Ahab.',[r('1 Kings',21,1,4),r('1 Kings',21,7,16)],'Naboth’s vineyard'),
+sa(2,'Who asked to inherit a double share of another prophet’s spirit?','Elisha asked Elijah before Elijah was taken up.',[r('2 Kings',2,8,12),r('1 Kings',19,19,21)],'Elisha’s request'),
+sa(2,'Who said, “You should have struck five or six times,” and why?','Elisha said it to King Joash because he struck the ground only three times.',[r('2 Kings',13,14,19),r('2 Kings',13,22,25)],'Joash strikes the ground'),
+sa(2,'Who announced, “I have found the book of the law in the house of the LORD”?','Hilkiah the high priest, speaking to Shaphan.',[r('2 Kings',22,8,10),r('2 Kings',23,1,3)],'The book of the law'),
+sa(3,'Who cried, “What portion have we in David? … To your tents, O Israel”?','The people of Israel, rejecting Rehoboam at Shechem.',[r('1 Kings',12,1,16),r('1 Kings',12,19,20)],'Israel rejects Rehoboam'),
+sa(2,'Who said, “You have gone up to Jerusalem long enough. Behold your gods, O Israel”?','Jeroboam, presenting the golden calves.',[r('1 Kings',12,26,30),r('2 Kings',17,21,23)],'Jeroboam’s calves'),
+mc(2,'Who told Naaman to wash in the Jordan seven times?','Elisha, through a messenger',['Elijah, speaking beside the Jordan','Gehazi, after accepting Naaman’s gifts','The king of Israel, after reading Syria’s letter'],'Elisha sent a messenger with the instruction to wash seven times.',[r('2 Kings',5,8,14),r('2 Kings',5,15,19)],'Naaman washes','Review the instruction and Naaman’s response.'),
+sa(3,'Who asked, “Is it well with you? Is it well with your husband? Is it well with the child?”','Elisha, sending Gehazi to meet the Shunammite woman.',[r('2 Kings',4,25,27),r('2 Kings',4,32,37)],'The Shunammite seeks Elisha'),
+tf(2,'Elijah said, “Fear not, for those who are with us are more than those who are with them.”',false,[r('2 Kings',6,15,17),r('2 Kings',2,11,12)],'Elisha at Dothan','False. Elisha said this to his servant at Dothan.'),
+
+// Kings and kingdoms
+sa(1,'Which king reigned longest in Judah, and for how long?','Manasseh, fifty-five years.',[r('2 Kings',21,1),r('2 Kings',21,17,18)],'Judah’s longest reign'),
+sa(1,'Which king had the shortest reign in Kings, and how long was it?','Zimri, seven days in Tirzah.',[r('1 Kings',16,15,20),r('2 Kings',15,13,15)],'The shortest reign'),
+sa(2,'Which king of Israel reigned for one month?','Shallum.',[r('2 Kings',15,10,15),r('1 Kings',16,15)],'Shallum’s reign'),
+sa(2,'Which two kings of Judah reigned for exactly three months?','Jehoahaz and Jehoiachin.',[r('2 Kings',23,31),r('2 Kings',24,8)],'Three-month reigns'),
+sa(1,'Who was the youngest king to take the throne, and how old was he?','Joash, seven years old.',[r('2 Kings',11,21),r('2 Kings',22,1),r('2 Kings',21,1)],'Young kings of Judah'),
+mc(1,'Under which king was the book of the law found and the covenant renewed?','Josiah',['Hezekiah','Joash','Jehoshaphat'],'The book was found in Josiah’s reign and led to covenant renewal.',[r('2 Kings',22,8,13),r('2 Kings',23,1,3)],'Josiah and the law','Read the discovery and covenant assembly.'),
+mc(2,'Which king broke in pieces the bronze serpent Moses had made?','Hezekiah',['Josiah','Asa','Jehu'],'Hezekiah destroyed Nehushtan along with other objects of false worship.',[r('2 Kings',18,1,4),r('2 Kings',23,4,15)],'Hezekiah’s reform','Compare Hezekiah’s reform with Josiah’s.'),
+sa(2,'What was the bronze serpent called?','Nehushtan.',[r('2 Kings',18,4),r('2 Kings',18,5,6)],'Nehushtan'),
+sa(2,'Which king bought a hill for two talents of silver and built his capital there?','Omri bought the hill from Shemer and built Samaria on it.',[r('1 Kings',16,23,24),r('2 Kings',17,5,6)],'Building Samaria'),
+sa(3,'Which king of Israel had his border restored according to the word spoken through Jonah son of Amittai?','Jeroboam II.',[r('2 Kings',14,23,27),r('2 Kings',13,22,25)],'Jeroboam II and Jonah'),
+sa(1,'Who was the last king of Israel, and who captured Samaria?','Hoshea was the last king; the king of Assyria captured Samaria.',[r('2 Kings',17,1,6),r('2 Kings',18,9,10)],'The fall of Israel'),
+sa(1,'Who was the last king of Judah before Jerusalem fell?','Zedekiah.',[r('2 Kings',24,18,20),r('2 Kings',25,1,7)],'The fall of Judah'),
+sa(2,'Which two kings died at Megiddo?','Ahaziah of Judah and Josiah.',[r('2 Kings',9,27),r('2 Kings',23,29,30)],'Deaths at Megiddo'),
+mc(2,'Which king of Judah was struck with leprosy and lived in a separate house?','Azariah, also called Uzziah',['Jotham','Ahaz','Amaziah'],'The LORD struck Azariah, and Jotham governed the people.',[r('2 Kings',15,1,5),r('2 Kings',15,32,34)],'Azariah’s leprosy','Review Azariah’s illness and Jotham’s role.'),
+tf(2,'Athaliah is the only woman who ruled Judah in her own name.',true,[r('2 Kings',11,1,3),r('2 Kings',11,13,16)],'Athaliah rules Judah','True. Athaliah ruled the land for six years.'),
+tf(1,'Jehu was a king of Judah.',false,[r('2 Kings',9,6,13),r('2 Kings',10,28,36)],'Jehu’s kingdom','False. Jehu was anointed king over Israel.'),
+tf(2,'Hezekiah and Hoshea were kings at the same time.',true,[r('2 Kings',18,1),r('2 Kings',18,9,10)],'Contemporary kings','True. Hezekiah began reigning in Hoshea’s third year.'),
+mc(3,'Which king was praised as turning to the LORD with all his heart, soul, and might, with no king like him before or after?','Josiah',['Hezekiah','David','Asa'],'This particular praise is given to Josiah; Hezekiah is separately praised for incomparable trust.',[r('2 Kings',23,24,25),r('2 Kings',18,5,6)],'Josiah’s unique praise','Compare the distinct praise given to Josiah and Hezekiah.'),
+sa(3,'Which king’s mother was Naamah the Ammonitess?','Rehoboam.',[r('1 Kings',14,21),r('1 Kings',11,1,8)],'Rehoboam’s mother'),
+sa(2,'Which king made Israel sin with two golden calves, and where did he set them?','Jeroboam set them at Bethel and Dan.',[r('1 Kings',12,26,30),r('2 Kings',17,21,23)],'Jeroboam’s calves'),
+mc(2,'In which kingdom did the ruling dynasty never change hands?','Judah, where the house of David continued',['Israel, where Jeroboam’s house continued','Both kingdoms retained their first dynasty','Neither kingdom retained a single dynasty'],'Judah retained David’s line, while Israel passed through repeated dynastic coups.',[r('1 Kings',11,36),r('2 Kings',11,1,12),r('2 Kings',15,8,16)],'David’s continuing house','Compare the royal lines of Israel and Judah.'),
+
+// Prophecy and fulfilment
+sa(2,'Who was named as a future king long before his birth, and by whom?','Josiah, named by the man of God from Judah at Jeroboam’s altar.',[r('1 Kings',13,1,3),r('2 Kings',23,15,18)],'Josiah named in advance'),
+sa(3,'Whose word did Hiel of Bethel fulfill when he rebuilt Jericho at the cost of his two sons?','Joshua’s word.',[r('1 Kings',16,34),r('2 Kings',2,19,22)],'Jericho rebuilt'),
+sa(2,'What did Elijah foretell about Jezebel, and where was it fulfilled?','Dogs would eat her within the bounds of Jezreel; it was fulfilled at Jezreel under Jehu.',[r('1 Kings',21,23),r('2 Kings',9,30,37)],'Jezebel’s foretold death'),
+mc(2,'Whose blood did dogs lick up by the pool of Samaria?','Ahab’s',['Jezebel’s','Joram’s','Naboth’s'],'Dogs licked Ahab’s blood from the chariot, fulfilling the word spoken after Naboth’s death.',[r('1 Kings',21,19),r('1 Kings',22,34,38)],'Ahab’s blood','Connect Elijah’s prophecy with Ahab’s death.'),
+sa(3,'Why did Elisha weep when he met Hazael?','He knew the evil Hazael would do to Israel.',[r('2 Kings',8,7,15),r('2 Kings',10,32,33),r('2 Kings',13,3,22)],'Elisha and Hazael'),
+sa(2,'Which promise about Jehu’s family was fulfilled when Zechariah was killed?','Jehu’s sons would sit on Israel’s throne to the fourth generation.',[r('2 Kings',10,30),r('2 Kings',15,8,12)],'Jehu’s fourth generation'),
+sa(2,'What did God warn Solomon would happen if Israel turned away, and where does Kings show it happening?','Israel would be cut off from the land and the temple rejected; Samaria fell and Jerusalem’s temple was burned.',[r('1 Kings',9,6,9),r('2 Kings',17,6,23),r('2 Kings',25,8,10)],'Solomon’s covenant warning'),
+mc(3,'Isaiah told Hezekiah that his treasures and descendants would be carried to which city?','Babylon',['Nineveh','Damascus','Egypt'],'Isaiah named Babylon, and later Babylon carried away Jerusalem’s treasures and people.',[r('2 Kings',20,16,18),r('2 Kings',24,13,16)],'Babylon foretold','Compare Isaiah’s warning with Jehoiachin’s deportation.'),
+tf(2,'Ahab’s judgment was postponed to his son’s days because Ahab humbled himself.',true,[r('1 Kings',21,25,29),r('2 Kings',9,24,26)],'Ahab humbles himself','True. The LORD said the full disaster on Ahab’s house would come in his son’s days.'),
+sa(3,'What practice does 2 Kings say continued among Samaria’s settlers “to this day”?','They feared the LORD and also served their graven images.',[r('2 Kings',17,32,33),r('2 Kings',17,41)],'Mixed worship in Samaria'),
+
+// Recurring numbers
+fb(2,"In the four hundred and _____ year after the people of Israel came out of the land of Egypt, in the fourth year of Solomon's reign over Israel, in the month of Ziv, which is the second month, he began to build the house of the LORD.",'eightieth',r('1 Kings',6,1),'The temple chronology'),
+sa(1,'How many years did Solomon take to build the temple, and how many to build his own house?','Seven years for the temple and thirteen years for his own house.',[r('1 Kings',6,37,38),r('1 Kings',7,1)],'Solomon’s building years'),
+sa(2,'How much gold came to Solomon in one year?','Six hundred and sixty-six talents of gold.',[r('1 Kings',10,14),r('1 Kings',10,21,25)],'Solomon’s gold'),
+sa(1,'How many wives and concubines did Solomon have?','Seven hundred wives and three hundred concubines.',[r('1 Kings',11,1,3),r('1 Kings',11,4,8)],'Solomon’s wives'),
+sa(1,'How many prophets of Baal faced Elijah on Mount Carmel?','Four hundred and fifty.',[r('1 Kings',18,19,22),r('1 Kings',18,38,40)],'Prophets of Baal'),
+sa(2,'How many prophets did Obadiah hide, and how did he hide and feed them?','One hundred, hidden by fifties in caves and fed with bread and water.',[r('1 Kings',18,3,4),r('1 Kings',18,13)],'Obadiah protects prophets'),
+sa(2,'How many in Israel had not bowed to Baal according to the LORD’s word to Elijah?','Seven thousand.',[r('1 Kings',19,15,18),r('2 Kings',10,18,28)],'The faithful remnant'),
+fb(1,'So he went down and dipped himself _____ times in the Jordan.','seven',r('2 Kings',5,14),'Naaman washes'),
+sa(1,'How many Assyrians did the angel of the LORD slay in one night?','One hundred and eighty-five thousand.',[r('2 Kings',19,32,36),r('2 Kings',18,13,17)],'Jerusalem delivered'),
+sa(2,'How many years were added to Hezekiah’s life?','Fifteen years.',[r('2 Kings',20,1,6),r('2 Kings',20,8,11)],'Hezekiah’s added years'),
+sa(2,'How many steps did the shadow go back on the dial of Ahaz?','Ten steps.',[r('2 Kings',20,8,11),r('2 Kings',20,1,6)],'The shadow’s sign'),
+sa(2,'How many yoke of oxen was Elisha plowing with when Elijah found him?','Twelve yoke; Elisha was with the twelfth.',[r('1 Kings',19,19,21),r('2 Kings',2,9,15)],'Elisha’s call'),
+fb(2,'And he arose, and ate and drank, and went in the strength of that food _____ days and forty nights to Horeb the mount of God.','forty',r('1 Kings',19,8),'Elijah’s journey'),
+mc(2,'How many captives did Nebuchadnezzar carry away in Jehoiachin’s deportation?','Ten thousand',['Seven thousand','One thousand','Fifty thousand'],'The deportation included all Jerusalem, the officers, and mighty men—ten thousand captives.',[r('2 Kings',24,10,16),r('2 Kings',25,11,12)],'Jehoiachin’s deportation','Review the groups and totals carried away.'),
+sa(3,'In what year of Jehoiachin’s exile was he freed from prison?','The thirty-seventh year.',[r('2 Kings',25,27,30),r('2 Kings',24,12,16)],'Jehoiachin released'),
+tf(2,'Zimri reigned seven years in Tirzah.',false,[r('1 Kings',16,15,20),r('2 Kings',15,13)],'Zimri’s reign','False. Zimri reigned seven days.'),
+tf(1,'Solomon’s temple took seven years to build.',true,[r('1 Kings',6,37,38),r('1 Kings',7,1)],'Building the temple','True. Solomon completed the temple in seven years.'),
+
+// Places
+sa(1,'Where was Solomon anointed king?','At Gihon.',[r('1 Kings',1,38,40),r('1 Kings',2,12)],'Gihon'),
+sa(1,'Where did Elijah defeat the prophets of Baal?','Mount Carmel.',[r('1 Kings',18,19,40),r('1 Kings',18,41,45)],'Mount Carmel'),
+sa(2,'Where did Elijah hear the still small voice?','At Horeb, the mount of God.',[r('1 Kings',19,8,12),r('1 Kings',19,15,18)],'Horeb'),
+sa(2,'Where did ravens feed Elijah?','By the brook Cherith, east of the Jordan.',[r('1 Kings',17,2,6),r('1 Kings',17,7,9)],'The brook Cherith'),
+sa(2,'In which foreign town did Elijah stay with a widow during the drought?','Zarephath, which belonged to Sidon.',[r('1 Kings',17,8,16),r('1 Kings',17,17,24)],'Zarephath'),
+sa(2,'Where was Naboth’s vineyard?','In Jezreel.',[r('1 Kings',21,1),r('2 Kings',9,21,26)],'Jezreel'),
+sa(2,'Where did Elisha’s servant see hills full of horses and chariots of fire?','Dothan.',[r('2 Kings',6,13,17),r('2 Kings',6,18,23)],'Dothan'),
+sa(3,'Where was Zedekiah brought before the king of Babylon, and what happened to his sons?','At Riblah; his sons were killed before his eyes, and then he was blinded.',[r('2 Kings',25,4,7),r('2 Kings',25,18,21)],'Riblah'),
+mc(2,'Where did Jehu’s arrow strike down King Joram?','On the property of Naboth the Jezreelite',['At Ramoth-gilead beside the city gate','At the pool of Samaria near Ahab’s palace','At Megiddo while fleeing toward Jerusalem'],'Joram fell on Naboth’s property, where Jehu ordered his body thrown.',[r('2 Kings',9,21,26),r('1 Kings',21,1,16)],'Joram and Naboth’s field','Connect Joram’s death with Naboth’s murder.'),
+sa(2,'Which city did Hiel rebuild, and which city did Omri build?','Hiel rebuilt Jericho; Omri built Samaria.',[r('1 Kings',16,24),r('1 Kings',16,34)],'Jericho and Samaria'),
+sa(2,'Where did Solomon build his fleet of ships?','At Ezion-geber near Eloth, on the shore of the Red Sea.',[r('1 Kings',9,26,28),r('1 Kings',10,11,12)],'Ezion-geber'),
+tf(2,'Elisha healed the bad water at Jericho by throwing salt into the spring.',true,[r('2 Kings',2,19,22),r('1 Kings',16,34)],'Jericho’s water','True. Elisha threw salt into the spring and declared the water healed.'),
+sa(3,'To which places did Assyria deport the Israelites?','Halah, the Habor—the river of Gozan—and the cities of the Medes.',[r('2 Kings',17,6),r('2 Kings',18,11)],'Israel’s deportation'),
+
+// Refrains and formulas
+fb(1,'And Asa did what was _____ in the eyes of the LORD, as David his father had done.','right',r('1 Kings',15,11),'The royal verdict'),
+sa(2,'What phrase repeatedly identifies the sin of northern kings who retained the golden calves?','They did not depart from “the sins of Jeroboam the son of Nebat.”',[r('2 Kings',3,3),r('2 Kings',10,29),r('2 Kings',13,2)],'The sins of Jeroboam'),
+sa(2,'What standard phrase does Kings commonly use to describe a king’s death?','He “slept with his fathers.”',[r('1 Kings',11,43),r('1 Kings',14,20),r('2 Kings',10,35)],'Slept with his fathers'),
+sa(3,'Which good kings of Judah were still faulted because the high places were not taken away?','Asa, Jehoshaphat, Joash, Amaziah, Azariah, and Jotham.',[r('1 Kings',15,14),r('1 Kings',22,43),r('2 Kings',12,3),r('2 Kings',14,4),r('2 Kings',15,4),r('2 Kings',15,35)],'High places remained'),
+tf(1,'Kings evaluates each ruler mainly by building projects and military victories.',false,[r('1 Kings',15,11),r('1 Kings',16,25),r('2 Kings',18,3)],'How Kings evaluates rulers','False. The primary verdict is whether a ruler did right or evil in the sight of the LORD.'),
+mc(2,'Why does God repeatedly preserve Judah even under unfaithful kings?','For the sake of David his servant and for the sake of Jerusalem',['Because Judah always possessed the strongest army','Because Egypt permanently guaranteed Judah’s borders','Because every priest interceded successfully for the king'],'Kings repeatedly grounds Judah’s preservation in God’s regard for David and Jerusalem.',[r('1 Kings',11,12,13),r('2 Kings',8,19),r('2 Kings',19,34),r('2 Kings',20,6)],'For David’s sake','Trace this explanation across Judah’s history.'),
+fb(2,'None was left but the tribe of _____ only.','Judah',r('2 Kings',17,18),'Judah remains'),
+sa(3,'Whose sins made Judah’s destruction unavoidable even after Josiah’s reform?','Manasseh’s idolatry and bloodshed.',[r('2 Kings',21,10,16),r('2 Kings',23,26,27)],'Manasseh’s lasting guilt'),
+
+// Women of Kings
+sa(1,'Who hid the infant Joash from Athaliah, and where was he kept?','Jehosheba hid him first in a bedchamber and then for six years in the house of the LORD.',[r('2 Kings',11,1,3),r('2 Kings',11,12)],'Jehosheba saves Joash'),
+sa(1,'Which prophetess did Josiah’s officials consult about the book of the law?','Huldah, wife of Shallum, keeper of the wardrobe.',[r('2 Kings',22,12,20),r('2 Kings',23,1,3)],'Huldah'),
+sa(2,'Which foreign queen tested Solomon with hard questions?','The queen of Sheba.',[r('1 Kings',10,1,10),r('1 Kings',10,23,25)],'The queen of Sheba'),
+mc(2,'Which woman built a small roof chamber for a prophet?','The Shunammite woman, for Elisha',['The widow of Zarephath, for Elijah','Jezebel, for the prophets of Baal','Huldah, for Josiah’s scribes'],'The Shunammite woman prepared a chamber with a bed, table, chair, and lamp for Elisha.',[r('2 Kings',4,8,11),r('2 Kings',8,1,6)],'The Shunammite’s hospitality','Review her hospitality and later story.'),
+sa(2,'Which two women appealed to a king during famine over a child who had been eaten?','Two women of Samaria appealed to the king of Israel during the Syrian siege.',[r('2 Kings',6,24,29),r('2 Kings',7,1,2)],'Women in Samaria’s famine'),
+sa(1,'Which queen was thrown from a window and trampled by horses?','Jezebel.',[r('2 Kings',9,30,37),r('1 Kings',21,23)],'Jezebel’s death'),
+tf(2,'Athaliah belonged to the house of Ahab.',true,[r('2 Kings',8,18,26),r('2 Kings',11,1,3)],'Athaliah’s family','True. Kings identifies her with Ahab’s house and as Omri’s granddaughter.'),
+sa(2,'Whose wife was told by Ahijah that her son would die as she entered the city?','Jeroboam’s wife, concerning their son Abijah.',[r('1 Kings',14,1,18),r('1 Kings',14,19,20)],'Jeroboam’s wife'),
+mc(1,'Who was Solomon’s mother?','Bathsheba',['Haggith','Abishag','Naamah'],'Bathsheba appealed to David concerning Solomon’s succession.',[r('1 Kings',1,11,31),r('1 Kings',2,19)],'Bathsheba and Solomon','Review Bathsheba’s role in Solomon’s accession.'),
+
+// Deaths and burials
+sa(2,'Who was killed by a man who drew his bow “at a venture”?','Ahab, at Ramoth-gilead.',[r('1 Kings',22,29,38),r('1 Kings',21,19)],'Ahab’s death'),
+sa(2,'How did Zimri die?','He burned the king’s house over himself in Tirzah.',[r('1 Kings',16,15,20),r('1 Kings',16,21,22)],'Zimri’s death'),
+sa(2,'Which king was struck down in the house of Millo by his servants?','Joash of Judah.',[r('2 Kings',12,19,21),r('2 Kings',14,5,6)],'Joash assassinated'),
+sa(2,'Which king fled to Lachish and was killed there?','Amaziah.',[r('2 Kings',14,17,20),r('2 Kings',15,1,3)],'Amaziah assassinated'),
+sa(1,'Who was buried in the garden of Uzza?','Manasseh and Amon.',[r('2 Kings',21,17,18),r('2 Kings',21,23,26)],'The garden of Uzza'),
+tf(2,'Jezebel received a royal burial in Samaria.',false,[r('2 Kings',9,30,37),r('1 Kings',21,23)],'Jezebel’s remains','False. Dogs consumed her, leaving only her skull, feet, and hands.'),
+sa(3,'Which king offered his eldest son as a burnt offering on the city wall?','The king of Moab, during the siege by Israel, Judah, and Edom.',[r('2 Kings',3,21,27),r('2 Kings',3,9,12)],'Moab’s king'),
+sa(2,'Who did not die in Kings but was taken up by a whirlwind?','Elijah.',[r('2 Kings',2,1,12),r('2 Kings',2,13,15)],'Elijah taken up'),
+mc(2,'Who was blinded and then taken in fetters to Babylon?','Zedekiah',['Jehoiachin','Jehoiakim','Hoshea'],'Zedekiah saw his sons killed, was blinded, and was taken to Babylon.',[r('2 Kings',25,4,7),r('2 Kings',24,12,16)],'Zedekiah’s capture','Review the different fates of Zedekiah and Jehoiachin.'),
+
+// Foreign rulers
+sa(1,'Which king of Tyre supplied cedar for the temple?','Hiram.',[r('1 Kings',5,1,12),r('1 Kings',9,10,14)],'Hiram of Tyre'),
+sa(2,'Which king of Egypt attacked Jerusalem in Rehoboam’s fifth year and took the temple treasures?','Shishak.',[r('1 Kings',14,25,28),r('2 Kings',18,13,16)],'Shishak'),
+sa(2,'Which Pharaoh killed Josiah?','Pharaoh Neco.',[r('2 Kings',23,28,30),r('2 Kings',23,31,35)],'Pharaoh Neco'),
+sa(2,'Name the Syrian commander healed of leprosy and the Syrian officer who became king.','Naaman was healed; Hazael became king.',[r('2 Kings',5,1,15),r('2 Kings',8,7,15)],'Naaman and Hazael'),
+sa(2,'Which Assyrian ruler captured Samaria?','Shalmaneser began the siege; the text says the king of Assyria captured the city.',[r('2 Kings',17,3,6),r('2 Kings',18,9,11)],'Assyria captures Samaria'),
+sa(1,'Which Assyrian king’s army was destroyed by the angel of the LORD?','Sennacherib’s.',[r('2 Kings',19,32,36),r('2 Kings',19,36,37)],'Sennacherib'),
+sa(2,'Which Babylonian king freed Jehoiachin and gave him a seat above other kings?','Evil-merodach.',[r('2 Kings',25,27,30),r('2 Kings',24,12,16)],'Evil-merodach'),
+mc(2,'To which foreign king did Ahaz send temple treasure and call himself “your servant and your son”?','Tiglath-pileser of Assyria',['Ben-hadad of Syria','Shalmaneser of Assyria','Pharaoh Neco of Egypt'],'Ahaz appealed to Tiglath-pileser for rescue from Syria and Israel.',[r('2 Kings',16,5,9),r('2 Kings',18,5,8)],'Ahaz appeals to Assyria','Compare Ahaz’s reliance on Assyria with Hezekiah’s trust.'),
+sa(3,'Which foreign king’s envoys were shown all of Hezekiah’s treasures?','Merodach-baladan of Babylon’s envoys.',[r('2 Kings',20,12,15),r('2 Kings',20,16,18)],'Babylon’s envoys'),
+tf(2,'Ben-hadad is the name of more than one king of Syria in Kings.',true,[r('1 Kings',15,18),r('1 Kings',20,1),r('2 Kings',13,24)],'The name Ben-hadad','True. The name occurs for Syrian rulers in different periods.'),
+
+// Famous RSV wording
+fb(1,'How long will you go _____ with two different opinions?','limping',r('1 Kings',18,21),'Two opinions'),
+fb(1,'And after the fire a still _____ voice.','small',r('1 Kings',19,12),'The still small voice'),
+fb(2,'Behold, heaven and the highest heaven cannot _____ thee; how much less this house which I have built!','contain',r('1 Kings',8,27),'Solomon’s dedication prayer'),
+fb(2,'I pray you, let me inherit a _____ share of your spirit.','double',r('2 Kings',2,9),'Elisha’s request'),
+fb(1,'Fear not, for those who are with us are _____ than those who are with them.','more',r('2 Kings',6,16),'Elisha at Dothan'),
+fb(2,'And his flesh was restored like the flesh of a little _____, and he was clean.','child',r('2 Kings',5,14),'Naaman cleansed'),
+fb(2,'There was nothing in the ark except the two _____ of stone which Moses put there at Horeb.','tables',r('1 Kings',8,9),'Inside the ark'),
+fb(3,'So these nations feared the LORD, and also served their _____ images.','graven',r('2 Kings',17,41),'Mixed worship'),
+fb(2,'Before him there was no king like him, who turned to the LORD with all his heart and with all his soul and with all his _____.','might',r('2 Kings',23,25),'Josiah’s devotion'),
+fb(2,"Yet I will leave seven _____ in Israel, all the knees that have not bowed to Ba'al, and every mouth that has not kissed him.",'thousand',r('1 Kings',19,18),'The faithful remnant'),
+fb(2,"He removed the high places, and broke the pillars, and cut down the _____. And he broke in pieces the bronze serpent that Moses had made, for until those days the people of Israel had burned incense to it; it was called Nehush'tan.","Ashe'rah",r('2 Kings',18,4),'Hezekiah’s reform'),
+fb(3,"Moreover Manas'seh shed very much _____ blood, till he had filled Jerusalem from one end to another, besides the sin which he made Judah to sin so that they did what was evil in the sight of the LORD.",'innocent',r('2 Kings',21,16),'Manasseh’s bloodshed'),
+fb(2,'And the _____ brought him bread and meat in the morning, and bread and meat in the evening.','ravens',r('1 Kings',17,6),'Elijah fed at Cherith'),
+fb(3,'I am about to go the way of all the _____. Be strong, and show yourself a man.','earth',r('1 Kings',2,2),'David’s charge'),
+fb(2,'And for his allowance, a regular allowance was given him by the king, every day a _____, as long as he lived.','portion',r('2 Kings',25,30),'Jehoiachin’s allowance'),
+
+// Sequence and structure
+mc(2,'Which of these events happened first?','The kingdom divided under Rehoboam',['Elijah confronted Baal’s prophets at Carmel','Assyria captured Samaria','Josiah renewed the covenant'],'The division occurred early in 1 Kings, before Elijah, the Assyrian exile, and Josiah.',[r('1 Kings',12,16,20),r('1 Kings',18,20,40),r('2 Kings',17,5,6),r('2 Kings',23,1,3)],'Major events in order','Trace these four events through Kings.'),
+sa(2,'Put these events in order: Samaria falls, Hezekiah’s illness, Josiah finds the law, Jerusalem falls.','Samaria falls; Hezekiah becomes ill; Josiah finds the book of the law; Jerusalem falls.',[r('2 Kings',17,5,6),r('2 Kings',20,1,11),r('2 Kings',22,8,13),r('2 Kings',25,1,10)],'The closing sequence'),
+sa(3,'Describe the three stages by which Judah’s people leave the land for Babylon or Egypt near the end of Kings.','Jehoiachin and Jerusalem’s leaders are deported; Jerusalem falls under Zedekiah and more people are exiled; after Gedaliah’s murder the remaining people flee to Egypt.',[r('2 Kings',24,12,16),r('2 Kings',25,8,12),r('2 Kings',25,22,26)],'Judah emptied from the land'),
+sa(2,'How do the two books of Kings handle the united and divided kingdoms?','1 Kings begins with a united kingdom and records its division; 2 Kings begins with both kingdoms and ends after both have fallen.',[r('1 Kings',1,1,4),r('1 Kings',12,16,20),r('2 Kings',1,1),r('2 Kings',25,8,30)],'Structure of Kings'),
+tf(1,'Elisha’s ministry begins before Elijah’s ministry ends.',true,[r('1 Kings',19,19,21),r('2 Kings',2,1,15)],'The prophetic overlap','True. Elisha follows Elijah before later witnessing Elijah’s departure.'),
+sa(2,'About how many chapters focus on Solomon, and how many cover Elijah and Elisha together?','Solomon occupies 1 Kings 1–11, eleven chapters; Elijah and Elisha together span about nineteen chapters from 1 Kings 17 through 2 Kings 13.',[r('1 Kings',1,1),r('1 Kings',11,41,43),r('1 Kings',17,1),r('2 Kings',13,20,21)],'Narrative space in Kings'),
 ]
+
+// The source design intentionally mixes recall and synthesis within its broad
+// "medium" band. Split that band for the learner-facing adaptive levels: direct
+// identifications belong in Easy, while comparisons spanning multiple passages
+// belong in Hard. Wording and answers stay untouched, so existing IDs survive.
+const easyTopics = new Set([
+  'Josiah and Bethel','Judgment on Jezebel','Josiah’s reform','The kingdom divides',
+  'Jeroboam’s lasting sin','Elisha and Gehazi','Ahab and Jezebel judged','Elijah’s mantle',
+  'The number forty-two','Ahab and Elijah','Naaman’s letter','Elisha at Dothan',
+  'Jezebel confronts Jehu','The borrowed axe','Solomon asks for wisdom','Elisha’s request',
+  'The book of the law','Naaman washes','Shallum’s reign','Hezekiah’s reform','Nehushtan',
+  'Building Samaria','Deaths at Megiddo','Azariah’s leprosy','Jeroboam’s calves',
+  'Ahab’s blood','Solomon’s gold','Hezekiah’s added years','The shadow’s sign',
+])
+const hardTopics = new Set([
+  'Provision for widows','Prophetic warnings of famine','Elisha succeeds Elijah',
+  'Jehu’s incomplete reform','Naboth and Ahab','Violent dynastic cycles',
+  'Hezekiah and Manasseh','David’s line','Solomon and the divided kingdom',
+  'Prayer and God’s name','Baal and Mount Carmel','Micaiah and Ahab',
+  'Prophetic power beyond departure','Hazael and Israel','Hezekiah and Josiah’s reforms',
+  'Temple furnishings','The Jordan and succession','Elisha’s final prophecy',
+  'Assembly and covenant','Famines across Kings','Fire from heaven','Leprosy in Kings',
+  'Dogs in dynastic judgments','Shared royal names',
+])
+
+export const rows:ComprehensiveRow[] = draftedRows.map(row => ({
+  ...row,
+  difficulty: easyTopics.has(row.review_topic) ? 1 : hardTopics.has(row.review_topic) ? 3 : row.difficulty,
+}))
 
 export default {slug:'all-kings',tag:'all-kings-v2',status:'published' as const,rows}

@@ -62,6 +62,7 @@ export const TYPE_LABEL: Record<QuizQuestion['type'], string> = {
   fill_blank: 'Fill in the blank',
   one_word: 'Short answer',
   true_false: 'True or false',
+  short_answer: 'Short answer',
 }
 
 /** Fisher–Yates shuffle (pure). */
