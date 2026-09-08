@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { QuizQuestion, QuizType } from '@/lib/types';
-import type { QuizChapterSummary } from '@/lib/db';
+import type { QuizChapterSummary, QuizCollectionSummary } from '@/lib/db';
 import { displayAnswer, gradeMultipleChoice, gradeText, gradeTrueFalse, DIFFICULTY_LABEL, TYPE_LABEL } from '@/lib/quiz-grading';
 import {
   applyAnswer, buildSession, computeMastery, verseHref, priorityRank, poolRemaining,
@@ -11,7 +11,7 @@ import {
 } from '@/lib/quiz-session';
 import {
   getChapterStats, createSession, recordAnswer, abandonSession, resetChapterProgress,
-  type ChapterProgress, type OpenSession,
+  type ChapterProgress, type OpenSession, type QuizScopeKind,
 } from '@/app/actions/quiz';
 import { saveQuizScore } from '@/app/actions/progress';
 import { markSectionForVerse } from '@/lib/mark-sections';
@@ -23,9 +23,17 @@ type Answered = { q: QuizQuestion; correct: boolean; given: string };
 
 type Props = {
   chapters: QuizChapterSummary[];
+  collections: QuizCollectionSummary[];
   isAuthenticated: boolean;
   allowAdminBrowse: boolean;
   progress: Record<string, ChapterProgress>;
+};
+
+type QuizSource = QuizChapterSummary & {
+  scopeKind: QuizScopeKind;
+  title: string;
+  description: string;
+  slug?: string;
 };
 
 const TYPE_ICON: Record<QuizType, string> = { multiple_choice: 'ⓐ', fill_blank: '▁', one_word: '✎', true_false: '✓✗' };
@@ -46,11 +54,11 @@ function saveLocalStats(chapterId: string, stats: StatsMap) {
   try { sessionStorage.setItem(localKey(chapterId), JSON.stringify(stats)); } catch { /* ignore */ }
 }
 
-export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse, progress: initialProgress }: Props) {
+export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, progress: initialProgress }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [progress, setProgress] = useState(initialProgress);
   const [selectedChapterId, setSelectedChapterId] = useState<string | null>(null);
-  const [chapter, setChapter] = useState<QuizChapterSummary | null>(null);
+  const [chapter, setChapter] = useState<QuizSource | null>(null);
   const [mode, setMode] = useState<SessionMode | 'review'>('session');
   const [drillOpen, setDrillOpen] = useState<string | null>(null);
   const [drillLevel, setDrillLevel] = useState<Level>('mixed');
@@ -70,7 +78,15 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
   const [typed, setTyped] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const withQuestions = useMemo(() => chapters.filter(c => c.counts.total > 0), [chapters]);
+  const chapterSources = useMemo<QuizSource[]>(() => chapters.map(ch => ({
+    ...ch, scopeKind: 'chapter', title: `${ch.bookName} ${ch.chapterNumber}`, description: '',
+  })), [chapters]);
+  const collectionSources = useMemo<QuizSource[]>(() => collections.map(collection => ({
+    id: collection.id, scopeKind: 'collection', slug: collection.slug, title: collection.title,
+    description: collection.description, bookName: collection.title, bookSlug: '1-kings', chapterNumber: 0,
+    counts: collection.counts,
+  })), [collections]);
+  const withQuestions = useMemo(() => [...collectionSources, ...chapterSources].filter(c => c.counts.total > 0), [collectionSources, chapterSources]);
   const current = round[index];
   const revealed = phase === 'revealed';
 
@@ -79,12 +95,12 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
   }, [phase, current]);
 
   // ------------------------------------------------------------ data loading
-  async function loadPool(ch: QuizChapterSummary): Promise<QuizQuestion[]> {
-    const res = await fetch(`/api/quiz/${ch.id}`);
+  async function loadPool(ch: QuizSource): Promise<QuizQuestion[]> {
+    const res = await fetch(`/api/quiz/${ch.id}${ch.scopeKind === 'collection' ? '?scope=collection' : ''}`);
     return res.ok ? ((await res.json()) as QuizQuestion[]) : [];
   }
-  async function loadStats(ch: QuizChapterSummary): Promise<{ stats: StatsMap; openSession: OpenSession | null }> {
-    if (isAuthenticated) return getChapterStats(ch.id);
+  async function loadStats(ch: QuizSource): Promise<{ stats: StatsMap; openSession: OpenSession | null }> {
+    if (isAuthenticated) return getChapterStats(ch.id, ch.scopeKind);
     return { stats: loadLocalStats(ch.id), openSession: null };
   }
 
@@ -94,7 +110,7 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
     setPhase(qs.length ? 'question' : 'complete');
   }
 
-  async function begin(ch: QuizChapterSummary, m: SessionMode | 'review', drill?: { level: Level; type: TypeFilter }) {
+  async function begin(ch: QuizSource, m: SessionMode | 'review', drill?: { level: Level; type: TypeFilter }) {
     setChapter(ch); setMode(m); setPhase('loading');
     const [qs, { stats: st }] = await Promise.all([loadPool(ch), loadStats(ch)]);
     setPool(qs); setStats(st);
@@ -107,11 +123,11 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
     } else {
       picked = buildSession(qs, st, { size: m === 'quick' ? QUICK_SIZE : SESSION_SIZE, difficulty: 'adaptive', types: 'all' });
     }
-    const sid = isAuthenticated && picked.length ? await createSession(ch.id, m === 'review' ? 'drill' : m, picked.map(q => q.id)) : null;
+    const sid = isAuthenticated && picked.length ? await createSession(ch.id, m === 'review' ? 'drill' : m, picked.map(q => q.id), ch.scopeKind) : null;
     startRound(picked, 0, 0, sid);
   }
 
-  async function resume(ch: QuizChapterSummary, open: OpenSession) {
+  async function resume(ch: QuizSource, open: OpenSession) {
     setChapter(ch); setMode(open.mode); setPhase('loading');
     const [qs, { stats: st }] = await Promise.all([loadPool(ch), loadStats(ch)]);
     setPool(qs); setStats(st);
@@ -124,7 +140,7 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
     startRound(ordered, open.position, open.correctCount, open.id);
   }
 
-  async function browse(ch: QuizChapterSummary) {
+  async function browse(ch: QuizSource) {
     if (!allowAdminBrowse) return;
     setChapter(ch); setPhase('loading'); setBrowseSearch('');
     const qs = await loadPool(ch);
@@ -153,7 +169,7 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
     const correctCount = priorCorrect + nextAnswered.filter(a => a.correct).length;
     const completed = position >= round.length;
     if (isAuthenticated) {
-      recordAnswer({ sessionId, chapterId: chapter.id, questionId: current.id, correct: ok, givenAnswer: given, position, correctCount, completed }).catch(() => {});
+      recordAnswer({ sessionId, chapterId: chapter.id, scopeKind: chapter.scopeKind, questionId: current.id, correct: ok, givenAnswer: given, position, correctCount, completed }).catch(() => {});
     } else {
       saveLocalStats(chapter.id, nextStats);
     }
@@ -164,7 +180,7 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
     if (index + 1 >= round.length) {
       const correctCount = priorCorrect + answered.filter(a => a.correct).length;
       if (isAuthenticated) {
-        saveQuizScore(chapter.id, Math.round((correctCount / round.length) * 100), chapter.bookSlug, chapter.chapterNumber).catch(() => {});
+        if (chapter.scopeKind === 'chapter') saveQuizScore(chapter.id, Math.round((correctCount / round.length) * 100), chapter.bookSlug, chapter.chapterNumber).catch(() => {});
         const m = computeMastery(pool, stats);
         setProgress(p => ({ ...p, [chapter.id]: { chapterId: chapter.id, attempted: m.attempted, mastered: m.mastered, toReview: m.toReview, correctAnswers: m.correctAnswers, wrongAnswers: m.wrongAnswers, openSession: null } }));
       }
@@ -180,14 +196,14 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
       setProgress(p => ({
         ...p,
         [chapter.id]: { ...(p[chapter.id] ?? { chapterId: chapter.id, attempted: 0, mastered: 0, toReview: 0, correctAnswers: 0, wrongAnswers: 0 }),
-          openSession: { id: sessionId, chapterId: chapter.id, mode: mode === 'review' ? 'drill' : mode, questionIds: round.map(q => q.id), position: index + (phase === 'revealed' ? 1 : 0), correctCount: priorCorrect + answered.filter(a => a.correct).length } },
+          openSession: { id: sessionId, chapterId: chapter.id, scopeKind: chapter.scopeKind, mode: mode === 'review' ? 'drill' : mode, questionIds: round.map(q => q.id), position: index + (phase === 'revealed' ? 1 : 0), correctCount: priorCorrect + answered.filter(a => a.correct).length } },
       }));
     }
     setPhase('setup');
   }
 
-  async function doReset(ch: QuizChapterSummary) {
-    if (isAuthenticated) await resetChapterProgress(ch.id);
+  async function doReset(ch: QuizSource) {
+    if (isAuthenticated) await resetChapterProgress(ch.id, ch.scopeKind);
     else saveLocalStats(ch.id, {});
     setProgress(p => { const n = { ...p }; delete n[ch.id]; return n; });
     setConfirmReset(null);
@@ -216,6 +232,26 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
           <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
         ) : !selectedChapter ? (
           <div className="space-y-8">
+            {collectionSources.map(collection => {
+              const p = progress[collection.id];
+              return (
+                <section key={collection.id} className="rounded-2xl px-5 py-5" style={{ ...card, borderColor: 'rgba(201,168,76,0.38)', background: 'rgba(201,168,76,0.06)' }}>
+                  <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--gold-300)' }}>Comprehensive quiz</p>
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div className="max-w-lg">
+                      <h2 className="text-2xl font-medium" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>{collection.title}</h2>
+                      <p className="text-sm mt-1 leading-relaxed" style={{ color: 'var(--muted-400)' }}>{collection.description}</p>
+                      <p className="text-xs mt-2" style={{ color: 'var(--muted-500)' }}>
+                        {collection.counts.total} questions · Easy {collection.counts[1]} · Medium {collection.counts[2]} · Hard {collection.counts[3]}
+                      </p>
+                    </div>
+                    <button onClick={() => setSelectedChapterId(collection.id)} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={goldBtn}>
+                      {(p?.attempted ?? 0) > 0 ? 'Continue All of Kings' : 'Choose All of Kings'}
+                    </button>
+                  </div>
+                </section>
+              );
+            })}
             {(['1 Kings', '2 Kings', 'Mark'] as const).map(bookName => (
               <section key={bookName}>
                 <h2 className="text-lg font-medium mb-3" style={{ color: 'var(--ivory-100)' }}>{bookName}</h2>
@@ -260,7 +296,8 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
                 <div key={ch.id} className="rounded-2xl px-5 py-4" style={card}>
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <div className="min-w-0">
-                      <p className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>{ch.bookName} {ch.chapterNumber}</p>
+                      <p className="text-sm font-medium" style={{ color: 'var(--ivory-100)' }}>{ch.title}</p>
+                      {ch.description && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{ch.description}</p>}
                       <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>
                         {total} questions · Easy {ch.counts[1]} · Medium {ch.counts[2]} · Hard {ch.counts[3]}
                       </p>
@@ -301,7 +338,7 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
                     </button>
                     {p && (confirmReset === ch.id ? (
                       <span className="flex items-center gap-2 text-xs ml-auto">
-                        <span style={{ color: '#f87171' }}>Erase all progress for this chapter?</span>
+                        <span style={{ color: '#f87171' }}>Erase all progress for this quiz?</span>
                         <button onClick={() => doReset(ch)} className="px-2.5 py-1 rounded-full" style={badStyle}>Yes, erase</button>
                         <button onClick={() => setConfirmReset(null)} className="px-2.5 py-1 rounded-full" style={ghostBtn}>Cancel</button>
                       </span>
@@ -348,11 +385,11 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
     const filtered = pool.filter(q => !needle || [q.question, displayAnswer(q), q.verse_ref, q.id, TYPE_LABEL[q.type]].some(value => value?.toLowerCase().includes(needle)));
     return (
       <div>
-        <button onClick={() => setPhase('setup')} className="mb-4 text-sm" style={{ color: 'var(--gold-300)' }}>← Back to {chapter.bookName} {chapter.chapterNumber}</button>
+        <button onClick={() => setPhase('setup')} className="mb-4 text-sm" style={{ color: 'var(--gold-300)' }}>← Back to {chapter.title}</button>
         <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
           <div>
             <h2 className="text-2xl font-medium" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Browse question bank</h2>
-            <p className="text-xs mt-1" style={{ color: 'var(--muted-500)' }}>{chapter.bookName} {chapter.chapterNumber} · {pool.length} questions · answers are shown</p>
+            <p className="text-xs mt-1" style={{ color: 'var(--muted-500)' }}>{chapter.title} · {pool.length} questions · answers are shown</p>
           </div>
           <input value={browseSearch} onChange={e => setBrowseSearch(e.target.value)} placeholder="Search wording, answer, verse, or ID…" className="w-full sm:w-80 rounded-xl px-4 py-2.5 text-sm outline-none" style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--ivory-100)', border: '1px solid rgba(201,168,76,0.25)' }} />
         </div>
@@ -392,17 +429,24 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
           return groups
         }, new Map<string, number>()).entries()).sort((a, b) => b[1] - a[1])
       : [];
+    const collectionReviewSections = chapter?.scopeKind === 'collection'
+      ? Array.from(missed.reduce((groups, { q }) => {
+          const topic = q.review_topic ?? 'Review the supporting passages'
+          groups.set(topic, (groups.get(topic) ?? 0) + 1)
+          return groups
+        }, new Map<string, number>()).entries()).sort((a, b) => b[1] - a[1])
+      : [];
 
     return (
       <div>
         <div className="rounded-2xl px-6 py-8 text-center mb-4" style={card}>
           <p className="text-xs uppercase tracking-wider mb-2" style={{ color: 'var(--muted-500)' }}>
-            {chapter?.bookName} {chapter?.chapterNumber} · {mode === 'quick' ? 'Quick' : mode === 'review' ? 'Review' : mode === 'drill' ? 'Drill' : 'Session'}
+            {chapter?.title} · {mode === 'quick' ? 'Quick' : mode === 'review' ? 'Review' : mode === 'drill' ? 'Drill' : 'Session'}
           </p>
           {round.length === 0 ? (
             <>
               <h2 className="text-2xl font-medium mb-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Nothing to review</h2>
-              <p className="text-sm" style={{ color: 'var(--muted-400)' }}>You have no missed questions outstanding in this chapter.</p>
+              <p className="text-sm" style={{ color: 'var(--muted-400)' }}>You have no missed questions outstanding in this quiz.</p>
             </>
           ) : (
             <>
@@ -443,6 +487,21 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
           </div>
         )}
 
+        {collectionReviewSections.length > 0 && (
+          <div className="rounded-2xl px-5 py-5 mb-4" style={{ ...card, borderColor: 'rgba(201,168,76,0.25)' }}>
+            <p className="text-sm font-medium mb-1" style={{ color: 'var(--gold-300)' }}>What to study next</p>
+            <p className="text-xs mb-3" style={{ color: 'var(--muted-500)' }}>Your missed answers point to these themes across Kings.</p>
+            <div className="space-y-2">
+              {collectionReviewSections.map(([title, count]) => (
+                <div key={title} className="flex items-center justify-between rounded-xl px-4 py-3" style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.12)' }}>
+                  <span className="text-sm" style={{ color: 'var(--ivory-100)' }}>{title}</span>
+                  <span className="text-xs ml-3 shrink-0" style={{ color: '#f87171' }}>{count} missed</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {missed.length > 0 && (
           <div className="rounded-2xl px-5 py-5 mb-4" style={{ ...card, borderColor: 'rgba(239,68,68,0.25)' }}>
             <p className="text-sm font-medium mb-1" style={{ color: '#f87171' }}>Go back and fix these ({missed.length})</p>
@@ -459,7 +518,9 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
                     You said <span style={{ color: '#f87171' }}>“{given.replace(/^["“]|["”]$/g, '') || '—'}”</span> · Answer: <span style={{ color: '#34d399' }}>{displayAnswer(q)}</span>
                   </p>
                   {q.explanation && <p className="text-xs mt-1" style={{ color: 'var(--muted-500)' }}>{q.explanation}</p>}
-                  {q.verse_ref && chapter && (
+                  {q.supporting_refs?.length ? (
+                    <ReferenceLinks references={q.supporting_refs} prompt="Study" />
+                  ) : q.verse_ref && chapter && (
                     <Link href={verseHref(chapter.bookSlug, chapter.chapterNumber, q.verse_number)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color: 'var(--gold-300)' }}>
                       Read {q.verse_ref} →
                     </Link>
@@ -497,10 +558,12 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
   return (
     <div>
       <div className="flex items-center justify-between mb-3 text-xs" style={{ color: 'var(--muted-500)' }}>
-        <span>{chapter?.bookName} {chapter?.chapterNumber} · {DIFFICULTY_LABEL[current.difficulty]}</span>
+        <span>{chapter?.title} · {DIFFICULTY_LABEL[current.difficulty]}</span>
         <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span> · <span data-testid="pool-count" style={{ color: 'var(--gold-300)' }}>Pool {poolRemaining(pool, stats)} / {pool.length}</span></span>
       </div>
-      <p className="text-[11px] -mt-4 mb-5" style={{ color: 'var(--muted-500)' }}>Support reference: {current.verse_ref} · ID {current.id}</p>
+      <p className="text-[11px] -mt-4 mb-5" style={{ color: 'var(--muted-500)' }}>
+        Support: {current.supporting_refs?.map(ref => ref.label).join(' · ') || current.verse_ref} · ID {current.id}
+      </p>
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
         <div className="h-1 rounded-full transition-all" style={{ width: `${(answeredCount / round.length) * 100}%`, background: 'var(--gold-400)' }} />
       </div>
@@ -552,7 +615,11 @@ export default function QuizArena({ chapters, isAuthenticated, allowAdminBrowse,
             {lastCorrect ? 'Correct — out of the pool' : `Not quite — the answer is “${displayAnswer(current)}”. Back in the pool.`}
           </p>
           {current.explanation && <p style={{ color: 'var(--muted-400)' }}>{current.explanation}</p>}
-          {current.verse_ref && chapter && (
+          {!lastCorrect && current.review_topic && <p className="text-xs mt-3 font-medium" style={{ color: 'var(--gold-300)' }}>What to review: {current.review_topic}</p>}
+          {!lastCorrect && current.review_guidance && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{current.review_guidance}</p>}
+          {current.supporting_refs?.length ? (
+            <ReferenceLinks references={current.supporting_refs} prompt={lastCorrect ? 'Reference' : 'Study'} />
+          ) : current.verse_ref && chapter && (
             <Link href={verseHref(chapter.bookSlug, chapter.chapterNumber, current.verse_number)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color: lastCorrect ? 'var(--muted-500)' : 'var(--gold-300)' }}>
               {lastCorrect ? current.verse_ref : `Read ${current.verse_ref} to fix this →`}
             </Link>
@@ -588,4 +655,16 @@ function renderBlank(text: string, answer: string | null, correct: boolean | nul
       )}
     </span>
   ));
+}
+
+function ReferenceLinks({ references, prompt }: { references: NonNullable<QuizQuestion['supporting_refs']>; prompt: string }) {
+  return (
+    <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2">
+      {references.map(ref => (
+        <Link key={`${ref.label}-${ref.verse_start}`} href={verseHref(ref.book_slug, ref.chapter, ref.verse_start)} className="text-xs underline underline-offset-2" style={{ color: 'var(--gold-300)' }}>
+          {prompt} {ref.label} →
+        </Link>
+      ))}
+    </div>
+  );
 }

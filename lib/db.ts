@@ -638,6 +638,41 @@ export type QuizChapterSummary = {
   counts: { 1: number; 2: number; 3: number; total: number }
 }
 
+export type QuizCollectionSummary = {
+  id: string
+  slug: string
+  title: string
+  description: string
+  books: string[]
+  counts: { 1: number; 2: number; 3: number; total: number }
+}
+
+export async function getQuizCollectionSummaries(): Promise<QuizCollectionSummary[]> {
+  const supabase = await createClient()
+  const [{ data: collections }, { data: questions }] = await Promise.all([
+    supabase.from('quiz_collections').select('id, slug, title, description, books, position').order('position'),
+    supabase.from('quiz_questions').select('collection_id, difficulty').not('collection_id', 'is', null),
+  ])
+  if (!collections) return []
+  const counts = new Map<string, { 1: number; 2: number; 3: number; total: number }>()
+  for (const q of questions ?? []) {
+    if (!q.collection_id) continue
+    const count = counts.get(q.collection_id) ?? { 1: 0, 2: 0, 3: 0, total: 0 }
+    const difficulty = (q.difficulty ?? 1) as 1 | 2 | 3
+    count[difficulty] += 1
+    count.total += 1
+    counts.set(q.collection_id, count)
+  }
+  return collections.map(collection => ({
+    id: collection.id,
+    slug: collection.slug,
+    title: collection.title,
+    description: collection.description,
+    books: collection.books ?? [],
+    counts: counts.get(collection.id) ?? { 1: 0, 2: 0, 3: 0, total: 0 },
+  }))
+}
+
 export async function getQuizChapterSummaries(): Promise<QuizChapterSummary[]> {
   const supabase = await createClient()
 

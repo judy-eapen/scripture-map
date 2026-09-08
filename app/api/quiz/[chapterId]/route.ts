@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 export const QUIZ_SELECT =
-  'id, type, difficulty, question, options, correct_index, answer, accepted_answers, verse_ref, verse_number, explanation'
+  'id, type, difficulty, question, options, correct_index, answer, accepted_answers, verse_ref, verse_number, explanation, supporting_refs, review_topic, review_guidance'
 
 /**
  * GET /api/quiz/:chapterId
@@ -17,7 +17,8 @@ export async function GET(
   const supabase = await createClient()
   const sp = req.nextUrl.searchParams
 
-  let query = supabase.from('quiz_questions').select(QUIZ_SELECT).eq('chapter_id', chapterId)
+  const ownerColumn = sp.get('scope') === 'collection' ? 'collection_id' : 'chapter_id'
+  let query = supabase.from('quiz_questions').select(QUIZ_SELECT).eq(ownerColumn, chapterId)
 
   const difficulty = Number(sp.get('difficulty'))
   if (difficulty >= 1 && difficulty <= 3) query = query.eq('difficulty', difficulty)

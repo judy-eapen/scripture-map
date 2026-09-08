@@ -137,6 +137,17 @@ export type QuizQuestion = {
   verse_ref: string | null;
   verse_number: number | null;
   explanation: string;
+  /** Every passage used to support a comprehensive question. */
+  supporting_refs?: Array<{
+    book: '1 Kings' | '2 Kings' | 'Mark';
+    book_slug: ScriptureBookSlug;
+    chapter: number;
+    verse_start: number;
+    verse_end?: number;
+    label: string;
+  }>;
+  review_topic?: string | null;
+  review_guidance?: string | null;
 };
 
 export type DifficultPassage = {
