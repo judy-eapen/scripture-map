@@ -1963,3 +1963,15 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 9 · 2cb141e9-84be-4b87-8fe2-4573ab687277 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 9 · 7ad2ad82-297f-4a17-8aa2-7ef292a07f6e · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 9 · c1074451-b535-4a80-b22d-044a3a93370f · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 10 semantic review
+
+- Mark 10 · 40bb324d-4526-4f9d-8ea3-2f35ab04302b · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · 96b04610-4f14-41af-9d88-66bfeabc2a11 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · d7598e83-9f56-4a3f-b426-5a3e064a82f9 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · 0e04764f-dd1e-4062-86ae-1619c0f5624a · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · fda9ddee-f7e4-4958-b8aa-c7fb26064ec3 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · 304f4c5b-f8c7-4a25-ae8b-831df2d99bb3 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · 2b3c003c-0d9e-4fe3-8d96-f670472cd1fa · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · 096a68c2-dc61-4be9-b234-805c7ae1fe6b · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · 54a6ebcf-a9c2-4f4f-bc48-8691e1b408b8 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 10 · c5e9d192-0aba-40d3-bd09-55e73330ca96 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.

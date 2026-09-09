@@ -10,7 +10,7 @@ const bank: ChapterBank = {
     // ══════════════════════════════════ v1–12 · The Pharisees test Jesus about divorce
     mc(1, 'At the start of Mark 10, Jesus arose and came to which region, where multitudes gathered to Him again?', ['The region of Judea by the other side of the Jordan', 'Jericho, where a great multitude went out with Him', 'Jerusalem, where He would be delivered to the chief priests', 'The house where His disciples questioned Him'], 1),
     blank(2, 'Then He arose from there and came to the region of Judea by the other side of the _____.', 'Jordan', 1),
-    tf(1, 'When multitudes gathered to Jesus in the region of Judea beyond the Jordan, He taught them again, as He was accustomed.', true, 1),
+    tf(1, 'When multitudes gathered to Jesus beyond the Jordan, He sent them away without teaching them.', false, 1, 'Mark says, “as He was accustomed, He taught them again.”'),
     sa(3, 'When Jesus came to the region of Judea by the other side of the Jordan and multitudes gathered to Him, what did He do?', 'As He was accustomed, He taught them again.', 1),
 
     mc(1, 'What question did the Pharisees bring to Jesus in Judea beyond the Jordan, testing Him?', ['"Is it lawful for a man to divorce his wife?"', '"What shall I do that I may inherit eternal life?"', '"Who then can be saved?"', '"What did Moses command you?"'], 2),
@@ -25,7 +25,7 @@ const bank: ChapterBank = {
 
     mc(2, 'When Jesus asked the Pharisees what Moses commanded, what did they say Moses had permitted a man to do?', ['Write a certificate of divorce and dismiss his wife', 'Leave his father and mother and be joined to his wife', 'Divorce his wife and marry another without committing adultery', 'Bring his little children to be touched and blessed'], 4),
     blank(3, 'They said, "Moses permitted a man to write a certificate of _____, and to dismiss her."', 'divorce', 4),
-    tf(1, 'The Pharisees answered Jesus that Moses permitted a man to write a certificate of divorce and to dismiss his wife.', true, 4),
+    tf(1, 'The Pharisees answered Jesus that Moses forbade every certificate of divorce.', false, 4, 'They said Moses “permitted a man to write a certificate of divorce, and to dismiss her.”'),
     sa(3, 'When Jesus asked the Pharisees, "What did Moses command you?", what exactly did they answer?', 'Moses permitted a man to write a certificate of divorce, and to dismiss her.', 4),
 
     mc(2, 'According to Jesus, why did Moses write the Pharisees the precept about a certificate of divorce?', ['Because of the hardness of their heart', 'Because from the beginning God made them male and female', 'Because the two shall become one flesh', 'Because a man must leave his father and mother'], 5),
@@ -35,7 +35,7 @@ const bank: ChapterBank = {
 
     blank(1, 'But from the beginning of the creation, God ‘made them male and _____.’', 'female', 6),
     mc(2, 'Answering the Pharisees about divorce, Jesus pointed back to "the beginning of the creation." What did He say God did then?', ['Made them male and female', 'Wrote them a certificate of divorce', 'Commanded them to honor father and mother', 'Joined the two into one flesh'], 6),
-    tf(2, 'Jesus told the Pharisees that from the beginning of the creation God made them male and female.', true, 6),
+    tf(2, 'Jesus told the Pharisees that God first made humanity male and female in the days of Moses.', false, 6, 'Jesus said, “from the beginning of the creation, God ‘made them male and female.’”'),
 
     blank(2, '‘For this reason a man shall leave his father and mother and be joined to his _____,', 'wife', 7),
     sa(1, 'In Jesus’ answer to the Pharisees about divorce, whom does a man leave in order to be joined to his wife?', 'His father and mother.', 7),
@@ -72,7 +72,7 @@ const bank: ChapterBank = {
     mc(2, 'How did Jesus react when He saw the disciples rebuking those who brought the children?', ['He was greatly displeased', 'He was greatly astonished', 'He looked at them and loved them', 'He stood still and commanded them to be called'], 14),
     blank(1, 'Let the little children come to Me, and do not _____ them; for of such is the kingdom of God.', 'forbid', 14),
     sa(3, 'When Jesus saw the disciples turning the children away, what did He tell them to do, and what reason did He give?', 'Let the little children come to Me and do not forbid them, for of such is the kingdom of God.', 14),
-    tf(2, 'Jesus said the little children should be allowed to come to Him because "of such is the kingdom of God."', true, 14),
+    tf(2, 'Jesus told His disciples to keep the little children from coming to Him.', false, 14, 'Jesus said, “Let the little children come to Me, and do not forbid them.”'),
     word(3, 'When Jesus saw the disciples rebuking those who brought the children, Mark says He was greatly ___.', 'displeased', 14),
 
     mc(2, 'According to Jesus, who "will by no means enter" the kingdom of God?', ['Whoever does not receive the kingdom of God as a little child', 'Whoever trusts in riches', 'Whoever divorces his wife and marries another', 'Whoever desires to be first among the disciples'], 15),
@@ -81,7 +81,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Jesus do with the little children after telling the disciples to let them come to Him?', ['Took them up in His arms, laid His hands on them, and blessed them', 'Sat them one on His right hand and one on His left', 'Sent them back to their fathers and mothers', 'Told them to sell whatever they had and give to the poor'], 16),
     blank(3, 'And He took them up in His arms, laid His hands on them, and _____ them.', 'blessed', 16),
-    tf(1, 'Jesus took the little children up in His arms, laid His hands on them, and blessed them.', true, 16),
+    tf(1, 'Jesus blessed the little children from a distance without touching them.', false, 16, 'Mark says He “took them up in His arms, laid His hands on them, and blessed them.”'),
     sa(3, 'Describe the three things Jesus did with the little children once He had them brought to Him.', 'He took them up in His arms, laid His hands on them, and blessed them.', 16),
 
     // ══════════════════════════════════ v17–22 · The rich man and eternal life
@@ -91,7 +91,7 @@ const bank: ChapterBank = {
     tf(3, 'The man who asked about inheriting eternal life walked up slowly and stood before Jesus.', false, 17, 'He "came running, knelt before Him."'),
     sa(1, 'How did the man who asked Jesus about eternal life approach Him?', 'He came running and knelt before Him on the road.', 17),
 
-    mc(2, 'When the man called Jesus "Good Teacher," how did Jesus respond?', ['"Why do you call Me good? No one is good but One, that is, God."', '"You do not know what you ask."', '"One thing you lack."', '"With men it is impossible, but not with God."'], 18),
+    mc(2, 'When the man called Jesus "Good Teacher," how did Jesus respond?', ['Why call Me good? No one is good but God', 'You do not know what you ask', 'One thing you lack', 'With men it is impossible, but not with God'], 18),
     blank(2, 'So Jesus said to him, "Why do you call Me good? No one is good but One, that is, _____.', 'God', 18),
     tf(2, 'Jesus told the man who called Him "Good Teacher" that no one is good but One, that is, God.', true, 18),
     word(3, 'Jesus told the rich man that "No one is good but One" — whom did He name as that One?', 'God', 18),
@@ -182,7 +182,7 @@ const bank: ChapterBank = {
     word(2, 'Jesus said that after being mocked, scourged, spit on, and killed, He would rise again on which day?', 'third', 34, ['3rd', 'the third day', '3']),
 
     // ══════════════════════════════════ v35–45 · James and John's request; the Son of Man came to serve
-    mc(1, 'Which two disciples came to Jesus saying, "Teacher, we want You to do for us whatever we ask"?', ['James and John, the sons of Zebedee', 'Peter and John', 'Peter and James', 'Peter and the ten'], 35),
+    mc(1, 'Which two disciples came to Jesus saying, "Teacher, we want You to do for us whatever we ask"?', ['James and John', 'Peter and John', 'Peter and James', 'Peter and Andrew'], 35),
     word(1, 'James and John, who asked to sit at Jesus’ right and left, were the sons of whom?', 'Zebedee', 35),
     blank(1, 'Then James and John, the sons of _____, came to Him, saying, "Teacher, we want You to do for us whatever we ask."', 'Zebedee', 35),
     tf(1, 'Peter and John came to Jesus saying, "Teacher, we want You to do for us whatever we ask."', false, 35, 'It was James and John, the sons of Zebedee.'),
@@ -192,7 +192,7 @@ const bank: ChapterBank = {
     tf(2, 'When James and John said they wanted Him to do whatever they asked, Jesus replied, "What do you want Me to do for you?"', true, 36),
     sa(3, 'Jesus asked James and John the very question He would later ask blind Bartimaeus. What was it?', 'What do you want Me to do for you?', 36, 'The same words appear when Bartimaeus is brought to Him outside Jericho.'),
 
-    mc(1, 'What did James and John ask Jesus to grant them?', ['To sit one on His right hand and the other on His left, in His glory', 'To drink the cup that He drinks', 'To be first among the twelve', 'To receive a hundredfold now in this time'], 37),
+    mc(1, 'What did James and John ask Jesus to grant them?', ['Seats at His right and left in His glory', 'The cup that He drinks', 'First place among the twelve', 'A hundredfold in this life'], 37),
     blank(2, 'They said to Him, "Grant us that we may sit, one on Your right hand and the other on Your left, in Your _____."', 'glory', 37),
     word(2, 'James and John asked to sit at Jesus’ right and left "in Your ___."', 'glory', 37),
     tf(1, 'James and John asked Jesus to let them sit on His right hand and on His left in His glory.', true, 37),
@@ -217,7 +217,7 @@ const bank: ChapterBank = {
     word(3, 'How many disciples were greatly displeased with James and John over their request?', 'ten', 41, ['10', 'the ten']),
     tf(1, 'The other ten disciples were greatly displeased with James and John when they heard their request.', true, 41),
 
-    mc(3, 'When Jesus called the disciples to Himself after the ten grew displeased, what did He say the rulers of the Gentiles do?', ['Lord it over them, and their great ones exercise authority over them', 'Condemn to death and deliver to the Gentiles', 'Sit on the right hand and on the left in glory', 'Write certificates of divorce and dismiss'], 42),
+    mc(3, 'When Jesus called the disciples to Himself after the ten grew displeased, what did He say the rulers of the Gentiles do?', ['Lord it over them and exercise authority', 'Condemn them and deliver them to the Gentiles', 'Sit at the right and left in glory', 'Write certificates of divorce'], 42),
     blank(3, 'You know that those who are considered rulers over the _____ lord it over them, and their great ones exercise authority over them.', 'Gentiles', 42),
     tf(2, 'Jesus said that those who are considered rulers over the Gentiles lord it over them.', true, 42),
 
@@ -231,7 +231,7 @@ const bank: ChapterBank = {
     tf(3, 'Jesus said whoever desires to be first among the disciples shall be slave of the twelve.', false, 44, 'He said "slave of all."'),
     sa(3, 'Jesus gave two parallel sayings about greatness. What did He say about whoever desires to be first?', 'Whoever desires to be first shall be slave of all.', 44),
 
-    mc(1, 'According to Jesus, why did the Son of Man come?', ['Not to be served, but to serve, and to give His life a ransom for many', 'To sit at the right hand in glory', 'To lord it over the Gentiles', 'To condemn the chief priests and scribes'], 45),
+    mc(1, 'According to Jesus, why did the Son of Man come?', ['To serve and give His life as a ransom for many', 'To sit at the right hand in glory', 'To lord it over the Gentiles', 'To condemn the chief priests and scribes'], 45),
     blank(1, 'For even the Son of Man did not come to be served, but to serve, and to give His life a _____ for many."', 'ransom', 45),
     word(2, 'Jesus said the Son of Man came to give His life a ransom for how many?', 'many', 45, ['for many']),
     tf(1, 'Jesus said the Son of Man came to be served.', false, 45, 'He "did not come to be served, but to serve."'),
