@@ -1996,3 +1996,12 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 
 - Mark 13 · c5049c25-e024-4949-aba3-97146c679c27 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 13 · f794e014-e78a-4c09-861a-1638773cccb5 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 14 semantic review
+
+- Mark 14 · 094a4693-0d01-4788-8141-79ef061d7597 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 14 · 17b87ca8-ad55-4693-bb14-dc2d9501452b · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 14 · f897a100-3490-4b0b-86b4-29c8ab9d8ee7 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 14 · 85fe5dca-7d11-4a83-8f5f-8727527bcd1f · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 14 · a59b8636-8208-4404-8ccb-aa68b8382e0f · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 14 · b185bb45-ff6f-4af0-9ba0-22c3d5013c35 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 14 · 2bd1614c-7a27-4b63-90cb-42dfc07b8205 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
