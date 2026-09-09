@@ -43,3 +43,32 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 1 · 9f425422-3ef3-4963-b992-75a12c52b7c3 · R5 · fixed · Made every proposed throne comparison similarly specific.
 - 1 Kings 1 · afda40e7-addd-40cf-a712-0e816ada15cd · R5 · fixed · Replaced short fragments with full questions grounded in the procession.
 - 1 Kings 1 · 766bfad1-ce5f-4f79-b1c4-dd9c0d7c2304 · R5 · fixed · Replaced short actions with comparable chapter actions.
+
+## 1 Kings 2
+
+- 1 Kings 2 · f87c5d9c-f570-4a7f-afd8-021853776879 · R5 · fixed · Balanced every named pair with full identities.
+- 1 Kings 2 · 29816d2c-3268-4063-8bdd-ffecb04d5abe · R5 · fixed · Balanced the proposed locations of Joab's blood with similarly detailed settings.
+- 1 Kings 2 · 35ccf29d-9a9e-478f-946b-7caa72a2703f · R5 · fixed · Replaced giveaway-short commands with comparable instructions.
+- 1 Kings 2 · d20bac27-61f6-43a3-b4af-443014d1ed44 · R5 · fixed · Expanded every person choice with a chapter-grounded identity.
+- 1 Kings 2 · 5adb7185-f9fd-4c55-af6f-2f45cb548ea5 · R3 · fixed · Removed meta wording that repeated the answer in the prompt.
+- 1 Kings 2 · dd894068-25ce-4034-8deb-e1104ea96be4 · R5 · fixed · Replaced giveaway-short claims with comparable kingdom claims.
+- 1 Kings 2 · fe33b297-697a-4b68-a497-2f6cc31aad7b · R5 · fixed · Made each proposed reply a complete quotation.
+- 1 Kings 2 · fad76f45-d5db-4052-a3ed-f1aba66f82fe · R5 · fixed · Replaced fragment actions with comparable responses by Solomon.
+- 1 Kings 2 · 4651beb5-c051-4b1d-a697-671c1b50978a · R5 · fixed · Made every proposed reply a complete statement.
+- 1 Kings 2 · c1026281-4538-4a57-8044-8e688b28593a · R5 · fixed · Made every proposed request similarly specific.
+- 1 Kings 2 · 4ea39a85-294d-4d60-9555-0a338f3e4feb · R5 · fixed · Balanced each named pair with roles and parentage.
+- 1 Kings 2 · b09a90c1-262e-447d-b036-d26353778cff · R5 · fixed · Replaced short oath fragments with comparable oath formulas.
+- 1 Kings 2 · 10c65fce-67b0-4aba-9137-d234c836142a · R5 · fixed · Added comparable destination context to every choice.
+- 1 Kings 2 · be8397e7-d61b-475d-a8c4-f0273366f8e8 · R5 · fixed · Replaced short invented motives with comparable chapter-grounded claims.
+- 1 Kings 2 · 218114c9-9b8a-49a9-839d-c19655f68c04 · R5 · fixed · Made every refuge choice a detailed chapter setting.
+- 1 Kings 2 · 30e5283a-42d0-431c-975a-282fe3abf37e · R5 · fixed · Balanced each proposed consequence with a full chapter event.
+- 1 Kings 2 · 30ac7c0e-8007-44ae-afdd-4f860a80fe91 · R5 · fixed · Expanded every named pair with chapter identities.
+- 1 Kings 2 · ba94e878-69c4-4828-acb4-c8a1a6c80063 · R5 · fixed · Expanded every candidate with a chapter role.
+- 1 Kings 2 · 4aa40f03-f87b-49a7-9b9e-9c3f7b6fdcc3 · R5 · fixed · Replaced short replies with comparable full statements.
+- 1 Kings 2 · bac11cd0-8447-4adf-ad7b-ba900fa5300d · R5 · fixed · Balanced each proposed pair of broken obligations.
+- 1 Kings 2 · fe19e7db-a828-4fa1-ab9e-529344fe3411 · R5 · fixed · Expanded every named candidate with a chapter identity.
+- 1 Kings 2 · 42fae302-1c5d-4b1a-a7c1-fd3f2f4f7669 · R2/R8 · retired · Required three separate passages while citing only verse 46.
+- 1 Kings 2 · 4539e549-f2ef-420c-a778-e75fdcf8c7c1 · R2/R8 · retired · Cross-chapter sequence could not be supported by the single cited verse.
+- 1 Kings 2 · 3f9d4ae8-ac68-4266-abcc-77d66a14a848 · R2/R8 · retired · Required three execution passages while citing only verse 46.
+- 1 Kings 2 · b6ca9236-b129-498d-8703-10813bdcaa60 · R2/R8 · retired · Required comparing outcomes from multiple cited verses.
+- 1 Kings 2 · 940e9baa-a065-42b7-afe4-ad424301ef43 · R2/R8 · retired · Combined David's verse-5 words with Solomon's verse-32 words under one citation.
