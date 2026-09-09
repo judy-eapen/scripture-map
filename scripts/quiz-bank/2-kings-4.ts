@@ -4,7 +4,7 @@ const bank: ChapterBank = {
   book: '2 Kings', chapter: 4, tag: 'quiz-v2-2kings-4', rows: [
     mc(2, 'What danger did the prophet’s widow face?', ['A creditor would take her two children as slaves', 'Her house would be seized by the king', 'Her children had become ill', 'She had been expelled from Israel'], 1),
     blank(1, 'the creditor has come to take my two children to be his _____.', 'slaves', 1),
-    word(3, 'Whom did the widow say her husband had feared?', 'the LORD', 1, ['LORD', 'God']),
+    word(3, 'Whom did the widow say her husband had feared?', 'LORD', 1, ['the LORD', 'God']),
     tf(2, 'The widow’s husband had been one of the sons of the prophets.', true, 1),
 
     mc(1, 'What did the widow have in her house?', ['A jar of oil', 'A sack of grain', 'A bowl of salt', 'Twenty barley loaves'], 2),
@@ -18,7 +18,7 @@ const bank: ChapterBank = {
     tf(3, 'Elisha told the widow to borrow only one vessel.', false, 3, 'He told her to borrow empty vessels and “not too few.”'),
     mc(3, 'What precise instruction did Elisha give about gathering containers?', ['Borrow empty vessels from every neighbor, and not too few', 'Buy one full jar from a merchant', 'Borrow twelve bowls from the prophets', 'Collect only vessels already containing oil'], 3),
 
-    mc(1, 'What was the widow to do after entering her house?', ['Shut the door and pour oil into every vessel', 'Sell her jar immediately', 'Call the creditor inside', 'Prepare food for Elisha'], 4),
+    mc(1, 'What was the widow to do after entering her house?', ['Shut the door and pour oil into every borrowed vessel', 'Sell her remaining jar of oil immediately to a merchant', 'Call the creditor inside to witness what she possessed', 'Prepare food for Elisha before filling any of the vessels'], 4),
     blank(3, 'when one is full, set it _____.', 'aside', 4),
     sa(2, 'Who would be inside with the widow?', 'her sons', 4, ['her children']),
     tf(1, 'The filled vessels were to be set aside.', true, 4),
@@ -69,7 +69,7 @@ const bank: ChapterBank = {
     sa(1, 'How did the woman describe her social security?', 'I dwell among my own people', 13, ['she dwelt among her own people']),
     tf(3, 'The woman asked Elisha to speak to the king for her.', false, 13, 'She answered that she dwelt among her own people.'),
 
-    mc(1, 'What need did Gehazi identify in the woman’s household?', ['She had no son and her husband was old', 'She owed a creditor', 'Her water was bad', 'Her husband had died'], 14),
+    mc(1, 'What need did Gehazi identify in the Shunammite woman’s household?', ['She had no son, and her husband was old', 'She owed a creditor who threatened to take her children', 'Her city’s water was bad and the land was unfruitful', 'Her husband had died and left her without anyone to help'], 14),
     blank(3, 'she has no son, and her husband is _____.', 'old', 14),
     word(2, 'Who pointed out that the woman had no son?', 'Gehazi', 14, ["Geha'zi"]),
     tf(1, 'The Shunammite woman was childless.', true, 14),
@@ -84,7 +84,7 @@ const bank: ChapterBank = {
     sa(2, 'What did the woman plead that Elisha not do?', 'lie to her', 16, ['deceive her', 'lie to your maidservant']),
     tf(1, 'The promise of a son initially seemed unbelievable to the woman.', true, 16),
 
-    mc(1, 'When did the woman bear the promised son?', ['About that time the following spring', 'Seven years later', 'At the next new moon', 'Before winter'], 17),
+    mc(1, 'When did the woman bear the son Elisha had promised?', ['About that time the following spring', 'Seven years after Elisha first stayed in her house', 'At the next new moon after her husband returned home', 'Before the beginning of winter in that same year'], 17),
     blank(2, 'But the woman _____, and she bore a son', 'conceived', 17),
     word(1, 'Whose word was fulfilled by the birth?', 'Elisha’s', 17, ['Elisha', "Eli'sha's"]),
     tf(3, 'The promised child was born exactly as Elisha had said.', true, 17),
@@ -178,7 +178,7 @@ const bank: ChapterBank = {
     blank(2, 'the child _____ seven times', 'sneezed', 35),
     word(1, 'How many times did the child sneeze?', 'seven', 35, ['7']),
     tf(3, 'Elisha remained motionless beside the child until he awoke.', false, 35, 'He walked once to and fro, then stretched himself upon the child again.'),
-    mc(3, 'What sequence marked the child’s return to life?', ['After Elisha stretched upon him again, he sneezed seven times and opened his eyes', 'Gehazi struck him with the staff and he stood', 'His mother poured oil over him and he spoke', 'The prophets prayed and he rose at noon'], 35),
+    mc(3, 'What sequence marked the child’s return to life?', ['After Elisha stretched upon him again, he sneezed seven times and opened his eyes', 'After Gehazi struck him with the staff again, the child stood and walked', 'After his mother poured oil over him, he spoke to her and left the room', 'After the sons of the prophets prayed together, the child arose at noon'], 35),
 
     mc(1, 'What did Elisha tell the Shunammite woman to do?', ['Take up her son', 'Bring another vessel', 'Return to Mount Carmel', 'Call her husband'], 36),
     blank(3, 'Call this _____.', 'Shu’nammite', 36, ['Shunammite']),
@@ -200,7 +200,7 @@ const bank: ChapterBank = {
     sa(1, 'Why did the man add the gourds?', 'he did not know what they were', 39, ['not knowing what they were', 'he was unaware']),
     tf(3, 'The gatherer recognized the wild gourds as dangerous.', false, 39, 'He cut them into the pot without knowing what they were.'),
 
-    mc(1, 'What did the men cry after tasting the pottage?', ['O man of God, there is death in the pot!', 'The water is bad!', 'Bring another vessel!', 'The child has awaked!'], 40),
+    mc(1, 'What did the men cry after tasting the pottage?', ['“O man of God, there is death in the pot!”', '“The water is bad, and the land is unfruitful!”', '“Bring me a new bowl, and put salt in it!”', '“The child has awaked, but there is no sound!”'], 40),
     blank(3, 'there is _____ in the pot!', 'death', 40),
     word(2, 'Were the men able to continue eating it?', 'no', 40, ['they could not eat it', 'no they could not']),
     tf(1, 'The men stopped eating because they believed the stew was deadly.', true, 40),
@@ -211,7 +211,7 @@ const bank: ChapterBank = {
     tf(3, 'The pottage remained harmful after the meal was added.', false, 41, 'There was no harm in the pot.'),
     mc(3, 'How was the deadly pottage made safe?', ['Elisha threw meal into the pot and told the men to eat', 'He poured it out and filled the pot with water', 'He added salt from a new bowl', 'He touched it with Elijah’s mantle'], 41),
 
-    mc(1, 'What food did the man from Baal-shalishah bring?', ['Twenty barley loaves and fresh ears of grain', 'A jar of oil and meal', 'One hundred lambs', 'Wild gourds and herbs'], 42),
+    mc(1, 'What food did the man from Baal-shalishah bring?', ['Twenty barley loaves and fresh ears of grain in his sack', 'A jar of oil and a measure of meal from his household', 'One hundred lambs and the wool of one hundred rams', 'Wild gourds and herbs gathered from the surrounding fields'], 42),
     blank(3, 'twenty loaves of _____', 'barley', 42),
     word(2, 'From where did the man come?', 'Baal-shalishah', 42, ["Ba'al-shal'ishah"]),
     tf(1, 'The food was described as bread of the first fruits.', true, 42),
@@ -219,12 +219,12 @@ const bank: ChapterBank = {
 
     mc(1, 'How many men did the servant doubt the food could feed?', ['One hundred', 'Fifty', 'Forty-two', 'Twenty'], 43),
     blank(2, 'They shall eat and have some _____.', 'left', 43),
-    word(1, 'Whose promise supported Elisha’s command to serve the food?', 'the LORD’s', 43, ['the LORD', 'God’s']),
+    word(1, 'Whose promise supported Elisha’s command to serve the food?', 'LORD', 43, ['the LORD', 'the LORD’s', "LORD's", 'God']),
     tf(3, 'Elisha withdrew his instruction after the servant questioned the amount.', false, 43, 'He repeated the command and cited the LORD’s promise of leftovers.'),
 
     mc(1, 'What happened when the food was set before the men?', ['They ate and had some left', 'They refused to eat', 'It ran out before all were served', 'They found death in it'], 44),
     blank(3, 'And they ate, and had some _____.', 'left', 44),
-    sa(2, 'According to whose word was there food left over?', 'the LORD’s word', 44, ['the word of the LORD', 'the LORD']),
+    sa(2, 'Whose word was fulfilled when the men ate and had food left over?', 'the LORD’s word', 44, ['the word of the LORD', 'the LORD']),
     tf(1, 'The result fulfilled the word of the LORD.', true, 44),
   ],
 }
