@@ -15,7 +15,7 @@ const bank: ChapterBank = {
     blank(2, 'Now when the queen of Sheba heard of the fame of Solomon concerning the name of the LORD, she came to test him with _____ questions.', 'hard', 1),
     mc(2, 'Solomon’s fame that reached the queen of Sheba concerned what?', ['The name of the LORD', 'His army', 'His gold', 'His fleet of ships'], 1),
 
-    mc(1, 'What did the queen of Sheba’s camels carry to Jerusalem?', ['Spices, very much gold, and precious stones', 'Almug wood and ivory', 'Horses and chariots', 'Apes and peacocks'], 2),
+    mc(1, 'What did the queen of Sheba’s camels carry to Jerusalem?', ['Spices, much gold, and precious stones', 'Almug wood, carved ivory, and silver vessels', 'Horses, royal chariots, and Egyptian linen', 'Apes, peacocks, and goods from Tarshish'], 2),
     blank(1, 'She came to Jerusalem with a very great retinue, with _____ bearing spices, and very much gold, and precious stones;', 'camels', 2),
     word(1, 'To which city did the queen of Sheba come?', 'Jerusalem', 2),
     tf(2, 'When the queen of Sheba came to Solomon, she told him all that was on her mind.', true, 2),
@@ -23,26 +23,26 @@ const bank: ChapterBank = {
 
     tf(1, 'Solomon answered all the queen of Sheba’s questions.', true, 3),
     blank(2, 'And Solomon answered all her questions; there was nothing _____ from the king which he could not explain to her.', 'hidden', 3),
-    mc(1, 'How did Solomon fare with the queen of Sheba’s questions?', ['He answered them all; nothing was hidden from him that he could not explain', 'He answered most but could not explain some', 'He referred them to his priests', 'He refused to answer riddles'], 3),
+    mc(1, 'How did Solomon fare with the queen of Sheba’s questions?', ['He answered everything; nothing was too difficult to explain', 'He answered most questions but could not explain several riddles', 'He referred her hardest questions to the priests at the temple', 'He refused to answer the questions concerning the LORD’s name'], 3),
     tf(3, 'There were some questions from the queen of Sheba that Solomon could not explain.', false, 3, 'There was nothing hidden from the king which he could not explain to her.'),
 
     // ══════════════════════════════════ v4–5 · What the queen saw
     blank(1, 'And when the queen of Sheba had seen all the _____ of Solomon, the house that he had built,', 'wisdom', 4),
-    word(2, 'Besides Solomon’s wisdom, verse 4 says the queen saw the ___ that he had built.', 'house', 4),
+    word(2, 'Besides Solomon’s wisdom, the queen saw the ___ that he had built.', 'house', 4),
     tf(1, 'The queen of Sheba saw the house that Solomon had built.', true, 4),
-    mc(3, 'What is the first thing listed that the queen of Sheba had seen (v4)?', ['All the wisdom of Solomon', 'The food of his table', 'His burnt offerings', 'His cupbearers'], 4),
+    mc(3, 'What is listed first among the things the queen of Sheba saw?', ['All the wisdom of Solomon', 'The food served at his table', 'His ascent and burnt offerings', 'His servants acting as cupbearers'], 4),
 
     mc(1, 'What was the effect on the queen of Sheba after she saw all of Solomon’s court?', ['There was no more spirit in her', 'She fell on her face', 'She wept aloud', 'She fled back to her land'], 5),
     blank(2, 'the food of his table, the seating of his officials, and the attendance of his servants, their clothing, his cupbearers, and his burnt offerings which he offered at the house of the LORD, there was no more _____ in her.', 'spirit', 5),
     word(3, 'Which of Solomon’s servants who handled drink are listed among what the queen saw?', 'cupbearers', 5, ['cupbearer']),
-    mc(3, 'Which of these is NOT listed in verse 5 among the things the queen of Sheba saw?', ['His fleet of ships', 'The food of his table', 'The seating of his officials', 'His cupbearers'], 5),
+    mc(3, 'Which of these did the queen of Sheba not see at Solomon’s court?', ['His fleet of ships', 'The food of his table', 'The seating of his officials', 'His cupbearers'], 5),
     tf(3, 'The queen of Sheba saw the burnt offerings Solomon offered at the house of the LORD.', true, 5),
     blank(3, 'the food of his table, the seating of his officials, and the attendance of his servants, their _____, his cupbearers,', 'clothing', 5),
 
     // ══════════════════════════════════ v6–9 · The queen’s speech
     blank(1, 'And she said to the king, "The report was _____ which I heard in my own land of your affairs and of your wisdom,', 'true', 6),
     tf(1, 'The queen of Sheba told Solomon that the report she had heard in her own land was true.', true, 6),
-    mc(2, 'According to the queen, where had she heard the report about Solomon?', ['In her own land', 'In Egypt', 'From the fleet of Hiram', 'In Tarshish'], 6),
+    mc(2, 'Where had the queen heard the report about Solomon?', ['In her own land', 'In the land of Egypt', 'From Hiram’s sailing fleet', 'In the port of Tarshish'], 6),
     word(3, 'The queen said the report she heard concerned Solomon’s affairs and his ___.', 'wisdom', 6),
 
     blank(1, 'but I did not believe the reports until I came and my own eyes had seen it; and, behold, the _____ was not told me;', 'half', 7),
@@ -53,12 +53,12 @@ const bank: ChapterBank = {
     mc(3, 'What did the queen say convinced her the reports were true?', ['She came and her own eyes had seen it', 'Solomon’s servants swore to it', 'The fleet of Hiram brought word', 'The kings of Arabia confirmed it'], 7),
 
     blank(2, 'Happy are your _____! Happy are these your servants, who continually stand before you and hear your wisdom!', 'wives', 8),
-    mc(2, 'Whom did the queen of Sheba call "happy"?', ['Solomon’s wives and his servants who stand before him', 'The kings of Arabia', 'The people of Jerusalem', 'The priests at the house of the LORD'], 8),
+    mc(2, 'Whom did the queen of Sheba call “happy”?', ['Solomon’s wives and servants who continually heard his wisdom', 'Arabia’s kings and governors who brought him yearly tribute', 'Jerusalem’s people who saw the royal court each day', 'The temple priests who ministered before the LORD’s house'], 8),
     tf(3, 'The queen said Solomon’s servants were happy because they continually stand before him and hear his wisdom.', true, 8),
     word(3, 'The queen said Solomon’s servants "continually ___ before you".', 'stand', 8),
 
     blank(1, 'Blessed be the LORD your God, who has delighted in you and set you on the _____ of Israel!', 'throne', 9),
-    mc(2, 'According to the queen, why had the LORD made Solomon king?', ['That he may execute justice and righteousness', 'That he may build a fleet of ships', 'That he may gather gold and silver', 'That he may conquer the kings of Syria'], 9),
+    mc(2, 'Why did the queen say the LORD had made Solomon king?', ['To execute justice and righteousness', 'To build a fleet and sail to Ophir', 'To gather gold and silver in Jerusalem', 'To conquer the kings of Syria'], 9),
     blank(2, 'Because the LORD loved Israel for ever, he has made you king, that you may execute _____ and righteousness."', 'justice', 9),
     tf(1, 'The queen of Sheba said, "Blessed be the LORD your God, who has delighted in you."', true, 9),
     word(3, 'The queen said the LORD loved Israel for how long — "for ___".', 'ever', 9, ['forever']),
@@ -78,13 +78,13 @@ const bank: ChapterBank = {
     tf(1, 'The fleet of Hiram brought gold from Ophir.', true, 11),
     tf(3, 'The fleet of Hiram brought cedar wood from Ophir.', false, 11, 'It brought almug wood and precious stones from Ophir.'),
 
-    mc(2, 'What did Solomon make from the almug wood?', ['Supports for the house of the LORD and the king’s house, and lyres and harps for the singers', 'Shields and a throne', 'Chariots for his horsemen', 'Drinking vessels'], 12),
+    mc(2, 'What did Solomon make from the almug wood?', ['Supports for both houses and lyres and harps for singers', 'Large and small shields and an ivory-covered throne', 'Chariots and stable fittings for the king’s horsemen', 'Royal drinking vessels and tableware for his banquets'], 12),
     blank(2, 'And the king made of the almug wood supports for the house of the LORD, and for the king’s house, lyres also and _____ for the singers;', 'harps', 12),
     word(3, 'Along with harps, what instruments did Solomon make of almug wood for the singers?', 'lyres', 12, ['lyre']),
     tf(1, 'Solomon made lyres and harps of almug wood for the singers.', true, 12),
     blank(3, 'no such almug wood has come or been seen, to this _____.', 'day', 12),
 
-    mc(1, 'What did King Solomon give the queen of Sheba?', ['All that she desired, whatever she asked, besides what he gave from his bounty', 'Only spices in return for her gold', 'A share of the fleet of Hiram', 'Nothing; she gave to him'], 13),
+    mc(1, 'What did King Solomon give the queen of Sheba?', ['Everything she desired and asked, besides his royal bounty', 'Only spices equal in value to the gold she had brought', 'A share in Hiram’s fleet and its cargo brought from Ophir', 'Nothing in return because she alone presented royal gifts'], 13),
     blank(2, 'And King Solomon gave to the queen of Sheba all that she _____, whatever she asked besides what was given her by the bounty of King Solomon.', 'desired', 13),
     tf(1, 'After visiting Solomon, the queen of Sheba went back to her own land with her servants.', true, 13),
     word(3, 'Solomon gave the queen gifts "by the ___ of King Solomon" — what word?', 'bounty', 13),
@@ -97,10 +97,10 @@ const bank: ChapterBank = {
     tf(1, 'Six hundred and sixty-six talents of gold came to Solomon in one year.', true, 14),
     tf(3, 'The weight of gold that came to Solomon in one year was six hundred and sixty-six shekels.', false, 14, 'It was six hundred and sixty-six talents of gold.'),
 
-    mc(2, 'Besides the yearly weight of gold, from whom else did gold come to Solomon (v15)?', ['Traders, merchants, all the kings of Arabia, and the governors of the land', 'The queen of Sheba alone', 'The kings of the Hittites and Syria', 'The people of Jerusalem'], 15),
+    mc(2, 'Besides the yearly weight, from whom else did Solomon receive gold?', ['Traders, merchants, Arabia’s kings, and governors of the land', 'The queen of Sheba alone during her visit to Jerusalem', 'The Hittite and Syrian kings who bought Egyptian chariots', 'The people of Jerusalem through a yearly temple tax'], 15),
     blank(3, 'besides that which came from the traders and from the traffic of the merchants, and from all the kings of _____ and from the governors of the land.', 'Arabia', 15),
-    word(3, 'The kings of which land are named in verse 15 as a source of Solomon’s gold?', 'Arabia', 15),
-    tf(2, 'Verse 15 says gold also came to Solomon from all the kings of Syria.', false, 15, 'It came "from all the kings of Arabia and from the governors of the land".'),
+    word(3, 'The kings of which land are named as a source of Solomon’s gold?', 'Arabia', 15),
+    tf(2, 'Gold also came to Solomon from all the kings of Syria.', false, 15, 'It came "from all the kings of Arabia and from the governors of the land".'),
 
     mc(2, 'How many large shields of beaten gold did Solomon make?', ['Two hundred', 'Three hundred', 'Six hundred', 'Twelve'], 16),
     blank(2, 'King Solomon made two hundred large shields of _____ gold; six hundred shekels of gold went into each shield.', 'beaten', 16),
@@ -156,14 +156,14 @@ const bank: ChapterBank = {
     tf(1, 'Solomon excelled all the kings of the earth in riches and in wisdom.', true, 23),
 
     blank(2, 'And the whole earth sought the presence of Solomon to hear his wisdom, which God had put into his _____.', 'mind', 24),
-    mc(1, 'Why did the whole earth seek the presence of Solomon?', ['To hear his wisdom, which God had put into his mind', 'To buy horses and chariots', 'To see his ivory throne', 'To trade for almug wood'], 24),
-    tf(3, 'Verse 24 says Solomon’s wisdom was something God had put into his mind.', true, 24),
-    word(2, 'Who put wisdom into Solomon’s mind, according to verse 24?', 'God', 24, ['the lord', 'lord']),
+    mc(1, 'Why did the whole earth seek the presence of Solomon?', ['To hear the wisdom that God had put in his mind', 'To buy the horses and chariots he imported from Egypt', 'To see the ivory throne overlaid with the finest gold', 'To trade gold and precious stones for his almug wood'], 24),
+    tf(3, 'Solomon’s wisdom was something God had put into his mind.', true, 24),
+    word(2, 'Who put wisdom into Solomon’s mind?', 'God', 24, ['the lord', 'lord']),
 
-    mc(3, 'Which item is NOT among the presents listed in verse 25?', ['Ivory', 'Myrrh', 'Garments', 'Mules'], 25),
+    mc(3, 'Which item is not among the yearly presents brought to Solomon?', ['Ivory', 'Myrrh', 'Garments', 'Mules'], 25),
     blank(2, 'Every one of them brought his present, articles of silver and gold, garments, _____, spices, horses, and mules, so much year by year.', 'myrrh', 25),
     tf(2, 'Those who sought Solomon brought their presents only once during his reign.', false, 25, 'They brought them "so much year by year".'),
-    word(3, 'Verse 25 lists horses and what other animals among the presents brought to Solomon?', 'mules', 25, ['mule']),
+    word(3, 'The yearly presents included horses and what other animals?', 'mules', 25, ['mule']),
     blank(3, 'Every one of them brought his present, articles of silver and gold, _____, myrrh, spices, horses, and mules,', 'garments', 25),
 
     // ══════════════════════════════════ v26–29 · Chariots, horses, silver like stone
@@ -191,19 +191,15 @@ const bank: ChapterBank = {
     mc(2, 'What was the price of a chariot imported from Egypt?', ['Six hundred shekels of silver', 'A hundred and fifty shekels of silver', 'Three minas of gold', 'A hundred and twenty talents'], 29),
     sa(2, 'A horse could be imported from Egypt for how many shekels of silver?', 'a hundred and fifty', 29, ['150', 'hundred and fifty', 'one hundred fifty', 'one hundred and fifty']),
     blank(3, 'A chariot could be imported from Egypt for six hundred shekels of _____, and a horse for a hundred and fifty;', 'silver', 29),
-    mc(3, 'To whom were chariots and horses exported through the king’s traders?', ['All the kings of the Hittites and the kings of Syria', 'The kings of Arabia', 'The queen of Sheba', 'The governors of the land'], 29),
+    mc(3, 'To whom were chariots and horses exported through the king’s traders?', ['All the Hittite kings and the kings of Syria', 'All the kings of Arabia who sent Solomon gold', 'The queen of Sheba and the servants who attended her', 'The governors of the land who collected royal tribute'], 29),
     blank(3, 'and so through the king’s traders they were exported to all the kings of the _____ and the kings of Syria.', 'Hittites', 29),
     tf(3, 'A chariot from Egypt cost a hundred and fifty shekels of silver.', false, 29, 'A chariot cost six hundred shekels; a horse cost a hundred and fifty.'),
     tf(2, 'Through the king’s traders, horses and chariots were exported to the kings of Syria.', true, 29),
 
     // ══════════════════════════════════ Whole-chapter
-    mc(1, 'Who is the foreign visitor whose visit dominates 1 Kings 10?', ['The queen of Sheba', 'Hiram king of Tyre', 'Pharaoh of Egypt', 'The king of the Hittites'], 1),
+    mc(1, 'Which foreign queen came to test Solomon with hard questions?', ['The queen of Sheba', 'A queen from Egypt', 'A queen from Arabia', 'A queen of the Hittites'], 1),
     mc(1, 'Who said, "Happy are your wives! Happy are these your servants"?', ['The queen of Sheba', 'Solomon', 'Hiram', 'The governors of the land'], 8),
-    mc(3, 'Which of these events comes FIRST in 1 Kings 10?', ['The queen of Sheba arrives in Jerusalem with camels bearing spices', 'Solomon makes his ivory throne', 'The fleet of Tarshish brings apes and peacocks', 'Solomon imports horses from Egypt and Kue'], 2),
     mc(2, 'Who said, "Blessed be the LORD your God, who has delighted in you and set you on the throne of Israel"?', ['The queen of Sheba', 'Hiram', 'Nathan the prophet', 'Zadok the priest'], 9),
-    mc(3, 'Which number is correctly paired in 1 Kings 10?', ['Twelve lions on the steps of the throne', 'Twelve thousand chariots', 'Six hundred talents of gold in one year', 'Two hundred horsemen'], 20),
-    tf(1, 'In 1 Kings 10, Solomon travelled to Sheba to visit the queen.', false, 1, 'The queen of Sheba came to Solomon in Jerusalem.'),
-    word(2, 'Which king’s fleet is named twice in 1 Kings 10 as sailing with or for Solomon?', 'Hiram', 22, ['hirams', 'hiram’s']),
   ],
 };
 
