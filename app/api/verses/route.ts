@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+const BOOK_NAMES: Record<string, string> = {
+  '1-kings': '1 Kings',
+  '2-kings': '2 Kings',
+  mark: 'Mark',
+}
+
 export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams
   const book = sp.get('book') ?? ''
@@ -11,7 +17,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ verses: [] }, { status: 400 })
   }
   const supabase = await createClient()
-  const { data: bookRow } = await supabase.from('books').select('id, name').eq('slug', book).maybeSingle()
+  const bookName = BOOK_NAMES[book]
+  if (!bookName) return NextResponse.json({ verses: [] }, { status: 400 })
+  const { data: bookRow } = await supabase.from('books').select('id, name').eq('name', bookName).maybeSingle()
   if (!bookRow) return NextResponse.json({ verses: [] })
   const { data: chapterRow } = await supabase.from('chapters').select('verses').eq('book_id', bookRow.id).eq('chapter_number', chapter).maybeSingle()
   const verses = ((chapterRow?.verses ?? []) as Array<{ verse_number:number; text:string }>)
