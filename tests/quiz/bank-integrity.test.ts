@@ -130,10 +130,12 @@ describe('Mark quiz bank matches the Orthodox Study Bible New Testament text use
     const bank = bankModule.default as ChapterBank
     const rows = bank.rows.filter(row => row.verse_number === 2)
     expect(rows.some(row => row.question === 'Where was the promised messenger sent?')).toBe(false)
+    expect(rows.some(row => row.type === 'fill_blank' && row.answer === 'before Your face')).toBe(false)
     expect(rows).toContainEqual(expect.objectContaining({
-      type: 'fill_blank',
-      answer: 'before Your face',
+      type: 'multiple_choice',
+      question: 'Before John the Baptist appears, Mark quotes the Prophets about a messenger. What is the messenger sent to do?',
     }))
+    expect(rows.find(row => row.type === 'multiple_choice')?.options?.[0]).toBe('Prepare the Lord’s way before Him')
   })
 })
 

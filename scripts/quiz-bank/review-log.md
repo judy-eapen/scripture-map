@@ -142,3 +142,31 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 6 · 80e10551-8f6a-42a1-a15d-e4000c385a8a · R2/R8 · retired · Combined separate gold-overlay passages under one citation.
 - 1 Kings 6 · 3c15fccd-c190-45ca-aa7a-7f8e6c151c0f · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
 - 1 Kings 6 · 35f92170-7b9a-46c2-aa58-caf1a89185da · R2/R8 · retired · Combined the beginning and completion dates under one citation.
+
+## 1 Kings 7
+
+- 1 Kings 7 · a03e6bc1-bfb4-4375-aab4-af93f4a69ba2 · R3 · retired/replaced · Removed reference-number framing from the direct house-building question.
+- 1 Kings 7 · 2e4f4be9-9a7e-427f-ab5b-c920c4655160 · R3 · retired/replaced · Replaced narrator-style “building described” wording with the building’s dimensions.
+- 1 Kings 7 · e7fd8da5-80fa-4286-bee6-5134bb116d82 · R3/R5 · retired/replaced · Removed reference-number framing and balanced all window arrangements.
+- 1 Kings 7 · 4ee0af8f-e616-4599-aabb-f9d5b596446b · R3/R5 · retired/replaced · Asked the frame-shape fact directly and made every choice comparable.
+- 1 Kings 7 · 5e4ba824-9931-4a1f-ac99-9eb61dc954a0 · R5 · fixed · Expanded each person choice with a comparable identifying detail.
+- 1 Kings 7 · 85a4bcf5-2922-43e9-b74c-d805bff2af9b · R3/R5 · retired/replaced · Removed reference-number wording and balanced the proposed material pairs.
+- 1 Kings 7 · 9a69288b-72f8-4c68-afc4-b44b89eba20a · R5 · retired/replaced · Shortened the prompt and made every pair of locations comparably specific.
+- 1 Kings 7 · 18ab73d3-5041-42e5-8c2e-a67e7a4b3696 · R5 · fixed · Expanded the alternative capital decorations to comparable descriptions.
+- 1 Kings 7 · 916a3fec-9a28-46e1-8e01-c49eb3d37793 · R3 · retired/replaced · Replaced “what does verse say” framing with the direct completion fact.
+- 1 Kings 7 · a6243721-e83b-4253-8dc2-7c1720b67b78 · R3 · retired/replaced · Removed reference-number framing from the pillar-top question.
+- 1 Kings 7 · e675182b-d151-4187-9dbf-5ef1681981b4 · R5 · fixed · Made all proposed brim descriptions comparable in detail.
+- 1 Kings 7 · 1e0e136d-c502-410a-a0fd-4c7ed0b65e60 · R3/R5 · retired/replaced · Asked the stand construction directly and balanced its alternatives.
+- 1 Kings 7 · ff401e9f-0503-44aa-8795-7df99409d3a4 · R3/R5 · retired/replaced · Removed reference-number framing and balanced descriptions of the ten stands.
+- 1 Kings 7 · 3b0ecc8d-c086-4af6-ae0a-7ae9e35fe893 · R3 · retired/replaced · Removed reference-number framing from Hiram’s three-item question.
+- 1 Kings 7 · 4ca8f8fb-2f48-4ad9-ab30-af5d0cc856f8 · R3 · retired/replaced · Asked the stands-and-lavers count directly.
+- 1 Kings 7 · eafd8fac-0f8c-45c8-9397-5d4506eee0dd · R5 · fixed · Expanded every proposed casting location to comparable detail.
+- 1 Kings 7 · 2cf84ce8-67ae-4604-be04-e1fdee3605e8 · R3/R5 · retired/replaced · Removed reference-number framing and made each proposed table use comparable.
+- 1 Kings 7 · e5cbe657-1cc5-4772-8bb8-04bdc3a51807 · R5 · fixed · Balanced every proposed lampstand count and location.
+- 1 Kings 7 · c0a85874-5d56-4ec9-8baf-f14694478cd2 · R3 · retired/replaced · Removed reference-number framing from the gold-items question.
+- 1 Kings 7 · 2661a157-0e4b-4c25-b82a-f89fcb29a129 · R5 · fixed · Made all proposed door pairs similarly specific.
+- 1 Kings 7 · 35cf872e-a1ef-41ed-aace-cd650721885f · R5 · fixed · Expanded every proposed group of objects to comparable detail.
+- 1 Kings 7 · 4cbbb599-b705-4c86-bda0-3c1ac3abcaa3 · R2/R8 · retired · Compared materials from several passages while citing only the molten-sea verse.
+- 1 Kings 7 · 0e97e7c2-a116-4ef0-97aa-a25b8560598a · R2/R8 · retired · Compared gold and bronze lists while citing only one verse.
+- 1 Kings 7 · 9debbae6-a6c6-44dd-86bc-dfeee4fdb4a0 · R2/R8 · retired · Required scanning multiple buildings while citing only the Forest of Lebanon verse.
+- 1 Kings 7 · 4d24ee53-589e-4d28-8fb7-88a0d22fae8a · R2/R8 · retired · Asked for a multi-passage ordering while citing only the first pillar verse.

@@ -11,9 +11,9 @@ const bank: ChapterBank = {
     word(1, 'How many years was Solomon building his own house?', 'thirteen', 1, ['13']),
     blank(1, 'Solomon was building his own house _____ years, and he finished his entire house.', 'thirteen', 1, ['13']),
     tf(1, 'Solomon spent thirteen years building his own house.', true, 1),
-    mc(1, 'Whose house took thirteen years to build in 1 Kings 7:1?', ['Solomon’s own house', 'The house of the LORD', 'Hiram’s house', 'Pharaoh’s daughter’s house'], 1),
+    mc(1, 'Whose house took thirteen years to build?', ['Solomon’s own house', 'The house of the LORD', 'Hiram’s house', 'Pharaoh’s daughter’s house'], 1),
 
-    mc(1, 'What was the name of the building described in 1 Kings 7:2?', ['The House of the Forest of Lebanon', 'The Hall of Pillars', 'The Hall of Judgment', 'The house of the LORD'], 2),
+    mc(1, 'What was the building called that measured one hundred cubits long, fifty broad, and thirty high?', ['The House of the Forest of Lebanon', 'The Hall of Pillars', 'The Hall of Judgment', 'The house of the LORD'], 2),
     sa(2, 'How many cubits long was the House of the Forest of Lebanon?', 'a hundred', 2, ['100', 'hundred', 'one hundred']),
     blank(1, 'He built the House of the Forest of _____; its length was a hundred cubits, and its breadth fifty cubits, and its height thirty cubits,', 'Lebanon', 2),
     blank(3, 'its length was a hundred cubits, and its breadth _____ cubits, and its height thirty cubits,', 'fifty', 2, ['50']),
@@ -30,12 +30,12 @@ const bank: ChapterBank = {
     blank(2, 'There were window frames in three rows, and window opposite window in three _____.', 'tiers', 4),
     word(1, 'The window frames were in how many rows?', 'three', 4, ['3']),
     blank(1, 'There were window frames in _____ rows, and window opposite window in three tiers.', 'three', 4, ['3']),
-    mc(3, 'How were the windows arranged in 1 Kings 7:4?', ['Window frames in three rows, window opposite window in three tiers', 'A single row of windows facing east', 'Windows only on the upper story', 'Two rows of round windows'], 4),
+    mc(3, 'How were the windows arranged?', ['In three rows, opposite one another in three tiers', 'In one row, with every opening facing eastward', 'On the upper story, with no windows below them', 'In two rows, with round frames facing the court'], 4),
 
     word(1, 'What shape were the frames of all the doorways and windows?', 'square', 5),
     blank(1, 'All the doorways and windows had _____ frames, and window was opposite window in three tiers.', 'square', 5),
     tf(1, 'All the doorways and windows had round frames.', false, 5, 'They had square frames.'),
-    mc(3, 'What does 1 Kings 7:5 say about the doorways and windows?', ['They had square frames, with window opposite window in three tiers', 'They were arched and overlaid with gold', 'They were covered with cedar shutters', 'They all faced the inner court'], 5),
+    mc(3, 'What shape were the frames of the doorways and windows?', ['They had square frames, with windows opposite in three tiers', 'They had arched frames, with every opening overlaid in gold', 'They had cedar shutters, with panels carved into their frames', 'They had rectangular frames, with every opening facing the court'], 5),
 
     // ══════════════════════════════════ v6–8 · Hall of Pillars, Hall of Judgment, Solomon’s and Pharaoh’s daughter’s houses
     mc(1, 'Which hall was fifty cubits long and thirty cubits broad?', ['The Hall of Pillars', 'The Hall of the Throne', 'The House of the Forest of Lebanon', 'The house for Pharaoh’s daughter'], 6),
@@ -51,7 +51,7 @@ const bank: ChapterBank = {
     tf(1, 'The Hall of Judgment was finished with cedar from floor to rafters.', true, 7),
     tf(2, 'The Hall of the Throne was finished with gold from floor to rafters.', false, 7, 'It was finished with cedar.'),
 
-    mc(1, 'For whom did Solomon make a house like the hall?', ['Pharaoh’s daughter, whom he had taken in marriage', 'Hiram of Tyre', 'His mother Bathsheba', 'The queen of Sheba'], 8),
+    mc(1, 'For whom did Solomon make a house like the hall?', ['Pharaoh’s daughter, whom he had married', 'Hiram of Tyre, who worked in bronze', 'Bathsheba, the mother of King Solomon', 'The queen of Sheba, who later visited him'], 8),
     word(1, 'Solomon built a house for the daughter of which ruler?', 'Pharaoh', 8),
     blank(2, 'Solomon also made a house like this hall for _____ daughter whom he had taken in marriage.', 'Pharaoh’s', 8, ['pharaohs', 'pharaoh']),
     tf(2, 'Solomon’s own dwelling was in the other court back of the hall.', true, 8),
@@ -73,12 +73,12 @@ const bank: ChapterBank = {
 
     blank(2, 'And above were costly stones, hewn according to measurement, and _____.', 'cedar', 11),
     tf(2, 'Above the foundation were costly stones hewn according to measurement, and cedar.', true, 11),
-    mc(3, 'What was above the foundation, according to 1 Kings 7:11?', ['Costly stones hewn according to measurement, and cedar', 'Bronze pillars', 'Gold-plated panels', 'Rough unhewn stones'], 11),
+    mc(3, 'What materials were laid above the foundation?', ['Costly measured stones together with cedar beams', 'Hollow bronze pillars together with bronze capitals', 'Gold-plated panels together with carved olivewood', 'Rough unhewn stones together with mud bricks'], 11),
     word(3, 'Above the foundation, the costly stones were hewn according to what?', 'measurement', 11, ['measure']),
 
     word(2, 'How many courses of hewn stone did the great court have round about?', 'three', 12, ['3']),
     blank(2, 'The great court had three courses of hewn stone round about, and a course of _____ beams;', 'cedar', 12),
-    mc(3, 'Which other places had the same construction as the great court — three courses of hewn stone and a course of cedar beams?', ['The inner court of the house of the LORD and the vestibule of the house', 'The Hall of Pillars and the Hall of Judgment', 'The house of Pharaoh’s daughter', 'The House of the Forest of Lebanon'], 12),
+    mc(3, 'Which places also had three courses of hewn stone and one course of cedar beams?', ['The inner court of the LORD’s house and its vestibule', 'The Hall of Pillars and the adjoining Hall of Judgment', 'Solomon’s house and the house for Pharaoh’s daughter', 'The Forest of Lebanon house and its surrounding court'], 12),
     tf(3, 'The great court had five courses of hewn stone round about.', false, 12, 'It had three courses of hewn stone and a course of cedar beams.'),
 
     // ══════════════════════════════════ v13–14 · Hiram of Tyre
@@ -114,7 +114,7 @@ const bank: ChapterBank = {
     mc(3, 'How tall was each capital of molten bronze?', ['Five cubits', 'Four cubits', 'Eighteen cubits', 'Twelve cubits'], 16),
     blank(3, 'the height of the one capital was five cubits, and the height of the other capital was _____ cubits.', 'five', 16, ['5']),
 
-    mc(2, 'What did Hiram make for the capitals on the tops of the pillars?', ['Nets of checker work with wreaths of chain work', 'Curtains of blue and purple', 'Rings of gold', 'Carved cedar panels'], 17),
+    mc(2, 'What did Hiram make for the capitals on the tops of the pillars?', ['Checker-work nets with wreaths of chain work', 'Blue-and-purple curtains with loops of fine linen', 'Golden rings with chains hanging between the pillars', 'Carved cedar panels with rows of open flowers'], 17),
     blank(3, 'Then he made two nets of _____ work with wreaths of chain work for the capitals upon the tops of the pillars;', 'checker', 17, ['chequer']),
     word(3, 'The wreaths on the nets for the capitals were of what kind of work?', 'chain', 17, ['chain work']),
     mc(2, 'How many nets did Hiram make for the capitals?', ['Two — a net for each capital', 'One large net covering both', 'Four', 'Twelve'], 17),
@@ -147,8 +147,8 @@ const bank: ChapterBank = {
 
     blank(2, 'And upon the tops of the pillars was _____. Thus the work of the pillars was finished.', 'lily-work', 22, ['lily work', 'lilywork']),
     tf(2, 'Upon the tops of the pillars were carved palm trees.', false, 22, 'Upon the tops of the pillars was lily-work.'),
-    word(3, 'What does 1 Kings 7:22 say was "finished"? The work of the ___.', 'pillars', 22),
-    mc(3, 'What was on the tops of the pillars, according to 1 Kings 7:22?', ['Lily-work', 'Gold crowns', 'Cherubim', 'Carved palm trees'], 22),
+    word(3, 'The addition of lily-work finished the work of the ___.', 'pillars', 22),
+    mc(3, 'What was on the tops of the pillars?', ['Lily-work', 'Gold crowns', 'Cherubim', 'Carved palm trees'], 22),
 
     // ══════════════════════════════════ v23–26 · The molten sea
     mc(1, 'What large round object did Hiram make, ten cubits from brim to brim?', ['The molten sea', 'The great laver', 'The bronze altar', 'The throne'], 23),
@@ -179,7 +179,7 @@ const bank: ChapterBank = {
     sa(2, 'How many baths did the molten sea hold?', 'two thousand', 26, ['2000', '2,000']),
     blank(2, 'Its thickness was a _____; and its brim was made like the brim of a cup, like the flower of a lily;', 'handbreadth', 26, ['hand breadth']),
     blank(3, 'like the flower of a lily; it held _____ baths.', 'two thousand', 26, ['2000', '2,000']),
-    mc(2, 'The brim of the sea was made like what?', ['The brim of a cup, like the flower of a lily', 'The rim of a chariot wheel', 'A crown of gold', 'The mouth of a lion'], 26),
+    mc(2, 'The brim of the sea was made like what?', ['A cup’s brim, shaped like the flower of a lily', 'A chariot-wheel rim, bound with bands of bronze', 'A royal crown, decorated with rows of pomegranates', 'A lion’s mouth, surrounded by carved palm trees'], 26),
     mc(3, 'How much did the molten sea hold?', ['Two thousand baths', 'Forty baths', 'Two hundred baths', 'Ten thousand baths'], 26),
     tf(3, 'The thickness of the sea was four fingers.', false, 26, 'Its thickness was a handbreadth; four fingers was the thickness of the pillars.'),
     tf(1, 'The molten sea held forty baths.', false, 26, 'It held two thousand baths; forty baths was the capacity of each laver.'),
@@ -194,7 +194,7 @@ const bank: ChapterBank = {
     word(2, 'The stands had panels, which were set in what?', 'frames', 28, ['the frames']),
     blank(2, 'This was the construction of the stands: they had _____, and the panels were set in the frames', 'panels', 28),
     tf(1, 'The panels of the stands were set in the frames.', true, 28),
-    mc(3, 'What does 1 Kings 7:28 say the stands had?', ['Panels set in the frames', 'Curtains hung on rings', 'Steps leading up', 'Horns at the corners'], 28),
+    mc(3, 'What did the stands have between their frames?', ['Panels set within the frames', 'Curtains suspended from rings', 'Steps leading up to the lavers', 'Horns projecting from the corners'], 28),
 
     mc(1, 'What figures were on the panels of the stands?', ['Lions, oxen, and cherubim', 'Eagles, lions, and men', 'Palm trees, pomegranates, and gourds', 'Horses, chariots, and oxen'], 29),
     blank(2, 'and on the panels that were set in the frames were lions, oxen, and _____.', 'cherubim', 29, ['cherubims', 'cherubs']),
@@ -242,7 +242,7 @@ const bank: ChapterBank = {
 
     blank(2, 'After this manner he made the ten stands; all of them were cast alike, of the same _____ and the same form.', 'measure', 37),
     tf(1, 'All ten stands were cast alike, of the same measure and the same form.', true, 37),
-    mc(2, 'What does 1 Kings 7:37 say about the ten stands?', ['All were cast alike, of the same measure and form', 'Each was a different size', 'Five were bronze and five were gold', 'They were carved from cedar'], 37),
+    mc(2, 'How did the ten stands compare with one another?', ['All were cast alike, with the same measure and form', 'Each was cast separately, with a different size and form', 'Five were cast in bronze, while five were made of gold', 'All were carved from cedar, with bronze panels attached'], 37),
     word(3, 'All ten stands were cast alike, of the same measure and the same ___.', 'form', 37),
 
     // ══════════════════════════════════ v38–39 · The ten lavers and their placement
@@ -262,7 +262,7 @@ const bank: ChapterBank = {
     mc(2, 'How were the ten stands placed?', ['Five on the south side and five on the north side of the house', 'All ten around the sea', 'Ten in a row at the vestibule', 'Five in the great court and five in the inner court'], 39),
 
     // ══════════════════════════════════ v40–47 · Summary of Hiram’s bronze work
-    mc(2, 'Which three items does 1 Kings 7:40 say Hiram also made?', ['The pots, the shovels, and the basins', 'The lampstands, the tables, and the altar', 'The cups, the snuffers, and the tongs', 'The doors, the sockets, and the hinges'], 40),
+    mc(2, 'Which three items did Hiram also make?', ['The pots, the shovels, and the basins', 'The lampstands, the tables, and the altar', 'The cups, the snuffers, and the tongs', 'The doors, the sockets, and the hinges'], 40),
     blank(1, 'Hiram also made the pots, the _____, and the basins.', 'shovels', 40),
     tf(1, 'Hiram finished all the work that he did for King Solomon on the house of the LORD.', true, 40),
     word(2, 'Along with the pots and shovels, Hiram made the ___.', 'basins', 40, ['basin', 'bowls']),
@@ -281,7 +281,7 @@ const bank: ChapterBank = {
     blank(1, 'the ten stands, and the ten _____ upon the stands;', 'lavers', 43, ['laver']),
     word(2, 'What sat upon the ten stands?', 'lavers', 43, ['laver', 'the lavers']),
     tf(1, 'There were ten lavers upon the ten stands.', true, 43),
-    mc(2, 'According to 1 Kings 7:43, how many stands and lavers were there?', ['Ten stands and ten lavers', 'Twelve stands and twelve lavers', 'Ten stands and one laver', 'Five stands and five lavers'], 43),
+    mc(2, 'How many stands and lavers were there?', ['Ten stands and ten lavers', 'Twelve stands and twelve lavers', 'Ten stands and one laver', 'Five stands and five lavers'], 43),
 
     blank(1, 'and the one sea, and the _____ oxen underneath the sea;', 'twelve', 44, ['12']),
     mc(1, 'What was underneath the sea?', ['Twelve oxen', 'Ten stands', 'Four wheels', 'Two pillars'], 44),
@@ -293,7 +293,7 @@ const bank: ChapterBank = {
     mc(1, 'What were the pots, shovels, and basins made of?', ['Burnished bronze', 'Pure gold', 'Silver', 'Iron'], 45),
     tf(1, 'The pots, shovels, and basins were made of pure gold.', false, 45, 'They were of burnished bronze.'),
 
-    mc(1, 'Where were the bronze vessels cast?', ['In the plain of the Jordan, between Succoth and Zarethan', 'In Tyre', 'In the great court in Jerusalem', 'In the plain of Sharon'], 46),
+    mc(1, 'Where were the bronze vessels cast?', ['In Jordan’s plain, in clay ground between Succoth and Zarethan', 'In the city of Tyre, beside Hiram’s bronze workshop', 'In Jerusalem’s great court, beside the house of the LORD', 'In Sharon’s plain, in clay ground near the coast'], 46),
     word(1, 'The vessels were cast in the plain of which river?', 'Jordan', 46, ['the jordan']),
     blank(2, 'In the plain of the _____ the king cast them, in the clay ground between Succoth and Zarethan.', 'Jordan', 46),
     blank(3, 'in the clay ground between Succoth and _____.', 'Zarethan', 46, ['zaretan']),
@@ -308,19 +308,19 @@ const bank: ChapterBank = {
     tf(2, 'The weight of the bronze was not found out.', true, 47),
 
     // ══════════════════════════════════ v48–51 · The gold furnishings; the work finished
-    mc(1, 'What was the golden table in 1 Kings 7:48 for?', ['The bread of the Presence', 'The incense', 'The lampstands', 'The ark'], 48),
+    mc(1, 'What was the golden table for?', ['The bread of the Presence', 'The offering of incense', 'The trimming of lamps', 'The ark of the covenant'], 48),
     blank(2, 'So Solomon made all the vessels that were in the house of the LORD: the golden _____, the golden table for the bread of the Presence,', 'altar', 48),
     word(2, 'The golden table was for the bread of the ___.', 'Presence', 48),
     tf(2, 'The altar and the table for the bread of the Presence were of gold.', true, 48),
     tf(1, 'The table for the bread of the Presence was made of bronze.', false, 48, 'It was a golden table.'),
 
-    mc(1, 'How many lampstands of pure gold were there, and where?', ['Ten — five on the south side and five on the north', 'Seven, all before the ark', 'Twelve, one for each tribe', 'Two, one at each pillar'], 49),
+    mc(1, 'How many lampstands of pure gold were there, and where?', ['Ten, with five south and five north before the inner sanctuary', 'Seven, all standing together directly before the ark', 'Twelve, with one lampstand representing each tribe of Israel', 'Two, with one lampstand standing beside each bronze pillar'], 49),
     word(1, 'The lampstands were made of what?', 'gold', 49, ['pure gold']),
     blank(2, 'the lampstands of pure gold, five on the south side and five on the north, before the inner _____;', 'sanctuary', 49),
     blank(3, 'the _____, the lamps, and the tongs, of gold;', 'flowers', 49),
     mc(2, 'Where did the lampstands of pure gold stand?', ['Before the inner sanctuary', 'In the great court', 'At the vestibule of the temple', 'Beside the molten sea'], 49),
     tf(1, 'The lampstands were of burnished bronze.', false, 49, 'The lampstands were of pure gold.'),
-    mc(3, 'Which items are listed with the lamps as being "of gold" in 1 Kings 7:49?', ['The flowers and the tongs', 'The pots and the shovels', 'The cups and the firepans', 'The wheels and the axles'], 49),
+    mc(3, 'Which items are listed with the lamps as being made of gold?', ['The flowers and the tongs', 'The pots and the shovels', 'The cups and the firepans', 'The wheels and the axles'], 49),
 
     mc(2, 'Which of these items was made of pure gold according to 1 Kings 7:50?', ['Dishes for incense', 'Shovels', 'Wheels', 'Lavers'], 50),
     word(3, 'The sockets of gold were for the doors of the innermost part of the house, also called the most ___ place.', 'holy', 50, ['most holy']),
@@ -328,9 +328,9 @@ const bank: ChapterBank = {
     blank(3, 'and the sockets of gold, for the doors of the innermost part of the house, the most holy place, and for the doors of the _____ of the temple.', 'nave', 50),
     tf(2, 'The sockets for the doors of the most holy place were of gold.', true, 50),
     tf(3, 'The cups, snuffers, and firepans were of burnished bronze.', false, 50, 'They were of pure gold.'),
-    mc(3, 'For which doors were the gold sockets made?', ['The doors of the most holy place and the doors of the nave of the temple', 'The doors of the Hall of Judgment', 'The gates of the great court', 'The doors of the House of the Forest of Lebanon'], 50),
+    mc(3, 'For which doors were the gold sockets made?', ['The doors of the most holy place and of the temple nave', 'The doors of the Hall of Judgment and of its porch', 'The gates of the great court and of the inner court', 'The doors of the Forest of Lebanon house and its hall'], 50),
 
-    mc(1, 'What did Solomon bring into the house of the LORD after the work was finished?', ['The things David his father had dedicated — the silver, the gold, and the vessels', 'The ark of the covenant', 'The spoils of Egypt', 'Hiram’s wages'], 51),
+    mc(1, 'What did Solomon bring into the house of the LORD after the work was finished?', ['David’s dedicated silver, gold, and vessels', 'The ark together with the tablets of the covenant', 'Egyptian spoils of chariots, horses, and weapons', 'Hiram’s payment of wheat, oil, and cedar timber'], 51),
     word(1, 'Whose dedicated things did Solomon bring into the house of the LORD?', 'David', 51, ['david his father', 'his father david']),
     blank(2, 'And Solomon brought in the things which David his father had dedicated, the silver, the gold, and the vessels, and stored them in the _____ of the house of the LORD.', 'treasuries', 51, ['treasury']),
     blank(1, 'Thus all the work that King Solomon did on the house of the LORD was _____.', 'finished', 51),
@@ -340,11 +340,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ Whole-chapter
     mc(1, 'Who was the bronze craftsman Solomon brought from Tyre in 1 Kings 7?', ['Hiram', 'Adoniram', 'Zadok', 'Benaiah'], 13),
-    mc(2, 'Which of these did Hiram make of bronze in 1 Kings 7?', ['The molten sea', 'The lampstands', 'The dishes for incense', 'The sockets for the doors of the most holy place'], 23),
-    mc(2, 'Which items in 1 Kings 7 were made of gold rather than bronze?', ['The lampstands, cups, snuffers, and firepans', 'The pillars Jachin and Boaz', 'The ten stands and lavers', 'The molten sea and the twelve oxen'], 50),
-    mc(3, 'Which of these buildings is NOT named in 1 Kings 7?', ['The House of Cedar', 'The House of the Forest of Lebanon', 'The Hall of Pillars', 'The Hall of the Throne'], 2),
     tf(2, 'Hiram’s bronze work was left unweighed because there was so much of it.', true, 47),
-    mc(3, 'In the order of the account in 1 Kings 7, which did Hiram make FIRST?', ['The two bronze pillars', 'The molten sea', 'The ten stands', 'The ten lavers'], 15),
   ],
 };
 
