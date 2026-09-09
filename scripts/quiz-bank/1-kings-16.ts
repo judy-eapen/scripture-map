@@ -11,17 +11,17 @@ const bank: ChapterBank = {
     mc(1, 'From where had the LORD exalted Baasha?', ['Out of the dust', 'Out of Egypt', 'From among the priests', 'From Jerusalem'], 2),
     blank(2, 'and made you _____ over my people Israel', 'leader', 2),
     word(2, 'In whose way had Baasha walked?', 'Jeroboam’s', 2, ['Jeroboam']),
-    tf(3, 'Baasha led Israel away from sin.', false, 2, 'He made Israel sin and provoked the LORD to anger.'),
+    tf(3, 'Baasha made Israel sin and provoked the LORD to anger.', true, 2),
 
-    mc(2, 'Whose house would Baasha’s house become like?', ['Jeroboam son of Nebat’s', 'David’s', 'Omri’s', 'Asa’s'], 3),
+    mc(2, 'Whose house would Baasha’s house become like?', ['The house of Jeroboam son of Nebat', 'The house of David, which retained a lamp', 'The house of Omri, which later ruled Israel', 'The house of Asa, which continued in Judah'], 3),
     blank(3, 'I will utterly _____ away Ba’asha and his house', 'sweep', 3),
     sa(1, 'What would the LORD sweep away?', 'Baasha and his house', 3),
-    tf(2, 'The LORD promised to establish Baasha’s house permanently.', false, 3, 'He said he would utterly sweep it away.'),
+    tf(2, 'The LORD said he would utterly sweep away Baasha and his house.', true, 3),
 
     mc(1, 'What would eat Baasha’s people who died in the city?', ['Dogs', 'Birds', 'Lions', 'Ravens'], 4),
     blank(2, 'any one of his who dies in the field the _____ of the air shall eat.', 'birds', 4),
     sa(2, 'Where would birds eat those who belonged to Baasha?', 'in the field', 4, ['field']),
-    tf(3, 'Birds would eat those who died in the city.', false, 4, 'Dogs would eat those in the city; birds those in the field.'),
+    tf(3, 'Dogs would eat Baasha’s people who died in the city, while birds would eat those who died in the field.', true, 4),
 
     mc(1, 'Where were Baasha’s other acts and might recorded?', ['The Chronicles of the Kings of Israel', 'The Chronicles of the Kings of Judah', 'The records of Tirzah', 'The book of Jehu'], 5),
     blank(3, 'and what he did, and his _____', 'might', 5),
@@ -31,11 +31,11 @@ const bank: ChapterBank = {
     mc(1, 'Who succeeded Baasha?', ['Elah his son', 'Zimri', 'Omri', 'Ahab'], 6),
     blank(2, 'and was buried at _____.', 'Tirzah', 6),
     sa(2, 'What happened to Baasha?', 'he slept with his fathers', 6, ['slept with his fathers', 'died']),
-    tf(3, 'Baasha was buried in Samaria.', false, 6, 'He was buried at Tirzah.'),
+    tf(3, 'Baasha was buried at Tirzah.', true, 6),
 
-    mc(2, 'Why did judgment come upon Baasha’s house?', ['For his evil, provocation, likeness to Jeroboam’s house, and destroying it', 'Only because he lost a war', 'Because he built Samaria', 'Because he opposed Omri'], 7),
+    mc(2, 'Why did judgment come upon Baasha’s house?', ['He did evil like Jeroboam, provoked the LORD, and destroyed Jeroboam’s house', 'He lost a decisive war against Judah and surrendered the cities of Israel', 'He purchased the hill of Samaria and built a new royal city there', 'He rejected Omri’s claim to Israel’s throne and supported Tibni instead'], 7),
     blank(3, 'provoking him to anger with the work of his _____.', 'hands', 7),
-    word(1, 'Through which prophet did the LORD’s word come?', 'Jehu son of Hanani', 7, ['Jehu', 'Jehu the son of Hanani']),
+    sa(1, 'Through which prophet did the LORD’s word come?', 'Jehu son of Hanani', 7, ['Jehu', 'Jehu the son of Hanani']),
     tf(2, 'Baasha was judged in part because he destroyed Jeroboam’s house.', true, 7),
 
     mc(1, 'How long did Elah reign?', ['Two years', 'Seven days', 'Twelve years', 'Twenty-two years'], 8),
@@ -46,7 +46,7 @@ const bank: ChapterBank = {
     mc(1, 'What was Elah doing when Zimri conspired against him?', ['Drinking himself drunk', 'Leading the army', 'Worshiping at Bethel', 'Building Tirzah'], 9),
     blank(2, 'When he was at Tirzah, drinking himself drunk in the house of _____.', 'Arza', 9),
     sa(2, 'What position did Zimri hold?', 'commander of half his chariots', 9, ['commander of half the chariots']),
-    tf(3, 'Elah was sober in the palace when Zimri approached.', false, 9, 'He was drinking himself drunk in Arza’s house.'),
+    tf(3, 'Elah was drinking himself drunk in Arza’s house when Zimri conspired against him.', true, 9),
     mc(3, 'Which circumstance made Elah vulnerable to Zimri?', ['He was drinking himself drunk in Arza’s house at Tirzah', 'He was besieging Samaria', 'He was visiting Damascus alone', 'He had dismissed every chariot commander'], 9),
 
     mc(1, 'What did Zimri do to Elah?', ['Struck him down and killed him', 'Exiled him to Judah', 'Imprisoned him', 'Made him army commander'], 10),
@@ -54,12 +54,12 @@ const bank: ChapterBank = {
     sa(1, 'In which year of Asa did Zimri kill Elah?', 'the twenty-seventh year', 10, ['twenty-seventh', '27th']),
     tf(2, 'Zimri reigned in Elah’s place.', true, 10),
 
-    mc(2, 'Whom did Zimri kill when he took the throne?', ['All Baasha’s house, including male kinsmen and friends', 'Only Elah', 'Only Baasha’s commanders', 'The entire population of Tirzah'], 11),
+    mc(2, 'Whom did Zimri kill when he took the throne?', ['All Baasha’s house, leaving no male kinsman or friend', 'Elah alone while sparing every other member of Baasha’s house', 'Baasha’s military commanders while preserving his relatives', 'The entire population of Tirzah, including Omri’s supporters'], 11),
     blank(3, 'he did not leave him a single _____ of his kinsmen or his friends.', 'male', 11),
     sa(1, 'When did Zimri act against Baasha’s house?', 'as soon as he sat on the throne', 11, ['as soon as he began to reign']),
-    tf(2, 'Zimri spared Baasha’s male friends.', false, 11, 'He left not a single male of Baasha’s kinsmen or friends.'),
+    tf(2, 'Zimri left not a single male among Baasha’s kinsmen or friends.', true, 11),
 
-    mc(1, 'According to whose word did Zimri destroy Baasha’s house?', ['The LORD’s word through Jehu', 'Omri’s command', 'Asa’s proclamation', 'Joshua’s prophecy'], 12),
+    mc(1, 'Whose word, delivered through Jehu, was fulfilled when Zimri destroyed Baasha’s house?', ['The LORD’s word', 'Omri’s command', 'Asa’s proclamation', 'Joshua’s prophecy'], 12),
     blank(2, 'Thus Zimri _____ all the house of Ba’asha', 'destroyed', 12),
     word(2, 'Which prophet had spoken against Baasha?', 'Jehu', 12),
     tf(3, 'Zimri’s destruction of Baasha’s house contradicted the LORD’s word.', false, 12, 'It fulfilled the LORD’s word spoken by Jehu.'),
@@ -94,7 +94,7 @@ const bank: ChapterBank = {
     blank(3, 'and burned the king’s house over him with fire, and _____.', 'died', 18),
     sa(2, 'Where did Zimri go when the city was taken?', 'the citadel of the king’s house', 18, ['the citadel']),
     tf(2, 'Zimri escaped from Tirzah after the city was taken.', false, 18, 'He burned the king’s house over himself and died.'),
-    mc(3, 'How did Zimri’s seven-day reign end?', ['He entered the citadel and burned the king’s house over himself', 'He surrendered to Tibni', 'He was killed at Gibbethon', 'He abdicated in favor of Omri'], 18),
+    mc(3, 'How did Zimri’s seven-day reign end?', ['He entered the citadel and burned the king’s house over himself', 'He surrendered the city and yielded Israel’s throne to Tibni', 'He returned to Gibbethon and was killed by the Philistines', 'He abdicated peacefully and transferred the kingdom to Omri'], 18),
 
     mc(2, 'Why does the text say Zimri died?', ['Because of his sins and Jeroboam-like evil', 'Because he served the LORD', 'Because he made peace with Judah', 'Because he refused the throne'], 19),
     blank(3, 'doing _____ in the sight of the LORD', 'evil', 19),
@@ -129,12 +129,12 @@ const bank: ChapterBank = {
 
     mc(1, 'How did Omri’s evil compare with earlier kings?', ['He did more evil than all before him', 'He did less evil than all before him', 'He equaled David', 'He turned from every idol'], 25),
     blank(2, 'Omri did what was _____ in the sight of the LORD', 'evil', 25),
-    word(2, 'In whose sight did Omri do evil?', 'the LORD’s', 25, ['the LORD', 'LORD']),
+    word(2, 'In whose sight did Omri do evil?', 'LORD', 25, ['the LORD', 'the LORD’s', "LORD's"]),
     tf(3, 'Omri was more righteous than every king before him.', false, 25, 'He did more evil than all who were before him.'),
 
     mc(2, 'What provoked the LORD through Omri’s rule?', ['The idols and Jeroboam’s sins', 'The purchase of Samaria', 'The death of Tibni alone', 'The siege of Tirzah'], 26),
     blank(3, 'provoking the LORD, the God of Israel, to _____ by their idols.', 'anger', 26),
-    word(1, 'Whose sinful way did Omri follow?', 'Jeroboam son of Nebat’s', 26, ['Jeroboam', 'Jeroboam’s']),
+    sa(1, 'Whose sinful way did Omri follow?', 'Jeroboam son of Nebat’s', 26, ['Jeroboam', 'Jeroboam’s', 'Jeroboam son of Nebat']),
     tf(2, 'Omri’s sins caused Israel to sin.', true, 26),
 
     mc(1, 'What quality of Omri was recorded with his other acts?', ['The might he showed', 'His wisdom writings', 'His temple service', 'His prophetic visions'], 27),
@@ -177,7 +177,7 @@ const bank: ChapterBank = {
     blank(3, 'he laid its foundation at the cost of Abi’ram his _____.', 'first-born', 34, ['firstborn']),
     word(1, 'Which son’s life was the cost of setting up Jericho’s gates?', 'Segub', 34),
     tf(2, 'Hiel rebuilt Jericho without cost to his family.', false, 34, 'The foundation cost Abiram and the gates cost Segub.'),
-    mc(3, 'What did rebuilding Jericho cost Hiel?', ['Abiram his first-born at the foundation and Segub his youngest at the gates', 'Two talents of silver', 'Seven years of labor', 'His throne in Bethel'], 34),
+    mc(3, 'What did rebuilding Jericho cost Hiel?', ['Abiram his first-born at the foundation and Segub his youngest at the gates', 'Two talents of silver for the hill and another two for the city walls', 'Seven years of forced labor by the men of Bethel and their families', 'His position in Bethel and his claim to govern the rebuilt city'], 34),
   ],
 }
 
