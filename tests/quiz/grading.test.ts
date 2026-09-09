@@ -9,6 +9,7 @@ const base: QuizQuestion = {
 }
 
 it('labels self-graded responses as short answers', () => {
+  expect(TYPE_LABEL.one_word).toBe('One-word answer')
   expect(TYPE_LABEL.short_answer).toBe('Short answer')
 })
 
