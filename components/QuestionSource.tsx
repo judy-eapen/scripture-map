@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import type { QuizQuestion, ScriptureBookSlug } from '@/lib/types'
-import { verseHref } from '@/lib/quiz-session'
+import { verseHref, verseHrefWithQuizReturn } from '@/lib/quiz-session'
 import { fetchChapterVerses, type CachedVerse } from '@/lib/client-verse-cache'
 
 type Ref = NonNullable<QuizQuestion['supporting_refs']>[number]
@@ -17,7 +18,14 @@ function fetchPassage(ref: Ref): Promise<Passage> {
   }))
 }
 
-export default function QuestionSource({ question, chapter, showTopic = false }: { question:QuizQuestion; chapter?:{ bookSlug:ScriptureBookSlug; chapterNumber:number }; showTopic?:boolean }) {
+export default function QuestionSource({ question, chapter, showTopic = false, quizReturnHref, beforeStudyNavigation }: {
+  question:QuizQuestion
+  chapter?:{ bookSlug:ScriptureBookSlug; chapterNumber:number }
+  showTopic?:boolean
+  quizReturnHref?:string
+  beforeStudyNavigation?:()=>Promise<void>
+}) {
+  const router = useRouter()
   const refs = useMemo<Ref[]>(() => question.supporting_refs?.length ? question.supporting_refs : chapter && question.verse_number ? [{
     book: question.verse_ref?.split(' ').slice(0, -1).join(' ') as Ref['book'],
     book_slug: chapter.bookSlug, chapter:chapter.chapterNumber, verse_start:question.verse_number, label:question.verse_ref ?? `Verse ${question.verse_number}`,
@@ -36,6 +44,7 @@ export default function QuestionSource({ question, chapter, showTopic = false }:
       <div className="space-y-2">
         {refs.map((ref, index) => {
           const passage = passages.find(item => item.label === ref.label)
+          const studyHref = verseHrefWithQuizReturn(verseHref(ref.book_slug, ref.chapter, ref.verse_start), quizReturnHref)
           return (
             <details key={`${ref.label}-${index}`} open={index === 0} className="rounded-lg px-3 py-2" style={{ background:'rgba(0,0,0,0.12)' }}>
               <summary className="text-xs cursor-pointer" style={{ color:'var(--gold-300)' }}>{ref.label}</summary>
@@ -44,7 +53,11 @@ export default function QuestionSource({ question, chapter, showTopic = false }:
                 {!passage && <p className="text-xs" style={{ color:'var(--muted-500)' }}>Loading passage…</p>}
                 {passage && !passage.verses.length && <p className="text-xs" style={{ color:'var(--muted-500)' }}>Passage text unavailable. Use the study link below.</p>}
               </div>
-              <Link href={verseHref(ref.book_slug, ref.chapter, ref.verse_start)} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color:'var(--gold-300)' }}>Study {ref.label} →</Link>
+              <Link href={studyHref} onClick={beforeStudyNavigation ? async event => {
+                event.preventDefault()
+                await beforeStudyNavigation()
+                router.push(studyHref)
+              } : undefined} className="inline-block text-xs mt-2 underline underline-offset-2" style={{ color:'var(--gold-300)' }}>Study {ref.label} →</Link>
             </details>
           )
         })}

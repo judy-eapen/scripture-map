@@ -7,7 +7,7 @@ import { getOpenQuizReports } from '@/app/actions/quiz-reports'
 
 export const dynamic = 'force-dynamic'
 
-export default async function QuizPage({ searchParams }: { searchParams: Promise<{ admin?: string; book?: string }> }) {
+export default async function QuizPage({ searchParams }: { searchParams: Promise<{ admin?: string; book?: string; resume?:string; source?:string }> }) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   const query = await searchParams
@@ -23,7 +23,7 @@ export default async function QuizPage({ searchParams }: { searchParams: Promise
   return (
     <AppShell navData={navData} isAuthenticated={!!user}>
       <div className="max-w-2xl mx-auto px-4 md:px-6 py-8 pt-14 md:pt-8 pb-24">
-        <QuizArena chapters={chapters} collections={collections} isAuthenticated={!!user} allowAdminBrowse={!!user && query.admin === '1'} adminReports={reports} progress={progress} initialBook={query.book ?? recentBook ?? chapters[0]?.bookSlug} />
+        <QuizArena chapters={chapters} collections={collections} isAuthenticated={!!user} allowAdminBrowse={!!user && query.admin === '1'} adminReports={reports} progress={progress} initialBook={query.book ?? recentBook ?? chapters[0]?.bookSlug} initialResumeSessionId={query.resume} initialResumeSourceId={query.source} />
       </div>
     </AppShell>
   )

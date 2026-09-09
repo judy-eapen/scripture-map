@@ -26,6 +26,7 @@ type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete' | 'brows
 type Level = 1 | 2 | 3 | 'mixed';
 type TypeFilter = 'all' | QuizType;
 type Answered = { q: QuizQuestion; correct: boolean; given: string };
+type LocalOpenRound = { mode:SessionMode | 'review'; questionIds:string[]; answeredIds:string[]; correctCount:number };
 
 type Props = {
   chapters: QuizChapterSummary[];
@@ -35,6 +36,8 @@ type Props = {
   adminReports: QuizReport[] | null;
   progress: Record<string, ChapterProgress>;
   initialBook?: string;
+  initialResumeSessionId?: string;
+  initialResumeSourceId?: string;
 };
 
 type QuizSource = QuizChapterSummary & {
@@ -55,14 +58,24 @@ const badStyle: React.CSSProperties = { background: 'rgba(239,68,68,0.1)', borde
 
 // Signed-out fallback: keep history in this tab only
 const localKey = (chapterId: string) => `quiz3_stats_${chapterId}`;
+const localRoundKey = (chapterId:string) => `quiz3_open_round_${chapterId}`;
 function loadLocalStats(chapterId: string): StatsMap {
   try { return JSON.parse(sessionStorage.getItem(localKey(chapterId)) ?? '{}'); } catch { return {}; }
 }
 function saveLocalStats(chapterId: string, stats: StatsMap) {
   try { sessionStorage.setItem(localKey(chapterId), JSON.stringify(stats)); } catch { /* ignore */ }
 }
+function loadLocalRound(chapterId:string):LocalOpenRound | null {
+  try { return JSON.parse(sessionStorage.getItem(localRoundKey(chapterId)) ?? 'null') as LocalOpenRound | null; } catch { return null; }
+}
+function saveLocalRound(chapterId:string, value:LocalOpenRound) {
+  try { sessionStorage.setItem(localRoundKey(chapterId), JSON.stringify(value)); } catch { /* ignore */ }
+}
+function clearLocalRound(chapterId:string) {
+  try { sessionStorage.removeItem(localRoundKey(chapterId)); } catch { /* ignore */ }
+}
 
-export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, adminReports, progress: initialProgress, initialBook }: Props) {
+export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, adminReports, progress: initialProgress, initialBook, initialResumeSessionId, initialResumeSourceId }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [progress, setProgress] = useState(initialProgress);
   const [selectedChapterId, setSelectedChapterId] = useState<string | null>(null);
@@ -87,6 +100,8 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   const [typed, setTyped] = useState('');
   const [awaitingSelfGrade, setAwaitingSelfGrade] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const answerWriteRef = useRef<Promise<void>>(Promise.resolve());
+  const autoResumeStarted = useRef(false);
 
   const chapterSources = useMemo<QuizSource[]>(() => chapters.map(ch => ({
     ...ch, scopeKind: 'chapter', title: `${ch.bookName} ${ch.chapterNumber}`, description: '',
@@ -152,6 +167,37 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
     startRound(ordered, startIndex, open.correctCount, open.id);
   }
 
+  useEffect(() => {
+    if (autoResumeStarted.current || !initialResumeSessionId || !initialResumeSourceId) return;
+    const source = withQuestions.find(candidate => candidate.id === initialResumeSourceId);
+    if (!isAuthenticated && initialResumeSessionId === 'local' && source) {
+      const saved = loadLocalRound(source.id);
+      if (!saved) return;
+      autoResumeStarted.current = true;
+      void (async () => {
+        setChapter(source); setMode(saved.mode); setPhase('loading');
+        const qs = await loadPool(source);
+        const localStats = loadLocalStats(source.id);
+        setPool(qs); setStats(localStats);
+        const byId = new Map(qs.map(question => [question.id, question]));
+        const ordered = saved.questionIds.map(id => byId.get(id)).filter((question): question is QuizQuestion => !!question);
+        const startIndex = resumeStartIndex(saved.questionIds, ordered.map(question => question.id), saved.answeredIds);
+        if (startIndex >= ordered.length) {
+          setRound(ordered); setPriorCorrect(saved.correctCount); setAnswered([]); setPhase('complete');
+          return;
+        }
+        startRound(ordered, startIndex, saved.correctCount, null);
+      })();
+      return;
+    }
+    const open = progress[initialResumeSourceId]?.openSession;
+    if (!source || !open || open.id !== initialResumeSessionId) return;
+    autoResumeStarted.current = true;
+    void resume(source, open);
+    // Resume is intentionally attempted once from the server-validated open session in the URL.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialResumeSessionId, initialResumeSourceId, isAuthenticated, progress, withQuestions]);
+
   async function browse(ch: QuizSource) {
     if (!allowAdminBrowse) return;
     setChapter(ch); setPhase('loading'); setBrowseSearch('');
@@ -193,7 +239,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
     const correctCount = priorCorrect + nextAnswered.filter(a => a.correct).length;
     const completed = position >= round.length;
     if (isAuthenticated) {
-      recordAnswer({ sessionId, chapterId: chapter.id, scopeKind: chapter.scopeKind, questionId: current.id, correct: ok, givenAnswer: given, position, correctCount, completed }).catch(() => {});
+      answerWriteRef.current = recordAnswer({ sessionId, chapterId: chapter.id, scopeKind: chapter.scopeKind, questionId: current.id, correct: ok, givenAnswer: given, position, correctCount, completed });
     } else {
       saveLocalStats(chapter.id, nextStats);
     }
@@ -209,6 +255,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
         setProgress(p => ({ ...p, [chapter.id]: { chapterId: chapter.id, attempted: m.attempted, mastered: m.mastered, toReview: m.toReview, correctAnswers: m.correctAnswers, wrongAnswers: m.wrongAnswers, openSession: null } }));
       }
       setPhase('complete');
+      if (chapter) clearLocalRound(chapter.id);
       return;
     }
     setIndex(i => i + 1); setChoice(null); setTyped(''); setLastCorrect(null); setAwaitingSelfGrade(false); setPhase('question');
@@ -229,6 +276,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   async function doReset(ch: QuizSource) {
     if (isAuthenticated) await resetChapterProgress(ch.id, ch.scopeKind);
     else saveLocalStats(ch.id, {});
+    clearLocalRound(ch.id);
     setProgress(p => { const n = { ...p }; delete n[ch.id]; return n; });
     setConfirmReset(null);
   }
@@ -581,6 +629,20 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   if (!isSupportedQuizType(current.type)) return <UnsupportedQuizQuestion question={current.question} />;
   const answeredCount = index + (revealed ? 1 : 0);
   const runningCorrect = priorCorrect + answered.filter(a => a.correct).length;
+  const quizReturnHref = chapter
+    ? `/quiz?book=${encodeURIComponent(chapter.scopeKind === 'collection' ? 'all-kings' : chapter.bookSlug)}&resume=${encodeURIComponent(sessionId ?? 'local')}&source=${encodeURIComponent(chapter.id)}`
+    : '/quiz';
+  async function prepareStudyNavigation() {
+    if (chapter && !isAuthenticated) {
+      saveLocalRound(chapter.id, {
+        mode,
+        questionIds:round.map(question => question.id),
+        answeredIds:answered.map(item => item.q.id),
+        correctCount:priorCorrect + answered.filter(item => item.correct).length,
+      });
+    }
+    await answerWriteRef.current;
+  }
 
   return (
     <div>
@@ -657,7 +719,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           {current.explanation && <p style={{ color: 'var(--muted-400)' }}>{current.explanation}</p>}
           {!lastCorrect && current.review_topic && <p className="text-xs mt-3 font-medium" style={{ color: 'var(--gold-300)' }}>What to review: {current.review_topic}</p>}
           {!lastCorrect && current.review_guidance && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{current.review_guidance}</p>}
-          <QuestionSource question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} showTopic />
+          <QuestionSource question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} showTopic quizReturnHref={quizReturnHref} beforeStudyNavigation={prepareStudyNavigation} />
           <QuestionReportForm questionId={current.id} />
         </div>
       )}

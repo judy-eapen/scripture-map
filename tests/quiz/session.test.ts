@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank, poolRemaining, resumeStartIndex, isSupportedQuizType } from '../../lib/quiz-session'
+import { buildSession, applyAnswer, computeMastery, levelWeights, priorityRank, poolRemaining, resumeStartIndex, isSupportedQuizType, verseHrefWithQuizReturn } from '../../lib/quiz-session'
 import type { QuizQuestion } from '../../lib/types'
 
 const types = ['multiple_choice', 'fill_blank', 'one_word', 'true_false', 'short_answer'] as const
@@ -66,6 +66,11 @@ describe('mastery + priority', () => {
 })
 
 describe('safe session resume', () => {
+  it('keeps the quiz return route before a study-page verse hash', () => {
+    expect(verseHrefWithQuizReturn('/study/1-kings/20#v15', '/quiz?book=1-kings&resume=session&source=chapter'))
+      .toBe('/study/1-kings/20?returnTo=%2Fquiz%3Fbook%3D1-kings%26resume%3Dsession%26source%3Dchapter#v15')
+  })
+
   it('uses answer rows rather than position and skips retired or missing questions', () => {
     const stored = ['q1', 'retired', 'q2', 'q3']
     expect(resumeStartIndex(stored, ['q1', 'q2', 'q3'], ['q1', 'retired'])).toBe(1)

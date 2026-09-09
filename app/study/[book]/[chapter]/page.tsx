@@ -4,9 +4,11 @@ import { createClient } from '@/lib/supabase/server'
 import { getChapterNotes } from '@/app/actions/notes'
 import ChapterView from '@/components/ChapterView'
 
-export default async function ChapterPage({ params }: { params: Promise<{ book: string; chapter: string }> }) {
+export default async function ChapterPage({ params, searchParams }: { params: Promise<{ book: string; chapter: string }>; searchParams:Promise<{ returnTo?:string }> }) {
   const { book, chapter } = await params
+  const query = await searchParams
   const chapterNum = parseInt(chapter, 10)
+  const quizReturnHref = query.returnTo?.startsWith('/quiz') && !query.returnTo.startsWith('//') ? query.returnTo : undefined
 
   if (isNaN(chapterNum)) notFound()
 
@@ -32,6 +34,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ book: 
       initialIsRead={initialIsRead}
       isAuthenticated={!!user}
       initialNotes={initialNotes}
+      quizReturnHref={quizReturnHref}
     />
   )
 }

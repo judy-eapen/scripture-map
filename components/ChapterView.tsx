@@ -31,9 +31,10 @@ type Props = {
   initialIsRead: boolean;
   isAuthenticated: boolean;
   initialNotes: VerseNote[];
+  quizReturnHref?: string;
 };
 
-export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes = [] }: Props) {
+export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes = [], quizReturnHref }: Props) {
   // Resizable map panel
   const [mapWidth, setMapWidth] = useState(500);
   const mapWidthBeforeSlides = useRef(500);
@@ -87,12 +88,17 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [slidesOpen, setSlidesOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
   // Only mount MapPanel when container is visible — Leaflet crashes in display:none containers
-  const [isLargeScreen, setIsLargeScreen] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches);
+  // Match the server's first render; the effect applies the real viewport immediately after hydration.
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
+    const initial = window.setTimeout(() => setIsLargeScreen(mq.matches), 0);
     const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
     mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
+    return () => {
+      window.clearTimeout(initial);
+      mq.removeEventListener('change', handler);
+    };
   }, []);
 
   // Notes state — keyed by verse_number for O(1) lookup
@@ -180,6 +186,13 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
         {/* Reading column */}
         <div className="flex-1 overflow-y-auto min-w-0">
           <div className="max-w-2xl mx-auto px-4 md:px-6 py-6 md:py-8 pb-24">
+
+            {quizReturnHref && (
+              <Link href={quizReturnHref} className="flex items-center justify-between rounded-xl px-4 py-3 mb-5 text-sm font-semibold" style={{ background:'rgba(201,168,76,0.12)', border:'1px solid rgba(201,168,76,0.35)', color:'var(--gold-300)' }}>
+                <span>← Return to your quiz</span>
+                <span className="text-xs font-normal" style={{ color:'var(--muted-400)' }}>Your place is saved</span>
+              </Link>
+            )}
 
             {/* Chapter header */}
             <div className="mb-7">

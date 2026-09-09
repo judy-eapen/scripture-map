@@ -179,3 +179,10 @@ export function poolRemaining(pool: QuizQuestion[], stats: StatsMap): number {
 export function verseHref(bookSlug: string, chapterNumber: number, verseNumber: number | null): string {
   return `/study/${bookSlug}/${chapterNumber}${verseNumber ? `#v${verseNumber}` : ''}`
 }
+
+/** Attach a quiz return route before the verse hash so reviewing a source never loses the active round. */
+export function verseHrefWithQuizReturn(studyHref:string, quizReturnHref?:string):string {
+  if (!quizReturnHref) return studyHref
+  const [path, hash] = studyHref.split('#', 2)
+  return `${path}?returnTo=${encodeURIComponent(quizReturnHref)}${hash ? `#${hash}` : ''}`
+}
