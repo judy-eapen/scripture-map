@@ -18,7 +18,7 @@ const bank: ChapterBank = {
     word(1, 'What would be poured out from the torn-down altar?', 'ashes', 3),
     tf(2, 'The sign said the altar would remain standing while its fire went out.', false, 3, 'The altar would be torn down and its ashes poured out.'),
 
-    mc(1, 'What happened when Jeroboam stretched out his hand against the man of God?', ['His hand dried up and he could not draw it back', 'The altar caught fire', 'The man of God fled', 'His servants seized the prophet'], 4),
+    mc(1, 'What happened when Jeroboam stretched out his hand against the man of God?', ['His hand dried up so he could not draw it back', 'The altar caught fire and burned the king’s hand', 'The man of God fled from the king toward Judah', 'The king’s servants seized the prophet beside the altar'], 4),
     blank(3, 'And his hand, which he stretched out against him, _____ up, so that he could not draw it back to himself.', 'dried', 4),
     sa(3, 'What command did Jeroboam give after stretching out his hand?', 'Lay hold of him', 4, ['lay hold', 'lay hold of him']),
     tf(3, 'Jeroboam was immediately able to draw his outstretched hand back to himself.', false, 4, 'His hand dried up so that he could not draw it back.'),
@@ -26,7 +26,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How was the sign concerning the altar fulfilled?', ['The altar was torn down and its ashes poured out', 'The altar split but retained its ashes', 'The priests removed the altar', 'Jeroboam repaired the altar'], 5),
     blank(3, 'The altar also was torn down, and the ashes _____ out from the altar,', 'poured', 5),
-    word(3, 'According to whose word had the man of God given the sign?', 'the LORD', 5, ['LORD']),
+    word(3, 'By whose word had the man of God given the sign?', 'LORD', 5, ['the LORD']),
     tf(3, 'The altar remained intact after the man of God gave the sign.', false, 5, 'The altar was torn down and its ashes were poured out.'),
 
     mc(1, 'What did Jeroboam ask the man of God to do for his hand?', ['Pray that it might be restored', 'Anoint it with oil', 'Place it on the altar', 'Take him back to Judah'], 6),
@@ -85,16 +85,16 @@ const bank: ChapterBank = {
     sa(1, 'What two things did he again say he would not consume?', 'bread and water', 16, ['bread or water']),
     tf(3, 'The man of God initially said he could eat with the prophet outside Bethel.', false, 16, 'He said he could neither eat bread nor drink water in that place.'),
 
-    mc(2, 'What command did the man of God repeat in verse 17?', ['Neither eat nor drink there nor return by the same way', 'Wait under the oak until morning', 'Go back and pray for the king', 'Destroy every high place'], 17),
+    mc(2, 'What command did the man of God repeat?', ['Neither eat nor drink there nor return by the same way', 'Wait beneath the oak until the following morning', 'Return to Bethel and pray once more for the king', 'Destroy every high place before departing for Judah'], 17),
     blank(1, 'You shall neither eat bread nor drink water there, nor _____ by the way that you came.', 'return', 17),
     sa(3, 'By what had this command been given?', 'the word of the LORD', 17, ['word of the LORD']),
     tf(3, 'The command allowed him to return by the same way.', false, 17, 'The command expressly forbade returning by the way he came.'),
 
-    mc(1, 'What false claim did the old prophet make?', ['An angel told him to bring the man back for food and water', 'Jeroboam had repented', 'The altar had been repaired', 'The road to Judah was unsafe'], 18),
+    mc(1, 'What false claim did the old prophet make?', ['An angel told him to bring the man back for food and water', 'King Jeroboam had repented and wanted the man to return', 'The broken altar had been repaired by the priests of Bethel', 'The road leading back to Judah had become unsafe for travel'], 18),
     blank(2, 'But he _____ to him.', 'lied', 18),
     sa(3, 'Who did the old prophet claim had spoken to him?', 'an angel', 18, ['angel']),
     tf(3, 'An angel truly commanded the old prophet to bring the man of God home.', false, 18, 'The old prophet claimed this, but the text says he lied.'),
-    mc(3, 'How did the old prophet persuade the man of God to return?', ['He falsely claimed an angel had spoken by the word of the LORD', 'He offered half his house', 'He said the king demanded it', 'He promised safe passage to Judah'], 18),
+    mc(3, 'How did the old prophet persuade the man of God to return?', ['He falsely claimed an angel had spoken by the LORD’s word', 'He offered the man half his house and a valuable reward', 'He said King Jeroboam demanded the man’s immediate return', 'He promised armed protection and safe passage back to Judah'], 18),
 
     mc(1, 'What did the man of God do after hearing the old prophet’s claim?', ['Went back and ate and drank in his house', 'Continued directly to Judah', 'Returned to Jeroboam', 'Stayed beneath the oak'], 19),
     blank(2, 'So he went _____ with him, and ate bread in his house, and drank water.', 'back', 19),
@@ -106,17 +106,17 @@ const bank: ChapterBank = {
     sa(3, 'What were the two men doing when the word came?', 'sitting at the table', 20, ['sat at the table']),
     tf(3, 'The word of the LORD came to one of the old prophet’s sons.', false, 20, 'It came to the prophet who had brought the man of God back.'),
 
-    mc(2, 'Why did the LORD’s message condemn the man of God?', ['He had disobeyed the LORD’s word and commandment', 'He had refused the king’s reward', 'He had spoken against Bethel', 'He had traveled alone'], 21),
+    mc(2, 'Why did the LORD’s message condemn the man of God?', ['He had disobeyed the LORD’s word and commandment', 'He had refused the refreshment and reward offered by the king', 'He had spoken against the altar and high places at Bethel', 'He had traveled back toward Judah without another companion'], 21),
     blank(2, 'Because you have _____ the word of the LORD, and have not kept the commandment', 'disobeyed', 21),
-    word(1, 'Whose commandment had the man of God failed to keep?', 'the LORD’s', 21, ['the LORD', 'LORD']),
+    word(1, 'Whose commandment had the man of God failed to keep?', 'LORD', 21, ['the LORD', 'the LORD’s', 'LORD’s']),
     tf(3, 'The message praised the man of God for keeping every command.', false, 21, 'It declared that he had disobeyed the LORD’s word.'),
 
-    mc(2, 'What consequence was announced for eating and drinking there?', ['His body would not come to the tomb of his fathers', 'He would lose his prophetic gift', 'His house would be destroyed', 'He would serve Jeroboam'], 22),
+    mc(2, 'What consequence was announced for eating and drinking there?', ['His body would not enter the tomb of his fathers', 'He would lose the prophetic gift given through God’s word', 'His family’s house would be cut off and destroyed', 'He would remain in Bethel and serve King Jeroboam'], 22),
     blank(2, 'your body shall not come to the tomb of your _____.', 'fathers', 22),
     sa(1, 'What had the man of God consumed in the forbidden place?', 'bread and water', 22, ['bread and drank water']),
     tf(3, 'The message promised that his body would be buried with his fathers.', false, 22, 'It said his body would not come to the tomb of his fathers.'),
 
-    mc(1, 'What did the old prophet do after the meal?', ['Saddled the ass for the prophet he had brought back', 'Sent his sons with the man', 'Walked with him to Judah', 'Returned him to the king'], 23),
+    mc(1, 'What did the old prophet do after the meal?', ['Saddled the ass for the prophet he had brought back', 'Sent his sons along the road to accompany the man', 'Walked beside the man all the way back to Judah', 'Returned the man to King Jeroboam at the altar'], 23),
     blank(2, 'And after he had eaten bread and drunk, he _____ the ass for the prophet whom he had brought back.', 'saddled', 23),
     sa(1, 'For whom was the animal saddled?', 'the prophet he had brought back', 23, ['the man of God']),
     tf(2, 'The old prophet provided the man of God with a saddled animal.', true, 23),
@@ -132,7 +132,7 @@ const bank: ChapterBank = {
     sa(1, 'Where did the passersby report what they had seen?', 'the city where the old prophet dwelt', 25, ['the city', 'Bethel']),
     tf(2, 'The passersby reported the sight in the old prophet’s city.', true, 25),
 
-    mc(2, 'How did the old prophet explain the man of God’s death?', ['The LORD gave him to the lion because he disobeyed', 'Robbers had left him for dead', 'Jeroboam secretly ordered it', 'The animal attacked without cause'], 26),
+    mc(2, 'How did the old prophet explain the man of God’s death?', ['The LORD gave him to the lion because he disobeyed', 'Robbers attacked him and left him dead beside the road', 'Jeroboam secretly ordered his guards to kill the man', 'The lion attacked without cause while the man traveled'], 26),
     blank(2, 'It is the man of God, who _____ the word of the LORD;', 'disobeyed', 26),
     sa(1, 'To what animal did the old prophet say the LORD had given the man?', 'the lion', 26, ['lion']),
     tf(3, 'The old prophet said the death occurred according to the LORD’s spoken word.', true, 26),
@@ -147,7 +147,7 @@ const bank: ChapterBank = {
     sa(1, 'Which two animals were standing beside the body?', 'the ass and the lion', 28, ['ass and lion', 'donkey and lion']),
     tf(3, 'The lion ate the body but left the ass unharmed.', false, 28, 'The lion neither ate the body nor tore the ass.'),
 
-    mc(1, 'What did the prophet do with the man of God’s body?', ['Laid it on the ass and brought it back to the city', 'Buried it beside the road', 'Took it to Judah', 'Presented it to Jeroboam'], 29),
+    mc(1, 'What did the prophet do with the man of God’s body?', ['Laid it on the ass and brought it back to the city', 'Buried it beside the road where the lion had killed him', 'Carried it onward to Judah and the tomb of his fathers', 'Presented it to Jeroboam as proof of the man’s death'], 29),
     blank(2, 'And the prophet took up the body of the man of God and laid it upon the _____.', 'ass', 29),
     sa(1, 'Why did the prophet bring the body back?', 'to mourn and bury him', 29, ['to mourn and to bury him']),
     tf(2, 'The prophet brought the body back to the city.', true, 29),
@@ -161,9 +161,9 @@ const bank: ChapterBank = {
     blank(2, 'lay my _____ beside his bones.', 'bones', 31),
     sa(1, 'In whose grave did the old prophet wish to be buried?', 'the man of God’s grave', 31, ['the grave in which the man of God is buried']),
     tf(3, 'The old prophet wanted his bones laid beside the man of God’s bones.', true, 31),
-    mc(3, 'Why would the two prophets eventually share a grave?', ['The old prophet instructed his sons to bury him beside the man of God', 'Jeroboam ordered a common tomb', 'They belonged to the same family', 'The lion guarded every other grave'], 31),
+    mc(3, 'Why would the two prophets eventually share a grave?', ['The old prophet told his sons to bury him beside the man of God', 'Jeroboam commanded that both prophets share a common royal tomb', 'The two prophets belonged to the same family from the land of Judah', 'The lion guarded every other grave and prevented another burial'], 31),
 
-    mc(2, 'Against what places would the man of God’s saying come to pass?', ['The altar at Bethel and high-place houses in Samaria’s cities', 'Only the palace in Jerusalem', 'Every altar in Judah', 'The temple at Shiloh alone'], 32),
+    mc(2, 'Against what places would the man of God’s saying come to pass?', ['Bethel’s altar and the high-place houses in Samaria’s cities', 'Only Solomon’s royal palace within the city of Jerusalem', 'Every altar throughout Judah and all its fortified cities', 'The former sanctuary at Shiloh and no other high place'], 32),
     blank(2, 'and against all the houses of the high places which are in the cities of _____', 'Sama’ria', 32, ['Samaria']),
     sa(1, 'Which altar had the man of God spoken against?', 'the altar in Bethel', 32, ['Bethel altar', 'altar at Bethel']),
     tf(3, 'The old prophet believed the saying would surely come to pass.', true, 32),
