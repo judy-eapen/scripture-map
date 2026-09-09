@@ -61,7 +61,7 @@ const bank: ChapterBank = {
     tf(1, 'Jesus told the Pharisees that a sign from heaven would be given to this generation.', false, 12, 'He said, "Assuredly, I say to you, no sign shall be given to this generation."'),
     word(3, 'When the Pharisees demanded a sign, what did Jesus do "deeply in His spirit" before He answered them?', 'sighed', 12, ['sigh', 'sighing']),
 
-    mc(2, 'What did Jesus do after telling the Pharisees that no sign would be given?', ['He left them, got into the boat again, and departed to the other side', 'He led them out of the town and healed a blind man', 'He commanded them to sit down on the ground', 'He strictly warned them to tell no one about Him'], 13),
+    mc(2, 'What did Jesus do after telling the Pharisees that no sign would be given?', ['He left by boat for the other side', 'He led them out of town and healed a blind man', 'He told them to sit on the ground', 'He warned them to tell no one'], 13),
     blank(2, 'And He left them, and getting into the _____ again, departed to the other side.', 'boat', 13),
 
     // ══════════════════════════════════ v14–21 · One loaf in the boat; the leaven warning
@@ -119,7 +119,7 @@ const bank: ChapterBank = {
     tf(2, 'After the first touch, the blind man at Bethsaida said he saw everyone clearly.', false, 24, 'He said, "I see men like trees, walking"; he saw clearly only after Jesus touched his eyes again (v. 25).'),
     sa(2, 'After the blind man at Bethsaida was first touched, what did he say he saw?', 'He looked up and said, "I see men like trees, walking."', 24),
 
-    mc(2, 'How was the blind man of Bethsaida finally healed?', ['Jesus put His hands on his eyes again and made him look up, and he saw everyone clearly', 'Jesus spoke a word from a distance and he was restored', 'Jesus told him to wash in the sea and his sight returned', 'Jesus sent him into the town and he was healed on the way'], 25),
+    mc(2, 'How was the blind man of Bethsaida finally healed?', ['Jesus put His hands on the man’s eyes again, and he saw clearly', 'Jesus spoke from a distance, and the man was restored', 'Jesus told the man to wash in the sea', 'Jesus sent the man into town to be healed'], 25),
     blank(3, 'Then He put His hands on his eyes again and made him look up. And he was restored and saw everyone _____.', 'clearly', 25),
     tf(2, 'Jesus put His hands on the blind man’s eyes a second time, and then he was restored and saw everyone clearly.', true, 25),
     word(2, 'After Jesus put His hands on his eyes again, the man of Bethsaida saw everyone how?', 'clearly', 25),
@@ -164,7 +164,7 @@ const bank: ChapterBank = {
     sa(2, 'How did Peter react when Jesus spoke openly about the Son of Man suffering and being killed?', 'Peter took Him aside and began to rebuke Him.', 32),
 
     mc(1, 'When Jesus turned and rebuked Peter for rebuking Him, what did He say?', ['"Get behind Me, Satan!"', '"O faithless generation!"', '"Why are you so fearful?"', '"Go your way; your faith has made you well"'], 33),
-    mc(3, 'What reason did Jesus give when He rebuked Peter with "Get behind Me, Satan!"?', ['Peter was not mindful of the things of God, but the things of men', 'Peter had asked for a sign from heaven', 'Peter had forgotten to take bread', 'Peter had told others about Him'], 33),
+    mc(3, 'What reason did Jesus give when He rebuked Peter with "Get behind Me, Satan!"?', ['Peter minded human things rather than God’s things', 'Peter had asked for a sign from heaven', 'Peter had forgotten to take bread', 'Peter had told others about Him'], 33),
     blank(1, 'He rebuked Peter, saying, "Get behind Me, _____!', 'Satan', 33),
     blank(3, 'But when He had turned around and looked at His _____, He rebuked Peter,', 'disciples', 33),
     word(1, 'Whom did Jesus rebuke with the words "Get behind Me, Satan!"?', 'Peter', 33),
@@ -179,7 +179,7 @@ const bank: ChapterBank = {
     word(1, 'Jesus said whoever desires to come after Him must deny himself and take up his what?', 'cross', 34),
     sa(1, 'What did Jesus say a person must do who desires to come after Him?', 'Deny himself, take up his cross, and follow Him.', 34),
 
-    mc(2, 'According to Jesus, who will save his life?', ['Whoever loses his life for Jesus’ sake and the gospel’s', 'Whoever desires to save his life', 'Whoever gains the whole world', 'Whoever is not ashamed before men'], 35),
+    mc(2, 'According to Jesus, who will save his life?', ['One who loses it for Jesus and the gospel', 'One who desires to save his life', 'One who gains the whole world', 'One who is not ashamed before men'], 35),
     blank(2, 'For whoever desires to save his life will _____ it, but whoever loses his life for My sake and the gospel’s will save it.', 'lose', 35),
     tf(2, 'Jesus said that whoever desires to save his life will lose it.', true, 35),
     sa(3, 'State the saying of Jesus about saving and losing one’s life (Mark 8:35).', '"Whoever desires to save his life will lose it, but whoever loses his life for My sake and the gospel’s will save it."', 35),
@@ -194,7 +194,7 @@ const bank: ChapterBank = {
     tf(3, 'Jesus asked, "Or what will a man give in exchange for his life?"', false, 37, 'The question is "what will a man give in exchange for his soul?"'),
     sa(3, 'Quote the two rhetorical questions Jesus asked about the soul after teaching about taking up the cross (Mark 8:36–37).', '"For what will it profit a man if he gains the whole world, and loses his own soul? Or what will a man give in exchange for his soul?"', 37),
 
-    mc(3, 'Of whom did Jesus say the Son of Man will be ashamed when He comes in the glory of His Father?', ['Whoever is ashamed of Him and His words in this adulterous and sinful generation', 'Whoever seeks a sign from heaven', 'Whoever reasons about having no bread', 'Whoever is mindful of the things of men'], 38),
+    mc(3, 'Of whom did Jesus say the Son of Man will be ashamed when He comes in the glory of His Father?', ['Those ashamed of Him and His words', 'Those who seek a sign from heaven', 'Those who reason about having no bread', 'Those mindful of the things of men'], 38),
     mc(3, 'With whom did Jesus say the Son of Man will come in the glory of His Father?', ['The holy angels', 'The elders and prophets', 'Moses and Elijah', 'The twelve disciples'], 38),
     blank(3, 'of him the Son of Man also will be ashamed when He comes in the glory of His Father with the holy _____."', 'angels', 38),
     word(2, 'Jesus said the Son of Man will come in the glory of His Father with the holy what?', 'angels', 38),
