@@ -1938,3 +1938,13 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 6 · 3547f1e3-443c-490c-b645-3d83425add7c · R5/R7 · retired · Balanced answer specificity or corrected the response form while preserving the cited Orthodox Bible fact.
 - Mark 6 · b180f9d2-be11-4ae2-b255-fea2e72fd1a3 · R5/R7 · retired · Balanced answer specificity or corrected the response form while preserving the cited Orthodox Bible fact.
 - Mark 6 · bf7dbb1d-d9ee-4abd-a375-b644bbe6d23b · R5/R7 · retired · Balanced answer specificity or corrected the response form while preserving the cited Orthodox Bible fact.
+## Mark 7 semantic review
+
+- Mark 7 · d22616f9-29a8-4ba0-859c-14ea7fb0a40b · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · f23ef2c3-fd93-493e-8f39-c9591ccfe223 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · 41916cf4-2fae-4754-9c09-42bcccde1a5e · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · 6a801db8-a819-48ca-aec3-e66d312a1954 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · 85da97e0-bad8-4f17-b2ed-26c1cf11561a · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · 2fc795f1-f326-4c92-9399-542cb0c6edeb · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · 8c9df0a2-1f8a-4627-bfa6-876838a3d5b8 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 7 · a019d9ce-5919-45a9-a108-d67a5c74f6dd · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.

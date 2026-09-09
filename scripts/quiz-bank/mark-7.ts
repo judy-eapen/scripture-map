@@ -27,7 +27,7 @@ const bank: ChapterBank = {
     blank(3, 'And there are many other things which they have received and hold, like the washing of cups, pitchers, copper vessels, and _____.', 'couches', 4),
     word(3, 'Besides cups, pitchers, and copper vessels, what piece of furniture does Mark say the Pharisees washed by tradition?', 'couches', 4, ['couch']),
 
-    mc(2, 'What question did the Pharisees and scribes put to Jesus about His disciples?', ['"Why do Your disciples not walk according to the tradition of the elders, but eat bread with unwashed hands?"', '"Why do Your disciples eat bread that has been thrown to the little dogs?"', '"Why do Your disciples not wash the cups and pitchers before they eat?"', '"Why do Your disciples reject the commandment of God to keep their own tradition?"'], 5),
+    mc(2, 'What question did the Pharisees and scribes put to Jesus about His disciples?', ['Why they ate with unwashed hands against the elders’ tradition', 'Why they ate the bread intended for little dogs', 'Why they washed cups and pitchers before eating', 'Why they rejected their own tradition'], 5),
     blank(1, 'Then the Pharisees and scribes asked Him, "Why do Your disciples not walk according to the tradition of the elders, but eat bread with _____ hands?"', 'unwashed', 5),
     sa(2, 'When the Pharisees and scribes questioned Jesus, what did they accuse His disciples of failing to walk according to?', 'The tradition of the elders — the disciples ate bread with unwashed hands.', 5),
 
@@ -95,7 +95,7 @@ const bank: ChapterBank = {
     blank(2, 'So He said to them, "Are you thus without _____ also?', 'understanding', 18),
     sa(2, 'What did Jesus ask His disciples when they did not perceive that outside things cannot defile a man?', '"Are you thus without understanding also?"', 18),
 
-    mc(3, 'According to Jesus, why can food entering a man from outside not defile him?', ['It does not enter his heart but his stomach, and is eliminated', 'It is purified by washing in a special way', 'It enters his heart and is purified there', 'It has been received and held as tradition'], 19),
+    mc(3, 'According to Jesus, why can food entering a man from outside not defile him?', ['It goes to the stomach and is eliminated', 'Special washing purifies it', 'The heart purifies it', 'Tradition makes it clean'], 19),
     blank(3, 'because it does not enter his heart but his _____, and is eliminated, thus purifying all foods?"', 'stomach', 19),
     word(3, 'Jesus said food that enters a man does not enter his heart but goes into what?', 'stomach', 19, ['the stomach', 'belly']),
     tf(3, 'Jesus said that food entering from outside is eliminated, "thus purifying all foods."', true, 19),
@@ -138,17 +138,17 @@ const bank: ChapterBank = {
     word(2, 'The Syro-Phoenician woman kept asking Jesus to cast what out of her daughter?', 'demon', 26, ['the demon', 'unclean spirit', 'spirit']),
     tf(3, 'Mark says the Syro-Phoenician woman asked Jesus only once to cast the demon out of her daughter.', false, 26, 'Mark says she "kept asking Him."'),
 
-    mc(3, 'How did Jesus first answer the Syro-Phoenician woman’s plea for her daughter?', ['"Let the children be filled first, for it is not good to take the children’s bread and throw it to the little dogs."', '"Go your way; the demon has gone out of your daughter."', '"Are you thus without understanding also?"', '"Do not be afraid; only believe, and your daughter will be made well."'], 27),
+    mc(3, 'How did Jesus first answer the Syro-Phoenician woman’s plea for her daughter?', ['The children must be filled first', 'The demon had already left her daughter', 'She too was without understanding', 'She needed only to believe'], 27),
     blank(2, 'But Jesus said to her, "Let the children be filled first, for it is not good to take the children’s bread and throw it to the little _____."', 'dogs', 27),
     tf(2, 'Jesus told the Syro-Phoenician woman, "Let the children be filled first."', true, 27),
     sa(2, 'Why did Jesus at first hold back from helping the Syro-Phoenician woman, in His own words?', '"Let the children be filled first, for it is not good to take the children’s bread and throw it to the little dogs."', 27),
 
-    mc(1, 'How did the Syro-Phoenician woman reply when Jesus spoke of the children’s bread and the little dogs?', ['"Yes, Lord, yet even the little dogs under the table eat from the children’s crumbs."', '"Yes, Lord, yet the children have already been filled at Your table."', '"No, Lord, for my daughter is a child and not a little dog."', '"Lord, if You are willing, You can make my daughter clean."'], 28),
+    mc(1, 'How did the Syro-Phoenician woman reply when Jesus spoke of the children’s bread and the little dogs?', ['Even the little dogs under the table eat the children’s crumbs', 'The children had already been filled at His table', 'Her daughter was a child, not a little dog', 'Jesus could make her daughter clean if willing'], 28),
     blank(1, 'And she answered and said to Him, "Yes, Lord, yet even the little dogs under the table eat from the children’s _____."', 'crumbs', 28),
     word(1, 'By what title did the Syro-Phoenician woman address Jesus when she spoke of the little dogs under the table?', 'Lord', 28),
     tf(3, 'The Syro-Phoenician woman said the little dogs eat the crumbs "on the table."', false, 28, 'She said "the little dogs under the table eat from the children’s crumbs."'),
 
-    mc(2, 'What did Jesus tell the Syro-Phoenician woman after her answer about the crumbs?', ['"For this saying go your way; the demon has gone out of your daughter."', '"For this saying your daughter shall be filled first."', '"Go your way; your faith has made your daughter well."', '"Go your way and tell no one what has been done."'], 29),
+    mc(2, 'What did Jesus tell the Syro-Phoenician woman after her answer about the crumbs?', ['Her saying meant the demon had left her daughter', 'Her daughter would now be filled first', 'Her faith had made her daughter well', 'She should tell no one what happened'], 29),
     blank(1, 'Then He said to her, "For this saying go your way; the demon has gone out of your _____."', 'daughter', 29),
     word(3, 'When Jesus sent the Syro-Phoenician woman home, what did He say had earned her request — "For this ___ go your way"?', 'saying', 29, ['this saying']),
     sa(2, 'Why did Jesus say the demon had gone out of the Syro-Phoenician woman’s daughter?', '"For this saying" — because of her answer that even the little dogs under the table eat the children’s crumbs.', 29),
@@ -170,7 +170,7 @@ const bank: ChapterBank = {
     sa(2, 'What did the people beg Jesus to do for the deaf man with the speech impediment?', 'They begged Him to put His hand on him.', 32),
 
     mc(2, 'What did Jesus do first with the deaf man before healing him?', ['He took him aside from the multitude', 'He commanded the multitude to be silent', 'He asked the man what he wanted', 'He sent the man to wash in the sea'], 33),
-    mc(3, 'How did Jesus touch the deaf man with the speech impediment?', ['He put His fingers in his ears, and He spat and touched his tongue', 'He put His hands on his eyes and touched his ears', 'He spat on the ground and put clay on his ears', 'He laid His hand on his head and touched his lips'], 33),
+    mc(3, 'How did Jesus touch the deaf man with the speech impediment?', ['Fingers in his ears, then a touch to his tongue', 'He touched the man’s eyes and placed hands on his ears', 'He put clay on the man’s ears', 'He touched the man’s head and lips'], 33),
     blank(2, 'And He took him aside from the multitude, and put His _____ in his ears, and He spat and touched his tongue.', 'fingers', 33),
     word(2, 'Jesus put His fingers in the deaf man’s ears, then spat and touched what?', 'tongue', 33, ['his tongue']),
     tf(2, 'Jesus healed the deaf man in front of the whole multitude.', false, 33, 'He "took him aside from the multitude."'),
@@ -183,7 +183,7 @@ const bank: ChapterBank = {
     tf(2, 'Mark translates "Ephphatha," the word Jesus spoke to the deaf man, as "Be healed."', false, 34, 'Mark translates it "Be opened."'),
     sa(1, 'What does "Ephphatha," the command Jesus spoke to the deaf man, mean?', 'Be opened.', 34, ['be opened', 'open']),
 
-    mc(1, 'What happened to the deaf man immediately after Jesus said "Ephphatha"?', ['His ears were opened, his tongue was loosed, and he spoke plainly', 'His eyes were opened and he saw everyone clearly', 'He rose up, took his bed, and went home', 'He fell at Jesus’ feet and worshiped Him'], 35),
+    mc(1, 'What happened to the deaf man immediately after Jesus said "Ephphatha"?', ['His ears opened, tongue was loosed, and speech became plain', 'His eyes opened and he could see everyone clearly', 'He took his bed and went home', 'He fell at Jesus’ feet'], 35),
     blank(3, 'Immediately his ears were opened, and the impediment of his tongue was _____, and he spoke plainly.', 'loosed', 35),
     word(2, 'After his tongue was loosed, how did the formerly deaf man speak — in one word?', 'plainly', 35, ['plain', 'clearly']),
     tf(1, 'The deaf man’s ears were opened immediately when Jesus spoke to him.', true, 35),
@@ -200,7 +200,7 @@ const bank: ChapterBank = {
     sa(3, 'How does Mark measure the people’s astonishment after the deaf man was healed, and what did they say about Jesus?', 'They were astonished beyond measure and said, "He has done all things well. He makes both the deaf to hear and the mute to speak."', 37),
 
     // ══════════════════════════════════ Whole-chapter
-    mc(2, 'Which episode in Mark 7 took place in the region of Tyre and Sidon?', ['The casting out of the demon from the Syro-Phoenician woman’s daughter', 'The dispute with the Pharisees over unwashed hands', 'The healing of the deaf man with the speech impediment', 'The teaching of the multitude about what defiles'], 24),
+    mc(2, 'Which episode in Mark 7 took place in the region of Tyre and Sidon?', ['The Syro-Phoenician woman’s request for her daughter', 'The Pharisees’ dispute with Jesus over unwashed hands', 'The healing of the deaf man', 'The teaching about what defiles'], 24),
     tf(2, 'In Mark 7 the deaf man was healed in the region of Tyre and Sidon.', false, 31, 'Jesus had left Tyre and Sidon and come through Decapolis to the Sea of Galilee before the deaf man was brought to Him.'),
   ],
 };
