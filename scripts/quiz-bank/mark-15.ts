@@ -1,65 +1,284 @@
-import { mc, blank, word, tf, type ChapterBank, sa } from './types'
-const bank: ChapterBank = { book: 'Mark', chapter: 15, tag: 'quiz-v2-mark-15', rows: [
-mc(1,'To whom did the council deliver the bound Jesus?',['Pilate','Herod','The high priest','Barabbas'],1),
-blank(2,'Are You the _____ of the Jews?','King',2),
-sa(3,'How did Jesus answer the chief priests’ many accusations?','He answered nothing',3,['nothing']),
-tf(1,'Pilate pointed out the many accusations made against Jesus.',true,4),
-mc(2,'What made Pilate marvel?',['Jesus still answered nothing','The crowd became quiet','Barabbas confessed','The council released Jesus'],5),
-blank(3,'at the feast he was accustomed to releasing one _____','prisoner',6),
-word(1,'What crime had Barabbas and his fellow rebels committed?','murder',7),
-tf(2,'The multitude asked Pilate to follow his usual release custom.',true,8),
-mc(1,'Whom did Pilate offer to release?',['The King of the Jews','Barabbas first','Simon of Cyrene','The centurion'],9),
-blank(2,'the chief priests had handed Him over because of _____.','envy',10),
-word(3,'Whom did the chief priests persuade the crowd to request?','Barabbas',11),
-tf(1,'Pilate asked what to do with the one called King of the Jews.',true,12),
-mc(2,'What did the crowd demand?',['Crucify Him','Release Him','Send Him to Herod','Scourge Barabbas'],13),
-blank(3,'Why, what _____ has He done?','evil',14),
-sa(1,'Why did Pilate release Barabbas?','to gratify the crowd',15),
-tf(2,'Pilate scourged Jesus before delivering Him for crucifixion.',true,15),
-mc(1,'What was the soldiers’ hall called?',['Praetorium','Golgotha','Gethsemane','The council chamber'],16),
-blank(2,'they clothed Him with _____','purple',17),
-sa(3,'How did the soldiers salute Jesus?','Hail, King of the Jews',18),
-tf(1,'The soldiers struck Jesus with a reed and spat on Him.',true,19),
-mc(2,'What did the soldiers put back on Jesus after mocking Him?',['His own clothes','The purple robe','Fine linen','A priestly garment'],20),
-blank(3,'Simon a Cyrenian, the father of Alexander and _____','Rufus',21),
-word(1,'What does Golgotha mean?','Place of a Skull',22),
-tf(2,'Jesus accepted the wine mingled with myrrh.',false,23,'He did not take it.'),
-mc(1,'How did the soldiers decide who received Jesus’ garments?',['By casting lots','By rank','By Pilate’s order','By tearing them evenly'],24),
-blank(1,'it was the _____ hour, and they crucified Him.','third',25,['3rd']),
-sa(3,'What accusation was written above Jesus?','The King of the Jews',26),
-tf(1,'Two robbers were crucified on Jesus’ right and left.',true,27),
-mc(2,'What Scripture was fulfilled by the crucifixion with criminals?',['He was numbered with transgressors','The stone became the cornerstone','The Shepherd struck the sheep','The house became a den'],28),
-blank(3,'You who destroy the temple and build it in _____ days','three',29,['3']),
-sa(1,'What did passersby challenge Jesus to do?','come down from the cross',30,['save Himself and come down']),
-tf(2,'The chief priests mocked that Jesus saved others but could not save Himself.',true,31),
-mc(1,'What did the mockers demand as proof for belief?',['That Christ descend from the cross','That Pilate release Barabbas','That Elijah appear','That darkness end'],32),
-blank(2,'there was darkness over the whole land until the _____ hour.','ninth',33,['9th']),
-sa(3,'What does “Eloi, Eloi, lama sabachthani” mean?','My God, My God, why have You forsaken Me?',34,['My God why have You forsaken Me']),
-tf(1,'Some bystanders thought Jesus was calling Elijah.',true,35),
-mc(2,'What drink was offered to Jesus on a sponge?',['Sour wine','Water','Wine with myrrh','Milk'],36),
-blank(3,'Jesus cried out with a loud voice, and breathed His _____.','last',37),
-sa(1,'How was the temple veil torn?','in two from top to bottom',38,['from top to bottom']),
-tf(2,'The centurion declared Jesus to be the Son of God.',true,39),
-mc(1,'Which women are named watching from afar?',['Mary Magdalene, Mary mother of James and Joses, and Salome','Martha, Mary of Bethany, and Joanna','Herodias and her daughter','Only Mary Magdalene'],40),
-blank(2,'who also followed Him and _____ to Him when He was in Galilee','ministered',41),
-sa(3,'What was Preparation Day?','the day before the Sabbath',42),
-tf(1,'Joseph of Arimathea was waiting for God’s kingdom.',true,43),
-mc(2,'Why did Pilate summon the centurion?',['To confirm Jesus had been dead for some time','To arrest Joseph','To release Barabbas','To tear the veil'],44),
-blank(3,'he granted the body to _____.','Joseph',45),
-sa(1,'What did Joseph roll against the tomb entrance?','a stone',46),
-tf(2,'Mary Magdalene and Mary mother of Joses saw where Jesus was laid.',true,47),
+// Mark 15 — quiz bank (NKJV, Orthodox Study Bible text as stored). Every row is anchored
+// to a verse; fill-in-the-blank rows are verified against the stored verse text by
+// scripts/seed-quiz-bank.ts. Questions are framed in the story (who / to whom / why / what
+// followed), never by inverting a single clause.
+import { mc, blank, word, tf, sa, type ChapterBank } from './types';
 
-mc(3,'Who participated in the morning consultation?',['Chief priests, elders, scribes, and the whole council','Only Pilate and Barabbas','The women from Galilee','Simon and his sons'],1),
-sa(2,'What did Jesus answer when Pilate asked if He was King of the Jews?','It is as you say',2),
-tf(3,'Pilate believed Jesus had been handed over out of righteous concern.',false,10,'He knew envy motivated the chief priests.'),
-mc(3,'What three actions did the soldiers take with the purple robe and crown?',['Clothed Him, crowned Him with thorns, and mocked His kingship','Released Him, fed Him, and honored Him','Blindfolded Pilate and crowned Barabbas','Wrapped Him in linen and buried Him'],17),
-word(2,'Who carried Jesus’ cross?','Simon of Cyrene',21,['Simon a Cyrenian']),
-tf(3,'The inscription above Jesus named Him King of Israel.',false,26,'It read “THE KING OF THE JEWS.”'),
-mc(3,'How long did darkness cover the land?',['From the sixth hour to the ninth','From the third hour to the sixth','From morning until the third hour','From the ninth hour until evening'],33),
-sa(2,'What did someone hope to see after offering sour wine?','whether Elijah would take Jesus down',36,['Elijah come to take Him down']),
-tf(3,'The temple veil tore from bottom to top.',false,38,'It tore from top to bottom.'),
-mc(3,'What prompted the centurion’s confession?',['Seeing how Jesus cried out and died','Seeing the empty tomb','Hearing Pilate’s verdict','Watching Simon carry the cross'],39),
-sa(2,'What position did Joseph of Arimathea hold?','prominent council member',43),
-mc(3,'How did Joseph prepare Jesus’ body and tomb?',['Wrapped Him in fine linen, laid Him in a rock-hewn tomb, and rolled a stone over it','Anointed Him with myrrh and returned Him to Pilate','Placed Him in the temple behind the veil','Buried Him in an unmarked field'],46),
-]};
+const bank: ChapterBank = {
+  book: 'Mark',
+  chapter: 15,
+  tag: 'quiz-v2-mark-15',
+  rows: [
+    // ══════════════════════════════════ v1–5 · The morning council; Jesus before Pilate
+    mc(1, 'On the morning after His arrest, who held a consultation and then bound Jesus and led Him away?', ['The chief priests with the elders, scribes, and the whole council', 'The soldiers of the whole garrison in the Praetorium', 'Pilate together with the centurion who stood opposite Him', 'The passers-by who wagged their heads at the cross'], 1),
+    word(1, 'After the morning council bound Jesus and led Him away, to whom did they deliver Him?', 'Pilate', 1),
+    blank(2, 'Immediately, in the morning, the chief priests held a consultation with the elders and scribes and the whole _____; and they bound Jesus, led Him away, and delivered Him to Pilate.', 'council', 1),
+    tf(1, 'Mark says the chief priests held their consultation with the elders and scribes in the evening, after the Sabbath.', false, 1, 'Mark says it happened "Immediately, in the morning."'),
+    sa(2, 'Describe what the chief priests did with Jesus after their morning consultation with the elders, scribes, and the whole council.', 'They bound Jesus, led Him away, and delivered Him to Pilate.', 1),
+
+    mc(1, 'What was the first question Pilate put to Jesus when the council delivered Him?', ['"Are You the King of the Jews?"', '"Do You answer nothing?"', '"Why, what evil has He done?"', '"What then do you want me to do with Him?"'], 2),
+    sa(1, 'When Pilate asked Jesus, "Are You the King of the Jews?", how did Jesus answer him?', 'He said, "It is as you say."', 2),
+    blank(1, 'Then Pilate asked Him, "Are You the King of the _____?" He answered and said to him, "It is as you say."', 'Jews', 2),
+    tf(2, 'When Pilate asked Jesus whether He was the King of the Jews, Jesus answered nothing.', false, 2, 'To this question Jesus answered, "It is as you say." It was to the chief priests’ accusations that He answered nothing.'),
+
+    mc(2, 'While Jesus stood before Pilate, who accused Him of many things?', ['The chief priests', 'The elders of the people', 'The whole garrison of soldiers', 'Those who passed by the cross'], 3),
+    blank(2, 'And the chief priests accused Him of many things, but He answered _____.', 'nothing', 3),
+    tf(1, 'When the chief priests accused Jesus of many things before Pilate, He answered nothing.', true, 3),
+
+    sa(2, 'When Jesus stayed silent under the chief priests’ accusations, what did Pilate say to Him the second time he asked?', 'He said, "Do You answer nothing? See how many things they testify against You!"', 4),
+    blank(3, 'Then Pilate asked Him again, saying, "Do You answer nothing? See how many things they _____ against You!"', 'testify', 4),
+    mc(2, 'What did Pilate point out to Jesus when he urged Him to answer?', ['How many things the chief priests were testifying against Him', 'That the crowd was asking for Barabbas to be released', 'That the inscription of His accusation had already been written', 'That the soldiers had called together the whole garrison'], 4),
+
+    word(1, 'When Jesus still answered nothing to Pilate’s second question, what did Pilate do?', 'marveled', 5, ['marvelled', 'marvel', 'he marveled', 'he marvelled']),
+    blank(2, 'But Jesus still answered nothing, so that Pilate _____.', 'marveled', 5, ['marvelled']),
+    tf(2, 'Pilate marveled because Jesus argued skillfully against the accusations of the chief priests.', false, 5, 'Pilate marveled because Jesus still answered nothing.'),
+    mc(3, 'Mark says Pilate marveled twice in this chapter. What was the first thing that made him marvel?', ['That Jesus still answered nothing to the accusations', 'That Jesus was already dead when Joseph asked for the body', 'That the veil of the temple was torn from top to bottom', 'That darkness came over the whole land at the sixth hour'], 5, 'The second time (v44) he marveled that Jesus was already dead.'),
+
+    // ══════════════════════════════════ v6–15 · The custom, Barabbas, "Crucify Him!"
+    sa(1, 'What custom did Pilate keep at the feast, according to Mark?', 'He was accustomed to releasing one prisoner to the people, whomever they requested.', 6),
+    blank(2, 'Now at the feast he was accustomed to releasing one _____ to them, whomever they requested.', 'prisoner', 6),
+    tf(1, 'At the feast Pilate was accustomed to releasing one prisoner, whomever the people requested.', true, 6),
+    word(2, 'How many prisoners was Pilate accustomed to releasing to the people at the feast?', 'one', 6, ['1']),
+
+    mc(1, 'Who was Barabbas, according to Mark?', ['A prisoner chained with his fellow rebels who had committed murder in the rebellion', 'A Cyrenian passing by who was compelled to bear the cross', 'A prominent council member who was waiting for the kingdom of God', 'A centurion who stood opposite Jesus at the cross'], 7),
+    word(1, 'What crime had Barabbas and his fellow rebels committed in the rebellion?', 'murder', 7),
+    blank(2, 'And there was one named _____, who was chained with his fellow rebels; they had committed murder in the rebellion.', 'Barabbas', 7),
+    tf(2, 'Barabbas was chained with his fellow rebels because they had committed robbery in the rebellion.', false, 7, 'They had committed murder in the rebellion.'),
+    sa(3, 'With whom was Barabbas chained, and why were they imprisoned?', 'He was chained with his fellow rebels; they had committed murder in the rebellion.', 7),
+
+    mc(2, 'What did the multitude, crying aloud, begin to ask Pilate to do?', ['To do just as he had always done for them at the feast', 'To send Jesus back to be judged by the chief priests', 'To scourge Jesus and then let Him go', 'To write the inscription of His accusation'], 8),
+    blank(3, 'Then the multitude, crying aloud, began to ask him to do just as he had always _____ for them.', 'done', 8),
+    tf(2, 'The multitude waited quietly for Pilate to release a prisoner, as was his custom.', false, 8, 'The multitude was "crying aloud" as they began to ask him.'),
+
+    sa(1, 'When the multitude asked Pilate to keep his custom of releasing a prisoner, what did Pilate offer them?', 'He asked, "Do you want me to release to you the King of the Jews?"', 9),
+    blank(1, 'But Pilate answered them, saying, "Do you want me to _____ to you the King of the Jews?"', 'release', 9),
+    mc(2, 'By what title did Pilate refer to Jesus when he offered to release Him to the multitude?', ['The King of the Jews', 'The Christ, the King of Israel', 'The Son of God', 'The Man from Nazareth'], 9),
+
+    word(1, 'Pilate knew the chief priests had handed Jesus over because of what?', 'envy', 10),
+    blank(1, 'For he knew that the chief priests had handed Him over because of _____.', 'envy', 10),
+    tf(1, 'Mark says Pilate knew the chief priests had handed Jesus over because of envy.', true, 10),
+    mc(3, 'Why, according to Mark, did Pilate offer to release the King of the Jews to the multitude?', ['Because he knew the chief priests had handed Jesus over because of envy', 'Because Jesus had answered him, "It is as you say"', 'Because the multitude had already cried out for Barabbas', 'Because Barabbas had committed murder in the rebellion'], 10),
+
+    mc(1, 'How did the chief priests respond when Pilate offered to release the King of the Jews?', ['They stirred up the crowd so that he should rather release Barabbas', 'They accused Jesus of many more things before Pilate', 'They demanded that Pilate scourge Jesus first', 'They asked Pilate to write the inscription of His accusation'], 11),
+    word(2, 'Whom did the crowd, stirred up by the chief priests, want Pilate to release instead of Jesus?', 'Barabbas', 11),
+    blank(2, 'But the chief priests _____ up the crowd, so that he should rather release Barabbas to them.', 'stirred', 11),
+    tf(1, 'It was the scribes who stirred up the crowd to ask for Barabbas.', false, 11, 'Mark says the chief priests stirred up the crowd.'),
+
+    sa(2, 'After the crowd was stirred up to ask for Barabbas, what did Pilate ask them about Jesus?', 'He asked, "What then do you want me to do with Him whom you call the King of the Jews?"', 12),
+    blank(2, 'Pilate answered and said to them again, "What then do you want me to do with Him whom you _____ the King of the Jews?"', 'call', 12),
+    tf(3, 'In his second question to the crowd, Pilate spoke of Jesus as "Him whom you call the King of the Jews."', true, 12),
+
+    mc(1, 'When Pilate asked the crowd what he should do with the one they called King of the Jews, what did they cry out?', ['"Crucify Him!"', '"Let Him alone!"', '"Release to us Barabbas!"', '"Save Yourself, and come down!"'], 13),
+    word(1, 'When Pilate asked the crowd what to do with Jesus, they cried out that He should be what?', 'crucified', 13, ['crucify', 'crucify him', 'crucifed']),
+    blank(1, 'So they cried out again, "_____ Him!"', 'Crucify', 13),
+
+    sa(1, 'What did Pilate ask the crowd when they cried "Crucify Him!", and how did they respond?', 'He asked, "Why, what evil has He done?" and they cried out all the more, "Crucify Him!"', 14),
+    blank(2, 'Then Pilate said to them, "Why, what _____ has He done?" But they cried out all the more, "Crucify Him!"', 'evil', 14),
+    tf(2, 'When Pilate asked, "Why, what evil has He done?", the crowd fell silent.', false, 14, 'They cried out all the more, "Crucify Him!"'),
+    mc(2, 'How did the crowd react when Pilate asked, "Why, what evil has He done?"', ['They cried out all the more, "Crucify Him!"', 'They began to ask for Barabbas instead', 'They wagged their heads and blasphemed Him', 'They answered nothing, so that Pilate marveled'], 14),
+
+    mc(1, 'Why did Pilate release Barabbas, according to Mark?', ['He wanted to gratify the crowd', 'He knew Barabbas was innocent of the murder', 'The chief priests asked him to keep his custom', 'The centurion advised him to release a prisoner'], 15),
+    sa(2, 'Describe the two things Pilate did once he decided to gratify the crowd.', 'He released Barabbas to them, and he delivered Jesus, after he had scourged Him, to be crucified.', 15),
+    blank(2, 'So Pilate, wanting to gratify the crowd, released _____ to them; and he delivered Jesus, after he had scourged Him, to be crucified.', 'Barabbas', 15),
+    word(2, 'What did Pilate have done to Jesus before delivering Him to be crucified?', 'scourged', 15, ['scourging', 'scourge', 'he scourged him']),
+    tf(1, 'Pilate delivered Jesus to be crucified after he had scourged Him.', true, 15),
+    blank(3, 'So Pilate, wanting to _____ the crowd, released Barabbas to them; and he delivered Jesus, after he had scourged Him, to be crucified.', 'gratify', 15),
+
+    // ══════════════════════════════════ v16–20 · The soldiers mock Jesus in the Praetorium
+    word(1, 'Into what hall did the soldiers lead Jesus after Pilate delivered Him?', 'Praetorium', 16, ['the praetorium', 'pretorium']),
+    blank(2, 'Then the soldiers led Him away into the hall called _____, and they called together the whole garrison.', 'Praetorium', 16),
+    mc(2, 'Whom did the soldiers call together once they had led Jesus into the Praetorium?', ['The whole garrison', 'The chief priests and scribes', 'The passers-by from the country', 'The women from Galilee'], 16),
+    tf(2, 'Only a handful of soldiers were present when Jesus was mocked in the Praetorium.', false, 16, 'They called together the whole garrison.'),
+
+    mc(1, 'In the Praetorium, what did the soldiers clothe Jesus with and put on His head?', ['Purple, and a twisted crown of thorns', 'Fine linen, and a crown of reeds', 'His own clothes, and a crown of thorns', 'Purple, and a wreath of myrrh'], 17),
+    word(1, 'What color did the soldiers clothe Jesus in when they mocked Him?', 'purple', 17),
+    blank(1, 'And they clothed Him with purple; and they twisted a crown of _____, put it on His head,', 'thorns', 17),
+    sa(3, 'Describe how the soldiers dressed Jesus in the Praetorium before saluting Him.', 'They clothed Him with purple, and twisted a crown of thorns and put it on His head.', 17),
+
+    sa(1, 'After dressing Jesus in purple and a crown of thorns, how did the soldiers salute Him?', '"Hail, King of the Jews!"', 18),
+    blank(1, 'and began to salute Him, "_____, King of the Jews!"', 'Hail', 18),
+    tf(2, 'The soldiers saluted Jesus with the words, "Hail, King of Israel!"', false, 18, 'They said, "Hail, King of the Jews!"'),
+    mc(3, 'What title did the soldiers use when they saluted Jesus in mockery?', ['King of the Jews', 'King of Israel', 'Son of God', 'The Christ'], 18),
+
+    mc(1, 'With what did the soldiers strike Jesus on the head in the Praetorium?', ['A reed', 'A crown of thorns', 'A sponge', 'A stone'], 19),
+    sa(2, 'List the three things the soldiers did to Jesus after saluting Him "Hail, King of the Jews!"', 'They struck Him on the head with a reed, spat on Him, and bowing the knee, they worshiped Him.', 19),
+    blank(2, 'Then they struck Him on the head with a _____ and spat on Him; and bowing the knee, they worshiped Him.', 'reed', 19),
+    tf(2, 'Bowing the knee, the soldiers worshiped Jesus in mockery after striking Him with a reed.', true, 19),
+    word(3, 'After striking Jesus with a reed and spitting on Him, the soldiers bowed the knee and did what?', 'worshiped', 19, ['worshipped', 'worship', 'worshiped him', 'worshipped him']),
+
+    mc(2, 'When the soldiers had finished mocking Jesus, what did they do before leading Him out to crucify Him?', ['They took the purple off Him and put His own clothes on Him', 'They wrapped Him in fine linen they had bought', 'They cast lots for the purple robe among themselves', 'They gave Him wine mingled with myrrh'], 20),
+    blank(2, 'And when they had mocked Him, they took the purple off Him, put His own _____ on Him, and led Him out to crucify Him.', 'clothes', 20),
+    tf(1, 'Jesus was led out to be crucified still wearing the purple the soldiers had put on Him.', false, 20, 'They took the purple off Him and put His own clothes on Him.'),
+
+    // ══════════════════════════════════ v21–28 · Simon of Cyrene, Golgotha, the crucifixion
+    mc(1, 'Who was compelled to carry Jesus’ cross, and how does Mark identify him?', ['Simon a Cyrenian, the father of Alexander and Rufus', 'Joseph of Arimathea, a prominent council member', 'Simon the leper, a man from Bethany', 'Alexander a Cyrenian, coming out of the country'], 21),
+    word(1, 'Simon, who was compelled to bear Jesus’ cross, is called a man of what place?', 'Cyrene', 21, ['cyrenian', 'a cyrenian', 'cyrenean']),
+    sa(2, 'Who were the sons of Simon the Cyrenian, as Mark names them?', 'Alexander and Rufus.', 21),
+    blank(2, 'Then they compelled a certain man, Simon a Cyrenian, the father of Alexander and _____, as he was coming out of the country and passing by, to bear His cross.', 'Rufus', 21),
+    tf(2, 'Simon the Cyrenian volunteered to bear Jesus’ cross as he was coming out of the country.', false, 21, 'The soldiers compelled him to bear the cross.'),
+    mc(3, 'What was Simon the Cyrenian doing when the soldiers compelled him to bear the cross?', ['Coming out of the country and passing by', 'Looking on from afar with the women', 'Standing opposite Jesus with the centurion', 'Coming down from Jerusalem to Golgotha'], 21),
+    word(3, 'Simon the Cyrenian was the father of Rufus and of whom else?', 'Alexander', 21),
+
+    word(1, 'What is the name of the place where they brought Jesus to be crucified?', 'Golgotha', 22),
+    sa(1, 'What does the name Golgotha mean, according to Mark’s translation?', 'Place of a Skull.', 22),
+    blank(1, 'And they brought Him to the place Golgotha, which is translated, Place of a _____.', 'Skull', 22),
+    mc(2, 'How does Mark translate the name Golgotha?', ['Place of a Skull', 'Place of the Preparation', 'Place of the Transgressors', 'Place of a Tomb'], 22),
+    tf(1, 'Golgotha is translated "Place of a Skull."', true, 22),
+
+    mc(1, 'What drink was offered to Jesus when they brought Him to Golgotha, and how did He respond?', ['Wine mingled with myrrh, which He did not take', 'Sour wine on a sponge, which He drank', 'Wine mingled with myrrh, which He drank', 'Water on a reed, which He refused'], 23),
+    word(2, 'The wine given to Jesus to drink at Golgotha was mingled with what?', 'myrrh', 23),
+    blank(1, 'Then they gave Him wine mingled with _____ to drink, but He did not take it.', 'myrrh', 23),
+    tf(1, 'Jesus drank the wine mingled with myrrh that was given to Him at Golgotha.', false, 23, '"He did not take it."'),
+
+    mc(1, 'How did those who crucified Jesus decide what each man should take of His garments?', ['They cast lots for them', 'The centurion assigned them', 'They tore them into equal pieces', 'They gave them to the women looking on'], 24),
+    blank(2, 'And when they crucified Him, they divided His _____, casting lots for them to determine what every man should take.', 'garments', 24),
+    word(2, 'What did those who crucified Jesus cast in order to divide His garments?', 'lots', 24),
+    tf(1, 'Those who crucified Jesus divided His garments by casting lots.', true, 24),
+    sa(3, 'In Mark’s words, what was the purpose of casting lots over Jesus’ garments?', 'To determine what every man should take.', 24),
+
+    word(1, 'At what hour does Mark say they crucified Jesus?', 'third', 25, ['3rd', 'the third hour', 'third hour', '3']),
+    blank(1, 'Now it was the _____ hour, and they crucified Him.', 'third', 25, ['3rd']),
+    tf(2, 'Mark says Jesus was crucified at the sixth hour.', false, 25, 'It was the third hour when they crucified Him.'),
+    mc(2, 'Which time marker does Mark attach to the crucifixion itself?', ['The third hour', 'The sixth hour', 'The ninth hour', 'Evening, on the Preparation Day'], 25),
+
+    sa(1, 'What was written in the inscription of Jesus’ accusation above Him?', 'THE KING OF THE JEWS.', 26),
+    blank(1, 'And the inscription of His accusation was written above: THE KING OF THE _____.', 'JEWS', 26),
+    mc(2, 'What does Mark call the words written above Jesus on the cross?', ['The inscription of His accusation', 'The title of His kingdom', 'The charge of the chief priests', 'The decree of Pilate'], 26),
+    tf(2, 'The inscription above Jesus read: THE CHRIST, THE KING OF ISRAEL.', false, 26, 'It read: THE KING OF THE JEWS.'),
+
+    mc(1, 'Who was crucified alongside Jesus, and where were they placed?', ['Two robbers, one on His right and the other on His left', 'Two rebels, both on His right', 'Barabbas and one robber, on either side of Him', 'Two of His fellow prisoners, behind Him'], 27),
+    word(1, 'How many robbers were crucified with Jesus?', 'two', 27, ['2']),
+    blank(1, 'With Him they also crucified two _____, one on His right and the other on His left.', 'robbers', 27),
+    tf(1, 'Two robbers were crucified with Jesus, one on His right and the other on His left.', true, 27),
+
+    sa(2, 'What Scripture does Mark say was fulfilled when Jesus was crucified between two robbers?', '"And He was numbered with the transgressors."', 28),
+    blank(2, 'So the Scripture was fulfilled which says, "And He was numbered with the _____."', 'transgressors', 28),
+    word(3, 'The Scripture fulfilled at the crucifixion says Jesus was "numbered with" whom?', 'transgressors', 28, ['the transgressors']),
+    tf(2, 'Mark quotes the Scripture, "And He was numbered with the transgressors," as fulfilled at the crucifixion.', true, 28),
+
+    // ══════════════════════════════════ v29–32 · Mocked by passers-by, chief priests, and robbers
+    mc(1, 'What did those who passed by the cross do and say to Jesus?', ['They blasphemed Him, wagging their heads, and taunted Him about destroying the temple and building it in three days', 'They bowed the knee and mocked Him with "Hail, King of the Jews!"', 'They offered Him sour wine and said to wait for Elijah', 'They said, "He saved others; Himself He cannot save"'], 29),
+    blank(2, 'And those who passed by blasphemed Him, wagging their heads and saying, "Aha! You who destroy the temple and build it in _____ days,', 'three', 29, ['3']),
+    word(2, 'The passers-by mocked Jesus as the one who would destroy the temple and build it in how many days?', 'three', 29, ['3']),
+    tf(2, 'The passers-by who blasphemed Jesus wagged their heads as they spoke.', true, 29),
+    sa(3, 'Quote the taunt the passers-by hurled at Jesus as they wagged their heads.', '"Aha! You who destroy the temple and build it in three days, save Yourself, and come down from the cross!"', 29),
+
+    blank(1, 'save Yourself, and come down from the _____!"', 'cross', 30),
+    mc(2, 'What did the passers-by challenge the one who would "destroy the temple" to do?', ['Save Himself and come down from the cross', 'Call for Elijah to take Him down', 'Answer the chief priests’ accusations', 'Drink the wine mingled with myrrh'], 30),
+    tf(3, 'The passers-by challenged Jesus to save Himself and come down from the cross.', true, 30),
+
+    mc(1, 'What did the chief priests, mocking among themselves with the scribes, say about Jesus on the cross?', ['"He saved others; Himself He cannot save."', '"Truly this Man was the Son of God!"', '"Look, He is calling for Elijah!"', '"Why, what evil has He done?"'], 31),
+    blank(1, 'Likewise the chief priests also, mocking among themselves with the scribes, said, "He _____ others; Himself He cannot save.', 'saved', 31),
+    word(2, 'With whom were the chief priests mocking among themselves at the cross?', 'scribes', 31, ['the scribes']),
+    tf(2, 'The chief priests mocked Jesus at the cross together with the elders.', false, 31, 'They were mocking among themselves with the scribes.'),
+    sa(2, 'What did the chief priests and scribes say Jesus could not do, in contrast to what He had done for others?', 'They said, "He saved others; Himself He cannot save."', 31),
+
+    mc(2, 'What did the chief priests and scribes say would make them "see and believe"?', ['If the Christ, the King of Israel, descended now from the cross', 'If Elijah came to take Him down', 'If the veil of the temple were torn in two', 'If darkness came over the whole land'], 32),
+    blank(2, 'Let the Christ, the King of _____, descend now from the cross, that we may see and believe." Even those who were crucified with Him reviled Him.', 'Israel', 32),
+    tf(1, 'Even those who were crucified with Jesus reviled Him.', true, 32),
+    sa(3, 'By what titles did the chief priests and scribes refer to Jesus when they challenged Him to descend from the cross?', 'The Christ, the King of Israel.', 32),
+    word(3, 'What did those who were crucified with Jesus do to Him, according to Mark?', 'reviled', 32, ['reviled him', 'revile']),
+
+    // ══════════════════════════════════ v33–39 · Darkness, "Eloi, Eloi", the death of Jesus
+    mc(1, 'What happened from the sixth hour until the ninth hour?', ['There was darkness over the whole land', 'The veil of the temple was torn in two', 'The soldiers cast lots for His garments', 'The women looked on from afar'], 33),
+    word(1, 'From the sixth hour until the ninth hour, what was over the whole land?', 'darkness', 33),
+    blank(1, 'Now when the sixth hour had come, there was _____ over the whole land until the ninth hour.', 'darkness', 33),
+    blank(3, 'Now when the _____ hour had come, there was darkness over the whole land until the ninth hour.', 'sixth', 33, ['6th']),
+    tf(2, 'The darkness over the whole land lasted from the third hour until the sixth hour.', false, 33, 'It lasted from the sixth hour until the ninth hour.'),
+    sa(2, 'When did the darkness over the whole land begin and end, according to Mark?', 'It began at the sixth hour and lasted until the ninth hour.', 33),
+
+    mc(1, 'What did Jesus cry out with a loud voice at the ninth hour?', ['"Eloi, Eloi, lama sabachthani?"', '"Truly this Man was the Son of God!"', '"Let Him alone; let us see if Elijah will come"', '"It is as you say"'], 34),
+    sa(1, 'How does Mark translate Jesus’ cry, "Eloi, Eloi, lama sabachthani?"', '"My God, My God, why have You forsaken Me?"', 34),
+    blank(2, 'And at the ninth hour Jesus cried out with a loud voice, saying, "Eloi, Eloi, lama _____?" which is translated, "My God, My God, why have You forsaken Me?"', 'sabachthani', 34),
+    blank(1, 'which is translated, "My God, My God, why have You _____ Me?"', 'forsaken', 34),
+    word(2, 'At what hour did Jesus cry out, "Eloi, Eloi, lama sabachthani?"', 'ninth', 34, ['9th', '9', 'the ninth hour', 'ninth hour']),
+    tf(1, 'Jesus cried out "Eloi, Eloi, lama sabachthani?" at the sixth hour.', false, 34, 'He cried out at the ninth hour.'),
+    word(3, 'What is the first word of Jesus’ cry at the ninth hour, translated "My God"?', 'Eloi', 34),
+
+    mc(2, 'When some who stood by heard Jesus cry "Eloi, Eloi," whom did they say He was calling for?', ['Elijah', 'Moses', 'David', 'The King of Israel'], 35),
+    word(1, 'Whom did some bystanders think Jesus was calling for when He cried out at the ninth hour?', 'Elijah', 35),
+    blank(2, 'Some of those who stood by, when they heard that, said, "Look, He is calling for _____!"', 'Elijah', 35),
+    tf(2, 'It was the chief priests who said, "Look, He is calling for Elijah!"', false, 35, 'It was "some of those who stood by."'),
+
+    mc(1, 'What did someone run to offer Jesus after the bystanders spoke of Elijah?', ['A sponge full of sour wine, put on a reed', 'Wine mingled with myrrh in a cup', 'Fine linen to cover Him', 'Water drawn from the temple'], 36),
+    word(2, 'The sponge offered to Jesus on a reed was filled with what kind of wine?', 'sour', 36, ['sour wine', 'vinegar']),
+    blank(2, 'Then someone ran and filled a _____ full of sour wine, put it on a reed, and offered it to Him to drink,', 'sponge', 36),
+    sa(2, 'What did the man who offered Jesus the sponge of sour wine say as he did so?', '"Let Him alone; let us see if Elijah will come to take Him down."', 36),
+    blank(3, 'saying, "Let Him alone; let us see if Elijah will come to take Him _____."', 'down', 36),
+    tf(3, 'The man who offered the sponge of sour wine said, "Let us see if Elijah will come to take Him down."', true, 36),
+
+    sa(1, 'What happened immediately after Jesus cried out with a loud voice the second time?', 'He breathed His last.', 37),
+    blank(1, 'And Jesus cried out with a loud voice, and _____ His last.', 'breathed', 37),
+    tf(1, 'Mark says Jesus breathed His last quietly, without a sound.', false, 37, 'Jesus "cried out with a loud voice, and breathed His last."'),
+    mc(2, 'How does Mark describe the moment of Jesus’ death?', ['He cried out with a loud voice, and breathed His last', 'He answered nothing, and breathed His last', 'He drank the sour wine, and breathed His last', 'He called for Elijah, and breathed His last'], 37),
+
+    mc(1, 'What happened to the veil of the temple when Jesus breathed His last?', ['It was torn in two from top to bottom', 'It was torn in two from bottom to top', 'It fell to the ground', 'It was rolled back like the stone'], 38),
+    word(1, 'What part of the temple was torn in two from top to bottom when Jesus died?', 'veil', 38, ['the veil', 'curtain']),
+    blank(1, 'Then the veil of the temple was torn in two from _____ to bottom.', 'top', 38),
+    tf(2, 'The veil of the temple was torn in two from bottom to top.', false, 38, 'It was torn "from top to bottom."'),
+    sa(3, 'Describe exactly how Mark says the veil of the temple was torn.', 'It was torn in two from top to bottom.', 38),
+
+    mc(1, 'What did the centurion who stood opposite Jesus say when he saw how He cried out and breathed His last?', ['"Truly this Man was the Son of God!"', '"Look, He is calling for Elijah!"', '"He saved others; Himself He cannot save."', '"It is as you say."'], 39),
+    word(2, 'Which officer, standing opposite Jesus, declared "Truly this Man was the Son of God!"?', 'centurion', 39, ['the centurion']),
+    blank(1, 'So when the centurion, who stood opposite Him, saw that He cried out like this and breathed His last, he said, "Truly this Man was the _____ of God!"', 'Son', 39),
+    tf(1, 'The centurion who stood opposite Jesus said, "Truly this Man was the King of the Jews!"', false, 39, 'He said, "Truly this Man was the Son of God!"'),
+    sa(2, 'What did the centurion see that led him to say "Truly this Man was the Son of God!"?', 'He saw that Jesus cried out like this and breathed His last.', 39),
+    blank(3, 'So when the centurion, who stood _____ Him, saw that He cried out like this and breathed His last, he said, "Truly this Man was the Son of God!"', 'opposite', 39),
+
+    // ══════════════════════════════════ v40–41 · The women looking on from afar
+    mc(1, 'Which women does Mark name among those looking on from afar at the crucifixion?', ['Mary Magdalene, Mary the mother of James the Less and of Joses, and Salome', 'Mary Magdalene, Salome, and the mother of Alexander and Rufus', 'Mary the mother of Joses, Salome, and the wife of Simon the Cyrenian', 'Mary Magdalene, Mary the mother of James the Less, and Herodias'], 40),
+    word(1, 'Which Mary is named first among the women looking on from afar at the cross?', 'Magdalene', 40, ['mary magdalene']),
+    word(2, 'Along with Mary Magdalene and Mary the mother of James the Less and of Joses, who was the third woman Mark names at the cross?', 'Salome', 40),
+    blank(2, 'There were also women looking on from afar, among whom were Mary Magdalene, Mary the mother of James the _____ and of Joses, and Salome,', 'Less', 40),
+    tf(2, 'The women watching the crucifixion stood close beside the cross.', false, 40, 'They were "looking on from afar."'),
+    sa(3, 'How does Mark identify the second Mary who looked on from afar at the crucifixion?', 'She was Mary the mother of James the Less and of Joses.', 40),
+    mc(3, 'Whose mother was the second Mary named among the women at the cross?', ['James the Less and Joses', 'Alexander and Rufus', 'James and John', 'Joseph and Simon'], 40),
+
+    mc(2, 'What had the women who looked on at the crucifixion done for Jesus earlier?', ['They followed Him and ministered to Him when He was in Galilee', 'They anointed His head with oil in Bethany', 'They prepared the Passover for Him in Jerusalem', 'They brought Him wine mingled with myrrh'], 41),
+    blank(2, 'who also followed Him and ministered to Him when He was in _____, and many other women who came up with Him to Jerusalem.', 'Galilee', 41),
+    tf(1, 'Mark says the three named women were the only women who had come up with Jesus to Jerusalem.', false, 41, 'There were also "many other women who came up with Him to Jerusalem."'),
+    sa(2, 'Where had these women followed and ministered to Jesus, and where had they come up with Him?', 'They followed and ministered to Him when He was in Galilee, and came up with Him to Jerusalem.', 41),
+
+    // ══════════════════════════════════ v42–47 · Joseph of Arimathea and the tomb
+    mc(1, 'What day was it when evening came after the crucifixion, and how does Mark explain it?', ['The Preparation Day, that is, the day before the Sabbath', 'The Sabbath, that is, the day of rest', 'The first day of Unleavened Bread', 'The day of the Passover feast'], 42),
+    word(2, 'Mark says evening came on which day, "that is, the day before the Sabbath"?', 'Preparation', 42, ['preparation day', 'the preparation day']),
+    blank(1, 'Now when evening had come, because it was the Preparation Day, that is, the day before the _____,', 'Sabbath', 42),
+    tf(2, 'Mark explains the Preparation Day as the day after the Sabbath.', false, 42, 'It was "the day before the Sabbath."'),
+
+    mc(1, 'Who went in to Pilate and asked for the body of Jesus?', ['Joseph of Arimathea, a prominent council member', 'Simon of Cyrene, the father of Alexander and Rufus', 'The centurion who stood opposite Him', 'Mary Magdalene and Mary the mother of Joses'], 43),
+    word(1, 'Joseph, who asked Pilate for Jesus’ body, was from what place?', 'Arimathea', 43, ['arimathaea']),
+    blank(2, 'Joseph of Arimathea, a prominent _____ member, who was himself waiting for the kingdom of God, coming and taking courage, went in to Pilate and asked for the body of Jesus.', 'council', 43),
+    sa(2, 'How does Mark describe Joseph of Arimathea, and what was he waiting for?', 'He was a prominent council member who was himself waiting for the kingdom of God.', 43),
+    tf(2, 'Mark says Joseph of Arimathea went in to Pilate "taking courage."', true, 43),
+    mc(3, 'What does Mark say Joseph of Arimathea was himself waiting for?', ['The kingdom of God', 'The coming of Elijah', 'The end of the Preparation Day', 'The Sabbath'], 43),
+    blank(3, 'Joseph of Arimathea, a prominent council member, who was himself waiting for the kingdom of God, coming and taking _____, went in to Pilate and asked for the body of Jesus.', 'courage', 43),
+
+    mc(2, 'Why did Pilate summon the centurion after Joseph asked for the body?', ['He marveled that Jesus was already dead and asked whether He had been dead for some time', 'He wanted the centurion to take Jesus down from the cross', 'He wanted to know who had torn the veil of the temple', 'He wanted the centurion to roll the stone against the tomb'], 44),
+    word(2, 'Whom did Pilate summon to confirm that Jesus had been dead for some time?', 'centurion', 44, ['the centurion']),
+    blank(2, 'Pilate _____ that He was already dead; and summoning the centurion, he asked him if He had been dead for some time.', 'marveled', 44, ['marvelled']),
+    tf(1, 'Pilate marveled that Jesus was already dead when Joseph asked for the body.', true, 44),
+    sa(3, 'What did Pilate ask the centurion when he summoned him?', 'He asked him if Jesus had been dead for some time.', 44),
+
+    sa(1, 'What did Pilate do once he found out from the centurion that Jesus was dead?', 'He granted the body to Joseph.', 45),
+    blank(2, 'So when he found out from the centurion, he _____ the body to Joseph.', 'granted', 45),
+    tf(2, 'Pilate refused to grant Joseph the body until the Sabbath had passed.', false, 45, 'When he found out from the centurion, he granted the body to Joseph.'),
+    mc(2, 'From whom did Pilate find out that Jesus was dead before granting the body to Joseph?', ['The centurion', 'The chief priests', 'Mary Magdalene', 'Simon the Cyrenian'], 45),
+
+    mc(1, 'What did Joseph buy to wrap the body of Jesus?', ['Fine linen', 'Purple cloth', 'A sponge', 'Myrrh'], 46),
+    word(1, 'In what did Joseph wrap the body of Jesus after taking Him down?', 'linen', 46, ['fine linen']),
+    blank(1, 'Then he bought fine _____, took Him down, and wrapped Him in the linen.', 'linen', 46),
+    sa(2, 'Describe the tomb where Joseph laid Jesus and how he closed it.', 'The tomb had been hewn out of the rock, and he rolled a stone against the door of the tomb.', 46),
+    blank(2, 'And he laid Him in a tomb which had been hewn out of the _____, and rolled a stone against the door of the tomb.', 'rock', 46),
+    tf(1, 'Joseph rolled a stone against the door of the tomb after laying Jesus in it.', true, 46),
+    mc(3, 'In what order does Mark list Joseph’s actions with the body of Jesus?', ['Bought fine linen, took Him down, wrapped Him, laid Him in a tomb, rolled a stone against the door', 'Took Him down, bought fine linen, laid Him in a tomb, wrapped Him, rolled a stone against the door', 'Rolled the stone away, took Him down, wrapped Him in linen, laid Him in the tomb', 'Wrapped Him in linen, took Him down, bought myrrh, laid Him in a tomb'], 46),
+    word(3, 'The tomb where Jesus was laid had been hewn out of what?', 'rock', 46, ['the rock']),
+
+    mc(1, 'Who observed where Jesus was laid in the tomb?', ['Mary Magdalene and Mary the mother of Joses', 'Mary Magdalene and Salome', 'Joseph of Arimathea and the centurion', 'Salome and Mary the mother of James'], 47),
+    blank(1, 'And Mary Magdalene and Mary the mother of _____ observed where He was laid.', 'Joses', 47),
+    tf(2, 'Salome is named with Mary Magdalene as observing where Jesus was laid.', false, 47, 'It was Mary the mother of Joses who observed with Mary Magdalene.'),
+    word(2, 'Along with Mary Magdalene, the mother of which man observed where Jesus was laid?', 'Joses', 47),
+    sa(3, 'Who observed where Jesus was laid, and how does Mark identify the second woman here?', 'Mary Magdalene and Mary the mother of Joses observed where He was laid.', 47),
+  ],
+};
+
 export default bank;
