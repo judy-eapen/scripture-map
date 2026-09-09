@@ -1457,3 +1457,34 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 2 Kings 14 · a395fb30-1516-403a-be7d-48da87ded216 · R4/R5/R7 · retired · Retired during the semantic pass after balancing true/false prompts and choices or correcting the response form; the replacement preserves the cited fact.
 - 2 Kings 14 · 479844f9-35cf-461c-a38f-ae60d5c1dfcd · R4/R5/R7 · retired · Retired during the semantic pass after balancing true/false prompts and choices or correcting the response form; the replacement preserves the cited fact.
 - 2 Kings 14 · add8cfef-7f91-4a80-88c9-ee22c8e82b4d · R4/R5/R7 · retired · Retired during the semantic pass after balancing true/false prompts and choices or correcting the response form; the replacement preserves the cited fact.
+
+## 2 Kings 15
+
+- 2 Kings 15 · 2ad3c574-31e5-435e-bd62-7ffeeddb0437 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 3d4b2fd6-36ad-4c0a-a190-7f1a47793644 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 71ef1732-d358-4d59-a2f8-c6ed11399811 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · a758e0c0-f70c-4fba-ac2e-598aa9103952 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · bb3cebc0-9ec1-43f8-bd51-02921299ce86 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · cbde2602-88c6-4fc3-8cb8-18478828c3a2 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · f87a61e4-818a-4e5d-a532-ce5113eda71d · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 12dbaead-7df1-4d2f-8042-b48f60beb2fc · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 8c949736-e582-431f-9d89-7302be3fa6ac · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · c17549cc-ca36-4b9a-b847-e8ed1d37916a · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · d21bc028-f530-40fa-a75e-135122de55a4 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · f2883fd1-7766-4889-91bf-5e282741b520 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · c6a724c0-03af-4025-b0ba-bd882cbf4162 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · cb8bca3d-40c1-4eb5-a2e3-335748557eb4 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · f99a9ef5-f705-47be-bd02-ea44a81aa0b4 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 5e6fbe64-96ac-4505-9c55-bff98efb883d · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 707d9ac1-7dcd-43ba-9553-d9e6c1771642 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 71d74884-6d9c-41a6-bba2-a60a48e452ed · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 83d982af-a309-44f3-8bfd-7a268299d38e · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · a4ebf1a7-3b6c-417c-a784-97aea423f83c · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · e6363681-40a7-4e40-aac9-977755eb2bd8 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · db063314-5c1f-4074-8124-e17314a9c28e · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 07bf2000-ee50-4ed6-b9ab-0d7f797bae3b · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · 6c114df4-34d5-4ea2-a187-9057d38bac2e · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · dc7a89fc-55ab-40a2-b290-c332a6f4f0e2 · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · fa128e46-4dd4-482c-8475-38d9e73c8a0a · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · f2393c36-0567-4ff2-8a54-d3f82ee8172a · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
+- 2 Kings 15 · b89b8a8e-ca55-4b6c-a66f-5f4ff22bd50d · R4/R5 · retired · Retired during the semantic pass after balancing true/false prompts or multiple-choice options; the replacement preserves the cited fact.
