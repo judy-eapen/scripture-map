@@ -76,7 +76,6 @@ const bank: ChapterBank = {
     mc(2, 'Why did the three kings go down to Elisha?', ['Jehoshaphat affirmed that the word of the LORD was with him', 'Mesha commanded them to consult the prophet before fighting', 'The army discovered a spring beside the place where Elisha stayed', 'Elijah sent them a message directing them to his former servant'], 12),
 
     mc(1, 'To whose prophets did Elisha initially send Israel’s king?', ['The prophets of his father and mother', 'The prophets at Jericho', 'The prophets of Judah', 'The prophets of Edom'], 13),
-    blank(2, 'And Eli\'sha said to the king of Israel, "What have I to do with _____? Go to the prophets of your father and the prophets of your mother." But the king of Israel said to him, "No; it is the LORD who has called these three kings to give them into the hand of Moab."', 'you', 13),
     sa(1, 'What explanation did Israel’s king repeat?', 'the LORD had called the three kings to give them to Moab', 13, ['the Lord called the three kings', 'they had been called to be delivered to Moab']),
     tf(3, 'Elisha warmly welcomed Israel’s king without rebuke.', false, 13, 'He challenged the king to go to the prophets of his parents.'),
 

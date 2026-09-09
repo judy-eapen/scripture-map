@@ -19,7 +19,6 @@ const bank: ChapterBank = {
     tf(2, 'Ben-hadad claimed Ahab’s silver, gold, wives, and fairest children.', true, 3),
 
     mc(1, 'How did Ahab initially answer Ben-hadad?', ['He said he and all he had were Ben-hadad’s', 'He declared war immediately', 'He refused every demand', 'He asked the prophet'], 4),
-    blank(2, 'And the king of Israel answered, "As you say, my lord, O king, I am yours, and all that I _____."', 'have', 4),
     sa(2, 'How did Ahab address Ben-hadad?', 'my lord, O king', 4, ['my lord', 'O king']),
     tf(3, 'Ahab initially answered that he and all he had belonged to Ben-hadad.', true, 4),
 

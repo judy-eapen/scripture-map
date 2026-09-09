@@ -32,7 +32,6 @@ const bank: ChapterBank = {
     sa(1, 'What would happen at worst if the Syrians rejected them?', 'they would be killed', 4, ['die', 'the Syrians would kill them']),
 
     mc(1, 'When did the lepers approach Syria’s camp?', ['At twilight', 'At noon', 'At dawn', 'At midnight'], 5),
-    blank(2, 'behold, there was no one _____.', 'there', 5),
     sa(1, 'What did they find at the edge of the camp?', 'no one', 5, ['nobody', 'an empty camp']),
     tf(3, 'The lepers met Syrian guards at the camp’s edge.', false, 5, 'There was no one there.'),
     mc(2, 'What first indicated that something extraordinary had happened?', ['The Syrian camp had been abandoned', 'The city gate was open', 'Rain filled the camp', 'Israel’s army was celebrating'], 5),
@@ -76,7 +75,6 @@ const bank: ChapterBank = {
     sa(1, 'Which animals did they specifically report as tied?', 'horses and asses', 10, ['horses and donkeys']),
 
     mc(1, 'Where did the gatekeepers send the report?', ['Into the king’s household', 'To the Syrian camp', 'To Dothan', 'To the market'], 11),
-    blank(2, 'Then the gatekeepers called _____, and it was told within the king\'s household.', 'out', 11),
     sa(1, 'Who relayed the lepers’ news?', 'the gatekeepers', 11, ['gatekeepers']),
     tf(3, 'The report reached the king’s household.', true, 11),
     mc(2, 'What role did the gatekeepers play?', ['They relayed the news to the royal household', 'They personally plundered the Syrian camp', 'They permanently closed the city gates', 'They arrested and imprisoned the four men'], 11),

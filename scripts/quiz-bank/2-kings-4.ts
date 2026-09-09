@@ -186,7 +186,6 @@ const bank: ChapterBank = {
     tf(1, 'Elisha presented the living child to his mother.', true, 36),
 
     mc(1, 'How did the woman respond before taking her son?', ['She fell at Elisha’s feet and bowed', 'She rebuked Gehazi', 'She called the reapers', 'She ran to her husband'], 37),
-    blank(2, 'She came and fell at his feet, bowing to the ground; then she took up her son and went _____.', 'out', 37),
     sa(1, 'To what did she bow?', 'the ground', 37),
     tf(3, 'The woman left without acknowledging Elisha.', false, 37, 'She fell at his feet and bowed to the ground.'),
 

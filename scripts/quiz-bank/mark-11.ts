@@ -19,7 +19,6 @@ const bank: ChapterBank = {
     sa(2, 'What two things did Jesus tell the two disciples to do with the colt once they found it tied in the village?', 'Loose it and bring it to Him.', 2, ['loose it and bring it', 'untie it and bring it']),
 
     mc(1, 'When Jesus sent two disciples to Bethphage and Bethany for the colt, what were they to say if anyone asked why they were taking it?', ['"The Lord has need of it"', '"The Teacher says, Where is the guest room?"', '"The Son of Man must go up to Jerusalem"', '"My house shall be called a house of prayer"'], 3),
-    blank(3, 'And if anyone says to you, "Why are you doing this?" say, "The Lord has need of it," and immediately he will send it _____.', 'here', 3),
     word(2, 'Jesus said that once the disciples answered "The Lord has need of it," the man would send the colt how soon?', 'immediately', 3, ['at once', 'right away']),
     tf(2, 'Jesus told the two disciples to say "The Teacher has need of it" if anyone questioned them about the colt.', false, 3, 'They were to say, "The Lord has need of it."'),
     sa(3, 'According to Jesus, what would happen as soon as the disciples said "The Lord has need of it"?', 'Immediately the man would send the colt there to Jesus.', 3),

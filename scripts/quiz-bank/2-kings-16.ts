@@ -82,7 +82,6 @@ const bank: ChapterBank = {
     tf(3, 'The priest complied with the king’s foreign altar instructions.', true, 11),
 
     mc(1, 'What did Ahaz do after viewing the new altar?', ['Drew near and went up on it', 'Destroyed it', 'Sent it back', 'Asked Uriah to remove it'], 12),
-    blank(2, 'And when the king came from Damascus, the king viewed the altar. Then the king drew near to the altar, and went _____ on it,', 'up', 12),
     word(1, 'From where had Ahaz returned?', 'Damascus', 12),
     tf(2, 'Ahaz used the copied altar upon his return.', true, 12),
     mc(3, 'What showed Ahaz’s approval of the new altar?', ['He approached and ascended it', 'He covered it', 'He expelled Uriah', 'He restored the bronze altar'], 12),
@@ -109,7 +108,6 @@ const bank: ChapterBank = {
     mc(3, 'How did Ahaz reassign the two altars?', ['Offerings used the great altar; inquiry used the bronze', 'Both altars were dismantled and destroyed', 'Only priests could approach the Damascus altar', 'Every form of sacrifice at the temple ceased'], 15),
 
     mc(1, 'How did Uriah respond to Ahaz’s commands?', ['He did all of them', 'He refused', 'He appealed to Assyria', 'He fled Jerusalem'], 16),
-    blank(2, 'Uri\'ah the priest did _____ this, as King Ahaz commanded.', 'all', 16),
     word(1, 'Who gave Uriah these commands?', 'Ahaz', 16, ['King Ahaz']),
     tf(2, 'Uriah resisted the king’s altar changes.', false, 16, 'He did all that Ahaz commanded.'),
     mc(3, 'What does Uriah’s response demonstrate?', ['Complete compliance with Ahaz’s orders', 'Secret opposition', 'Ignorance of the orders', 'A return to Mosaic worship'], 16),

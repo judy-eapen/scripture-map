@@ -39,7 +39,6 @@ const bank: ChapterBank = {
     tf(3, 'Obadiah recognized Elijah and fell on his face.', true, 7),
 
     mc(1, 'What message did Elijah give Obadiah?', ['Tell Ahab that Elijah is here', 'Tell Jezebel to release the prophets', 'Tell Ahab rain has begun', 'Tell Israel to meet at Cherith'], 8),
-    blank(3, 'And he answered him, "It is I. Go, tell your lord, `Behold, Eli\'jah is _____.\'"', 'here', 8),
     sa(1, 'How did Elijah identify himself?', 'It is I', 8),
     tf(2, 'Elijah told Obadiah to announce his presence to Ahab.', true, 8),
 
@@ -54,7 +53,6 @@ const bank: ChapterBank = {
     tf(2, 'Ahab required nations and kingdoms to swear that they had not found Elijah.', true, 10),
 
     mc(1, 'What message did Elijah now expect Obadiah to repeat?', ['Behold, Elijah is here', 'Rain has fallen', 'Ahab must leave Samaria', 'The prophets are safe'], 11),
-    blank(2, 'And now you say, “Go, tell your lord, ‘Behold, Eli’jah is _____.’”', 'here', 11),
     sa(2, 'To whom was Obadiah to speak?', 'his lord', 11, ['Ahab']),
     tf(3, 'Elijah told Obadiah to report that Elijah was there.', true, 11),
 

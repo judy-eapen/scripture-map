@@ -44,7 +44,6 @@ const bank: ChapterBank = {
     mc(3, 'What gruesome evidence of loyalty reached Jehu?', ['Seventy heads in baskets, arranged in two heaps', 'Seventy captured soldiers brought from Samaria', 'Ahab’s royal crown and ceremonial garments', 'The seventy princes delivered to Jehu alive'], 8),
 
     mc(1, 'What distinction did Jehu make before the people?', ['He killed his master; others killed Ahab’s sons', 'He bore no responsibility for any death', 'The gathered people had personally killed Joram', 'Elijah had directly ordered the beheadings'], 9),
-    blank(2, 'Then in the morning, when he went out, he stood, and said to all the people, "You are innocent. It was I who conspired against my master, and slew him; but who struck down all _____?', 'these', 9),
     sa(1, 'When did Jehu address the people?', 'in the morning', 9),
     tf(3, 'Jehu denied having conspired against and killed his master.', false, 9, 'Jehu openly said, “I conspired against my master and killed him.”'),
 

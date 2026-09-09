@@ -144,7 +144,6 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v28–31 · Peter: "we have left all"
     word(1, 'Which disciple told Jesus, "See, we have left all and followed You"?', 'Peter', 28),
-    blank(2, 'Then Peter began to say to Him, "See, we have left _____ and followed You."', 'all', 28),
     tf(3, 'It was John who said to Jesus, "See, we have left all and followed You."', false, 28, 'Peter said it.'),
     mc(2, 'After Jesus said that with God all things are possible, what did Peter begin to say to Him?', ['"See, we have left all and followed You."', '"Teacher, all these things I have kept from my youth."', '"Grant us that we may sit on Your right hand and Your left."', '"Teacher, we want You to do for us whatever we ask."'], 28),
 

@@ -35,8 +35,6 @@ const bank: ChapterBank = {
     sa(2, 'Where was Cherith located?', 'east of the Jordan', 5),
     tf(3, 'Elijah went and lived by the brook Cherith as the LORD had commanded.', true, 5),
     mc(2, 'What did Elijah do in response to the LORD’s command?', ['He went and lived by the brook Cherith east of the Jordan', 'He returned to Ahab and remained at the royal court', 'He announced that rain would begin immediately', 'He left Israel and settled permanently in Jerusalem'], 5),
-    blank(3, 'So he went and _____ according to the word of the LORD; he went and dwelt by the brook Cherith that is east of the Jordan.', 'did', 5),
-
     mc(1, 'What did the ravens bring Elijah?', ['Bread and meat', 'Meal and oil', 'Loaves and honey', 'Fish and bread'], 6),
     blank(2, 'And the ravens brought him bread and meat in the _____.', 'morning', 6),
     sa(1, 'From where did Elijah drink?', 'the brook', 6),
@@ -105,8 +103,6 @@ const bank: ChapterBank = {
     sa(1, 'Who ate with the widow and Elijah?', 'her household', 15),
     tf(3, 'The food sustained only Elijah and not the widow’s household.', false, 15, 'She, Elijah, and her household ate for many days.'),
     mc(2, 'For how long did the household eat?', ['Many days', 'One evening', 'Seven days exactly', 'Until the next morning'], 15),
-    blank(3, 'And she went and _____ as Eli\'jah said; and she, and he, and her household ate for many days.', 'did', 15),
-
     mc(1, 'What happened to the widow’s jar of meal?', ['It was not spent', 'It spoiled', 'It was stolen', 'It became empty that night'], 16),
     blank(2, 'neither did the cruse of oil _____', 'fail', 16),
     word(2, 'Through whom had the LORD spoken this word?', 'Elijah', 16, ["Eli'jah"]),

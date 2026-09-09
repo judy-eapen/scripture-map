@@ -8,7 +8,6 @@ const bank: ChapterBank = {
     tf(1, 'Syria and Israel continued for three years without war.', true, 1),
 
     mc(1, 'Who came down to visit the king of Israel in the third year?', ['Jehoshaphat king of Judah', 'Ben-hadad king of Syria', 'Micaiah son of Imlah', 'Zedekiah son of Chenaanah'], 2),
-    blank(2, 'But in the third year Jehosh\'aphat the king of Judah came _____ to the king of Israel.', 'down', 2),
     word(2, 'Of which kingdom was Jehoshaphat king?', 'Judah', 2),
     tf(3, 'Jehoshaphat came down to the king of Israel in the third year.', true, 2),
 
@@ -163,7 +162,6 @@ const bank: ChapterBank = {
     tf(2, 'The Syrian king ordered the captains to fight everyone they saw.', false, 31, 'They were to focus only on Israel’s king.'),
 
     mc(1, 'Whom did the captains mistake for Israel’s king?', ['Jehoshaphat', 'Micaiah', 'Zedekiah', 'Amon'], 32),
-    blank(2, 'And when the captains of the chariots saw Jehosh\'aphat, they said, "It is surely the king of Israel." So they turned to fight against him; and Jehosh\'aphat cried _____.', 'out', 32),
     sa(2, 'What did Jehoshaphat do when surrounded?', 'cried out', 32),
     tf(3, 'The captains immediately recognized Jehoshaphat as Judah’s king.', false, 32, 'They first thought he was Israel’s king.'),
 

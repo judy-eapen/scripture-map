@@ -54,7 +54,6 @@ const bank: ChapterBank = {
     tf(1, 'Elisha’s warnings protected the king on multiple occasions.', true, 10),
 
     mc(1, 'What did Syria’s king suspect?', ['One of his own people supported Israel’s king', 'Elisha led Israel’s army', 'Dothan had betrayed Syria', 'His servants had lost their weapons'], 11),
-    blank(2, 'and he called his servants and said to them, "Will you not show me who of us is _____ the king of Israel?"', 'for', 11),
     sa(1, 'How did the Syrian king feel about the repeated failures?', 'greatly troubled', 11, ['troubled']),
     tf(3, 'Syria’s king called his servants to identify a possible traitor.', true, 11),
 
@@ -75,7 +74,6 @@ const bank: ChapterBank = {
     tf(1, 'The Syrian army arrived at Dothan during the night.', true, 14),
 
     mc(1, 'What did Elisha’s servant see in the morning?', ['An army surrounding the city', 'The Syrian forces fleeing away', 'A mountain covered with fire', 'The Jordan River divided'], 15),
-    blank(2, 'When the servant of the man of God rose early in the morning and went out, behold, an army with horses and chariots was round about the city. And the servant said, "Alas, my master! What shall we _____?"', 'do', 15),
     sa(1, 'Who was alarmed by the surrounding army?', 'the servant of the man of God', 15, ['Elisha’s servant', 'the servant']),
     tf(3, 'The servant found Dothan free of enemy soldiers.', false, 15, 'A Syrian army surrounded the city.'),
 
