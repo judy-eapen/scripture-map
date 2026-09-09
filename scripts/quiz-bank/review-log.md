@@ -1913,3 +1913,6 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 2 · 7e0d4a94-aecb-4da9-977b-8601bdf92c56 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 2 · 145d2c31-c129-432a-9d39-a7cf2f1d129e · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 2 · 33293f62-8ea8-421b-8fee-c05386e0e1e7 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 3 semantic review
+
+- Mark 3 · 6a502059-d029-43c9-af53-1575fbaaa397 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.

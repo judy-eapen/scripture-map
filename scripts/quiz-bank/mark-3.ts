@@ -23,7 +23,7 @@ const bank: ChapterBank = {
     blank(1, 'And He said to the man who had the withered hand, "Step _____."', 'forward', 3),
     mc(2, 'What did Jesus first say to the man with the withered hand?', ['"Step forward."', '"Stretch out your hand."', '"Be quiet, and come out of him!"', '"Go your way; your faith has made you well."'], 3),
 
-    mc(2, 'What question did Jesus put to the watchers before He healed the man with the withered hand?', ['"Is it lawful on the Sabbath to do good or to do evil, to save life or to kill?"', '"How can Satan cast out Satan?"', '"Who is My mother, or My brothers?"', '"Why does this generation seek a sign?"'], 4),
+    mc(2, 'What question did Jesus put to the watchers before He healed the man with the withered hand?', ['"Is it lawful on the Sabbath to do good or evil, to save life or to kill?"', '"How can Satan cast out Satan and still allow his divided kingdom to stand?"','"Who are My mother and My brothers among all those gathered around Me?"','"Why does this generation continue to seek a sign before it will believe?"'], 4),
     blank(3, 'Then He said to them, "Is it lawful on the Sabbath to do good or to do evil, to save life or to _____?" But they kept silent.', 'kill', 4),
     sa(2, 'How did the watchers in the synagogue respond when Jesus asked whether it was lawful to do good or evil on the Sabbath?', 'They kept silent.', 4),
     tf(2, 'When Jesus asked whether it was lawful to do good or evil on the Sabbath, the watchers answered that it was lawful to do good.', false, 4, 'They kept silent.'),
