@@ -159,7 +159,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the LORD command Judah through Shemaiah?', ['They must not fight against their Israelite kinsmen', 'They must go up and restore the kingdom to Rehoboam', 'They must accept Jeroboam as king over Judah as well', 'They must build a new house for the LORD in Jerusalem'], 24),
     blank(1, 'Thus says the LORD, You shall not go up or fight against your _____ the people of Israel.', 'kinsmen', 24),
-    blank(3, 'Return every man to his home, for this thing is from _____.', 'me', 24),
+    blank(3, '`Thus says the LORD, You shall not go up or fight against your kins_____n the people of Israel.', 'me', 24),
     word(2, 'The LORD called the people of Israel Judah’s ___ (one word).', 'kinsmen', 24, ['kinsman', 'kin']),
     tf(1, 'Judah hearkened to the word of the LORD and went home again.', true, 24),
     tf(2, 'Despite Shemaiah’s word, Judah went up and fought against Israel.', false, 24, 'They hearkened to the word of the LORD and went home again.'),

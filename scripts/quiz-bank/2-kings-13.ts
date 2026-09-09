@@ -21,7 +21,7 @@ const bank: ChapterBank = {
     mc(2, 'What judgment followed Israel’s continued sin?', ['Ongoing subjection to Syria’s rulers', 'Immediate exile to Assyria', 'Destruction of Samaria’s temple', 'Loss of Judah'], 3),
 
     mc(1, 'What did Jehoahaz do under oppression?', ['Besought the LORD', 'Asked Hazael for mercy', 'Fled Samaria', 'Called Elisha to battle'], 4),
-    blank(3, 'the LORD _____ to him', 'hearkened', 4),
+    blank(3, 'Then Jeho\'ahaz besought the LORD, and the LORD _____ to him; for he saw the oppression of Israel, how the king of Syria oppressed them.', 'hearkened', 4),
     sa(2, 'What did the LORD see?', 'Israel’s oppression', 4, ['how Syria oppressed Israel']),
     tf(1, 'The LORD listened to Jehoahaz’s plea.', true, 4),
     mc(2, 'Why did the LORD respond?', ['He saw how Syria oppressed Israel', 'Jehoahaz had removed all idols', 'Hazael repented', 'Judah sent an army'], 4),
@@ -33,13 +33,13 @@ const bank: ChapterBank = {
     mc(2, 'What practical result followed the savior’s work?', ['Israel escaped Syria and resumed life at home', 'Israel invaded and conquered the kingdom of Judah', 'The residents permanently abandoned Samaria', 'Jehoahaz became the new king of Syria'], 5),
 
     mc(1, 'What idolatrous object remained in Samaria?', ['The Asherah', 'Baal’s pillar', 'The bronze serpent', 'A golden image of Hazael'], 6),
-    blank(3, 'but _____ in them', 'walked', 6),
+    blank(3, 'Nevertheless they did not depart from the sins of the house of Jerobo\'am, which he made Israel to sin, but _____ in them;', 'walked', 6),
     word(2, 'From whose house’s sins did Israel not depart?', 'Jeroboam’s', 6, ['house of Jeroboam']),
     tf(1, 'Deliverance did not produce full repentance.', true, 6),
     mc(2, 'What contrast does the verse expose?', ['Israel received relief yet continued in Jeroboam’s sins', 'Syria repented while Israel sinned', 'The Asherah was removed but calves remained', 'Jehoahaz left Samaria'], 6),
 
     mc(1, 'How many horsemen remained to Jehoahaz?', ['Fifty', 'Ten', 'Ten thousand', 'Seventy'], 7),
-    blank(2, 'and ten thousand _____.', 'footmen', 7),
+    blank(2, 'For there was not left to Jeho\'ahaz an army of more than fifty horsemen and ten chariots and ten thousand _____;', 'footmen', 7),
     word(1, 'How many chariots remained?', 'ten', 7, ['10']),
     tf(3, 'Jehoahaz retained Israel’s full military strength against Syria.', false, 7, 'Syria reduced his army to fifty horsemen, ten chariots, and ten thousand footmen.'),
     mc(2, 'What force survived Syria’s destruction?', ['Fifty horsemen, ten chariots, and ten thousand infantry', 'Seventy chariots accompanied by fifty thousand infantry', 'Ten horsemen supported by fifty armored chariots', 'Only a small guard assigned to protect the king'], 7),
@@ -63,7 +63,7 @@ const bank: ChapterBank = {
     mc(2, 'Which two kings named Joash frame the dating formula?', ['Joash of Judah and Jehoash of Israel', 'King Jehu of Israel and King Hazael of Syria', 'King Amaziah of Judah and King Jeroboam of Israel', 'King Ahab of Israel and King Jehoshaphat of Judah'], 10),
 
     mc(1, 'How did Jehoash act in the LORD’s sight?', ['He did evil', 'He did right like David', 'He removed Jeroboam’s sins', 'He restored the covenant'], 11),
-    blank(2, 'but he _____ in them.', 'walked', 11),
+    blank(2, 'he did not depart from all the sins of Jerobo\'am the son of Nebat, which he made Israel to sin, but he _____ in them.', 'walked', 11),
     sa(1, 'Whose sins did he continue?', 'Jeroboam son of Nebat’s', 11, ['Jeroboam’s', 'Jeroboam son of Nebat']),
     tf(3, 'Jehoash departed from all of Jeroboam’s sins.', false, 11, 'He continued to walk in them.'),
     mc(2, 'What continuity joined Jehoash to earlier northern kings?', ['He maintained Jeroboam’s sinful worship', 'He served Baal in Jezreel', 'He worshiped in Jerusalem', 'He followed Hazael'], 11),
@@ -88,7 +88,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha tell Joash to take?', ['A bow and arrows', 'A staff and mantle', 'A sword and shield', 'A flask of oil'], 15),
     blank(2, 'Take a bow and _____.', 'arrows', 15),
-    word(1, 'Did the king obey this instruction?', 'yes', 15, ['he took them', 'yes he did']),
+    tf(1, 'When Elisha told Joash to take a bow and arrows, the king took them.', true, 15),
     tf(3, 'Joash refused to take the bow and arrows Elisha requested.', false, 15, 'The king obeyed and took the bow and arrows.'),
     mc(2, 'What objects began Elisha’s acted prophecy?', ['A bow and arrows', 'A chariot and horses', 'A jar and oil', 'A chest and silver'], 15),
 
@@ -135,12 +135,12 @@ const bank: ChapterBank = {
     tf(1, 'The oppression lasted through Jehoahaz’s days.', true, 22),
 
     mc(1, 'Why did the LORD show compassion to Israel?', ['Because of his covenant with the patriarchs', 'Because the nation had completely repented', 'Because King Hazael had requested mercy', 'Because Joash had struck the ground six times'], 23),
-    blank(2, 'and would not _____ them', 'destroy', 23),
+    blank(2, 'But the LORD was gracious to them and had compassion on them, and he turned toward them, because of his covenant with Abraham, Isaac, and Jacob, and would not _____ them;', 'destroy', 23),
     sa(1, 'Name the three patriarchs in the covenant.', 'Abraham, Isaac, and Jacob', 23),
     tf(3, 'The LORD had already cast Israel entirely from his presence.', false, 23, 'Because of his covenant, he had not yet cast Israel from his presence.'),
 
     mc(1, 'Who succeeded Hazael?', ['His son Ben-hadad', 'Joash', 'Jehoahaz', 'Jeroboam'], 24),
-    blank(3, 'became king in his _____.', 'stead', 24),
+    blank(3, 'When Haz\'ael king of Syria died, Ben-ha\'dad his son became king in his _____.', 'stead', 24),
     word(2, 'Which king died?', 'Hazael', 24, ["Haza'el"]),
     tf(1, 'The Syrian throne passed from father to son.', true, 24),
 

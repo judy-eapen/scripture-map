@@ -14,7 +14,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Ahab call to him?', ['Obadiah', 'Elijah', 'Jezebel', 'A prophet of Baal'], 3),
     blank(3, 'And Ahab called Obadi’ah, who was over the _____.', 'household', 3),
-    word(1, 'How greatly did Obadiah revere the LORD?', 'greatly', 3),
+    sa(1, 'What does Kings say about Obadiah’s attitude toward the LORD?', 'He feared the LORD greatly.', 3, ['he revered the LORD greatly']),
     tf(2, 'Obadiah was responsible for Ahab’s household.', true, 3),
 
     mc(1, 'How many prophets did Obadiah hide?', ['One hundred', 'Four hundred', 'Fifty', 'Seven thousand'], 4),
@@ -39,7 +39,7 @@ const bank: ChapterBank = {
     tf(3, 'Obadiah recognized Elijah and fell on his face.', true, 7),
 
     mc(1, 'What message did Elijah give Obadiah?', ['Tell Ahab that Elijah is here', 'Tell Jezebel to release the prophets', 'Tell Ahab rain has begun', 'Tell Israel to meet at Cherith'], 8),
-    blank(3, 'Go, tell your lord, “Behold, Eli’jah is _____.”', 'here', 8),
+    blank(3, 'And he answered him, "It is I. Go, tell your lord, `Behold, Eli\'jah is _____.\'"', 'here', 8),
     sa(1, 'How did Elijah identify himself?', 'It is I', 8),
     tf(2, 'Elijah told Obadiah to announce his presence to Ahab.', true, 8),
 
@@ -69,7 +69,7 @@ const bank: ChapterBank = {
     tf(2, 'Obadiah had fed the hidden prophets bread and water.', true, 13),
 
     mc(1, 'What did Obadiah again predict would happen to him?', ['Ahab would kill him', 'Elijah would hide him', 'Jezebel would reward him', 'He would become king'], 14),
-    blank(2, 'and he will _____ me.', 'kill', 14),
+    blank(2, 'And now you say, `Go, tell your lord, "Behold, Eli\'jah is here"\'; and he will _____ me."', 'kill', 14),
     word(2, 'Whose presence was Obadiah asked to announce?', 'Elijah’s', 14, ['Elijah']),
     tf(3, 'Obadiah believed Ahab would kill him if Elijah could not be found.', true, 14),
 

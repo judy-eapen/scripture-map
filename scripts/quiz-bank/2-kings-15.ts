@@ -115,7 +115,7 @@ const bank: ChapterBank = {
     tf(3, 'Menahem’s son inherited the throne.', true, 22),
 
     mc(1, 'How long did Pekahiah reign?', ['Two years', 'Twenty years', 'Ten years', 'Six months'], 23),
-    blank(2, 'he reigned _____ years.', 'two', 23, ['2']),
+    blank(2, 'In the fiftieth year of Azari\'ah king of Judah Pekahi\'ah the son of Men\'ahem began to reign over Israel in Sama\'ria, and he reigned _____ years.', 'two', 23, ['2']),
     word(1, 'Who was Pekahiah’s father?', 'Menahem', 23),
     tf(3, 'Pekahiah ruled Israel from Jerusalem.', false, 23, 'He reigned over Israel in Samaria for two years.'),
 

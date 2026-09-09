@@ -253,7 +253,7 @@ const bank: ChapterBank = {
     mc(2, 'Where are the rest of the acts of Solomon said to be written?', ['The book of the acts of Solomon', 'The Chronicles of the Kings of Israel', 'The book of Nathan the prophet', 'The book of the law'], 41),
     blank(2, 'Now the rest of the acts of Solomon, and all that he did, and his _____, are they not written in the book of the acts of Solomon?', 'wisdom', 41),
     tf(3, 'The rest of Solomon’s acts are written in the Chronicles of the Kings of Judah.', false, 41, 'They are written in "the book of the acts of Solomon".'),
-    word(3, 'Solomon’s acts were written in "the book of the ___ of Solomon."', 'acts', 41),
+    sa(3, 'In what record does Kings say the rest of Solomon’s deeds and his wisdom were written?', 'The book of the acts of Solomon.', 41, ['book of the acts of Solomon']),
     mc(1, 'How long did Solomon reign in Jerusalem over all Israel?', ['Forty years', 'Thirty years', 'Seven years', 'Fifty years'], 42),
     word(1, 'How many years did Solomon reign?', 'forty', 42, ['40']),
     blank(1, 'And the time that Solomon reigned in Jerusalem over all Israel was _____ years.', 'forty', 42, ['40']),

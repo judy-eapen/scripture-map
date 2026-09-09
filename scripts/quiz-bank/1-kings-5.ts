@@ -168,7 +168,7 @@ const bank: ChapterBank = {
     blank(2, 'At the king\'s command, they quarried out great, _____ stones in order to lay the foundation of the house with dressed stones.', 'costly', 17),
     mc(2, 'The foundation of the house was laid with what kind of stones?', ['Dressed stones', 'Rough field stones', 'Bricks of clay', 'Stones from the sea'], 17),
     tf(2, 'The foundation of the house was laid with rough, uncut stones.', false, 17, 'It was laid "with dressed stones".'),
-    word(3, 'The foundation was laid with "___ stones" — what word describes them?', 'dressed', 17),
+    word(3, 'Along with great costly stones, what kind of stones were quarried for the foundation of the house?', 'dressed', 17, ['dressed stones']),
     blank(3, 'At the king\'s command, they _____ out great, costly stones in order to lay the foundation of the house with dressed stones.', 'quarried', 17),
 
     mc(1, 'Along with Solomon’s and Hiram’s builders, who did the hewing?', ['The men of Gebal', 'The men of Sidon', 'The men of Tyre', 'The Levites'], 18),

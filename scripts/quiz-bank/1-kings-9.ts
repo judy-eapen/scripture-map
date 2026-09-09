@@ -195,7 +195,7 @@ const bank: ChapterBank = {
     mc(1, 'From where did Pharaoh’s daughter go up to her own house?', ['The city of David', 'Egypt', 'Gezer', 'The house of the LORD'], 24),
     blank(2, 'But Pharaoh’s daughter went up from the city of _____ to her own house which Solomon had built for her;', 'David', 24),
     word(2, 'What did Solomon build after Pharaoh’s daughter moved to her own house?', 'Millo', 24, ['the millo']),
-    blank(2, 'then he built the _____.', 'Millo', 24),
+    blank(2, 'But Pharaoh\'s daughter went up from the city of David to her own house which Solomon had built for her; then he built the _____.', 'Millo', 24),
     tf(1, 'Solomon built a house for Pharaoh’s daughter.', true, 24),
     tf(3, 'Pharaoh’s daughter went up from the city of David to the house of the LORD.', false, 24, 'She went up "to her own house which Solomon had built for her".'),
     mc(3, 'What did Solomon build right after Pharaoh’s daughter moved into her house?', ['The Millo', 'The wall of Jerusalem', 'The fleet at Ezion-geber', 'Lower Beth-horon'], 24),

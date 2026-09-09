@@ -14,7 +14,7 @@ const bank: ChapterBank = {
     sa(1, 'How did Jezebel communicate the threat?', 'by a messenger', 2, ['a messenger']),
     tf(2, 'Jezebel threatened Elijah’s life by that time the next day.', true, 2),
     mc(3, 'By when did Jezebel vow to kill Elijah?', ['This time tomorrow', 'At sunset that day', 'After forty days', 'When rain returned'], 2),
-    blank(1, 'by this time _____.', 'tomorrow', 2),
+    blank(1, 'Then Jez\'ebel sent a messenger to Eli\'jah, saying, "So may the gods do to me, and more also, if I do not make your life as the life of one of them by this time _____."', 'tomorrow', 2),
     mc(3, 'Whose threat caused Elijah to flee for his life?', ['Jezebel’s', 'Ahab’s', 'Obadiah’s', 'Elisha’s'], 2),
 
     mc(1, 'Where did Elijah go when he was afraid?', ['Beersheba in Judah', 'Samaria', 'Damascus', 'Mount Carmel'], 3),
@@ -33,14 +33,14 @@ const bank: ChapterBank = {
     mc(3, 'What did Elijah ask the LORD while sitting under the broom tree?', ['To take away his life because he was no better than his fathers', 'To send rain upon the earth because the famine had continued', 'To let fire fall again upon the prophets who pursued him', 'To anoint him king over Israel in Ahab’s place'], 4),
 
     mc(1, 'Who touched Elijah while he slept?', ['An angel', 'Elisha', 'His servant', 'Jezebel’s messenger'], 5),
-    blank(1, 'Arise and _____.', 'eat', 5),
+    blank(1, 'And he lay down and slept under a broom tree; and behold, an angel touched him, and said to him, "Arise and _____."', 'eat', 5),
     sa(2, 'Where did Elijah sleep?', 'under a broom tree', 5),
     tf(3, 'The angel touched Elijah and told him to arise and eat.', true, 5),
     mc(3, 'What two actions preceded the angel’s command?', ['Elijah lay down and slept', 'Elijah ate and traveled', 'Elijah prayed and anointed', 'Elijah ran and hid'], 5),
     blank(3, 'and behold, an angel _____ him', 'touched', 5),
 
     mc(1, 'What food was beside Elijah’s head?', ['A cake baked on hot stones', 'Bread and meat from ravens', 'A jar of meal', 'A roasted bull'], 6),
-    blank(3, 'and a jar of _____.', 'water', 6),
+    blank(3, 'And he looked, and behold, there was at his head a cake baked on hot stones and a jar of _____.', 'water', 6),
     sa(1, 'What did Elijah do after eating and drinking?', 'lay down again', 6),
     tf(2, 'The cake was baked on hot stones.', true, 6),
     mc(3, 'Where was the food placed?', ['At Elijah’s head', 'At the cave entrance', 'Under the tree roots', 'Beside his servant'], 6),

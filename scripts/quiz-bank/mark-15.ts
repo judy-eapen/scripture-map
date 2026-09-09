@@ -204,7 +204,7 @@ const bank: ChapterBank = {
     word(2, 'The sponge offered to Jesus on a reed was filled with what kind of wine?', 'sour', 36, ['sour wine', 'vinegar']),
     blank(2, 'Then someone ran and filled a _____ full of sour wine, put it on a reed, and offered it to Him to drink,', 'sponge', 36),
     sa(3, 'What did the man who offered Jesus the sponge of sour wine say as he did so?', '"Let Him alone; let us see if Elijah will come to take Him down."', 36),
-    blank(3, 'saying, "Let Him alone; let us see if Elijah will come to take Him _____."', 'down', 36),
+    blank(3, 'Then someone ran and filled a sponge full of sour wine, put it on a reed, and offered it to Him to drink, saying, “Let Him alone; let us see if Elijah will come to take Him _____.”', 'down', 36),
     tf(3, 'The man who offered the sponge of sour wine said, "Let us see if Elijah will come to take Him down."', true, 36),
 
     sa(1, 'What happened immediately after Jesus cried out with a loud voice the second time?', 'He breathed His last.', 37),

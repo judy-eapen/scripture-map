@@ -79,7 +79,7 @@ const bank: ChapterBank = {
     blank(3, 'for Herod feared John, knowing that he was a just and _____ man, and he protected him.', 'holy', 20),
     sa(3, 'How did Herod respond whenever he heard John speak?', 'He did many things, and heard him gladly.', 20),
     tf(3, 'Herodias feared John, knowing he was a just and holy man, and protected him.', false, 20, 'It was Herod who feared John and protected him; Herodias wanted to kill him.'),
-    word(3, 'Which of the two, Herod or Herodias, protected John while he was in prison?', 'Herod', 20),
+    word(3, 'Who feared John, knowing he was a just and holy man, and kept him safe?', 'Herod', 20),
 
     // ══════════════════════════════════ v21–29 · Herod’s birthday; John beheaded
     mc(1, 'On what occasion did Herod give a feast for his nobles, high officers, and the chief men of Galilee?', ['His birthday', 'The Sabbath', 'His marriage to Herodias', 'The day John was imprisoned'], 21),

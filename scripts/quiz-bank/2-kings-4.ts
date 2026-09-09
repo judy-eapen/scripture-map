@@ -95,7 +95,7 @@ const bank: ChapterBank = {
     tf(1, 'The child went out during the harvest work.', true, 18),
 
     mc(1, 'What complaint did the child make?', ['My head, my head!', 'The water is bad!', 'There is death in the pot!', 'I am hungry!'], 19),
-    blank(2, 'Carry him to his _____.', 'mother', 19),
+    blank(2, 'And he said to his father, "Oh, my head, my head!" The father said to his servant, "Carry him to his _____."', 'mother', 19),
     sa(1, 'Who was told to carry the child?', 'the father’s servant', 19, ['a servant', 'his servant']),
     tf(3, 'The father personally carried the child home.', false, 19, 'He instructed his servant to carry the child to his mother.'),
 
@@ -145,7 +145,7 @@ const bank: ChapterBank = {
     tf(1, 'Her words expressed grief over the promise that now seemed broken.', true, 28),
 
     mc(1, 'What did Elisha send Gehazi to place on the child?', ['Elisha’s staff', 'A new bowl', 'A jar of oil', 'His mantle'], 29),
-    blank(2, 'Gird up your _____', 'loins', 29),
+    blank(2, 'He said to Geha\'zi, "Gird up your _____, and take my staff in your hand, and go.', 'loins', 29),
     sa(1, 'How was Gehazi to respond to greetings on the way?', 'he was not to reply', 29, ['do not reply', 'not answer']),
     tf(3, 'Gehazi was instructed to stop and greet everyone he met.', false, 29, 'He was to go without greeting or replying to greetings.'),
 
@@ -155,7 +155,7 @@ const bank: ChapterBank = {
     tf(1, 'Elisha arose and followed the mother.', true, 30),
 
     mc(1, 'What happened when Gehazi laid the staff on the child?', ['There was no sound or sign of life', 'The child immediately stood', 'The child sneezed seven times', 'The mother entered the room'], 31),
-    blank(2, 'The child has not _____.', 'awaked', 31, ['awakened']),
+    blank(2, 'Therefore he returned to meet him, and told him, "The child has not _____."', 'awaked', 31, ['awakened']),
     word(1, 'Who returned to report the unsuccessful attempt?', 'Gehazi', 31, ["Geha'zi"]),
     tf(3, 'The child revived when Gehazi placed the staff on his face.', false, 31, 'There was no sound or sign of life.'),
 
@@ -165,7 +165,7 @@ const bank: ChapterBank = {
     tf(1, 'The child remained in the chamber where his mother had placed him.', true, 32),
 
     mc(1, 'What did Elisha do after shutting the door?', ['Prayed to the LORD', 'Called the king', 'Sent Gehazi away again', 'Poured oil on the child'], 33),
-    blank(2, 'and _____ to the LORD.', 'prayed', 33),
+    blank(2, 'So he went in and shut the door upon the two of them, and _____ to the LORD.', 'prayed', 33),
     sa(1, 'Who was inside the closed room?', 'Elisha and the child', 33, ['the two of them']),
     tf(3, 'Elisha prayed publicly before the household.', false, 33, 'He shut the door upon the two of them and prayed.'),
 
@@ -186,7 +186,7 @@ const bank: ChapterBank = {
     tf(1, 'Elisha presented the living child to his mother.', true, 36),
 
     mc(1, 'How did the woman respond before taking her son?', ['She fell at Elisha’s feet and bowed', 'She rebuked Gehazi', 'She called the reapers', 'She ran to her husband'], 37),
-    blank(2, 'then she took up her son and went _____.', 'out', 37),
+    blank(2, 'She came and fell at his feet, bowing to the ground; then she took up her son and went _____.', 'out', 37),
     sa(1, 'To what did she bow?', 'the ground', 37),
     tf(3, 'The woman left without acknowledging Elisha.', false, 37, 'She fell at his feet and bowed to the ground.'),
 
@@ -202,7 +202,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the men cry after tasting the pottage?', ['“O man of God, there is death in the pot!”', '“The water is bad, and the land is unfruitful!”', '“Bring me a new bowl, and put salt in it!”', '“The child has awaked, but there is no sound!”'], 40),
     blank(3, 'there is _____ in the pot!', 'death', 40),
-    word(2, 'Were the men able to continue eating it?', 'no', 40, ['they could not eat it', 'no they could not']),
+    tf(2, 'After the men cried out that there was death in the pot, they could not eat the stew.', true, 40),
     tf(1, 'The men stopped eating because they believed the stew was deadly.', true, 40),
 
     mc(1, 'What did Elisha throw into the pot?', ['Meal', 'Salt', 'Oil', 'Barley loaves'], 41),
@@ -212,7 +212,7 @@ const bank: ChapterBank = {
     mc(3, 'How was the deadly pottage made safe?', ['Elisha threw meal into the pot and told the men to eat', 'He poured it out and filled the pot with water', 'He added salt from a new bowl', 'He touched it with Elijah’s mantle'], 41),
 
     mc(1, 'What food did the man from Baal-shalishah bring?', ['Twenty barley loaves and fresh ears of grain in his sack', 'A jar of oil and a measure of meal from his household', 'One hundred lambs and the wool of one hundred rams', 'Wild gourds and herbs gathered from the surrounding fields'], 42),
-    blank(3, 'twenty loaves of _____', 'barley', 42),
+    blank(3, 'A man came from Ba\'al-shal\'ishah, bringing the man of God bread of the first fruits, twenty loaves of _____, and fresh ears of grain in his sack.', 'barley', 42),
     word(2, 'From where did the man come?', 'Baal-shalishah', 42, ["Ba'al-shal'ishah"]),
     tf(1, 'The food was described as bread of the first fruits.', true, 42),
     mc(3, 'What provision was brought for the men?', ['Twenty barley loaves with fresh ears of grain', 'One hundred wheat loaves with oil', 'Seven jars of meal and salt', 'Two hundred lambs and wool'], 42),

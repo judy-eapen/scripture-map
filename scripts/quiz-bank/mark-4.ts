@@ -102,7 +102,7 @@ const bank: ChapterBank = {
     // ══════════════════════════════════ v26–29 · The parable of the growing seed
     mc(1, 'In the parable of the growing seed, what did Jesus liken the kingdom of God to?', ['A man scattering seed on the ground', 'A sower whose seed fell by the wayside', 'A lamp set on a lampstand', 'A boat crossing to the other side'], 26),
     blank(1, 'And He said, "The kingdom of God is as if a man should scatter _____ on the ground,', 'seed', 26),
-    word(1, 'In the parable of the growing seed, what did the man scatter on the ground?', 'seed', 26),
+    word(1, 'In the parable Jesus told after the saying about the lamp, what did the man scatter on the ground?', 'seed', 26),
     mc(3, 'In the parable of the growing seed, what did the man do while the seed sprouted and grew?', ['He slept by night and rose by day, not knowing how it grew', 'He watched by night and watered it by day', 'He put in the sickle while the seed was still sprouting', 'He set a lamp on a lampstand to see it grow'], 27),
     blank(3, 'and should sleep by night and rise by day, and the seed should sprout and grow, he himself does not know _____.', 'how', 27),
     sa(3, 'In the parable of the growing seed, what did the man understand about how the seed sprouted and grew?', 'Nothing — he slept by night and rose by day, and the seed sprouted and grew, he himself did not know how.', 27),

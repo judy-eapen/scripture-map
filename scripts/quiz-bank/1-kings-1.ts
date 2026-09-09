@@ -40,7 +40,7 @@ const bank: ChapterBank = {
     mc(2, 'Benaiah was the son of whom?', ['Jehoiada', 'Zeruiah', 'Abiathar', 'Haggith'], 8),
     blank(3, 'But Zadok the priest, and Benai’ah the son of Jehoi’ada, and Nathan the prophet, and Shim’e-i, and Re’i, and David’s _____ men were not with Adoni’jah.', 'mighty', 8),
     word(3, 'Who is named right after Shimei among those who were not with Adonijah?', 'Rei', 8),
-    tf(2, 'Nathan the prophet sided with Adonijah.', false, 8),
+    tf(2, 'Nathan the prophet sided with Adonijah.', false, 8, 'Zadok, Benaiah, Nathan, Shimei, Rei and David’s mighty men were not with Adonijah.'),
     mc(2, 'Where did Adonijah hold his sacrifice and feast?', ['By the Serpent’s Stone beside En-rogel', 'At Gihon beside King David’s own mule', 'In King David’s chamber beside his bed', 'At the tent containing Zadok’s horn of oil'], 9),
     word(2, 'Adonijah sacrificed sheep, oxen, and fatlings beside what stone?', 'Serpent’s Stone', 9, ['serpents stone', 'serpent stone', 'the serpents stone']),
     word(3, 'The Serpent’s Stone, where Adonijah sacrificed, was beside which spring?', 'En-rogel', 9, ['enrogel', 'en rogel']),

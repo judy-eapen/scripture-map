@@ -15,7 +15,7 @@ const bank: ChapterBank = {
     mc(2, 'Which act distinguished Jehoram from his father and mother?', ['He removed the pillar of Baal his father had made', 'He restored the temple in Jerusalem', 'He released Moab from tribute', 'He followed Elisha'], 2),
 
     mc(1, 'To whose sin did Jehoram cling?', ['Jeroboam son of Nebat’s', 'David’s', 'Jehoshaphat’s', 'Mesha’s'], 3),
-    blank(2, 'he did not _____ from it.', 'depart', 3),
+    blank(2, 'Nevertheless he clung to the sin of Jerobo\'am the son of Nebat, which he made Israel to sin; he did not _____ from it.', 'depart', 3),
     word(1, 'Whom had Jeroboam caused to sin?', 'Israel', 3),
     tf(3, 'Removing Baal’s pillar meant Jehoram departed from every sin of Israel’s kings.', false, 3, 'He continued in the sin of Jeroboam son of Nebat.'),
     mc(2, 'What persistent failure qualified Jehoram’s partial reform?', ['He continued in Jeroboam’s sin', 'He rebuilt Baal’s pillar', 'He worshiped the god of Ekron', 'He refused to reign in Samaria'], 3),
@@ -34,7 +34,7 @@ const bank: ChapterBank = {
     mc(2, 'Against whom was Moab’s rebellion directed?', ['The king of Israel', 'The king of Edom', 'The prophet Elisha', 'The king of Judah alone'], 5),
 
     mc(1, 'What did King Jehoram do after Moab rebelled?', ['He marched from Samaria and mustered all Israel', 'He sent Elisha to Moab to negotiate with Mesha', 'He withdrew into Ahab’s palace and refused to campaign', 'He surrendered Israel’s frontier cities to the king of Moab'], 6),
-    blank(3, 'and _____ all Israel.', 'mustered', 6),
+    blank(3, 'So King Jeho\'ram marched out of Sama\'ria at that time and _____ all Israel.', 'mustered', 6),
     word(2, 'From what city did Jehoram march?', 'Samaria', 6, ["Sama'ria"]),
     tf(1, 'Jehoram assembled Israel’s forces.', true, 6),
     mc(2, 'Whom did Jehoram muster for the campaign?', ['All Israel', 'Only the men of Samaria', 'The prophets at Jericho', 'One hundred thousand shepherds'], 6),
@@ -76,7 +76,7 @@ const bank: ChapterBank = {
     mc(2, 'Why did the three kings go down to Elisha?', ['Jehoshaphat affirmed that the word of the LORD was with him', 'Mesha commanded them to consult the prophet before fighting', 'The army discovered a spring beside the place where Elisha stayed', 'Elijah sent them a message directing them to his former servant'], 12),
 
     mc(1, 'To whose prophets did Elisha initially send Israel’s king?', ['The prophets of his father and mother', 'The prophets at Jericho', 'The prophets of Judah', 'The prophets of Edom'], 13),
-    blank(2, 'What have I to do with _____?', 'you', 13),
+    blank(2, 'And Eli\'sha said to the king of Israel, "What have I to do with _____? Go to the prophets of your father and the prophets of your mother." But the king of Israel said to him, "No; it is the LORD who has called these three kings to give them into the hand of Moab."', 'you', 13),
     sa(1, 'What explanation did Israel’s king repeat?', 'the LORD had called the three kings to give them to Moab', 13, ['the Lord called the three kings', 'they had been called to be delivered to Moab']),
     tf(3, 'Elisha warmly welcomed Israel’s king without rebuke.', false, 13, 'He challenged the king to go to the prophets of his parents.'),
 
@@ -113,7 +113,7 @@ const bank: ChapterBank = {
 
     mc(1, 'When did water arrive in the dry streambed?', ['The next morning at the time of the sacrifice', 'At midnight while a visible storm crossed Edom', 'After three days of steady rain over the allied camp', 'At sunset after Israel had defeated the Moabite army'], 20),
     blank(3, 'water came from the direction of _____.', 'Edom', 20),
-    sa(2, 'How much of the country was filled with water?', 'the country', 20, ['all the country', 'it was filled']),
+    sa(2, 'When the water came at the time of the morning offering, what happened to the country?', 'The country was filled with water.', 20, ['it was filled with water']),
     tf(1, 'The water came without the wind or rain the army had expected.', true, 20),
 
     mc(1, 'Who answered Moab’s call to arms?', ['All who were able to put on armor', 'Only seven hundred swordsmen', 'Only the oldest men', 'Mesha’s shepherds alone'], 21),
@@ -144,7 +144,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How many swordsmen did Moab’s king take for a breakout attempt?', ['Seven hundred', 'One hundred thousand', 'Fifty', 'Forty-two'], 26),
     blank(3, 'to break through, opposite the king of _____.', 'Edom', 26),
-    word(2, 'Did the swordsmen break through?', 'no', 26, ['they could not', 'no they could not']),
+    tf(2, 'The king of Moab took seven hundred swordsmen to break through to the king of Edom, but they could not.', true, 26),
     tf(1, 'The battle was going against the king of Moab.', true, 26),
 
     mc(1, 'Whom did Moab’s king offer as a burnt offering?', ['His eldest son who was to succeed him', 'The king of Edom', 'A hundred thousand lambs', 'One of Israel’s servants'], 27),

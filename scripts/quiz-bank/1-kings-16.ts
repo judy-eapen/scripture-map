@@ -29,7 +29,7 @@ const bank: ChapterBank = {
     tf(2, 'The text points to a written record of Baasha’s acts.', true, 5),
 
     mc(1, 'Who succeeded Baasha?', ['Elah his son', 'Zimri', 'Omri', 'Ahab'], 6),
-    blank(2, 'and was buried at _____.', 'Tirzah', 6),
+    blank(2, 'And Ba\'asha slept with his fathers, and was buried at _____; and Elah his son reigned in his stead.', 'Tirzah', 6),
     sa(2, 'What happened to Baasha?', 'he slept with his fathers', 6, ['slept with his fathers', 'died']),
     tf(3, 'Baasha was buried at Tirzah.', true, 6),
 
@@ -86,7 +86,7 @@ const bank: ChapterBank = {
     tf(3, 'The troops accepted Zimri as king after learning he killed Elah.', false, 16, 'They made Omri king that day in the camp.'),
 
     mc(1, 'From where did Omri march to besiege Tirzah?', ['Gibbethon', 'Samaria', 'Jerusalem', 'Damascus'], 17),
-    blank(3, 'and they _____ Tirzah.', 'besieged', 17),
+    blank(3, 'So Omri went up from Gib\'bethon, and all Israel with him, and they _____ Tirzah.', 'besieged', 17),
     sa(1, 'Who went with Omri?', 'all Israel', 17),
     tf(2, 'Omri went alone to Tirzah.', false, 17, 'All Israel went with him.'),
 
@@ -161,7 +161,7 @@ const bank: ChapterBank = {
     blank(3, 'he took for wife Jez’ebel the daughter of _____ king of the Sido’nians', 'Ethba’al', 31, ['Ethbaal']),
     word(1, 'Which god did Ahab serve and worship?', 'Baal', 31, ["Ba'al"]),
     tf(2, 'Jezebel was the daughter of the king of the Sidonians.', true, 31),
-    mc(3, 'Which description of Jezebel is given?', ['Daughter of Ethbaal, king of the Sidonians', 'Daughter of Shemer, owner of Samaria', 'Daughter of Arza, over the household', 'Daughter of Hanani the prophet'], 31),
+    mc(3, 'Whose daughter was Jezebel, whom Ahab took as his wife?', ['Daughter of Ethbaal, king of the Sidonians', 'Daughter of Shemer, owner of Samaria', 'Daughter of Arza, over the household', 'Daughter of Hanani the prophet'], 31),
 
     mc(1, 'What did Ahab erect for Baal?', ['An altar', 'A pillar to the LORD', 'A bronze shield', 'A royal throne'], 32),
     blank(2, 'in the house of Ba’al, which he built in _____.', 'Sama’ria', 32, ['Samaria']),

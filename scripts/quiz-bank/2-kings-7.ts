@@ -46,7 +46,7 @@ const bank: ChapterBank = {
     word(1, 'Who produced the sound that terrified Syria?', 'LORD', 6, ['the LORD', 'God']),
 
     mc(1, 'What did the Syrians leave behind?', ['Tents, horses, and asses', 'Only empty food jars', 'Their king and captains', 'All their garments but no animals'], 7),
-    blank(2, 'and fled for their _____.', 'lives', 7),
+    blank(2, 'So they fled away in the twilight and forsook their tents, their horses, and their asses, leaving the camp as it was, and fled for their _____.', 'lives', 7),
     sa(1, 'When did the Syrians flee?', 'at twilight', 7, ['twilight']),
     tf(3, 'The Syrians carefully packed their camp before departing.', false, 7, 'They left the camp as it was and fled for their lives.'),
     mc(2, 'Why was the camp available for the lepers to discover?', ['The entire Syrian army had fled in panic', 'Israel had captured every soldier', 'The Syrians were hiding nearby', 'The army had marched to Egypt'], 7),
@@ -76,7 +76,7 @@ const bank: ChapterBank = {
     sa(1, 'Which animals did they specifically report as tied?', 'horses and asses', 10, ['horses and donkeys']),
 
     mc(1, 'Where did the gatekeepers send the report?', ['Into the king’s household', 'To the Syrian camp', 'To Dothan', 'To the market'], 11),
-    blank(2, 'Then the gatekeepers called _____.', 'out', 11),
+    blank(2, 'Then the gatekeepers called _____, and it was told within the king\'s household.', 'out', 11),
     sa(1, 'Who relayed the lepers’ news?', 'the gatekeepers', 11, ['gatekeepers']),
     tf(3, 'The report reached the king’s household.', true, 11),
     mc(2, 'What role did the gatekeepers play?', ['They relayed the news to the royal household', 'They personally plundered the Syrian camp', 'They permanently closed the city gates', 'They arrested and imprisoned the four men'], 11),
@@ -101,7 +101,7 @@ const bank: ChapterBank = {
     sa(2, 'What command did the king give the scouts?', 'Go and see', 14, ['go see', 'investigate']),
     tf(1, 'The mounted scouts went toward Egypt instead of following Syria’s route.', false, 14, 'The king sent them after the Syrian army to investigate.'),
     mc(2, 'What was the purpose of the mounted mission?', ['To verify what had happened to the Syrian army', 'To negotiate surrender', 'To bring Elisha to the king', 'To collect food before anyone else'], 14),
-    word(1, 'Were the scouts mounted?', 'yes', 14, ['two mounted men', 'yes they were']),
+    tf(1, 'The king sent horsemen to follow the Syrian army.', true, 14),
 
     mc(1, 'How far did the scouts follow the Syrians’ trail?', ['As far as the Jordan', 'Only to the camp edge', 'To Damascus', 'To Dothan'], 15),
     blank(2, 'all the way was _____ with garments and equipment', 'littered', 15),
@@ -140,7 +140,7 @@ const bank: ChapterBank = {
     sa(2, 'Who had questioned whether the LORD could do this?', 'the captain', 19, ['the officer']),
 
     mc(1, 'How did the chapter close the captain’s story?', ['The crowd trampled him and he died', 'The captain repented and ate the food', 'The king pardoned and restored the captain', 'The captain escaped and fled to Syria'], 20),
-    blank(3, 'And so it _____ to him', 'happened', 20),
+    blank(3, 'And so it _____ to him, for the people trod upon him in the gate and he died.', 'happened', 20),
     sa(2, 'Who caused the captain’s death?', 'the people', 20, ['the crowd']),
     tf(1, 'The final outcome matched Elisha’s words.', true, 20),
     mc(2, 'What final detail confirms both halves of the warning?', ['He saw the food but died before eating it', 'He remained in the palace and saw nothing', 'He ate the promised food before dying', 'He escaped from the crowd and left Israel'], 20),

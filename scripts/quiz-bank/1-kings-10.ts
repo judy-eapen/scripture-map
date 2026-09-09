@@ -87,7 +87,7 @@ const bank: ChapterBank = {
     mc(1, 'What did King Solomon give the queen of Sheba?', ['Everything she desired and asked, besides his royal bounty', 'Only spices equal in value to the gold she had brought', 'A share in Hiram’s fleet and its cargo brought from Ophir', 'Nothing in return because she alone presented royal gifts'], 13),
     blank(2, 'And King Solomon gave to the queen of Sheba all that she _____, whatever she asked besides what was given her by the bounty of King Solomon.', 'desired', 13),
     tf(1, 'After visiting Solomon, the queen of Sheba went back to her own land with her servants.', true, 13),
-    word(3, 'Solomon gave the queen gifts "by the ___ of King Solomon" — what word?', 'bounty', 13),
+    word(3, 'Besides everything she asked for, Solomon gave the queen of Sheba gifts out of what, according to the verse?', 'bounty', 13, ['royal bounty', 'his royal bounty']),
     tf(3, 'The queen of Sheba stayed in Jerusalem and became one of Solomon’s wives.', false, 13, 'She turned and went back to her own land, with her servants.'),
 
     // ══════════════════════════════════ v14–17 · Gold revenue and shields

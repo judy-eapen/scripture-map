@@ -91,7 +91,7 @@ const bank: ChapterBank = {
 
     mc(2, 'Jesus reminded the disciples that when He broke the five loaves for the five thousand, how many baskets of fragments were taken up?', ['Twelve', 'Seven', 'Five', 'Four'], 19),
     blank(2, 'When I broke the five loaves for the five thousand, how many baskets full of fragments did you take up?" They said to Him, "_____."', 'Twelve', 19, ['12']),
-    word(2, 'In the boat, Jesus recalled breaking how many loaves for the five thousand?', 'five', 19, ['5']),
+    word(2, 'When Jesus questioned the disciples in the boat about the first feeding, how many loaves did He say He broke?', 'five', 19, ['5']),
     sa(3, 'In the boat, how did Jesus contrast the two feedings when He questioned the disciples about their lack of understanding?', 'He recalled the five loaves for the five thousand with twelve baskets of fragments taken up, and the seven loaves for the four thousand with seven large baskets taken up.', 19),
 
     mc(2, 'Jesus asked the disciples how many large baskets were taken up when He broke the seven loaves for the four thousand. What did they answer?', ['Seven', 'Twelve', 'Four', 'Five'], 20),

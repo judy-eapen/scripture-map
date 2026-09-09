@@ -233,7 +233,7 @@ const bank: ChapterBank = {
 
     mc(1, 'According to Jesus, why did the Son of Man come?', ['To serve and give His life as a ransom for many', 'To sit at the right hand in glory', 'To lord it over the Gentiles', 'To condemn the chief priests and scribes'], 45),
     blank(1, 'For even the Son of Man did not come to be served, but to serve, and to give His life a _____ for many."', 'ransom', 45),
-    word(2, 'Jesus said the Son of Man came to give His life a ransom for how many?', 'many', 45, ['for many']),
+    sa(2, 'Jesus said the Son of Man came not to be served but to serve — and to give His life as what?', 'A ransom for many.', 45, ['ransom for many']),
     tf(1, 'Jesus said the Son of Man came to be served.', false, 45, 'He "did not come to be served, but to serve."'),
     sa(3, 'Jesus ended His teaching on greatness by pointing to His own mission. What did He say the Son of Man came to do?', 'Not to be served, but to serve, and to give His life a ransom for many.', 45),
 

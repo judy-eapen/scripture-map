@@ -14,7 +14,7 @@ const bank: ChapterBank = {
     blank(1, 'The beginning of the gospel of Jesus Christ, the _____ of God.', 'Son', 1),
     tf(2, 'Mark opens his Gospel by calling Jesus Christ "the Son of David."', false, 1, 'Mark’s first verse calls Him "the Son of God."'),
     mc(2, 'Before John the Baptist appears, Mark quotes the Prophets about a messenger. What is the messenger sent to do?', ['Prepare the Lord’s way before Him', 'Baptize the Lord in the Jordan River', 'Anoint the Lord as king over Israel', 'Announce the Lord’s birth in Nazareth'], 2),
-    word(3, 'Mark introduces John the Baptist with a quotation about a messenger sent "before Your face." Where does Mark say this was written — the Law, the Psalms, or the Prophets?', 'Prophets', 2, ['the prophets', 'prophet']),
+    word(3, 'In whose writings does Mark say the quotation about the messenger is written?', 'Prophets', 2, ['the prophets', 'prophet']),
     sa(3, 'Before John appears, Mark quotes a promise from the Prophets. Whom does God say He will send, and for what purpose?', 'God says He will send His messenger before the Lord’s face, and the messenger will prepare the Lord’s way before Him.', 2),
     blank(1, '"The voice of one crying in the wilderness: ‘Prepare the way of the Lord; Make His paths _____.’"', 'straight', 3),
     mc(2, 'The prophecy Mark quotes speaks of "the voice of one crying in the wilderness." What does that voice tell people to do?', ['Prepare the way of the Lord and make His paths straight', 'Repent and believe in the gospel, for the time is fulfilled', 'Follow the Lord and become fishers of men', 'Show themselves to the priest as Moses commanded'], 3),

@@ -19,7 +19,7 @@ const bank: ChapterBank = {
     tf(2, 'Ben-hadad claimed Ahab’s silver, gold, wives, and fairest children.', true, 3),
 
     mc(1, 'How did Ahab initially answer Ben-hadad?', ['He said he and all he had were Ben-hadad’s', 'He declared war immediately', 'He refused every demand', 'He asked the prophet'], 4),
-    blank(2, 'I am yours, and all that I _____.', 'have', 4),
+    blank(2, 'And the king of Israel answered, "As you say, my lord, O king, I am yours, and all that I _____."', 'have', 4),
     sa(2, 'How did Ahab address Ben-hadad?', 'my lord, O king', 4, ['my lord', 'O king']),
     tf(3, 'Ahab initially answered that he and all he had belonged to Ben-hadad.', true, 4),
 
@@ -39,7 +39,7 @@ const bank: ChapterBank = {
     tf(3, 'Ahab told the elders that he had not refused Ben-hadad’s original demand.', true, 7),
 
     mc(1, 'What advice did the elders and people give Ahab?', ['Do not heed or consent', 'Surrender everything', 'Flee Samaria', 'Ask Syria for time'], 8),
-    blank(3, 'Do not heed or _____.', 'consent', 8),
+    blank(3, 'And all the elders and all the people said to him, "Do not heed or _____."', 'consent', 8),
     sa(1, 'Who joined the elders in advising Ahab?', 'all the people', 8, ['the people']),
     tf(2, 'The elders and all the people told Ahab not to heed or consent.', true, 8),
 
@@ -127,7 +127,7 @@ const bank: ChapterBank = {
 
     mc(2, 'How was the replacement army to compare with the lost army?', ['Horse for horse and chariot for chariot', 'Twice as many infantry only', 'Without horses', 'Smaller but faster'], 25),
     blank(3, 'and _____ for chariot', 'chariot', 25),
-    word(1, 'Did Ben-hadad follow his servants’ advice?', 'yes', 25, ['he did', 'yes he did']),
+    tf(1, 'Ben-hadad listened to his servants and did what they advised.', true, 25),
     tf(2, 'Ben-hadad rejected the advice to rebuild his army.', false, 25, 'He hearkened and did so.'),
 
     mc(1, 'Where did Ben-hadad take the Syrians in spring?', ['Aphek', 'Samaria', 'Jezreel', 'Carmel'], 26),
@@ -168,7 +168,7 @@ const bank: ChapterBank = {
     mc(3, 'What complete appearance did Ben-hadad’s servants present to Ahab?', ['Sackcloth on their loins and ropes on their heads', 'Armor on their bodies and crowns on their heads', 'Ashes on their faces and sandals in their hands', 'Royal robes and golden chains'], 32),
 
     mc(2, 'What were Ben-hadad’s men watching for?', ['An omen in Ahab’s words', 'A signal from Syria', 'The return of scouts', 'A change in weather'], 33),
-    blank(3, 'Go and _____ him.', 'bring', 33),
+    blank(3, 'Now the men were watching for an omen, and they quickly took it up from him and said, "Yes, your brother Ben-ha\'dad." Then he said, "Go and _____ him." Then Ben-ha\'dad came forth to him;', 'bring', 33),
     sa(1, 'Where did Ahab cause Ben-hadad to sit?', 'in the chariot', 33, ['the chariot']),
     tf(2, 'The servants quickly repeated Ahab’s word “brother.”', true, 33),
 
@@ -183,7 +183,7 @@ const bank: ChapterBank = {
     tf(2, 'The first man obeyed and struck the prophet.', false, 35, 'He refused.'),
 
     mc(1, 'What happened to the man who refused the LORD’s command?', ['A lion killed him', 'The king imprisoned him', 'He was wounded by a prophet', 'He paid a talent of silver'], 36),
-    blank(2, 'a lion shall _____ you.', 'kill', 36),
+    blank(2, 'Then he said to him, "Because you have not obeyed the voice of the LORD, behold, as soon as you have gone from me, a lion shall _____ you." And as soon as he had departed from him, a lion met him and killed him.', 'kill', 36),
     sa(2, 'When did the lion meet him?', 'as soon as he departed', 36, ['after he departed']),
     tf(3, 'The man escaped the announced judgment.', false, 36, 'A lion met and killed him.'),
 

@@ -49,12 +49,12 @@ const bank: ChapterBank = {
     tf(3, 'Ahab’s house would share the fate of earlier condemned royal houses.', true, 9),
 
     mc(1, 'What was foretold about Jezebel’s body?', ['Dogs would eat her and she would go unburied', 'She would receive burial beside King Ahab', 'She would escape safely into Samaria', 'Fire would consume her entire body'], 10),
-    blank(3, 'and none shall _____ her.', 'bury', 10),
+    blank(3, 'And the dogs shall eat Jez\'ebel in the territory of Jezreel, and none shall _____ her." Then he opened the door, and fled.', 'bury', 10),
     sa(2, 'Where would dogs eat Jezebel?', 'the territory of Jezreel', 10, ['Jezreel']),
     tf(1, 'The prophet remained with Jehu after delivering the oracle.', false, 10, 'He opened the door and fled.'),
 
     mc(1, 'How did Jehu’s fellow servants describe the prophet?', ['This mad fellow', 'The man of God', 'The king’s messenger', 'A Syrian spy'], 11),
-    blank(2, 'Is all _____?', 'well', 11),
+    blank(2, 'When Jehu came out to the servants of his master, they said to him, "Is all _____?', 'well', 11),
     sa(1, 'What did Jehu initially say about the visitor’s talk?', 'You know the fellow and his talk', 11, ['they knew him and his talk']),
     tf(3, 'The commanders questioned why the young prophet had come.', true, 11),
 
@@ -64,7 +64,7 @@ const bank: ChapterBank = {
     tf(1, 'Jehu continued concealing the prophet’s message after the commanders pressed him.', false, 12, 'After they pressed him, Jehu told them he had been anointed king over Israel.'),
 
     mc(1, 'How did the commanders proclaim Jehu?', ['They spread garments, sounded a trumpet, and hailed him', 'They crowned him inside the temple at Samaria', 'They sent Jezebel a letter announcing the decision', 'They waited until Joram formally approved him'], 13),
-    blank(2, 'and they blew the _____.', 'trumpet', 13),
+    blank(2, 'Then in haste every man of them took his garment, and put it under him on the bare steps, and they blew the _____, and proclaimed, "Jehu is king."', 'trumpet', 13),
     sa(1, 'Where were the garments placed?', 'under Jehu on the bare steps', 13, ['under him', 'on the bare steps']),
     tf(3, 'The commanders acted immediately and proclaimed Jehu king.', true, 13),
 
@@ -79,7 +79,7 @@ const bank: ChapterBank = {
     tf(3, 'Jehu wanted the conspiracy kept from Joram.', true, 15),
 
     mc(1, 'How did Jehu travel to Jezreel?', ['In his chariot', 'On foot', 'On horseback alone', 'With a Syrian escort'], 16),
-    blank(3, 'for Joram _____ there.', 'lay', 16),
+    blank(3, 'Then Jehu mounted his chariot, and went to Jezreel, for Joram _____ there.', 'lay', 16),
     sa(2, 'Who had come to visit Joram?', 'Ahaziah king of Judah', 16, ['Ahaziah']),
     tf(1, 'Joram was alone in Jezreel when Jehu approached.', false, 16, 'Ahaziah king of Judah had come down to visit Joram there.'),
 
@@ -99,7 +99,7 @@ const bank: ChapterBank = {
     tf(3, 'The second messenger also asked whether there was peace.', true, 19),
 
     mc(1, 'How did the watchman identify Jehu’s approach?', ['By his furious driving', 'By a royal banner', 'By the sound of a trumpet', 'By his horses’ color'], 20),
-    blank(3, 'for he drives _____.', 'furiously', 20),
+    blank(3, 'Again the watchman reported, "He reached them, but he is not coming back. And the driving is like the driving of Jehu the son of Nimshi; for he drives _____."', 'furiously', 20),
     word(2, 'Whose son did the watchman call Jehu?', 'Nimshi’s', 20, ['Nimshi', 'son of Nimshi']),
     tf(1, 'The watchman identified Jehu by a royal banner over his chariot.', false, 20, 'He identified Jehu by his furious manner of driving.'),
     mc(3, 'What distinctive behavior led the watchman to name Jehu?', ['The leader was driving his chariot furiously', 'The leader was carrying Elisha’s oil flask', 'The leader was sounding a trumpet continually', 'The leader was following behind two messengers'], 20),
@@ -161,7 +161,7 @@ const bank: ChapterBank = {
     tf(3, 'Jezebel greeted Jehu by comparing him to a regicide.', true, 31),
 
     mc(1, 'Who responded to Jehu’s call from the window?', ['Two or three eunuchs', 'Jezebel’s sons', 'The watchman', 'Joram’s servants'], 32),
-    blank(3, 'Who is on my _____? Who?', 'side', 32),
+    blank(3, 'And he lifted up his face to the window, and said, "Who is on my _____?', 'side', 32),
     sa(2, 'In what direction did Jehu look?', 'up to the window', 32, ['toward the window']),
     tf(1, 'Jehu asked the eunuchs whether they supported Jezebel.', false, 32, 'Looking up at the window, Jehu asked, “Who is on my side? Who?”'),
 

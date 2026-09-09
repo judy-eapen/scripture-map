@@ -8,7 +8,7 @@ const bank: ChapterBank = {
     tf(1, 'Syria and Israel continued for three years without war.', true, 1),
 
     mc(1, 'Who came down to visit the king of Israel in the third year?', ['Jehoshaphat king of Judah', 'Ben-hadad king of Syria', 'Micaiah son of Imlah', 'Zedekiah son of Chenaanah'], 2),
-    blank(2, 'Jehosh’aphat the king of Judah came _____ to the king of Israel.', 'down', 2),
+    blank(2, 'But in the third year Jehosh\'aphat the king of Judah came _____ to the king of Israel.', 'down', 2),
     word(2, 'Of which kingdom was Jehoshaphat king?', 'Judah', 2),
     tf(3, 'Jehoshaphat came down to the king of Israel in the third year.', true, 2),
 
@@ -143,17 +143,17 @@ const bank: ChapterBank = {
     tf(2, 'Micaiah was to receive plentiful food in prison.', false, 27, 'He was to receive scant bread and water.'),
 
     mc(1, 'What would prove the LORD had not spoken by Micaiah?', ['Ahab returning in peace', 'Israel losing Ramoth-gilead', 'Micaiah remaining in prison', 'Jehoshaphat returning home'], 28),
-    blank(2, 'Hear, all you _____!', 'peoples', 28),
+    blank(2, 'And Micai\'ah said, "If you return in peace, the LORD has not spoken by me." And he said, "Hear, all you _____!"', 'peoples', 28),
     sa(2, 'What condition did Micaiah state?', 'If you return in peace', 28, ['Ahab returning in peace']),
     tf(3, 'Micaiah withdrew his prophecy before the peoples.', false, 28, 'He publicly tied its truth to Ahab’s failure to return in peace.'),
 
     mc(1, 'Who went up to Ramoth-gilead?', ['The kings of Israel and Judah', 'Micaiah and Zedekiah', 'Ahab alone', 'The Syrian captains'], 29),
-    blank(3, 'went up to _____-gilead.', 'Ramoth', 29, ['Ramoth-gilead']),
+    blank(3, 'So the king of Israel and Jehosh\'aphat the king of Judah went up to _____-gilead.', 'Ramoth', 29, ['Ramoth-gilead']),
     word(1, 'Which king of Judah joined the battle?', 'Jehoshaphat', 29, ["Jehosh'aphat"]),
     tf(2, 'The kings abandoned the campaign after Micaiah’s warning.', false, 29, 'They went up to Ramoth-gilead.'),
 
     mc(1, 'How did Ahab plan to enter battle?', ['In disguise', 'In royal robes', 'On foot', 'Under a flag of peace'], 30),
-    blank(2, 'but you wear your _____.', 'robes', 30),
+    blank(2, 'And the king of Israel said to Jehosh\'aphat, "I will disguise myself and go into battle, but you wear your _____." And the king of Israel disguised himself and went into battle.', 'robes', 30),
     word(2, 'Who continued wearing royal robes?', 'Jehoshaphat', 30),
     tf(3, 'Both kings disguised themselves.', false, 30, 'Ahab disguised himself while Jehoshaphat wore his robes.'),
 
@@ -163,7 +163,7 @@ const bank: ChapterBank = {
     tf(2, 'The Syrian king ordered the captains to fight everyone they saw.', false, 31, 'They were to focus only on Israel’s king.'),
 
     mc(1, 'Whom did the captains mistake for Israel’s king?', ['Jehoshaphat', 'Micaiah', 'Zedekiah', 'Amon'], 32),
-    blank(2, 'So they turned to fight against him; and Jehosh’aphat cried _____.', 'out', 32),
+    blank(2, 'And when the captains of the chariots saw Jehosh\'aphat, they said, "It is surely the king of Israel." So they turned to fight against him; and Jehosh\'aphat cried _____.', 'out', 32),
     sa(2, 'What did Jehoshaphat do when surrounded?', 'cried out', 32),
     tf(3, 'The captains immediately recognized Jehoshaphat as Judah’s king.', false, 32, 'They first thought he was Israel’s king.'),
 
@@ -235,7 +235,7 @@ const bank: ChapterBank = {
     tf(3, 'Jehoshaphat’s warfare was absent from the record.', false, 45, 'How he warred was among the recorded acts.'),
 
     mc(1, 'Whom did Jehoshaphat remove from the land?', ['The remaining male cult prostitutes', 'All Syrian captains', 'The prophets of the LORD', 'The people of Edom'], 46),
-    blank(3, 'he _____ from the land.', 'exterminated', 46),
+    blank(3, 'And the remnant of the male cult prostitutes who remained in the days of his father Asa, he _____ from the land.', 'exterminated', 46),
     word(1, 'During whose reign had the remnant remained?', 'Asa’s', 46, ['his father Asa’s']),
     tf(2, 'Jehoshaphat preserved the cult prostitutes.', false, 46, 'He exterminated the remnant from the land.'),
 

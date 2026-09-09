@@ -91,7 +91,7 @@ const bank: ChapterBank = {
     tf(3, 'The command allowed him to return by the same way.', false, 17, 'The command expressly forbade returning by the way he came.'),
 
     mc(1, 'What false claim did the old prophet make?', ['An angel told him to bring the man back for food and water', 'King Jeroboam had repented and wanted the man to return', 'The broken altar had been repaired by the priests of Bethel', 'The road leading back to Judah had become unsafe for travel'], 18),
-    blank(2, 'But he _____ to him.', 'lied', 18),
+    blank(2, 'And he said to him, "I also am a prophet as you are, and an angel spoke to me by the word of the LORD, saying, `Bring him back with you into your house that he may eat bread and drink water.\'" But he _____ to him.', 'lied', 18),
     sa(3, 'Who did the old prophet claim had spoken to him?', 'an angel', 18, ['angel']),
     tf(3, 'An angel truly commanded the old prophet to bring the man of God home.', false, 18, 'The old prophet claimed this, but the text says he lied.'),
     mc(3, 'How did the old prophet persuade the man of God to return?', ['He falsely claimed an angel had spoken by the LORD’s word', 'He offered the man half his house and a valuable reward', 'He said King Jeroboam demanded the man’s immediate return', 'He promised armed protection and safe passage back to Judah'], 18),
@@ -138,7 +138,7 @@ const bank: ChapterBank = {
     tf(3, 'The old prophet said the death occurred according to the LORD’s spoken word.', true, 26),
 
     mc(1, 'What did the old prophet again command his sons to do?', ['Saddle the ass for him', 'Bring the body to the king', 'Prepare a tomb in Judah', 'Drive away the lion'], 27),
-    blank(2, 'And they _____ it.', 'saddled', 27),
+    blank(2, 'And he said to his sons, "Saddle the ass for me." And they _____ it.', 'saddled', 27),
     sa(1, 'Who obeyed the old prophet’s command?', 'his sons', 27),
     tf(2, 'The sons refused to saddle the animal.', false, 27, 'They saddled it as he commanded.'),
 

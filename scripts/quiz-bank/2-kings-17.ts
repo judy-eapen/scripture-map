@@ -9,7 +9,7 @@ const bank: ChapterBank = {
 
     mc(2, 'How did Hoshea act in the LORD’s sight?', ['He did evil, but unlike the kings before him', 'He did what was right in the manner of David', 'He removed every idol from the northern kingdom', 'He fully restored Israel’s covenant faithfulness'], 2),
     blank(3, 'yet not as the kings of _____ who were before him.', 'Israel', 2),
-    word(2, 'Was Hoshea’s evil said to equal that of his predecessors?', 'no', 2),
+    tf(2, 'Hoshea did evil in the sight of the LORD, but not as the kings of Israel who were before him.', true, 2),
     tf(1, 'Hoshea’s evil is qualified as unlike the kings before him.', true, 2),
 
     mc(1, 'Which Assyrian king came against Hoshea?', ['Shalmaneser', 'Tiglath-pileser', 'Sennacherib', 'Pul'], 3),
@@ -59,7 +59,7 @@ const bank: ChapterBank = {
     tf(3, 'Their high-place worship was acceptable and did not provoke the LORD.', false, 11, 'They burned incense and did wicked things, provoking the LORD to anger.'),
 
     mc(1, 'What did Israel serve despite the LORD’s prohibition?', ['Idols', 'The prophets', 'The law', 'Judah'], 12),
-    blank(2, 'and they _____ idols', 'served', 12),
+    blank(2, 'and they _____ idols, of which the LORD had said to them, "You shall not do this."', 'served', 12),
     sa(1, 'What had the LORD said about this?', 'You shall not do this', 12),
     tf(3, 'Israel served idols the LORD had forbidden.', true, 12),
 
@@ -74,7 +74,7 @@ const bank: ChapterBank = {
     tf(3, 'The people listened obediently to the prophets.', false, 14, 'They would not listen.'),
 
     mc(1, 'What happened as Israel pursued false idols?', ['They themselves became false', 'They became faithful', 'They defeated Assyria', 'They restored David’s throne'], 15),
-    blank(2, 'They despised his _____', 'statutes', 15),
+    blank(2, 'They despised his _____, and his covenant that he made with their fathers, and the warnings which he gave them.', 'statutes', 15),
     sa(1, 'What agreement with their fathers did they reject?', 'the covenant', 15),
     tf(3, 'Israel rejected the practices of the surrounding nations.', false, 15, 'They followed the nations around them despite the LORD’s command not to do so.'),
 
@@ -93,7 +93,7 @@ const bank: ChapterBank = {
     word(1, 'Which kingdom was removed?', 'Israel', 18),
     tf(3, 'Only Judah remained at this stage.', true, 18),
 
-    mc(1, 'Did Judah keep the LORD’s commandments?', ['No', 'Yes, completely', 'Only under Ahaz', 'The verse does not say'], 19),
+    tf(1, 'Judah kept the commandments of the LORD their God.', false, 19, 'Judah also did not keep them, but walked in the customs which Israel had introduced.'),
     blank(2, 'walked in the customs which _____ had introduced.', 'Israel', 19),
     word(1, 'Whose customs did Judah copy?', 'Israel’s', 19, ['Israel']),
     tf(3, 'Judah was untouched by Israel’s corrupt influence.', false, 19, 'Judah walked in customs Israel introduced.'),
@@ -202,7 +202,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How did the people respond to the covenant instruction?', ['They would not listen', 'They obeyed fully', 'They destroyed their images', 'They returned to Judah'], 40),
     blank(2, 'they did according to their former _____.', 'manner', 40),
-    word(1, 'Did they listen?', 'no', 40),
+    tf(1, 'The nations settled in Samaria listened and gave up their former customs.', false, 40, 'They did not listen, but did according to their former manner.'),
     tf(3, 'The people abandoned their former manner.', false, 40, 'They continued according to it.'),
 
     mc(1, 'What did the nations serve alongside fearing the LORD?', ['Their graven images', 'The law alone', 'The prophets', 'Jerusalem’s temple'], 41),

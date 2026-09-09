@@ -18,7 +18,7 @@ const bank: ChapterBank = {
     tf(3, 'Jehu forbade Ahab’s supporters from choosing a king to oppose him.', false, 3, 'He challenged them to choose the best of Ahab’s sons, set him on the throne, and fight for their master’s house.'),
 
     mc(1, 'Why were Samaria’s leaders terrified?', ['Two kings had failed to withstand Jehu', 'Their fortified city had no defenses', 'All of Ahab’s sons had already fled', 'A Syrian force had surrounded Samaria'], 4),
-    blank(3, 'how then can we _____?', 'stand', 4),
+    blank(3, 'But they were exceedingly afraid, and said, "Behold, the two kings could not _____ before him;', 'stand', 4),
     word(2, 'How many kings did they say could not stand before Jehu?', 'two', 4, ['2']),
     tf(1, 'The leaders doubted their ability to oppose Jehu.', true, 4),
 
@@ -44,7 +44,7 @@ const bank: ChapterBank = {
     mc(3, 'What gruesome evidence of loyalty reached Jehu?', ['Seventy heads in baskets, arranged in two heaps', 'Seventy captured soldiers brought from Samaria', 'Ahab’s royal crown and ceremonial garments', 'The seventy princes delivered to Jehu alive'], 8),
 
     mc(1, 'What distinction did Jehu make before the people?', ['He killed his master; others killed Ahab’s sons', 'He bore no responsibility for any death', 'The gathered people had personally killed Joram', 'Elijah had directly ordered the beheadings'], 9),
-    blank(2, 'but who struck down all _____?', 'these', 9),
+    blank(2, 'Then in the morning, when he went out, he stood, and said to all the people, "You are innocent. It was I who conspired against my master, and slew him; but who struck down all _____?', 'these', 9),
     sa(1, 'When did Jehu address the people?', 'in the morning', 9),
     tf(3, 'Jehu denied having conspired against and killed his master.', false, 9, 'Jehu openly said, “I conspired against my master and killed him.”'),
 
@@ -100,7 +100,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Jehu order proclaimed?', ['A solemn assembly for Baal', 'A fast for Israel', 'A coronation at Jezreel', 'War against Syria'], 20),
     blank(3, 'Sanctify a solemn _____ for Ba’al.', 'assembly', 20),
-    word(2, 'Was the assembly publicly proclaimed?', 'yes', 20, ['they proclaimed it']),
+    tf(2, 'Jehu proclaimed a solemn assembly for Baal.', true, 20),
     tf(1, 'The gathering was formally announced.', true, 20),
 
     mc(1, 'How fully did Baal’s worshipers respond?', ['All came, filling Baal’s house', 'Only the ordained priests arrived', 'Most of the worshipers stayed home', 'No one believed Jehu’s proclamation'], 21),
@@ -119,17 +119,17 @@ const bank: ChapterBank = {
     tf(3, 'Jehu welcomed servants of the LORD into Baal’s assembly.', false, 23, 'He ordered a careful search so that only Baal’s worshipers would remain.'),
 
     mc(1, 'How many men did Jehu station outside?', ['Eighty', 'Seventy', 'Forty-two', 'Twenty-eight'], 24),
-    blank(3, 'shall _____ his life.', 'forfeit', 24),
+    blank(3, 'Now Jehu had stationed eighty men outside, and said, "The man who allows any of those whom I give into your hands to escape shall _____ his life."', 'forfeit', 24),
     sa(2, 'What were the guards forbidden to allow?', 'any worshiper to escape', 24, ['an escape', 'anyone to escape']),
     tf(1, 'A guard’s own life was the penalty for letting a captive escape.', true, 24),
 
     mc(1, 'What command followed the burnt offering?', ['Kill the worshipers and allow no escape', 'Release every worshiper from the building', 'Set fire to the entire city of Samaria', 'Send all the priests into Judah as exiles'], 25),
-    blank(2, 'Go in and _____ them', 'slay', 25),
+    blank(2, 'So as soon as he had made an end of offering the burnt offering, Jehu said to the guard and to the officers, "Go in and _____ them;', 'slay', 25),
     sa(1, 'Who carried out the killing?', 'the guard and officers', 25, ['guards and officers']),
     tf(3, 'Jehu’s guards released Baal’s worshipers after the burnt offering.', false, 25, 'The guards and officers killed them, allowed none to escape, and entered the inner room.'),
 
     mc(1, 'What did Jehu’s men do to Baal’s pillar?', ['Brought it out and burned it', 'Moved it to Bethel', 'Covered it with garments', 'Left it standing'], 26),
-    blank(3, 'and _____ it.', 'burned', 26),
+    blank(3, 'and they brought out the pillar that was in the house of Ba\'al, and _____ it.', 'burned', 26),
     sa(2, 'From where was the pillar removed?', 'the house of Baal', 26, ['Baal’s house']),
     tf(1, 'The pillar was destroyed by fire.', true, 26),
 
@@ -155,7 +155,7 @@ const bank: ChapterBank = {
     tf(1, 'The promise was limited to four generations.', true, 30),
 
     mc(1, 'What spiritual failure remained in Jehu?', ['He did not walk in the LORD’s law wholeheartedly', 'He restored Baal worship', 'He refused to destroy Ahab’s house', 'He worshiped Syria’s gods'], 31),
-    blank(2, 'with all his _____.', 'heart', 31),
+    blank(2, 'But Jehu was not careful to walk in the law of the LORD the God of Israel with all his _____;', 'heart', 31),
     word(1, 'From whose sins did Jehu fail to turn?', 'Jeroboam’s', 31, ['Jeroboam']),
     tf(3, 'Jehu’s zeal was matched by wholehearted obedience to the law.', false, 31, 'He was not careful to walk in the LORD’s law with all his heart.'),
 
@@ -170,7 +170,7 @@ const bank: ChapterBank = {
     tf(3, 'Hazael’s conquests were limited to territory west of the Jordan.', false, 33, 'The losses included Gilead and Bashan east of the Jordan.'),
 
     mc(1, 'Where were Jehu’s other deeds and might recorded?', ['Chronicles of the Kings of Israel', 'Chronicles of Judah', 'Book of Elijah', 'Records of Syria'], 34),
-    blank(3, 'all his _____.', 'might', 34),
+    blank(3, 'Now the rest of the acts of Jehu, and all that he did, and all his _____, are they not written in the Book of the Chronicles of the Kings of Israel?', 'might', 34),
     word(2, 'Whose acts does the verse summarize?', 'Jehu’s', 34, ['Jehu']),
     tf(1, 'The narrator refers readers to Israel’s royal chronicles.', true, 34),
 
@@ -180,7 +180,7 @@ const bank: ChapterBank = {
     tf(3, 'Jehu was buried outside Samaria in Jezreel.', false, 35, 'He was buried in Samaria, and Jehoahaz succeeded him.'),
 
     mc(1, 'How long did Jehu reign?', ['Twenty-eight years', 'Forty years', 'Seven years', 'Twelve years'], 36),
-    blank(3, 'was _____-eight years.', 'twenty', 36),
+    blank(3, 'The time that Jehu reigned over Israel in Sama\'ria was _____-eight years.', 'twenty', 36),
     word(2, 'Over which kingdom did Jehu reign?', 'Israel', 36),
     tf(1, 'Jehu’s reign was based in Samaria.', true, 36),
   ],

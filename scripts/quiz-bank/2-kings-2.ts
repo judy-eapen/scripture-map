@@ -103,7 +103,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Why did Elisha finally allow the men to search?', ['They urged him until he was ashamed', 'The LORD commanded him', 'He believed Elijah was lost', 'The king ordered the search'], 17),
     blank(2, 'They sent therefore fifty men; and for _____ days they sought him', 'three', 17, ['3']),
-    word(1, 'Did the searchers find Elijah?', 'no', 17, ['they did not find him', 'no they did not']),
+    tf(1, 'The fifty men searched three days for Elijah but did not find him.', true, 17),
     tf(3, 'The fifty men found Elijah on the third day.', false, 17, 'They searched for three days but did not find him.'),
     mc(2, 'What was the outcome of the search for Elijah?', ['Fifty men searched for three days without finding him', 'The searchers found Elijah alive in a valley near the Jordan', 'The searchers found Elijah waiting for them on Mount Carmel', 'The fifty men abandoned the search after looking for only one day'], 17),
 

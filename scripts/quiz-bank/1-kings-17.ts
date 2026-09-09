@@ -35,7 +35,7 @@ const bank: ChapterBank = {
     sa(2, 'Where was Cherith located?', 'east of the Jordan', 5),
     tf(3, 'Elijah went and lived by the brook Cherith as the LORD had commanded.', true, 5),
     mc(2, 'What did Elijah do in response to the LORD’s command?', ['He went and lived by the brook Cherith east of the Jordan', 'He returned to Ahab and remained at the royal court', 'He announced that rain would begin immediately', 'He left Israel and settled permanently in Jerusalem'], 5),
-    blank(3, 'So he went and _____ according to the word of the LORD', 'did', 5),
+    blank(3, 'So he went and _____ according to the word of the LORD; he went and dwelt by the brook Cherith that is east of the Jordan.', 'did', 5),
 
     mc(1, 'What did the ravens bring Elijah?', ['Bread and meat', 'Meal and oil', 'Loaves and honey', 'Fish and bread'], 6),
     blank(2, 'And the ravens brought him bread and meat in the _____.', 'morning', 6),
@@ -84,7 +84,7 @@ const bank: ChapterBank = {
     sa(1, 'How many sticks was she gathering?', 'a couple', 12, ['two', '2']),
     tf(2, 'The widow expected that she and her son would eat and then die.', true, 12),
     mc(1, 'For whom was the widow preparing her final meal?', ['Herself and her son', 'Elijah and Ahab', 'Her whole household', 'The ravens'], 12),
-    blank(2, 'I have nothing _____', 'baked', 12),
+    blank(2, 'And she said, "As the LORD your God lives, I have nothing _____, only a handful of meal in a jar, and a little oil in a cruse;', 'baked', 12),
 
     mc(1, 'What did Elijah first tell the widow?', ['Fear not', 'Leave Zarephath', 'Call your son', 'Gather more oil'], 13),
     blank(2, 'but first make me a little _____ of it and bring it to me', 'cake', 13),
@@ -105,7 +105,7 @@ const bank: ChapterBank = {
     sa(1, 'Who ate with the widow and Elijah?', 'her household', 15),
     tf(3, 'The food sustained only Elijah and not the widow’s household.', false, 15, 'She, Elijah, and her household ate for many days.'),
     mc(2, 'For how long did the household eat?', ['Many days', 'One evening', 'Seven days exactly', 'Until the next morning'], 15),
-    blank(3, 'And she went and _____ as Eli’jah said', 'did', 15),
+    blank(3, 'And she went and _____ as Eli\'jah said; and she, and he, and her household ate for many days.', 'did', 15),
 
     mc(1, 'What happened to the widow’s jar of meal?', ['It was not spent', 'It spoiled', 'It was stolen', 'It became empty that night'], 16),
     blank(2, 'neither did the cruse of oil _____', 'fail', 16),
@@ -147,7 +147,7 @@ const bank: ChapterBank = {
     tf(3, 'The child’s soul returned, but he did not revive.', false, 22, 'His soul returned and he revived.'),
 
     mc(1, 'To whom did Elijah deliver the living child?', ['His mother', 'Ahab', 'The household servants', 'The elders of Sidon'], 23),
-    blank(3, 'See, your son _____.', 'lives', 23),
+    blank(3, 'And Eli\'jah took the child, and brought him down from the upper chamber into the house, and delivered him to his mother; and Eli\'jah said, "See, your son _____."', 'lives', 23),
     sa(1, 'From where did Elijah bring the child down?', 'the upper chamber', 23),
     tf(2, 'Elijah told the mother that her son lived.', true, 23),
 

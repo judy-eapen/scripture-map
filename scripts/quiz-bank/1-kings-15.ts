@@ -141,7 +141,7 @@ const bank: ChapterBank = {
     blank(3, 'and Ba’asha struck him down at _____.', 'Gib’bethon', 27, ['Gibbethon']),
     word(1, 'To which tribe’s house did Baasha belong?', 'Issachar', 27, ["Is'sachar"]),
     tf(2, 'Nadab and Israel were laying siege to Gibbethon when Baasha struck him.', true, 27),
-    mc(3, 'Which description correctly identifies Nadab’s killer?', ['Baasha son of Ahijah of Issachar', 'Ben-hadad of Damascus', 'Jehoshaphat son of Asa', 'Shishak king of Egypt'], 27),
+    mc(3, 'Who conspired against Nadab and struck him down at Gibbethon?', ['Baasha son of Ahijah of Issachar', 'Ben-hadad of Damascus', 'Jehoshaphat son of Asa', 'Shishak king of Egypt'], 27),
 
     mc(1, 'In which year of Asa did Baasha kill Nadab?', ['The third year', 'The second year', 'The twentieth year', 'The eighteenth year'], 28),
     blank(2, 'So Ba’asha _____ him in the third year of Asa king of Judah', 'killed', 28),

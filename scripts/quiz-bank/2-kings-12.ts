@@ -53,7 +53,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the priests agree to stop doing?', ['Collecting public money and managing repairs', 'Serving in the temple as ordained priests', 'Receiving the money from designated offerings', 'Providing religious instruction to King Jehoash'], 8),
     blank(3, 'they should take no more money from the _____.', 'people', 8),
-    word(2, 'Did the priests keep responsibility for construction?', 'no', 8, ['they would not repair the house']),
+    tf(2, 'The priests agreed to take no more money from the people and to make no more repairs on the house.', true, 8),
     tf(1, 'The priests accepted the king’s revised arrangement.', true, 8),
     mc(2, 'What two responsibilities were removed from the priests?', ['Public collection and repair management', 'Temple worship and sacrificial service', 'Religious teaching and judicial decisions', 'Guard duty and the singing of psalms'], 8),
     sa(1, 'Who reached this agreement?', 'the priests', 8),
@@ -102,7 +102,7 @@ const bank: ChapterBank = {
     sa(1, 'Who controlled the practical expenditure?', 'the repair workmen', 14, ['workmen']),
 
     mc(1, 'Why was no accounting demanded from the managers?', ['They dealt honestly', 'The sums were too small', 'The king waived oversight for relatives', 'No records existed'], 15),
-    blank(2, 'for they dealt _____.', 'honestly', 15),
+    blank(2, 'And they did not ask an accounting from the men into whose hand they delivered the money to pay out to the workmen, for they dealt _____.', 'honestly', 15),
     sa(1, 'To whom did the managers pay out money?', 'the workmen', 15),
     tf(3, 'The managers required constant auditing because they dealt dishonestly.', false, 15, 'No accounting was demanded from them because they dealt honestly.'),
     mc(2, 'What quality underpinned trust in the repair administration?', ['Honesty', 'Royal birth', 'Priestly status alone', 'Military authority'], 15),
@@ -110,8 +110,8 @@ const bank: ChapterBank = {
     mc(3, 'Why could the repair funds be entrusted without a separate reckoning?', ['The distributors were known to deal honestly', 'The collection chest never contained much money', 'Only Jehoiada was permitted to touch the funds', 'Every workman completed the project without wages'], 15),
 
     mc(1, 'Which offering money belonged to the priests?', ['Guilt and sin offering money', 'All repair gifts', 'The king’s votive gifts', 'The chest collection'], 16),
-    blank(3, 'it _____ to the priests.', 'belonged', 16),
-    word(2, 'Was this offering money placed in the temple repair fund?', 'no', 16, ['it was not brought in', 'no it was not']),
+    blank(3, 'The money from the guilt offerings and the money from the sin offerings was not brought into the house of the LORD; it _____ to the priests.', 'belonged', 16),
+    tf(2, 'The money from the guilt offerings and the sin offerings was brought into the house of the LORD.', false, 16, 'That money was not brought into the house of the LORD; it belonged to the priests.'),
     tf(1, 'Guilt- and sin-offering money remained priestly income.', true, 16),
     mc(2, 'What financial boundary did the verse preserve?', ['Priestly offering money remained outside the repair fund', 'All income received by priests funded construction', 'The king personally confiscated every offering', 'Sin-offering money was delivered as tribute to Syria'], 16),
 

@@ -14,11 +14,11 @@ const bank: ChapterBank = {
 
     mc(1, 'What additional request did one prophet make?', ['That Elisha go with them', 'That the king supply wood', 'That Gehazi build the house', 'That they remain where they were'], 3),
     blank(2, 'Be pleased to go with your _____.', 'servants', 3),
-    word(1, 'Did Elisha agree to accompany them?', 'yes', 3, ['I will go', 'he agreed']),
+    tf(1, 'When the sons of the prophets asked Elisha to go with them to the Jordan, he answered, "I will go."', true, 3),
     tf(3, 'Elisha refused to join the work party.', false, 3, 'He answered, “I will go.”'),
 
     mc(1, 'What did the group do after reaching the Jordan?', ['Cut down trees', 'Crossed on dry ground', 'Built a siege wall', 'Searched for Elijah'], 4),
-    blank(3, 'they cut down _____.', 'trees', 4),
+    blank(3, 'So he went with them. And when they came to the Jordan, they cut down _____.', 'trees', 4),
     word(2, 'Who went with the prophets?', 'Elisha', 4, ["Eli'sha"]),
     tf(1, 'The building work began at the Jordan.', true, 4),
 
@@ -28,7 +28,7 @@ const bank: ChapterBank = {
     tf(3, 'The man had purchased the lost axe for himself.', false, 5, 'He cried out because it was borrowed.'),
 
     mc(1, 'How did Elisha make the iron float?', ['He threw a cut stick where it fell', 'He struck the water with his mantle', 'He poured salt into the river', 'He commanded the man to dive'], 6),
-    blank(3, 'and made the iron _____.', 'float', 6),
+    blank(3, 'Then the man of God said, "Where did it fall?" When he showed him the place, he cut off a stick, and threw it in there, and made the iron _____.', 'float', 6),
     sa(2, 'What did Elisha first ask the man?', 'Where did it fall?', 6, ['where the axe head fell', 'the place it fell']),
     tf(1, 'The man showed Elisha the place where the axe head had fallen.', true, 6),
     mc(3, 'What complete sequence recovered the borrowed axe head?', ['A stick was thrown where it fell, and the iron floated', 'The Jordan was parted and the man walked to it', 'The river was drained and the iron was found', 'A new iron head was given to the man'], 6),
@@ -54,7 +54,7 @@ const bank: ChapterBank = {
     tf(1, 'Elisha’s warnings protected the king on multiple occasions.', true, 10),
 
     mc(1, 'What did Syria’s king suspect?', ['One of his own people supported Israel’s king', 'Elisha led Israel’s army', 'Dothan had betrayed Syria', 'His servants had lost their weapons'], 11),
-    blank(2, 'Will you not show me who of us is _____ the king of Israel?', 'for', 11),
+    blank(2, 'and he called his servants and said to them, "Will you not show me who of us is _____ the king of Israel?"', 'for', 11),
     sa(1, 'How did the Syrian king feel about the repeated failures?', 'greatly troubled', 11, ['troubled']),
     tf(3, 'Syria’s king called his servants to identify a possible traitor.', true, 11),
 
@@ -75,7 +75,7 @@ const bank: ChapterBank = {
     tf(1, 'The Syrian army arrived at Dothan during the night.', true, 14),
 
     mc(1, 'What did Elisha’s servant see in the morning?', ['An army surrounding the city', 'The Syrian forces fleeing away', 'A mountain covered with fire', 'The Jordan River divided'], 15),
-    blank(2, 'Alas, my master! What shall we _____?', 'do', 15),
+    blank(2, 'When the servant of the man of God rose early in the morning and went out, behold, an army with horses and chariots was round about the city. And the servant said, "Alas, my master! What shall we _____?"', 'do', 15),
     sa(1, 'Who was alarmed by the surrounding army?', 'the servant of the man of God', 15, ['Elisha’s servant', 'the servant']),
     tf(3, 'The servant found Dothan free of enemy soldiers.', false, 15, 'A Syrian army surrounded the city.'),
 

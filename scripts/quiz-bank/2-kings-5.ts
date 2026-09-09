@@ -6,7 +6,7 @@ const bank: ChapterBank = {
     blank(1, 'He was a mighty man of valor, but he was a _____.', 'leper', 1),
     word(1, 'Through whom had the LORD given victory to Syria?', 'Naaman', 1, ["Na'aman"]),
     tf(2, 'Naaman was highly favored by the king of Syria.', true, 1),
-    mc(2, 'What contrast closes the description of Naaman?', ['He was a mighty warrior but had leprosy', 'He was wealthy but had no servants', 'He was Syrian but served Israel', 'He was honored but had no victories'], 1),
+    mc(2, 'Naaman was commander of the Syrian army and a mighty man of valor. What else does the verse say about him?', ['He was a mighty warrior but had leprosy', 'He was wealthy but had no servants', 'He was Syrian but served Israel', 'He was honored but had no victories'], 1),
 
     mc(1, 'Whom had Syrian raiders carried away from Israel?', ['A little maid', 'Elisha', 'Gehazi', 'The king’s daughter'], 2),
     blank(3, 'and she waited on Na’aman’s _____.', 'wife', 2),
@@ -71,14 +71,14 @@ const bank: ChapterBank = {
     mc(2, 'What did Naaman imagine Elisha would do?', ['Come out, invoke the LORD his God, and wave his hand over the diseased place', 'Send him back to Israel’s king so that the king could perform the cure', 'Ask the captive Israelite maid to pray over him at the prophet’s house', 'Accept all the silver and garments before announcing how he would be healed'], 11),
 
     mc(1, 'Which rivers did Naaman praise above Israel’s waters?', ['Abana and Pharpar', 'Jordan and Kishon', 'Cherith and Kidron', 'Habor and Gozan'], 12),
-    blank(3, 'the rivers of _____', 'Damascus', 12),
+    blank(3, 'Are not Aba\'na and Pharpar, the rivers of _____, better than all the waters of Israel?', 'Damascus', 12),
     sa(2, 'In what state did Naaman turn away?', 'a rage', 12, ['rage', 'anger']),
     tf(1, 'Naaman believed he could wash in Damascus’s rivers instead.', true, 12),
     mc(3, 'What comparison fueled Naaman’s refusal?', ['He considered Abana and Pharpar better than all Israel’s waters', 'He considered the Jordan larger than Syrian rivers', 'He believed Samaria had no prophet', 'He thought Israel’s king should wash for him'], 12),
     sa(3, 'Name both rivers Naaman mentioned.', 'Abana and Pharpar', 12, ["Aba'na and Pharpar"]),
 
     mc(1, 'Who persuaded Naaman to reconsider?', ['His servants', 'Elisha’s messenger', 'The king of Israel', 'The captive maid'], 13),
-    blank(2, 'Wash, and be _____.', 'clean', 13),
+    blank(2, 'But his servants came near and said to him, "My father, if the prophet had commanded you to do some great thing, would you not have done it? How much rather, then, when he says to you, `Wash, and be _____\'?"', 'clean', 13),
     sa(1, 'What contrast did the servants make?', 'he would have done a great thing, so he should do the simple command', 13, ['if commanded a great thing he would do it', 'the command was simple']),
     tf(3, 'Naaman’s servants encouraged him to obey the prophet’s simple instruction.', true, 13),
 
@@ -95,7 +95,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha do when Naaman offered a present?', ['Refused it', 'Accepted the silver', 'Took two garments', 'Asked Gehazi to receive it'], 16),
     blank(3, 'As the LORD lives, whom I serve, I will receive _____.', 'none', 16),
-    word(2, 'Did Naaman urge Elisha to accept the gift?', 'yes', 16, ['he urged him', 'yes he did']),
+    tf(2, 'Naaman urged Elisha to take a present, but Elisha refused.', true, 16),
     tf(1, 'Elisha maintained his refusal despite Naaman’s urging.', true, 16),
 
     mc(1, 'What did Naaman request after Elisha refused the gift?', ['Two mules’ burden of earth', 'Elijah’s mantle', 'A jar of Jordan water', 'Two talents of silver'], 17),
@@ -119,7 +119,7 @@ const bank: ChapterBank = {
     tf(1, 'Gehazi invoked the LORD’s name while planning to take what Elisha refused.', true, 20),
 
     mc(1, 'How did Naaman respond when he saw Gehazi running after him?', ['He got down from his chariot to meet him and asked whether all was well', 'He drove away quickly because he believed Elisha had changed his mind', 'He sent one of his servants back while remaining inside the chariot', 'He drew his sword because he believed Gehazi intended to seize the gifts'], 21),
-    blank(2, 'Is all _____?', 'well', 21),
+    blank(2, 'And when Na\'aman saw some one running after him, he alighted from the chariot to meet him, and said, "Is all _____?"', 'well', 21),
     word(1, 'Who followed Naaman?', 'Gehazi', 21, ["Geha'zi"]),
     tf(3, 'Naaman ignored Gehazi’s approach.', false, 21, 'He alighted from the chariot and met him.'),
 

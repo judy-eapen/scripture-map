@@ -33,7 +33,7 @@ const bank: ChapterBank = {
     sa(1, 'In which year did Jehoiada act?', 'the seventh year', 4, ['seventh', '7th year']),
 
     mc(1, 'What fraction of the incoming Sabbath force guarded the king’s house?', ['One third', 'One half', 'Two thirds', 'All of it'], 5),
-    blank(2, 'one _____ of you', 'third', 5),
+    blank(2, 'one _____ of you, those who come off duty on the sabbath and guard the king\'s house', 'third', 5),
     sa(1, 'When did this group come off duty?', 'on the sabbath', 5, ['Sabbath']),
     tf(3, 'Jehoiada assigned the entire Sabbath force to the royal house.', false, 5, 'One third of the force was assigned to guard the king’s house.'),
     mc(2, 'What was the first part of Jehoiada’s security plan?', ['One third would guard the king’s house', 'Every guard would enter the LORD’s house', 'No armed guard would remain with the king', 'The Carites would depart from Jerusalem'], 5),
@@ -61,7 +61,7 @@ const bank: ChapterBank = {
     sa(1, 'Whom did the armed ranks surround?', 'the king', 8, ['Joash']),
 
     mc(1, 'How did the captains respond to Jehoiada’s plan?', ['They carried it out fully', 'They refused the oath', 'They warned Athaliah', 'They left the temple'], 9),
-    blank(2, 'each brought his _____', 'men', 9),
+    blank(2, 'The captains did according to all that Jehoi\'ada the priest commanded, and each brought his _____ who were to go off duty on the sabbath, with those who were to come on duty on the sabbath, and came to Jehoi\'ada the priest.', 'men', 9),
     sa(1, 'Who assembled both outgoing and incoming Sabbath guards?', 'the captains', 9),
     tf(3, 'The captains brought only the incoming Sabbath guard to Jehoiada.', false, 9, 'Each captain brought both those coming on duty and those going off duty.'),
     mc(2, 'What demonstrated disciplined obedience?', ['Each captain brought both Sabbath groups', 'The assembled guards crowned Queen Athaliah', 'The men discarded their weapons before entering', 'The captains postponed Jehoiada’s plan'], 9),
@@ -82,7 +82,7 @@ const bank: ChapterBank = {
     sa(2, 'Which directions mark the guard line?', 'south to north', 11, ['south side to north side']),
 
     mc(1, 'What did Jehoiada place on Joash?', ['The crown', 'A priestly robe', 'David’s shield', 'Sackcloth'], 12),
-    blank(3, 'and gave him the _____.', 'testimony', 12),
+    blank(3, 'Then he brought out the king\'s son, and put the crown upon him, and gave him the _____;', 'testimony', 12),
     sa(2, 'What did the people shout?', 'Long live the king!', 12, ['Long live the king']),
     tf(1, 'Joash was crowned, given the testimony, and anointed.', true, 12),
     mc(2, 'How did the assembly celebrate the new king?', ['They clapped and cried, “Long live the king!”', 'They tore their garments in grief and protest', 'They fled from the temple into the city', 'They bowed before the images of Baal'], 12),
@@ -111,7 +111,7 @@ const bank: ChapterBank = {
     sa(2, 'Through what formation was she to be taken?', 'between the ranks', 15, ['the ranks']),
 
     mc(1, 'Where was Athaliah killed?', ['At the king’s house beyond the horses’ entrance', 'Inside the sacred precinct of the LORD’s house', 'Immediately before the altar belonging to Baal', 'Upon the fortified outer wall of Jerusalem'], 16),
-    blank(3, 'and there she was _____.', 'slain', 16),
+    blank(3, 'and she went through the horses\' entrance to the king\'s house, and there she was _____.', 'slain', 16),
     sa(2, 'What route did Athaliah take?', 'the horses’ entrance to the king’s house', 16, ['horses entrance']),
     tf(1, 'The guards laid hands on Athaliah.', true, 16),
     mc(2, 'How was Jehoiada’s restriction observed?', ['She was taken outside the temple before execution', 'She received a complete pardon from the new king', 'She was executed immediately beside the altar', 'She escaped through the horses’ entrance unharmed'], 16),
@@ -135,7 +135,7 @@ const bank: ChapterBank = {
     mc(2, 'Who joined the royal procession?', ['Captains, Carites, guards, and people', 'Baal’s priests together with Queen Athaliah', 'Only Jehoiada and the young king Joash', 'A contingent of soldiers sent from Syria'], 19),
 
     mc(1, 'How did the land respond after Athaliah’s death?', ['The people rejoiced and the city grew quiet', 'Jerusalem immediately broke into open revolt', 'The temple and palace guards fled from the city', 'Public worship of Baal increased throughout Judah'], 20),
-    blank(3, 'and the city was _____.', 'quiet', 20),
+    blank(3, 'and the city was _____ after Athali\'ah had been slain with the sword at the king\'s house.', 'quiet', 20),
     sa(2, 'Where had Athaliah been killed?', 'at the king’s house', 20, ['the palace']),
     tf(1, 'Athaliah’s removal brought public joy and civic quiet.', true, 20),
     mc(2, 'What two results marked the restored kingship?', ['Rejoicing in the land and quiet in the city', 'A severe famine followed by political revolt', 'Renewed warfare followed by a foreign siege', 'Public silence accompanied by national mourning'], 20),

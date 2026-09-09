@@ -98,7 +98,7 @@ const bank: ChapterBank = {
     tf(3, 'The narrator points to Judah’s royal records.', true, 18),
 
     mc(1, 'Where was the conspiracy against Amaziah formed?', ['Jerusalem', 'Lachish', 'Samaria', 'Beth-shemesh'], 19),
-    blank(2, 'and he fled to _____.', 'Lachish', 19),
+    blank(2, 'And they made a conspiracy against him in Jerusalem, and he fled to _____.', 'Lachish', 19),
     word(1, 'Where was Amaziah killed?', 'Lachish', 19),
     tf(3, 'Amaziah escaped his pursuers permanently.', false, 19, 'They followed him to Lachish and killed him there.'),
 

@@ -132,7 +132,7 @@ const bank: ChapterBank = {
     tf(2, 'Shishak attacked Jerusalem in Rehoboam’s seventeenth year.', false, 25, 'He came in Rehoboam’s fifth year.'),
 
     mc(2, 'What did Shishak take from Jerusalem?', ['The temple and royal treasures, including Solomon’s gold shields', 'The city’s stored food while leaving the royal treasures', 'The bronze replacement shields later made by Rehoboam', 'The ark of the covenant while leaving the gold shields'], 26),
-    blank(3, 'he took away _____', 'everything', 26),
+    blank(3, 'he took away the treasures of the house of the LORD and the treasures of the king\'s house; he took away _____. He also took away all the shields of gold which Solomon had made;', 'everything', 26),
     sa(1, 'What kind of shields had Solomon made?', 'gold shields', 26, ['shields of gold', 'gold']),
     tf(2, 'Shishak left the treasures of the LORD’s house untouched.', false, 26, 'He took the treasures of the LORD’s house and the king’s house.'),
 

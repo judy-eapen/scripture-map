@@ -58,7 +58,7 @@ const bank: ChapterBank = {
     tf(1, 'Elisha knew that the sickness itself need not prevent recovery.', true, 10),
 
     mc(1, 'What did Elisha do until Hazael felt ashamed?', ['Fixed his gaze and stared at him', 'Refused to look at him', 'Prayed with him', 'Accepted his present'], 11),
-    blank(2, 'And the man of God _____.', 'wept', 11),
+    blank(2, 'And he fixed his gaze and stared at him, until he was ashamed. And the man of God _____.', 'wept', 11),
     word(1, 'Who became ashamed under Elisha’s gaze?', 'Hazael', 11, ["Haza'el"]),
     tf(3, 'Elisha laughed after staring at Hazael.', false, 11, 'After staring at Hazael, the man of God wept.'),
 
@@ -111,7 +111,7 @@ const bank: ChapterBank = {
     tf(1, 'Edom established its own king.', true, 20),
 
     mc(1, 'Where did Joram cross with his chariots?', ['Zair', 'Jezreel', 'Damascus', 'Samaria'], 21),
-    blank(2, 'and rose by _____', 'night', 21),
+    blank(2, 'Then Joram passed over to Za\'ir with all his chariots, and rose by _____, and he and his chariot commanders smote the E\'domites who had surrounded him;', 'night', 21),
     sa(1, 'Who had surrounded Joram?', 'the Edomites', 21, ['Edom']),
     tf(3, 'Joram’s army remained at Zair after striking the surrounding Edomites.', false, 21, 'After the nighttime attack, his army fled home.'),
 

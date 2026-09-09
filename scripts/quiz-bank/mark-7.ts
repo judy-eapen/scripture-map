@@ -83,10 +83,7 @@ const bank: ChapterBank = {
     sa(1, 'Sum up what Jesus told the multitude about what can and cannot defile a man.', 'Nothing that enters a man from outside can defile him; the things that come out of him are what defile a man.', 15),
 
     blank(2, 'If anyone has ears to hear, let him _____!', 'hear', 16),
-    mc(3, 'How did Jesus close His teaching to the multitude about what defiles a man?', ['"If anyone has ears to hear, let him hear!"', '"He who has ears, let him understand the parable!"', '"Go your way; your faith has made you clean!"', '"Hear Me, everyone, and be opened!"'], 16),
-    word(2, 'When Jesus said "If anyone has ears to hear, let him hear!", what did He say a person with ears must do?', 'hear', 16, ['listen']),
-
-    // ══════════════════════════════════ v17–23 · The explanation in the house
+    mc(3, 'How did Jesus close His teaching to the multitude about what defiles a man?', ['"If anyone has ears to hear, let him hear!"', '"He who has ears, let him understand the parable!"', '"Go your way; your faith has made you clean!"', '"Hear Me, everyone, and be opened!"'], 16),// ══════════════════════════════════ v17–23 · The explanation in the house
     mc(1, 'Where were Jesus’ disciples when they asked Him about the parable on what defiles?', ['In a house away from the crowd', 'On the Sea of Galilee', 'In the marketplace', 'In the region of Decapolis'], 17),
     blank(1, 'When He had entered a house away from the crowd, His disciples asked Him concerning the _____.', 'parable', 17),
     tf(1, 'The disciples asked Jesus about the parable while He was still with the crowd.', false, 17, 'They asked when He had entered a house away from the crowd.'),
