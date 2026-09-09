@@ -20,7 +20,7 @@ const bank: ChapterBank = {
     mc(1, 'In the parable of the vineyard, what did the vinedressers do to the first servant the owner sent?', ['They beat him and sent him away empty-handed', 'They threw stones at him and wounded him in the head', 'They killed him and cast him out of the vineyard', 'They gave him some of the fruit and sent him back'], 3),
     blank(2, 'And they took him and beat him and sent him away _____.', 'empty-handed', 3, ['empty handed', 'emptyhanded']),
 
-    mc(3, 'In the parable of the vineyard, how did the vinedressers treat the second servant?', ['They threw stones at him, wounded him in the head, and sent him away shamefully treated', 'They beat him and sent him away empty-handed', 'They killed him and cast him out of the vineyard', 'They seized him and shut him up in the tower'], 4),
+    mc(3, 'In the parable of the vineyard, how did the vinedressers treat the second servant?', ['They stoned him, wounded his head, and sent him away shamefully', 'They beat him and sent him away empty-handed', 'They killed him and cast him out of the vineyard', 'They seized him and shut him up in the tower'], 4),
     word(3, 'In the parable of the vineyard, where on his body was the second servant wounded?', 'head', 4, ['the head', 'his head', 'in the head']),
     blank(3, 'Again he sent them another servant, and at him they threw _____, wounded him in the head, and sent him away shamefully treated.', 'stones', 4),
 
@@ -86,7 +86,7 @@ const bank: ChapterBank = {
     word(1, 'Which group, who say there is no resurrection, came to question Jesus?', 'Sadducees', 18, ['the sadducees']),
     tf(1, 'The Sadducees who questioned Jesus about the seven brothers believed in the resurrection.', false, 18, 'Mark notes the Sadducees "say there is no resurrection."'),
 
-    mc(2, 'According to the Sadducees, what did Moses write should happen if a man’s brother dies leaving a wife but no children?', ['His brother should take his wife and raise up offspring for his brother', 'His wife should return to her father’s house', 'His inheritance should be given to the poor', 'His brother should give her a certificate of divorce'], 19),
+    mc(2, 'According to the Sadducees, what did Moses write should happen if a man’s brother dies leaving a wife but no children?', ['His brother should marry the widow and raise up offspring', 'The widow should return to her father’s house', 'The inheritance should be given to the poor', 'The brother should give her a divorce certificate'], 19),
     blank(3, 'Teacher, Moses wrote to us that if a man’s brother dies, and leaves his wife behind, and leaves no _____, his brother should take his wife and raise up offspring for his brother.', 'children', 19),
     sa(3, 'In the Sadducees’ question, under what three conditions did Moses’ rule about a brother taking his brother’s wife apply?', 'If a man’s brother dies, leaves his wife behind, and leaves no children.', 19),
 
@@ -109,7 +109,7 @@ const bank: ChapterBank = {
     sa(2, 'How did Jesus begin His answer to the Sadducees’ question about the seven brothers?', '"Are you not therefore mistaken, because you do not know the Scriptures nor the power of God?"', 24),
     tf(1, 'Jesus told the Sadducees they were mistaken because they did not know the Scriptures nor the power of God.', true, 24),
 
-    mc(1, 'What did Jesus tell the Sadducees about marriage for those who rise from the dead?', ['They neither marry nor are given in marriage, but are like angels in heaven', 'They return to the husband or wife they had first', 'They marry again, but only within their own family', 'They are given in marriage by God Himself'], 25),
+    mc(1, 'What did Jesus tell the Sadducees about marriage for those who rise from the dead?', ['They do not marry but are like the angels in heaven', 'They return to the spouse they had first', 'They marry again within their own family', 'They are given in marriage by God Himself'], 25),
     blank(1, 'For when they rise from the dead, they neither marry nor are given in marriage, but are like _____ in heaven.', 'angels', 25, ['angel']),
     tf(2, 'Jesus said that in the resurrection people marry and are given in marriage just as on earth.', false, 25, 'He said they "neither marry nor are given in marriage, but are like angels in heaven."'),
 
@@ -143,7 +143,7 @@ const bank: ChapterBank = {
     word(1, 'Jesus said the second commandment is to love whom as yourself?', 'neighbor', 31, ['neighbour', 'your neighbor', 'your neighbour']),
     sa(2, 'After giving the two commandments to the scribe, what did Jesus say about all other commandments?', 'There is no other commandment greater than these.', 31),
 
-    mc(3, 'How did the scribe respond after Jesus named the two greatest commandments?', ['"Well said, Teacher. You have spoken the truth, for there is one God, and there is no other but He."', '"Teacher, we know that You are true, and teach the way of God in truth."', '"Good Teacher, what shall I do that I may inherit eternal life?"', '"Teacher, Moses wrote to us that there is one God."'], 32),
+    mc(3, 'How did the scribe respond after Jesus named the two greatest commandments?', ['Jesus had spoken truly: there is one God and no other', 'Jesus was true and taught God’s way in truth', 'He asked how he might inherit eternal life', 'He said Moses had written that there is one God'], 32),
     blank(2, 'So the scribe said to Him, "Well said, Teacher. You have spoken the truth, for there is one _____, and there is no other but He.', 'God', 32),
     sa(3, 'What reason did the scribe give when he told Jesus, "You have spoken the truth"?', 'For there is one God, and there is no other but He.', 32),
     tf(2, 'The scribe told Jesus, "Well said, Teacher. You have spoken the truth."', true, 32),
@@ -164,16 +164,16 @@ const bank: ChapterBank = {
     blank(2, 'Then Jesus answered and said, while He taught in the temple, "How is it that the scribes say that the Christ is the Son of _____?', 'David', 35),
     sa(3, 'What question did Jesus raise about the scribes’ teaching while He taught in the temple?', '"How is it that the scribes say that the Christ is the Son of David?"', 35),
 
-    mc(2, 'Jesus said David spoke by the Holy Spirit. Which saying of David did He quote?', ['"The Lord said to my Lord, ‘Sit at My right hand, till I make Your enemies Your footstool.’"', '"The stone which the builders rejected has become the chief cornerstone."', '"Hear, O Israel, the Lord our God, the Lord is one."', '"I am the God of Abraham, the God of Isaac, and the God of Jacob."'], 36),
+    mc(2, 'Jesus said David spoke by the Holy Spirit. Which saying of David did He quote?', ['The Lord told my Lord to sit at His right hand', 'The rejected stone has become the chief cornerstone', 'The Lord our God, the Lord is one', 'I am the God of Abraham, Isaac, and Jacob'], 36),
     blank(3, 'For David himself said by the Holy Spirit: ‘The Lord said to my Lord, "Sit at My right hand, Till I make Your enemies Your _____."’', 'footstool', 36),
-    word(2, 'By whom did Jesus say David spoke when he said, "The Lord said to my Lord"?', 'Holy Spirit', 36, ['the holy spirit', 'spirit', 'the spirit']),
+    word(2, 'By whom did Jesus say David spoke when he said, "The Lord said to my Lord"?', 'Spirit', 36, ['the spirit', 'holy spirit', 'the holy spirit']),
     word(3, 'In the psalm Jesus quoted, what would the enemies of David’s Lord be made?', 'footstool', 36, ['a footstool', 'your footstool', 'his footstool']),
     tf(2, 'Jesus said David spoke the words "The Lord said to my Lord" by the Holy Spirit.', true, 36),
     sa(3, 'In the psalm Jesus quoted in the temple, what did the Lord say to David’s Lord?', '"Sit at My right hand, till I make Your enemies Your footstool."', 36),
 
     mc(3, 'What point did Jesus draw from David calling the Christ "Lord"?', ['If David himself calls Him Lord, how is He then his Son?', 'If David calls Him Lord, then David was not truly king', 'If David calls Him Lord, the scribes must be His servants', 'If David calls Him Lord, then the Christ must sit on David’s throne'], 37),
     blank(2, 'Therefore David himself calls Him ‘Lord’; how is He then his _____?" And the common people heard Him gladly.', 'Son', 37),
-    tf(2, 'After Jesus asked how the Christ could be David’s Son, the scribes heard Him gladly.', false, 37, 'It was the common people who heard Him gladly.'),
+    tf(2, 'After Jesus asked how the Christ could be David’s Son, the common people heard Him gladly.', true, 37),
     sa(3, 'Jesus asked, "David himself calls Him ‘Lord’; how is He then his Son?" Who responded, and how?', 'The common people heard Him gladly.', 37),
 
     // ══════════════════════════════════ v38–40 · Beware of the scribes
@@ -199,7 +199,7 @@ const bank: ChapterBank = {
     mc(1, 'Where did Jesus sit when He watched the people put in their money?', ['Opposite the treasury', 'On the Mount of Olives', 'In the best seat in the synagogue', 'At the door of the temple'], 41),
     blank(1, 'Now Jesus sat opposite the _____ and saw how the people put money into the treasury.', 'treasury', 41),
     sa(2, 'As Jesus sat opposite the treasury, what did He see the rich doing?', 'Many who were rich put in much.', 41),
-    tf(2, 'As Jesus sat opposite the treasury, He saw that only the poor put money in.', false, 41, '"Many who were rich put in much."'),
+    tf(2, 'As Jesus sat opposite the treasury, He saw many rich people put in much.', true, 41),
 
     mc(1, 'What did the poor widow throw into the treasury?', ['Two mites, which make a quadrans', 'Two denarii, out of her abundance', 'One mite, half of a quadrans', 'A single denarius bearing Caesar’s image'], 42),
     blank(1, 'Then one poor widow came and threw in two _____, which make a quadrans.', 'mites', 42, ['mite']),
@@ -212,7 +212,7 @@ const bank: ChapterBank = {
     tf(2, 'Jesus called the scribes to Himself to tell them about the poor widow’s gift.', false, 43, 'He called His disciples to Himself.'),
     mc(3, 'How did Jesus begin His words to the disciples about the poor widow?', ['"Assuredly, I say to you"', '"Have you not even read"', '"Beware of the scribes"', '"Are you not therefore mistaken"'], 43),
 
-    mc(2, 'Why did Jesus say the poor widow had given more than the rich?', ['They gave out of their abundance, but she out of her poverty put in all she had, her whole livelihood', 'Her two mites were worth more than their gold', 'She gave in secret while they gave for a pretense', 'She gave with all her heart, soul, mind and strength'], 44),
+    mc(2, 'Why did Jesus say the poor widow had given more than the rich?', ['They gave from abundance; she gave all she had from poverty', 'Her two mites were worth more than their gold', 'She gave in secret while they gave for a pretense', 'She gave with all her heart, soul, mind and strength'], 44),
     blank(1, 'for they all put in out of their abundance, but she out of her _____ put in all that she had, her whole livelihood."', 'poverty', 44),
     blank(3, 'for they all put in out of their abundance, but she out of her poverty put in all that she had, her whole _____."', 'livelihood', 44),
     sa(3, 'In Jesus’ words, what did the rich give out of, and what did the widow give out of?', 'The rich gave out of their abundance; the widow gave out of her poverty, putting in all that she had, her whole livelihood.', 44),

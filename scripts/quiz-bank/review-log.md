@@ -1981,3 +1981,14 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 11 · 3e9972f8-f8dc-4651-b779-41d767c06c66 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 11 · 518358d9-98fd-41af-813c-8278f228f720 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 11 · f7e3331d-aa4e-4096-9069-876751d57176 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 12 semantic review
+
+- Mark 12 · d3a7940f-129c-4c09-b074-4f72fe7f271b · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · 265f1a10-a5d7-4f8f-a46b-831fd21210cb · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · fea14747-e9f7-40a1-9b6e-0e1f85f56a07 · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · 2da0de81-5320-40ee-9310-f2a22db3a9eb · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · ea007326-b445-46dd-a95f-9e250b744a5e · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · 10a930df-b75e-4b0b-89ff-a95dfd874a0a · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · d559feb5-b8c8-4eb6-a570-3af055019fba · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · 14c20e9f-64cb-42fd-afba-25bacca0eee5 · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+- Mark 12 · 8eaa9f4f-b083-4d4b-9cb4-6497bd370a7b · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
