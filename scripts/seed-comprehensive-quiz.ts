@@ -53,6 +53,9 @@ async function main() {
     if (row.type === 'multiple_choice' && (row.options?.length !== 4 || new Set(row.options.map(norm)).size !== 4)) errors.push(`${where}: needs four unique options`)
     if (row.type !== 'multiple_choice' && !row.answer) errors.push(`${where}: answer missing`)
     if (row.type === 'fill_blank') {
+      if (!row.lead_in?.trim()) errors.push(`${where}: collection fill_blank requires a lead_in`)
+      const answerVariants = [row.answer, ...(row.accepted_answers ?? [])].filter(Boolean).map(value => norm(value!))
+      if (row.lead_in && answerVariants.some(answer => answer && ` ${norm(row.lead_in!)} `.includes(` ${answer} `))) errors.push(`${where}: lead_in contains the answer`)
       if ((row.question.match(/_{3,}/g) ?? []).length !== 1) errors.push(`${where}: fill_blank needs exactly one blank`)
       const ref = row.supporting_refs[0]
       const source = (verseTexts.get(`${ref.book}:${ref.chapter}`) ?? [])
@@ -70,6 +73,7 @@ async function main() {
   const { data: collection, error: collectionError } = await supabase.from('quiz_collections').select('id').eq('slug', bank.slug).single()
   if (collectionError || !collection) throw new Error('Apply supabase/migrations/012_comprehensive_quizzes.sql before loading this bank')
   const canRetire = !(await supabase.from('quiz_questions').select('retired_at').limit(1)).error
+  const canLeadIn = !(await supabase.from('quiz_questions').select('lead_in').limit(1)).error
   if (retireDraft) {
     if (!canRetire) throw new Error('Apply supabase/migrations/013_retire_questions.sql before retiring draft questions')
     const { count, error } = await supabase
@@ -91,6 +95,7 @@ async function main() {
       review_topic: row.review_topic, review_guidance: row.review_guidance,
       verse_ref: row.supporting_refs.map(ref => ref.label).join('; '), verse_number: null,
       answer: row.answer ?? null, accepted_answers: row.accepted_answers ?? [], options: null as string[] | null, correct_index: null as number | null,
+      ...(canLeadIn ? { lead_in: row.lead_in ?? null } : {}),
     }
     if (row.type === 'multiple_choice') Object.assign(result, shuffled(row.options!))
     return result

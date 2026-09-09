@@ -17,6 +17,7 @@ import { saveQuizScore } from '@/app/actions/progress';
 import { markSectionForVerse } from '@/lib/mark-sections';
 import UnsupportedQuizQuestion from '@/components/UnsupportedQuizQuestion';
 import QuestionSource from '@/components/QuestionSource';
+import FillBlankContext from '@/components/FillBlankContext';
 
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete' | 'browse';
 type Level = 1 | 2 | 3 | 'mixed';
@@ -582,9 +583,9 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
         <span>{chapter?.title} · {DIFFICULTY_LABEL[current.difficulty]}</span>
         <span>{index + 1} / {round.length} · <span style={{ color: '#34d399' }}>{runningCorrect} ✓</span> · <span style={{ color: '#f87171' }}>{answeredCount + priorCorrect - runningCorrect} ✗</span> · <span data-testid="pool-count" style={{ color: 'var(--gold-300)' }}>Pool {poolRemaining(pool, stats)} / {pool.length}</span></span>
       </div>
-      <p className="text-[11px] -mt-4 mb-5" style={{ color: 'var(--muted-500)' }}>
+      {allowAdminBrowse && <p className="text-[11px] -mt-4 mb-5" style={{ color: 'var(--muted-500)' }}>
         {chapter?.scopeKind === 'collection' ? `Topic: ${current.review_topic ?? 'All of Kings'}` : `Support reference: ${current.verse_ref}`} · ID {current.id}
-      </p>
+      </p>}
       <div className="h-1 rounded-full mb-6" style={{ background: 'rgba(255,255,255,0.06)' }}>
         <div className="h-1 rounded-full transition-all" style={{ width: `${(answeredCount / round.length) * 100}%`, background: 'var(--gold-400)' }} />
       </div>
@@ -594,10 +595,15 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           <span data-testid="type-badge" className="text-xs font-semibold px-2.5 py-1 rounded-full" style={goldBtn}>{TYPE_ICON[current.type]} {TYPE_LABEL[current.type]}</span>
           {current.type === 'fill_blank' && current.verse_ref && <span className="text-xs" style={{ color: 'var(--muted-500)' }}>{current.verse_ref} · type the missing word(s)</span>}
         </div>
+        {current.type === 'fill_blank' && current.lead_in && <p className="text-sm mb-2" style={{ color:'var(--ivory-200)' }}>{current.lead_in}</p>}
         <p className="text-lg leading-relaxed" style={{ color: 'var(--ivory-100)', fontFamily: current.type === 'fill_blank' ? 'var(--font-playfair)' : undefined }}>
           {current.type === 'fill_blank' ? renderBlank(current.question, revealed ? displayAnswer(current) : null, lastCorrect) : current.question}
         </p>
       </div>
+
+      {current.type === 'fill_blank' && !revealed && (
+        <FillBlankContext question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} />
+      )}
 
       {current.type === 'multiple_choice' && (
         <div className="space-y-2 mb-4">
@@ -646,7 +652,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           {current.explanation && <p style={{ color: 'var(--muted-400)' }}>{current.explanation}</p>}
           {!lastCorrect && current.review_topic && <p className="text-xs mt-3 font-medium" style={{ color: 'var(--gold-300)' }}>What to review: {current.review_topic}</p>}
           {!lastCorrect && current.review_guidance && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{current.review_guidance}</p>}
-          <QuestionSource question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} />
+          <QuestionSource question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} showTopic />
         </div>
       )}
 

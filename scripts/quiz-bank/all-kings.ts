@@ -1,11 +1,11 @@
 import type { QuizDifficulty, QuizType, ScriptureBookSlug } from '../../lib/types'
 
 export type CrossReference = { book:'1 Kings'|'2 Kings'; book_slug:ScriptureBookSlug; chapter:number; verse_start:number; verse_end?:number; label:string }
-export type ComprehensiveRow = { type:QuizType; difficulty:QuizDifficulty; question:string; options?:string[]; answer?:string; accepted_answers?:string[]; explanation:string; supporting_refs:CrossReference[]; review_topic:string; review_guidance:string }
+export type ComprehensiveRow = { type:QuizType; difficulty:QuizDifficulty; question:string; options?:string[]; answer?:string; accepted_answers?:string[]; explanation:string; supporting_refs:CrossReference[]; review_topic:string; review_guidance:string; lead_in?:string }
 const r=(book:'1 Kings'|'2 Kings',chapter:number,verse_start:number,verse_end?:number):CrossReference=>({book,book_slug:book==='1 Kings'?'1-kings':'2-kings',chapter,verse_start,verse_end,label:`${book} ${chapter}:${verse_start}${verse_end&&verse_end!==verse_start?`–${verse_end}`:''}`})
 const mc=(difficulty:QuizDifficulty,question:string,correct:string,distractors:[string,string,string],explanation:string,supporting_refs:CrossReference[],review_topic:string,review_guidance:string):ComprehensiveRow=>({type:'multiple_choice',difficulty,question,options:[correct,...distractors],explanation,supporting_refs,review_topic,review_guidance})
 const sa=(difficulty:QuizDifficulty,question:string,answer:string,supporting_refs:CrossReference[],review_topic:string,explanation=answer):ComprehensiveRow=>({type:'short_answer',difficulty,question,answer,explanation,supporting_refs,review_topic,review_guidance:`Review ${supporting_refs.map(ref=>ref.label).join(' and ')}.`})
-const fb=(difficulty:QuizDifficulty,question:string,answer:string,supporting_ref:CrossReference,review_topic:string):ComprehensiveRow=>({type:'fill_blank',difficulty,question,answer,explanation:`The missing word is “${answer}.”`,supporting_refs:[supporting_ref],review_topic,review_guidance:`Read ${supporting_ref.label} in full.`})
+const fb=(difficulty:QuizDifficulty,question:string,answer:string,supporting_ref:CrossReference,review_topic:string,lead_in:string):ComprehensiveRow=>({type:'fill_blank',difficulty,question,answer,explanation:`The missing word is “${answer}.”`,supporting_refs:[supporting_ref],review_topic,review_guidance:`Read ${supporting_ref.label} in full.`,lead_in})
 const tf=(difficulty:QuizDifficulty,question:string,answer:boolean,supporting_refs:CrossReference[],review_topic:string,explanation:string):ComprehensiveRow=>({type:'true_false',difficulty,question,answer:answer?'true':'false',explanation,supporting_refs,review_topic,review_guidance:`Review ${supporting_refs.map(ref=>ref.label).join(' and ')}.`})
 
 const draftedRows:ComprehensiveRow[]=[
@@ -132,19 +132,19 @@ tf(2,'Ahab’s judgment was postponed to his son’s days because Ahab humbled h
 sa(3,'What practice does 2 Kings say continued among Samaria’s settlers “to this day”?','They feared the LORD and also served their graven images.',[r('2 Kings',17,32,33),r('2 Kings',17,41)],'Mixed worship in Samaria'),
 
 // Recurring numbers
-fb(2,"In the four hundred and _____ year after the people of Israel came out of the land of Egypt, in the fourth year of Solomon's reign over Israel, in the month of Ziv, which is the second month, he began to build the house of the LORD.",'eightieth',r('1 Kings',6,1),'The temple chronology'),
+fb(2,"In the four hundred and _____ year after the people of Israel came out of the land of Egypt, in the fourth year of Solomon's reign over Israel, in the month of Ziv, which is the second month, he began to build the house of the LORD.",'eightieth',r('1 Kings',6,1),'The temple chronology','The temple construction is dated from the exodus:'),
 sa(1,'How many years did Solomon take to build the temple, and how many to build his own house?','Seven years for the temple and thirteen years for his own house.',[r('1 Kings',6,37,38),r('1 Kings',7,1)],'Solomon’s building years'),
 sa(2,'How much gold came to Solomon in one year?','Six hundred and sixty-six talents of gold.',[r('1 Kings',10,14),r('1 Kings',10,21,25)],'Solomon’s gold'),
 sa(1,'How many wives and concubines did Solomon have?','Seven hundred wives and three hundred concubines.',[r('1 Kings',11,1,3),r('1 Kings',11,4,8)],'Solomon’s wives'),
 sa(1,'How many prophets of Baal faced Elijah on Mount Carmel?','Four hundred and fifty.',[r('1 Kings',18,19,22),r('1 Kings',18,38,40)],'Prophets of Baal'),
 sa(2,'How many prophets did Obadiah hide, and how did he hide and feed them?','One hundred, hidden by fifties in caves and fed with bread and water.',[r('1 Kings',18,3,4),r('1 Kings',18,13)],'Obadiah protects prophets'),
 sa(2,'How many in Israel had not bowed to Baal according to the LORD’s word to Elijah?','Seven thousand.',[r('1 Kings',19,15,18),r('2 Kings',10,18,28)],'The faithful remnant'),
-fb(1,'So he went down and dipped himself _____ times in the Jordan.','seven',r('2 Kings',5,14),'Naaman washes'),
+fb(1,'So he went down and dipped himself _____ times in the Jordan.','seven',r('2 Kings',5,14),'Naaman washes','Naaman obeys Elisha:'),
 sa(1,'How many Assyrians did the angel of the LORD slay in one night?','One hundred and eighty-five thousand.',[r('2 Kings',19,32,36),r('2 Kings',18,13,17)],'Jerusalem delivered'),
 sa(2,'How many years were added to Hezekiah’s life?','Fifteen years.',[r('2 Kings',20,1,6),r('2 Kings',20,8,11)],'Hezekiah’s added years'),
 sa(2,'How many steps did the shadow go back on the dial of Ahaz?','Ten steps.',[r('2 Kings',20,8,11),r('2 Kings',20,1,6)],'The shadow’s sign'),
 sa(2,'How many yoke of oxen was Elisha plowing with when Elijah found him?','Twelve yoke; Elisha was with the twelfth.',[r('1 Kings',19,19,21),r('2 Kings',2,9,15)],'Elisha’s call'),
-fb(2,'And he arose, and ate and drank, and went in the strength of that food _____ days and forty nights to Horeb the mount of God.','forty',r('1 Kings',19,8),'Elijah’s journey'),
+fb(2,'And he arose, and ate and drank, and went in the strength of that food _____ days and forty nights to Horeb the mount of God.','forty',r('1 Kings',19,8),'Elijah’s journey','Strengthened by the angel’s food, Elijah travels to Horeb:'),
 mc(2,'How many captives did Nebuchadnezzar carry away in Jehoiachin’s deportation?','Ten thousand',['Seven thousand','One thousand','Fifty thousand'],'The deportation included all Jerusalem, the officers, and mighty men—ten thousand captives.',[r('2 Kings',24,10,16),r('2 Kings',25,11,12)],'Jehoiachin’s deportation','Review the groups and totals carried away.'),
 sa(3,'In what year of Jehoiachin’s exile was he freed from prison?','The thirty-seventh year.',[r('2 Kings',25,27,30),r('2 Kings',24,12,16)],'Jehoiachin released'),
 tf(2,'Zimri reigned seven years in Tirzah.',false,[r('1 Kings',16,15,20),r('2 Kings',15,13)],'Zimri’s reign','False. Zimri reigned seven days.'),
@@ -166,13 +166,13 @@ tf(2,'Elisha healed the bad water at Jericho by throwing salt into the spring.',
 sa(3,'To which places did Assyria deport the Israelites?','Halah, the Habor—the river of Gozan—and the cities of the Medes.',[r('2 Kings',17,6),r('2 Kings',18,11)],'Israel’s deportation'),
 
 // Refrains and formulas
-fb(1,'And Asa did what was _____ in the eyes of the LORD, as David his father had done.','right',r('1 Kings',15,11),'The royal verdict'),
+fb(1,'And Asa did what was _____ in the eyes of the LORD, as David his father had done.','right',r('1 Kings',15,11),'The royal verdict','Kings gives its verdict on Asa’s reign:'),
 sa(2,'What phrase repeatedly identifies the sin of northern kings who retained the golden calves?','They did not depart from “the sins of Jeroboam the son of Nebat.”',[r('2 Kings',3,3),r('2 Kings',10,29),r('2 Kings',13,2)],'The sins of Jeroboam'),
 sa(2,'What standard phrase does Kings commonly use to describe a king’s death?','He “slept with his fathers.”',[r('1 Kings',11,43),r('1 Kings',14,20),r('2 Kings',10,35)],'Slept with his fathers'),
 sa(3,'Which good kings of Judah were still faulted because the high places were not taken away?','Asa, Jehoshaphat, Joash, Amaziah, Azariah, and Jotham.',[r('1 Kings',15,14),r('1 Kings',22,43),r('2 Kings',12,3),r('2 Kings',14,4),r('2 Kings',15,4),r('2 Kings',15,35)],'High places remained'),
 tf(1,'Kings evaluates each ruler mainly by building projects and military victories.',false,[r('1 Kings',15,11),r('1 Kings',16,25),r('2 Kings',18,3)],'How Kings evaluates rulers','False. The primary verdict is whether a ruler did right or evil in the sight of the LORD.'),
 mc(2,'Why does God repeatedly preserve Judah even under unfaithful kings?','For the sake of David his servant and for the sake of Jerusalem',['Because Judah always possessed the strongest army','Because Egypt permanently guaranteed Judah’s borders','Because every priest interceded successfully for the king'],'Kings repeatedly grounds Judah’s preservation in God’s regard for David and Jerusalem.',[r('1 Kings',11,12,13),r('2 Kings',8,19),r('2 Kings',19,34),r('2 Kings',20,6)],'For David’s sake','Trace this explanation across Judah’s history.'),
-fb(2,'None was left but the tribe of _____ only.','Judah',r('2 Kings',17,18),'Judah remains'),
+fb(2,'None was left but the tribe of _____ only.','Judah',r('2 Kings',17,18),'Judah remains','After the LORD removed Israel from his sight:'),
 sa(3,'Whose sins made Judah’s destruction unavoidable even after Josiah’s reform?','Manasseh’s idolatry and bloodshed.',[r('2 Kings',21,10,16),r('2 Kings',23,26,27)],'Manasseh’s lasting guilt'),
 
 // Women of Kings
@@ -210,21 +210,21 @@ sa(3,'Which foreign king’s envoys were shown all of Hezekiah’s treasures?','
 tf(2,'Ben-hadad is the name of more than one king of Syria in Kings.',true,[r('1 Kings',15,18),r('1 Kings',20,1),r('2 Kings',13,24)],'The name Ben-hadad','True. The name occurs for Syrian rulers in different periods.'),
 
 // Famous RSV wording
-fb(1,'How long will you go _____ with two different opinions?','limping',r('1 Kings',18,21),'Two opinions'),
-fb(1,'And after the fire a still _____ voice.','small',r('1 Kings',19,12),'The still small voice'),
-fb(2,'Behold, heaven and the highest heaven cannot _____ thee; how much less this house which I have built!','contain',r('1 Kings',8,27),'Solomon’s dedication prayer'),
-fb(2,'I pray you, let me inherit a _____ share of your spirit.','double',r('2 Kings',2,9),'Elisha’s request'),
-fb(1,'Fear not, for those who are with us are _____ than those who are with them.','more',r('2 Kings',6,16),'Elisha at Dothan'),
-fb(2,'And his flesh was restored like the flesh of a little _____, and he was clean.','child',r('2 Kings',5,14),'Naaman cleansed'),
-fb(2,'There was nothing in the ark except the two _____ of stone which Moses put there at Horeb.','tables',r('1 Kings',8,9),'Inside the ark'),
-fb(3,'So these nations feared the LORD, and also served their _____ images.','graven',r('2 Kings',17,41),'Mixed worship'),
-fb(2,'Before him there was no king like him, who turned to the LORD with all his heart and with all his soul and with all his _____.','might',r('2 Kings',23,25),'Josiah’s devotion'),
-fb(2,"Yet I will leave seven _____ in Israel, all the knees that have not bowed to Ba'al, and every mouth that has not kissed him.",'thousand',r('1 Kings',19,18),'The faithful remnant'),
-fb(2,"He removed the high places, and broke the pillars, and cut down the _____. And he broke in pieces the bronze serpent that Moses had made, for until those days the people of Israel had burned incense to it; it was called Nehush'tan.","Ashe'rah",r('2 Kings',18,4),'Hezekiah’s reform'),
-fb(3,"Moreover Manas'seh shed very much _____ blood, till he had filled Jerusalem from one end to another, besides the sin which he made Judah to sin so that they did what was evil in the sight of the LORD.",'innocent',r('2 Kings',21,16),'Manasseh’s bloodshed'),
-fb(2,'And the _____ brought him bread and meat in the morning, and bread and meat in the evening.','ravens',r('1 Kings',17,6),'Elijah fed at Cherith'),
-fb(3,'I am about to go the way of all the _____. Be strong, and show yourself a man.','earth',r('1 Kings',2,2),'David’s charge'),
-fb(2,'And for his allowance, a regular allowance was given him by the king, every day a _____, as long as he lived.','portion',r('2 Kings',25,30),'Jehoiachin’s allowance'),
+fb(1,'How long will you go _____ with two different opinions?','limping',r('1 Kings',18,21),'Two opinions','Elijah challenges Israel to choose whom they will follow:'),
+fb(1,'And after the fire a still _____ voice.','small',r('1 Kings',19,12),'The still small voice','At Horeb, the LORD’s presence follows wind, earthquake, and fire:'),
+fb(2,'Behold, heaven and the highest heaven cannot _____ thee; how much less this house which I have built!','contain',r('1 Kings',8,27),'Solomon’s dedication prayer','Solomon acknowledges that the temple cannot limit God:'),
+fb(2,'I pray you, let me inherit a _____ share of your spirit.','double',r('2 Kings',2,9),'Elisha’s request','Before Elijah is taken up, Elisha makes his request:'),
+fb(1,'Fear not, for those who are with us are _____ than those who are with them.','more',r('2 Kings',6,16),'Elisha at Dothan','Surrounded at Dothan, Elisha reassures his servant:'),
+fb(2,'And his flesh was restored like the flesh of a little _____, and he was clean.','child',r('2 Kings',5,14),'Naaman cleansed','After washing in the Jordan, Naaman is healed:'),
+fb(2,'There was nothing in the ark except the two _____ of stone which Moses put there at Horeb.','tables',r('1 Kings',8,9),'Inside the ark','When the ark is brought into the temple, its contents are described:'),
+fb(3,'So these nations feared the LORD, and also served their _____ images.','graven',r('2 Kings',17,41),'Mixed worship','The final description of the settlers’ divided worship says:'),
+fb(2,'Before him there was no king like him, who turned to the LORD with all his heart and with all his soul and with all his _____.','might',r('2 Kings',23,25),'Josiah’s devotion','Kings gives Josiah an exceptional verdict:'),
+fb(2,"Yet I will leave seven _____ in Israel, all the knees that have not bowed to Ba'al, and every mouth that has not kissed him.",'thousand',r('1 Kings',19,18),'The faithful remnant','The LORD tells Elijah that a faithful remnant remains:'),
+fb(2,"He removed the high places, and broke the pillars, and cut down the _____. And he broke in pieces the bronze serpent that Moses had made, for until those days the people of Israel had burned incense to it; it was called Nehush'tan.","Ashe'rah",r('2 Kings',18,4),'Hezekiah’s reform','Hezekiah removes objects associated with false worship:'),
+fb(3,"Moreover Manas'seh shed very much _____ blood, till he had filled Jerusalem from one end to another, besides the sin which he made Judah to sin so that they did what was evil in the sight of the LORD.",'innocent',r('2 Kings',21,16),'Manasseh’s bloodshed','Kings describes the extent of Manasseh’s violence:'),
+fb(2,'And the _____ brought him bread and meat in the morning, and bread and meat in the evening.','ravens',r('1 Kings',17,6),'Elijah fed at Cherith','At the brook Cherith, the LORD provides Elijah’s food:'),
+fb(3,'I am about to go the way of all the _____. Be strong, and show yourself a man.','earth',r('1 Kings',2,2),'David’s charge','As his death approaches, David charges Solomon:'),
+fb(2,'And for his allowance, a regular allowance was given him by the king, every day a _____, as long as he lived.','portion',r('2 Kings',25,30),'Jehoiachin’s allowance','After Jehoiachin is released, the king provides for him:'),
 
 // Sequence and structure
 mc(2,'Which of these events happened first?','The kingdom divided under Rehoboam',['Elijah confronted Baal’s prophets at Carmel','Assyria captured Samaria','Josiah renewed the covenant'],'The division occurred early in 1 Kings, before Elijah, the Assyrian exile, and Josiah.',[r('1 Kings',12,16,20),r('1 Kings',18,20,40),r('2 Kings',17,5,6),r('2 Kings',23,1,3)],'Major events in order','Trace these four events through Kings.'),

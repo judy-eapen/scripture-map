@@ -148,6 +148,8 @@ export type QuizQuestion = {
   }>;
   review_topic?: string | null;
   review_guidance?: string | null;
+  /** Optional answer-free framing shown before a comprehensive fill-in verse. */
+  lead_in?: string | null;
 };
 
 export type DifficultPassage = {

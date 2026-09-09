@@ -4,31 +4,20 @@ import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { QuizQuestion, ScriptureBookSlug } from '@/lib/types'
 import { verseHref } from '@/lib/quiz-session'
+import { fetchChapterVerses, type CachedVerse } from '@/lib/client-verse-cache'
 
 type Ref = NonNullable<QuizQuestion['supporting_refs']>[number]
-type Verse = { verse_number:number; text:string }
-type Passage = { label:string; ref:Ref; verses:Verse[] }
-const chapterCache = new Map<string, Promise<Verse[]>>()
+type Passage = { label:string; ref:Ref; verses:CachedVerse[] }
 
 function fetchPassage(ref: Ref): Promise<Passage> {
-  const key = `${ref.book_slug}:${ref.chapter}`
-  let request = chapterCache.get(key)
-  if (!request) {
-    const query = new URLSearchParams({ book:ref.book_slug, chapter:String(ref.chapter), from:'1', to:'999' })
-    request = fetch(`/api/verses?${query}`).then(async response => {
-      const data = response.ok ? await response.json() : { verses:[] }
-      return data.verses ?? []
-    })
-    chapterCache.set(key, request)
-  }
-  return request.then(verses => ({
+  return fetchChapterVerses(ref.book_slug, ref.chapter).then(verses => ({
     label:ref.label,
     ref,
     verses:verses.filter(verse => verse.verse_number >= ref.verse_start && verse.verse_number <= (ref.verse_end ?? ref.verse_start)),
   }))
 }
 
-export default function QuestionSource({ question, chapter }: { question:QuizQuestion; chapter?:{ bookSlug:ScriptureBookSlug; chapterNumber:number } }) {
+export default function QuestionSource({ question, chapter, showTopic = false }: { question:QuizQuestion; chapter?:{ bookSlug:ScriptureBookSlug; chapterNumber:number }; showTopic?:boolean }) {
   const refs = useMemo<Ref[]>(() => question.supporting_refs?.length ? question.supporting_refs : chapter && question.verse_number ? [{
     book: question.verse_ref?.split(' ').slice(0, -1).join(' ') as Ref['book'],
     book_slug: chapter.bookSlug, chapter:chapter.chapterNumber, verse_start:question.verse_number, label:question.verse_ref ?? `Verse ${question.verse_number}`,
@@ -43,6 +32,7 @@ export default function QuestionSource({ question, chapter }: { question:QuizQue
   return (
     <div className="mt-4 pt-3" style={{ borderTop:'1px solid rgba(255,255,255,0.1)' }}>
       <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color:'var(--gold-300)' }}>Source</p>
+      {showTopic && question.review_topic && <p className="text-xs mb-2" style={{ color:'var(--muted-400)' }}>Topic: {question.review_topic}</p>}
       <div className="space-y-2">
         {refs.map((ref, index) => {
           const passage = passages.find(item => item.label === ref.label)

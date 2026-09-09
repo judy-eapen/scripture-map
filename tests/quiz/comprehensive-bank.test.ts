@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import bank from '../../scripts/quiz-bank/all-kings'
 import { gradeMultipleChoice, gradeTrueFalse } from '../../lib/quiz-grading'
 import type { QuizQuestion } from '../../lib/types'
+import { maskContextAnswers } from '../../lib/fill-blank-context'
 
 describe('All of Kings comprehensive bank', () => {
   it('contains only unique questions with supporting passages', () => {
@@ -23,6 +24,24 @@ describe('All of Kings comprehensive bank', () => {
       expect(row.question).not.toMatch(/how do (?:1|2) Kings \d+:/i)
       expect(row.question).not.toMatch(/which pair of passages/i)
     }
+  })
+
+  it('gives every collection fill-in an answer-free lead-in', () => {
+    const fills = bank.rows.filter(row => row.type === 'fill_blank')
+    expect(fills).toHaveLength(20)
+    for (const row of fills) {
+      expect(row.lead_in?.trim()).toBeTruthy()
+      expect(` ${row.lead_in!.toLowerCase()} `).not.toContain(` ${row.answer!.toLowerCase()} `)
+    }
+  })
+
+  it('masks canonical and accepted answers from context without changing other text', () => {
+    const question = {
+      id:'mask', type:'fill_blank', difficulty:1, question:'', options:null, correct_index:null,
+      answer:"Ashe'rah", accepted_answers:['Asherah'], verse_ref:'2 Kings 18:4', verse_number:4, explanation:'',
+    } as QuizQuestion
+    expect(maskContextAnswers("He cut down the Asherah; the Ashe'rah was removed.", question))
+      .toBe('He cut down the ▮▮▮; the ▮▮▮ was removed.')
   })
 
   it('covers the requested famines across both books', () => {
