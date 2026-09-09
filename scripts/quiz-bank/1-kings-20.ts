@@ -125,7 +125,7 @@ const bank: ChapterBank = {
     tf(3, 'The plan was to give each king a larger command.', false, 24, 'The kings were to be removed and commanders appointed.'),
 
     mc(2, 'How was the replacement army to compare with the lost army?', ['Horse for horse and chariot for chariot', 'Twice as many infantry only', 'Without horses', 'Smaller but faster'], 25),
-    blank(3, 'and _____ for chariot', 'chariot', 25),
+    blank(2, 'and muster an army like the army that you have lost, horse for horse, and chariot for chariot; then we will fight against them in the _____, and surely we shall be stronger than they.', 'plain', 25),
     tf(1, 'Ben-hadad listened to his servants and did what they advised.', true, 25),
     tf(2, 'Ben-hadad rejected the advice to rebuild his army.', false, 25, 'He hearkened and did so.'),
 
