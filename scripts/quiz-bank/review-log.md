@@ -109,3 +109,16 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 4 · 246236aa-5a94-4261-aad4-9e5177d23b6d · R2/R8 · retired · Combined two Baana notices while citing only one.
 - 1 Kings 4 · d30971a2-4a2f-443f-87dd-d57034d465e7 · R2/R8 · retired · Combined two Jehoshaphat notices under one citation.
 - 1 Kings 4 · 69606ccb-e55e-40ab-a695-75ea2989075a · R3/R8 · retired · Asked what the chapter emphasizes rather than what happened.
+
+## 1 Kings 5
+
+- 1 Kings 5 · 374b12cc-d07f-4ce9-8313-63b0e3f238ea · R5 · fixed · Balanced the reasons for Hiram's message with detailed chapter claims.
+- 1 Kings 5 · 1957ab15-7e3e-4201-92bb-1442c807e1d8 · R5 · fixed · Balanced the reasons David could not build the house.
+- 1 Kings 5 · 9ae01bf5-8ae8-4875-9e74-801679b4a46f · R5 · fixed · Made each proposed building project similarly specific.
+- 1 Kings 5 · b81723d2-5ab8-409e-94f0-7fa9d71f113b · R5 · fixed · Made each proposed builder similarly specific.
+- 1 Kings 5 · 42677fa9-4e86-4bcf-9b9f-783f4c650d59 · R5 · fixed · Replaced giveaway-short quotations with comparable statements.
+- 1 Kings 5 · 68bb6387-ee71-4dd5-8a8f-e404272b781b · R5 · fixed · Made every proposed relationship a full statement.
+- 1 Kings 5 · e9488ee6-44c8-4636-8b80-689d76949b31 · R5 · fixed · Balanced every description of the officers' work.
+- 1 Kings 5 · f98721b6-c281-41ae-b62d-70bc9ac70ea8 · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
+- 1 Kings 5 · 0350448f-f37a-4803-9289-bbb2710a2307 · R2/R8 · retired · Combined the timber and wheat exchanges under one citation.
+- 1 Kings 5 · cc583f96-77fc-4ba2-b6c3-9024fe9fa03d · R2/R8 · retired · Required comparing quantities across several uncited verses.

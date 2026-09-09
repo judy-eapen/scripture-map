@@ -12,7 +12,7 @@ const bank: ChapterBank = {
     word(1, 'Who was the king of Tyre who sent servants to Solomon?', 'Hiram', 1),
     blank(1, 'Now Hiram king of _____ sent his servants to Solomon, when he heard that they had anointed him king in place of his father; for Hiram always loved David.', 'Tyre', 1),
     tf(1, 'Hiram always loved David.', true, 1),
-    mc(2, 'Why did Hiram send his servants to Solomon?', ['He heard they had anointed Solomon king in place of his father', 'Solomon had asked him for timber', 'To collect tribute from Israel', 'To settle a border dispute'], 1),
+    mc(2, 'Why did Hiram send his servants to Solomon?', ['He heard they had anointed Solomon king in place of his father', 'He heard Solomon had refused the throne and returned it to David', 'He wanted Solomon to send forced labor to build a house in Tyre', 'He learned Solomon had ended the peace that Hiram shared with David'], 1),
     blank(2, 'Now Hiram king of Tyre sent his servants to Solomon, when he heard that they had _____ him king in place of his father; for Hiram always loved David.', 'anointed', 1),
     tf(2, 'Solomon was the first to send servants, sending them to Hiram king of Tyre.', false, 1, 'Hiram sent his servants to Solomon when he heard Solomon had been anointed king.'),
     word(3, 'The verse says Hiram "always ___ David."', 'loved', 1),
@@ -24,7 +24,7 @@ const bank: ChapterBank = {
     word(2, 'Solomon "sent ___ to Hiram" — what did he send?', 'word', 2, ['a message', 'message']),
 
     // ══════════════════════════════════ v3–6 · Solomon’s message
-    mc(1, 'According to Solomon, why could David not build a house for the name of the LORD?', ['Because of the warfare with which his enemies surrounded him', 'Because he lacked cedar timber', 'Because he was too old', 'Because the priests opposed it'], 3),
+    mc(1, 'According to Solomon, why could David not build a house for the name of the LORD?', ['Because of the warfare with which his enemies surrounded him', 'Because no one among Israel knew how to cut the timber of Lebanon', 'Because Hiram refused to supply the cedar and cypress David desired', 'Because the LORD had not yet placed David upon the throne of Israel'], 3),
     blank(1, 'You know that David my father could not build a house for the name of the LORD his God because of the _____ with which his enemies surrounded him, until the LORD put them under the soles of his feet.', 'warfare', 3),
     word(2, 'Solomon said the LORD put David’s enemies under the soles of his what?', 'feet', 3),
     tf(1, 'Solomon said his father David had built a house for the name of the LORD.', false, 3, 'David "could not build a house for the name of the LORD his God because of the warfare".'),
@@ -40,10 +40,10 @@ const bank: ChapterBank = {
     tf(3, 'Solomon said the LORD had given him rest on every side but one.', false, 4, 'He said "rest on every side; there is neither adversary nor misfortune".'),
     mc(3, 'Complete Solomon’s words: "there is neither adversary nor ___".', ['misfortune', 'enemy', 'famine', 'plague'], 4),
 
-    mc(1, 'What did Solomon purpose to build?', ['A house for the name of the LORD his God', 'A palace for himself', 'A fleet of ships', 'A wall around Jerusalem'], 5),
+    mc(1, 'What did Solomon purpose to build?', ['A house for the name of the LORD his God', 'A palace in Tyre for Hiram and all his servants', 'A fleet of rafts to carry timber across the sea', 'A wall around the great high place at Gibeon'], 5),
     blank(1, 'And so I purpose to build a _____ for the name of the LORD my God, as the LORD said to David my father, `Your son, whom I will set upon your throne in your place, shall build the house for my name.\'', 'house', 5),
     word(1, 'Solomon purposed to build a house for the ___ of the LORD his God.', 'name', 5),
-    mc(2, 'According to Solomon, who had the LORD said would build the house for his name?', ['David’s son, whom the LORD would set upon David’s throne', 'David himself', 'Hiram king of Tyre', 'The priests of Israel'], 5),
+    mc(2, 'According to Solomon, who had the LORD said would build the house for his name?', ['David’s son, whom the LORD would set upon David’s throne', 'David himself, after the LORD put every enemy beneath his feet', 'Hiram king of Tyre, who had always shown love toward David', 'The Sidonian servants who knew how to cut the timber of Lebanon'], 5),
     tf(2, 'Solomon said the LORD had told David that David’s son would build the house for the LORD’s name.', true, 5),
     blank(2, 'as the LORD said to David my father, `Your son, whom I will set upon your _____ in your place, shall build the house for my name.\'', 'throne', 5),
     tf(3, 'Solomon quoted the LORD as saying to David, "You shall build the house for my name."', false, 5, 'The LORD said, "Your son … shall build the house for my name."'),
@@ -64,7 +64,7 @@ const bank: ChapterBank = {
     mc(1, 'How did Hiram react when he heard Solomon’s words?', ['He rejoiced greatly', 'He was angry', 'He demanded more payment', 'He refused the request'], 7),
     blank(1, 'When Hiram heard the words of Solomon, he _____ greatly, and said, "Blessed be the LORD this day, who has given to David a wise son to be over this great people."', 'rejoiced', 7),
     word(1, 'Hiram called Solomon a ___ son given to David.', 'wise', 7),
-    mc(2, 'What did Hiram say when he rejoiced?', ['"Blessed be the LORD this day, who has given to David a wise son to be over this great people"', '"Long live King Solomon"', '"May the gods of Tyre bless you"', '"Now Israel and Tyre are one"'], 7),
+    mc(2, 'What did Hiram say when he rejoiced?', ['"Blessed be the LORD this day, who has given to David a wise son to be over this great people"', '"Blessed be David this day, whose son has given Tyre dominion over this great people"', '"Blessed be the Sidonians, who alone know how to cut timber for this great house"', '"Blessed be Solomon’s servants, who will provide food for all of Hiram’s household"'], 7),
     tf(2, 'Hiram blessed the LORD for giving David a wise son.', true, 7),
     blank(2, 'Blessed be the LORD this day, who has given to David a _____ son to be over this great people.', 'wise', 7),
     tf(3, 'Hiram said the LORD had given David a wise son to be over "this small nation".', false, 7, 'He said "over this great people".'),
@@ -114,7 +114,7 @@ const bank: ChapterBank = {
     blank(1, 'And the LORD gave Solomon _____, as he promised him; and there was peace between Hiram and Solomon; and the two of them made a treaty.', 'wisdom', 12),
     word(2, 'What did Hiram and Solomon make together?', 'treaty', 12, ['a treaty']),
     tf(1, 'There was peace between Hiram and Solomon.', true, 12),
-    mc(2, 'What was the relationship between Hiram and Solomon?', ['There was peace between them and they made a treaty', 'They were at war', 'Hiram paid tribute to Solomon', 'Solomon was Hiram’s vassal'], 12),
+    mc(2, 'What was the relationship between Hiram and Solomon?', ['There was peace between them and they made a treaty', 'There was warfare between them over the timber from Lebanon', 'Hiram brought tribute and served Solomon throughout his lifetime', 'Solomon became Hiram’s servant in exchange for cedar and cypress'], 12),
     blank(2, 'and there was _____ between Hiram and Solomon; and the two of them made a treaty.', 'peace', 12),
     tf(3, 'The verse says the LORD gave Solomon wisdom "as he promised him".', true, 12),
     word(3, 'The LORD gave Solomon wisdom "as he ___ him".', 'promised', 12),
@@ -157,7 +157,7 @@ const bank: ChapterBank = {
     tf(2, 'Solomon had three thousand three hundred chief officers over the work.', true, 16),
     blank(2, 'besides Solomon\'s three thousand three _____ chief officers who were over the work,', 'hundred', 16),
     tf(3, 'Solomon had three thousand six hundred chief officers over the work.', false, 16, 'The RSV says "three thousand three hundred chief officers".'),
-    mc(3, 'What did the chief officers do?', ['They had charge of the people who carried on the work', 'They cut the cedars in Lebanon', 'They sailed the rafts', 'They collected the wheat for Hiram'], 16),
+    mc(3, 'What did the chief officers do?', ['They had charge of the people who carried on the work', 'They cut cedar and cypress timber in Lebanon with the Sidonians', 'They made the timber into rafts and directed them across the sea', 'They gathered wheat and beaten oil as food for Hiram’s household'], 16),
     blank(3, 'who had charge of the people who carried on the _____.', 'work', 16),
 
     // ══════════════════════════════════ v17–18 · Stones and builders
@@ -181,11 +181,8 @@ const bank: ChapterBank = {
     word(3, 'The builders "did the ___" and prepared the timber and the stone.', 'hewing', 18),
 
     // ══════════════════════════════════ Whole-chapter
-    mc(2, 'Which happened FIRST in 1 Kings 5?', ['Hiram sent his servants to Solomon', 'Solomon raised a levy of thirty thousand men', 'Hiram and Solomon made a treaty', 'Great stones were quarried for the foundation'], 1),
     mc(3, 'Who said, "Blessed be the LORD this day, who has given to David a wise son"?', ['Hiram', 'Solomon', 'Adoniram', 'David'], 7),
     mc(2, 'Who said, "there is no one among us who knows how to cut timber like the Sidonians"?', ['Solomon', 'Hiram', 'Adoniram', 'The men of Gebal'], 6),
-    tf(2, 'In 1 Kings 5, Solomon gave Hiram timber and Hiram gave Solomon wheat.', false, 11, 'It was the reverse: Hiram supplied timber and Solomon gave wheat and oil.'),
-    mc(3, 'Which number does NOT appear in 1 Kings 5?', ['Forty thousand', 'Thirty thousand', 'Seventy thousand', 'Eighty thousand'], 15),
     word(2, 'Which king’s name is paired with Solomon throughout 1 Kings 5?', 'Hiram', 12),
     tf(3, 'Adoniram was in charge of the hewers of stone in the hill country.', false, 14, 'Adoniram was in charge of the levy of forced labor sent to Lebanon.'),
   ],
