@@ -72,3 +72,25 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 2 · 3f9d4ae8-ac68-4266-abcc-77d66a14a848 · R2/R8 · retired · Required three execution passages while citing only verse 46.
 - 1 Kings 2 · b6ca9236-b129-498d-8703-10813bdcaa60 · R2/R8 · retired · Required comparing outcomes from multiple cited verses.
 - 1 Kings 2 · 940e9baa-a065-42b7-afe4-ad424301ef43 · R2/R8 · retired · Combined David's verse-5 words with Solomon's verse-32 words under one citation.
+
+## 1 Kings 3
+
+- 1 Kings 3 · fc02cdcd-469a-46b5-a0c2-a6fd173ebe0b · R5 · fixed · Balanced the proposed reasons for high-place sacrifices.
+- 1 Kings 3 · 3aef9f3c-c2b9-4451-a898-df07e47ba7af · R3/R5 · fixed · Removed meta verse-number wording and balanced concrete actions.
+- 1 Kings 3 · b2e5df9c-f2b6-490f-9db1-0f9ec6bb240e · R5 · fixed · Made each three-part description similarly detailed.
+- 1 Kings 3 · aef5ccfe-fc19-41fc-a262-337d91a18f28 · R5 · fixed · Balanced every description of Israel.
+- 1 Kings 3 · 0b197f73-3915-4873-aa9b-228ac0956d6e · R5 · fixed · Made all requested gifts comparable in detail.
+- 1 Kings 3 · 1882ca06-224d-4642-9e8d-dce5ac00dbe4 · R5 · fixed · Balanced the requested and unrequested choices.
+- 1 Kings 3 · 1f93771f-7d6c-4298-a19a-5fa08b10d0c5 · R5 · fixed · Replaced short comparisons with complete alternatives.
+- 1 Kings 3 · cc777431-4062-4c2d-ac06-aa8c094fbf51 · R5 · fixed · Made every proposed account a full sequence.
+- 1 Kings 3 · 49d64bf5-739a-4c9a-ae6b-e58d4ce3cf49 · R5 · fixed · Made every time choice similarly specific.
+- 1 Kings 3 · 71e86e45-db45-49c8-a882-dda3c351747c · R5 · fixed · Made every proposed discovery a complete account.
+- 1 Kings 3 · c47c25b7-2cbb-42c8-ac7f-9c64741796f1 · R5 · fixed · Made each ownership claim a full paired statement.
+- 1 Kings 3 · 3266953c-2675-478c-8453-e56d0ff2d368 · R5 · fixed · Made every proposed ruling similarly specific.
+- 1 Kings 3 · 52403120-c8be-4ed8-ab9f-1339a3715684 · R5 · fixed · Balanced the women's proposed responses.
+- 1 Kings 3 · 8faaeab7-744d-46b7-91da-dc43c315bb85 · R5 · fixed · Balanced the women's proposed responses.
+- 1 Kings 3 · 681f4e5a-064f-4871-b48f-39d231019dcb · R5 · fixed · Replaced short unrelated claims with comparable chapter facts.
+- 1 Kings 3 · 95bb2604-74cd-4740-b0f0-3036872809ed · R8 · retired · Filler-word completion duplicated the full factual statement beside it.
+- 1 Kings 3 · 55830eeb-1745-4e8b-b5b7-a2c9f608ada5 · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
+- 1 Kings 3 · 499af799-c3e2-4f0f-a490-53ea115e6813 · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
+- 1 Kings 3 · 44a461da-eda0-4f4f-9113-92a5d91e2edf · R2/R8 · retired · Combined the dream and judgment while citing only verse 16.

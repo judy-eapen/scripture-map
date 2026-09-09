@@ -16,7 +16,7 @@ const bank: ChapterBank = {
     tf(2, 'Solomon brought Pharaoh’s daughter into the city of David until he had finished building his own house, the house of the LORD, and the wall around Jerusalem.', true, 1),
     mc(3, 'Which of these is NOT one of the three building projects named in verse 1?', ['The altar at Gibeon', 'His own house', 'The house of the LORD', 'The wall around Jerusalem'], 1),
 
-    mc(1, 'Why were the people sacrificing at the high places?', ['Because no house had yet been built for the name of the LORD', 'Because the king commanded it', 'Because the ark was kept there', 'Because the priests had fled'], 2),
+    mc(1, 'Why were the people sacrificing at the high places?', ['Because no house had yet been built for the name of the LORD', 'Because Solomon had commanded the people to leave Jerusalem', 'Because the ark of the covenant had been placed at every high place', 'Because the priests had fled from the house already built for the LORD'], 2),
     blank(2, 'The people were sacrificing at the high places, however, because no _____ had yet been built for the name of the LORD.', 'house', 2),
     word(1, 'Before the temple was built the people were sacrificing at the "high ___".', 'places', 2, ['high places']),
     tf(2, 'The people sacrificed at the high places because a house for the name of the LORD had already been built there.', false, 2, 'They did so because no house had yet been built for the name of the LORD.'),
@@ -27,7 +27,7 @@ const bank: ChapterBank = {
     tf(1, 'Solomon loved the LORD, walking in the statutes of David his father.', true, 3),
     blank(3, 'only, he sacrificed and burnt _____ at the high places.', 'incense', 3),
     word(2, 'Besides sacrificing, what did Solomon burn at the high places?', 'incense', 3),
-    mc(3, 'What qualification ("only, …") does verse 3 add about Solomon’s devotion?', ['He sacrificed and burnt incense at the high places', 'He married a foreign wife', 'He built no altar', 'He neglected the statutes of David'], 3),
+    mc(3, 'Besides walking in David’s statutes, what did Solomon do at the high places?', ['He sacrificed and burnt incense at the high places', 'He refused to walk in the statutes of David his father', 'He abandoned the LORD to worship the gods of Pharaoh', 'He offered no sacrifices or incense anywhere in Israel'], 3),
 
     // ══════════════════════════════════ v4–5 · Gibeon and the dream
     mc(1, 'Where did the king go to sacrifice?', ['Gibeon', 'Jerusalem', 'Bethel', 'Hebron'], 4),
@@ -49,7 +49,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v6–9 · Solomon’s prayer
     blank(2, 'Thou hast shown great and _____ love to thy servant David my father,', 'steadfast', 6),
-    mc(3, 'According to Solomon, how had David walked before the LORD?', ['In faithfulness, in righteousness, and in uprightness of heart', 'In humility, in wisdom, and in strength', 'In fear and in trembling', 'In sacrifice and in song'], 6),
+    mc(3, 'According to Solomon, how had David walked before the LORD?', ['In faithfulness, in righteousness, and in uprightness of heart', 'In wisdom, in honor, and in greatness among all other kings', 'In sacrifice, in burnt offerings, and in feasts for his servants', 'In long life, in riches, and in victory over the life of his enemies'], 6),
     blank(3, 'because he walked before thee in faithfulness, in righteousness, and in _____ of heart toward thee;', 'uprightness', 6),
     word(3, 'Solomon said God had given David a son to sit on his ___ this day.', 'throne', 6),
     tf(2, 'Solomon began his prayer by recalling God’s steadfast love to his father David.', true, 6),
@@ -57,19 +57,18 @@ const bank: ChapterBank = {
 
     blank(1, 'thou hast made thy servant king in place of David my father, although I am but a little _____;', 'child', 7),
     mc(1, 'How did Solomon describe himself to God?', ['As "but a little child"', 'As a mighty warrior', 'As the wisest of men', 'As a faithful priest'], 7),
-    word(2, 'Solomon said, "I do not know how to go out or come ___."', 'in', 7),
     tf(2, 'Solomon told God, "I do not know how to go out or come in."', true, 7),
     blank(3, 'And now, O LORD my God, thou hast made thy servant _____ in place of David my father,', 'king', 7),
     tf(1, 'Solomon told God he was fully prepared and experienced for kingship.', false, 7, 'He said "I am but a little child; I do not know how to go out or come in."'),
 
     blank(2, 'And thy servant is in the midst of thy people whom thou hast _____, a great people,', 'chosen', 8),
-    mc(2, 'How did Solomon describe the people of Israel in his prayer?', ['A great people that cannot be numbered or counted for multitude', 'A stiff-necked people', 'A people few in number', 'A people scattered among the nations'], 8),
+    mc(2, 'How did Solomon describe the people of Israel in his prayer?', ['A great people that cannot be numbered or counted for multitude', 'A small people whose number could easily be counted by the king', 'A people scattered outside the land and living among many nations', 'A people who had rejected every statute and commandment of the LORD'], 8),
     word(3, 'Solomon said the people could not be numbered or counted for what?', 'multitude', 8),
     tf(3, 'Solomon said God’s people were so few they could easily be counted.', false, 8, 'He said they were "a great people, that cannot be numbered or counted for multitude".'),
     blank(3, 'a great people, that cannot be _____ or counted for multitude.', 'numbered', 8),
     mc(3, 'Solomon said he was "in the midst of" whom?', ['Thy people whom thou hast chosen', 'His enemies', 'The princes of Egypt', 'The priests and Levites'], 8),
 
-    mc(1, 'What did Solomon ask God for?', ['An understanding mind to govern the people', 'Long life', 'Riches', 'The death of his enemies'], 9),
+    mc(1, 'What did Solomon ask God for?', ['An understanding mind to govern the people', 'A long life in which no other king would compare with him', 'Great riches and honor throughout all the days of his reign', 'Victory over his enemies and power to take their lives'], 9),
     blank(1, 'Give thy servant therefore an _____ mind to govern thy people,', 'understanding', 9),
     word(2, 'Solomon asked for an understanding ___ to govern the people.', 'mind', 9),
     blank(2, 'that I may discern between good and _____;', 'evil', 9),
@@ -84,7 +83,7 @@ const bank: ChapterBank = {
     mc(2, 'How did the Lord respond to Solomon’s request?', ['It pleased the Lord', 'The Lord was angry', 'The Lord was silent', 'The Lord rebuked him'], 10),
     tf(2, 'The Lord was displeased that Solomon asked for wisdom rather than riches.', false, 10, 'It pleased the Lord that Solomon had asked this.'),
 
-    mc(1, 'Which of these did Solomon NOT ask for, according to God?', ['Long life, riches, or the life of his enemies', 'Understanding', 'Discernment of what is right', 'Wisdom to govern'], 11),
+    mc(1, 'Which of these did Solomon NOT ask for, according to God?', ['Long life, riches, or the life of his enemies', 'Understanding to discern what was right for the people', 'A discerning mind with which to govern God’s great people', 'Wisdom to judge between good and evil among the people'], 11),
     blank(2, 'and have not asked for yourself long life or _____ or the life of your enemies,', 'riches', 11),
     blank(3, 'but have asked for yourself understanding to discern what is _____,', 'right', 11),
     word(2, 'God noted Solomon had not asked for the life of his ___.', 'enemies', 11),
@@ -95,7 +94,7 @@ const bank: ChapterBank = {
     blank(1, 'Behold, I give you a wise and _____ mind,', 'discerning', 12),
     mc(1, 'What did God give Solomon?', ['A wise and discerning mind', 'A strong and mighty army', 'A long and peaceful life', 'A house of cedar'], 12),
     word(2, 'God gave Solomon "a wise and discerning ___".', 'mind', 12),
-    mc(2, 'How unique would Solomon’s wisdom be, according to God?', ['None like him had been before and none like him would arise after', 'Equal to the wise men of Egypt', 'Greater than David but less than Moses', 'Greatest in Israel for a generation'], 12),
+    mc(2, 'How unique would Solomon’s wisdom be, according to God?', ['None like him had been before and none like him would arise after', 'It would equal the wisdom possessed by the kings who had come before him', 'It would be greater than David’s but surpassed by the king who followed him', 'It would make him the wisest king only during the years of his own reign'], 12),
     blank(3, 'so that none like you has been before you and none like you shall _____ after you.', 'arise', 12),
     tf(2, 'God said none like Solomon had been before him and none like him would arise after him.', true, 12),
     blank(3, 'behold, I now do according to your _____.', 'word', 12),
@@ -158,17 +157,17 @@ const bank: ChapterBank = {
     blank(1, 'And she arose at _____, and took my son from beside me, while your maidservant slept,', 'midnight', 20),
     blank(3, 'and laid it in her bosom, and laid her _____ son in my bosom.', 'dead', 20),
     tf(2, 'The first woman claimed the other woman took her son while she slept and laid the dead son in her bosom.', true, 20),
-    mc(3, 'According to the first woman, what did the other woman do while she slept?', ['Took her son from beside her, laid it in her own bosom, and laid her dead son in the first woman’s bosom', 'Fled the house with both children', 'Woke the neighbors', 'Hid the dead child in the street'], 20),
+    mc(3, 'According to the first woman, what did the other woman do while she slept?', ['Took her son from beside her, laid it in her own bosom, and laid her dead son in the first woman’s bosom', 'Took both children from the house at midnight and carried them before the king for judgment', 'Woke the people nearby and asked them to decide which woman had given birth to the living child', 'Placed the living child beside the sleeping woman and carried her own dead child out of the house'], 20),
 
     blank(1, 'When I rose in the morning to _____ my child, behold, it was dead;', 'nurse', 21),
-    mc(1, 'When did the first woman discover the dead child?', ['In the morning, when she rose to nurse her child', 'At midnight', 'On the third day', 'When the king questioned her'], 21),
+    mc(1, 'When did the first woman discover the dead child?', ['In the morning, when she rose to nurse her child', 'At midnight, when the other woman arose from beside her', 'On the third day, when the other woman gave birth to her son', 'Before the king, when he questioned both women about the child'], 21),
     word(2, 'When the first woman rose in the ___, she found the child dead.', 'morning', 21),
     tf(2, 'The first woman said that when she looked closely, the dead child was not the one she had borne.', true, 21),
     blank(3, 'but when I looked at it _____ in the morning, behold, it was not the child that I had borne.', 'closely', 21),
-    mc(3, 'How did the first woman realize the switch?', ['She looked at the dead child closely and saw it was not the child she had borne', 'The other woman confessed', 'A neighbor told her', 'The living child cried for her'], 21),
+    mc(3, 'How did the first woman realize the switch?', ['She looked at the dead child closely and saw it was not the child she had borne', 'The other woman confessed before the king that she had exchanged the children', 'A person who had been in the house told her what happened during the night', 'The living child cried for its mother while the two women stood before Solomon'], 21),
 
     blank(1, 'But the other woman said, "No, the _____ child is mine, and the dead child is yours."', 'living', 22),
-    mc(1, 'What did the other woman claim?', ['"The living child is mine, and the dead child is yours"', '"Both children are mine"', '"The dead child is mine"', '"Neither child is mine"'], 22),
+    mc(1, 'What did the other woman claim?', ['"The living child is mine, and the dead child is yours"', '"Both the living child and the dead child belong to me"', '"The dead child is mine, and the living child is yours"', '"Neither the living child nor the dead child belongs to me"'], 22),
     tf(1, 'The two women agreed about which child belonged to whom.', false, 22, 'Each claimed the living child was hers and the dead child the other’s.'),
     blank(3, 'The first said, "No, the dead child is yours, and the living child is mine." Thus they spoke before the _____.', 'king', 22),
     tf(3, 'The other woman admitted that the dead child was hers.', false, 22, 'She said "the living child is mine, and the dead child is yours".'),
@@ -187,15 +186,15 @@ const bank: ChapterBank = {
     tf(1, 'The king asked for a sword to be brought before him.', true, 24),
     tf(3, 'The king asked for a spear to be brought before him.', false, 24, 'He said "Bring me a sword."'),
 
-    mc(1, 'What did the king command be done with the living child?', ['Divide it in two and give half to each woman', 'Give it to the first woman', 'Give it to the second woman', 'Raise it in the palace'], 25),
+    mc(1, 'What did the king command be done with the living child?', ['Divide it in two and give half to each woman', 'Give it whole to the first woman who spoke before him', 'Give it whole to the other woman whose son had died', 'Take it from both women and raise it among his servants'], 25),
     blank(1, 'And the king said, "_____ the living child in two, and give half to the one, and half to the other."', 'Divide', 25),
     word(3, 'The king ordered the living child divided in how many parts?', 'two', 25, ['2']),
     blank(2, 'Divide the living child in two, and give _____ to the one, and half to the other.', 'half', 25),
     tf(2, 'The king commanded that the dead child be divided in two.', false, 25, 'He commanded the living child be divided.'),
     tf(3, 'The king said to give half of the child to the one and half to the other.', true, 25),
 
-    mc(1, 'What did the true mother say when the king ordered the child divided?', ['"Oh, my lord, give her the living child, and by no means slay it"', '"It shall be neither mine nor yours; divide it"', '"Give me the sword"', '"The child is dead already"'], 26),
-    mc(2, 'What did the other woman say when the king ordered the child divided?', ['"It shall be neither mine nor yours; divide it"', '"Give her the living child"', '"Spare the child, my lord"', '"I am its mother"'], 26),
+    mc(1, 'What did the true mother say when the king ordered the child divided?', ['"Oh, my lord, give her the living child, and by no means slay it"', '"Let the child belong to neither of us; take the sword and divide it"', '"Give the living child to me and place the dead child in her bosom"', '"The child has already died; let each woman receive half of the body"'], 26),
+    mc(2, 'What did the other woman say when the king ordered the child divided?', ['"It shall be neither mine nor yours; divide it"', '"Give the living child to her, and by no means slay it"', '"Spare the living child, my lord, because my heart yearns for him"', '"I am the child’s mother; give him to me and send the other woman away"'], 26),
     blank(1, 'Oh, my lord, give her the living child, and by no means _____ it.', 'slay', 26),
     word(2, 'Why did the true mother speak up? Because her ___ yearned for her son.', 'heart', 26),
     blank(3, 'Then the woman whose son was alive said to the king, because her heart _____ for her son,', 'yearned', 26),
@@ -215,18 +214,15 @@ const bank: ChapterBank = {
     blank(1, 'And all Israel heard of the _____ which the king had rendered;', 'judgment', 28, ['judgement']),
     blank(3, 'and they stood in _____ of the king,', 'awe', 28),
     word(2, 'Israel perceived that the ___ of God was in Solomon.', 'wisdom', 28),
-    mc(2, 'Why did Israel stand in awe of the king?', ['They perceived that the wisdom of God was in him, to render justice', 'He had a thousand chariots', 'He had married Pharaoh’s daughter', 'He had built the temple'], 28),
+    mc(2, 'Why did Israel stand in awe of the king?', ['They perceived that the wisdom of God was in him, to render justice', 'They learned that he had offered a thousand burnt offerings at Gibeon', 'They heard that he had made a marriage alliance with Pharaoh king of Egypt', 'They saw that he had finished building the house of the LORD in Jerusalem'], 28),
     blank(3, 'because they perceived that the wisdom of God was in him, to render _____.', 'justice', 28),
     tf(1, 'All Israel heard of the king’s judgment and stood in awe of him.', true, 28),
     tf(3, 'Only the people of Jerusalem heard of the king’s judgment.', false, 28, '"All Israel heard of the judgment".'),
 
     // ══════════════════════════════════ Whole-chapter
-    mc(3, 'Which of these events happened FIRST in 1 Kings 3?', ['Solomon’s marriage alliance with Pharaoh', 'The dream at Gibeon', 'The two harlots come before the king', 'All Israel stands in awe of the king'], 1),
-    mc(2, 'Which of these happened LAST in 1 Kings 3?', ['All Israel heard of the judgment and stood in awe of the king', 'Solomon offered a thousand burnt offerings at Gibeon', 'God appeared to Solomon in a dream', 'Solomon made a feast for all his servants'], 28),
     mc(2, 'Who said, "Ask what I shall give you"?', ['God', 'Solomon', 'Pharaoh', 'The first woman'], 5),
     mc(2, 'Who said, "Bring me a sword"?', ['The king', 'The first woman', 'The other woman', 'A servant'], 24),
     mc(3, 'Who said, "It shall be neither mine nor yours; divide it"?', ['The other woman (whose son was dead)', 'The woman whose son was alive', 'The king', 'A servant of the king'], 26),
-    tf(2, 'In 1 Kings 3 the dream at Gibeon comes before the judgment between the two harlots.', true, 16),
     word(1, 'Who is the king throughout 1 Kings 3?', 'Solomon', 4),
   ],
 };
