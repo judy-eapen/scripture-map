@@ -1955,3 +1955,11 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 8 · 6389afdb-5c33-423e-9487-02b272881383 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 8 · ad718f3f-8be4-40fa-964e-80651673e623 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 8 · 6a8ab25c-1829-4943-837e-0ce933e7e916 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 9 semantic review
+
+- Mark 9 · fedeae77-ee21-4933-a8d6-c11845a9bf85 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 9 · 61a04844-bdd4-4914-95fa-17044e3d5fb3 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 9 · 571ff01c-3ec1-4b05-9568-30bf74816740 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 9 · 2cb141e9-84be-4b87-8fe2-4573ab687277 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 9 · 7ad2ad82-297f-4a17-8aa2-7ef292a07f6e · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 9 · c1074451-b535-4a80-b22d-044a3a93370f · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
