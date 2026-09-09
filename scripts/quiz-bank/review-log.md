@@ -170,3 +170,88 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 7 · 0e97e7c2-a116-4ef0-97aa-a25b8560598a · R2/R8 · retired · Compared gold and bronze lists while citing only one verse.
 - 1 Kings 7 · 9debbae6-a6c6-44dd-86bc-dfeee4fdb4a0 · R2/R8 · retired · Required scanning multiple buildings while citing only the Forest of Lebanon verse.
 - 1 Kings 7 · 4d24ee53-589e-4d28-8fb7-88a0d22fae8a · R2/R8 · retired · Asked for a multi-passage ordering while citing only the first pillar verse.
+
+## 1 Kings 8
+
+- 1 Kings 8 · 32f665c6-3de2-4f5e-97c5-91efa31eb7d1 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 3c44170f-439f-4b1d-9cba-a25f5e11a3be · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 47758a4e-4d00-4d89-858f-b41cb0cef74d · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 9f648348-8af5-442e-9322-01b802f6ce58 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 445a459e-0380-4e13-928f-c87799396cf7 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 76de1a44-553d-4ae8-87c7-004b4787cb0e · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · cbebd824-3760-461e-b6fa-af83d58ed5b6 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 5b229c1f-9b06-4c70-8850-0ffce00fd2d8 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 7f6bd5b9-b49c-4e27-bed6-40b6a0af19a0 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · d9462ae9-9143-4d29-946d-4907ab14850f · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 2fd1d0b6-8393-46e9-b37b-3a567733a4d4 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · d92e4d8c-a2a5-4699-8f55-4a31648a87ba · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 0fefa666-040c-47f4-8c8c-b007e5660502 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 6b4b6e70-e1d6-4156-8204-5fd61ce77cf2 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · c8422853-0c0b-4d51-8a1b-df8dd7b65d53 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · fdda15e4-3519-44c3-b62a-72cd40e91a34 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 4bcc2a32-37c6-47fa-b889-c92135c0e60f · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · e4082ae7-f52e-49df-8960-044445eb83ff · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 20989d92-e86a-462a-b083-711caec52a05 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 338babdb-eb34-42d8-846c-744bacc03df4 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 0fa72335-340f-43bc-bac4-b5ccae320258 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 63bfd8a3-f2b7-4560-b8dd-7a79a4127b3f · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · d6db9dd8-0b8e-453d-a548-9b846571dcb7 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 2a85424c-ba5c-4aef-abbd-e819d5a1ee7d · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · d5bc948b-ad61-4a49-bfef-bb768a1bb365 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 5a2766e4-ec69-40d3-b342-aa2421801427 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · da1c7f3d-dce3-4242-95ad-3cc6de4c7979 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 98689fe1-86c2-43c9-881a-c934fdaa185e · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 75a0131c-2bd9-4760-944c-09dd486c04e5 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 91d8cee1-b205-4c56-84ea-cba75daf49c9 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 660dd97d-d77c-4c60-9666-d849a586ccb2 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · b973e620-a764-4c98-9bd6-567016a70161 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 0a3c4319-53d0-422c-b047-fea6cfaf073c · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 7b8dac3c-65da-4ed8-b95f-5de0b0395fa1 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · d19e85da-91f2-46aa-b600-279febe00f14 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 6cd14fae-199b-405e-ac00-07a987f7b9e4 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 42d8ec55-d1be-4b79-81d4-2ae1b2a9d7d6 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 9f367ecf-bf4c-49f2-baaf-cf0968b1a75e · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · eea566a6-7100-4f77-9a0c-66e94750b397 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · f7463966-cc55-4b5b-a734-efeaf7e510e9 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 8f7ce6e5-cdd5-426a-aa60-24d2e37ba81f · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 1903c66e-0a07-4455-8f8f-ae63262af6dc · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · b0327ba2-5ca7-4a41-89c8-1cfa406da1b4 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 7199a63a-1aaf-41f1-a2c9-8a6a3718d6a1 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · df329065-cd21-4690-b323-3799236ac9ca · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 7d33d0f7-cf98-4abf-81fc-2bc563a8241c · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 274fd018-924e-4b16-b561-cf46e1798665 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · af11606f-6e60-49d8-8221-9e984756e077 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 057f0293-27c7-4c26-b586-60ed5ae4345d · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · b897583f-ca9a-474b-9b64-bda852ddfec9 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 1aff9035-2deb-452c-831a-c6b4e2261021 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 65f117bb-f501-468a-b7fa-ff4fb24e01c3 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 4109ccf2-e275-48ef-b276-924abcb76ac8 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 9e9813cc-24b6-4044-900a-ff297fe12649 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 5a5b2eb4-3ee3-4d88-a616-aaf2e77a29fb · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 5d74f49e-2be5-4567-9652-cd6bea1330e3 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 8f87a3f8-d9db-4dab-b237-025c52b670ba · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 77c25207-598c-44eb-b04a-82a50bf6a079 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 3a667e50-6d42-4fd4-8e40-0a17c1e50fff · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 61932b1c-db36-41b1-8241-ffe9afe7cf64 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 5df9a9b1-42af-422d-9b4c-678793e61897 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 1d25f331-98eb-4489-b15e-2af8162c0166 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 0f6f7a70-0759-497f-a425-5dcfba4b99d7 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 3008ecef-6f13-478a-a22d-e1fc5a491a10 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · ebe5eadc-da6a-4ecf-a0e1-a29b42e811b8 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 7a0a2193-7873-4c20-b2ed-7ead1a1cc795 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · e2cb864d-36e7-47f5-96ec-6abacb8ca472 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 3ecbc8ec-5c0b-4411-b2e1-5e643a1d8d98 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 9cb9f894-1409-480d-bf0d-b66a891a6bf0 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 19c177a4-96a8-4acc-85f6-97109376632e · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · cc7217da-ccbc-4e9a-89d1-f75b51094030 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · c7b3ea49-e44f-4805-9747-07407232fa5f · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 01359a35-7734-4a46-82de-4667ac18449c · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 10dbdcd5-ab26-4c36-b3af-9e9f5f83678a · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 1770142c-97e6-4f73-a076-252ebe527e3c · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · 5579d108-ac57-4707-aacf-9805825d8548 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · a1383257-8909-4758-b012-3deda973c8a5 · R3/R5/R7 · retired/replaced · Removed meta wording, balanced choices, or normalized the response type while preserving the cited fact.
+- 1 Kings 8 · ebaf567f-31a6-457c-8557-265c71127ab8 · R2/R8 · retired · Cross-passage event ordering was unsupported by its single citation.
+- 1 Kings 8 · 73d0ba51-76bc-4ae5-b496-c500a486dd99 · R2/R8 · retired · Cross-passage event ordering was unsupported by its single citation.
+- 1 Kings 8 · caba6584-beba-4a54-b377-a0810509cfb2 · R2/R8 · retired · A long-range speaker summary was unsupported by its single citation.
+- 1 Kings 8 · 711bb60e-d5f0-4307-ae47-d60ac9c91262 · R2/R8 · retired · A multi-petition comparison was unsupported by its single citation.
+- 1 Kings 8 · a61cc85d-c2f5-4ce6-a70a-173be5c5f1e0 · R2/R8 · retired · A petition-order question was unsupported by its single citation.
