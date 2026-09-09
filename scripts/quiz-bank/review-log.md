@@ -1992,3 +1992,7 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 12 · d559feb5-b8c8-4eb6-a570-3af055019fba · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
 - Mark 12 · 14c20e9f-64cb-42fd-afba-25bacca0eee5 · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
 - Mark 12 · 8eaa9f4f-b083-4d4b-9cb4-6497bd370a7b · R4/R5/R7 · retired · Balanced the true/false split or answer specificity, or corrected the response form, while preserving the cited Orthodox Bible fact.
+## Mark 13 semantic review
+
+- Mark 13 · c5049c25-e024-4949-aba3-97146c679c27 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 13 · f794e014-e78a-4c09-861a-1638773cccb5 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
