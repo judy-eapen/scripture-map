@@ -6,26 +6,26 @@ const bank: ChapterBank = {
     blank(1, 'Now Naboth the Jezreelite had a _____ in Jezreel', 'vineyard', 1),
     word(3, 'Where was the vineyard?', 'Jezreel', 1),
     tf(1, 'Naboth’s vineyard was beside Ahab’s palace.', true, 1),
-    mc(2, 'Which two locations are connected in the opening description?', ['Naboth’s vineyard in Jezreel and Ahab’s nearby palace', 'Mount Carmel and the brook Kishon', 'Samaria and Damascus', 'Beersheba and Horeb'], 1),
+    mc(2, 'Where was Naboth’s vineyard in relation to Ahab’s palace?', ['In Jezreel beside Ahab’s palace', 'On Mount Carmel beside the brook Kishon', 'In Samaria beside the road to Damascus', 'At Beersheba beside the road to Horeb'], 1),
 
-    mc(1, 'Why did Ahab want Naboth’s vineyard?', ['To make a vegetable garden near his house', 'To build a palace', 'To plant an olive grove', 'To give it to Jezebel'], 2),
+    mc(1, 'Why did Ahab want Naboth’s vineyard?', ['To make a vegetable garden because it was near his house', 'To enlarge his palace because the vineyard blocked its entrance', 'To plant an olive grove that would supply oil for the royal household', 'To give the land to Jezebel as a garden beside her residence'], 2),
     blank(2, 'and I will give you a _____ vineyard for it', 'better', 2),
     sa(2, 'What alternative to another vineyard did Ahab offer?', 'its value in money', 2, ['money']),
-    tf(3, 'Ahab offered neither land nor money for the vineyard.', false, 2, 'He offered a better vineyard or its value in money.'),
+    tf(3, 'Ahab offered Naboth either a better vineyard or its value in money.', true, 2),
     mc(3, 'What two forms of compensation did Ahab offer?', ['A better vineyard or its value in money', 'Gold or a palace', 'Horses or chariots', 'A royal office or tax relief'], 2),
 
     mc(1, 'Why did Naboth refuse Ahab?', ['The vineyard was his fathers’ inheritance', 'Ahab offered too little money', 'It was too far from the palace', 'Jezebel owned it'], 3),
     blank(3, 'The LORD _____ that I should give you the inheritance of my fathers.', 'forbid', 3),
     sa(1, 'What did Naboth call the vineyard?', 'the inheritance of my fathers', 3, ['his fathers’ inheritance', 'inheritance']),
-    tf(2, 'Naboth refused because he wanted a higher price.', false, 3, 'He refused to give away his ancestral inheritance.'),
-    mc(3, 'What reason did Naboth give for not selling?', ['“The LORD forbid that I should give you the inheritance of my fathers”', 'The vineyard had no value', 'The elders prohibited the sale', 'He wanted Ahab’s palace instead'], 3),
+    tf(2, 'Naboth refused because the vineyard was the inheritance of his fathers.', true, 3),
+    mc(3, 'Why did Naboth refuse to give Ahab the vineyard?', ['The LORD forbid him to give away the inheritance of his fathers', 'The vineyard had no value and could not be exchanged for better land', 'The elders of Jezreel had prohibited every sale of land to the king', 'He would exchange it only if Ahab gave him the neighboring palace'], 3),
     tf(1, 'Naboth regarded the vineyard as an inheritance from his fathers.', true, 3),
 
     mc(1, 'How did Ahab react to Naboth’s refusal?', ['He became vexed and sullen and ate no food', 'He accepted it cheerfully', 'He immediately arrested Naboth', 'He left for Samaria'], 4),
     blank(2, 'And he lay down on his bed, and turned away his _____.', 'face', 4),
     word(2, 'What did Ahab refuse to eat?', 'food', 4),
-    tf(3, 'Ahab remained cheerful after Naboth refused.', false, 4, 'He was vexed and sullen.'),
-    mc(2, 'Which actions showed Ahab’s sulking response?', ['He lay on his bed, turned away his face, and ate no food', 'He fasted in sackcloth before the LORD', 'He convened the elders for a trial', 'He returned to the vineyard and worked'], 4),
+    tf(3, 'Ahab became vexed and sullen, lay on his bed, and refused food.', true, 4),
+    mc(2, 'How did Ahab respond after Naboth refused him?', ['He lay on his bed, turned away his face, and ate no food', 'He put on sackcloth and fasted in repentance before the LORD', 'He convened the elders of Jezreel to arrange a lawful trial', 'He returned to the vineyard and began working the land himself'], 4),
 
     mc(1, 'Who asked why Ahab’s spirit was vexed?', ['Jezebel his wife', 'Naboth', 'Elijah', 'An elder'], 5),
     blank(3, 'Why is your spirit so vexed that you eat no _____?', 'food', 5),
@@ -35,23 +35,23 @@ const bank: ChapterBank = {
     mc(2, 'How did Ahab describe his offer to Naboth?', ['Money or another vineyard', 'Only a royal appointment', 'Only half its value', 'A field in Samaria'], 6),
     blank(3, 'I will give you _____ vineyard for it', 'another', 6),
     sa(1, 'What answer did Ahab report from Naboth?', 'I will not give you my vineyard', 6, ['he would not give the vineyard']),
-    tf(2, 'Ahab told Jezebel that Naboth had accepted money.', false, 6, 'He said Naboth refused to give him the vineyard.'),
+    tf(2, 'Ahab told Jezebel that Naboth had refused to give him the vineyard.', true, 6),
 
     mc(1, 'What did Jezebel promise Ahab?', ['She would give him Naboth’s vineyard', 'She would buy another palace', 'She would persuade him to forget it', 'She would return to Sidon'], 7),
     blank(2, 'Arise, and eat bread, and let your heart be _____.', 'cheerful', 7),
     sa(2, 'What challenge did Jezebel make about Ahab’s authority?', 'Do you now govern Israel?', 7, ['govern Israel']),
-    tf(3, 'Jezebel told Ahab to remain in bed.', false, 7, 'She told him to arise, eat, and be cheerful.'),
+    tf(3, 'Jezebel told Ahab to arise, eat bread, and let his heart be cheerful.', true, 7),
 
     mc(1, 'In whose name did Jezebel write letters?', ['Ahab’s', 'Naboth’s', 'Elijah’s', 'Her own'], 8),
     blank(3, 'and sealed them with his _____.', 'seal', 8),
     sa(1, 'To whom were the letters sent?', 'the elders and nobles', 8),
-    tf(2, 'Jezebel openly signed the letters in her own name.', false, 8, 'She wrote in Ahab’s name and used his seal.'),
-    mc(3, 'How did Jezebel give her orders royal authority?', ['She wrote in Ahab’s name and sealed the letters with his seal', 'She asked Ahab to sign each letter', 'She spoke before all Israel', 'She sent Elijah as messenger'], 8),
+    tf(2, 'Jezebel wrote the letters in Ahab’s name and sealed them with his seal.', true, 8),
+    mc(3, 'How did Jezebel give her orders royal authority?', ['She wrote in Ahab’s name and sealed the letters with his seal', 'She had Ahab publicly sign each letter before the elders', 'She delivered the instructions orally before an assembly of all Israel', 'She sent the prophet Elijah as the official royal messenger'], 8),
 
     mc(1, 'What public observance did Jezebel order?', ['A fast', 'A feast', 'A coronation', 'A sacrifice at Carmel'], 9),
     blank(2, 'and set Naboth on _____ among the people', 'high', 9),
     sa(2, 'Among whom was Naboth to be placed?', 'the people', 9),
-    tf(3, 'Jezebel ordered Naboth hidden from the people.', false, 9, 'She ordered him set on high among them.'),
+    tf(3, 'Jezebel ordered a fast and directed that Naboth be set on high among the people.', true, 9),
 
     mc(1, 'What false charge were the two base fellows to make?', ['Naboth cursed God and the king', 'Naboth stole the vineyard', 'Naboth served Baal', 'Naboth plotted with Syria'], 10),
     blank(3, 'Then take him out, and _____ him to death.', 'stone', 10),
@@ -59,10 +59,10 @@ const bank: ChapterBank = {
     tf(2, 'The planned accusation concerned cursing God and the king.', true, 10),
     mc(3, 'What complete scheme did the letters command?', ['Use two base fellows to accuse Naboth, then stone him', 'Buy the vineyard secretly', 'Exile Naboth after a trial', 'Seize the vineyard without harming him'], 10),
 
-    mc(1, 'Who carried out Jezebel’s instructions?', ['The elders and nobles of Naboth’s city', 'Ahab’s army', 'The prophets of Baal', 'Naboth’s family'], 11),
+    mc(1, 'Who carried out Jezebel’s written instructions?', ['The elders and nobles who lived in Naboth’s city', 'Ahab’s army commanders stationed at the palace', 'The prophets of Baal who ate at Jezebel’s table', 'Members of Naboth’s household who inherited the vineyard'], 11),
     blank(2, 'did as Jez’ebel had sent _____ to them', 'word', 11),
     sa(2, 'Where did the officials live?', 'in Naboth’s city', 11, ['his city']),
-    tf(3, 'The elders refused to follow Jezebel’s letters.', false, 11, 'They did as the letters directed.'),
+    tf(3, 'The elders and nobles of Naboth’s city did as Jezebel’s letters directed.', true, 11),
 
     mc(1, 'What did the city leaders proclaim?', ['A fast', 'A feast', 'War', 'Naboth’s innocence'], 12),
     blank(3, 'and set Naboth on high among the _____.', 'people', 12),
@@ -91,12 +91,12 @@ const bank: ChapterBank = {
 
     mc(1, 'To whom did the LORD’s word come?', ['Elijah the Tishbite', 'Naboth', 'Ahab', 'An elder'], 17),
     blank(3, 'Then the word of the LORD came to Eli’jah the _____.', 'Tishbite', 17),
-    word(1, 'Whose word came to Elijah?', 'the LORD’s', 17, ['the LORD', 'LORD']),
+    word(1, 'Whose word came to Elijah?', 'LORD', 17, ['the LORD', 'the LORD’s', "LORD's"]),
     tf(2, 'The LORD remained silent about Naboth’s death.', false, 17, 'His word came to Elijah.'),
 
     mc(1, 'Where was Elijah told to meet Ahab?', ['In Naboth’s vineyard', 'At the palace in Samaria', 'On Mount Carmel', 'At Naboth’s tomb'], 18),
     blank(2, 'where he has gone to take _____.', 'possession', 18),
-    word(2, 'What title is given to Ahab?', 'king of Israel', 18),
+    sa(2, 'What title is given to Ahab?', 'king of Israel', 18),
     tf(3, 'Ahab was in the vineyard to return it.', false, 18, 'He had gone there to take possession.'),
 
     mc(2, 'What accusation did the LORD tell Elijah to make?', ['Have you killed and also taken possession?', 'Have you sold the vineyard?', 'Have you freed Naboth?', 'Have you hidden the prophets?'], 19),
@@ -138,10 +138,10 @@ const bank: ChapterBank = {
 
     mc(1, 'Whose idolatry did Ahab imitate?', ['The Amorites’', 'The Syrians’', 'The Philistines’', 'The Egyptians’'], 26),
     blank(2, 'He did very _____ in going after idols', 'abominably', 26),
-    word(2, 'Who had cast the Amorites out?', 'the LORD', 26, ['LORD']),
+    word(2, 'Who had cast the Amorites out?', 'LORD', 26, ['the LORD']),
     tf(3, 'Ahab avoided the idols of the former inhabitants.', false, 26, 'He followed their abominable idolatry.'),
 
-    mc(1, 'How did Ahab respond to the judgment?', ['He tore his clothes, wore sackcloth, fasted, and went dejectedly', 'He threatened Elijah', 'He celebrated', 'He fled to Syria'], 27),
+    mc(1, 'How did Ahab respond when he heard the words of judgment?', ['He tore his clothes, wore sackcloth, fasted, and went dejectedly', 'He threatened Elijah and ordered the prophet imprisoned in Samaria', 'He celebrated taking possession of the vineyard with a royal feast', 'He fled from Jezreel to seek protection from the king of Syria'], 27),
     blank(3, 'he rent his clothes, and put _____ upon his flesh', 'sackcloth', 27),
     word(1, 'What did Ahab stop doing as part of his response?', 'eating', 27, ['he fasted', 'fasted']),
     tf(2, 'Ahab humbled himself with sackcloth and fasting.', true, 27),
