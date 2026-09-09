@@ -5,7 +5,7 @@ const bank: ChapterBank = {
     mc(1, 'Who began to reign over Judah in the second year of Joash king of Israel?', ['Amaziah son of Joash', 'Azariah', 'Jeroboam', 'Jehoahaz'], 1),
     blank(1, 'In the second year of Jo’ash the son of Jo’ahaz, king of Israel, _____ the son of Jo’ash, king of Judah, began to reign.', 'Amazi’ah', 1, ['Amaziah']),
     word(3, 'Which kingdom did Amaziah rule?', 'Judah', 1),
-    tf(2, 'Amaziah was a son of Joash king of Judah.', true, 1),
+    tf(2, 'Amaziah was a son of Joash king of Israel.', false, 1, 'Amaziah was the son of Joash king of Judah.'),
     mc(3, 'Which Israelite king provides the date for Amaziah’s accession?', ['Joash son of Jehoahaz', 'Jeroboam son of Joash', 'Jehu', 'Hazael'], 1),
 
     mc(2, 'How old was Amaziah when he began to reign?', ['Twenty-five', 'Sixteen', 'Thirty-seven', 'Twenty-nine'], 2),
@@ -17,19 +17,19 @@ const bank: ChapterBank = {
     mc(1, 'Whose conduct did Amaziah follow?', ['His father Joash’s', 'David’s completely', 'Jeroboam’s', 'Ahab’s'], 3),
     blank(2, 'he did what was _____ in the eyes of the LORD, yet not like David his father', 'right', 3),
     word(1, 'Which ancestor was the higher standard Amaziah did not fully match?', 'David', 3),
-    tf(2, 'Amaziah did what was right, but not as fully as David.', true, 3),
+    tf(2, 'Amaziah matched David’s obedience completely.', false, 3, 'He did what was right, yet not like David; he acted as his father Joash had.'),
     mc(3, 'How does the narrator qualify Amaziah’s obedience?', ['Right like Joash, but not like David', 'Wholly evil like Ahab', 'Perfect throughout his life', 'Better than David'], 3),
 
     mc(1, 'What worship sites did Amaziah leave in place?', ['The high places', 'The Jerusalem temple', 'Baal’s temple in Samaria', 'The altar at Carmel'], 4),
     blank(2, 'the people still sacrificed and burned _____ on the high places.', 'incense', 4),
     word(1, 'What did the people continue to offer on the high places?', 'sacrifices', 4, ['sacrificed']),
     tf(2, 'The high places were removed during Amaziah’s reign.', false, 4, 'They were not removed.'),
-    mc(3, 'What limitation remained in Judah’s worship reform?', ['People still sacrificed and burned incense at high places', 'The temple was closed', 'No priests served in Jerusalem', 'The ark was removed'], 4),
+    mc(3, 'What limitation remained in Judah’s worship reform?', ['People still worshiped at the high places', 'The Jerusalem temple remained closed', 'No priests continued serving in Jerusalem', 'The covenant ark had been removed from Judah'], 4),
 
-    mc(1, 'Whom did Amaziah execute after securing royal power?', ['The servants who killed his father', 'Their children', 'The priests', 'The king of Israel'], 5),
+    mc(1, 'Whom did Amaziah execute after securing royal power?', ['The servants who murdered his father', 'The children belonging to those servants', 'The priests who served within the temple', 'The reigning king of the northern kingdom'], 5),
     blank(2, 'he killed his _____ who had slain the king his father.', 'servants', 5),
     sa(1, 'What had those servants done?', 'slain the king his father', 5, ['killed his father']),
-    tf(2, 'Amaziah waited until royal power was firmly in his hand before acting.', true, 5),
+    tf(2, 'Amaziah executed his father’s assassins before securing the kingdom.', false, 5, 'He acted after the kingdom was firmly in his hand.'),
 
     mc(1, 'Whom did Amaziah spare when punishing his father’s murderers?', ['Their children', 'The murderers', 'Their commanders', 'Their priests'], 6),
     blank(2, 'but every man shall die for his own _____.', 'sin', 6),
@@ -39,7 +39,7 @@ const bank: ChapterBank = {
     mc(1, 'How many Edomites did Amaziah kill in the Valley of Salt?', ['Ten thousand', 'One thousand', 'Twenty thousand', 'Five hundred'], 7),
     blank(2, 'and took _____ by storm, and called it Jok’the-el', 'Sela', 7),
     word(1, 'What new name did Amaziah give Sela?', 'Jokthe-el', 7, ['Jok’the-el']),
-    tf(3, 'Amaziah captured Sela by storm.', true, 7),
+    tf(3, 'Amaziah failed to capture the Edomite stronghold of Sela.', false, 7, 'He took Sela by storm and renamed it Jokthe-el.'),
 
     mc(1, 'Whom did Amaziah challenge to meet face to face?', ['Jehoash king of Israel', 'Hazael king of Syria', 'Jeroboam', 'The king of Edom'], 8),
     blank(2, 'Come, let us look one another in the _____.', 'face', 8),
@@ -49,8 +49,8 @@ const bank: ChapterBank = {
     mc(1, 'Which two plants appear in Jehoash’s parable?', ['A thistle and a cedar on Lebanon', 'A vine and a fig tree', 'An olive and a bramble', 'A reed and an oak'], 9),
     blank(2, 'A _____ on Lebanon sent to a cedar on Lebanon', 'thistle', 9),
     sa(1, 'What trampled the thistle?', 'a wild beast of Lebanon', 9, ['wild beast']),
-    tf(2, 'In the parable, the thistle asked the cedar for a daughter as a wife for his son.', true, 9),
-    mc(3, 'What warning did the thistle-and-cedar parable convey?', ['Amaziah’s prideful challenge would end in humiliation', 'Israel desired a marriage alliance', 'Lebanon would invade Judah', 'Edom would aid Amaziah'], 9),
+    tf(2, 'In Jehoash’s parable, the cedar asked the thistle for a marriage alliance.', false, 9, 'The thistle asked the cedar to give his daughter as a wife for the thistle’s son.'),
+    mc(3, 'What warning did the thistle-and-cedar parable convey?', ['Amaziah’s pride would lead to humiliation', 'Israel genuinely desired a marriage alliance', 'Lebanon was preparing to invade Judah', 'Edom would provide military aid to Amaziah'], 9),
 
     mc(1, 'What victory had lifted Amaziah’s heart?', ['His defeat of Edom', 'His defeat of Israel', 'His capture of Damascus', 'His victory over Moab'], 10),
     blank(2, 'Be content with your glory, and stay at _____.', 'home', 10),
@@ -59,8 +59,8 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did Amaziah and Jehoash face one another in battle?', ['Beth-shemesh in Judah', 'Jerusalem', 'Samaria', 'Lachish'], 11),
     blank(2, 'But Amazi’ah would not _____.', 'listen', 11),
-    word(1, 'Which king went up to answer the challenge?', 'Jehoash king of Israel', 11, ['Jehoash']),
-    tf(3, 'Beth-shemesh belonged to Judah.', true, 11),
+    sa(1, 'Which king went up to answer the challenge?', 'Jehoash king of Israel', 11, ['Jehoash']),
+    tf(3, 'The confrontation took place at Beth-shemesh in Israel.', false, 11, 'The kings met at Beth-shemesh, which belonged to Judah.'),
 
     mc(1, 'Who won the battle at Beth-shemesh?', ['Israel', 'Judah', 'Edom', 'Syria'], 12),
     blank(2, 'and every man fled to his _____.', 'home', 12),
@@ -70,9 +70,9 @@ const bank: ChapterBank = {
     mc(1, 'Whom did Jehoash capture at Beth-shemesh?', ['Amaziah king of Judah', 'Azariah', 'Jeroboam', 'Jonah'], 13),
     blank(2, 'and broke down the wall of Jerusalem for _____ hundred cubits', 'four', 13, ['4']),
     sa(1, 'Between which gates was Jerusalem’s wall broken?', 'the Ephraim Gate and the Corner Gate', 13, ['Ephraim Gate to Corner Gate']),
-    tf(3, 'Jehoash carried his captive from Beth-shemesh to Jerusalem.', true, 13),
+    tf(3, 'Jehoash released Amaziah at Beth-shemesh without entering Jerusalem.', false, 13, 'Jehoash captured Amaziah and came to Jerusalem, where he broke down part of the wall.'),
 
-    mc(1, 'What did Jehoash seize from Jerusalem?', ['Gold, silver, vessels, royal treasure, and hostages', 'Only food', 'Only weapons', 'The ark of the covenant'], 14),
+    mc(1, 'What did Jehoash seize from Jerusalem?', ['Gold, silver, vessels, treasure, and hostages', 'Only the food stored inside Jerusalem', 'Only weapons belonging to Judah’s army', 'The ark of the covenant from the temple'], 14),
     blank(2, 'also _____, and he returned to Sama’ria.', 'hostages', 14),
     word(1, 'To what city did Jehoash return?', 'Samaria', 14, ['Sama’ria']),
     tf(3, 'Some seized vessels came from the house of the LORD.', true, 14),
@@ -80,7 +80,7 @@ const bank: ChapterBank = {
     mc(1, 'Where were Jehoash’s remaining acts recorded?', ['Chronicles of the Kings of Israel', 'Chronicles of Judah', 'Book of Moses', 'Book of Jonah'], 15),
     blank(2, 'and how he fought with Amazi’ah king of _____.', 'Judah', 15),
     word(1, 'What quality of Jehoash is mentioned with his acts?', 'might', 15),
-    tf(3, 'The royal record included Jehoash’s war with Amaziah.', true, 15),
+    tf(3, 'The royal record omitted Jehoash’s conflict with Amaziah.', false, 15, 'The summary specifically includes how Jehoash fought Amaziah king of Judah.'),
 
     mc(1, 'Who succeeded Jehoash in Israel?', ['His son Jeroboam', 'Amaziah', 'Azariah', 'Jonah'], 16),
     blank(2, 'and was buried in Sama’ria with the kings of _____.', 'Israel', 16),
@@ -127,11 +127,11 @@ const bank: ChapterBank = {
     word(1, 'Whom had Jeroboam son of Nebat caused to sin?', 'Israel', 24),
     tf(3, 'Jeroboam did evil in the LORD’s sight.', true, 24),
 
-    mc(1, 'Which prophet foretold Jeroboam’s restoration of Israel’s border?', ['Jonah son of Amittai from Gath-hepher', 'Elisha', 'Amos', 'Isaiah'], 25),
+    mc(1, 'Which prophet foretold Jeroboam’s restoration of Israel’s border?', ['Jonah son of Amittai', 'The prophet Elisha son of Shaphat', 'The prophet Amos from Tekoa', 'The prophet Isaiah son of Amoz'], 25),
     blank(2, 'from the entrance of Hamath as far as the Sea of the _____.', 'Arabah', 25),
     word(1, 'Where was Jonah from?', 'Gath-hepher', 25, ['Gath-he’pher']),
     tf(2, 'Jeroboam restored Israel’s border according to the LORD’s word through Jonah.', true, 25),
-    mc(3, 'Between what limits was Israel’s border restored?', ['From the entrance of Hamath to the Sea of the Arabah', 'From Jerusalem to Lachish', 'From Samaria to Damascus', 'From Elath to Edom'], 25),
+    mc(3, 'Between what limits was Israel’s border restored?', ['Hamath’s entrance to the Sea of the Arabah', 'The city of Jerusalem to the city of Lachish', 'The city of Samaria to the city of Damascus', 'The port of Elath to the territory of Edom'], 25),
 
     mc(1, 'How does the chapter describe Israel’s affliction?', ['Very bitter', 'Brief and mild', 'Entirely ended', 'Self-inflicted only'], 26),
     blank(2, 'for there was none left, bond or _____.', 'free', 26),
