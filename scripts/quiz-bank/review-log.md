@@ -1904,3 +1904,7 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 2 Kings 25 · d5caf40e-5f58-4536-ae12-758fc3a61b61 · R4/R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
 - 2 Kings 25 · a0c7857d-9ead-42a5-9952-304948358b17 · R4/R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
 - 2 Kings 25 · af120533-2103-4c41-a69b-114868c67698 · R4/R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+## Mark 1 semantic review
+
+- Mark 1 · d891129a-2b4c-4702-a950-606fff9fbe6d · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 1 · bcd32087-c10e-4b3b-bb27-4a1ae2e6edb3 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.

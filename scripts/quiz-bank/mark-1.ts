@@ -136,7 +136,7 @@ const bank: ChapterBank = {
     tf(3, 'Jesus let the demons speak that evening so the crowd would learn who He was.', false, 34, 'He "did not allow the demons to speak, because they knew Him."'),
 
     // ══════════════════════════════════ v35–39 · Prayer before daylight, then the next towns
-    mc(1, 'The morning after healing the crowds in Capernaum, what did Jesus do?', ['He rose long before daylight and went to a solitary place to pray', 'He went back into the synagogue to teach', 'He walked by the Sea of Galilee calling disciples', 'He healed the leper who came kneeling to Him'], 35),
+    mc(1, 'The morning after healing the crowds in Capernaum, what did Jesus do?', ['He rose before daylight and went to a solitary place to pray', 'He returned to the synagogue and continued teaching the crowds','He walked beside the Sea of Galilee to call more disciples','He remained in the city and healed the leper who approached Him'], 35),
     blank(3, 'Now in the morning, having risen a long while before daylight, He went out and departed to a _____ place; and there He prayed.', 'solitary', 35),
     word(2, 'What did Jesus do in the solitary place He went to before daylight?', 'prayed', 35, ['pray', 'he prayed', 'praying']),
     tf(1, 'Jesus rose a long while before daylight and went out to a solitary place to pray.', true, 35),
@@ -157,7 +157,7 @@ const bank: ChapterBank = {
     blank(1, 'Now a leper came to Him, imploring Him, kneeling down to Him and saying to Him, "If You are willing, You can make me _____."', 'clean', 40),
     word(1, 'A man with what disease came kneeling before Jesus and imploring Him to make him clean?', 'leprosy', 40, ['leper']),
     sa(2, 'How did the leper approach Jesus, and what did he ask?', 'He came imploring Jesus and kneeling down before Him, saying, "If You are willing, You can make me clean."', 40),
-    mc(2, 'How did Jesus respond to the leper who said, "If You are willing, You can make me clean"?', ['Moved with compassion, He touched him and said, "I am willing; be cleansed"', 'He sent him to the priest without touching him', 'He rebuked him and said, "Be quiet"', 'He told him to wash seven times in the Jordan'], 41),
+    mc(2, 'How did Jesus respond to the leper who said, "If You are willing, You can make me clean"?', ['Moved with compassion, He touched him and said, "I am willing; be cleansed"', 'He refused to touch him and immediately sent him away to the priest','He rebuked the man publicly and commanded him to remain silent','He directed the man to wash seven times in the Jordan River'], 41),
     blank(3, 'Then Jesus, moved with _____, stretched out His hand and touched him, and said to him, "I am willing; be cleansed."', 'compassion', 41),
     word(2, 'Jesus was moved with what when the leper knelt before Him?', 'compassion', 41),
     tf(2, 'Jesus cleansed the leper without touching him.', false, 41, 'Jesus "stretched out His hand and touched him."'),
@@ -165,7 +165,7 @@ const bank: ChapterBank = {
     tf(1, 'The leprosy left the man immediately, as soon as Jesus had spoken.', true, 42),
     blank(3, 'And He strictly _____ him and sent him away at once,', 'warned', 43),
     tf(2, 'After cleansing the leper, Jesus strictly warned him and sent him away at once.', true, 43),
-    mc(2, 'What did Jesus command the cleansed leper to do?', ['Say nothing to anyone, but show himself to the priest and offer what Moses commanded', 'Tell everyone in the city what God had done for him', 'Follow Him and become one of His disciples', 'Return home and wash in the Jordan'], 44),
+    mc(2, 'What did Jesus command the cleansed leper to do?', ['Tell no one, but show himself to the priest and offer what Moses commanded', 'Tell everyone throughout the city what God had done for him','Follow Jesus immediately and become one of His twelve disciples','Return to his home and wash himself seven times in the Jordan'], 44),
     blank(2, 'and said to him, "See that you say nothing to anyone; but go your way, show yourself to the _____, and offer for your cleansing those things which Moses commanded, as a testimony to them."', 'priest', 44),
     word(3, 'Jesus told the cleansed leper to offer for his cleansing the things that whom had commanded?', 'Moses', 44),
     sa(3, 'Jesus gave the cleansed leper three instructions. What were they?', 'Say nothing to anyone; go show himself to the priest; and offer for his cleansing the things Moses commanded, as a testimony to them.', 44),
