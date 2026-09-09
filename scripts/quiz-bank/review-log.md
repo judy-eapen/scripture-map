@@ -897,3 +897,32 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 2 Kings 2 · 538f63fa-4f67-4c27-89be-bdda259b2cf3 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
 - 2 Kings 2 · 7dcafbca-a769-40e6-9445-c365d990f5e4 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
 - 2 Kings 2 · dede2a80-b2aa-43ef-95ba-3595816439cd · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+
+## 2 Kings 3
+
+- 2 Kings 3 · 6133fa59-33bd-4967-83b6-cdc7c43bf2d7 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 07a08726-e6e5-4718-876e-12830ff4edfc · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 38352a4e-115f-4918-8c11-24d4712c7a40 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 7343250b-fe24-460d-a9f2-c86830f52a12 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 9f4ed1cd-9ed0-454c-9e56-4b1024a9f395 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 903dd491-0e70-4342-bd41-c24f70019a13 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · afc8e2ca-5a54-4bde-9232-d945dadcce48 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · c38cf6a7-1e85-4644-9958-91b5106e3f07 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · d9d83771-a1ab-4532-9b1e-6ea01ea4400c · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 2492393a-6291-4bb3-b0a3-beddb3c711a2 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 4f4d1ca2-4134-4fa3-a0e0-0b4cb8f36a91 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 517be6d9-9aee-49ac-b8a6-f823d6531f4d · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 5d45df11-7e63-4dec-acb6-c66879732872 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 69f9d105-41c7-4b77-b139-73b1b5f89c6c · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 7ecd69a3-e5a2-4fbc-955f-b2e2f8eecafc · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 9d2abdd6-da43-4137-9117-a84a3189111b · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · a8c8502b-aab1-4d73-8710-42cb856d1f16 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · b43b86f8-6053-4ac0-9a8e-c558625036d1 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · fb672e4d-095f-4391-a0aa-a0333e8b7f61 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · aaf03006-cd68-4b83-bbde-5419286d15ac · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · ce40cbdc-3ba8-40e2-a8ee-acd6c32408b3 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 98012f51-5c76-406d-84d0-81df299bdf13 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · a467071f-fd16-4606-a9a8-5a8240c003df · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 9b59b68d-16e7-4682-9c72-d1c09054765e · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · e2d3ddb1-f881-468c-baa4-584e625f1028 · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.
+- 2 Kings 3 · 8c99af8f-8e52-4977-a118-364850e1f2ce · R5/R7 · retired · Retired during the semantic pass after balancing choices or correcting the response form; the replacement preserves the cited fact.

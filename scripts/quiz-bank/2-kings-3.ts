@@ -33,7 +33,7 @@ const bank: ChapterBank = {
     tf(3, 'Mesha’s rebellion began while Ahab was still alive.', false, 5, 'The king of Moab rebelled when Ahab died.'),
     mc(2, 'Against whom was Moab’s rebellion directed?', ['The king of Israel', 'The king of Edom', 'The prophet Elisha', 'The king of Judah alone'], 5),
 
-    mc(1, 'What did King Jehoram do after Moab rebelled?', ['Marched from Samaria and mustered all Israel', 'Sent Elisha to Moab', 'Returned to Ahab’s palace', 'Surrendered the frontier'], 6),
+    mc(1, 'What did King Jehoram do after Moab rebelled?', ['He marched from Samaria and mustered all Israel', 'He sent Elisha to Moab to negotiate with Mesha', 'He withdrew into Ahab’s palace and refused to campaign', 'He surrendered Israel’s frontier cities to the king of Moab'], 6),
     blank(3, 'and _____ all Israel.', 'mustered', 6),
     word(2, 'From what city did Jehoram march?', 'Samaria', 6, ["Sama'ria"]),
     tf(1, 'Jehoram assembled Israel’s forces.', true, 6),
@@ -55,7 +55,7 @@ const bank: ChapterBank = {
     blank(2, 'they had made a circuitous march of _____ days', 'seven', 9, ['7']),
     word(1, 'What essential supply did the army lack?', 'water', 9),
     tf(3, 'Only the soldiers lacked water; the animals still had enough.', false, 9, 'There was no water for either the army or the animals that followed.'),
-    mc(2, 'What crisis arose after the circuitous seven-day march?', ['There was no water for the army or its animals', 'Moab captured the three kings', 'Edom deserted the alliance', 'The army lost all its weapons'], 9),
+    mc(2, 'What crisis arose after the circuitous seven-day march?', ['There was no water for the army or the animals that followed it', 'Moab captured all three allied kings before they reached the frontier', 'Edom deserted the alliance and returned to its own land', 'The army lost its weapons while crossing the wilderness of Edom'], 9),
 
     mc(1, 'Whom did Israel’s king blame for the army’s danger?', ['The LORD', 'Jehoshaphat', 'The king of Edom', 'Elisha'], 10),
     blank(3, 'The LORD has called these three kings to give them into the hand of _____.', 'Moab', 10),
@@ -63,7 +63,7 @@ const bank: ChapterBank = {
     tf(1, 'Jehoram feared that the allied kings would be delivered to Moab.', true, 10),
     mc(2, 'How did Jehoram interpret the lack of water?', ['As the LORD delivering the three kings to Moab', 'As proof that Edom had betrayed them', 'As a sign to return to Samaria', 'As a test from Elisha'], 10),
 
-    mc(1, 'What did Jehoshaphat seek during the crisis?', ['A prophet through whom they could inquire of the LORD', 'A guide through Edom', 'A messenger from Moab', 'A new source of tribute'], 11),
+    mc(1, 'What did Jehoshaphat seek during the water crisis?', ['A prophet through whom they could inquire of the LORD', 'A guide who could lead the army by another route through Edom', 'A messenger who could negotiate terms with the king of Moab', 'A source of tribute that could supply provisions for the army'], 11),
     blank(2, 'Eli’sha the son of _____ is here', 'Shaphat', 11),
     sa(1, 'What service had Elisha performed for Elijah?', 'poured water on Elijah’s hands', 11, ['he poured water on the hands of Elijah', 'poured water on his hands']),
     tf(3, 'One of Israel’s servants identified Elisha as a former servant of Elijah.', true, 11),
@@ -73,7 +73,7 @@ const bank: ChapterBank = {
     blank(3, 'The _____ of the LORD is with him.', 'word', 12),
     sa(2, 'Who went down to Elisha?', 'the kings of Israel, Judah, and Edom', 12, ['the three kings', 'all three kings']),
     tf(1, 'The three allied kings went to Elisha rather than summoning him to them.', true, 12),
-    mc(2, 'What persuaded the kings to approach Elisha?', ['Jehoshaphat’s confidence that the LORD’s word was with him', 'A command from Mesha', 'The discovery of a spring', 'A message from Elijah'], 12),
+    mc(2, 'Why did the three kings go down to Elisha?', ['Jehoshaphat affirmed that the word of the LORD was with him', 'Mesha commanded them to consult the prophet before fighting', 'The army discovered a spring beside the place where Elisha stayed', 'Elijah sent them a message directing them to his former servant'], 12),
 
     mc(1, 'To whose prophets did Elisha initially send Israel’s king?', ['The prophets of his father and mother', 'The prophets at Jericho', 'The prophets of Judah', 'The prophets of Edom'], 13),
     blank(2, 'What have I to do with _____?', 'you', 13),
@@ -89,11 +89,11 @@ const bank: ChapterBank = {
     blank(2, 'And when the minstrel _____, the power of the LORD came upon him.', 'played', 15),
     sa(1, 'What came upon Elisha while the minstrel played?', 'the power of the LORD', 15, ['power of the Lord', 'the LORD’s power']),
     tf(3, 'Elisha began prophesying before the minstrel played.', false, 15, 'The power of the LORD came upon him when the minstrel played.'),
-    mc(3, 'What did Elisha request immediately before the LORD’s power came upon him?', ['A minstrel, whose playing preceded the prophecy', 'A new bowl filled with salt', 'Elijah’s mantle', 'Fifty strong men'], 15),
+    mc(3, 'What did Elisha request immediately before the LORD’s power came upon him?', ['A minstrel, whose playing preceded the prophecy', 'A new bowl filled with salt to make the water wholesome', 'Elijah’s mantle so that he could strike the Jordan', 'Fifty strong men to search the mountains and valleys'], 15),
 
     mc(1, 'What did the LORD promise to make in the dry streambed?', ['Pools of water', 'A fortified city', 'A road to Samaria', 'A field of stones'], 16),
     blank(3, 'I will make this dry stream-bed full of _____.', 'pools', 16),
-    word(2, 'Who spoke the promise through Elisha?', 'the LORD', 16, ['LORD', 'God']),
+    word(2, 'Who spoke the promise through Elisha?', 'LORD', 16, ['the LORD', 'God']),
     tf(1, 'The prophecy concerned a dry streambed becoming full of pools.', true, 16),
 
     mc(1, 'What would fill the streambed even though the army saw no weather?', ['Water', 'Blood', 'Stones', 'Wool'], 17),
@@ -111,7 +111,7 @@ const bank: ChapterBank = {
     sa(1, 'What were they commanded to do to the springs?', 'stop them up', 19, ['stop up the springs', 'block them']),
     tf(3, 'The prophecy said every good piece of land would be ruined with stones.', true, 19),
 
-    mc(1, 'When did water arrive?', ['The next morning at the time of the sacrifice', 'At midnight during a storm', 'After three days of rain', 'At sunset after the battle'], 20),
+    mc(1, 'When did water arrive in the dry streambed?', ['The next morning at the time of the sacrifice', 'At midnight while a visible storm crossed Edom', 'After three days of steady rain over the allied camp', 'At sunset after Israel had defeated the Moabite army'], 20),
     blank(3, 'water came from the direction of _____.', 'Edom', 20),
     sa(2, 'How much of the country was filled with water?', 'the country', 20, ['all the country', 'it was filled']),
     tf(1, 'The water came without the wind or rain the army had expected.', true, 20),
@@ -130,7 +130,7 @@ const bank: ChapterBank = {
     blank(2, 'the kings have surely fought together, and _____ one another.', 'slain', 23),
     sa(1, 'What did the Moabites rush to take?', 'the spoil', 23, ['spoil', 'plunder']),
     tf(3, 'The Moabites correctly recognized the red appearance as reflected sunlight on water.', false, 23, 'They mistook the water for blood and assumed the kings had killed one another.'),
-    mc(3, 'Why did the Moabites advance carelessly toward Israel’s camp?', ['Sunlight made the water look like blood, so they assumed the allied kings had slain one another', 'They had received a peace message from Jehoshaphat', 'They believed the army had died of thirst', 'They saw the king of Edom retreat'], 23),
+    mc(3, 'Why did the Moabites advance toward Israel’s camp expecting spoil?', ['Sunlight made the water look like blood, so they assumed the allied kings had slain one another', 'Jehoshaphat had sent them a peace message saying all three kings had abandoned the campaign', 'They believed the entire allied army had died from thirst during the seven-day wilderness march', 'They saw the king of Edom retreat through the wilderness after fighting the other two kings'], 23),
 
     mc(1, 'What happened when Moab reached Israel’s camp?', ['The Israelites rose and attacked them', 'The three kings surrendered', 'The camp was empty', 'Elisha negotiated peace'], 24),
     blank(3, 'till they _____ before them', 'fled', 24),
