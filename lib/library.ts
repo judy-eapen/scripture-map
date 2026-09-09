@@ -17,12 +17,19 @@ function slugify(name: string) {
 
 async function readLibraryBooks(): Promise<LibraryBook[]> {
   const supabase = createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { persistSession: false } })
-  const { data, error } = await supabase.from('books').select('id, name, chapters(id, chapter_number, quiz_questions(id))')
+  let { data, error } = await supabase.from('books').select('id, name, chapters(id, chapter_number, quiz_questions(id, retired_at))')
+  let canFilterRetired = !error
+  if (error) {
+    const fallback = await supabase.from('books').select('id, name, chapters(id, chapter_number, quiz_questions(id))')
+    data = fallback.data
+    error = fallback.error
+    canFilterRetired = false
+  }
   if (error) return []
-  type Row = { id: string; name: string; chapters: { id: string; chapter_number: number; quiz_questions: { id: string }[] | null }[] | null }
+  type Row = { id:string; name:string; chapters:{ id:string; chapter_number:number; quiz_questions:{ id:string; retired_at?:string | null }[] | null }[] | null }
   return ((data ?? []) as Row[]).map(book => ({
     id: book.id, name: book.name, slug: slugify(book.name),
-    chapters: (book.chapters ?? []).map(chapter => ({ id: chapter.id, number: chapter.chapter_number, questionIds: (chapter.quiz_questions ?? []).map(question => question.id) })).sort((a, b) => a.number - b.number),
+    chapters: (book.chapters ?? []).map(chapter => ({ id:chapter.id, number:chapter.chapter_number, questionIds:(chapter.quiz_questions ?? []).filter(question => !canFilterRetired || question.retired_at == null).map(question => question.id) })).sort((a, b) => a.number - b.number),
   })).sort((a, b) => (canonical.get(a.name) ?? Number.MAX_SAFE_INTEGER) - (canonical.get(b.name) ?? Number.MAX_SAFE_INTEGER) || a.name.localeCompare(b.name))
 }
 
