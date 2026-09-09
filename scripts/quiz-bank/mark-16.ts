@@ -12,13 +12,13 @@ const bank: ChapterBank = {
     blank(1, 'Now when the Sabbath was past, Mary Magdalene, Mary the mother of James, and Salome bought _____, that they might come and anoint Him.', 'spices', 1),
     word(1, 'Along with Mary Magdalene and Mary the mother of James, which woman went to buy spices to anoint Jesus?', 'Salome', 1),
     sa(2, 'Why did Mary Magdalene, Mary the mother of James, and Salome buy spices once the Sabbath was past?', 'So that they might come and anoint Jesus’ body.', 1),
-    tf(1, 'Mary Magdalene, Mary the mother of James, and Salome bought spices while the Sabbath was still in progress.', false, 1, 'They bought the spices "when the Sabbath was past."'),
+    tf(1, 'Mary Magdalene, Mary the mother of James, and Salome bought spices after the Sabbath had passed.', true, 1),
     mc(3, 'How is the second Mary who bought spices with Mary Magdalene and Salome identified in Mark 16?', ['Mary the mother of James', 'Mary the mother of Joses', 'Mary the mother of Simon', 'Mary the mother of Judas'], 1),
 
-    mc(1, 'When did the three women come to the tomb with their spices?', ['Very early in the morning on the first day of the week, when the sun had risen', 'Late on the Sabbath day, as the sun was setting', 'At the third hour on the day of Preparation', 'In the middle of the night, before the rooster crowed'], 2),
+    mc(1, 'When did the three women come to the tomb with their spices?', ['Early on the first day of the week, when the sun had risen', 'Late on the Sabbath, while the sun was setting', 'At the third hour on Preparation Day', 'At night, before the rooster had crowed'], 2),
     blank(3, 'Very early in the morning, on the _____ day of the week, they came to the tomb when the sun had risen.', 'first', 2),
     word(2, 'On which day of the week did the women come to the tomb very early in the morning?', 'first', 2, ['the first', 'first day', '1st']),
-    tf(2, 'The women reached the tomb while it was still dark, before the sun had risen.', false, 2, 'They came "when the sun had risen."'),
+    tf(2, 'The women reached the tomb very early, when the sun had risen.', true, 2),
 
     mc(1, 'What question did the women ask among themselves on the way to the tomb?', ['"Who will roll away the stone from the door of the tomb for us?"', '"Who will let us pass the guards at the door of the tomb?"', '"Where have they laid Him?"', '"Who will help us anoint Him?"'], 3),
     blank(1, 'And they said among themselves, "Who will roll away the _____ from the door of the tomb for us?"', 'stone', 3),
@@ -26,14 +26,14 @@ const bank: ChapterBank = {
 
     mc(2, 'What did the women see when they looked up at the tomb?', ['That the stone had already been rolled away', 'That soldiers were seated at the door', 'That the young man was rolling the stone back', 'That the stone had been broken in pieces'], 4),
     blank(3, 'But when they looked up, they saw that the stone had been rolled away—for it was very _____.', 'large', 4, ['big']),
-    tf(1, 'When the women looked up, they found the very large stone still in place at the door of the tomb.', false, 4, 'They "saw that the stone had been rolled away."'),
+    tf(1, 'When the women looked up, they saw that the very large stone had been rolled away.', true, 4),
     sa(3, 'What detail does Mark add about the stone at the tomb, and how does it connect to the women’s question on the way?', 'The stone was very large — which is why they had asked who would roll it away for them.', 4),
 
     // ══════════════════════════════════ v5–8 · The young man in the tomb
     mc(1, 'When the women entered the tomb very early on the first day of the week, whom did they see and what was he wearing?', ['A young man clothed in a long white robe', 'A young man wearing only a linen cloth', 'A man clothed in camel’s hair with a leather belt', 'A centurion standing guard in his armor'], 5),
     blank(1, 'And entering the tomb, they saw a young man clothed in a long _____ robe sitting on the right side; and they were alarmed.', 'white', 5),
     word(3, 'On which side of the tomb was the young man in the long white robe sitting?', 'right', 5, ['the right', 'right side']),
-    tf(2, 'The young man in the long white robe was sitting on the left side of the tomb.', false, 5, 'He was "sitting on the right side."'),
+    tf(2, 'The young man in the long white robe was sitting on the right side of the tomb.', true, 5),
     sa(1, 'How did the women react when they entered the tomb and saw the young man in the long white robe?', 'They were alarmed.', 5),
     mc(3, 'What was the young man in the long white robe doing when the women entered the tomb?', ['Sitting on the right side', 'Standing at the door', 'Sitting on the stone', 'Kneeling where Jesus had been laid'], 5),
     blank(3, 'And entering the tomb, they saw a young man clothed in a long white robe sitting on the right side; and they were _____.', 'alarmed', 5),
@@ -51,11 +51,11 @@ const bank: ChapterBank = {
     blank(2, 'But go, tell His disciples—and Peter—that He is going before you into _____; there you will see Him, as He said to you.', 'Galilee', 7),
     word(1, 'Where did the young man say Jesus was going before the disciples, where they would see Him?', 'Galilee', 7),
     word(2, 'Which disciple did the young man single out by name when he told the women to go tell the disciples?', 'Peter', 7),
-    tf(2, 'The young man told the women that the disciples would see Jesus in Jerusalem.', false, 7, 'He said Jesus was "going before you into Galilee; there you will see Him."'),
+    tf(2, 'The young man told the women that the disciples would see Jesus in Galilee.', true, 7),
     sa(3, 'According to the young man, why should the disciples expect to see Jesus in Galilee?', 'Because He is going before them into Galilee, "as He said to you" — Jesus had already told them so.', 7),
     mc(3, 'How did the young man back up his promise that the disciples would see Jesus in Galilee?', ['"As He said to you"', '"As it is written in the prophets"', '"As Moses commanded you"', '"As I have shown you"'], 7),
 
-    mc(1, 'What did the women do after hearing the young man’s message at the tomb?', ['They fled from the tomb quickly, trembling and amazed, and said nothing to anyone', 'They ran to Peter and the disciples and told them everything', 'They stayed in the tomb weeping until the disciples arrived', 'They went back into the city to buy more spices'], 8),
+    mc(1, 'What did the women do after hearing the young man’s message at the tomb?', ['They fled trembling and amazed, saying nothing to anyone', 'They ran to the disciples and told them everything', 'They wept in the tomb until the disciples arrived', 'They returned to the city to buy more spices'], 8),
     blank(2, 'And they said nothing to anyone, for they were _____.', 'afraid', 8),
     sa(2, 'Why did the women say nothing to anyone after fleeing the tomb?', 'Because they were afraid.', 8),
     tf(1, 'The women left the tomb trembling and amazed and said nothing to anyone.', true, 8),
@@ -81,7 +81,7 @@ const bank: ChapterBank = {
     tf(1, 'When they heard Mary Magdalene’s report that Jesus was alive, His companions believed her at once.', false, 11, '"They did not believe."'),
     sa(3, 'What two things did the mourners hear from Mary Magdalene, and how did they take it?', 'That Jesus was alive and had been seen by her; they did not believe.', 11),
 
-    mc(2, 'After appearing to Mary Magdalene, to whom did Jesus appear next, and where?', ['To two of them as they walked into the country', 'To Peter alone beside the sea', 'To the eleven at the table', 'To the women again at the tomb'], 12),
+    mc(2, 'After appearing to Mary Magdalene, to whom did Jesus appear next, and where?', ['To two followers walking into the country', 'To Peter alone beside the sea', 'To the eleven seated at the table', 'To the women again at the tomb'], 12),
     blank(2, 'After that, He appeared in another form to _____ of them as they walked and went into the country.', 'two', 12, ['2']),
     word(1, 'How many of Jesus’ followers were walking into the country when He appeared to them?', 'two', 12, ['2']),
     tf(3, 'Jesus appeared to the two who were walking into the country in the same form they had always known.', false, 12, 'He "appeared in another form to two of them."'),
@@ -111,7 +111,7 @@ const bank: ChapterBank = {
     sa(3, 'State the two outcomes Jesus set before the eleven in Mark 16:16, and what decides each.', 'He who believes and is baptized will be saved; he who does not believe will be condemned.', 16),
     mc(3, 'In Jesus’ words to the eleven, what alone is named as the ground of condemnation?', ['Not believing', 'Not being baptized', 'Not preaching the gospel', 'Hardness of heart'], 16),
 
-    mc(2, 'Which two signs did Jesus name first among those that would follow believers?', ['Casting out demons in His name and speaking with new tongues', 'Raising the dead and cleansing lepers', 'Walking on the sea and stilling the storm', 'Multiplying loaves and opening blind eyes'], 17),
+    mc(2, 'Which two signs did Jesus name first among those that would follow believers?', ['Casting out demons and speaking with new tongues', 'Raising the dead and cleansing lepers', 'Walking on the sea and stilling the storm', 'Multiplying loaves and opening blind eyes'], 17),
     blank(2, 'And these signs will follow those who believe: In My name they will cast out _____; they will speak with new tongues;', 'demons', 17),
     blank(2, 'In My name they will cast out demons; they will speak with new _____;', 'tongues', 17),
     sa(2, 'Whom did Jesus say the signs would follow, and what was the first sign He named?', 'Those who believe; the first sign is casting out demons in His name.', 17),
@@ -127,7 +127,7 @@ const bank: ChapterBank = {
     tf(3, 'Jesus said that if believers drank anything deadly it would harm them only a little.', false, 18, '"It will by no means hurt them."'),
 
     // ══════════════════════════════════ v19–20 · Ascension and the disciples preaching
-    mc(1, 'What happened to the Lord after He had spoken to the eleven?', ['He was received up into heaven and sat down at the right hand of God', 'He went before them into Galilee', 'He vanished from their sight at the table', 'He was carried by a cloud to the Mount of Olives'], 19),
+    mc(1, 'What happened to the Lord after He had spoken to the eleven?', ['He was taken into heaven and sat at God’s right hand', 'He went before them into Galilee', 'He vanished from their sight at the table', 'A cloud carried Him to the Mount of Olives'], 19),
     blank(1, 'So then, after the Lord had spoken to them, He was received up into _____, and sat down at the right hand of God.', 'heaven', 19),
     blank(2, 'He was received up into heaven, and sat down at the _____ hand of God.', 'right', 19),
     word(2, 'At whose right hand did the Lord sit down after He was received up into heaven?', 'God', 19, ['God’s', 'the Father']),
