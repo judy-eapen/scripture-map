@@ -1916,3 +1916,10 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 ## Mark 3 semantic review
 
 - Mark 3 · 6a502059-d029-43c9-af53-1575fbaaa397 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 4 semantic review
+
+- Mark 4 · e5030f0b-6897-4857-8933-0a3c32e3d9c9 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 4 · f0455fe4-2c6f-42ed-8c63-e61bce988452 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 4 · a2e33d08-e86f-4fdb-ad22-8b2523752942 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 4 · 03ff7fae-d8b2-4ebf-997e-a81ef02f672a · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 4 · 09fe16c1-dc6f-4d4e-827e-0ff0c3ea210d · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
