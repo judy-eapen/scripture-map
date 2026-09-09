@@ -10,7 +10,7 @@ const bank: ChapterBank = {
     mc(1, 'What did Jeroboam tell his wife to do before going to Shiloh?', ['Disguise herself', 'Take their son', 'Wear royal clothing', 'Summon the prophet'], 2),
     blank(1, 'Arise, and _____ yourself, that it be not known that you are the wife of Jerobo’am', 'disguise', 2),
     word(3, 'Which prophet was at Shiloh?', 'Ahijah', 2, ["Ahi'jah"]),
-    tf(1, 'Jeroboam wanted everyone to know that the visitor was his wife.', false, 2, 'He told her to disguise herself so her identity would not be known.'),
+    tf(1, 'Jeroboam told his wife to disguise herself so her identity would not be known.', true, 2),
     mc(3, 'What had Ahijah previously said about Jeroboam?', ['That he would be king over this people', 'That his son would rule Judah', 'That he would rebuild Jerusalem', 'That he would defeat Egypt'], 2),
 
     mc(2, 'What three kinds of provisions was Jeroboam’s wife to take?', ['Ten loaves, cakes, and a jar of honey', 'Bread, oil, and wine', 'Five loaves, fish, and honey', 'Meal, raisins, and water'], 3),
@@ -27,49 +27,49 @@ const bank: ChapterBank = {
     mc(1, 'Who told Ahijah that Jeroboam’s wife was coming?', ['The LORD', 'His servant', 'Jeroboam', 'The child'], 5),
     blank(2, 'When she came, she pretended to be _____ woman.', 'another', 5),
     sa(2, 'About whom was she coming to inquire?', 'her son', 5),
-    tf(3, 'The LORD was unaware that she intended to disguise herself.', false, 5, 'The LORD told Ahijah she was coming and what he should say.'),
+    tf(3, 'The LORD knew that Jeroboam’s wife intended to disguise herself.', true, 5),
 
     mc(1, 'How did Ahijah know the woman had entered?', ['He heard the sound of her feet', 'A servant announced her', 'She called his name', 'She knocked three times'], 6),
     blank(2, 'But when Ahi’jah heard the sound of her _____, as she came in at the door', 'feet', 6, ["Ahi'jah"]),
     sa(1, 'What kind of tidings was Ahijah charged to give her?', 'heavy tidings', 6),
     tf(3, 'Ahijah addressed her as the wife of Jeroboam.', true, 6),
-    mc(3, 'What exposed the disguised visitor’s identity in the narrative?', ['The LORD’s revelation and the sound of her feet', 'Her royal jewelry', 'The gifts she carried', 'Her son entering behind her'], 6),
+    mc(3, 'How did Ahijah identify the disguised visitor?', ['The LORD told him who was coming before he heard her enter', 'Her royal jewelry revealed that she was the queen', 'The gifts she carried bore Jeroboam’s royal seal', 'Her sick son entered the house behind her'], 6),
 
     mc(1, 'From among whom had the LORD exalted Jeroboam?', ['The people', 'The priests', 'David’s sons', 'The Egyptians'], 7),
     blank(2, 'Because I exalted you from among the people, and made you _____ over my people Israel', 'leader', 7),
     word(2, 'Over which people was Jeroboam made leader?', 'Israel', 7),
-    tf(3, 'The message said Jeroboam had made himself leader without the LORD’s action.', false, 7, 'The LORD said he had exalted Jeroboam and made him leader.'),
+    tf(3, 'The LORD exalted Jeroboam from among the people and made him leader over Israel.', true, 7),
 
     mc(2, 'From whose house had the kingdom been torn away?', ['The house of David', 'The house of Saul', 'The house of Jeroboam', 'The house of Levi'], 8),
     blank(3, 'who kept my commandments, and followed me with all his _____', 'heart', 8),
     word(1, 'Which servant was held up as the faithful comparison?', 'David', 8),
-    tf(2, 'Jeroboam had followed the LORD with all his heart as David did.', false, 8, 'The LORD said Jeroboam had not been like David.'),
+    tf(2, 'David kept the LORD’s commandments and followed him with all his heart.', true, 8),
 
     mc(1, 'What had Jeroboam made for himself?', ['Other gods and molten images', 'A new temple in Jerusalem', 'Bronze shields', 'A palace in Shiloh'], 9),
     blank(2, 'and have cast me behind your _____', 'back', 9),
     word(2, 'What emotion did Jeroboam’s acts provoke in the LORD?', 'anger', 9),
-    tf(3, 'Jeroboam’s conduct was described as less evil than those before him.', false, 9, 'He had done evil above all who were before him.'),
+    tf(3, 'Jeroboam did evil above all who were before him.', true, 9),
 
-    mc(2, 'What judgment would come upon Jeroboam’s house?', ['Every male would be cut off and the house consumed', 'It would rule Judah', 'It would move to Egypt', 'Only its wealth would be removed'], 10),
+    mc(2, 'What judgment would come upon Jeroboam’s house?', ['Every male would be cut off and the house would be consumed', 'The house would be preserved and placed over Judah', 'The household would be exiled together to Egypt', 'Its royal wealth would be removed but its heirs spared'], 10),
     blank(3, 'I will bring _____ upon the house of Jerobo’am', 'evil', 10),
     sa(1, 'Who among Jeroboam’s house would be cut off?', 'every male', 10),
-    tf(2, 'The announced judgment distinguished between bond and free males.', false, 10, 'It included every male, both bond and free in Israel.'),
+    tf(2, 'The announced judgment included every male, both bond and free in Israel.', true, 10),
 
     mc(1, 'What would eat those of Jeroboam’s house who died in the city?', ['Dogs', 'Birds', 'Lions', 'Jackals'], 11),
     blank(2, 'any one who dies in the open country the _____ of the air shall eat', 'birds', 11),
-    word(1, 'Who had spoken this judgment?', 'the LORD', 11, ['LORD']),
-    tf(3, 'Birds would eat those who died in the city.', false, 11, 'Dogs would eat those in the city; birds would eat those in the open country.'),
+    word(1, 'Who had spoken this judgment?', 'LORD', 11, ['the LORD']),
+    tf(3, 'Dogs would eat those who died in the city, and birds would eat those who died in the open country.', true, 11),
 
     mc(1, 'When would the sick child die?', ['When his mother’s feet entered the city', 'When she reached Ahijah’s door', 'At sunrise', 'After Jeroboam died'], 12),
     blank(3, 'When your feet enter the _____, the child shall die.', 'city', 12),
     sa(2, 'Where was Jeroboam’s wife told to go?', 'her house', 12, ['home', 'to her house']),
-    tf(2, 'Ahijah said the child would recover when she returned.', false, 12, 'He said the child would die when her feet entered the city.'),
+    tf(2, 'Ahijah said the child would die when his mother’s feet entered the city.', true, 12),
 
-    mc(2, 'Why would Abijah alone from Jeroboam’s house come to the grave?', ['Something pleasing to the LORD was found in him', 'He was the oldest son', 'His mother disguised herself', 'He lived in Shiloh'], 13),
+    mc(2, 'Why would Abijah alone from Jeroboam’s house come to the grave?', ['Something pleasing to the LORD was found in him', 'He was Jeroboam’s oldest surviving son', 'His mother obeyed the command to disguise herself', 'He had left the royal household to live in Shiloh'], 13),
     blank(3, 'for he _____ of Jerobo’am shall come to the grave', 'only', 13),
     sa(1, 'Who would mourn for and bury the child?', 'all Israel', 13),
-    tf(2, 'Nothing pleasing to the LORD was found in Abijah.', false, 13, 'Something pleasing to the LORD was found in him.'),
-    mc(3, 'What distinguished Abijah from the rest of Jeroboam’s house?', ['He alone had something pleasing to the LORD in him', 'He alone lived in Judah', 'He alone became king', 'He alone opposed Ahijah'], 13),
+    tf(2, 'Something pleasing to the LORD was found in Abijah.', true, 13),
+    mc(3, 'What distinguished Abijah from the rest of Jeroboam’s house?', ['He alone had something pleasing to the LORD in him', 'He alone had moved from Israel into Judah', 'He alone had succeeded Jeroboam as king', 'He alone had openly opposed the prophet Ahijah'], 13),
 
     mc(1, 'What would the LORD raise up over Israel?', ['A king who would cut off Jeroboam’s house', 'A prophet from Egypt', 'A priest from Judah', 'A judge who would restore Saul’s house'], 14),
     blank(2, 'the LORD will raise up for himself a _____ over Israel', 'king', 14),
@@ -91,15 +91,15 @@ const bank: ChapterBank = {
     sa(1, 'What happened as she reached the house?', 'the child died', 17, ['child died', 'he died']),
     tf(2, 'The child died as his mother came to the threshold.', true, 17),
 
-    mc(2, 'According to whose word did Israel bury and mourn the child?', ['The LORD’s word through Ahijah', 'Jeroboam’s decree', 'Rehoboam’s command', 'The law of Egypt'], 18),
+    mc(2, 'Whose word, delivered through Ahijah, was fulfilled when Israel buried and mourned the child?', ['The LORD’s word', 'Jeroboam’s decree', 'Rehoboam’s command', 'The law of Egypt'], 18),
     blank(2, 'And all Israel buried him and _____ for him', 'mourned', 18),
     word(1, 'Which prophet had spoken the LORD’s word?', 'Ahijah', 18, ["Ahi'jah"]),
     tf(3, 'Only the child’s family mourned him.', false, 18, 'All Israel buried and mourned him.'),
 
-    mc(1, 'Where were the rest of Jeroboam’s acts recorded?', ['The Book of the Chronicles of the Kings of Israel', 'The Book of the Kings of Judah', 'The records of Shiloh', 'The book of Ahijah'], 19),
+    mc(1, 'Where were the rest of Jeroboam’s acts recorded?', ['The Book of the Chronicles of the Kings of Israel', 'The Book of the Chronicles of the Kings of Judah', 'The official records kept by the sanctuary at Shiloh', 'The prophetic record written by Ahijah of Shiloh'], 19),
     blank(3, 'how he _____ and how he reigned', 'warred', 19),
     sa(2, 'What two aspects of Jeroboam’s rule are mentioned?', 'how he warred and reigned', 19, ['warred and reigned']),
-    tf(2, 'The verse says no written record of Jeroboam’s acts existed.', false, 19, 'His acts were written in the Book of the Chronicles of the Kings of Israel.'),
+    tf(2, 'No written record of Jeroboam’s acts existed.', false, 19, 'His acts were written in the Book of the Chronicles of the Kings of Israel.'),
 
     mc(1, 'How long did Jeroboam reign?', ['Twenty-two years', 'Seventeen years', 'Forty-one years', 'Twelve years'], 20),
     blank(3, 'And the time that Jerobo’am reigned was _____-two years', 'twenty', 20, ['22', 'twenty-two']),
@@ -108,12 +108,12 @@ const bank: ChapterBank = {
 
     mc(2, 'How old was Rehoboam when he began to reign?', ['Forty-one', 'Twenty-two', 'Seventeen', 'Forty'], 21),
     blank(3, 'and he reigned _____ years in Jerusalem', 'seventeen', 21, ['17']),
-    word(1, 'Who was Rehoboam’s mother?', 'Naamah the Ammonitess', 21, ["Na'amah", 'Naamah']),
+    sa(1, 'Who was Rehoboam’s mother?', 'Naamah the Ammonitess', 21, ["Na'amah", 'Naamah']),
     tf(2, 'Rehoboam, Solomon’s son, reigned in Judah.', true, 21),
 
     mc(1, 'How did Judah act in the LORD’s sight?', ['They did evil', 'They kept every command', 'They removed the high places', 'They followed David wholeheartedly'], 22),
     blank(2, 'and they provoked him to _____ with their sins', 'jealousy', 22),
-    word(2, 'Whom did Judah provoke with their sins?', 'the LORD', 22, ['LORD']),
+    word(2, 'Whom did Judah provoke with their sins?', 'LORD', 22, ['the LORD']),
     tf(3, 'Judah’s sins were fewer than all their fathers’ sins.', false, 22, 'They provoked the LORD more than all their fathers had done.'),
 
     mc(2, 'What did Judah build for themselves?', ['High places, pillars, and Asherim', 'Only houses and city walls', 'Bronze shields and guardrooms', 'Altars only in Jerusalem'], 23),
@@ -131,7 +131,7 @@ const bank: ChapterBank = {
     word(1, 'Of what country was Shishak king?', 'Egypt', 25),
     tf(2, 'Shishak attacked Jerusalem in Rehoboam’s seventeenth year.', false, 25, 'He came in Rehoboam’s fifth year.'),
 
-    mc(2, 'What did Shishak take from Jerusalem?', ['The temple and royal treasures, including Solomon’s gold shields', 'Only food from the storehouses', 'The bronze shields made by Rehoboam', 'The ark of the covenant'], 26),
+    mc(2, 'What did Shishak take from Jerusalem?', ['The temple and royal treasures, including Solomon’s gold shields', 'The city’s stored food while leaving the royal treasures', 'The bronze replacement shields later made by Rehoboam', 'The ark of the covenant while leaving the gold shields'], 26),
     blank(3, 'he took away _____', 'everything', 26),
     sa(1, 'What kind of shields had Solomon made?', 'gold shields', 26, ['shields of gold', 'gold']),
     tf(2, 'Shishak left the treasures of the LORD’s house untouched.', false, 26, 'He took the treasures of the LORD’s house and the king’s house.'),
@@ -142,7 +142,7 @@ const bank: ChapterBank = {
     tf(3, 'Rehoboam replaced the gold shields with silver ones.', false, 27, 'He made shields of bronze.'),
     mc(3, 'After Shishak took Solomon’s gold shields, what material did Rehoboam use for replacements?', ['Bronze', 'Gold', 'Silver', 'Iron'], 27),
 
-    mc(2, 'When did the guard carry the bronze shields?', ['Whenever the king went into the LORD’s house', 'Whenever an army attacked', 'Every Sabbath morning', 'When tribute went to Egypt'], 28),
+    mc(2, 'When did the guard carry the bronze shields?', ['Whenever the king went into the LORD’s house', 'Whenever an enemy army approached Jerusalem', 'Every Sabbath morning before the people assembled', 'Whenever Rehoboam sent tribute to the king of Egypt'], 28),
     blank(3, 'the guard bore them and brought them back to the _____', 'guardroom', 28),
     sa(1, 'Where were the shields returned?', 'the guardroom', 28, ['guardroom']),
     tf(2, 'The bronze shields remained permanently displayed in the LORD’s house.', false, 28, 'The guard brought them back to the guardroom.'),
