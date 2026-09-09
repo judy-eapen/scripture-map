@@ -51,7 +51,7 @@ const bank: ChapterBank = {
     tf(1, 'All the demons begged Jesus, "Send us to the swine, that we may enter them."', true, 12),
     mc(2, 'About how many swine were in the herd the unclean spirits entered?', ['About two thousand', 'About five thousand', 'About four thousand', 'About twelve hundred'], 13),
     blank(3, 'Then the unclean spirits went out and entered the swine (there were about _____); and the herd ran violently down the steep place into the sea, and drowned in the sea.', 'two thousand', 13, ['2000', '2,000']),
-    mc(2, 'What happened to the herd after the unclean spirits entered the swine?', ['It ran violently down the steep place into the sea and drowned', 'It scattered into the mountains and the tombs', 'It fled into the city and the country', 'It stood feeding quietly near the mountains'], 13),
+    mc(2, 'What happened to the herd after the unclean spirits entered the swine?', ['It rushed down the steep place into the sea and drowned','It scattered throughout the nearby mountains and among the tombs','It fled away from the shore into both the city and countryside','It remained quietly feeding on the hillside beside the mountains'], 13),
     tf(1, 'Jesus refused the demons permission to enter the swine.', false, 13, 'At once Jesus gave them permission.'),
     sa(1, 'How did Jesus respond to the demons’ request to enter the swine, and what followed?', 'He at once gave them permission; the spirits entered the swine, and the herd of about two thousand ran violently down the steep place into the sea and drowned.', 13),
 
@@ -72,7 +72,7 @@ const bank: ChapterBank = {
     // ══════════════════════════════════ v18–20 · Go home to your friends
     mc(2, 'As Jesus got into the boat to leave the Gadarenes, what did the man who had been demon-possessed beg for?', ['That he might be with Jesus', 'That Jesus would depart from the region', 'That Jesus would not torment him', 'That Jesus would not send the spirits out of the country'], 18),
     tf(1, 'The man Jesus delivered from the legion begged to go with Him in the boat.', true, 18),
-    mc(1, 'What did Jesus tell the delivered man to do instead of coming with Him in the boat?', ['Go home to his friends and tell them what great things the Lord had done for him', 'Follow Him to the house of the ruler of the synagogue', 'Tell no one what had happened to him', 'Go and proclaim it to those who fed the swine'], 19),
+    mc(1, 'What did Jesus tell the delivered man to do instead of coming with Him in the boat?', ['Go home and tell his friends what the Lord had done for him','Follow Jesus to the home of the ruler of the synagogue','Remain silent and tell no one what had happened to him','Go directly to the swineherds and proclaim the event to them'], 19),
     blank(2, '"Go home to your friends, and tell them what great things the Lord has done for you, and how He has had _____ on you."', 'compassion', 19),
     word(2, 'Jesus told the delivered man to tell his friends how the Lord had had what on him?', 'compassion', 19, ['mercy']),
     tf(2, 'Jesus permitted the man He delivered from the legion to get into the boat and go with Him.', false, 19, 'Jesus did not permit him, but sent him home to his friends.'),
@@ -121,12 +121,12 @@ const bank: ChapterBank = {
     blank(2, 'And Jesus, immediately knowing in Himself that _____ had gone out of Him, turned around in the crowd and said, "Who touched My clothes?"', 'power', 30),
     tf(3, 'Jesus knew in Himself that power had gone out of Him, so He turned around in the crowd.', true, 30),
     sa(3, 'Why did Jesus turn around in the crowd and ask, "Who touched My clothes?"', 'He knew immediately in Himself that power had gone out of Him.', 30),
-    mc(2, 'How did the disciples answer when Jesus asked, "Who touched My clothes?"', ['"You see the multitude thronging You, and You say, ‘Who touched Me?’"', '"Lord, it was the woman with the flow of blood"', '"Why trouble the Teacher any further?"', '"No one has touched You, Teacher"'], 31),
+    mc(2, 'How did the disciples answer when Jesus asked, "Who touched My clothes?"', ['"You see the multitude thronging You, and You say, ‘Who touched Me?’"', '"Lord, the woman suffering from the flow of blood was the one"','"Why should anyone continue to trouble the Teacher any further?"','"Teacher, no one among this entire multitude has touched You"'], 31),
     tf(3, 'The disciples pointed out to Jesus the woman who had touched Him.', false, 31, 'They protested, "You see the multitude thronging You, and You say, ‘Who touched Me?’"'),
     sa(3, 'What did the disciples say that showed they thought Jesus’ question about who touched Him was unreasonable?', 'They said, "You see the multitude thronging You, and You say, ‘Who touched Me?’"', 31),
     mc(3, 'What did Jesus do after His disciples protested that the multitude was thronging Him?', ['He looked around to see her who had done this thing', 'He went on at once to the house of Jairus', 'He commanded the multitude to be put outside', 'He got into the boat and crossed to the other side'], 32),
     tf(3, 'After the disciples spoke, Jesus dropped the matter and went on toward Jairus’ house.', false, 32, 'He looked around to see her who had done this thing.'),
-    mc(2, 'How did the healed woman come before Jesus when He looked around for her?', ['Fearing and trembling, she fell down before Him and told Him the whole truth', 'Rejoicing, she proclaimed in Decapolis what He had done', 'Silently, she slipped away behind the crowd', 'Boldly, she asked Him to lay His hands on her'], 33),
+    mc(2, 'How did the healed woman come before Jesus when He looked around for her?', ['Fearing and trembling, she fell before Him and told the truth','Rejoicing openly, she proclaimed throughout Decapolis what He had done','Remaining completely silent, she slipped away behind the surrounding crowd','Approaching Him boldly, she asked Him to place His hands upon her'], 33),
     blank(3, 'But the woman, fearing and trembling, knowing what had happened to her, came and fell down before Him and told Him the whole _____.', 'truth', 33),
     tf(2, 'The healed woman came to Jesus fearing and trembling and told Him the whole truth.', true, 33),
     mc(1, 'What did Jesus say to the woman who had touched His garment after twelve years of bleeding?', ['"Daughter, your faith has made you well. Go in peace, and be healed of your affliction"', '"Little girl, I say to you, arise"', '"Go home to your friends, and tell them what great things the Lord has done for you"', '"Do not be afraid; only believe"'], 34),
@@ -137,7 +137,7 @@ const bank: ChapterBank = {
     mc(3, 'Whom did Jesus address as "Daughter" in Mark 5?', ['The woman healed of the flow of blood', 'Jairus’ twelve-year-old daughter', 'The mother of the child', 'A woman among those who wept and wailed'], 34),
 
     // ══════════════════════════════════ v35–37 · Your daughter is dead
-    mc(2, 'What news came from Jairus’ house while Jesus was still speaking with the healed woman?', ['"Your daughter is dead. Why trouble the Teacher any further?"', '"Your daughter is healed. Come home quickly"', '"The child is not dead, but sleeping"', '"The Teacher is coming. Prepare the house"'], 35),
+    mc(2, 'What news came from Jairus’ house while Jesus was still speaking with the healed woman?', ['"Your daughter is dead. Why trouble the Teacher any further?"', '"Your daughter has been healed, so return to your home quickly"','"The child is not dead at all but is merely sleeping peacefully"','"The Teacher is approaching, so prepare your household to receive Him"'], 35),
     blank(2, 'Your daughter is dead. Why trouble the _____ any further?', 'Teacher', 35),
     tf(2, 'The messengers from Jairus’ house told him his daughter was at the point of death and urged the Teacher to hurry.', false, 35, 'They said, "Your daughter is dead. Why trouble the Teacher any further?"'),
     sa(1, 'What did the messengers from the ruler of the synagogue’s house say, and when did they arrive?', 'While Jesus was still speaking, they said, "Your daughter is dead. Why trouble the Teacher any further?"', 35),
