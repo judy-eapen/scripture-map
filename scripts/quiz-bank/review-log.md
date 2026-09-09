@@ -1975,3 +1975,9 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 10 · 096a68c2-dc61-4be9-b234-805c7ae1fe6b · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 10 · 54a6ebcf-a9c2-4f4f-bc48-8691e1b408b8 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 10 · c5e9d192-0aba-40d3-bd09-55e73330ca96 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 11 semantic review
+
+- Mark 11 · 0568c221-0ea5-4db8-9ad5-aa09c5f011f6 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 11 · 3e9972f8-f8dc-4651-b779-41d767c06c66 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 11 · 518358d9-98fd-41af-813c-8278f228f720 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 11 · f7e3331d-aa4e-4096-9069-876751d57176 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.

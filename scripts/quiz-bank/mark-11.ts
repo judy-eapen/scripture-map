@@ -44,7 +44,7 @@ const bank: ChapterBank = {
     mc(2, 'As Jesus rode the colt toward Jerusalem, what did the people spread on the road?', ['Their clothes, and leafy branches cut from the trees', 'Only leafy branches cut down from the trees', 'Only their clothes, laid down as He rode by', 'Linen cloths bought from the sellers in the temple'], 8),
     blank(3, 'And many spread their clothes on the road, and others cut down leafy _____ from the trees and spread them on the road.', 'branches', 8),
 
-    mc(1, 'As Jesus rode toward Jerusalem, what did those who went before Him and those who followed cry out?', ['"Hosanna! Blessed is He who comes in the name of the Lord!"', '"Truly this Man was the Son of God!"', '"Jesus, Son of David, have mercy on me!"', '"Rabbi, it is good for us to be here!"'], 9),
+    mc(1, 'As Jesus rode toward Jerusalem, what did those who went before Him and those who followed cry out?', ['Hosanna! Blessed is He who comes in the Lord’s name!', 'Truly this Man was the Son of God!', 'Jesus, Son of David, have mercy on me!', 'Rabbi, it is good for us to be here!'], 9),
     blank(1, 'Then those who went before and those who followed cried out, saying: "_____! "Blessed is He who comes in the name of the Lord!"', 'Hosanna', 9),
     tf(2, 'Only those who followed behind Jesus cried out "Hosanna"; those who went before Him were silent.', false, 9, 'Both "those who went before and those who followed" cried out.'),
     sa(3, 'In whose name did the crowd say the One riding into Jerusalem was coming?', 'In the name of the Lord: "Blessed is He who comes in the name of the Lord!"', 9, ['the lord', 'in the name of the lord']),
@@ -56,7 +56,7 @@ const bank: ChapterBank = {
 
     mc(1, 'On the day Jesus rode into Jerusalem, what did He do in the temple?', ['He looked around at all things and left, since the hour was late', 'He overturned the tables of the money changers', 'He taught that His house should be a house of prayer', 'He answered the chief priests about His authority'], 11, 'The cleansing of the temple came the next day.'),
     blank(2, 'So when He had looked around at all things, as the hour was already late, He went out to _____ with the twelve.', 'Bethany', 11),
-    tf(2, 'On the day He rode into Jerusalem, Jesus drove the money changers out of the temple.', false, 11, 'That day He only looked around at all things and went out to Bethany; the cleansing came the next day.'),
+    tf(2, 'On the day after He rode into Jerusalem, Jesus drove the money changers out of the temple.', true, 15),
     sa(3, 'Why did Jesus leave Jerusalem for Bethany on the day He entered the city and looked around the temple?', 'Because the hour was already late.', 11, ['the hour was late', 'it was late']),
     mc(3, 'Who went with Jesus out to Bethany after He looked around the temple on the day of His entry?', ['The twelve', 'Peter, James, and John', 'The two disciples He had sent for the colt', 'The crowd that had cried "Hosanna"'], 11),
 
@@ -103,7 +103,7 @@ const bank: ChapterBank = {
     sa(3, 'Which two groups heard Jesus’ teaching in the temple and sought how they might destroy Him?', 'The scribes and the chief priests.', 18, ['scribes and chief priests', 'chief priests and scribes']),
 
     blank(1, 'When _____ had come, He went out of the city.', 'evening', 19),
-    tf(1, 'Jesus stayed in Jerusalem overnight after cleansing the temple.', false, 19, 'When evening had come, He went out of the city.'),
+    tf(1, 'Jesus went out of Jerusalem when evening came after cleansing the temple.', true, 19),
 
     // ══════════════════════════════════ v20–26 · The withered fig tree; faith, prayer, forgiveness
     mc(1, 'The morning after Jesus cleansed the temple, what did the disciples see as they passed by?', ['The fig tree dried up from the roots', 'The fig tree covered with ripe figs', 'The money changers back at their tables', 'The chief priests waiting at the temple gate'], 20),
@@ -111,7 +111,7 @@ const bank: ChapterBank = {
     word(2, 'When the disciples passed the cursed fig tree the next morning, from what part had it dried up?', 'roots', 20, ['the roots', 'root']),
     tf(2, 'The fig tree Jesus cursed had withered only in its upper branches by the next morning.', false, 20, 'They saw it "dried up from the roots."'),
     sa(1, 'After Jesus cursed the fig tree and cleansed the temple, what did the disciples notice the next morning as they passed by?', 'They saw the fig tree dried up from the roots.', 20),
-    tf(3, 'The disciples saw the fig tree withered on the same day Jesus cursed it.', false, 20, 'Jesus cursed it on the way to Jerusalem; they saw it dried up the next morning as they passed by.'),
+    tf(3, 'The disciples saw the cursed fig tree dried up from the roots the next morning.', true, 20),
 
     mc(1, 'Which disciple remembered and pointed out the withered fig tree to Jesus?', ['Peter', 'John', 'James', 'Andrew'], 21),
     mc(3, 'What did Peter say when he saw the withered fig tree?', ['"Rabbi, look! The fig tree which You cursed has withered away."', '"Rabbi, it is good for us to be here."', '"Teacher, see what manner of stones and what buildings are here!"', '"Teacher, do You not care that we are perishing?"'], 21),
