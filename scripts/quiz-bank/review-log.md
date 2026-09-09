@@ -122,3 +122,23 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 5 · f98721b6-c281-41ae-b62d-70bc9ac70ea8 · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
 - 1 Kings 5 · 0350448f-f37a-4803-9289-bbb2710a2307 · R2/R8 · retired · Combined the timber and wheat exchanges under one citation.
 - 1 Kings 5 · cc583f96-77fc-4ba2-b6c3-9024fe9fa03d · R2/R8 · retired · Required comparing quantities across several uncited verses.
+
+## 1 Kings 6
+
+- 1 Kings 6 · f233b46f-fd96-461a-8e26-e7beb566995e · R5 · fixed · Balanced every structural reason with chapter construction details.
+- 1 Kings 6 · fad2169b-7a30-41ac-92fb-3937de5a350d · R5 · fixed · Balanced the alternatives to the LORD's promised word.
+- 1 Kings 6 · 209ad2d5-5d10-4e0a-bbf7-44aadc2bd702 · R3/R5 · fixed · Removed verse-number framing and balanced each three-part requirement.
+- 1 Kings 6 · 5a41eaf0-eb6a-44a1-9b90-3a42a56477c8 · R3/R5 · fixed · Removed verse-number framing and balanced the promised outcomes.
+- 1 Kings 6 · 9971c125-a50c-467a-8bca-85db3212794e · R5 · fixed · Made each building section similarly specific.
+- 1 Kings 6 · f490fbc6-d4ac-4c40-b8e0-0b9843aba614 · R5 · fixed · Made every carving list comparable in detail.
+- 1 Kings 6 · 1111d0bb-0070-44f6-9a18-c27bebcfc2e8 · R3/R4 · fixed · Removed reference-number framing and swapped Solomon for Hiram.
+- 1 Kings 6 · ea5a55cf-8f42-416e-b2c3-8e9c4e87cc30 · R4 · fixed · Swapped Solomon for Hiram and quoted the correction.
+- 1 Kings 6 · 30b48afe-793e-40eb-9811-752a52771ed9 · R4 · fixed · Swapped Ziv for Bul and quoted the correction.
+- 1 Kings 6 · 849cb9ff-a133-4054-a57c-98697f05fead · R3 · fixed · Removed verse-number framing from the factual year question.
+- 1 Kings 6 · db23384e-aa6e-44a7-a253-dfa3fa6c5518 · R3 · fixed · Removed narrator-style verse-number framing.
+- 1 Kings 6 · 780f3dc1-95a8-4e83-8cd2-c2e648ded63d · R3 · fixed · Replaced a chapter-summary prompt with the direct month-of-Ziv action.
+- 1 Kings 6 · ce07c3f0-b74b-4f09-89ee-8e138de62e16 · R3/R8 · retired · The prompt repeated “cherub” and asked only for the same word.
+- 1 Kings 6 · 4ab43c6f-f3ea-4b59-b080-0149f2425496 · R2/R8 · retired · Combined woods named in multiple uncited verses.
+- 1 Kings 6 · 80e10551-8f6a-42a1-a15d-e4000c385a8a · R2/R8 · retired · Combined separate gold-overlay passages under one citation.
+- 1 Kings 6 · 3c15fccd-c190-45ca-aa7a-7f8e6c151c0f · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
+- 1 Kings 6 · 35f92170-7b9a-46c2-aa58-caf1a89185da · R2/R8 · retired · Combined the beginning and completion dates under one citation.
