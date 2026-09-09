@@ -1,16 +1,16 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 3, tag: 'quiz-v2-2kings-3', rows: [
     mc(1, 'Who became king over Israel in Samaria?', ['Jehoram son of Ahab', 'Jehoshaphat', 'Mesha', 'Elisha'], 1),
     blank(1, 'Jeho’ram the son of Ahab became king over Israel in _____.', 'Sama’ria', 1, ['Samaria']),
-    word(1, 'How many years did Jehoram reign?', 'twelve years', 1, ['twelve', '12 years', '12']),
+    sa(1, 'How many years did Jehoram reign?', 'twelve years', 1, ['twelve', '12 years', '12']),
     tf(2, 'Jehoram began reigning in Jehoshaphat’s eighteenth year.', true, 1),
     mc(2, 'During whose reign in Judah did Jehoram begin ruling Israel?', ['Jehoshaphat’s', 'Ahab’s', 'Mesha’s', 'Elijah’s'], 1),
 
     mc(1, 'How did Jehoram’s conduct compare with that of his parents?', ['He did evil, though not as they had', 'He was more faithful than David', 'He did exactly as Jehoshaphat did', 'He abandoned every evil practice'], 2),
     blank(3, 'for he put away the pillar of _____ which his father had made.', 'Ba’al', 2, ['Baal']),
-    word(2, 'What object made by Ahab did Jehoram remove?', 'the pillar of Baal', 2, ['Baal’s pillar', 'pillar of Baal']),
+    sa(2, 'What object made by Ahab did Jehoram remove?', 'the pillar of Baal', 2, ['Baal’s pillar', 'pillar of Baal']),
     tf(1, 'Jehoram still did what was evil in the LORD’s sight.', true, 2),
     mc(2, 'Which act distinguished Jehoram from his father and mother?', ['He removed the pillar of Baal his father had made', 'He restored the temple in Jerusalem', 'He released Moab from tribute', 'He followed Elisha'], 2),
 
@@ -22,7 +22,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What was Mesha king of Moab’s occupation?', ['Sheep breeder', 'Minstrel', 'Swordsman', 'Prophet'], 4),
     blank(3, 'he had to deliver annually to the king of Israel a hundred thousand _____', 'lambs', 4),
-    word(2, 'How many lambs did Mesha deliver each year?', 'one hundred thousand', 4, ['100,000', '100000', 'a hundred thousand']),
+    sa(2, 'How many lambs did Mesha deliver each year?', 'one hundred thousand', 4, ['100,000', '100000', 'a hundred thousand']),
     tf(1, 'Mesha also delivered the wool of one hundred thousand rams.', true, 4),
     mc(3, 'What annual tribute did Mesha owe Israel’s king?', ['One hundred thousand lambs and wool from one hundred thousand rams', 'One hundred thousand rams and wool from ten thousand lambs', 'Seven hundred swords and fifty horses', 'Silver from every fortified city'], 4),
     word(3, 'From what animals did the second part of Mesha’s tribute come?', 'rams', 4, ['one hundred thousand rams']),
@@ -41,7 +41,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Which king did Jehoram invite to fight Moab with him?', ['Jehoshaphat king of Judah', 'Mesha king of Moab', 'The king of Syria', 'Ahaziah'], 7),
     blank(2, 'I am as you are, my people as your people, my _____ as your horses.', 'horses', 7),
-    word(1, 'How did Jehoshaphat answer Jehoram’s invitation?', 'I will go', 7, ['he would go', 'yes']),
+    sa(1, 'How did Jehoshaphat answer Jehoram’s invitation?', 'I will go', 7, ['he would go', 'yes']),
     tf(3, 'Jehoshaphat refused to join the battle against Moab.', false, 7, 'He agreed and pledged his people and horses with Jehoram’s.'),
     mc(2, 'What did Jehoshaphat pledge along with himself?', ['His people and his horses', 'His temple and treasury', 'His prophets and priests', 'His city and fields'], 7),
 
@@ -65,29 +65,29 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Jehoshaphat seek during the crisis?', ['A prophet through whom they could inquire of the LORD', 'A guide through Edom', 'A messenger from Moab', 'A new source of tribute'], 11),
     blank(2, 'Eli’sha the son of _____ is here', 'Shaphat', 11),
-    word(1, 'What service had Elisha performed for Elijah?', 'poured water on Elijah’s hands', 11, ['he poured water on the hands of Elijah', 'poured water on his hands']),
+    sa(1, 'What service had Elisha performed for Elijah?', 'poured water on Elijah’s hands', 11, ['he poured water on the hands of Elijah', 'poured water on his hands']),
     tf(3, 'One of Israel’s servants identified Elisha as a former servant of Elijah.', true, 11),
     mc(2, 'Who told the kings that Elisha was nearby?', ['One of the king of Israel’s servants', 'The king of Edom', 'Mesha', 'A son of the prophets from Bethel'], 11),
 
     mc(1, 'What did Jehoshaphat affirm about Elisha?', ['The word of the LORD was with him', 'He commanded Israel’s army', 'He had brought the drought', 'He was Mesha’s adviser'], 12),
     blank(3, 'The _____ of the LORD is with him.', 'word', 12),
-    word(2, 'Who went down to Elisha?', 'the kings of Israel, Judah, and Edom', 12, ['the three kings', 'all three kings']),
+    sa(2, 'Who went down to Elisha?', 'the kings of Israel, Judah, and Edom', 12, ['the three kings', 'all three kings']),
     tf(1, 'The three allied kings went to Elisha rather than summoning him to them.', true, 12),
     mc(2, 'What persuaded the kings to approach Elisha?', ['Jehoshaphat’s confidence that the LORD’s word was with him', 'A command from Mesha', 'The discovery of a spring', 'A message from Elijah'], 12),
 
     mc(1, 'To whose prophets did Elisha initially send Israel’s king?', ['The prophets of his father and mother', 'The prophets at Jericho', 'The prophets of Judah', 'The prophets of Edom'], 13),
     blank(2, 'What have I to do with _____?', 'you', 13),
-    word(1, 'What explanation did Israel’s king repeat?', 'the LORD had called the three kings to give them to Moab', 13, ['the Lord called the three kings', 'they had been called to be delivered to Moab']),
+    sa(1, 'What explanation did Israel’s king repeat?', 'the LORD had called the three kings to give them to Moab', 13, ['the Lord called the three kings', 'they had been called to be delivered to Moab']),
     tf(3, 'Elisha warmly welcomed Israel’s king without rebuke.', false, 13, 'He challenged the king to go to the prophets of his parents.'),
 
     mc(1, 'For whose sake did Elisha agree to regard the group?', ['Jehoshaphat king of Judah', 'Jehoram king of Israel', 'The king of Edom', 'Mesha king of Moab'], 14),
     blank(3, 'were it not that I have regard for Jehosh’aphat the king of _____', 'Judah', 14),
-    word(2, 'Whom did Elisha say he served?', 'the LORD of hosts', 14, ['LORD of hosts', 'the Lord']),
+    sa(2, 'Whom did Elisha say he served?', 'the LORD of hosts', 14, ['LORD of hosts', 'the Lord']),
     tf(1, 'Elisha said he would not have looked at Israel’s king apart from his regard for Jehoshaphat.', true, 14),
 
     mc(1, 'Whom did Elisha ask them to bring?', ['A minstrel', 'A prophet from Bethel', 'A water bearer', 'A captain of fifty'], 15),
     blank(2, 'And when the minstrel _____, the power of the LORD came upon him.', 'played', 15),
-    word(1, 'What came upon Elisha while the minstrel played?', 'the power of the LORD', 15, ['power of the Lord', 'the LORD’s power']),
+    sa(1, 'What came upon Elisha while the minstrel played?', 'the power of the LORD', 15, ['power of the Lord', 'the LORD’s power']),
     tf(3, 'Elisha began prophesying before the minstrel played.', false, 15, 'The power of the LORD came upon him when the minstrel played.'),
     mc(3, 'What did Elisha request immediately before the LORD’s power came upon him?', ['A minstrel, whose playing preceded the prophecy', 'A new bowl filled with salt', 'Elijah’s mantle', 'Fifty strong men'], 15),
 
@@ -98,48 +98,48 @@ const bank: ChapterBank = {
 
     mc(1, 'What would fill the streambed even though the army saw no weather?', ['Water', 'Blood', 'Stones', 'Wool'], 17),
     blank(2, 'You shall not see wind or _____', 'rain', 17),
-    word(1, 'Who would drink from the supplied water?', 'the people, their cattle, and their beasts', 17, ['the army and its animals', 'you your cattle and your beasts']),
+    sa(1, 'Who would drink from the supplied water?', 'the people, their cattle, and their beasts', 17, ['the army and its animals', 'you your cattle and your beasts']),
     tf(3, 'The promised water depended on the army seeing a rainstorm.', false, 17, 'They would see neither wind nor rain, yet the streambed would fill.'),
 
     mc(1, 'What additional victory did the LORD promise?', ['He would give the Moabites into their hand', 'He would give Edom to Moab', 'He would make Mesha king of Israel', 'He would send the army back to Judah'], 18),
     blank(3, 'This is a _____ thing in the sight of the LORD', 'light', 18),
-    word(2, 'Whom would the LORD give into the allies’ hand?', 'the Moabites', 18, ['Moab']),
+    sa(2, 'Whom would the LORD give into the allies’ hand?', 'the Moabites', 18, ['Moab']),
     tf(1, 'Providing water was described as a light thing for the LORD.', true, 18),
 
     mc(1, 'What kind of cities were the allies told they would conquer?', ['Every fortified and choice city', 'Only Moab’s capital', 'Only cities without walls', 'The cities of Judah'], 19),
     blank(2, 'and shall fell every good _____', 'tree', 19),
-    word(1, 'What were they commanded to do to the springs?', 'stop them up', 19, ['stop up the springs', 'block them']),
+    sa(1, 'What were they commanded to do to the springs?', 'stop them up', 19, ['stop up the springs', 'block them']),
     tf(3, 'The prophecy said every good piece of land would be ruined with stones.', true, 19),
 
     mc(1, 'When did water arrive?', ['The next morning at the time of the sacrifice', 'At midnight during a storm', 'After three days of rain', 'At sunset after the battle'], 20),
     blank(3, 'water came from the direction of _____.', 'Edom', 20),
-    word(2, 'How much of the country was filled with water?', 'the country', 20, ['all the country', 'it was filled']),
+    sa(2, 'How much of the country was filled with water?', 'the country', 20, ['all the country', 'it was filled']),
     tf(1, 'The water came without the wind or rain the army had expected.', true, 20),
 
     mc(1, 'Who answered Moab’s call to arms?', ['All who were able to put on armor', 'Only seven hundred swordsmen', 'Only the oldest men', 'Mesha’s shepherds alone'], 21),
     blank(2, 'and were drawn up at the _____.', 'frontier', 21),
-    word(1, 'What news caused Moab to mobilize?', 'the kings had come to fight them', 21, ['the kings were coming to fight', 'the allied kings had come']),
+    sa(1, 'What news caused Moab to mobilize?', 'the kings had come to fight them', 21, ['the kings were coming to fight', 'the allied kings had come']),
     tf(3, 'Only veteran soldiers were called out by Moab.', false, 21, 'All able to put on armor, from youngest to oldest, were called out.'),
 
     mc(1, 'What color did the water appear to the Moabites?', ['Red like blood', 'White like wool', 'Black like night', 'Green like grass'], 22),
     blank(3, 'the sun _____ upon the water', 'shone', 22),
-    word(2, 'What made the water look red?', 'the morning sun', 22, ['sunlight', 'the sun shining on it']),
+    sa(2, 'What made the water look red?', 'the morning sun', 22, ['sunlight', 'the sun shining on it']),
     tf(1, 'The Moabites saw the water opposite them at sunrise.', true, 22),
 
     mc(1, 'What did the Moabites wrongly think the red water was?', ['Blood', 'Wine', 'Fire', 'Mud'], 23),
     blank(2, 'the kings have surely fought together, and _____ one another.', 'slain', 23),
-    word(1, 'What did the Moabites rush to take?', 'the spoil', 23, ['spoil', 'plunder']),
+    sa(1, 'What did the Moabites rush to take?', 'the spoil', 23, ['spoil', 'plunder']),
     tf(3, 'The Moabites correctly recognized the red appearance as reflected sunlight on water.', false, 23, 'They mistook the water for blood and assumed the kings had killed one another.'),
     mc(3, 'Why did the Moabites advance carelessly toward Israel’s camp?', ['Sunlight made the water look like blood, so they assumed the allied kings had slain one another', 'They had received a peace message from Jehoshaphat', 'They believed the army had died of thirst', 'They saw the king of Edom retreat'], 23),
 
     mc(1, 'What happened when Moab reached Israel’s camp?', ['The Israelites rose and attacked them', 'The three kings surrendered', 'The camp was empty', 'Elisha negotiated peace'], 24),
     blank(3, 'till they _____ before them', 'fled', 24),
-    word(2, 'Who pursued and slaughtered the fleeing Moabites?', 'the Israelites', 24, ['Israel']),
+    sa(2, 'Who pursued and slaughtered the fleeing Moabites?', 'the Israelites', 24, ['Israel']),
     tf(1, 'Israel advanced while striking the Moabites.', true, 24),
 
     mc(1, 'Which stronghold remained after the campaign devastated the land?', ['Kir-hareseth', 'Samaria', 'Bethel', 'Jericho'], 25),
     blank(2, 'every man threw a _____, until it was covered', 'stone', 25),
-    word(1, 'Who surrounded and conquered Kir-hareseth?', 'the slingers', 25, ['slingers']),
+    sa(1, 'Who surrounded and conquered Kir-hareseth?', 'the slingers', 25, ['slingers']),
     tf(3, 'The Israelites left Moab’s springs and good trees untouched.', false, 25, 'They stopped the springs and felled the good trees.'),
 
     mc(1, 'How many swordsmen did Moab’s king take for a breakout attempt?', ['Seven hundred', 'One hundred thousand', 'Fifty', 'Forty-two'], 26),
@@ -149,7 +149,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Moab’s king offer as a burnt offering?', ['His eldest son who was to succeed him', 'The king of Edom', 'A hundred thousand lambs', 'One of Israel’s servants'], 27),
     blank(2, 'and offered him for a burnt offering upon the _____.', 'wall', 27),
-    word(1, 'What came upon Israel after the offering?', 'great wrath', 27, ['wrath', 'great wrath upon Israel']),
+    sa(1, 'What came upon Israel after the offering?', 'great wrath', 27, ['wrath', 'great wrath upon Israel']),
     tf(3, 'After the offering, Israel withdrew and returned to its own land.', true, 27),
   ],
 }

@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 4, tag: 'quiz-v2-2kings-4', rows: [
@@ -14,59 +14,59 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha tell the widow to borrow?', ['Empty vessels from all her neighbors', 'Money from the king', 'Oil from the prophets', 'Grain from Shunem'], 3),
     blank(2, 'empty vessels and not too _____.', 'few', 3),
-    word(1, 'From whom was she to borrow the vessels?', 'all her neighbors', 3, ['her neighbors', 'all of her neighbors']),
+    sa(1, 'From whom was she to borrow the vessels?', 'all her neighbors', 3, ['her neighbors', 'all of her neighbors']),
     tf(3, 'Elisha told the widow to borrow only one vessel.', false, 3, 'He told her to borrow empty vessels and “not too few.”'),
     mc(3, 'What precise instruction did Elisha give about gathering containers?', ['Borrow empty vessels from every neighbor, and not too few', 'Buy one full jar from a merchant', 'Borrow twelve bowls from the prophets', 'Collect only vessels already containing oil'], 3),
 
     mc(1, 'What was the widow to do after entering her house?', ['Shut the door and pour oil into every vessel', 'Sell her jar immediately', 'Call the creditor inside', 'Prepare food for Elisha'], 4),
     blank(3, 'when one is full, set it _____.', 'aside', 4),
-    word(2, 'Who would be inside with the widow?', 'her sons', 4, ['her children']),
+    sa(2, 'Who would be inside with the widow?', 'her sons', 4, ['her children']),
     tf(1, 'The filled vessels were to be set aside.', true, 4),
 
     mc(1, 'What did the widow’s sons do while she poured?', ['They brought the vessels to her', 'They sold the oil', 'They went to Elisha', 'They hid from the creditor'], 5),
     blank(2, 'and as she poured they brought the _____ to her.', 'vessels', 5),
-    word(1, 'What did the widow close before pouring?', 'the door', 5),
+    sa(1, 'What did the widow close before pouring?', 'the door', 5),
     tf(3, 'The pouring took place publicly before the neighbors.', false, 5, 'She shut the door upon herself and her sons.'),
 
     mc(1, 'When did the oil stop flowing?', ['When there were no more vessels', 'When the creditor arrived', 'At noon', 'When Elisha entered'], 6),
     blank(3, 'There is not _____. Then the oil stopped flowing.', 'another', 6),
-    word(2, 'What had become full?', 'the vessels', 6, ['all the vessels']),
+    sa(2, 'What had become full?', 'the vessels', 6, ['all the vessels']),
     tf(1, 'The supply of oil continued until every available vessel was full.', true, 6),
 
     mc(1, 'What was the widow told to do with the oil?', ['Sell it and pay her debts', 'Give it all to the creditor', 'Pour it into the spring', 'Offer it at Bethel'], 7),
     blank(2, 'you and your sons can live on the _____.', 'rest', 7),
-    word(1, 'Who gave the widow the final instructions?', 'the man of God', 7, ['Elisha']),
+    sa(1, 'Who gave the widow the final instructions?', 'the man of God', 7, ['Elisha']),
     tf(3, 'After paying her debts, nothing would remain for the family.', false, 7, 'Elisha said she and her sons could live on the remainder.'),
 
     mc(1, 'Where did a wealthy woman regularly host Elisha?', ['Shunem', 'Jericho', 'Samaria', 'Gilgal'], 8),
     blank(3, 'who urged him to eat some _____.', 'food', 8),
-    word(2, 'How often did Elisha stop there after accepting her hospitality?', 'whenever he passed that way', 8, ['whenever he passed', 'each time he passed']),
+    sa(2, 'How often did Elisha stop there after accepting her hospitality?', 'whenever he passed that way', 8, ['whenever he passed', 'each time he passed']),
     tf(1, 'The woman of Shunem urged Elisha to share a meal.', true, 8),
 
     mc(1, 'How did the woman describe Elisha to her husband?', ['A holy man of God', 'A traveling merchant', 'A royal commander', 'A son of the king'], 9),
     blank(2, 'who is continually _____ our way.', 'passing', 9),
-    word(1, 'To whom did the Shunammite woman speak?', 'her husband', 9),
+    sa(1, 'To whom did the Shunammite woman speak?', 'her husband', 9),
     tf(3, 'The woman believed Elisha was merely an ordinary traveler.', false, 9, 'She perceived that he was a holy man of God.'),
 
     mc(1, 'What room did the couple propose making for Elisha?', ['A small walled roof chamber', 'A chamber inside the palace', 'A tent beside the road', 'A room beneath the house'], 10),
     blank(3, 'and put there for him a bed, a table, a chair, and a _____.', 'lamp', 10),
-    word(2, 'Name the four furnishings placed in Elisha’s room.', 'a bed, a table, a chair, and a lamp', 10, ['bed table chair and lamp']),
+    sa(2, 'Name the four furnishings placed in Elisha’s room.', 'a bed, a table, a chair, and a lamp', 10, ['bed table chair and lamp']),
     tf(1, 'The room was intended for Elisha to use whenever he visited.', true, 10),
     mc(3, 'Which complete furnishing list belonged in Elisha’s roof chamber?', ['A bed, table, chair, and lamp', 'A bed, chest, altar, and lamp', 'A couch, desk, stool, and brazier', 'A table, jar, basin, and mantle'], 10),
 
     mc(1, 'What did Elisha do in the prepared chamber?', ['Rested there', 'Stored the widow’s oil', 'Met the king', 'Taught one hundred men'], 11),
     blank(2, 'he turned into the chamber and _____ there.', 'rested', 11),
-    word(1, 'When did Elisha use the chamber?', 'one day when he came there', 11, ['one day', 'when he came']),
+    sa(1, 'When did Elisha use the chamber?', 'one day when he came there', 11, ['one day', 'when he came']),
     tf(3, 'Elisha refused to enter the chamber made for him.', false, 11, 'He turned into it and rested there.'),
 
     mc(1, 'Whom did Elisha tell Gehazi to call?', ['The Shunammite woman', 'The prophet’s widow', 'The king', 'A minstrel'], 12),
     blank(3, 'And he said to Geha’zi his _____.', 'servant', 12),
-    word(2, 'What did the woman do after Gehazi called her?', 'stood before Elisha', 12, ['stood before him']),
+    sa(2, 'What did the woman do after Gehazi called her?', 'stood before Elisha', 12, ['stood before him']),
     tf(1, 'Gehazi served Elisha.', true, 12),
 
     mc(1, 'What favor did Elisha offer to arrange for the woman?', ['A word to the king or army commander', 'A place among the prophets', 'Payment for the room', 'Protection from Moab'], 13),
     blank(2, 'See, you have taken all this _____ for us', 'trouble', 13),
-    word(1, 'How did the woman describe her social security?', 'I dwell among my own people', 13, ['she dwelt among her own people']),
+    sa(1, 'How did the woman describe her social security?', 'I dwell among my own people', 13, ['she dwelt among her own people']),
     tf(3, 'The woman asked Elisha to speak to the king for her.', false, 13, 'She answered that she dwelt among her own people.'),
 
     mc(1, 'What need did Gehazi identify in the woman’s household?', ['She had no son and her husband was old', 'She owed a creditor', 'Her water was bad', 'Her husband had died'], 14),
@@ -81,7 +81,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha promise the Shunammite woman?', ['She would embrace a son when the season returned', 'Her husband would become young', 'The king would reward her', 'She would receive many vessels of oil'], 16),
     blank(3, 'you shall embrace a _____.', 'son', 16),
-    word(2, 'What did the woman plead that Elisha not do?', 'lie to her', 16, ['deceive her', 'lie to your maidservant']),
+    sa(2, 'What did the woman plead that Elisha not do?', 'lie to her', 16, ['deceive her', 'lie to your maidservant']),
     tf(1, 'The promise of a son initially seemed unbelievable to the woman.', true, 16),
 
     mc(1, 'When did the woman bear the promised son?', ['About that time the following spring', 'Seven years later', 'At the next new moon', 'Before winter'], 17),
@@ -91,42 +91,42 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did the grown child go one day?', ['To his father among the reapers', 'To Elisha at Mount Carmel', 'To the prophets at Gilgal', 'To the king in Samaria'], 18),
     blank(3, 'he went out one day to his father among the _____.', 'reapers', 18),
-    word(2, 'Whom did the child visit in the field?', 'his father', 18),
+    sa(2, 'Whom did the child visit in the field?', 'his father', 18),
     tf(1, 'The child went out during the harvest work.', true, 18),
 
     mc(1, 'What complaint did the child make?', ['My head, my head!', 'The water is bad!', 'There is death in the pot!', 'I am hungry!'], 19),
     blank(2, 'Carry him to his _____.', 'mother', 19),
-    word(1, 'Who was told to carry the child?', 'the father’s servant', 19, ['a servant', 'his servant']),
+    sa(1, 'Who was told to carry the child?', 'the father’s servant', 19, ['a servant', 'his servant']),
     tf(3, 'The father personally carried the child home.', false, 19, 'He instructed his servant to carry the child to his mother.'),
 
     mc(1, 'How long did the sick child sit on his mother’s lap?', ['Until noon', 'Until evening', 'For three days', 'Until the next morning'], 20),
     blank(3, 'the child sat on her lap till noon, and then he _____.', 'died', 20),
-    word(2, 'Who received the child from the servant?', 'his mother', 20, ['the mother']),
+    sa(2, 'Who received the child from the servant?', 'his mother', 20, ['the mother']),
     tf(1, 'The child died while on his mother’s lap.', true, 20),
 
     mc(1, 'Where did the mother lay her dead son?', ['On the man of God’s bed', 'In the field with his father', 'At the city gate', 'On her own bed'], 21),
     blank(2, 'and shut the _____ upon him', 'door', 21),
-    word(1, 'What did the woman do after laying him down?', 'shut the door and went out', 21, ['she closed the door and left']),
+    sa(1, 'What did the woman do after laying him down?', 'shut the door and went out', 21, ['she closed the door and left']),
     tf(3, 'The woman immediately announced the child’s death publicly.', false, 21, 'She placed him in Elisha’s room, shut the door, and went out.'),
 
     mc(1, 'What did the woman request from her husband?', ['A servant and one donkey', 'Two reapers and a cart', 'A bowl and salt', 'Gehazi and Elisha’s staff'], 22),
     blank(3, 'that I may quickly go to the man of God, and come _____ again.', 'back', 22),
-    word(2, 'Whom did she intend to visit?', 'the man of God', 22, ['Elisha']),
+    sa(2, 'Whom did she intend to visit?', 'the man of God', 22, ['Elisha']),
     tf(1, 'The woman intended to make the journey quickly.', true, 22),
 
     mc(1, 'Why did the husband question her trip?', ['It was neither new moon nor sabbath', 'The donkey was sick', 'Elisha was in Samaria', 'The reapers needed her'], 23),
     blank(2, 'She said, “It will be _____.”', 'well', 23),
-    word(1, 'Which two observances did the husband mention?', 'new moon and sabbath', 23, ['the new moon and the sabbath']),
+    sa(1, 'Which two observances did the husband mention?', 'new moon and sabbath', 23, ['the new moon and the sabbath']),
     tf(3, 'The husband believed it was the customary day to visit the prophet.', false, 23, 'He noted that it was neither new moon nor sabbath.'),
 
     mc(1, 'What instruction did the woman give her servant about the journey?', ['Keep the animal moving unless she said otherwise', 'Travel slowly through every village', 'Return to the reapers first', 'Wait until the sabbath'], 24),
     blank(3, 'do not _____ the pace for me unless I tell you.', 'slacken', 24),
-    word(2, 'What animal did the woman saddle?', 'the ass', 24, ['a donkey', 'donkey']),
+    sa(2, 'What animal did the woman saddle?', 'the ass', 24, ['a donkey', 'donkey']),
     tf(1, 'The woman wanted to travel without unnecessary delay.', true, 24),
 
     mc(1, 'Where did the woman find Elisha?', ['Mount Carmel', 'Shunem', 'Samaria', 'Gilgal'], 25),
     blank(2, 'Look, yonder is the _____.', 'Shu’nammite', 25, ['Shunammite']),
-    word(1, 'Whom did Elisha address when he saw her coming?', 'Gehazi his servant', 25, ['Gehazi']),
+    sa(1, 'Whom did Elisha address when he saw her coming?', 'Gehazi his servant', 25, ['Gehazi']),
     tf(3, 'Gehazi noticed the woman before Elisha did.', false, 25, 'Elisha saw her coming and pointed her out to Gehazi.'),
 
     mc(1, 'What three welfare questions was Gehazi to ask?', ['Whether she, her husband, and her child were well', 'Whether the king, army, and city were well', 'Whether her house, field, and animals were well', 'Whether Elisha, Gehazi, and the prophets were well'], 26),
@@ -141,12 +141,12 @@ const bank: ChapterBank = {
 
     mc(1, 'What earlier warning did the woman recall?', ['Do not deceive me about a son', 'Do not borrow too few vessels', 'Do not travel on the sabbath', 'Do not send a search party'], 28),
     blank(3, 'Did I not say, Do not _____ me?', 'deceive', 28),
-    word(2, 'What gift had she not originally requested?', 'a son', 28),
+    sa(2, 'What gift had she not originally requested?', 'a son', 28),
     tf(1, 'Her words expressed grief over the promise that now seemed broken.', true, 28),
 
     mc(1, 'What did Elisha send Gehazi to place on the child?', ['Elisha’s staff', 'A new bowl', 'A jar of oil', 'His mantle'], 29),
     blank(2, 'Gird up your _____', 'loins', 29),
-    word(1, 'How was Gehazi to respond to greetings on the way?', 'he was not to reply', 29, ['do not reply', 'not answer']),
+    sa(1, 'How was Gehazi to respond to greetings on the way?', 'he was not to reply', 29, ['do not reply', 'not answer']),
     tf(3, 'Gehazi was instructed to stop and greet everyone he met.', false, 29, 'He was to go without greeting or replying to greetings.'),
 
     mc(1, 'What oath did the child’s mother make?', ['She would not leave Elisha', 'She would not return to Shunem', 'She would never speak to Gehazi', 'She would give away her home'], 30),
@@ -161,17 +161,17 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha see when he entered the house?', ['The child lying dead on his bed', 'The child speaking with his mother', 'Gehazi holding the child', 'An empty chamber'], 32),
     blank(3, 'he saw the child lying _____ on his bed.', 'dead', 32),
-    word(2, 'On whose bed was the child lying?', 'Elisha’s bed', 32, ['his bed', 'the man of God’s bed']),
+    sa(2, 'On whose bed was the child lying?', 'Elisha’s bed', 32, ['his bed', 'the man of God’s bed']),
     tf(1, 'The child remained in the chamber where his mother had placed him.', true, 32),
 
     mc(1, 'What did Elisha do after shutting the door?', ['Prayed to the LORD', 'Called the king', 'Sent Gehazi away again', 'Poured oil on the child'], 33),
     blank(2, 'and _____ to the LORD.', 'prayed', 33),
-    word(1, 'Who was inside the closed room?', 'Elisha and the child', 33, ['the two of them']),
+    sa(1, 'Who was inside the closed room?', 'Elisha and the child', 33, ['the two of them']),
     tf(3, 'Elisha prayed publicly before the household.', false, 33, 'He shut the door upon the two of them and prayed.'),
 
     mc(1, 'How did Elisha position himself over the child?', ['Mouth to mouth, eyes to eyes, and hands to hands', 'With his staff on the child’s feet', 'Kneeling beside the doorway', 'Seated at the head of the bed'], 34),
     blank(3, 'the flesh of the child became _____.', 'warm', 34),
-    word(2, 'What physical change first occurred?', 'the child’s flesh became warm', 34, ['his flesh became warm', 'warmth']),
+    sa(2, 'What physical change first occurred?', 'the child’s flesh became warm', 34, ['his flesh became warm', 'warmth']),
     tf(1, 'Elisha stretched himself upon the child.', true, 34),
 
     mc(1, 'What did the child do before opening his eyes?', ['Sneezed seven times', 'Spoke Elisha’s name', 'Cried out twice', 'Sat up immediately'], 35),
@@ -187,17 +187,17 @@ const bank: ChapterBank = {
 
     mc(1, 'How did the woman respond before taking her son?', ['She fell at Elisha’s feet and bowed', 'She rebuked Gehazi', 'She called the reapers', 'She ran to her husband'], 37),
     blank(2, 'then she took up her son and went _____.', 'out', 37),
-    word(1, 'To what did she bow?', 'the ground', 37),
+    sa(1, 'To what did she bow?', 'the ground', 37),
     tf(3, 'The woman left without acknowledging Elisha.', false, 37, 'She fell at his feet and bowed to the ground.'),
 
     mc(1, 'What condition afflicted the land when Elisha returned to Gilgal?', ['Famine', 'War', 'Flood', 'Plague'], 38),
     blank(3, 'Set on the great pot, and boil _____ for the sons of the prophets.', 'pottage', 38),
-    word(2, 'Who were sitting before Elisha?', 'the sons of the prophets', 38, ['sons of the prophets']),
+    sa(2, 'Who were sitting before Elisha?', 'the sons of the prophets', 38, ['sons of the prophets']),
     tf(1, 'Elisha ordered food prepared during the famine.', true, 38),
 
     mc(1, 'What did one man unknowingly add to the pottage?', ['Wild gourds from a wild vine', 'Poisoned water', 'Spoiled barley loaves', 'Bitter salt'], 39),
     blank(2, 'and found a wild vine and gathered from it his lap full of wild _____.', 'gourds', 39),
-    word(1, 'Why did the man add the gourds?', 'he did not know what they were', 39, ['not knowing what they were', 'he was unaware']),
+    sa(1, 'Why did the man add the gourds?', 'he did not know what they were', 39, ['not knowing what they were', 'he was unaware']),
     tf(3, 'The gatherer recognized the wild gourds as dangerous.', false, 39, 'He cut them into the pot without knowing what they were.'),
 
     mc(1, 'What did the men cry after tasting the pottage?', ['O man of God, there is death in the pot!', 'The water is bad!', 'Bring another vessel!', 'The child has awaked!'], 40),
@@ -224,7 +224,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What happened when the food was set before the men?', ['They ate and had some left', 'They refused to eat', 'It ran out before all were served', 'They found death in it'], 44),
     blank(3, 'And they ate, and had some _____.', 'left', 44),
-    word(2, 'According to whose word was there food left over?', 'the LORD’s word', 44, ['the word of the LORD', 'the LORD']),
+    sa(2, 'According to whose word was there food left over?', 'the LORD’s word', 44, ['the word of the LORD', 'the LORD']),
     tf(1, 'The result fulfilled the word of the LORD.', true, 44),
   ],
 }

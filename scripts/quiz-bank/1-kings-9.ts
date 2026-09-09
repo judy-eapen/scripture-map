@@ -1,6 +1,6 @@
 // 1 Kings 9 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -113,7 +113,7 @@ const bank: ChapterBank = {
     tf(3, 'Hiram called Solomon "my servant" when he complained about the cities.', false, 13, 'He said, "my brother".'),
 
     mc(1, 'How much gold had Hiram sent to the king?', ['One hundred and twenty talents', 'Four hundred and twenty talents', 'Six hundred talents', 'Twenty talents'], 14),
-    word(2, 'How many talents of gold had Hiram sent to the king?', 'one hundred and twenty', 14, ['120', 'one hundred twenty', 'a hundred and twenty', 'hundred and twenty']),
+    sa(2, 'How many talents of gold had Hiram sent to the king?', 'one hundred and twenty', 14, ['120', 'one hundred twenty', 'a hundred and twenty', 'hundred and twenty']),
     blank(2, 'Hiram had sent to the king one hundred and twenty talents of _____.', 'gold', 14),
     tf(1, 'Hiram had sent the king one hundred and twenty talents of gold.', true, 14),
     tf(3, 'Hiram had sent the king one hundred and twenty talents of silver.', false, 14, 'It was gold.'),
@@ -186,7 +186,7 @@ const bank: ChapterBank = {
     blank(3, 'they were the soldiers, they were his officials, his commanders, his captains, his _____ commanders and his horsemen.', 'chariot', 22),
 
     mc(1, 'How many chief officers were over Solomon’s work?', ['Five hundred and fifty', 'Three hundred', 'Two hundred and fifty', 'One thousand'], 23),
-    word(1, 'How many chief officers had charge of the people carrying on Solomon’s work?', 'five hundred and fifty', 23, ['550', 'five hundred fifty']),
+    sa(1, 'How many chief officers had charge of the people carrying on Solomon’s work?', 'five hundred and fifty', 23, ['550', 'five hundred fifty']),
     blank(2, 'These were the chief officers who were over Solomon’s work: five hundred and _____, who had charge of the people who carried on the work.', 'fifty', 23, ['50']),
     tf(2, 'There were five hundred and fifty chief officers over Solomon’s work.', true, 23),
     blank(3, 'These were the chief _____ who were over Solomon’s work:', 'officers', 23),
@@ -231,7 +231,7 @@ const bank: ChapterBank = {
     mc(1, 'Where did the fleet go to get gold?', ['Ophir', 'Tarshish', 'Sheba', 'Egypt'], 28),
     word(1, 'The fleet sailed to what place and brought back gold?', 'Ophir', 28),
     mc(2, 'How much gold was brought from Ophir?', ['Four hundred and twenty talents', 'One hundred and twenty talents', 'Six hundred and sixty-six talents', 'Two hundred talents'], 28),
-    word(3, 'How many talents of gold did the fleet bring from Ophir?', 'four hundred and twenty', 28, ['420', 'four hundred twenty']),
+    sa(3, 'How many talents of gold did the fleet bring from Ophir?', 'four hundred and twenty', 28, ['420', 'four hundred twenty']),
     blank(1, 'and they went to _____, and brought from there gold,', 'Ophir', 28),
     blank(3, 'and brought from there gold, to the amount of four hundred and _____ talents; and they brought it to King Solomon.', 'twenty', 28, ['20']),
     tf(2, 'The fleet brought four hundred and twenty talents of gold to King Solomon.', true, 28),

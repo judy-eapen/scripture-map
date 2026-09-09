@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 5, tag: 'quiz-v2-2kings-5', rows: [
@@ -16,14 +16,14 @@ const bank: ChapterBank = {
 
     mc(1, 'Who first spoke of a possible cure for Naaman?', ['The Israelite maid serving his wife', 'The king of Syria', 'Gehazi', 'Naaman’s soldiers'], 3),
     blank(2, 'Would that my lord were with the prophet who is in _____.', 'Sama’ria', 3, ['Samaria']),
-    word(1, 'What did the maid say the prophet could cure?', 'Naaman’s leprosy', 3, ['his leprosy', 'leprosy']),
+    sa(1, 'What did the maid say the prophet could cure?', 'Naaman’s leprosy', 3, ['his leprosy', 'leprosy']),
     tf(3, 'The maid directed Naaman’s household toward a prophet in Samaria.', true, 3),
     mc(3, 'What hope did the captive Israelite maid give her mistress?', ['The prophet in Samaria could cure Naaman’s leprosy', 'The king of Israel would employ Naaman', 'The rivers of Damascus would heal him', 'Gehazi would sell him medicine'], 3),
-    word(2, 'To whom did the maid express her wish for Naaman’s healing?', 'her mistress', 3, ['Naaman’s wife']),
+    sa(2, 'To whom did the maid express her wish for Naaman’s healing?', 'her mistress', 3, ['Naaman’s wife']),
 
     mc(1, 'Whom did Naaman tell about the maiden’s words?', ['His lord, the king of Syria', 'The king of Israel', 'Elisha', 'Gehazi'], 4),
     blank(3, 'Thus and so spoke the _____ from the land of Israel.', 'maiden', 4),
-    word(2, 'Whose report did Naaman repeat?', 'the Israelite maiden’s', 4, ['the maiden from Israel', 'the little maid’s']),
+    sa(2, 'Whose report did Naaman repeat?', 'the Israelite maiden’s', 4, ['the maiden from Israel', 'the little maid’s']),
     tf(1, 'Naaman brought the girl’s message to his Syrian master.', true, 4),
     mc(2, 'What prompted Naaman to approach his king?', ['The maiden’s statement about a prophet in Israel', 'An order from Elisha', 'A letter from Israel’s king', 'A defeat in battle'], 4),
 
@@ -41,13 +41,13 @@ const bank: ChapterBank = {
 
     mc(1, 'How did Israel’s king react to the letter?', ['He tore his clothes', 'He rejoiced', 'He sent for the maid', 'He washed in the Jordan'], 7),
     blank(2, 'Am I God, to kill and to make _____?', 'alive', 7),
-    word(1, 'What did the king suspect Syria was seeking?', 'a quarrel', 7, ['a quarrel with him', 'conflict']),
+    sa(1, 'What did the king suspect Syria was seeking?', 'a quarrel', 7, ['a quarrel with him', 'conflict']),
     tf(3, 'Israel’s king believed he personally had power to cure leprosy.', false, 7, 'He protested that he was not God, able to kill and make alive.'),
     mc(2, 'Why did the king interpret the request as hostile?', ['He could not cure leprosy and thought Syria sought a quarrel', 'The letter demanded tribute', 'Naaman arrived with an invading army', 'The maid had accused him'], 7),
 
     mc(1, 'What did Elisha tell the king to do with Naaman?', ['Send him to Elisha', 'Return him to Syria', 'Wash him in Jerusalem', 'Imprison him'], 8),
     blank(3, 'that he may know that there is a _____ in Israel.', 'prophet', 8),
-    word(2, 'What had Elisha heard the king had done?', 'torn his clothes', 8, ['rent his clothes']),
+    sa(2, 'What had Elisha heard the king had done?', 'torn his clothes', 8, ['rent his clothes']),
     tf(1, 'Elisha wanted Naaman to learn that Israel had a prophet.', true, 8),
     mc(2, 'What question did Elisha send to Israel’s king?', ['Why have you torn your clothes?', 'Why did you send for Naaman?', 'Where is the captive maid?', 'Are Damascus’s rivers better?'], 8),
 
@@ -66,31 +66,31 @@ const bank: ChapterBank = {
 
     mc(1, 'Why was Naaman angry?', ['Elisha did not come out and heal him as he expected', 'The king refused his letter', 'His servants abandoned him', 'The Jordan had no water'], 11),
     blank(2, 'and wave his hand over the place, and cure the _____.', 'leper', 11),
-    word(1, 'Whose name did Naaman expect Elisha to call on?', 'the LORD his God', 11, ['the LORD', 'God']),
+    sa(1, 'Whose name did Naaman expect Elisha to call on?', 'the LORD his God', 11, ['the LORD', 'God']),
     tf(3, 'Naaman had expected a personal and dramatic healing ritual.', true, 11),
     mc(2, 'What did Naaman imagine Elisha would do?', ['Come out, invoke the LORD, and wave his hand over the diseased place', 'Send him to Israel’s king', 'Ask the maid to pray', 'Accept the gifts before speaking'], 11),
 
     mc(1, 'Which rivers did Naaman praise above Israel’s waters?', ['Abana and Pharpar', 'Jordan and Kishon', 'Cherith and Kidron', 'Habor and Gozan'], 12),
     blank(3, 'the rivers of _____', 'Damascus', 12),
-    word(2, 'In what state did Naaman turn away?', 'a rage', 12, ['rage', 'anger']),
+    sa(2, 'In what state did Naaman turn away?', 'a rage', 12, ['rage', 'anger']),
     tf(1, 'Naaman believed he could wash in Damascus’s rivers instead.', true, 12),
     mc(3, 'What comparison fueled Naaman’s refusal?', ['He considered Abana and Pharpar better than all Israel’s waters', 'He considered the Jordan larger than Syrian rivers', 'He believed Samaria had no prophet', 'He thought Israel’s king should wash for him'], 12),
-    word(3, 'Name both rivers Naaman mentioned.', 'Abana and Pharpar', 12, ["Aba'na and Pharpar"]),
+    sa(3, 'Name both rivers Naaman mentioned.', 'Abana and Pharpar', 12, ["Aba'na and Pharpar"]),
 
     mc(1, 'Who persuaded Naaman to reconsider?', ['His servants', 'Elisha’s messenger', 'The king of Israel', 'The captive maid'], 13),
     blank(2, 'Wash, and be _____.', 'clean', 13),
-    word(1, 'What contrast did the servants make?', 'he would have done a great thing, so he should do the simple command', 13, ['if commanded a great thing he would do it', 'the command was simple']),
+    sa(1, 'What contrast did the servants make?', 'he would have done a great thing, so he should do the simple command', 13, ['if commanded a great thing he would do it', 'the command was simple']),
     tf(3, 'Naaman’s servants encouraged him to obey the prophet’s simple instruction.', true, 13),
 
     mc(1, 'What happened after Naaman dipped seven times?', ['His flesh became like a little child’s and he was clean', 'Nothing changed', 'His skin became white as snow', 'He received Elisha’s mantle'], 14),
     blank(3, 'his flesh was restored like the flesh of a little _____.', 'child', 14),
-    word(2, 'According to whose word did Naaman wash?', 'the man of God’s', 14, ['the word of the man of God', 'Elisha’s word']),
+    sa(2, 'According to whose word did Naaman wash?', 'the man of God’s', 14, ['the word of the man of God', 'Elisha’s word']),
     tf(1, 'Naaman obeyed by dipping seven times in the Jordan.', true, 14),
     mc(3, 'How does the verse describe Naaman’s restored flesh?', ['Like the flesh of a little child, and clean', 'Scarred but no longer painful', 'White as snow', 'Unchanged until he reached Syria'], 14),
 
     mc(1, 'What confession did Naaman make after being healed?', ['There is no God in all the earth but in Israel', 'Syria’s gods had healed him', 'Elisha was greater than the LORD', 'The Jordan was a god'], 15),
     blank(2, 'so accept now a _____ from your servant.', 'present', 15),
-    word(1, 'Who returned with Naaman to Elisha?', 'all his company', 15, ['his whole company']),
+    sa(1, 'Who returned with Naaman to Elisha?', 'all his company', 15, ['his whole company']),
     tf(3, 'Naaman’s healing led him to acknowledge Israel’s God.', true, 15),
 
     mc(1, 'What did Elisha do when Naaman offered a present?', ['Refused it', 'Accepted the silver', 'Took two garments', 'Asked Gehazi to receive it'], 16),
@@ -100,17 +100,17 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Naaman request after Elisha refused the gift?', ['Two mules’ burden of earth', 'Elijah’s mantle', 'A jar of Jordan water', 'Two talents of silver'], 17),
     blank(2, 'your servant will not offer burnt offering or sacrifice to any god but the _____.', 'LORD', 17, ['Lord']),
-    word(1, 'How much earth did Naaman request?', 'two mules’ burden', 17, ['two mule loads', 'two mules burden']),
+    sa(1, 'How much earth did Naaman request?', 'two mules’ burden', 17, ['two mule loads', 'two mules burden']),
     tf(3, 'Naaman promised exclusive sacrifice to the LORD.', true, 17),
 
     mc(1, 'For what situation did Naaman ask the LORD’s pardon?', ['Bowing in Rimmon’s house while supporting his master', 'Washing in a Syrian river', 'Accepting gifts from the king', 'Taking Israelite soil'], 18),
     blank(3, 'when my master goes into the house of _____ to worship there', 'Rimmon', 18),
-    word(2, 'Why would Naaman enter Rimmon’s house?', 'his master leaned on his arm', 18, ['to support his master', 'the king leaned on him']),
+    sa(2, 'Why would Naaman enter Rimmon’s house?', 'his master leaned on his arm', 18, ['to support his master', 'the king leaned on him']),
     tf(1, 'Naaman anticipated that his royal service might require him to bow in Rimmon’s house.', true, 18),
 
     mc(1, 'What parting words did Elisha give Naaman?', ['Go in peace', 'Wash again', 'Return the gifts', 'Remain in Israel'], 19),
     blank(2, 'But when Na’aman had gone from him a short _____.', 'distance', 19),
-    word(1, 'How far had Naaman gone when the next event began?', 'a short distance', 19),
+    sa(1, 'How far had Naaman gone when the next event began?', 'a short distance', 19),
     tf(3, 'Naaman was still at Elisha’s house when Gehazi formed his plan.', false, 19, 'Naaman had gone a short distance.'),
 
     mc(1, 'What did Gehazi decide to do?', ['Run after Naaman and get something from him', 'Return Naaman’s gifts', 'Follow Elisha to the Jordan', 'Warn the king of Syria'], 20),
@@ -125,7 +125,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What false story did Gehazi tell?', ['Two young prophets had arrived and needed silver and garments', 'Elisha had changed his mind for himself', 'The king demanded a tax', 'The widow needed more oil'], 22),
     blank(3, 'pray, give them a talent of silver and two festal _____.', 'garments', 22),
-    word(2, 'From what region did Gehazi claim the young men came?', 'the hill country of Ephraim', 22, ['hill country of E’phraim', 'Ephraim']),
+    sa(2, 'From what region did Gehazi claim the young men came?', 'the hill country of Ephraim', 22, ['hill country of E’phraim', 'Ephraim']),
     tf(1, 'Gehazi falsely said that Elisha had sent him.', true, 22),
 
     mc(1, 'How much silver did Naaman press Gehazi to accept?', ['Two talents', 'One talent', 'Ten talents', 'Six thousand shekels'], 23),
@@ -135,17 +135,17 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Gehazi do when he reached the hill?', ['Took the gifts, hid them in the house, and dismissed the men', 'Returned the gifts', 'Brought the servants to Elisha', 'Gave the silver to the prophets'], 24),
     blank(3, 'and put them in the _____.', 'house', 24),
-    word(2, 'Whom did Gehazi send away?', 'Naaman’s servants', 24, ['the men', 'the two servants']),
+    sa(2, 'Whom did Gehazi send away?', 'Naaman’s servants', 24, ['the men', 'the two servants']),
     tf(1, 'Gehazi concealed the gifts before returning to Elisha.', true, 24),
 
     mc(1, 'How did Gehazi answer Elisha’s question about his whereabouts?', ['Your servant went nowhere', 'I went after Naaman', 'I visited the prophets', 'I went to the hill'], 25),
     blank(2, 'Where have you been, _____?', 'Geha’zi', 25, ['Gehazi']),
-    word(1, 'Before whom did Gehazi stand?', 'his master Elisha', 25, ['Elisha', 'his master']),
+    sa(1, 'Before whom did Gehazi stand?', 'his master Elisha', 25, ['Elisha', 'his master']),
     tf(3, 'Gehazi immediately confessed where he had gone.', false, 25, 'He falsely claimed that he had gone nowhere.'),
 
     mc(1, 'What did Elisha reveal about Gehazi’s secret meeting?', ['He had gone with him in spirit', 'Naaman’s servants had reported it', 'The king had seen it', 'The maid had followed him'], 26),
     blank(3, 'Was it a time to accept money and _____?', 'garments', 26),
-    word(2, 'Name two kinds of property Elisha listed after money and garments.', 'olive orchards and vineyards', 26, ['sheep and oxen', 'menservants and maidservants', 'orchards and vineyards']),
+    sa(2, 'Name two kinds of property Elisha listed after money and garments.', 'olive orchards and vineyards', 26, ['sheep and oxen', 'menservants and maidservants', 'orchards and vineyards']),
     tf(1, 'Elisha knew when Naaman turned from his chariot to meet Gehazi.', true, 26),
 
     mc(1, 'What judgment fell on Gehazi?', ['Naaman’s leprosy would cling to him and his descendants', 'He would lose only the silver', 'He would be exiled to Syria', 'He would become Naaman’s servant'], 27),

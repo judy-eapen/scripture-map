@@ -1,6 +1,6 @@
 // 1 Kings 4 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -150,7 +150,7 @@ const bank: ChapterBank = {
     word(2, 'Solomon’s daily flour and meal were measured in what unit?', 'cors', 22, ['cor']),
 
     mc(3, 'How many fat oxen were part of Solomon’s daily provision?', ['Ten', 'Twenty', 'Thirty', 'A hundred'], 23),
-    word(3, 'How many sheep were in Solomon’s provision for one day?', 'a hundred', 23, ['100', 'hundred', 'one hundred']),
+    sa(3, 'How many sheep were in Solomon’s provision for one day?', 'a hundred', 23, ['100', 'hundred', 'one hundred']),
     blank(3, 'ten fat oxen, and _____ pasture-fed cattle, a hundred sheep, besides harts, gazelles, roebucks, and fatted fowl.', 'twenty', 23, ['20']),
     tf(3, 'Solomon’s daily provision included twenty pasture-fed cattle.', true, 23),
     mc(2, 'Which of these is NOT listed in Solomon’s daily provision in 1 Kings 4:23?', ['Goats', 'Harts', 'Gazelles', 'Roebucks'], 23),
@@ -171,7 +171,7 @@ const bank: ChapterBank = {
     tf(2, 'Every man dwelt under his olive tree and under his fig tree.', false, 25, 'It was "every man under his vine and under his fig tree".'),
 
     mc(2, 'How many stalls of horses did Solomon have for his chariots?', ['Forty thousand', 'Twelve thousand', 'Four thousand', 'Fourteen hundred'], 26),
-    word(2, 'How many horsemen did Solomon have?', 'twelve thousand', 26, ['12000', '12,000']),
+    sa(2, 'How many horsemen did Solomon have?', 'twelve thousand', 26, ['12000', '12,000']),
     blank(3, 'Solomon also had _____ stalls of horses for his chariots, and twelve thousand horsemen.', 'forty thousand', 26, ['40000', '40,000']),
     tf(1, 'Solomon had twelve thousand horsemen.', true, 26),
     tf(1, 'Solomon had forty thousand horsemen.', false, 26, 'He had forty thousand stalls of horses for his chariots, and twelve thousand horsemen.'),
@@ -212,7 +212,7 @@ const bank: ChapterBank = {
     mc(3, 'Which three men are named as the sons of Mahol?', ['Heman, Calcol, and Darda', 'Ethan, Heman, and Calcol', 'Elihoreph, Ahijah, and Zabud', 'Darda, Ethan, and Iddo'], 31),
 
     mc(1, 'How many proverbs did Solomon utter?', ['Three thousand', 'A thousand and five', 'Five thousand', 'Three hundred'], 32),
-    word(2, 'How many songs did Solomon have?', 'a thousand and five', 32, ['1005', '1,005', 'thousand and five', 'one thousand five', 'one thousand and five']),
+    sa(2, 'How many songs did Solomon have?', 'a thousand and five', 32, ['1005', '1,005', 'thousand and five', 'one thousand five', 'one thousand and five']),
     blank(1, 'He also uttered three thousand _____; and his songs were a thousand and five.', 'proverbs', 32),
     tf(2, 'Solomon’s songs numbered a thousand and five.', true, 32),
     tf(1, 'Solomon uttered three thousand songs.', false, 32, 'He uttered three thousand proverbs; his songs were a thousand and five.'),

@@ -1,6 +1,6 @@
 // 1 Kings 8 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -28,7 +28,7 @@ const bank: ChapterBank = {
     mc(1, 'What were Solomon and the congregation doing before the ark?', ['Sacrificing so many sheep and oxen that they could not be counted', 'Singing psalms with harps', 'Fasting and weeping', 'Reading the law of Moses'], 5),
     blank(3, 'sacrificing so many sheep and oxen that they could not be _____ or numbered.', 'counted', 5),
     tf(1, 'Before the ark, Solomon and the congregation sacrificed exactly one thousand sheep and oxen.', false, 5, 'They sacrificed so many sheep and oxen "that they could not be counted or numbered".'),
-    word(3, 'Which two kinds of animals were sacrificed before the ark in numbers that could not be counted?', 'sheep and oxen', 5, ['sheep oxen', 'oxen and sheep', 'sheep, oxen', 'oxen sheep']),
+    sa(3, 'Which two kinds of animals were sacrificed before the ark in numbers that could not be counted?', 'sheep and oxen', 5, ['sheep oxen', 'oxen and sheep', 'sheep, oxen', 'oxen sheep']),
 
     // ══════════════════════════════════ v6–9 · The ark in the most holy place
     mc(1, 'Where did the priests bring the ark of the covenant?', ['To the inner sanctuary, the most holy place, underneath the wings of the cherubim', 'To the court before the house', 'To the city of David', 'To the tent of meeting'], 6),
@@ -193,7 +193,7 @@ const bank: ChapterBank = {
     mc(1, 'Who is the subject of the petition in verse 41?', ['A foreigner, not of God’s people Israel, who comes from a far country', 'A priest who has sinned', 'A soldier going to battle', 'A widow of Israel'], 41),
     blank(1, '"Likewise when a _____, who is not of thy people Israel, comes from a far country for thy name’s sake', 'foreigner', 41, ['stranger']),
     tf(1, 'Solomon prayed for the foreigner who comes from a far country for the LORD’s name’s sake.', true, 41),
-    word(2, 'The foreigner in verse 41 comes from where?', 'a far country', 41, ['far country', 'far', 'a far land', 'far away']),
+    sa(2, 'The foreigner in verse 41 comes from where?', 'a far country', 41, ['far country', 'far', 'a far land', 'far away']),
     mc(3, 'In verse 42, what will the foreigners hear of?', ['God’s great name, his mighty hand, and his outstretched arm', 'Solomon’s wisdom and wealth', 'The temple’s gold and cedar', 'The victories of David'], 42),
     blank(3, '(for they shall hear of thy great name, and thy mighty hand, and of thy outstretched _____), when he comes and prays toward this house,', 'arm', 42),
     tf(3, 'Verse 42 says the foreigners will hear of Solomon’s wisdom and the beauty of the house.', false, 42, 'They "shall hear of thy great name, and thy mighty hand, and of thy outstretched arm".'),
@@ -290,8 +290,8 @@ const bank: ChapterBank = {
     mc(1, 'How many sheep did Solomon offer as peace offerings?', ['A hundred and twenty thousand', 'Twenty-two thousand', 'Twelve thousand', 'Twenty thousand'], 63),
     blank(1, 'Solomon offered as peace offerings to the LORD twenty-two thousand _____ and a hundred and twenty thousand sheep.', 'oxen', 63),
     blank(2, 'Solomon offered as peace offerings to the LORD _____ oxen and a hundred and twenty thousand sheep.', 'twenty-two thousand', 63, ['22000', '22,000', 'twenty two thousand']),
-    word(1, 'How many sheep were offered as peace offerings at the dedication of the house?', 'a hundred and twenty thousand', 63, ['120000', '120,000', 'one hundred twenty thousand', 'hundred and twenty thousand', 'one hundred and twenty thousand', '120 thousand']),
-    word(1, 'How many oxen did Solomon offer as peace offerings at the dedication of the house?', 'twenty-two thousand', 63, ['22000', '22,000', 'twenty two thousand', '22 thousand']),
+    sa(1, 'How many sheep were offered as peace offerings at the dedication of the house?', 'a hundred and twenty thousand', 63, ['120000', '120,000', 'one hundred twenty thousand', 'hundred and twenty thousand', 'one hundred and twenty thousand', '120 thousand']),
+    sa(1, 'How many oxen did Solomon offer as peace offerings at the dedication of the house?', 'twenty-two thousand', 63, ['22000', '22,000', 'twenty two thousand', '22 thousand']),
     tf(1, 'Solomon offered twenty-two thousand oxen as peace offerings.', true, 63),
     tf(2, 'Solomon offered twenty-two thousand sheep and a hundred and twenty thousand oxen.', false, 63, 'It was twenty-two thousand oxen and a hundred and twenty thousand sheep.'),
     blank(1, 'So the king and all the people of Israel _____ the house of the LORD.', 'dedicated', 63),

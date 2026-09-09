@@ -1,10 +1,10 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings', chapter: 22, tag: 'quiz-v2-1kings-22', rows: [
     mc(1, 'How long did Syria and Israel remain without war?', ['Three years', 'Two years', 'Seven years', 'Forty years'], 1),
     blank(1, 'For _____ years Syria and Israel continued without war.', 'three', 1, ['3']),
-    word(3, 'Which two nations were at peace?', 'Syria and Israel', 1),
+    sa(3, 'Which two nations were at peace?', 'Syria and Israel', 1),
     tf(1, 'Syria and Israel fought continuously during these three years.', false, 1, 'They continued without war.'),
 
     mc(1, 'Who visited the king of Israel in the third year?', ['Jehoshaphat king of Judah', 'Ben-hadad', 'Micaiah', 'Zedekiah'], 2),
@@ -19,7 +19,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Israel’s king ask Jehoshaphat to do?', ['Join him in battle at Ramoth-gilead', 'Give him Jerusalem', 'Consult Micaiah alone', 'Fight against Israel'], 4),
     blank(2, 'I am as you are, my people as your people, my _____ as your horses.', 'horses', 4),
-    word(2, 'How did Jehoshaphat describe his people?', 'as your people', 4, ['like the king of Israel’s people']),
+    sa(2, 'How did Jehoshaphat describe his people?', 'as your people', 4, ['like the king of Israel’s people']),
     tf(3, 'Jehoshaphat refused to join Israel’s king.', false, 4, 'He identified himself, his people, and his horses with the king.'),
 
     mc(1, 'What did Jehoshaphat ask Ahab to do first?', ['Inquire for the word of the LORD', 'Muster the army', 'Consult the king of Syria', 'Disguise himself'], 5),
@@ -46,7 +46,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did the king order an officer to bring?', ['Micaiah son of Imlah', 'Zedekiah son of Chenaanah', 'Amon', 'Joash'], 9),
     blank(2, 'Bring _____ Micai’ah the son of Imlah.', 'quickly', 9),
-    word(2, 'Who was sent to summon Micaiah?', 'an officer', 9),
+    sa(2, 'Who was sent to summon Micaiah?', 'an officer', 9),
     tf(3, 'The king told the officer to delay bringing Micaiah.', false, 9, 'He said to bring him quickly.'),
 
     mc(2, 'Where were the two kings seated?', ['At Samaria’s gate entrance on the threshing floor', 'Inside the temple', 'At Ramoth-gilead', 'In Ahab’s chariot'], 10),
@@ -87,7 +87,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How did Micaiah see Israel?', ['Scattered like sheep without a shepherd', 'Triumphant over Syria', 'Gathered around Ahab', 'Safe within Samaria'], 17),
     blank(3, 'as sheep that have no _____.', 'shepherd', 17),
-    word(1, 'What were the people told to do?', 'return home in peace', 17, ['return to his home', 'go home']),
+    sa(1, 'What were the people told to do?', 'return home in peace', 17, ['return to his home', 'go home']),
     tf(2, 'The vision showed Israel with a master leading them.', false, 17, 'They were like sheep without a shepherd and had no master.'),
 
     mc(1, 'How did Ahab interpret Micaiah’s vision?', ['As another evil prophecy about him', 'As a promise of victory', 'As counsel to free Micaiah', 'As praise for his leadership'], 18),
@@ -97,7 +97,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did Micaiah see the LORD?', ['Sitting on his throne', 'Standing at Ramoth-gilead', 'Inside Samaria’s gate', 'In Ahab’s chariot'], 19),
     blank(3, 'and all the host of _____ standing beside him', 'heaven', 19),
-    word(1, 'On which sides did heaven’s host stand?', 'right and left', 19, ['his right hand and his left']),
+    sa(1, 'On which sides did heaven’s host stand?', 'right and left', 19, ['his right hand and his left']),
     tf(2, 'Micaiah’s vision showed the LORD surrounded by the host of heaven.', true, 19),
 
     mc(1, 'What outcome did the LORD ask about bringing upon Ahab?', ['That he go up and fall at Ramoth-gilead', 'That he return home in peace', 'That he release Micaiah', 'That he conquer Syria'], 20),
@@ -107,19 +107,19 @@ const bank: ChapterBank = {
 
     mc(1, 'Who volunteered to entice Ahab?', ['A spirit', 'Micaiah', 'Zedekiah', 'Jehoshaphat'], 21),
     blank(3, 'Then a spirit came _____ and stood before the LORD', 'forward', 21),
-    word(1, 'What did the spirit say?', 'I will entice him', 21, ['I will entice Ahab']),
+    sa(1, 'What did the spirit say?', 'I will entice him', 21, ['I will entice Ahab']),
     tf(2, 'The spirit refused the task.', false, 21, 'The spirit volunteered to entice Ahab.'),
     mc(3, 'In Micaiah’s vision, who stepped forward before the LORD?', ['A spirit volunteering to entice Ahab', 'A Syrian captain', 'Zedekiah with iron horns', 'Jehoshaphat'], 21),
 
     mc(1, 'How would the spirit entice Ahab?', ['By being a lying spirit in his prophets’ mouths', 'By appearing in a dream', 'By hiding Micaiah', 'By defeating the Syrians'], 22),
     blank(3, 'I will go forth, and will be a _____ spirit in the mouth of all his prophets.', 'lying', 22),
-    word(1, 'In whose mouths would the spirit operate?', 'all Ahab’s prophets', 22, ['all his prophets', 'the prophets']),
+    sa(1, 'In whose mouths would the spirit operate?', 'all Ahab’s prophets', 22, ['all his prophets', 'the prophets']),
     tf(2, 'The LORD said the spirit’s plan would fail.', false, 22, 'He said the spirit would succeed.'),
     mc(3, 'What kind of spirit volunteered to entice Ahab?', ['A lying spirit in all his prophets’ mouths', 'A spirit of courage in Ahab', 'A silent spirit in Micaiah', 'A spirit of peace in Syria'], 22),
 
     mc(2, 'What did Micaiah say the LORD had placed in the prophets’ mouths?', ['A lying spirit', 'Words of peace', 'A song of victory', 'Silence'], 23),
     blank(3, 'the LORD has spoken _____ concerning you.', 'evil', 23),
-    word(1, 'How many of Ahab’s prophets were affected?', 'all of them', 23, ['all these prophets']),
+    sa(1, 'How many of Ahab’s prophets were affected?', 'all of them', 23, ['all these prophets']),
     tf(2, 'Micaiah said the favorable prophecies came from truthful spirits.', false, 23, 'He identified a lying spirit behind them.'),
 
     mc(1, 'What did Zedekiah do to Micaiah?', ['Struck him on the cheek', 'Imprisoned him', 'Made him iron horns', 'Released him'], 24),
@@ -129,22 +129,22 @@ const bank: ChapterBank = {
 
     mc(1, 'When would Zedekiah recognize Micaiah’s truth?', ['When he hid in an inner chamber', 'When Ahab returned victorious', 'When the prophets were released', 'When Syria surrendered'], 25),
     blank(3, 'when you go into an inner chamber to _____ yourself.', 'hide', 25),
-    word(1, 'Where would Zedekiah go?', 'an inner chamber', 25),
+    sa(1, 'Where would Zedekiah go?', 'an inner chamber', 25),
     tf(2, 'Micaiah said Zedekiah would publicly celebrate.', false, 25, 'He would hide in an inner chamber.'),
 
     mc(1, 'To whom was Micaiah to be taken?', ['Amon the governor and Joash the king’s son', 'Zedekiah and Jehoshaphat', 'The king of Syria', 'The thirty-two captains'], 26),
     blank(2, 'take him back to Amon the _____ of the city', 'governor', 26),
-    word(2, 'What was Joash’s relationship to the king?', 'his son', 26, ['the king’s son']),
+    sa(2, 'What was Joash’s relationship to the king?', 'his son', 26, ['the king’s son']),
     tf(3, 'Ahab ordered Micaiah taken to Jehoshaphat.', false, 26, 'He ordered him taken to Amon and Joash.'),
 
     mc(2, 'What treatment did Ahab order for Micaiah?', ['Prison with scant bread and water', 'Freedom with a reward', 'Exile to Syria', 'Service in the army'], 27),
     blank(3, 'feed him with _____ fare of bread and water', 'scant', 27),
-    word(1, 'Until when was Micaiah to remain confined?', 'until Ahab came in peace', 27, ['until I come in peace']),
+    sa(1, 'Until when was Micaiah to remain confined?', 'until Ahab came in peace', 27, ['until I come in peace']),
     tf(2, 'Micaiah was to receive plentiful food in prison.', false, 27, 'He was to receive scant bread and water.'),
 
     mc(1, 'What would prove the LORD had not spoken by Micaiah?', ['Ahab returning in peace', 'Israel losing Ramoth-gilead', 'Micaiah remaining in prison', 'Jehoshaphat returning home'], 28),
     blank(2, 'Hear, all you _____!', 'peoples', 28),
-    word(2, 'What condition did Micaiah state?', 'If you return in peace', 28, ['Ahab returning in peace']),
+    sa(2, 'What condition did Micaiah state?', 'If you return in peace', 28, ['Ahab returning in peace']),
     tf(3, 'Micaiah withdrew his prophecy before the peoples.', false, 28, 'He publicly tied its truth to Ahab’s failure to return in peace.'),
 
     mc(1, 'Who went up to Ramoth-gilead?', ['The kings of Israel and Judah', 'Micaiah and Zedekiah', 'Ahab alone', 'The Syrian captains'], 29),
@@ -164,44 +164,44 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did the captains mistake for Israel’s king?', ['Jehoshaphat', 'Micaiah', 'Zedekiah', 'Amon'], 32),
     blank(2, 'So they turned to fight against him; and Jehosh’aphat cried _____.', 'out', 32),
-    word(2, 'What did Jehoshaphat do when surrounded?', 'cried out', 32),
+    sa(2, 'What did Jehoshaphat do when surrounded?', 'cried out', 32),
     tf(3, 'The captains immediately recognized Jehoshaphat as Judah’s king.', false, 32, 'They first thought he was Israel’s king.'),
 
     mc(1, 'Why did the captains stop pursuing Jehoshaphat?', ['They saw he was not Israel’s king', 'He defeated them', 'Ahab ordered them away', 'The battle ended'], 33),
     blank(3, 'they turned _____ from pursuing him.', 'back', 33),
-    word(1, 'Who stopped pursuing Jehoshaphat?', 'the chariot captains', 33, ['captains']),
+    sa(1, 'Who stopped pursuing Jehoshaphat?', 'the chariot captains', 33, ['captains']),
     tf(2, 'The captains continued pursuing him after recognizing him.', false, 33, 'They turned back.'),
 
     mc(1, 'How was Ahab wounded?', ['A man drew a bow at a venture and struck between armor pieces', 'A captain recognized and speared him', 'Jehoshaphat struck him', 'He fell from his chariot'], 34),
     blank(3, 'struck the king of Israel between the scale armor and the _____.', 'breastplate', 34),
-    word(1, 'What weapon wounded Ahab?', 'a bow', 34, ['arrow']),
+    sa(1, 'What weapon wounded Ahab?', 'a bow', 34, ['arrow']),
     tf(2, 'The archer deliberately aimed at the disguised king.', false, 34, 'The man drew his bow at a venture.'),
     mc(3, 'Despite Ahab’s disguise, how was he struck?', ['A chance arrow hit between his scale armor and breastplate', 'A Syrian captain recognized his face', 'His chariot overturned', 'His driver betrayed him'], 34),
 
     mc(1, 'Until when was wounded Ahab propped in his chariot?', ['Until evening', 'Until noon', 'Until the next morning', 'Until sunset the next day'], 35),
     blank(2, 'and the blood of the wound flowed into the _____ of the chariot.', 'bottom', 35),
-    word(2, 'Which direction did Ahab face?', 'toward the Syrians', 35, ['the Syrians']),
+    sa(2, 'Which direction did Ahab face?', 'toward the Syrians', 35, ['the Syrians']),
     tf(3, 'Ahab recovered before evening.', false, 35, 'He died at evening.'),
 
     mc(1, 'What cry went through the army around sunset?', ['Every man to his city and country', 'Victory belongs to Israel', 'Capture the Syrian king', 'Bring Micaiah'], 36),
     blank(3, 'Every man to his _____, and every man to his country!', 'city', 36),
-    word(1, 'When did the cry go out?', 'about sunset', 36, ['sunset']),
+    sa(1, 'When did the cry go out?', 'about sunset', 36, ['sunset']),
     tf(2, 'The army was ordered to remain at Ramoth-gilead.', false, 36, 'The cry told every man to return home.'),
 
     mc(1, 'Where was Ahab buried?', ['Samaria', 'Ramoth-gilead', 'Jezreel', 'Jerusalem'], 37),
     blank(2, 'So the king died, and was brought to _____.', 'Sama’ria', 37, ['Samaria']),
-    word(2, 'What happened to Israel’s king?', 'he died', 37, ['died']),
+    sa(2, 'What happened to Israel’s king?', 'he died', 37, ['died']),
     tf(3, 'Ahab was buried at Ramoth-gilead.', false, 37, 'He was buried in Samaria.'),
 
     mc(1, 'Where did dogs lick up Ahab’s blood?', ['By the pool of Samaria', 'At Ramoth-gilead', 'In Naboth’s vineyard', 'At Jezreel’s gate'], 38),
     blank(3, 'and the dogs licked up his _____', 'blood', 38),
-    word(1, 'What was washed beside the pool?', 'the chariot', 38),
+    sa(1, 'What was washed beside the pool?', 'the chariot', 38),
     tf(2, 'The event fulfilled the LORD’s spoken word.', true, 38),
     mc(3, 'What scene fulfilled the word concerning Ahab’s blood?', ['Dogs licked it by Samaria’s pool when the chariot was washed', 'Birds consumed it at Ramoth-gilead', 'It fell on Naboth’s vineyard', 'It was buried with Ahab'], 38),
 
     mc(1, 'What notable house had Ahab built?', ['An ivory house', 'A cedar temple', 'A house of iron', 'A golden palace'], 39),
     blank(2, 'and all the _____ that he built', 'cities', 39),
-    word(2, 'Where were Ahab’s other acts recorded?', 'the Chronicles of the Kings of Israel', 39, ['Israel’s chronicles']),
+    sa(2, 'Where were Ahab’s other acts recorded?', 'the Chronicles of the Kings of Israel', 39, ['Israel’s chronicles']),
     tf(3, 'The record mentions no building projects by Ahab.', false, 39, 'It mentions his ivory house and cities.'),
 
     mc(1, 'Who succeeded Ahab?', ['Ahaziah his son', 'Jehoshaphat', 'Micaiah', 'Jehoram'], 40),
@@ -221,7 +221,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whose righteous way did Jehoshaphat follow?', ['Asa his father’s', 'Ahab’s', 'Jeroboam’s', 'Micaiah’s'], 43),
     blank(2, 'yet the high places were not taken _____.', 'away', 43),
-    word(2, 'What did the people still do at high places?', 'sacrificed and burned incense', 43),
+    sa(2, 'What did the people still do at high places?', 'sacrificed and burned incense', 43),
     tf(3, 'Jehoshaphat removed every high place.', false, 43, 'The high places remained.'),
 
     mc(1, 'What relationship did Jehoshaphat establish with Israel’s king?', ['Peace', 'Continual war', 'A tribute arrangement', 'No contact'], 44),
@@ -241,7 +241,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who ruled Edom in the absence of a king?', ['A deputy', 'Jehoshaphat', 'Ahaziah', 'A Syrian captain'], 47),
     blank(2, 'There was no _____ in Edom', 'king', 47),
-    word(2, 'What office governed Edom?', 'a deputy', 47, ['deputy']),
+    sa(2, 'What office governed Edom?', 'a deputy', 47, ['deputy']),
     tf(3, 'Edom had its own king at this time.', false, 47, 'A deputy ruled because there was no king.'),
 
     mc(1, 'Why did Jehoshaphat’s ships fail to reach Ophir?', ['They were wrecked at Ezion-geber', 'Syria captured them', 'They lacked sailors', 'Ahaziah refused to help'], 48),
@@ -256,7 +256,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Jehoshaphat?', ['Jehoram his son', 'Ahaziah', 'Ahab', 'Asa'], 50),
     blank(3, 'and was buried with his fathers in the city of _____ his father', 'David', 50),
-    word(1, 'Where was Jehoshaphat buried?', 'the city of David', 50, ['city of David']),
+    sa(1, 'Where was Jehoshaphat buried?', 'the city of David', 50, ['city of David']),
     tf(2, 'Jehoshaphat’s son Jehoram reigned after him.', true, 50),
 
     mc(2, 'When did Ahaziah begin to reign over Israel?', ['Jehoshaphat’s seventeenth year', 'Ahab’s fourth year', 'Jehoshaphat’s twenty-fifth year', 'The third year of peace'], 51),
@@ -271,7 +271,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Ahaziah serve and worship?', ['Baal', 'The LORD', 'The king of Syria', 'Micaiah'], 53),
     blank(3, 'and provoked the LORD, the God of Israel, to _____.', 'anger', 53),
-    word(1, 'Whose pattern did Ahaziah follow in provoking the LORD?', 'his father’s', 53, ['his father', 'Ahab’s']),
+    sa(1, 'Whose pattern did Ahaziah follow in provoking the LORD?', 'his father’s', 53, ['his father', 'Ahab’s']),
     tf(2, 'Ahaziah rejected Baal worship.', false, 53, 'He served and worshiped Baal.'),
   ],
 }

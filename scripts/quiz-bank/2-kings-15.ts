@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 15, tag: 'quiz-v2-2kings-15', rows: [
@@ -19,12 +19,12 @@ const bank: ChapterBank = {
 
     mc(1, 'What places remained despite Azariah’s right conduct?', ['The high places', 'Baal’s temple', 'Golden calves in Jerusalem', 'Asherah groves only'], 4),
     blank(2, 'the people still sacrificed and burned _____ on the high places.', 'incense', 4),
-    word(1, 'What did the people continue to do at the high places?', 'sacrifice and burn incense', 4),
+    sa(1, 'What did the people continue to do at the high places?', 'sacrifice and burn incense', 4),
     tf(3, 'Azariah removed all the high places.', false, 4, 'The high places were not taken away.'),
 
     mc(1, 'What affliction did the LORD send upon Azariah?', ['Leprosy', 'Blindness', 'Paralysis', 'Fever'], 5),
     blank(2, 'he was a leper to the day of his _____.', 'death', 5),
-    word(1, 'Where did the afflicted king live?', 'in a separate house', 5, ['a separate house']),
+    sa(1, 'Where did the afflicted king live?', 'in a separate house', 5, ['a separate house']),
     tf(2, 'Jotham governed the people while Azariah lived separately.', true, 5),
     mc(3, 'How did leprosy change Azariah’s rule?', ['He lived separately while Jotham managed the household and governed', 'He abdicated to Assyria', 'He moved to Samaria', 'The priests ruled without Jotham'], 5),
 
@@ -35,7 +35,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Azariah?', ['His son Jotham', 'Zechariah', 'Menahem', 'Ahaz'], 7),
     blank(2, 'they buried him with his fathers in the city of _____.', 'David', 7),
-    word(1, 'What phrase reports Azariah’s death?', 'slept with his fathers', 7),
+    sa(1, 'What phrase reports Azariah’s death?', 'slept with his fathers', 7),
     tf(3, 'Azariah was buried in the city of David.', true, 7),
 
     mc(1, 'How long did Zechariah reign over Israel?', ['Six months', 'One month', 'Two years', 'Ten years'], 8),
@@ -50,7 +50,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who conspired against and killed Zechariah?', ['Shallum son of Jabesh', 'Menahem son of Gadi', 'Pekah', 'Hoshea'], 10),
     blank(2, 'and struck him down at _____', 'Ibleam', 10),
-    word(1, 'What did Shallum do after killing Zechariah?', 'reigned in his stead', 10, ['became king']),
+    sa(1, 'What did Shallum do after killing Zechariah?', 'reigned in his stead', 10, ['became king']),
     tf(3, 'Zechariah died in a conspiracy.', true, 10),
 
     mc(1, 'Where were Zechariah’s remaining deeds recorded?', ['Chronicles of the Kings of Israel', 'Chronicles of Judah', 'Book of Moses', 'Records of Syria'], 11),
@@ -96,12 +96,12 @@ const bank: ChapterBank = {
 
     mc(1, 'Which Assyrian king came against the land?', ['Pul', 'Tiglath-pileser', 'Sennacherib', 'Shalmaneser'], 19),
     blank(2, 'Men’ahem gave Pul a thousand talents of _____.', 'silver', 19),
-    word(1, 'Why did Menahem pay Pul?', 'to confirm his hold on royal power', 19, ['to secure his royal power']),
+    sa(1, 'Why did Menahem pay Pul?', 'to confirm his hold on royal power', 19, ['to secure his royal power']),
     tf(3, 'Menahem used Assyrian support to strengthen his throne.', true, 19),
 
     mc(1, 'From whom did Menahem collect Pul’s payment?', ['Israel’s wealthy men', 'Judah’s priests', 'Tappuah’s soldiers', 'Foreign merchants'], 20),
     blank(2, 'fifty _____ of silver from every man', 'shekels', 20),
-    word(1, 'How much was assessed from each wealthy man?', 'fifty shekels of silver', 20, ['50 shekels']),
+    sa(1, 'How much was assessed from each wealthy man?', 'fifty shekels of silver', 20, ['50 shekels']),
     tf(3, 'After receiving the payment, Assyria’s king left the land.', true, 20),
 
     mc(1, 'Where were Menahem’s remaining deeds recorded?', ['Chronicles of the Kings of Israel', 'Chronicles of Judah', 'Book of Pul', 'Records of Tappuah'], 21),
@@ -111,7 +111,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Menahem?', ['His son Pekahiah', 'Pekah', 'Hoshea', 'Shallum'], 22),
     blank(2, 'and _____ his son reigned in his stead.', 'Pekahi’ah', 22, ['Pekahiah']),
-    word(1, 'What phrase reports Menahem’s death?', 'slept with his fathers', 22),
+    sa(1, 'What phrase reports Menahem’s death?', 'slept with his fathers', 22),
     tf(3, 'Menahem’s son inherited the throne.', true, 22),
 
     mc(1, 'How long did Pekahiah reign?', ['Two years', 'Twenty years', 'Ten years', 'Six months'], 23),
@@ -174,7 +174,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Jotham build at the LORD’s house?', ['The upper gate', 'A new altar', 'The western wall', 'A royal chamber'], 35),
     blank(2, 'He built the upper _____ of the house of the LORD.', 'gate', 35),
-    word(1, 'What worship sites still remained?', 'the high places', 35, ['high places']),
+    sa(1, 'What worship sites still remained?', 'the high places', 35, ['high places']),
     tf(3, 'People still sacrificed and burned incense on the high places.', true, 35),
 
     mc(1, 'Where were Jotham’s other acts recorded?', ['Chronicles of the Kings of Judah', 'Chronicles of Israel', 'Book of Zadok', 'Records of Syria'], 36),
@@ -189,7 +189,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Jotham?', ['His son Ahaz', 'Uzziah', 'Pekah', 'Hoshea'], 38),
     blank(2, 'Jotham slept with his fathers, and was buried with his fathers in the city of David his father; and _____ his son reigned in his stead.', 'Ahaz', 38),
-    word(1, 'Where was Jotham buried?', 'the city of David', 38, ['city of David']),
+    sa(1, 'Where was Jotham buried?', 'the city of David', 38, ['city of David']),
     tf(3, 'Jotham was buried with his fathers.', true, 38),
   ],
 }

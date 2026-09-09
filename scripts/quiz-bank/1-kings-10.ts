@@ -1,6 +1,6 @@
 // 1 Kings 10 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -66,7 +66,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v10–13 · Gifts exchanged, almug wood
     mc(1, 'How much gold did the queen of Sheba give King Solomon?', ['A hundred and twenty talents', 'Six hundred and sixty-six talents', 'Four hundred and twenty talents', 'Six hundred shekels'], 10),
-    word(2, 'How many talents of gold did the queen of Sheba give the king?', 'a hundred and twenty', 10, ['120', 'hundred and twenty', 'one hundred twenty', 'one hundred and twenty']),
+    sa(2, 'How many talents of gold did the queen of Sheba give the king?', 'a hundred and twenty', 10, ['120', 'hundred and twenty', 'one hundred twenty', 'one hundred and twenty']),
     blank(1, 'Then she gave the king a hundred and twenty _____ of gold, and a very great quantity of spices, and precious stones;', 'talents', 10),
     tf(1, 'Never again came such an abundance of spices as those the queen of Sheba gave King Solomon.', true, 10),
     blank(3, 'never again came such an abundance of _____ as these which the queen of Sheba gave to King Solomon.', 'spices', 10),
@@ -92,7 +92,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v14–17 · Gold revenue and shields
     mc(1, 'How much gold came to Solomon in one year?', ['Six hundred and sixty-six talents', 'A hundred and twenty talents', 'Six hundred shekels', 'Three minas'], 14),
-    word(1, 'How many talents of gold came to Solomon in one year?', 'six hundred and sixty-six', 14, ['666', 'six hundred sixty-six', 'six hundred sixty six', 'six hundred and sixty six']),
+    sa(1, 'How many talents of gold came to Solomon in one year?', 'six hundred and sixty-six', 14, ['666', 'six hundred sixty-six', 'six hundred sixty six', 'six hundred and sixty six']),
     blank(2, 'Now the weight of gold that came to Solomon in one year was six hundred and _____ talents of gold,', 'sixty-six', 14, ['sixty six', '66']),
     tf(1, 'Six hundred and sixty-six talents of gold came to Solomon in one year.', true, 14),
     tf(3, 'The weight of gold that came to Solomon in one year was six hundred and sixty-six shekels.', false, 14, 'It was six hundred and sixty-six talents of gold.'),
@@ -104,7 +104,7 @@ const bank: ChapterBank = {
 
     mc(2, 'How many large shields of beaten gold did Solomon make?', ['Two hundred', 'Three hundred', 'Six hundred', 'Twelve'], 16),
     blank(2, 'King Solomon made two hundred large shields of _____ gold; six hundred shekels of gold went into each shield.', 'beaten', 16),
-    word(3, 'How many shekels of gold went into each of the two hundred large shields?', 'six hundred', 16, ['600']),
+    sa(3, 'How many shekels of gold went into each of the two hundred large shields?', 'six hundred', 16, ['600']),
     tf(3, 'Six hundred shekels of gold went into each large shield.', true, 16),
     blank(1, 'King Solomon made _____ large shields of beaten gold; six hundred shekels of gold went into each shield.', 'two hundred', 16, ['200']),
 
@@ -113,7 +113,7 @@ const bank: ChapterBank = {
     blank(2, 'And he made three hundred shields of beaten gold; three _____ of gold went into each shield; and the king put them in the House of the Forest of Lebanon.', 'minas', 17),
     tf(3, 'Three minas of gold went into each of the three hundred shields.', true, 17),
     tf(2, 'Solomon put the three hundred shields of beaten gold in the house of the LORD.', false, 17, 'He put them in the House of the Forest of Lebanon.'),
-    word(3, 'How many shields did Solomon make with three minas of gold in each?', 'three hundred', 17, ['300']),
+    sa(3, 'How many shields did Solomon make with three minas of gold in each?', 'three hundred', 17, ['300']),
 
     // ══════════════════════════════════ v18–21 · The ivory throne, gold vessels
     mc(1, 'What was Solomon’s great throne made of?', ['Ivory overlaid with the finest gold', 'Cedar overlaid with silver', 'Almug wood', 'Pure gold'], 18),
@@ -168,7 +168,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v26–29 · Chariots, horses, silver like stone
     mc(1, 'How many chariots did Solomon have?', ['Fourteen hundred', 'Twelve thousand', 'Six hundred', 'Two hundred'], 26),
-    word(2, 'How many horsemen did Solomon have?', 'twelve thousand', 26, ['12000', '12,000']),
+    sa(2, 'How many horsemen did Solomon have?', 'twelve thousand', 26, ['12000', '12,000']),
     blank(2, 'And Solomon gathered together chariots and horsemen; he had _____ chariots and twelve thousand horsemen,', 'fourteen hundred', 26, ['1400', '1,400', 'one thousand four hundred']),
     tf(3, 'Solomon had twelve thousand chariots and fourteen hundred horsemen.', false, 26, 'He had fourteen hundred chariots and twelve thousand horsemen.'),
     mc(3, 'Where did Solomon station his chariots and horsemen?', ['In the chariot cities and with the king in Jerusalem', 'In Egypt and Kue', 'In the House of the Forest of Lebanon', 'Along the coast with the fleet of Tarshish'], 26),
@@ -189,7 +189,7 @@ const bank: ChapterBank = {
     tf(2, 'Solomon imported his horses from Arabia.', false, 28, 'His import of horses was from Egypt and Kue.'),
 
     mc(2, 'What was the price of a chariot imported from Egypt?', ['Six hundred shekels of silver', 'A hundred and fifty shekels of silver', 'Three minas of gold', 'A hundred and twenty talents'], 29),
-    word(2, 'A horse could be imported from Egypt for how many shekels of silver?', 'a hundred and fifty', 29, ['150', 'hundred and fifty', 'one hundred fifty', 'one hundred and fifty']),
+    sa(2, 'A horse could be imported from Egypt for how many shekels of silver?', 'a hundred and fifty', 29, ['150', 'hundred and fifty', 'one hundred fifty', 'one hundred and fifty']),
     blank(3, 'A chariot could be imported from Egypt for six hundred shekels of _____, and a horse for a hundred and fifty;', 'silver', 29),
     mc(3, 'To whom were chariots and horses exported through the king’s traders?', ['All the kings of the Hittites and the kings of Syria', 'The kings of Arabia', 'The queen of Sheba', 'The governors of the land'], 29),
     blank(3, 'and so through the king’s traders they were exported to all the kings of the _____ and the kings of Syria.', 'Hittites', 29),

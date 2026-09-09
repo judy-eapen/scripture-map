@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings', chapter: 15, tag: 'quiz-v2-1kings-15', rows: [
@@ -14,7 +14,7 @@ const bank: ChapterBank = {
 
     mc(2, 'How did Abijam’s heart compare with David’s?', ['It was not wholly true to the LORD', 'It was more faithful than David’s', 'It was wholly true to the LORD', 'The text makes no comparison'], 3),
     blank(3, 'and his heart was not wholly _____ to the LORD his God', 'true', 3),
-    word(1, 'In whose sins did Abijam walk?', 'his father’s', 3, ['his father', 'the sins of his father']),
+    sa(1, 'In whose sins did Abijam walk?', 'his father’s', 3, ['his father', 'the sins of his father']),
     tf(2, 'Abijam’s heart was wholly true to the LORD like David’s.', false, 3, 'His heart was not wholly true to the LORD.'),
 
     mc(1, 'For whose sake did the LORD give Abijam a lamp in Jerusalem?', ['David’s', 'Solomon’s', 'Jeroboam’s', 'Rehoboam’s'], 4),
@@ -25,13 +25,13 @@ const bank: ChapterBank = {
 
     mc(2, 'What exception is named in the account of David’s obedience?', ['The matter of Uriah the Hittite', 'The census of Israel', 'His flight from Saul', 'The building of the temple'], 5),
     blank(3, 'except in the matter of Uri’ah the _____.', 'Hittite', 5),
-    word(1, 'What did David do in the LORD’s eyes?', 'what was right', 5, ['right']),
+    sa(1, 'What did David do in the LORD’s eyes?', 'what was right', 5, ['right']),
     tf(2, 'David never turned aside from the LORD’s commands, except in the matter of Uriah.', true, 5),
     mc(3, 'Which statement explains why the LORD preserved a lamp for David’s house?', ['David did right and obeyed, except in the matter of Uriah', 'David never faced any failure', 'Abijam surpassed David’s obedience', 'Jeroboam honored David’s house'], 5),
 
     mc(1, 'What existed between Rehoboam and Jeroboam throughout his life?', ['War', 'Peace', 'A league', 'Shared rule'], 6),
     blank(2, 'Now there was _____ between Rehobo’am and Jerobo’am all the days of his life.', 'war', 6),
-    word(2, 'Between which two kings was there war?', 'Rehoboam and Jeroboam', 6),
+    sa(2, 'Between which two kings was there war?', 'Rehoboam and Jeroboam', 6),
     tf(3, 'Rehoboam and Jeroboam remained at peace.', false, 6, 'There was war between them.'),
 
     mc(1, 'Where were Abijam’s other acts recorded?', ['The Chronicles of the Kings of Judah', 'The Chronicles of the Kings of Israel', 'The book of Uriah', 'The records of Damascus'], 7),
@@ -41,7 +41,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Abijam?', ['Asa his son', 'Nadab his brother', 'Baasha', 'Jehoshaphat'], 8),
     blank(2, 'and they buried him in the city of _____.', 'David', 8),
-    word(2, 'What happened to Abijam before Asa reigned?', 'he slept with his fathers', 8, ['slept with his fathers', 'died']),
+    sa(2, 'What happened to Abijam before Asa reigned?', 'he slept with his fathers', 8, ['slept with his fathers', 'died']),
     tf(3, 'Abijam was buried in Tirzah.', false, 8, 'He was buried in the city of David.'),
 
     mc(1, 'In which year of Jeroboam did Asa begin to reign?', ['The twentieth year', 'The eighteenth year', 'The third year', 'The forty-first year'], 9),
@@ -72,17 +72,17 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Asa fail to take away?', ['The high places', 'The idols', 'The cult prostitutes', 'Maacah’s image'], 14),
     blank(2, 'Nevertheless the heart of Asa was wholly _____ to the LORD all his days.', 'true', 14),
-    word(2, 'For how long was Asa’s heart wholly true?', 'all his days', 14),
+    sa(2, 'For how long was Asa’s heart wholly true?', 'all his days', 14),
     tf(3, 'The high places were taken away during Asa’s reign.', false, 14, 'The high places were not taken away.'),
 
     mc(2, 'What did Asa bring into the LORD’s house?', ['His father’s and his own votive gifts', 'Maacah’s image', 'The stones of Ramah', 'Baasha’s weapons'], 15),
     blank(3, 'silver, and gold, and _____.', 'vessels', 15),
-    word(1, 'What kind of gifts did Asa bring?', 'votive gifts', 15),
+    sa(1, 'What kind of gifts did Asa bring?', 'votive gifts', 15),
     tf(2, 'Asa brought both his father’s gifts and his own into the LORD’s house.', true, 15),
 
     mc(1, 'Who was king of Israel during Asa’s continuing war?', ['Baasha', 'Nadab', 'Jeroboam', 'Ben-hadad'], 16),
     blank(2, 'And there was war between Asa and _____ king of Israel all their days.', 'Ba’asha', 16, ['Baasha']),
-    word(2, 'How long did the war between Asa and Baasha continue?', 'all their days', 16),
+    sa(2, 'How long did the war between Asa and Baasha continue?', 'all their days', 16),
     tf(3, 'Asa and Baasha maintained a lasting peace.', false, 16, 'There was war between them all their days.'),
 
     mc(2, 'Why did Baasha build Ramah?', ['To prevent anyone going out from or coming in to Asa', 'To defend Judah from Egypt', 'To house his royal treasures', 'To prepare an attack on Damascus'], 17),
@@ -98,7 +98,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Asa ask Ben-hadad to break?', ['His league with Baasha', 'The walls of Ramah', 'His alliance with Egypt', 'The gates of Damascus'], 19),
     blank(2, 'behold, I am sending to you a present of silver and _____', 'gold', 19),
-    word(2, 'What did Asa want Baasha to do?', 'withdraw from him', 19, ['withdraw', 'withdraw from me']),
+    sa(2, 'What did Asa want Baasha to do?', 'withdraw from him', 19, ['withdraw', 'withdraw from me']),
     tf(3, 'Asa asked Ben-hadad to strengthen his league with Baasha.', false, 19, 'He asked Ben-hadad to break that league.'),
 
     mc(2, 'Which city was among those Ben-hadad conquered?', ['Dan', 'Jerusalem', 'Ramah', 'Tirzah'], 20),
@@ -113,18 +113,18 @@ const bank: ChapterBank = {
 
     mc(2, 'What did Asa have all Judah carry away from Ramah?', ['Its stones and timber', 'Its gold shields', 'Its idols and pillars', 'Its food and livestock'], 22),
     blank(3, 'Then King Asa made a _____ to all Judah, none was exempt', 'proclamation', 22),
-    word(1, 'Which two cities did Asa build with Ramah’s materials?', 'Geba and Mizpah', 22),
+    sa(1, 'Which two cities did Asa build with Ramah’s materials?', 'Geba and Mizpah', 22),
     tf(2, 'Some people in Judah were exempt from Asa’s proclamation.', false, 22, 'None was exempt.'),
 
     mc(1, 'What illness troubled Asa in his old age?', ['A disease in his feet', 'Blindness', 'Leprosy', 'A disease in his hands'], 23),
     blank(2, 'But in his old age he was diseased in his _____.', 'feet', 23),
-    word(2, 'When did Asa’s disease occur?', 'in his old age', 23, ['old age']),
+    sa(2, 'When did Asa’s disease occur?', 'in his old age', 23, ['old age']),
     tf(3, 'The account says Asa was diseased in his hands.', false, 23, 'He was diseased in his feet.'),
     mc(3, 'Which detail closes the summary of Asa’s recorded acts?', ['In old age he was diseased in his feet', 'He became blind', 'He lost Jerusalem', 'He rebuilt Ramah'], 23),
 
     mc(1, 'Who succeeded Asa?', ['Jehoshaphat his son', 'Baasha', 'Nadab', 'Abijam'], 24),
     blank(3, 'and was buried with his fathers in the city of _____ his father', 'David', 24),
-    word(1, 'Where was Asa buried?', 'the city of David', 24, ['city of David']),
+    sa(1, 'Where was Asa buried?', 'the city of David', 24, ['city of David']),
     tf(2, 'Jehoshaphat reigned after Asa.', true, 24),
 
     mc(2, 'When did Nadab begin to reign over Israel?', ['Asa’s second year', 'Asa’s third year', 'Jeroboam’s eighteenth year', 'Rehoboam’s fifth year'], 25),
@@ -155,7 +155,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What had Jeroboam caused Israel to do?', ['Sin', 'Build Ramah', 'Fight Syria', 'Serve Asa'], 30),
     blank(2, 'and because of the _____ to which he provoked the LORD', 'anger', 30),
-    word(2, 'Whom did Jeroboam provoke?', 'the LORD, the God of Israel', 30, ['the LORD', 'LORD']),
+    sa(2, 'Whom did Jeroboam provoke?', 'the LORD, the God of Israel', 30, ['the LORD', 'LORD']),
     tf(3, 'The destruction of Jeroboam’s house was unrelated to his sins.', false, 30, 'It came because of his sins and the anger he provoked.'),
 
     mc(1, 'Where were Nadab’s remaining acts recorded?', ['The Chronicles of the Kings of Israel', 'The Chronicles of the Kings of Judah', 'The records of Gibbethon', 'The book of Baasha'], 31),
@@ -165,12 +165,12 @@ const bank: ChapterBank = {
 
     mc(1, 'What continued between Asa and Baasha?', ['War', 'Peace', 'Trade', 'A family alliance'], 32),
     blank(2, 'And there was _____ between Asa and Ba’asha king of Israel all their days.', 'war', 32),
-    word(2, 'How long did their conflict continue?', 'all their days', 32),
+    sa(2, 'How long did their conflict continue?', 'all their days', 32),
     tf(3, 'Asa and Baasha were at peace throughout their reigns.', false, 32, 'There was war between them all their days.'),
 
     mc(2, 'How long did Baasha reign over Israel?', ['Twenty-four years', 'Forty-one years', 'Three years', 'Two years'], 33),
     blank(3, 'Ba’asha the son of Ahi’jah began to reign over all Israel at _____.', 'Tirzah', 33),
-    word(1, 'In which year of Asa did Baasha begin to reign?', 'the third year', 33, ['third', '3rd']),
+    sa(1, 'In which year of Asa did Baasha begin to reign?', 'the third year', 33, ['third', '3rd']),
     tf(2, 'Baasha reigned at Tirzah for twenty-four years.', true, 33),
 
     mc(1, 'In whose way did Baasha walk?', ['Jeroboam’s', 'David’s', 'Asa’s', 'Nadab’s'], 34),

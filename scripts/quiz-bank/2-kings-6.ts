@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 6, tag: 'quiz-v2-2kings-6', rows: [
@@ -24,18 +24,18 @@ const bank: ChapterBank = {
 
     mc(1, 'What fell into the water while a man cut a log?', ['His axe head', 'Elisha’s staff', 'A silver talent', 'A wooden vessel'], 5),
     blank(2, 'Alas, my master! It was _____.', 'borrowed', 5),
-    word(1, 'Why was the man especially distressed?', 'the axe was borrowed', 5, ['it was borrowed', 'the axe head was borrowed']),
+    sa(1, 'Why was the man especially distressed?', 'the axe was borrowed', 5, ['it was borrowed', 'the axe head was borrowed']),
     tf(3, 'The man had purchased the lost axe for himself.', false, 5, 'He cried out because it was borrowed.'),
 
     mc(1, 'How did Elisha make the iron float?', ['He threw a cut stick where it fell', 'He struck the water with his mantle', 'He poured salt into the river', 'He commanded the man to dive'], 6),
     blank(3, 'and made the iron _____.', 'float', 6),
-    word(2, 'What did Elisha first ask the man?', 'Where did it fall?', 6, ['where the axe head fell', 'the place it fell']),
+    sa(2, 'What did Elisha first ask the man?', 'Where did it fall?', 6, ['where the axe head fell', 'the place it fell']),
     tf(1, 'The man showed Elisha the place where the axe head had fallen.', true, 6),
     mc(3, 'What complete sequence recovered the borrowed axe head?', ['The man showed the place, Elisha threw in a cut stick, and the iron floated', 'Elisha parted the Jordan and the man walked to it', 'The prophets drained the river and found it', 'Elisha replaced it with another iron head'], 6),
 
     mc(1, 'What did Elisha tell the man to do with the floating iron?', ['Take it up', 'Leave it there', 'Give it to another prophet', 'Throw it back'], 7),
     blank(2, 'So he reached out his hand and _____ it.', 'took', 7),
-    word(1, 'How did the man retrieve the iron?', 'with his hand', 7, ['he reached out his hand']),
+    sa(1, 'How did the man retrieve the iron?', 'with his hand', 7, ['he reached out his hand']),
     tf(3, 'Elisha personally lifted the axe head from the water.', false, 7, 'The man reached out and took it.'),
 
     mc(1, 'With whom did Syria’s king plan his military camp?', ['His servants', 'Elisha', 'Israel’s king', 'The elders of Samaria'], 8),
@@ -45,17 +45,17 @@ const bank: ChapterBank = {
 
     mc(1, 'What warning did Elisha send Israel’s king?', ['Do not pass a place where Syrians were going down', 'Abandon Samaria', 'Attack Dothan immediately', 'Cross the Jordan at night'], 9),
     blank(2, 'Beware that you do not _____ this place', 'pass', 9),
-    word(1, 'Who were going down to the dangerous place?', 'the Syrians', 9, ['Syrians']),
+    sa(1, 'Who were going down to the dangerous place?', 'the Syrians', 9, ['Syrians']),
     tf(3, 'The man of God warned Israel’s king of the Syrian position.', true, 9),
 
     mc(1, 'How did Israel’s king use Elisha’s warnings?', ['He checked the named places and saved himself repeatedly', 'He ignored every warning', 'He sent the information to Syria', 'He left the kingdom'], 10),
     blank(3, 'so that he saved himself there more than once or _____.', 'twice', 10),
-    word(2, 'Who identified the dangerous locations?', 'the man of God', 10, ['Elisha']),
+    sa(2, 'Who identified the dangerous locations?', 'the man of God', 10, ['Elisha']),
     tf(1, 'Elisha’s warnings protected the king on multiple occasions.', true, 10),
 
     mc(1, 'What did Syria’s king suspect?', ['One of his own people supported Israel’s king', 'Elisha led Israel’s army', 'Dothan had betrayed Syria', 'His servants had lost their weapons'], 11),
     blank(2, 'Will you not show me who of us is _____ the king of Israel?', 'for', 11),
-    word(1, 'How did the Syrian king feel about the repeated failures?', 'greatly troubled', 11, ['troubled']),
+    sa(1, 'How did the Syrian king feel about the repeated failures?', 'greatly troubled', 11, ['troubled']),
     tf(3, 'Syria’s king called his servants to identify a possible traitor.', true, 11),
 
     mc(1, 'How did a servant explain Israel’s advance knowledge?', ['Elisha told Israel’s king even the words spoken in Syria’s bedchamber', 'A Syrian captain sent letters', 'Israel had spies in every camp', 'The king spoke publicly'], 12),
@@ -71,17 +71,17 @@ const bank: ChapterBank = {
 
     mc(1, 'What force did Syria send to Dothan?', ['Horses, chariots, and a great army', 'A single messenger', 'Fifty unarmed men', 'Two servants with gifts'], 14),
     blank(3, 'and they came by _____, and surrounded the city.', 'night', 14),
-    word(2, 'What did the Syrian force do to Dothan?', 'surrounded it', 14, ['surrounded the city']),
+    sa(2, 'What did the Syrian force do to Dothan?', 'surrounded it', 14, ['surrounded the city']),
     tf(1, 'The Syrian army arrived at Dothan during the night.', true, 14),
 
     mc(1, 'What did Elisha’s servant see in the morning?', ['An army with horses and chariots surrounding the city', 'The Syrians fleeing', 'A mountain full of fire', 'The Jordan divided'], 15),
     blank(2, 'Alas, my master! What shall we _____?', 'do', 15),
-    word(1, 'Who was alarmed by the surrounding army?', 'the servant of the man of God', 15, ['Elisha’s servant', 'the servant']),
+    sa(1, 'Who was alarmed by the surrounding army?', 'the servant of the man of God', 15, ['Elisha’s servant', 'the servant']),
     tf(3, 'The servant found Dothan free of enemy soldiers.', false, 15, 'A Syrian army surrounded the city.'),
 
     mc(1, 'Why did Elisha tell his servant not to fear?', ['Those with them were more than those with the Syrians', 'The army had already left', 'Israel’s king was inside Dothan', 'The Syrians had no weapons'], 16),
     blank(3, 'those who are with us are _____ than those who are with them.', 'more', 16),
-    word(2, 'What command did Elisha first give his frightened servant?', 'Fear not', 16, ['do not fear']),
+    sa(2, 'What command did Elisha first give his frightened servant?', 'Fear not', 16, ['do not fear']),
     tf(1, 'Elisha saw that their true support outnumbered the enemy.', true, 16),
 
     mc(1, 'What did Elisha pray for his servant?', ['That the LORD would open his eyes to see', 'That the LORD would blind him', 'That fire would consume Dothan', 'That the Syrians would flee immediately'], 17),
@@ -97,7 +97,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did Elisha lead the blinded Syrians?', ['Samaria', 'Dothan', 'The Jordan', 'Mount Carmel'], 19),
     blank(2, 'follow me, and I will bring you to the man whom you _____.', 'seek', 19),
-    word(1, 'What did Elisha tell the Syrians about their location?', 'this was not the way or the city', 19, ['not the way and not the city']),
+    sa(1, 'What did Elisha tell the Syrians about their location?', 'this was not the way or the city', 19, ['not the way and not the city']),
     tf(3, 'Elisha guided the Syrians into Israel’s capital.', true, 19),
 
     mc(1, 'What did the Syrians discover when their eyes were opened?', ['They were in the midst of Samaria', 'They had returned to Dothan', 'They stood at the Jordan', 'They were surrounded by fire'], 20),
@@ -112,63 +112,63 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha command instead of killing the Syrians?', ['Give them bread and water, then send them to their master', 'Make them slaves', 'Hold them in Samaria', 'Return them without food'], 22),
     blank(3, 'Set bread and _____ before them', 'water', 22),
-    word(2, 'To whom were the captives to return?', 'their master', 22, ['the Syrian king']),
+    sa(2, 'To whom were the captives to return?', 'their master', 22, ['the Syrian king']),
     tf(1, 'Elisha opposed executing the captured army.', true, 22),
 
     mc(1, 'What did Israel’s king prepare for the Syrians?', ['A great feast', 'A prison', 'A ransom', 'A battlefield'], 23),
     blank(2, 'and they went to their _____.', 'master', 23),
-    word(1, 'What stopped after the feast and release?', 'Syrian raids into Israel', 23, ['the Syrian raids', 'raids']),
+    sa(1, 'What stopped after the feast and release?', 'Syrian raids into Israel', 23, ['the Syrian raids', 'raids']),
     tf(3, 'The Syrians ate, drank, and were sent away.', true, 23),
 
     mc(1, 'Who later besieged Samaria?', ['Ben-hadad king of Syria', 'Mesha king of Moab', 'The king of Edom', 'Naaman'], 24),
     blank(3, 'and went up, and _____ Sama’ria.', 'besieged', 24),
-    word(2, 'How much of Syria’s army did Ben-hadad muster?', 'his entire army', 24, ['the entire army', 'all his army']),
+    sa(2, 'How much of Syria’s army did Ben-hadad muster?', 'his entire army', 24, ['the entire army', 'all his army']),
     tf(1, 'Ben-hadad brought Syria’s entire army against Samaria.', true, 24),
 
     mc(1, 'What did an ass’s head cost during the famine?', ['Eighty shekels of silver', 'Five shekels', 'One talent', 'Twenty shekels'], 25),
     blank(2, 'an ass’s head was sold for _____ shekels of silver', 'eighty', 25, ['80']),
-    word(1, 'What caused the great famine in Samaria?', 'the Syrian siege', 25, ['the siege', 'Samaria was besieged']),
+    sa(1, 'What caused the great famine in Samaria?', 'the Syrian siege', 25, ['the siege', 'Samaria was besieged']),
     tf(3, 'A fourth of a kab of dove’s dung sold for five silver shekels.', true, 25),
     mc(3, 'How severe had prices become under the siege?', ['A donkey’s head cost eighty silver shekels and a quarter-kab of dove’s dung cost five', 'A whole donkey cost five shekels', 'Bread remained freely available', 'One hundred lambs cost a single shekel'], 25),
 
     mc(1, 'Where was Israel’s king when a woman appealed to him?', ['Passing on the city wall', 'At Elisha’s house', 'At Dothan’s gate', 'Beside the Jordan'], 26),
     blank(3, 'Help, my lord, O _____!', 'king', 26),
-    word(2, 'Who cried out for help?', 'a woman', 26),
+    sa(2, 'Who cried out for help?', 'a woman', 26),
     tf(1, 'The woman directly appealed to the king.', true, 26),
 
     mc(1, 'Why did the king say he could not help?', ['The LORD was not helping her', 'He had no authority', 'Elisha had forbidden it', 'She lived outside Samaria'], 27),
     blank(2, 'From the threshing floor, or from the wine _____?', 'press', 27),
-    word(1, 'What two sources of provision did the king mention?', 'the threshing floor and the wine press', 27, ['threshing floor or wine press']),
+    sa(1, 'What two sources of provision did the king mention?', 'the threshing floor and the wine press', 27, ['threshing floor or wine press']),
     tf(3, 'The king claimed he could supply help even if the LORD did not.', false, 27, 'He asked how he could help if the LORD would not.'),
 
     mc(1, 'What agreement did the woman report?', ['They would eat her son first and the other woman’s son the next day', 'They would share grain from the king', 'They would leave the city together', 'They would seek Elisha for food'], 28),
     blank(3, 'Give your son, that we may eat him _____.', 'today', 28),
-    word(2, 'Who asked the woman to explain her trouble?', 'the king', 28),
+    sa(2, 'Who asked the woman to explain her trouble?', 'the king', 28),
     tf(1, 'The reported agreement exposed the extremity of the famine.', true, 28),
 
     mc(1, 'What did the second woman do on the next day?', ['Hid her son', 'Gave her son as agreed', 'Appealed to Elisha', 'Left Samaria'], 29),
     blank(2, 'but she has _____ her son.', 'hidden', 29),
-    word(1, 'Whose son had already been eaten?', 'the speaking woman’s son', 29, ['her son', 'the first woman’s son']),
+    sa(1, 'Whose son had already been eaten?', 'the speaking woman’s son', 29, ['her son', 'the first woman’s son']),
     tf(3, 'Both women fulfilled the agreement they had made.', false, 29, 'The second woman hid her son.'),
 
     mc(1, 'What did the king do after hearing the woman?', ['Tore his clothes', 'Ordered a feast', 'Opened the city gates', 'Called for Ben-hadad'], 30),
     blank(3, 'he had _____ beneath upon his body', 'sackcloth', 30),
-    word(2, 'Who saw the sackcloth under the king’s clothes?', 'the people', 30),
+    sa(2, 'Who saw the sackcloth under the king’s clothes?', 'the people', 30),
     tf(1, 'The king was wearing sackcloth beneath his garments.', true, 30),
 
     mc(1, 'Whose death did the king vow to seek?', ['Elisha son of Shaphat’s', 'Ben-hadad’s', 'The woman’s', 'Naaman’s'], 31),
     blank(2, 'if the head of Eli’sha the son of Shaphat remains on his _____ today.', 'shoulders', 31),
-    word(1, 'What oath formula did the king use?', 'May God do so to me, and more also', 31, ['may God do so and more']),
+    sa(1, 'What oath formula did the king use?', 'May God do so to me, and more also', 31, ['may God do so and more']),
     tf(3, 'The king blamed Elisha and threatened to behead him.', true, 31),
 
     mc(1, 'Who was sitting with Elisha in his house?', ['The elders', 'The Syrian captives', 'The sons of the prophets', 'The women from the wall'], 32),
     blank(3, 'shut the door, and hold the door _____ against him.', 'fast', 32),
-    word(2, 'Whom had the king sent ahead?', 'a messenger', 32, ['the messenger', 'a man']),
+    sa(2, 'Whom had the king sent ahead?', 'a messenger', 32, ['the messenger', 'a man']),
     tf(1, 'Elisha knew the messenger’s purpose before he arrived.', true, 32),
 
     mc(1, 'How did the king describe Samaria’s trouble?', ['As coming from the LORD', 'As Elisha’s miracle', 'As Judah’s fault', 'As a natural drought'], 33),
     blank(2, 'Why should I _____ for the LORD any longer?', 'wait', 33),
-    word(1, 'Who came down while Elisha was still speaking?', 'the king', 33),
+    sa(1, 'Who came down while Elisha was still speaking?', 'the king', 33),
     tf(3, 'The king expressed continued patience and trust in waiting for the LORD.', false, 33, 'He asked why he should wait for the LORD any longer.'),
   ],
 }

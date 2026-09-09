@@ -1,10 +1,10 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 17, tag: 'quiz-v2-2kings-17', rows: [
     mc(1, 'Who began ruling Israel in Ahaz’s twelfth year?', ['Hoshea son of Elah', 'Shalmaneser', 'Pekah', 'Hezekiah'], 1),
     blank(1, 'Hoshe’a the son of Elah began to reign in _____ over Israel', 'Sama’ria', 1, ['Samaria']),
-    word(3, 'How long did Hoshea reign?', 'nine years', 1, ['9 years']),
+    sa(3, 'How long did Hoshea reign?', 'nine years', 1, ['9 years']),
     tf(2, 'Hoshea ruled Israel from Samaria.', true, 1),
 
     mc(2, 'How did Hoshea act in the LORD’s sight?', ['He did evil, though not like the earlier kings', 'He did right like David', 'He removed every idol', 'He restored the covenant'], 2),
@@ -19,7 +19,7 @@ const bank: ChapterBank = {
 
     mc(1, 'With which Egyptian king did Hoshea communicate?', ['So', 'Pharaoh Neco', 'Shishak', 'Tirhakah'], 4),
     blank(2, 'the king of Assyria found _____ in Hoshe’a', 'treachery', 4),
-    word(1, 'What annual obligation did Hoshea stop paying?', 'tribute to Assyria', 4, ['tribute']),
+    sa(1, 'What annual obligation did Hoshea stop paying?', 'tribute to Assyria', 4, ['tribute']),
     tf(3, 'Assyria’s king imprisoned Hoshea after discovering his treachery.', true, 4),
 
     mc(1, 'How long was Samaria besieged?', ['Three years', 'Nine years', 'One year', 'Seven years'], 5),
@@ -45,37 +45,37 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Israel build throughout its towns?', ['High places', 'Schools', 'Palaces', 'City walls only'], 9),
     blank(2, 'things that were not _____.', 'right', 9),
-    word(1, 'How broadly were high places built?', 'from watchtower to fortified city', 9),
+    sa(1, 'How broadly were high places built?', 'from watchtower to fortified city', 9),
     tf(3, 'Israel secretly did things against the LORD.', true, 9),
 
     mc(1, 'What did Israel set up on high hills?', ['Pillars and Asherim', 'Altars to the LORD only', 'Watchtowers', 'Bronze oxen'], 10),
     blank(2, 'pillars and _____ on every high hill', 'Ashe’rim', 10, ['Asherim']),
-    word(1, 'Where else were these objects placed?', 'under every green tree', 10),
+    sa(1, 'Where else were these objects placed?', 'under every green tree', 10),
     tf(3, 'Israel’s idolatrous objects were widely distributed.', true, 10),
 
     mc(1, 'What did Israel burn at the high places?', ['Incense', 'Royal records', 'Tribute', 'Weapons'], 11),
     blank(2, 'wicked things, _____ the LORD to anger', 'provoking', 11),
-    word(1, 'Whose behavior did Israel imitate?', 'the nations carried away before them', 11, ['the displaced nations']),
+    sa(1, 'Whose behavior did Israel imitate?', 'the nations carried away before them', 11, ['the displaced nations']),
     tf(3, 'Their high-place worship provoked the LORD.', true, 11),
 
     mc(1, 'What did Israel serve despite the LORD’s prohibition?', ['Idols', 'The prophets', 'The law', 'Judah'], 12),
     blank(2, 'and they _____ idols', 'served', 12),
-    word(1, 'What had the LORD said about this?', 'You shall not do this', 12),
+    sa(1, 'What had the LORD said about this?', 'You shall not do this', 12),
     tf(3, 'Israel served idols the LORD had forbidden.', true, 12),
 
     mc(1, 'Through whom did the LORD warn Israel and Judah?', ['Every prophet and seer', 'Assyrian kings', 'Egyptian messengers', 'Only their priests'], 13),
     blank(2, 'Turn from your evil _____.', 'ways', 13),
-    word(1, 'What were the people commanded to keep?', 'the LORD’s commandments and statutes', 13, ['commandments and statutes']),
+    sa(1, 'What were the people commanded to keep?', 'the LORD’s commandments and statutes', 13, ['commandments and statutes']),
     tf(3, 'The prophetic warnings called the people back to the law.', true, 13),
 
     mc(1, 'How did Israel respond to the warnings?', ['They refused to listen and remained stubborn', 'They repented', 'They returned every idol', 'They moved to Judah'], 14),
     blank(2, 'but were _____, as their fathers had been', 'stubborn', 14),
-    word(1, 'What did their fathers fail to do?', 'believe in the LORD', 14),
+    sa(1, 'What did their fathers fail to do?', 'believe in the LORD', 14),
     tf(3, 'The people listened obediently to the prophets.', false, 14, 'They would not listen.'),
 
     mc(1, 'What happened as Israel pursued false idols?', ['They themselves became false', 'They became faithful', 'They defeated Assyria', 'They restored David’s throne'], 15),
     blank(2, 'They despised his _____', 'statutes', 15),
-    word(1, 'What agreement with their fathers did they reject?', 'the covenant', 15),
+    sa(1, 'What agreement with their fathers did they reject?', 'the covenant', 15),
     tf(3, 'Israel copied surrounding nations despite the LORD’s command.', true, 15),
 
     mc(1, 'Which images did Israel make?', ['Two molten calves and an Asherah', 'A bronze serpent only', 'Cherubim', 'A model altar'], 16),
@@ -85,7 +85,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Israel do with sons and daughters?', ['Burned them as offerings', 'Sent them to Judah', 'Made them priests of the LORD', 'Exiled them to Egypt'], 17),
     blank(2, 'used divination and _____.', 'sorcery', 17),
-    word(1, 'To what did Israel sell itself?', 'to do evil in the LORD’s sight', 17, ['doing evil']),
+    sa(1, 'To what did Israel sell itself?', 'to do evil in the LORD’s sight', 17, ['doing evil']),
     tf(3, 'These practices provoked the LORD to anger.', true, 17),
 
     mc(1, 'What did the LORD do in anger?', ['Removed Israel from his sight', 'Destroyed Judah immediately', 'Restored Samaria', 'Made Hoshea king'], 18),
@@ -100,7 +100,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the LORD do to Israel’s descendants?', ['Rejected and afflicted them', 'Made them rulers of Assyria', 'Settled them in Judah', 'Ignored them'], 20),
     blank(2, 'gave them into the hand of _____.', 'spoilers', 20),
-    word(1, 'How long did this judgment continue?', 'until he cast them out of his sight', 20),
+    sa(1, 'How long did this judgment continue?', 'until he cast them out of his sight', 20),
     tf(3, 'Israel was afflicted before being cast from the LORD’s sight.', true, 20),
 
     mc(1, 'Whom did Israel make king after separation from David’s house?', ['Jeroboam son of Nebat', 'Hoshea', 'Shalmaneser', 'Ahaz'], 21),
@@ -110,22 +110,22 @@ const bank: ChapterBank = {
 
     mc(1, 'Whose sins did Israel continue?', ['Jeroboam’s', 'David’s', 'Moses’', 'Hezekiah’s'], 22),
     blank(2, 'they did not _____ from them', 'depart', 22),
-    word(1, 'Who walked in those sins?', 'the people of Israel', 22, ['Israel']),
+    sa(1, 'Who walked in those sins?', 'the people of Israel', 22, ['Israel']),
     tf(3, 'Israel abandoned Jeroboam’s pattern.', false, 22, 'They did not depart from it.'),
 
     mc(1, 'Where was Israel exiled?', ['Assyria', 'Egypt', 'Judah', 'Moab'], 23),
     blank(2, 'as he had spoken by all his servants the _____.', 'prophets', 23),
-    word(1, 'From what were the Israelites exiled?', 'their own land', 23),
+    sa(1, 'From what were the Israelites exiled?', 'their own land', 23),
     tf(3, 'The exile fulfilled the LORD’s prophetic warnings.', true, 23),
 
     mc(1, 'Who repopulated Samaria’s cities?', ['Peoples brought by Assyria’s king', 'Returning Israelites', 'Judah’s army', 'Egyptian settlers only'], 24),
     blank(2, 'Babylon, Cuthah, Avva, Hamath, and _____.', 'Sephar-va’im', 24, ['Sephar-vaim']),
-    word(1, 'Whose place did the foreign settlers take?', 'the people of Israel’s', 24, ['Israelites']),
+    sa(1, 'Whose place did the foreign settlers take?', 'the people of Israel’s', 24, ['Israelites']),
     tf(3, 'The new peoples took possession of Samaria’s cities.', true, 24),
 
     mc(1, 'What did the LORD send among settlers who did not fear him?', ['Lions', 'Famine', 'Locusts', 'An Assyrian army'], 25),
     blank(2, 'the LORD sent _____ among them', 'lions', 25),
-    word(1, 'What did the lions do?', 'killed some of them', 25),
+    sa(1, 'What did the lions do?', 'killed some of them', 25),
     tf(3, 'The settlers initially did not fear the LORD.', true, 25),
 
     mc(1, 'Why did officials say the lions were killing settlers?', ['They did not know the god-of-the-land law', 'They refused Assyrian tribute', 'They attacked Bethel', 'They freed Israelite captives'], 26),
@@ -135,7 +135,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What solution did Assyria’s king order?', ['Return an exiled priest to teach the law', 'Send soldiers to kill every lion', 'Remove all settlers', 'Rebuild Samaria’s walls'], 27),
     blank(2, 'Send there one of the _____ whom you carried away', 'priests', 27),
-    word(1, 'What was the priest to teach?', 'the law of the god of the land', 27),
+    sa(1, 'What was the priest to teach?', 'the law of the god of the land', 27),
     tf(3, 'The king ordered the priest to live among the settlers.', true, 27),
 
     mc(1, 'Where did the returned priest live?', ['Bethel', 'Samaria city', 'Jerusalem', 'Halah'], 28),
@@ -146,7 +146,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did each settler nation still make?', ['Its own gods', 'A copy of the law', 'A temple to the LORD only', 'A royal palace'], 29),
     blank(2, 'put them in the shrines of the high _____.', 'places', 29),
-    word(1, 'Who had made those high-place shrines?', 'the Samaritans', 29),
+    sa(1, 'Who had made those high-place shrines?', 'the Samaritans', 29),
     tf(3, 'Each nation installed its gods in the cities where it lived.', true, 29),
 
     mc(1, 'Which god did Babylon’s settlers make?', ['Succoth-benoth', 'Nergal', 'Ashima', 'Tartak'], 30),
@@ -156,23 +156,23 @@ const bank: ChapterBank = {
 
     mc(1, 'Which gods did the Avvites make?', ['Nibhaz and Tartak', 'Nergal and Ashima', 'Baal and Asherah', 'Adrammelech only'], 31),
     blank(2, 'burned their children in the _____', 'fire', 31),
-    word(1, 'Which people burned children to their gods?', 'the Sepharvites', 31, ['Sephar’vites']),
+    sa(1, 'Which people burned children to their gods?', 'the Sepharvites', 31, ['Sephar’vites']),
     tf(3, 'Adrammelech and Anammelech were gods of Sepharvaim.', true, 31),
 
     mc(1, 'Whom did the settlers appoint as high-place priests?', ['All sorts of people from among themselves', 'Only Levites', 'Assyrian officials', 'David’s descendants'], 32),
     blank(2, 'appointed from among _____ all sorts of people', 'themselves', 32),
-    word(1, 'Where did these priests sacrifice?', 'high-place shrines', 32, ['shrines of the high places']),
+    sa(1, 'Where did these priests sacrifice?', 'high-place shrines', 32, ['shrines of the high places']),
     tf(3, 'The settlers combined fear of the LORD with unauthorized priesthood.', true, 32),
 
     mc(1, 'How did the settlers divide their worship?', ['They feared the LORD but served their own gods', 'They served the LORD alone', 'They abandoned all worship', 'They worshiped only Assyria’s king'], 33),
     blank(2, 'they feared the LORD but also served their own _____.', 'gods', 33),
-    word(1, 'Whose religious manner did they retain?', 'the nations from whom they had been carried away', 33, ['their former nations']),
+    sa(1, 'Whose religious manner did they retain?', 'the nations from whom they had been carried away', 33, ['their former nations']),
     tf(2, 'The settlers’ fear of the LORD did not replace their old gods.', true, 33),
     mc(3, 'What made their worship double-minded?', ['They acknowledged the LORD while continuing their own gods', 'They had no priests', 'They rejected every shrine', 'They returned to exile'], 33),
 
     mc(1, 'What name had the LORD given Jacob?', ['Israel', 'Judah', 'Bethel', 'Samaria'], 34),
     blank(2, 'the children of Jacob, whom he named _____.', 'Israel', 34),
-    word(1, 'What did the people fail to follow?', 'statutes, ordinances, law, and commandment', 34),
+    sa(1, 'What did the people fail to follow?', 'statutes, ordinances, law, and commandment', 34),
     tf(3, 'Their continued practices truly fulfilled the LORD’s covenant law.', false, 34, 'They did not follow the LORD’s statutes or law.'),
 
     mc(1, 'What had the covenant forbidden?', ['Fearing, bowing to, serving, or sacrificing to other gods', 'Living in Samaria', 'Keeping statutes', 'Offering to the LORD'], 35),
@@ -182,22 +182,22 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom alone were the people to fear?', ['The LORD', 'Assyria’s king', 'Their own gods', 'Pharaoh'], 36),
     blank(2, 'brought you out of the land of _____', 'Egypt', 36),
-    word(1, 'How did the LORD bring them out?', 'with great power and an outstretched arm', 36),
+    sa(1, 'How did the LORD bring them out?', 'with great power and an outstretched arm', 36),
     tf(3, 'They were commanded to bow and sacrifice to the LORD.', true, 36),
 
     mc(1, 'How often were the people to obey the written law?', ['Always', 'Only in exile', 'Once a year', 'Only under a king'], 37),
     blank(2, 'you shall always be _____ to do', 'careful', 37),
-    word(1, 'Whom were they forbidden to fear?', 'other gods', 37),
+    sa(1, 'Whom were they forbidden to fear?', 'other gods', 37),
     tf(3, 'The written statutes and ordinances required continuing care.', true, 37),
 
     mc(1, 'What were the people commanded not to forget?', ['The LORD’s covenant', 'Assyrian tribute', 'Samaria’s shrines', 'Their former gods'], 38),
     blank(2, 'you shall not forget the _____ that I have made with you.', 'covenant', 38),
-    word(1, 'What prohibition is repeated?', 'Do not fear other gods', 38),
+    sa(1, 'What prohibition is repeated?', 'Do not fear other gods', 38),
     tf(3, 'Remembering the covenant required rejecting other gods.', true, 38),
 
     mc(1, 'What did the LORD promise if they feared him?', ['Deliverance from all enemies', 'Return to Egypt', 'Rule over Assyria', 'Freedom to serve other gods'], 39),
     blank(2, 'he will _____ you out of the hand of all your enemies.', 'deliver', 39),
-    word(1, 'Whom were they to fear?', 'the LORD their God', 39, ['the LORD']),
+    sa(1, 'Whom were they to fear?', 'the LORD their God', 39, ['the LORD']),
     tf(3, 'The LORD promised deliverance from enemies.', true, 39),
 
     mc(1, 'How did the people respond to the covenant instruction?', ['They would not listen', 'They obeyed fully', 'They destroyed their images', 'They returned to Judah'], 40),
@@ -207,7 +207,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the nations serve alongside fearing the LORD?', ['Their graven images', 'The law alone', 'The prophets', 'Jerusalem’s temple'], 41),
     blank(2, 'their children likewise, and their children’s _____.', 'children', 41),
-    word(1, 'How long did the inherited pattern continue?', 'to this day', 41),
+    sa(1, 'How long did the inherited pattern continue?', 'to this day', 41),
     tf(3, 'Later generations continued the mixed worship of their fathers.', true, 41),
   ],
 }

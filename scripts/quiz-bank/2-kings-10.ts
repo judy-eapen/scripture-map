@@ -1,20 +1,20 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 10, tag: 'quiz-v2-2kings-10', rows: [
     mc(2, 'How many sons of Ahab were in Samaria?', ['Seventy', 'Forty-two', 'Eighty', 'Twenty-eight'], 1),
     blank(1, 'So Jehu wrote _____, and sent them to Sama’ria', 'letters', 1),
-    word(3, 'To whom were Ahab’s sons entrusted?', 'the rulers, elders, and guardians in Samaria', 1, ['the city rulers elders and guardians']),
+    sa(3, 'To whom were Ahab’s sons entrusted?', 'the rulers, elders, and guardians in Samaria', 1, ['the city rulers elders and guardians']),
     tf(2, 'Jehu addressed both city leaders and the guardians of Ahab’s sons.', true, 1),
 
     mc(1, 'What resources did Jehu acknowledge were available to Ahab’s supporters?', ['Sons, chariots, horses, fortified cities, and weapons', 'Only the palace and treasury', 'A Syrian army', 'The prophets of Baal alone'], 2),
     blank(3, 'there are with you chariots and horses, fortified cities also, and _____.', 'weapons', 2),
-    word(2, 'Whose sons were with the letter’s recipients?', 'their master’s sons', 2, ['Ahab’s sons']),
+    sa(2, 'Whose sons were with the letter’s recipients?', 'their master’s sons', 2, ['Ahab’s sons']),
     tf(1, 'Jehu’s letter noted that the recipients had military resources.', true, 2),
 
     mc(1, 'What challenge did Jehu issue?', ['Crown Ahab’s best son and fight for the dynasty', 'Send every son to Jezreel', 'Surrender Samaria without a king', 'Attack Hazael'], 3),
     blank(2, 'set him on his father’s _____.', 'throne', 3),
-    word(1, 'What kind of son were they to select?', 'the best and fittest', 3, ['best and fittest son']),
+    sa(1, 'What kind of son were they to select?', 'the best and fittest', 3, ['best and fittest son']),
     tf(3, 'Jehu invited Ahab’s supporters to defend their master’s house.', true, 3),
 
     mc(1, 'Why were Samaria’s leaders terrified?', ['Two kings had already failed to withstand Jehu', 'They had no fortified city', 'Ahab’s sons had fled', 'Syria surrounded them'], 4),
@@ -24,12 +24,12 @@ const bank: ChapterBank = {
 
     mc(1, 'What loyalty did the city leaders declare?', ['They were Jehu’s servants and would obey him', 'They would crown Ahab’s son', 'They would serve Hazael', 'They would abandon the city'], 5),
     blank(2, 'We will not make any one _____.', 'king', 5),
-    word(1, 'Which officials joined in the message?', 'palace and city overseers, elders, and guardians', 5, ['the officials elders and guardians']),
+    sa(1, 'Which officials joined in the message?', 'palace and city overseers, elders, and guardians', 5, ['the officials elders and guardians']),
     tf(3, 'The leaders left the decision in Jehu’s hands.', true, 5),
 
     mc(1, 'What proof of obedience did Jehu demand?', ['The heads of Ahab’s sons', 'The city’s weapons', 'Seventy talents of silver', 'The prophets of Baal'], 6),
     blank(3, 'come to me at Jezreel _____ at this time.', 'tomorrow', 6),
-    word(2, 'Who were raising the seventy princes?', 'the great men of the city', 6, ['Samaria’s great men']),
+    sa(2, 'Who were raising the seventy princes?', 'the great men of the city', 6, ['Samaria’s great men']),
     tf(1, 'The demand appeared in Jehu’s second letter.', true, 6),
 
     mc(1, 'What did the leaders send to Jehu?', ['Seventy severed heads in baskets', 'The princes alive', 'Seventy baskets of food', 'A royal crown'], 7),
@@ -39,13 +39,13 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did Jehu order the heads placed?', ['In two heaps at the gate entrance', 'Inside Ahab’s palace', 'On Naboth’s plot', 'At Samaria’s wall'], 8),
     blank(3, 'Lay them in two _____ at the entrance of the gate', 'heaps', 8),
-    word(2, 'Until when were the heads to remain?', 'until morning', 8, ['the morning']),
+    sa(2, 'Until when were the heads to remain?', 'until morning', 8, ['the morning']),
     tf(1, 'A messenger reported the arrival of the princes’ heads.', true, 8),
     mc(3, 'What gruesome evidence of loyalty reached Jehu?', ['Ahab’s seventy sons’ heads arrived in baskets and were arranged in two heaps', 'The city sent seventy captured soldiers', 'The leaders delivered Ahab’s crown', 'The guardians brought the princes alive'], 8),
 
     mc(1, 'What distinction did Jehu make before the people?', ['He killed his master, but others killed all Ahab’s sons', 'He was innocent of every death', 'The people had killed Joram', 'Elijah had ordered the beheadings'], 9),
     blank(2, 'but who struck down all _____?', 'these', 9),
-    word(1, 'When did Jehu address the people?', 'in the morning', 9),
+    sa(1, 'When did Jehu address the people?', 'in the morning', 9),
     tf(3, 'Jehu openly admitted conspiring against his master.', true, 9),
 
     mc(1, 'What did Jehu say could not fail?', ['Any of the LORD’s word against Ahab’s house', 'Samaria’s defenses', 'His own letters', 'The worship of Baal'], 10),
@@ -65,7 +65,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Jehu meet at Beth-eked?', ['Ahaziah king of Judah’s kinsmen', 'Ahab’s seventy sons', 'Baal’s priests', 'Hazael’s soldiers'], 13),
     blank(2, 'we came down to visit the royal _____', 'princes', 13),
-    word(1, 'Whom else did the kinsmen plan to visit?', 'the queen mother’s sons', 13, ['sons of the queen mother']),
+    sa(1, 'Whom else did the kinsmen plan to visit?', 'the queen mother’s sons', 13, ['sons of the queen mother']),
     tf(3, 'The travelers openly identified themselves as Ahaziah’s relatives.', true, 13),
 
     mc(1, 'What did Jehu order done with Ahaziah’s kinsmen?', ['Take them alive, then kill them at the pit', 'Escort them to Samaria', 'Send them back to Judah', 'Make them servants'], 14),
@@ -75,27 +75,27 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Jehu meet after leaving Beth-eked?', ['Jehonadab son of Rechab', 'Elisha', 'Jehoahaz', 'Hazael'], 15),
     blank(2, 'Is your heart _____ to my heart as mine is to yours?', 'true', 15),
-    word(1, 'What gesture sealed the agreement?', 'Jehonadab gave Jehu his hand', 15, ['he gave him his hand', 'gave his hand']),
+    sa(1, 'What gesture sealed the agreement?', 'Jehonadab gave Jehu his hand', 15, ['he gave him his hand', 'gave his hand']),
     tf(3, 'Jehu brought Jehonadab into his chariot.', true, 15),
 
     mc(1, 'What did Jehu invite Jehonadab to observe?', ['His zeal for the LORD', 'His battle with Hazael', 'The rebuilding of Samaria', 'His worship of Baal'], 16),
     blank(3, 'Come with me, and see my _____ for the LORD.', 'zeal', 16),
-    word(2, 'Where did Jehonadab ride?', 'in Jehu’s chariot', 16, ['the chariot']),
+    sa(2, 'Where did Jehonadab ride?', 'in Jehu’s chariot', 16, ['the chariot']),
     tf(1, 'Jehu presented his actions as zeal for the LORD.', true, 16),
 
     mc(1, 'What did Jehu do upon reaching Samaria?', ['Killed all who remained to Ahab', 'Crowned Ahab’s son', 'Released Baal’s priests', 'Returned to Jezreel'], 17),
     blank(2, 'till he had _____ them out', 'wiped', 17),
-    word(1, 'Whose earlier word did this fulfill?', 'the LORD’s word to Elijah', 17, ['the word spoken to Elijah']),
+    sa(1, 'Whose earlier word did this fulfill?', 'the LORD’s word to Elijah', 17, ['the word spoken to Elijah']),
     tf(3, 'The destruction of Ahab’s remnant fulfilled the prophetic word.', true, 17),
 
     mc(1, 'What deceptive claim did Jehu make?', ['He would serve Baal more than Ahab had', 'He had abandoned Israel’s throne', 'He would restore Ahab’s sons', 'He would follow Jeroboam no longer'], 18),
     blank(3, 'Ahab served Ba’al a little; but Jehu will serve him _____.', 'much', 18),
-    word(2, 'Whom did Jehu assemble to hear his claim?', 'all the people', 18, ['the people']),
+    sa(2, 'Whom did Jehu assemble to hear his claim?', 'all the people', 18, ['the people']),
     tf(1, 'Jehu publicly claimed greater devotion to Baal than Ahab.', true, 18),
 
     mc(1, 'Why did Jehu summon every worshiper and priest of Baal?', ['He planned to destroy them through cunning', 'He sincerely wanted a sacrifice', 'He needed their political support', 'He wanted them to flee Israel'], 19),
     blank(2, 'whoever is missing shall not _____.', 'live', 19),
-    word(1, 'What event did Jehu announce?', 'a great sacrifice to Baal', 19, ['great sacrifice', 'sacrifice to Baal']),
+    sa(1, 'What event did Jehu announce?', 'a great sacrifice to Baal', 19, ['great sacrifice', 'sacrifice to Baal']),
     tf(3, 'Jehu concealed his intent to destroy Baal’s worshipers.', true, 19),
 
     mc(1, 'What did Jehu order proclaimed?', ['A solemn assembly for Baal', 'A fast for Israel', 'A coronation at Jezreel', 'War against Syria'], 20),
@@ -110,32 +110,32 @@ const bank: ChapterBank = {
 
     mc(1, 'What was distributed to Baal’s worshipers?', ['Vestments from the wardrobe', 'Weapons', 'Bread and water', 'Flasks of oil'], 22),
     blank(3, 'Bring out the _____ for all the worshipers of Ba’al.', 'vestments', 22),
-    word(2, 'Who supplied the garments?', 'the person in charge of the wardrobe', 22, ['the wardrobe keeper']),
+    sa(2, 'Who supplied the garments?', 'the person in charge of the wardrobe', 22, ['the wardrobe keeper']),
     tf(1, 'The worshipers received distinctive clothing.', true, 22),
 
     mc(1, 'Whom did Jehu bring into Baal’s house?', ['Jehonadab son of Rechab', 'Elisha', 'Jehoahaz', 'The king of Judah'], 23),
     blank(2, 'see that there is no _____ of the LORD here among you', 'servant', 23),
-    word(1, 'Who alone was supposed to remain inside?', 'the worshipers of Baal', 23, ['Baal worshipers']),
+    sa(1, 'Who alone was supposed to remain inside?', 'the worshipers of Baal', 23, ['Baal worshipers']),
     tf(3, 'Jehu ordered a search to exclude servants of the LORD.', true, 23),
 
     mc(1, 'How many men did Jehu station outside?', ['Eighty', 'Seventy', 'Forty-two', 'Twenty-eight'], 24),
     blank(3, 'shall _____ his life.', 'forfeit', 24),
-    word(2, 'What were the guards forbidden to allow?', 'any worshiper to escape', 24, ['an escape', 'anyone to escape']),
+    sa(2, 'What were the guards forbidden to allow?', 'any worshiper to escape', 24, ['an escape', 'anyone to escape']),
     tf(1, 'A guard’s own life was the penalty for letting a captive escape.', true, 24),
 
     mc(1, 'What command followed the burnt offering?', ['Enter and kill Baal’s worshipers without allowing escape', 'Release the worshipers', 'Burn Samaria', 'Send the priests to Judah'], 25),
     blank(2, 'Go in and _____ them', 'slay', 25),
-    word(1, 'Who carried out the killing?', 'the guard and officers', 25, ['guards and officers']),
+    sa(1, 'Who carried out the killing?', 'the guard and officers', 25, ['guards and officers']),
     tf(3, 'After killing the worshipers, the force entered Baal’s inner room.', true, 25),
 
     mc(1, 'What did Jehu’s men do to Baal’s pillar?', ['Brought it out and burned it', 'Moved it to Bethel', 'Covered it with garments', 'Left it standing'], 26),
     blank(3, 'and _____ it.', 'burned', 26),
-    word(2, 'From where was the pillar removed?', 'the house of Baal', 26, ['Baal’s house']),
+    sa(2, 'From where was the pillar removed?', 'the house of Baal', 26, ['Baal’s house']),
     tf(1, 'The pillar was destroyed by fire.', true, 26),
 
     mc(1, 'What did Baal’s house become?', ['A latrine', 'A temple of the LORD', 'Jehu’s palace', 'A city gate'], 27),
     blank(2, 'and made it a _____ to this day.', 'latrine', 27),
-    word(1, 'What structures did they demolish?', 'Baal’s pillar and house', 27, ['the pillar and house of Baal']),
+    sa(1, 'What structures did they demolish?', 'Baal’s pillar and house', 27, ['the pillar and house of Baal']),
     tf(3, 'The humiliation of Baal’s sanctuary remained visible.', true, 27),
     mc(3, 'How did Jehu’s deception end Baal’s organized worship?', ['He gathered the worshipers, killed them, demolished the pillar and house, and made it a latrine', 'He persuaded every priest to convert', 'He moved the shrine to Dan', 'He closed the house but preserved its pillar'], 27),
 
@@ -151,7 +151,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What dynasty promise did the LORD give Jehu?', ['His sons would sit on Israel’s throne to the fourth generation', 'His house would rule forever', 'He would conquer Syria', 'His son would reign in Judah'], 30),
     blank(3, 'your sons of the fourth _____ shall sit on the throne of Israel.', 'generation', 30),
-    word(2, 'Why was Jehu rewarded?', 'he carried out the LORD’s judgment on Ahab’s house', 30, ['he did what was right concerning Ahab’s house']),
+    sa(2, 'Why was Jehu rewarded?', 'he carried out the LORD’s judgment on Ahab’s house', 30, ['he did what was right concerning Ahab’s house']),
     tf(1, 'The promise was limited to four generations.', true, 30),
 
     mc(1, 'What spiritual failure remained in Jehu?', ['He did not walk in the LORD’s law wholeheartedly', 'He restored Baal worship', 'He refused to destroy Ahab’s house', 'He worshiped Syria’s gods'], 31),
@@ -176,7 +176,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Jehu?', ['Jehoahaz his son', 'Jehonadab', 'Hazael', 'Joash of Judah'], 35),
     blank(2, 'they buried him in _____.', 'Sama’ria', 35, ['Samaria']),
-    word(1, 'What phrase reports Jehu’s death?', 'he slept with his fathers', 35, ['slept with his fathers']),
+    sa(1, 'What phrase reports Jehu’s death?', 'he slept with his fathers', 35, ['slept with his fathers']),
     tf(3, 'Jehu was buried in Samaria.', true, 35),
 
     mc(1, 'How long did Jehu reign?', ['Twenty-eight years', 'Forty years', 'Seven years', 'Twelve years'], 36),

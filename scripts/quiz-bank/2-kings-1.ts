@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 1, tag: 'quiz-v2-2kings-1', rows: [
@@ -16,7 +16,7 @@ const bank: ChapterBank = {
     tf(2, 'Ahaziah sent to inquire whether he would recover.', true, 2),
     mc(3, 'What complete sequence led to Ahaziah’s inquiry?', ['He fell through his upper-room lattice in Samaria and sent to Baal-zebub of Ekron', 'He was wounded in Moab and consulted Elijah', 'He fell at Carmel and sent to the LORD’s temple', 'He became ill in Jerusalem and consulted Ahab'], 2),
     mc(2, 'Where was Ahaziah when he fell through the lattice?', ['In his upper chamber in Samaria', 'In the temple in Jerusalem', 'On Mount Carmel', 'At the gate of Ekron'], 2),
-    word(2, 'What part of the upper chamber did Ahaziah fall through?', 'the lattice', 2, ['lattice']),
+    sa(2, 'What part of the upper chamber did Ahaziah fall through?', 'the lattice', 2, ['lattice']),
     tf(1, 'Baal-zebub was identified as the god of Ekron.', true, 2),
 
     mc(1, 'Who told Elijah to meet Ahaziah’s messengers?', ['The angel of the LORD', 'Ahab', 'The captain of fifty', 'Jehoram'], 3),
@@ -24,7 +24,7 @@ const bank: ChapterBank = {
     word(2, 'Which prophet was sent?', 'Elijah the Tishbite', 3, ['Elijah']),
     tf(3, 'The messengers were going to inquire of the God of Israel.', false, 3, 'They were going to Baal-zebub of Ekron.'),
     mc(2, 'Where did the angel direct Elijah to meet the messengers?', ['On their way from the king of Samaria', 'Inside the temple at Jerusalem', 'At Ahab’s tomb', 'In the palace at Ekron'], 3),
-    word(3, 'What question exposed the king’s lack of faith?', 'Is it because there is no God in Israel?', 3, ['Is there no God in Israel', 'because there is no God in Israel']),
+    sa(3, 'What question exposed the king’s lack of faith?', 'Is it because there is no God in Israel?', 3, ['Is there no God in Israel', 'because there is no God in Israel']),
     tf(1, 'The angel of the LORD sent Elijah to confront the royal messengers.', true, 3),
 
     mc(1, 'What judgment was announced to Ahaziah?', ['He would not leave his bed but would surely die', 'He would recover in seven days', 'He would lose his kingdom but live', 'He would defeat Moab'], 4),
@@ -32,15 +32,15 @@ const bank: ChapterBank = {
     word(1, 'Who went after receiving the message?', 'Elijah', 4, ["Eli'jah"]),
     tf(2, 'The LORD promised Ahaziah a full recovery.', false, 4, 'He said Ahaziah would surely die.'),
     mc(2, 'Why would Ahaziah not come down from his bed?', ['He had sent to inquire of Baal-zebub', 'Moab had rebelled', 'Elijah refused to visit him', 'His messengers returned too soon'], 4),
-    word(2, 'From what would Ahaziah not come down?', 'the bed to which he had gone', 4, ['his bed', 'the bed']),
+    sa(2, 'From what would Ahaziah not come down?', 'the bed to which he had gone', 4, ['his bed', 'the bed']),
     tf(3, 'Elijah delivered the LORD’s judgment that Ahaziah would surely die.', true, 4),
 
     mc(1, 'What surprised the king about his messengers?', ['They returned early', 'They brought Elijah', 'They had gone to Israel’s God', 'They had been attacked'], 5),
     blank(2, 'Why have you _____?', 'returned', 5),
-    word(2, 'Who questioned the messengers?', 'the king', 5, ['Ahaziah']),
+    sa(2, 'Who questioned the messengers?', 'the king', 5, ['Ahaziah']),
     tf(3, 'The king expected the messengers’ immediate return.', false, 5, 'He asked why they had returned.'),
     mc(2, 'To whom did the messengers return?', ['Ahaziah the king', 'Elijah', 'The god of Ekron', 'The captain of fifty'], 5),
-    word(1, 'What did the king ask them to explain?', 'why they had returned', 5, ['their return', 'why they returned']),
+    sa(1, 'What did the king ask them to explain?', 'why they had returned', 5, ['their return', 'why they returned']),
     tf(2, 'The messengers came back to the king before completing the trip to Ekron.', true, 5),
 
     mc(2, 'What message did the unknown man send back?', ['Ahaziah would not leave his bed but would die', 'Ahaziah would recover', 'Moab would surrender', 'The messengers should continue to Ekron'], 6),
@@ -48,15 +48,15 @@ const bank: ChapterBank = {
     word(1, 'Whom had Ahaziah intended to consult?', 'Baal-zebub', 6, ["Ba'al-ze'bub"]),
     tf(2, 'The messengers continued to Ekron after meeting Elijah.', false, 6, 'They returned to the king with Elijah’s message.'),
     mc(3, 'How did the messengers describe the basis of the judgment?', ['The king sought Baal-zebub as though there were no God in Israel', 'The king refused to fight Moab', 'The king had dismissed his captains', 'The king had left Samaria'], 6),
-    word(2, 'What outcome did the messengers report for Ahaziah?', 'he would surely die', 6, ['surely die', 'death']),
+    sa(2, 'What outcome did the messengers report for Ahaziah?', 'he would surely die', 6, ['surely die', 'death']),
     tf(1, 'The man told the messengers to carry his words back to the king.', true, 6),
 
     mc(1, 'What did Ahaziah ask about the messenger?', ['What kind of man he was', 'Where he lived', 'How old he was', 'Whether he served Moab'], 7),
     blank(2, 'What _____ of man was he', 'kind', 7),
-    word(2, 'Whom had the man met?', 'Ahaziah’s messengers', 7, ['the messengers']),
+    sa(2, 'Whom had the man met?', 'Ahaziah’s messengers', 7, ['the messengers']),
     tf(3, 'Ahaziah asked only what words were spoken, not what the man looked like.', false, 7, 'He asked what kind of man he was.'),
     mc(2, 'Why did Ahaziah ask what kind of man had met them?', ['He wanted to identify the bearer of the message', 'He wanted to reward an Ekron priest', 'He needed a new captain', 'He planned to send him to Moab'], 7),
-    word(1, 'What information about the man did the king request?', 'what kind of man he was', 7, ['his appearance', 'a description of him']),
+    sa(1, 'What information about the man did the king request?', 'what kind of man he was', 7, ['his appearance', 'a description of him']),
     tf(2, 'The king sought a description of the man who had spoken to the messengers.', true, 7),
 
     mc(1, 'How was Elijah dressed?', ['A haircloth garment and leather girdle', 'Royal robes and a crown', 'Linen with a golden sash', 'Sackcloth with ropes'], 8),
@@ -70,10 +70,10 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did the king first send to Elijah?', ['A captain of fifty with his fifty', 'A single messenger', 'Jehoram', 'A hundred prophets'], 9),
     blank(2, 'who was sitting on the top of a _____.', 'hill', 9),
-    word(2, 'What title did the captain use for Elijah?', 'man of God', 9),
+    sa(2, 'What title did the captain use for Elijah?', 'man of God', 9),
     tf(3, 'Elijah was hiding inside a cave.', false, 9, 'He was sitting on top of a hill.'),
     mc(2, 'Where did the first captain find Elijah?', ['Sitting on top of a hill', 'Standing in Ahaziah’s chamber', 'At the gate of Samaria', 'Walking toward Ekron'], 9),
-    word(1, 'What command from the king did the captain give Elijah?', 'Come down', 9, ['come down from the hill']),
+    sa(1, 'What command from the king did the captain give Elijah?', 'Come down', 9, ['come down from the hill']),
     tf(2, 'The first captain arrived with fifty men.', true, 9),
 
     mc(1, 'What happened to the first captain and his fifty?', ['Fire from heaven consumed them', 'They arrested Elijah', 'They fled to Samaria', 'A lion killed them'], 10),
@@ -86,7 +86,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the second captain order Elijah to do?', ['Come down quickly', 'Remain on the hill', 'Go to Ekron', 'Send a message only'], 11),
     blank(2, 'Again the king sent to him _____ captain of fifty men', 'another', 11),
-    word(2, 'Whose order did the second captain cite?', 'the king’s', 11, ['the king']),
+    sa(2, 'Whose order did the second captain cite?', 'the king’s', 11, ['the king']),
     tf(3, 'The second captain approached without an order from Ahaziah.', false, 11, 'He cited the king’s order.'),
     mc(2, 'How did the second captain intensify the command?', ['He ordered Elijah to come down quickly', 'He asked Elijah to wait', 'He offered Elijah protection', 'He knelt and begged'], 11),
     word(1, 'How many men were under the second captain?', 'fifty', 11, ['50']),
@@ -97,15 +97,15 @@ const bank: ChapterBank = {
     word(1, 'Who called down the fire?', 'Elijah', 12),
     tf(2, 'The second captain and his fifty survived the fire.', false, 12, 'The fire consumed them.'),
     mc(3, 'What source does the verse give for the second fire?', ['The fire of God came down from heaven', 'The captain lit the hill', 'Lightning came from Ekron', 'The soldiers set a signal fire'], 12),
-    word(2, 'What happened to the second captain’s company?', 'they were consumed', 12, ['fire consumed them', 'consumed by fire']),
+    sa(2, 'What happened to the second captain’s company?', 'they were consumed', 12, ['fire consumed them', 'consumed by fire']),
     tf(1, 'Elijah again answered by calling down fire.', true, 12),
 
     mc(1, 'How did the third captain approach Elijah?', ['He fell on his knees and pleaded', 'He commanded more forcefully', 'He attacked at once', 'He stayed with the king'], 13),
     blank(2, 'let my life, and the life of these fifty servants of yours, be _____ in your sight.', 'precious', 13),
-    word(2, 'Which captain showed humility?', 'the third captain', 13, ['third']),
+    sa(2, 'Which captain showed humility?', 'the third captain', 13, ['third']),
     tf(3, 'The third captain repeated the demand without pleading.', false, 13, 'He knelt and entreated Elijah.'),
     mc(2, 'Whose lives did the third captain ask Elijah to value?', ['His own life and the lives of his fifty servants', 'Only the king’s life', 'The lives of the first two captains', 'Only Elijah’s life'], 13),
-    word(1, 'What did the third captain do before speaking?', 'fell on his knees', 13, ['knelt', 'fell on his knees before Elijah']),
+    sa(1, 'What did the third captain do before speaking?', 'fell on his knees', 13, ['knelt', 'fell on his knees before Elijah']),
 
     mc(2, 'What precedent did the third captain mention?', ['Fire consumed the first two captains and their fifties', 'A lion killed the messengers', 'Elijah healed Ahaziah', 'Moab defeated Israel'], 14),
     blank(3, 'but now let my life be _____ in your sight.', 'precious', 14),
@@ -117,7 +117,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did the angel tell Elijah about the third captain?', ['Go down with him and do not fear', 'Call down fire again', 'Send him away', 'Hide on the hill'], 15),
     blank(2, 'do not be _____ of him.', 'afraid', 15),
-    word(2, 'To whom did Elijah go?', 'the king', 15, ['Ahaziah']),
+    sa(2, 'To whom did Elijah go?', 'the king', 15, ['Ahaziah']),
     tf(3, 'Elijah refused to accompany the humbled captain.', false, 15, 'He went down with him to the king.'),
     mc(2, 'What reassurance accompanied the command to go down?', ['Elijah was not to be afraid of the captain', 'Ahaziah had recovered', 'Moab had surrendered', 'The fire could not return'], 15),
     tf(1, 'Elijah obeyed the angel and went to the king.', true, 15),
@@ -131,7 +131,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who became king after Ahaziah?', ['Jehoram his brother', 'Elijah', 'Moab’s king', 'Ahab'], 17),
     blank(3, 'because Ahazi’ah had no _____.', 'son', 17),
-    word(1, 'According to whose word did Ahaziah die?', 'the LORD’s word through Elijah', 17, ['the word of the LORD', 'Elijah’s word']),
+    sa(1, 'According to whose word did Ahaziah die?', 'the LORD’s word through Elijah', 17, ['the word of the LORD', 'Elijah’s word']),
     tf(2, 'Ahaziah’s son succeeded him.', false, 17, 'He had no son, so his brother Jehoram became king.'),
     mc(3, 'Why did Jehoram succeed Ahaziah?', ['Ahaziah had no son', 'Elijah appointed him', 'Moab selected him', 'Ahab returned to rule'], 17),
     word(2, 'In whose reign in Judah did Jehoram begin to rule Israel?', 'Jehoram son of Jehoshaphat', 17, ['Jehoram', 'Jehoram the son of Jehoshaphat']),
@@ -141,7 +141,7 @@ const bank: ChapterBank = {
     word(2, 'Which kingdom’s chronicles recorded Ahaziah?', 'Israel', 18),
     tf(3, 'The text says Ahaziah’s acts were never recorded.', false, 18, 'They were written in Israel’s royal chronicles.'),
     mc(2, 'What kind of information closes the account of Ahaziah?', ['A reference to the record of his other acts', 'A list of his sons', 'A report of victory over Moab', 'A hymn written by Elijah'], 18),
-    word(1, 'What record contained the rest of Ahaziah’s deeds?', 'the Book of the Chronicles of the Kings of Israel', 18, ['Chronicles of the Kings of Israel', 'the chronicles of Israel’s kings']),
+    sa(1, 'What record contained the rest of Ahaziah’s deeds?', 'the Book of the Chronicles of the Kings of Israel', 18, ['Chronicles of the Kings of Israel', 'the chronicles of Israel’s kings']),
   ],
 }
 

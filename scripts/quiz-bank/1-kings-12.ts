@@ -1,6 +1,6 @@
 // 1 Kings 12 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -48,7 +48,7 @@ const bank: ChapterBank = {
     mc(3, 'What did the old men advise Rehoboam?', ['Be a servant to this people, serve them, and speak good words to them', 'Add to their yoke', 'Chastise them with scorpions', 'Send them away for three days'], 7),
     blank(2, 'If you will be a _____ to this people today and serve them, and speak good words to them when you answer them, then they will be your servants for ever.', 'servant', 7),
     blank(2, 'If you will be a servant to this people today and serve them, and speak _____ words to them when you answer them, then they will be your servants for ever.', 'good', 7),
-    word(3, 'The old men said that if Rehoboam served the people, they would be his servants for how long?', 'for ever', 7, ['forever', 'ever']),
+    sa(3, 'The old men said that if Rehoboam served the people, they would be his servants for how long?', 'for ever', 7, ['forever', 'ever']),
     tf(3, 'The old men advised Rehoboam to speak good words to the people.', true, 7),
     tf(3, 'The old men told Rehoboam that the people would serve him for three years.', false, 7, 'They said "they will be your servants for ever".'),
 
@@ -139,7 +139,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v21–24 · Shemaiah forbids war
     mc(2, 'How many chosen warriors did Rehoboam assemble?', ['A hundred and eighty thousand', 'Eighty thousand', 'A hundred thousand', 'Twelve thousand'], 21),
-    word(3, 'How many chosen warriors did Rehoboam assemble from Judah and Benjamin?', 'a hundred and eighty thousand', 21, ['180000', '180,000', 'one hundred eighty thousand', 'hundred and eighty thousand', 'one hundred and eighty thousand', '180 thousand']),
+    sa(3, 'How many chosen warriors did Rehoboam assemble from Judah and Benjamin?', 'a hundred and eighty thousand', 21, ['180000', '180,000', 'one hundred eighty thousand', 'hundred and eighty thousand', 'one hundred and eighty thousand', '180 thousand']),
     blank(3, 'When Rehobo’am came to Jerusalem, he assembled all the house of Judah, and the tribe of _____, a hundred and eighty thousand chosen warriors, to fight against the house of Israel,', 'Benjamin', 21),
     blank(3, 'he assembled all the house of Judah, and the tribe of Benjamin, a hundred and _____ thousand chosen warriors, to fight against the house of Israel,', 'eighty', 21, ['80']),
     mc(2, 'Which two groups did Rehoboam assemble to fight against the house of Israel?', ['The house of Judah and the tribe of Benjamin', 'Judah and Ephraim', 'Benjamin and Levi', 'Judah and Dan'], 21),

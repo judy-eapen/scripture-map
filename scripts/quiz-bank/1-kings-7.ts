@@ -1,6 +1,6 @@
 // 1 Kings 7 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -14,7 +14,7 @@ const bank: ChapterBank = {
     mc(1, 'Whose house took thirteen years to build in 1 Kings 7:1?', ['Solomon’s own house', 'The house of the LORD', 'Hiram’s house', 'Pharaoh’s daughter’s house'], 1),
 
     mc(1, 'What was the name of the building described in 1 Kings 7:2?', ['The House of the Forest of Lebanon', 'The Hall of Pillars', 'The Hall of Judgment', 'The house of the LORD'], 2),
-    word(2, 'How many cubits long was the House of the Forest of Lebanon?', 'a hundred', 2, ['100', 'hundred', 'one hundred']),
+    sa(2, 'How many cubits long was the House of the Forest of Lebanon?', 'a hundred', 2, ['100', 'hundred', 'one hundred']),
     blank(1, 'He built the House of the Forest of _____; its length was a hundred cubits, and its breadth fifty cubits, and its height thirty cubits,', 'Lebanon', 2),
     blank(3, 'its length was a hundred cubits, and its breadth _____ cubits, and its height thirty cubits,', 'fifty', 2, ['50']),
     mc(3, 'What were the dimensions of the House of the Forest of Lebanon?', ['100 cubits long, 50 wide, 30 high', '60 cubits long, 20 wide, 30 high', '50 cubits long, 30 wide, 20 high', '100 cubits long, 100 wide, 50 high'], 2),
@@ -129,7 +129,7 @@ const bank: ChapterBank = {
     mc(3, 'The lily-work of the capitals in the vestibule measured how many cubits?', ['Four', 'Five', 'Twelve', 'Eighteen'], 19),
     tf(2, 'The capitals in the vestibule were of lily-work.', true, 19),
 
-    word(2, 'How many pomegranates were there on each capital, in two rows round about?', 'two hundred', 20, ['200']),
+    sa(2, 'How many pomegranates were there on each capital, in two rows round about?', 'two hundred', 20, ['200']),
     blank(2, 'there were _____ pomegranates, in two rows round about; and so with the other capital.', 'two hundred', 20, ['200']),
     mc(3, 'How many pomegranates were on one capital according to 1 Kings 7:20?', ['Two hundred', 'One hundred', 'Four hundred', 'Fifty'], 20),
     tf(3, 'Each capital had one hundred pomegranates in two rows round about.', false, 20, 'There were two hundred pomegranates.'),
@@ -176,7 +176,7 @@ const bank: ChapterBank = {
     tf(1, 'The sea stood upon twelve lions.', false, 25, 'It stood upon twelve oxen.'),
     word(3, 'How many of the oxen under the sea faced north?', 'three', 25, ['3']),
 
-    word(2, 'How many baths did the molten sea hold?', 'two thousand', 26, ['2000', '2,000']),
+    sa(2, 'How many baths did the molten sea hold?', 'two thousand', 26, ['2000', '2,000']),
     blank(2, 'Its thickness was a _____; and its brim was made like the brim of a cup, like the flower of a lily;', 'handbreadth', 26, ['hand breadth']),
     blank(3, 'like the flower of a lily; it held _____ baths.', 'two thousand', 26, ['2000', '2,000']),
     mc(2, 'The brim of the sea was made like what?', ['The brim of a cup, like the flower of a lily', 'The rim of a chariot wheel', 'A crown of gold', 'The mouth of a lion'], 26),
@@ -236,7 +236,7 @@ const bank: ChapterBank = {
     tf(2, 'On the top of the stand was a round band half a cubit high.', true, 35),
 
     mc(2, 'What did Hiram carve on the surfaces of the stays and panels?', ['Cherubim, lions, and palm trees', 'Oxen, gourds, and pomegranates', 'Eagles, serpents, and vines', 'Stars, moons, and suns'], 36),
-    word(2, 'Along with cherubim and lions, what trees were carved on the stays and panels?', 'palm trees', 36, ['palm', 'palms', 'palm tree']),
+    sa(2, 'Along with cherubim and lions, what trees were carved on the stays and panels?', 'palm trees', 36, ['palm', 'palms', 'palm tree']),
     blank(2, 'And on the surfaces of its stays and on its panels, he carved cherubim, lions, and _____ trees, according to the space of each, with wreaths round about.', 'palm', 36),
     tf(3, 'The cherubim, lions, and palm trees were carved "according to the space of each".', true, 36),
 
@@ -272,7 +272,7 @@ const bank: ChapterBank = {
     mc(3, 'What covered the two bowls of the capitals?', ['The two networks', 'The two lavers', 'Two sheets of gold', 'Two cedar canopies'], 41),
     tf(2, 'The list of Hiram’s finished work begins with the two pillars.', true, 41),
 
-    word(2, 'How many pomegranates in total were made for the two networks?', 'four hundred', 42, ['400']),
+    sa(2, 'How many pomegranates in total were made for the two networks?', 'four hundred', 42, ['400']),
     blank(2, 'and the _____ pomegranates for the two networks, two rows of pomegranates for each network,', 'four hundred', 42, ['400']),
     mc(2, 'How many pomegranates were there for the two networks together?', ['Four hundred', 'Two hundred', 'One hundred', 'Two thousand'], 42),
     tf(3, 'There were four hundred pomegranates for the two networks.', true, 42),

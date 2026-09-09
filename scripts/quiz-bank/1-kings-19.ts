@@ -1,17 +1,17 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings', chapter: 19, tag: 'quiz-v2-1kings-19', rows: [
     mc(1, 'Who told Jezebel what Elijah had done?', ['Ahab', 'Obadiah', 'Elisha', 'Jehu'], 1),
     blank(1, 'Ahab told Jez’ebel all that Eli’jah had _____.', 'done', 1),
-    word(3, 'How had Elijah slain the prophets?', 'with the sword', 1),
+    sa(3, 'How had Elijah slain the prophets?', 'with the sword', 1),
     tf(1, 'Ahab concealed Elijah’s actions from Jezebel.', false, 1, 'He told her all Elijah had done.'),
     mc(3, 'What particular deed did Ahab report?', ['Elijah had slain all the prophets with the sword', 'Elijah had fled to Horeb', 'Elijah had anointed Elisha', 'Elijah had hidden the prophets'], 1),
     blank(3, 'and how he had slain all the prophets with the _____.', 'sword', 1),
 
     mc(1, 'What did Jezebel threaten to do to Elijah?', ['Make his life like one of the slain prophets by the next day', 'Imprison him for seven years', 'Send him to Damascus', 'Take away his mantle'], 2),
     blank(3, 'if I do not make your _____ as the life of one of them', 'life', 2),
-    word(1, 'How did Jezebel communicate the threat?', 'by a messenger', 2, ['a messenger']),
+    sa(1, 'How did Jezebel communicate the threat?', 'by a messenger', 2, ['a messenger']),
     tf(2, 'Jezebel promised Elijah protection.', false, 2, 'She threatened his life by the same time the next day.'),
     mc(3, 'By when did Jezebel vow to kill Elijah?', ['This time tomorrow', 'At sunset that day', 'After forty days', 'When rain returned'], 2),
     blank(1, 'by this time _____.', 'tomorrow', 2),
@@ -19,14 +19,14 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did Elijah go when he was afraid?', ['Beersheba in Judah', 'Samaria', 'Damascus', 'Mount Carmel'], 3),
     blank(1, 'and came to Beer-sheba, which belongs to _____.', 'Judah', 3),
-    word(2, 'Whom did Elijah leave at Beersheba?', 'his servant', 3),
+    sa(2, 'Whom did Elijah leave at Beersheba?', 'his servant', 3),
     tf(3, 'Elijah took his servant onward into the wilderness.', false, 3, 'He left his servant at Beersheba.'),
     mc(3, 'Why did Elijah leave?', ['He was afraid and went for his life', 'The LORD told him to anoint Hazael', 'Ahab sent him to Judah', 'He sought Elisha'], 3),
     blank(3, 'Then he was _____, and he arose and went for his life', 'afraid', 3),
 
     mc(1, 'Under what kind of tree did Elijah sit?', ['A broom tree', 'An oak', 'A cedar', 'A fig tree'], 4),
     blank(3, 'and he asked that he might _____.', 'die', 4),
-    word(1, 'How far did Elijah travel into the wilderness?', 'a day’s journey', 4, ['one day', 'a day']),
+    sa(1, 'How far did Elijah travel into the wilderness?', 'a day’s journey', 4, ['one day', 'a day']),
     tf(2, 'Elijah prayed for the LORD to take away his life.', true, 4),
     mc(3, 'Why did Elijah say his life should be taken?', ['He was no better than his fathers', 'He had never served the LORD', 'He had lost his mantle', 'He wanted to become king'], 4),
     blank(1, 'It is enough; now, O LORD, take away my _____.', 'life', 4),
@@ -34,21 +34,21 @@ const bank: ChapterBank = {
 
     mc(1, 'Who touched Elijah while he slept?', ['An angel', 'Elisha', 'His servant', 'Jezebel’s messenger'], 5),
     blank(1, 'Arise and _____.', 'eat', 5),
-    word(2, 'Where did Elijah sleep?', 'under a broom tree', 5),
+    sa(2, 'Where did Elijah sleep?', 'under a broom tree', 5),
     tf(3, 'The angel told Elijah to continue sleeping.', false, 5, 'The angel told him to arise and eat.'),
     mc(3, 'What two actions preceded the angel’s command?', ['Elijah lay down and slept', 'Elijah ate and traveled', 'Elijah prayed and anointed', 'Elijah ran and hid'], 5),
     blank(3, 'and behold, an angel _____ him', 'touched', 5),
 
     mc(1, 'What food was beside Elijah’s head?', ['A cake baked on hot stones', 'Bread and meat from ravens', 'A jar of meal', 'A roasted bull'], 6),
     blank(3, 'and a jar of _____.', 'water', 6),
-    word(1, 'What did Elijah do after eating and drinking?', 'lay down again', 6),
+    sa(1, 'What did Elijah do after eating and drinking?', 'lay down again', 6),
     tf(2, 'The cake was baked on hot stones.', true, 6),
     mc(3, 'Where was the food placed?', ['At Elijah’s head', 'At the cave entrance', 'Under the tree roots', 'Beside his servant'], 6),
     blank(1, 'there was at his head a _____ baked on hot stones', 'cake', 6),
 
     mc(1, 'How many times did the angel come to Elijah?', ['A second time', 'Seven times', 'Only once', 'Twelve times'], 7),
     blank(1, 'else the journey will be too _____ for you.', 'great', 7),
-    word(2, 'Who came the second time?', 'the angel of the LORD', 7, ['angel']),
+    sa(2, 'Who came the second time?', 'the angel of the LORD', 7, ['angel']),
     tf(3, 'The angel said Elijah needed no more food for his journey.', false, 7, 'He told Elijah to eat because the journey was too great.'),
     mc(3, 'Why was Elijah told to eat again?', ['The journey would be too great for him', 'Ahab was arriving', 'The food would spoil', 'Rain was coming'], 7),
     blank(3, 'And the angel of the LORD came again a _____ time', 'second', 7, ['2nd']),
@@ -70,21 +70,21 @@ const bank: ChapterBank = {
 
     mc(2, 'What did Elijah say Israel had forsaken?', ['The LORD’s covenant', 'The throne of Ahab', 'The city of Samaria', 'The land of Judah'], 10),
     blank(3, 'and slain thy prophets with the _____.', 'sword', 10),
-    word(1, 'How did Elijah describe his zeal?', 'very jealous for the LORD', 10, ['very jealous']),
+    sa(1, 'How did Elijah describe his zeal?', 'very jealous for the LORD', 10, ['very jealous']),
     tf(2, 'Elijah believed many other prophets remained beside him.', false, 10, 'He said he alone was left.'),
     mc(1, 'What were people seeking to take from Elijah?', ['His life', 'His mantle', 'His food', 'His servant'], 10),
     blank(2, 'and I, even I only, am _____.', 'left', 10),
 
     mc(1, 'What natural force rent the mountains?', ['A great strong wind', 'Fire', 'An earthquake', 'Rain'], 11),
     blank(3, 'but the LORD was not in the _____.', 'wind', 11),
-    word(1, 'What followed the wind?', 'an earthquake', 11, ['earthquake']),
+    sa(1, 'What followed the wind?', 'an earthquake', 11, ['earthquake']),
     tf(2, 'The LORD was in the earthquake.', false, 11, 'The text expressly says the LORD was not in the earthquake.'),
     mc(2, 'What did the strong wind do?', ['Rent mountains and broke rocks', 'Brought great rain', 'Burned the altar', 'Carried Elijah away'], 11),
     blank(2, 'and broke in pieces the _____ before the LORD', 'rocks', 11),
 
     mc(1, 'What followed the fire?', ['A still small voice', 'Another earthquake', 'A great rain', 'A strong wind'], 12),
     blank(2, 'and after the earthquake a _____, but the LORD was not in the fire', 'fire', 12),
-    word(2, 'In what was the LORD’s presence revealed after the fire?', 'a still small voice', 12),
+    sa(2, 'In what was the LORD’s presence revealed after the fire?', 'a still small voice', 12),
     tf(3, 'The LORD was revealed in the fire rather than the voice.', false, 12, 'He was not in the fire; a still small voice followed.'),
     mc(2, 'Which sequence is correct?', ['Wind, earthquake, fire, still small voice', 'Fire, wind, rain, voice', 'Earthquake, rain, fire, wind', 'Voice, wind, fire, earthquake'], 12),
     blank(3, 'and after the fire a still small _____.', 'voice', 12),
@@ -92,14 +92,14 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elijah wrap over his face?', ['His mantle', 'A sackcloth', 'His robe', 'A veil from the cave'], 13),
     blank(2, 'and went out and stood at the _____ of the cave.', 'entrance', 13),
-    word(2, 'What did Elijah hear?', 'a voice', 13),
+    sa(2, 'What did Elijah hear?', 'a voice', 13),
     tf(3, 'Elijah stayed deep inside the cave after hearing the voice.', false, 13, 'He went out and stood at the cave entrance.'),
     mc(2, 'What question did the voice repeat?', ['What are you doing here, Elijah?', 'Where is your servant?', 'Have you anointed Elisha?', 'Why did you flee Ahab?'], 13),
     blank(3, 'he wrapped his face in his _____', 'mantle', 13),
 
     mc(2, 'What did Elijah repeat about Israel?', ['They forsook the covenant, destroyed altars, and killed prophets', 'They had all repented', 'They had defeated Jezebel', 'They had returned to David'], 14),
     blank(3, 'and they seek my life, to take it _____.', 'away', 14),
-    word(1, 'For whom was Elijah very jealous?', 'the LORD, the God of hosts', 14, ['the LORD', 'LORD']),
+    sa(1, 'For whom was Elijah very jealous?', 'the LORD, the God of hosts', 14, ['the LORD', 'LORD']),
     tf(2, 'Elijah said Israel had restored the LORD’s altars.', false, 14, 'He said they had thrown the altars down.'),
     mc(1, 'Who did Elijah say was left?', ['Elijah alone', 'Seven thousand prophets', 'Ahab’s household', 'All Israel'], 14),
     blank(2, 'for the people of Israel have _____ thy covenant', 'forsaken', 14),
@@ -128,7 +128,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How many in Israel had not bowed to Baal?', ['Seven thousand', 'One hundred', 'Four hundred and fifty', 'Twelve thousand'], 18),
     blank(3, 'all the knees that have not bowed to _____', 'Ba’al', 18, ['Baal']),
-    word(1, 'What had the faithful mouths not done to Baal?', 'kissed him', 18, ['kissed Baal']),
+    sa(1, 'What had the faithful mouths not done to Baal?', 'kissed him', 18, ['kissed Baal']),
     tf(2, 'The LORD said Elijah was literally the only faithful person left.', false, 18, 'The LORD would leave seven thousand who had not bowed to Baal.'),
     mc(2, 'What two acts of Baal worship had the remnant refused?', ['Bowing the knee and kissing him', 'Building an altar and offering a bull', 'Eating and drinking', 'Wearing sackcloth and fasting'], 18),
     blank(2, 'Yet I will leave _____ thousand in Israel', 'seven', 18, ['7', 'seven thousand']),
@@ -136,7 +136,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What was Elisha doing when Elijah found him?', ['Plowing', 'Praying in a cave', 'Tending sheep', 'Building an altar'], 19),
     blank(3, 'who was plowing, with _____ yoke of oxen before him', 'twelve', 19, ['12']),
-    word(1, 'What did Elijah cast upon Elisha?', 'his mantle', 19, ['mantle']),
+    sa(1, 'What did Elijah cast upon Elisha?', 'his mantle', 19, ['mantle']),
     tf(2, 'Elisha was with the first yoke of oxen.', false, 19, 'He was with the twelfth.'),
     mc(2, 'Whose son was Elisha?', ['Shaphat’s', 'Nimshi’s', 'Hazael’s', 'Ahab’s'], 19),
     blank(2, 'and he was with the _____.', 'twelfth', 19, ['12th']),
@@ -144,7 +144,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha ask to do before following Elijah?', ['Kiss his father and mother', 'Finish plowing for a year', 'Visit Ahab', 'Go to Horeb'], 20),
     blank(2, 'and then I will _____ you.', 'follow', 20),
-    word(2, 'What did Elisha leave behind?', 'the oxen', 20),
+    sa(2, 'What did Elisha leave behind?', 'the oxen', 20),
     tf(3, 'Elijah forbade Elisha from saying farewell.', false, 20, 'Elijah told him to go back again.'),
     mc(2, 'How did Elisha respond to the mantle?', ['He left the oxen and ran after Elijah', 'He ignored Elijah', 'He fled to Damascus', 'He asked to become king'], 20),
     blank(3, 'Let me _____ my father and my mother', 'kiss', 20),

@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 14, tag: 'quiz-v2-2kings-14', rows: [
@@ -28,7 +28,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Amaziah execute after securing royal power?', ['The servants who killed his father', 'Their children', 'The priests', 'The king of Israel'], 5),
     blank(2, 'he killed his _____ who had slain the king his father.', 'servants', 5),
-    word(1, 'What had those servants done?', 'slain the king his father', 5, ['killed his father']),
+    sa(1, 'What had those servants done?', 'slain the king his father', 5, ['killed his father']),
     tf(2, 'Amaziah waited until royal power was firmly in his hand before acting.', true, 5),
 
     mc(1, 'Whom did Amaziah spare when punishing his father’s murderers?', ['Their children', 'The murderers', 'Their commanders', 'Their priests'], 6),
@@ -48,7 +48,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Which two plants appear in Jehoash’s parable?', ['A thistle and a cedar on Lebanon', 'A vine and a fig tree', 'An olive and a bramble', 'A reed and an oak'], 9),
     blank(2, 'A _____ on Lebanon sent to a cedar on Lebanon', 'thistle', 9),
-    word(1, 'What trampled the thistle?', 'a wild beast of Lebanon', 9, ['wild beast']),
+    sa(1, 'What trampled the thistle?', 'a wild beast of Lebanon', 9, ['wild beast']),
     tf(2, 'In the parable, the thistle asked the cedar for a daughter as a wife for his son.', true, 9),
     mc(3, 'What warning did the thistle-and-cedar parable convey?', ['Amaziah’s prideful challenge would end in humiliation', 'Israel desired a marriage alliance', 'Lebanon would invade Judah', 'Edom would aid Amaziah'], 9),
 
@@ -64,12 +64,12 @@ const bank: ChapterBank = {
 
     mc(1, 'Who won the battle at Beth-shemesh?', ['Israel', 'Judah', 'Edom', 'Syria'], 12),
     blank(2, 'and every man fled to his _____.', 'home', 12),
-    word(1, 'What happened to Judah’s soldiers?', 'they fled to their homes', 12, ['fled home']),
+    sa(1, 'What happened to Judah’s soldiers?', 'they fled to their homes', 12, ['fled home']),
     tf(3, 'Judah defeated Israel at Beth-shemesh.', false, 12, 'Israel defeated Judah.'),
 
     mc(1, 'Whom did Jehoash capture at Beth-shemesh?', ['Amaziah king of Judah', 'Azariah', 'Jeroboam', 'Jonah'], 13),
     blank(2, 'and broke down the wall of Jerusalem for _____ hundred cubits', 'four', 13, ['4']),
-    word(1, 'Between which gates was Jerusalem’s wall broken?', 'the Ephraim Gate and the Corner Gate', 13, ['Ephraim Gate to Corner Gate']),
+    sa(1, 'Between which gates was Jerusalem’s wall broken?', 'the Ephraim Gate and the Corner Gate', 13, ['Ephraim Gate to Corner Gate']),
     tf(3, 'Jehoash carried his captive from Beth-shemesh to Jerusalem.', true, 13),
 
     mc(1, 'What did Jehoash seize from Jerusalem?', ['Gold, silver, vessels, royal treasure, and hostages', 'Only food', 'Only weapons', 'The ark of the covenant'], 14),
@@ -84,7 +84,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Jehoash in Israel?', ['His son Jeroboam', 'Amaziah', 'Azariah', 'Jonah'], 16),
     blank(2, 'and was buried in Sama’ria with the kings of _____.', 'Israel', 16),
-    word(1, 'What phrase describes Jehoash’s death?', 'slept with his fathers', 16),
+    sa(1, 'What phrase describes Jehoash’s death?', 'slept with his fathers', 16),
     tf(3, 'Jehoash was buried in Samaria.', true, 16),
 
     mc(1, 'How long did Amaziah live after Jehoash died?', ['Fifteen years', 'Twenty-nine years', 'Sixteen years', 'Forty-one years'], 17),
@@ -109,7 +109,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whom did Judah make king after Amaziah?', ['Azariah', 'Jeroboam', 'Jehoash', 'Zechariah'], 21),
     blank(2, 'who was _____ years old, and made him king', 'sixteen', 21, ['16']),
-    word(1, 'Who selected Azariah as king?', 'all the people of Judah', 21),
+    sa(1, 'Who selected Azariah as king?', 'all the people of Judah', 21),
     tf(3, 'Azariah was Amaziah’s son.', true, 21),
 
     mc(1, 'Which city did Azariah build and restore to Judah?', ['Elath', 'Lachish', 'Samaria', 'Damascus'], 22),
@@ -135,7 +135,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How does the chapter describe Israel’s affliction?', ['Very bitter', 'Brief and mild', 'Entirely ended', 'Self-inflicted only'], 26),
     blank(2, 'for there was none left, bond or _____.', 'free', 26),
-    word(1, 'Who was available to help Israel?', 'no one', 26, ['none']),
+    sa(1, 'Who was available to help Israel?', 'no one', 26, ['none']),
     tf(3, 'The LORD saw Israel’s bitter affliction.', true, 26),
 
     mc(1, 'Through whose hand did the LORD save Israel?', ['Jeroboam son of Joash', 'Amaziah', 'Jonah', 'Azariah'], 27),
@@ -145,12 +145,12 @@ const bank: ChapterBank = {
 
     mc(1, 'Which two cities did Jeroboam recover for Israel?', ['Damascus and Hamath', 'Jerusalem and Lachish', 'Elath and Sela', 'Samaria and Beth-shemesh'], 28),
     blank(2, 'how he recovered for Israel Damascus and _____.', 'Hamath', 28),
-    word(1, 'Where were Jeroboam’s other acts recorded?', 'Chronicles of the Kings of Israel', 28),
+    sa(1, 'Where were Jeroboam’s other acts recorded?', 'Chronicles of the Kings of Israel', 28),
     tf(3, 'The recovered cities had belonged to Judah.', true, 28),
 
     mc(1, 'Who succeeded Jeroboam?', ['His son Zechariah', 'Azariah', 'Amaziah', 'Jonah'], 29),
     blank(2, 'and _____ his son reigned in his stead.', 'Zechari’ah', 29, ['Zechariah']),
-    word(1, 'With whom did Jeroboam sleep at death?', 'his fathers, the kings of Israel', 29, ['his fathers']),
+    sa(1, 'With whom did Jeroboam sleep at death?', 'his fathers, the kings of Israel', 29, ['his fathers']),
     tf(3, 'Jeroboam’s son continued the dynasty.', true, 29),
   ],
 }

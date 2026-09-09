@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 2, tag: 'quiz-v2-2kings-2', rows: [
@@ -16,13 +16,13 @@ const bank: ChapterBank = {
 
     mc(1, 'Who approached Elisha at Bethel?', ['The sons of the prophets', 'The king’s captains', 'The men of Jericho', 'The priests of Baal'], 3),
     blank(2, 'Do you know that today the LORD will take away your _____ from over you?', 'master', 3),
-    word(1, 'What did Elisha tell the prophets to hold?', 'their peace', 3, ['your peace', 'peace']),
+    sa(1, 'What did Elisha tell the prophets to hold?', 'their peace', 3, ['your peace', 'peace']),
     tf(3, 'Elisha said he did not know that his master would be taken away.', false, 3, 'He said that he knew and told them to hold their peace.'),
     mc(2, 'What news did the prophets at Bethel already know?', ['The LORD would take Elisha’s master away that day', 'Elijah would settle permanently in Bethel', 'The king would come to Bethel', 'The Jordan had dried up'], 3),
 
     mc(1, 'Where did Elijah next say the LORD had sent him?', ['Jericho', 'Samaria', 'Carmel', 'Gilgal'], 4),
     blank(3, 'Eli’sha, _____ here, I pray you', 'tarry', 4),
-    word(2, 'What did Elisha again refuse to do?', 'leave Elijah', 4, ['leave him', 'remain behind']),
+    sa(2, 'What did Elisha again refuse to do?', 'leave Elijah', 4, ['leave him', 'remain behind']),
     tf(1, 'Elisha accompanied Elijah to Jericho.', true, 4),
     mc(2, 'How did Elisha answer the request that he stay behind?', ['He swore that he would not leave Elijah', 'He agreed to wait at Bethel', 'He asked the prophets to accompany Elijah', 'He returned to Gilgal'], 4),
 
@@ -46,29 +46,29 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elijah use to strike the Jordan?', ['His rolled-up mantle', 'A wooden staff', 'A new bowl', 'A sword'], 8),
     blank(3, 'and the water was _____ to the one side and to the other', 'parted', 8),
-    word(2, 'On what kind of ground did Elijah and Elisha cross?', 'dry ground', 8),
+    sa(2, 'On what kind of ground did Elijah and Elisha cross?', 'dry ground', 8),
     tf(1, 'Both Elijah and Elisha crossed the divided Jordan.', true, 8),
     mc(2, 'What sequence opened a path through the Jordan?', ['Elijah rolled up his mantle and struck the water', 'Elisha poured salt into the river', 'The prophets called down fire', 'A whirlwind moved the water'], 8),
 
     mc(1, 'What did Elisha ask to inherit from Elijah?', ['A double share of his spirit', 'His home in Gilgal', 'Leadership of Israel’s army', 'A double share of land'], 9),
     blank(2, 'let me inherit a _____ share of your spirit.', 'double', 9),
-    word(1, 'When did Elijah invite Elisha to make a request?', 'after they had crossed', 9, ['when they had crossed the Jordan', 'after crossing']),
+    sa(1, 'When did Elijah invite Elisha to make a request?', 'after they had crossed', 9, ['when they had crossed the Jordan', 'after crossing']),
     tf(3, 'Elisha asked Elijah for wealth before they separated.', false, 9, 'He asked to inherit a double share of Elijah’s spirit.'),
     mc(3, 'Which request did Elisha make before Elijah was taken away?', ['Let me inherit a double share of your spirit', 'Let me return to the prophets at Jericho', 'Let me become king over Israel', 'Let me receive the chariot of fire'], 9),
     tf(2, 'Elisha made his request before Elijah was taken from him.', true, 9),
 
     mc(2, 'How did Elijah describe Elisha’s request?', ['A hard thing', 'An impossible sin', 'A simple favor', 'A royal command'], 10),
     blank(3, 'if you _____ me as I am being taken from you, it shall be so for you', 'see', 10),
-    word(1, 'What would show that Elisha’s request was granted?', 'seeing Elijah as he was taken away', 10, ['he would see Elijah taken away', 'seeing him taken']),
+    sa(1, 'What would show that Elisha’s request was granted?', 'seeing Elijah as he was taken away', 10, ['he would see Elijah taken away', 'seeing him taken']),
     tf(2, 'Elijah said the request would be granted whether or not Elisha saw his departure.', false, 10, 'It would be so only if Elisha saw Elijah being taken from him.'),
     mc(1, 'What condition did Elijah attach to Elisha receiving what he asked?', ['Elisha must see Elijah being taken away', 'Elisha must remain in Jericho', 'Elisha must find the lost mantle', 'Elisha must cross the Jordan alone'], 10),
 
     mc(1, 'What separated Elijah and Elisha as they walked and talked?', ['A chariot of fire and horses of fire', 'The divided waters of the Jordan', 'Fifty sons of the prophets', 'Two she-bears'], 11),
     blank(2, 'And Eli’jah went up by a _____ into heaven.', 'whirlwind', 11),
-    word(1, 'Where did Elijah go?', 'into heaven', 11, ['heaven']),
+    sa(1, 'Where did Elijah go?', 'into heaven', 11, ['heaven']),
     tf(3, 'The chariot of fire carried both Elijah and Elisha into heaven.', false, 11, 'The fiery chariot and horses separated them; Elijah went up in a whirlwind.'),
     mc(3, 'How does the RSV describe Elijah’s departure?', ['Fire-like chariot and horses separated the men, and Elijah ascended in a whirlwind', 'Elijah crossed the Jordan and disappeared into a cave', 'An angel carried Elijah away from Bethel', 'Elijah climbed Carmel and vanished in a cloud'], 11),
-    word(3, 'What were Elijah and Elisha doing immediately before the fiery appearance?', 'walking and talking', 11, ['going on and talking', 'they went on and talked']),
+    sa(3, 'What were Elijah and Elisha doing immediately before the fiery appearance?', 'walking and talking', 11, ['going on and talking', 'they went on and talked']),
 
     mc(1, 'What did Elisha cry when he saw Elijah taken?', ['My father, my father! the chariots of Israel and its horsemen!', 'Where is the LORD, the God of Elijah?', 'Go up, you baldhead!', 'Bring me a new bowl!'], 12),
     blank(3, 'Then he took hold of his own clothes and _____ them in two pieces.', 'rent', 12),
@@ -84,7 +84,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Elisha say as he struck the Jordan?', ['Where is the LORD, the God of Elijah?', 'Let me inherit a double share', 'Hold your peace', 'Bring me a new bowl'], 14),
     blank(3, 'Where is the LORD, the God of _____?', 'Eli’jah', 14, ['Elijah']),
-    word(2, 'What happened to the water when Elisha struck it?', 'it parted to both sides', 14, ['the water parted', 'it was parted']),
+    sa(2, 'What happened to the water when Elisha struck it?', 'it parted to both sides', 14, ['the water parted', 'it was parted']),
     tf(1, 'Elisha crossed the Jordan after the water divided.', true, 14),
     mc(3, 'What demonstrated that Elijah’s prophetic ministry continued through Elisha?', ['Elisha struck the Jordan with the mantle and the water parted', 'Elisha found Elijah on a mountain', 'The prophets gave Elisha a new mantle', 'The king appointed Elisha at Samaria'], 14),
     tf(2, 'The Jordan parted for Elisha as it had for Elijah.', true, 14),
@@ -109,7 +109,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Where was Elisha when the searchers returned?', ['Jericho', 'Bethel', 'Gilgal', 'Samaria'], 18),
     blank(3, 'Did I not say to you, Do not _____?', 'go', 18),
-    word(2, 'What reminder did Elisha give the returning men?', 'he had told them not to go', 18, ['Did I not say to you, Do not go', 'not to go']),
+    sa(2, 'What reminder did Elisha give the returning men?', 'he had told them not to go', 18, ['Did I not say to you, Do not go', 'not to go']),
     tf(1, 'The failed search confirmed Elisha’s earlier warning.', true, 18),
     mc(2, 'What did Elisha say when the search party came back?', ['Did I not say to you, Do not go?', 'Where is the LORD, the God of Elijah?', 'Bring me a new bowl', 'Hold your peace'], 18),
 
@@ -127,7 +127,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Where did Elisha throw the salt?', ['Into the spring of water', 'Into the Jordan', 'On the unfruitful land', 'At the city gate'], 21),
     blank(2, 'I have made this water _____.', 'wholesome', 21),
-    word(1, 'What two harms would no longer come from the water?', 'death or miscarriage', 21, ['death and miscarriage', 'neither death nor miscarriage']),
+    sa(1, 'What two harms would no longer come from the water?', 'death or miscarriage', 21, ['death and miscarriage', 'neither death nor miscarriage']),
     tf(3, 'Elisha claimed that the salt itself, apart from the LORD, healed the spring.', false, 21, 'Elisha announced, “Thus says the LORD, I have made this water wholesome.”'),
     mc(3, 'How did Elisha heal Jericho’s bad water?', ['He threw salt from a new bowl into the spring and proclaimed the LORD’s healing', 'He struck it with Elijah’s mantle', 'He poured oil into the Jordan', 'He asked the prophets to dig another well'], 21),
 
@@ -138,7 +138,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Where was Elisha traveling when the boys jeered at him?', ['Up to Bethel', 'Down to Jericho', 'Across the Jordan', 'Toward Ekron'], 23),
     blank(2, 'Go up, you _____! Go up, you baldhead!', 'baldhead', 23, ['bald head']),
-    word(1, 'Who came out of the city and jeered at Elisha?', 'some small boys', 23, ['small boys', 'boys']),
+    sa(1, 'Who came out of the city and jeered at Elisha?', 'some small boys', 23, ['small boys', 'boys']),
     tf(3, 'The boys honored Elisha as he approached Bethel.', false, 23, 'They jeered at him and repeatedly called him “baldhead.”'),
 
     mc(1, 'In whose name did Elisha curse the jeering boys?', ['The name of the LORD', 'The name of Elijah', 'The name of the king', 'The name of Bethel'], 24),

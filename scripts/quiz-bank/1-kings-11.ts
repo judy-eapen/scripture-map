@@ -1,6 +1,6 @@
 // 1 Kings 11 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -19,7 +19,7 @@ const bank: ChapterBank = {
     tf(1, 'The LORD had told the people of Israel not to enter into marriage with these nations.', true, 2),
     word(3, 'Verse 2 says Solomon "___ to these in love." Which verb?', 'clung', 2, ['clung to']),
     mc(1, 'How many wives did Solomon have?', ['Seven hundred', 'Three hundred', 'One thousand', 'Seventy'], 3),
-    word(1, 'How many concubines did Solomon have?', 'three hundred', 3, ['300']),
+    sa(1, 'How many concubines did Solomon have?', 'three hundred', 3, ['300']),
     blank(1, 'He had _____ wives, princesses, and three hundred concubines; and his wives turned away his heart.', 'seven hundred', 3, ['700']),
     blank(3, 'He had seven hundred wives, princesses, and _____ concubines; and his wives turned away his heart.', 'three hundred', 3, ['300']),
     tf(1, 'Solomon had three hundred wives and seven hundred concubines.', false, 3, 'It was seven hundred wives, princesses, and three hundred concubines.'),
@@ -48,7 +48,7 @@ const bank: ChapterBank = {
     mc(1, 'Where did Solomon build the high place for Chemosh and Molech?', ['On the mountain east of Jerusalem', 'In the temple court', 'At Gibeon', 'In the valley of Hinnom'], 7),
     blank(3, 'on the mountain _____ of Jerusalem.', 'east', 7),
     tf(2, 'Solomon built the high place for Chemosh and Molech on the mountain west of Jerusalem.', false, 7, 'It was on the mountain east of Jerusalem.'),
-    word(1, 'What did Solomon build for Chemosh and for Molech?', 'high place', 7, ['a high place', 'high places']),
+    sa(1, 'What did Solomon build for Chemosh and for Molech?', 'high place', 7, ['a high place', 'high places']),
     blank(1, 'And so he did for all his foreign wives, who burned _____ and sacrificed to their gods.', 'incense', 8),
     mc(1, 'What did Solomon’s foreign wives do (1 Kings 11:8)?', ['Burned incense and sacrificed to their gods', 'Wove garments for the temple', 'Fasted and prayed', 'Taught Israel their languages'], 8),
     tf(2, 'Solomon built high places only for Pharaoh’s daughter.', false, 8, '"And so he did for all his foreign wives."'),
@@ -92,7 +92,7 @@ const bank: ChapterBank = {
     tf(1, 'Hadad was of the royal house in Edom.', true, 14),
     mc(2, 'Who slew every male in Edom?', ['Joab the commander of the army', 'David', 'Solomon', 'Benaiah'], 15),
     blank(3, 'and Jo’ab the commander of the army went up to bury the _____, he slew every male in Edom', 'slain', 15),
-    word(2, 'Joab went up to Edom to bury whom?', 'the slain', 15, ['slain']),
+    sa(2, 'Joab went up to Edom to bury whom?', 'the slain', 15, ['slain']),
     tf(2, 'Joab slew every male in Edom.', true, 15),
     tf(3, 'Joab went up to bury the slain in Edom while Solomon was in Edom.', false, 15, 'It was "when David was in Edom".'),
     mc(1, 'How long did Joab and all Israel remain in Edom?', ['Six months', 'Forty days', 'A year', 'Three years'], 16),
@@ -101,7 +101,7 @@ const bank: ChapterBank = {
     tf(2, 'Joab and all Israel remained in Edom six years.', false, 16, 'They remained six months.'),
     mc(1, 'To what country did Hadad flee?', ['Egypt', 'Syria', 'Midian', 'Zobah'], 17),
     blank(1, 'but Hadad fled to _____, together with certain E’domites of his father’s servants, Hadad being yet a little child.', 'Egypt', 17),
-    word(2, 'Hadad fled with certain Edomites who were whose servants?', 'his father’s', 17, ['his fathers', 'father', 'his father', 'fathers']),
+    sa(2, 'Hadad fled with certain Edomites who were whose servants?', 'his father’s', 17, ['his fathers', 'father', 'his father', 'fathers']),
     tf(1, 'Hadad was a grown man when he fled to Egypt.', false, 17, 'Hadad was "yet a little child".'),
     blank(3, 'Hadad being yet a little _____.', 'child', 17),
     mc(2, 'From where did Hadad’s party set out on the way to Egypt?', ['Midian', 'Paran', 'Edom', 'Zobah'], 18),

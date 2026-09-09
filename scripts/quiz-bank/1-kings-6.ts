@@ -1,7 +1,7 @@
 // 1 Kings 6 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
 // Note: the stored RSV text for this chapter has no verse 33 (37 verses: 1–32, 34–38).
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -124,7 +124,7 @@ const bank: ChapterBank = {
     mc(3, 'What did he overlay with gold "until all the house was finished"?', ['The whole house', 'Only the doors', 'Only the floor', 'The outer court'], 22),
     blank(2, 'Also the whole _____ that belonged to the inner sanctuary he overlaid with gold.', 'altar', 22),
     tf(3, 'The altar that belonged to the inner sanctuary was left as plain cedar.', false, 22, 'The whole altar that belonged to the inner sanctuary he overlaid with gold.'),
-    word(3, 'The whole altar that he overlaid with gold belonged to which part of the house?', 'inner sanctuary', 22, ['sanctuary', 'the inner sanctuary']),
+    sa(3, 'The whole altar that he overlaid with gold belonged to which part of the house?', 'inner sanctuary', 22, ['sanctuary', 'the inner sanctuary']),
 
     // ══════════════════════════════════ v23–28 · The two cherubim
     mc(1, 'What did he make in the inner sanctuary out of olivewood?', ['Two cherubim', 'Two pillars', 'A table', 'A lampstand'], 23),
@@ -148,7 +148,7 @@ const bank: ChapterBank = {
     mc(2, 'Where did the cherubim’s other wings touch each other?', ['In the middle of the house', 'At the door of the inner sanctuary', 'At the vestibule', 'Against the ceiling'], 27),
     blank(2, 'He put the cherubim in the innermost part of the house; and the _____ of the cherubim were spread out', 'wings', 27, ['wing']),
     tf(2, 'A wing of each cherub touched a wall of the house.', true, 27),
-    word(3, 'In which part of the house did he put the cherubim?', 'innermost part', 27, ['innermost', 'the innermost part', 'innermost part of the house']),
+    sa(3, 'In which part of the house did he put the cherubim?', 'innermost part', 27, ['innermost', 'the innermost part', 'innermost part of the house']),
     tf(3, 'The wings of the cherubim were folded at their sides.', false, 27, 'The wings were spread out, touching the walls and each other in the middle of the house.'),
     blank(3, 'their other wings touched each other in the _____ of the house.', 'middle', 27),
     word(1, 'With what did he overlay the cherubim?', 'gold', 28),

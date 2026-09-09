@@ -1,6 +1,6 @@
 // 1 Kings 5 — quiz bank (RSV). Every row is anchored to a verse; fill-in-the-blank
 // rows are verified against the stored verse text by scripts/seed-quiz-bank.ts.
-import { mc, blank, word, tf, type ChapterBank } from './types';
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '1 Kings',
@@ -103,7 +103,7 @@ const bank: ChapterBank = {
     blank(1, 'while Solomon gave Hiram twenty thousand cors of _____ as food for his household, and twenty thousand cors of beaten oil.', 'wheat', 11),
     mc(2, 'How often did Solomon give Hiram the wheat and oil?', ['Year by year', 'Once only', 'Month by month', 'Every seven years'], 11),
     tf(2, 'Solomon gave Hiram wheat and beaten oil year by year.', true, 11),
-    word(2, 'How many cors of wheat did Solomon give Hiram?', 'twenty thousand', 11, ['20000', '20,000', '20 thousand']),
+    sa(2, 'How many cors of wheat did Solomon give Hiram?', 'twenty thousand', 11, ['20000', '20,000', '20 thousand']),
     blank(2, 'Solomon gave this to Hiram year by _____.', 'year', 11),
     mc(3, 'What kind of oil did Solomon give Hiram?', ['Beaten oil', 'Anointing oil', 'Perfumed oil', 'Oil pressed in Lebanon'], 11),
     blank(3, 'while Solomon gave Hiram twenty thousand cors of wheat as food for his household, and twenty thousand cors of _____ oil.', 'beaten', 11),
@@ -122,7 +122,7 @@ const bank: ChapterBank = {
 
     // ══════════════════════════════════ v13–16 · The labor force
     mc(1, 'How many men were in Solomon’s levy of forced labor?', ['Thirty thousand', 'Ten thousand', 'Seventy thousand', 'Eighty thousand'], 13),
-    word(1, 'How many men numbered in the levy Solomon raised out of all Israel?', 'thirty thousand', 13, ['30000', '30,000', '30 thousand']),
+    sa(1, 'How many men numbered in the levy Solomon raised out of all Israel?', 'thirty thousand', 13, ['30000', '30,000', '30 thousand']),
     blank(1, 'King Solomon raised a levy of forced labor out of all Israel; and the levy numbered _____ thousand men.', 'thirty', 13, ['30']),
     tf(1, 'Solomon raised a levy of forced labor out of all Israel.', true, 13),
     blank(2, 'King Solomon raised a levy of forced _____ out of all Israel; and the levy numbered thirty thousand men.', 'labor', 13, ['labour']),
@@ -133,7 +133,7 @@ const bank: ChapterBank = {
     word(1, 'Who was in charge of Solomon’s levy of forced labor?', 'Adoni’ram', 14, ['adoniram']),
     blank(1, '_____ was in charge of the levy.', 'Adoni’ram', 14, ['adoniram']),
     mc(2, 'How many men of the levy were sent to Lebanon each month?', ['Ten thousand', 'Thirty thousand', 'Three thousand three hundred', 'Twenty thousand'], 14),
-    word(2, 'How many men went to Lebanon a month in relays?', 'ten thousand', 14, ['10000', '10,000', '10 thousand']),
+    sa(2, 'How many men went to Lebanon a month in relays?', 'ten thousand', 14, ['10000', '10,000', '10 thousand']),
     blank(2, 'And he sent them to Lebanon, _____ thousand a month in relays;', 'ten', 14, ['10']),
     mc(3, 'What was the rotation for the men of the levy?', ['A month in Lebanon and two months at home', 'Two months in Lebanon and a month at home', 'Six months in Lebanon and six months at home', 'A year in Lebanon and a year at home'], 14),
     tf(2, 'The men of the levy spent a month in Lebanon and two months at home.', true, 14),
@@ -142,7 +142,7 @@ const bank: ChapterBank = {
     word(3, 'The ten thousand a month were sent to Lebanon "in ___".', 'relays', 14),
 
     mc(1, 'How many burden-bearers did Solomon have?', ['Seventy thousand', 'Eighty thousand', 'Thirty thousand', 'Ten thousand'], 15),
-    word(1, 'How many hewers of stone did Solomon have in the hill country?', 'eighty thousand', 15, ['80000', '80,000', '80 thousand']),
+    sa(1, 'How many hewers of stone did Solomon have in the hill country?', 'eighty thousand', 15, ['80000', '80,000', '80 thousand']),
     blank(1, 'Solomon also had _____ thousand burden-bearers and eighty thousand hewers of stone in the hill country,', 'seventy', 15, ['70']),
     mc(2, 'Where were Solomon’s eighty thousand hewers of stone?', ['In the hill country', 'In Lebanon', 'By the sea', 'In Tyre'], 15),
     blank(2, 'Solomon also had seventy thousand burden-bearers and eighty thousand hewers of _____ in the hill country,', 'stone', 15),
@@ -152,7 +152,7 @@ const bank: ChapterBank = {
     blank(3, 'Solomon also had seventy thousand burden-bearers and eighty thousand hewers of stone in the _____ country,', 'hill', 15),
 
     mc(1, 'How many chief officers did Solomon have over the work?', ['Three thousand three hundred', 'Three thousand', 'Thirty thousand', 'Three hundred'], 16),
-    word(1, 'How many chief officers were over the work?', 'three thousand three hundred', 16, ['3300', '3,300']),
+    sa(1, 'How many chief officers were over the work?', 'three thousand three hundred', 16, ['3300', '3,300']),
     blank(1, 'besides Solomon\'s three thousand three hundred chief _____ who were over the work, who had charge of the people who carried on the work.', 'officers', 16),
     tf(2, 'Solomon had three thousand three hundred chief officers over the work.', true, 16),
     blank(2, 'besides Solomon\'s three thousand three _____ chief officers who were over the work,', 'hundred', 16),

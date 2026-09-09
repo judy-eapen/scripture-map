@@ -1,4 +1,4 @@
-import { mc, blank, word, tf, type ChapterBank } from './types'
+import { mc, blank, word, tf, type ChapterBank, sa } from './types'
 
 const bank: ChapterBank = {
   book: '2 Kings', chapter: 16, tag: 'quiz-v2-2kings-16', rows: [
@@ -18,7 +18,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Whose ways did Ahaz follow?', ['The kings of Israel’s', 'David’s', 'Hezekiah’s', 'The priests’'], 3),
     blank(2, 'He even burned his _____ as an offering', 'son', 3),
-    word(1, 'What did Ahaz do to his son?', 'burned him as an offering', 3, ['burned his son as an offering']),
+    sa(1, 'What did Ahaz do to his son?', 'burned him as an offering', 3, ['burned his son as an offering']),
     tf(2, 'Ahaz imitated abominable practices of the displaced nations.', true, 3),
     mc(3, 'What especially abominable act showed Ahaz’s apostasy?', ['He burned his son as an offering', 'He dismissed every priest', 'He destroyed Jerusalem', 'He sold his son to Assyria'], 3),
     mc(2, 'Who had driven those nations out before Israel?', ['The LORD', 'The king of Assyria', 'David', 'Pekah'], 3),
@@ -39,7 +39,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Which city did the king of Edom recover?', ['Elath', 'Damascus', 'Jerusalem', 'Samaria'], 6),
     blank(2, 'and drove the men of _____ from Elath', 'Judah', 6),
-    word(1, 'Who came to dwell in Elath?', 'the Edomites', 6, ['Edomites']),
+    sa(1, 'Who came to dwell in Elath?', 'the Edomites', 6, ['Edomites']),
     tf(2, 'Judah retained control of Elath.', false, 6, 'Edom recovered Elath and expelled Judah’s men.'),
     mc(2, 'For which kingdom was Elath recovered?', ['Edom', 'Israel', 'Judah', 'Assyria'], 6),
     mc(3, 'What territorial reversal occurred during Ahaz’s crisis?', ['Edom regained Elath from Judah', 'Judah captured Damascus', 'Israel seized Assyria', 'Syria restored Samaria'], 6),
@@ -53,7 +53,7 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Ahaz send to Assyria’s king?', ['Silver and gold as a present', 'The ark', 'His son', 'The bronze altar'], 8),
     blank(2, 'Ahaz also took the silver and _____', 'gold', 8),
-    word(1, 'From which two treasuries did Ahaz take wealth?', 'the LORD’s house and the king’s house', 8, ['temple and palace treasuries']),
+    sa(1, 'From which two treasuries did Ahaz take wealth?', 'the LORD’s house and the king’s house', 8, ['temple and palace treasuries']),
     tf(2, 'Some of Ahaz’s payment came from the house of the LORD.', true, 8),
     mc(2, 'Why were sacred and royal treasures removed?', ['To purchase Assyrian aid', 'To rebuild Elath', 'To pay temple workers', 'To ransom Pekah'], 8),
     mc(3, 'What did Ahaz’s gift make Judah’s dependence visible?', ['He used temple and palace wealth to secure Assyria', 'He funded Syria’s siege', 'He enriched Edom', 'He restored David’s treasury'], 8),
@@ -74,7 +74,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who built the copied Damascus altar?', ['Uriah the priest', 'Ahaz himself', 'Tiglath-pileser', 'Hezekiah'], 11),
     blank(2, 'in accordance with all that King Ahaz had sent from _____.', 'Damascus', 11),
-    word(1, 'When was the altar ready?', 'before Ahaz arrived from Damascus', 11, ['before the king returned']),
+    sa(1, 'When was the altar ready?', 'before Ahaz arrived from Damascus', 11, ['before the king returned']),
     tf(2, 'Uriah waited for Ahaz to return before beginning the altar.', false, 11, 'He completed it before Ahaz arrived.'),
     mc(2, 'What guided Uriah’s construction?', ['Everything Ahaz sent from Damascus', 'The law of Moses', 'A vision from the LORD', 'Solomon’s original plans'], 11),
     mc(3, 'How faithfully did Uriah reproduce the foreign altar?', ['In accordance with Ahaz’s exact design', 'Only approximately', 'He refused to build it', 'He changed it to match the bronze altar'], 11),
@@ -89,21 +89,21 @@ const bank: ChapterBank = {
 
     mc(1, 'Which offerings did Ahaz burn on the altar?', ['Burnt and cereal offerings', 'Incense only', 'Peace offerings only', 'No offerings'], 13),
     blank(2, 'and poured his _____ offering', 'drink', 13),
-    word(1, 'What blood did Ahaz throw on the altar?', 'the blood of his peace offerings', 13, ['peace-offering blood']),
+    sa(1, 'What blood did Ahaz throw on the altar?', 'the blood of his peace offerings', 13, ['peace-offering blood']),
     tf(2, 'Ahaz poured a drink offering on the new altar.', true, 13),
     mc(2, 'What range of ritual acts did Ahaz perform?', ['Burning, pouring, and applying blood', 'Prayer only', 'Reading the law', 'Offering incense only'], 13),
     mc(3, 'Which offering accompanied Ahaz’s burnt offering?', ['A cereal offering', 'A guilt offering only', 'Firstfruits only', 'No other offering'], 13),
 
     mc(1, 'What did Ahaz do with the bronze altar?', ['Moved it to the north side of his altar', 'Destroyed it', 'Sent it to Damascus', 'Placed it in the palace'], 14),
     blank(2, 'and put it on the _____ side of his altar.', 'north', 14),
-    word(1, 'Where had the bronze altar stood?', 'before the LORD', 14),
+    sa(1, 'Where had the bronze altar stood?', 'before the LORD', 14),
     tf(2, 'Ahaz displaced the bronze altar from the temple front.', true, 14),
     mc(2, 'What took the bronze altar’s prominent position?', ['Ahaz’s copied altar', 'The ark', 'A golden calf', 'The laver'], 14),
     mc(3, 'Between what two points had the bronze altar been located?', ['Ahaz’s altar and the house of the LORD', 'The palace and city gate', 'The laver and sea', 'The north and south gates'], 14),
 
     mc(1, 'Whom did Ahaz command about altar use?', ['Uriah the priest', 'Hezekiah', 'Tiglath-pileser', 'Pekah'], 15),
     blank(2, 'Upon the great altar burn the _____ burnt offering', 'morning', 15),
-    word(1, 'What purpose did Ahaz reserve for the bronze altar?', 'for him to inquire by', 15, ['to inquire by']),
+    sa(1, 'What purpose did Ahaz reserve for the bronze altar?', 'for him to inquire by', 15, ['to inquire by']),
     tf(2, 'Ahaz ordered public and royal offerings placed on the great altar.', true, 15),
     mc(2, 'What was to be thrown upon the great altar?', ['All blood of burnt offerings and sacrifices', 'Only incense', 'Temple silver', 'Water from the laver'], 15),
     mc(3, 'How did Ahaz reassign the two altars?', ['Regular offerings went on the great altar; the bronze altar was reserved for inquiry', 'Both were destroyed', 'Only priests used the Damascus altar', 'All worship ceased'], 15),
@@ -116,14 +116,14 @@ const bank: ChapterBank = {
 
     mc(1, 'What did Ahaz remove from the stands?', ['The laver', 'The altar', 'The ark', 'The lampstands'], 17),
     blank(2, 'he took down the sea from off the bronze _____.', 'oxen', 17),
-    word(1, 'What supported the sea after Ahaz’s change?', 'a pediment of stone', 17, ['stone pediment']),
+    sa(1, 'What supported the sea after Ahaz’s change?', 'a pediment of stone', 17, ['stone pediment']),
     tf(2, 'Ahaz cut off the frames of the stands.', true, 17),
     mc(2, 'What material were the original oxen?', ['Bronze', 'Gold', 'Stone', 'Wood'], 17),
     mc(3, 'How did Ahaz alter the temple furnishings?', ['He stripped the stands and moved the sea from bronze oxen to stone', 'He restored Solomon’s arrangement', 'He added more bronze oxen', 'He sent the sea to Assyria'], 17),
 
     mc(1, 'Why did Ahaz remove royal structures from the LORD’s house?', ['Because of the king of Assyria', 'Because of Rezin', 'Because of fire', 'Because Hezekiah asked'], 18),
     blank(2, 'the covered way for the _____', 'sabbath', 18),
-    word(1, 'What royal access did Ahaz remove?', 'the outer entrance for the king', 18, ['outer royal entrance']),
+    sa(1, 'What royal access did Ahaz remove?', 'the outer entrance for the king', 18, ['outer royal entrance']),
     tf(2, 'The covered sabbath way had been built inside the palace.', true, 18),
     mc(2, 'Which two structures were removed?', ['The covered sabbath way and the king’s outer entrance', 'The altar and ark', 'The city gates', 'The palace treasury and temple'], 18),
     mc(3, 'Whose influence drove Ahaz’s architectural changes?', ['The Assyrian king’s', 'Uriah’s', 'Pekah’s', 'David’s'], 18),
@@ -137,7 +137,7 @@ const bank: ChapterBank = {
 
     mc(1, 'Who succeeded Ahaz?', ['His son Hezekiah', 'Jotham', 'Pekah', 'Uriah'], 20),
     blank(2, 'and _____ his son reigned in his stead.', 'Hezeki’ah', 20, ['Hezekiah']),
-    word(1, 'Where was Ahaz buried?', 'the city of David', 20, ['city of David']),
+    sa(1, 'Where was Ahaz buried?', 'the city of David', 20, ['city of David']),
     tf(2, 'Ahaz was buried with his fathers.', true, 20),
     mc(2, 'What phrase reports Ahaz’s death?', ['He slept with his fathers', 'He was carried to Assyria', 'He fell in battle', 'He disappeared'], 20),
     mc(3, 'How did Judah’s succession continue?', ['Hezekiah, Ahaz’s son, took the throne', 'Assyria appointed Uriah', 'Pekah ruled Judah', 'The throne remained empty'], 20),
