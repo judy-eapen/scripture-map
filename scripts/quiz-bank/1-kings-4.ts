@@ -9,7 +9,7 @@ const bank: ChapterBank = {
   rows: [
     // ══════════════════════════════════ v1–6 · Solomon’s high officials
     blank(1, 'King Solomon was king over all _____,', 'Israel', 1),
-    tf(1, 'At the start of 1 Kings 4, Solomon was king over all Israel.', true, 1),
+    tf(1, 'At the start of 1 Kings 4, Solomon was king over Judah alone.', false, 1, 'The chapter begins, "King Solomon was king over all Israel."'),
     word(1, 'Who was king over all Israel in 1 Kings 4?', 'Solomon', 1),
     mc(1, 'According to 1 Kings 4:1, Solomon was king over what?', ['All Israel', 'Judah only', 'Jerusalem only', 'The northern tribes only'], 1),
 
@@ -23,28 +23,28 @@ const bank: ChapterBank = {
     blank(2, 'Elihor’eph and Ahi’jah the sons of Shisha were _____;', 'secretaries', 3),
     blank(3, 'Jehosh’aphat the son of Ahi’lud was _____;', 'recorder', 3),
     word(2, 'Who was Solomon’s recorder?', 'Jehoshaphat', 3),
-    tf(2, 'Jehoshaphat the son of Ahilud was recorder.', true, 3),
+    tf(2, 'Jehoshaphat the son of Ahilud was one of Solomon’s secretaries.', false, 3, 'Elihoreph and Ahijah were secretaries; "Jehoshaphat the son of Ahilud was recorder."'),
     mc(3, 'Jehoshaphat the recorder was the son of whom?', ['Ahilud', 'Shisha', 'Zadok', 'Nathan'], 3),
 
     mc(1, 'Who was in command of Solomon’s army?', ['Benaiah the son of Jehoiada', 'Adoniram the son of Abda', 'Ahishar', 'Azariah the son of Nathan'], 4),
     word(1, 'Who commanded the army under King Solomon?', 'Benaiah', 4),
     blank(1, 'Benai’ah the son of Jehoi’ada was in command of the _____;', 'army', 4),
     mc(1, 'Which two men are named as priests in 1 Kings 4:4?', ['Zadok and Abiathar', 'Azariah and Zabud', 'Elihoreph and Ahijah', 'Zadok and Nathan'], 4),
-    tf(1, 'According to 1 Kings 4:4, Zadok and Abiathar were priests.', true, 4),
+    tf(1, 'Zadok and Abiathar were commanders of Solomon’s army.', false, 4, '"Benaiah the son of Jehoiada was in command of the army; Zadok and Abiathar were priests."'),
     blank(3, 'Zadok and _____ were priests;', 'Abiathar', 4),
 
     mc(2, 'Who was "over the officers"?', ['Azariah the son of Nathan', 'Azariah the son of Zadok', 'Ahishar', 'Ben-hur'], 5),
     word(2, 'Who was "priest and king’s friend"?', 'Zabud', 5),
     blank(3, 'Zabud the son of Nathan was priest and king’s _____;', 'friend', 5),
     mc(3, 'Azariah (over the officers) and Zabud (priest and king’s friend) were both sons of whom?', ['Nathan', 'Zadok', 'Ahilud', 'Shisha'], 5),
-    tf(2, 'Zabud the son of Nathan was described as priest and king’s friend.', true, 5),
+    tf(2, 'Zabud the son of Zadok was described as priest and king’s friend.', false, 5, 'The verse names "Zabud the son of Nathan" as priest and king’s friend.'),
     blank(3, 'Azari’ah the son of Nathan was over the _____;', 'officers', 5),
     tf(3, 'Zabud the son of Nathan was in charge of the palace.', false, 5, 'Ahishar was in charge of the palace; Zabud was priest and king’s friend.'),
 
     mc(1, 'Who was in charge of the palace?', ['Ahishar', 'Adoniram the son of Abda', 'Benaiah the son of Jehoiada', 'Zabud the son of Nathan'], 6),
     word(1, 'Who was in charge of the forced labor?', 'Adoniram', 6, ['adoniram']),
     blank(1, 'and Adoni’ram the son of Abda was in charge of the forced _____.', 'labor', 6),
-    tf(1, 'Adoniram the son of Abda was in charge of the forced labor.', true, 6),
+    tf(1, 'Adoniram the son of Abda was in charge of the palace.', false, 6, 'Ahishar was in charge of the palace; Adoniram "was in charge of the forced labor."'),
     word(3, 'Adoniram, who was in charge of the forced labor, was the son of whom?', 'Abda', 6),
     blank(3, 'Ahi’shar was in charge of the _____;', 'palace', 6),
     mc(1, 'What was Adoniram the son of Abda in charge of?', ['The forced labor', 'The palace', 'The army', 'The officers'], 6),
@@ -218,7 +218,7 @@ const bank: ChapterBank = {
     tf(1, 'Solomon uttered three thousand songs.', false, 32, 'He uttered three thousand proverbs; his songs were a thousand and five.'),
     blank(3, 'He also uttered _____ proverbs;', 'three thousand', 32, ['3000', '3,000']),
 
-    mc(1, 'Solomon spoke of trees "from the cedar that is in Lebanon to" what?', ['The hyssop that grows out of the wall', 'The oak of Bashan', 'The fig tree', 'The vine of Engedi'], 33),
+    mc(1, 'Solomon spoke of trees "from the cedar that is in Lebanon to" what?', ['The hyssop that grows out of the wall', 'The vine under which the people of Israel dwelt', 'The fig tree under which every man lived in safety', 'The barley brought for the horses and swift steeds'], 33),
     word(2, 'Which plant "grows out of the wall" in 1 Kings 4:33?', 'hyssop', 33),
     blank(2, 'He spoke of trees, from the _____ that is in Lebanon to the hyssop that grows out of the wall;', 'cedar', 33),
     tf(1, 'Solomon spoke of beasts, birds, reptiles, and fish.', true, 33),
@@ -232,12 +232,6 @@ const bank: ChapterBank = {
     tf(2, 'Men came only from Israel to hear Solomon’s wisdom.', false, 34, 'They came "from all peoples … and from all the kings of the earth".'),
 
     // ══════════════════════════════════ Whole-chapter
-    mc(2, 'Which two of Solomon’s officers were married to daughters of Solomon?', ['Ben-abinadab and Ahimaaz', 'Ben-hur and Ben-deker', 'Baana and Geber', 'Ahinadab and Shimei'], 15),
-    mc(3, 'Which of these was NOT one of Solomon’s twelve district officers?', ['Adoniram the son of Abda', 'Ben-hur', 'Shimei the son of Ela', 'Geber the son of Uri'], 6),
-    mc(1, '1 Kings 4 is mostly about what?', ['Solomon’s officials, provisions, and wisdom', 'David’s last words', 'The building of the temple', 'The visit of the queen of Sheba'], 1),
-    tf(2, 'Two men named Baana served among Solomon’s twelve officers.', true, 16, 'Baana the son of Ahilud (v12) and Baana the son of Hushai (v16).'),
-    mc(3, 'Which name appears twice in 1 Kings 4 — once as a high official and once as one of the twelve officers?', ['Jehoshaphat', 'Benaiah', 'Zabud', 'Ahishar'], 17, 'Jehoshaphat the son of Ahilud was recorder; Jehoshaphat the son of Paruah was officer in Issachar.'),
-    mc(1, 'Which quality of Solomon does the end of 1 Kings 4 emphasize?', ['His wisdom', 'His military conquests', 'His building projects', 'His many wives'], 29),
   ],
 };
 

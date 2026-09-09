@@ -94,3 +94,18 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - 1 Kings 3 · 55830eeb-1745-4e8b-b5b7-a2c9f608ada5 · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
 - 1 Kings 3 · 499af799-c3e2-4f0f-a490-53ea115e6813 · R2/R8 · retired · Cross-verse sequence was unsupported by its single citation.
 - 1 Kings 3 · 44a461da-eda0-4f4f-9113-92a5d91e2edf · R2/R8 · retired · Combined the dream and judgment while citing only verse 16.
+
+## 1 Kings 4
+
+- 1 Kings 4 · 656c8492-a878-4235-b639-82c651c111a4 · R4 · fixed · Swapped all Israel for Judah alone and quoted the correction.
+- 1 Kings 4 · 0ef48d8d-b8e4-484e-99e8-857078b79951 · R4 · fixed · Swapped recorder for secretary and quoted the offices.
+- 1 Kings 4 · 37f964ec-f7d3-4791-a73f-5fdc85d93b7c · R3/R4 · fixed · Removed the verse-number framing and swapped the priests' office.
+- 1 Kings 4 · 0f2831d5-ac88-44e8-bebc-de9c9f459c19 · R4 · fixed · Swapped Zabud's father and quoted the correction.
+- 1 Kings 4 · cceda3ea-97b6-45d1-be32-48f8207d5e70 · R4 · fixed · Swapped forced labor for palace and quoted both offices.
+- 1 Kings 4 · c46cb0a8-64b9-4952-8704-bb19ecec9abc · R5 · fixed · Balanced each plant-related choice with chapter detail.
+- 1 Kings 4 · 80ecf476-1b9a-4d97-b3b4-3f1ec2a2f06b · R2/R8 · retired · Required combining two marriage notices under one citation.
+- 1 Kings 4 · 94d71fe4-a1af-4283-a1f3-28de9ba110be · R2/R8 · retired · Required checking district officers across many uncited verses.
+- 1 Kings 4 · c280510b-a46e-4617-aeec-26a66efd2538 · R3/R8 · retired · Asked for a meta summary rather than a verse fact.
+- 1 Kings 4 · 246236aa-5a94-4261-aad4-9e5177d23b6d · R2/R8 · retired · Combined two Baana notices while citing only one.
+- 1 Kings 4 · d30971a2-4a2f-443f-87dd-d57034d465e7 · R2/R8 · retired · Combined two Jehoshaphat notices under one citation.
+- 1 Kings 4 · 69606ccb-e55e-40ab-a695-75ea2989075a · R3/R8 · retired · Asked what the chapter emphasizes rather than what happened.
