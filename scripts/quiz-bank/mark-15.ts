@@ -13,7 +13,7 @@ const bank: ChapterBank = {
     mc(1, 'On the morning after His arrest, who held a consultation and then bound Jesus and led Him away?', ['The chief priests with the elders, scribes, and the whole council', 'The soldiers of the whole garrison in the Praetorium', 'Pilate together with the centurion who stood opposite Him', 'The passers-by who wagged their heads at the cross'], 1),
     word(1, 'After the morning council bound Jesus and led Him away, to whom did they deliver Him?', 'Pilate', 1),
     blank(3, 'Immediately, in the morning, the chief priests held a consultation with the elders and scribes and the whole _____; and they bound Jesus, led Him away, and delivered Him to Pilate.', 'council', 1),
-    tf(2, 'Mark says the chief priests held their consultation with the elders and scribes in the evening, after the Sabbath.', false, 1, 'Mark says it happened "Immediately, in the morning."'),
+    tf(2, 'Mark says the chief priests held their consultation with the elders and scribes immediately in the morning.', true, 1),
     sa(3, 'Describe what the chief priests did with Jesus after their morning consultation with the elders, scribes, and the whole council.', 'They bound Jesus, led Him away, and delivered Him to Pilate.', 1),
 
     mc(1, 'What was the first question Pilate put to Jesus when the council delivered Him?', ['"Are You the King of the Jews?"', '"Do You answer nothing?"', '"Why, what evil has He done?"', '"What then do you want me to do with Him?"'], 2),
@@ -40,7 +40,7 @@ const bank: ChapterBank = {
     tf(1, 'At the feast Pilate was accustomed to releasing one prisoner, whomever the people requested.', true, 6),
     word(3, 'How many prisoners was Pilate accustomed to releasing to the people at the feast?', 'one', 6, ['1']),
 
-    mc(1, 'Who was Barabbas, according to Mark?', ['A prisoner chained with his fellow rebels who had committed murder in the rebellion', 'A Cyrenian passing by who was compelled to bear the cross', 'A prominent council member who was waiting for the kingdom of God', 'A centurion who stood opposite Jesus at the cross'], 7),
+    mc(1, 'Who was Barabbas, according to Mark?', ['A rebel imprisoned for murder during the rebellion', 'A Cyrenian compelled to bear Jesus’ cross', 'A council member awaiting God’s kingdom', 'A centurion standing opposite Jesus'], 7),
     word(1, 'What crime had Barabbas and his fellow rebels committed in the rebellion?', 'murder', 7),
     blank(2, 'And there was one named _____, who was chained with his fellow rebels; they had committed murder in the rebellion.', 'Barabbas', 7),
     tf(3, 'Barabbas was chained with his fellow rebels because they had committed robbery in the rebellion.', false, 7, 'They had committed murder in the rebellion.'),
@@ -62,7 +62,7 @@ const bank: ChapterBank = {
     mc(1, 'How did the chief priests respond when Pilate offered to release the King of the Jews?', ['They stirred up the crowd so that he should rather release Barabbas', 'They accused Jesus of many more things before Pilate', 'They demanded that Pilate scourge Jesus first', 'They asked Pilate to write the inscription of His accusation'], 11),
     word(2, 'Whom did the crowd, stirred up by the chief priests, want Pilate to release instead of Jesus?', 'Barabbas', 11),
     blank(3, 'But the chief priests _____ up the crowd, so that he should rather release Barabbas to them.', 'stirred', 11),
-    tf(2, 'It was the scribes who stirred up the crowd to ask for Barabbas.', false, 11, 'Mark says the chief priests stirred up the crowd.'),
+    tf(2, 'The chief priests stirred up the crowd to ask Pilate to release Barabbas.', true, 11),
 
     sa(3, 'After the crowd was stirred up to ask for Barabbas, what did Pilate ask them about Jesus?', 'He asked, "What then do you want me to do with Him whom you call the King of the Jews?"', 12),
     blank(2, 'Pilate answered and said to them again, "What then do you want me to do with Him whom you _____ the King of the Jews?"', 'call', 12),
@@ -115,7 +115,7 @@ const bank: ChapterBank = {
     word(1, 'Simon, who was compelled to bear Jesus’ cross, is called a man of what place?', 'Cyrene', 21, ['cyrenian', 'a cyrenian', 'cyrenean']),
     sa(2, 'Who were the sons of Simon the Cyrenian, as Mark names them?', 'Alexander and Rufus.', 21),
     blank(2, 'Then they compelled a certain man, Simon a Cyrenian, the father of Alexander and _____, as he was coming out of the country and passing by, to bear His cross.', 'Rufus', 21),
-    tf(3, 'Simon the Cyrenian volunteered to bear Jesus’ cross as he was coming out of the country.', false, 21, 'The soldiers compelled him to bear the cross.'),
+    tf(3, 'The soldiers compelled Simon the Cyrenian to bear Jesus’ cross as he came out of the country.', true, 21),
     mc(3, 'What was Simon the Cyrenian doing when the soldiers compelled him to bear the cross?', ['Coming out of the country and passing by', 'Looking on from afar with the women', 'Standing opposite Jesus with the centurion', 'Coming down from Jerusalem to Golgotha'], 21),
     word(3, 'Simon the Cyrenian was the father of Rufus and of whom else?', 'Alexander', 21),
 
@@ -138,7 +138,7 @@ const bank: ChapterBank = {
 
     word(1, 'At what hour does Mark say they crucified Jesus?', 'third', 25, ['3rd', 'the third hour', 'third hour', '3']),
     blank(1, 'Now it was the _____ hour, and they crucified Him.', 'third', 25, ['3rd']),
-    tf(3, 'Mark says Jesus was crucified at the sixth hour.', false, 25, 'It was the third hour when they crucified Him.'),
+    tf(3, 'Mark says Jesus was crucified at the third hour.', true, 25),
     mc(2, 'Which time marker does Mark attach to the crucifixion itself?', ['The third hour', 'The sixth hour', 'The ninth hour', 'Evening, on the Preparation Day'], 25),
 
     sa(1, 'What was written in the inscription of Jesus’ accusation above Him?', 'THE KING OF THE JEWS.', 26),
@@ -157,7 +157,7 @@ const bank: ChapterBank = {
     tf(2, 'Mark quotes the Scripture, "And He was numbered with the transgressors," as fulfilled at the crucifixion.', true, 28),
 
     // ══════════════════════════════════ v29–32 · Mocked by passers-by, chief priests, and robbers
-    mc(1, 'What did those who passed by the cross do and say to Jesus?', ['They blasphemed Him, wagging their heads, and taunted Him about destroying the temple and building it in three days', 'They bowed the knee and mocked Him with "Hail, King of the Jews!"', 'They offered Him sour wine and said to wait for Elijah', 'They said, "He saved others; Himself He cannot save"'], 29),
+    mc(1, 'What did those who passed by the cross do and say to Jesus?', ['They wagged their heads and taunted Him about rebuilding the temple', 'They bowed and mocked Him as King of the Jews', 'They offered sour wine and waited for Elijah', 'They said He saved others but could not save Himself'], 29),
     blank(2, 'And those who passed by blasphemed Him, wagging their heads and saying, "Aha! You who destroy the temple and build it in _____ days,', 'three', 29, ['3']),
     word(2, 'The passers-by mocked Jesus as the one who would destroy the temple and build it in how many days?', 'three', 29, ['3']),
     tf(2, 'The passers-by who blasphemed Jesus wagged their heads as they spoke.', true, 29),
@@ -173,7 +173,7 @@ const bank: ChapterBank = {
     tf(3, 'The chief priests mocked Jesus at the cross together with the elders.', false, 31, 'They were mocking among themselves with the scribes.'),
     sa(3, 'What did the chief priests and scribes say Jesus could not do, in contrast to what He had done for others?', 'They said, "He saved others; Himself He cannot save."', 31),
 
-    mc(2, 'What did the chief priests and scribes say would make them "see and believe"?', ['If the Christ, the King of Israel, descended now from the cross', 'If Elijah came to take Him down', 'If the veil of the temple were torn in two', 'If darkness came over the whole land'], 32),
+    mc(2, 'What did the chief priests and scribes say would make them "see and believe"?', ['If the King of Israel came down from the cross', 'If Elijah came to take Him down', 'If the temple veil were torn in two', 'If darkness covered the whole land'], 32),
     blank(2, 'Let the Christ, the King of _____, descend now from the cross, that we may see and believe." Even those who were crucified with Him reviled Him.', 'Israel', 32),
     tf(1, 'Even those who were crucified with Jesus reviled Him.', true, 32),
     sa(3, 'By what titles did the chief priests and scribes refer to Jesus when they challenged Him to descend from the cross?', 'The Christ, the King of Israel.', 32),
@@ -240,10 +240,10 @@ const bank: ChapterBank = {
     sa(3, 'Where had these women followed and ministered to Jesus, and where had they come up with Him?', 'They followed and ministered to Him when He was in Galilee, and came up with Him to Jerusalem.', 41),
 
     // ══════════════════════════════════ v42–47 · Joseph of Arimathea and the tomb
-    mc(1, 'What day was it when evening came after the crucifixion, and how does Mark explain it?', ['The Preparation Day, that is, the day before the Sabbath', 'The Sabbath, that is, the day of rest', 'The first day of Unleavened Bread', 'The day of the Passover feast'], 42),
+    mc(1, 'What day was it when evening came after the crucifixion, and how does Mark explain it?', ['Preparation Day, the day before the Sabbath', 'The Sabbath, the appointed day of rest', 'The first day of Unleavened Bread', 'The day of the Passover feast'], 42),
     word(2, 'Mark says evening came on which day, "that is, the day before the Sabbath"?', 'Preparation', 42, ['preparation day', 'the preparation day']),
     blank(1, 'Now when evening had come, because it was the Preparation Day, that is, the day before the _____,', 'Sabbath', 42),
-    tf(2, 'Mark explains the Preparation Day as the day after the Sabbath.', false, 42, 'It was "the day before the Sabbath."'),
+    tf(2, 'Mark explains the Preparation Day as the day before the Sabbath.', true, 42),
 
     mc(1, 'Who went in to Pilate and asked for the body of Jesus?', ['Joseph of Arimathea, a prominent council member', 'Simon of Cyrene, the father of Alexander and Rufus', 'The centurion who stood opposite Him', 'Mary Magdalene and Mary the mother of Joses'], 43),
     word(1, 'Joseph, who asked Pilate for Jesus’ body, was from what place?', 'Arimathea', 43, ['arimathaea']),
@@ -253,7 +253,7 @@ const bank: ChapterBank = {
     mc(3, 'What does Mark say Joseph of Arimathea was himself waiting for?', ['The kingdom of God', 'The coming of Elijah', 'The end of the Preparation Day', 'The Sabbath'], 43),
     blank(3, 'Joseph of Arimathea, a prominent council member, who was himself waiting for the kingdom of God, coming and taking _____, went in to Pilate and asked for the body of Jesus.', 'courage', 43),
 
-    mc(2, 'Why did Pilate summon the centurion after Joseph asked for the body?', ['He marveled that Jesus was already dead and asked whether He had been dead for some time', 'He wanted the centurion to take Jesus down from the cross', 'He wanted to know who had torn the veil of the temple', 'He wanted the centurion to roll the stone against the tomb'], 44),
+    mc(2, 'Why did Pilate summon the centurion after Joseph asked for the body?', ['He wondered whether Jesus had already been dead for some time', 'He wanted the centurion to take Jesus from the cross', 'He wanted to know who had torn the temple veil', 'He wanted the centurion to seal the tomb with a stone'], 44),
     word(2, 'Whom did Pilate summon to confirm that Jesus had been dead for some time?', 'centurion', 44, ['the centurion']),
     blank(2, 'Pilate _____ that He was already dead; and summoning the centurion, he asked him if He had been dead for some time.', 'marveled', 44, ['marvelled']),
     tf(1, 'Pilate marveled that Jesus was already dead when Joseph asked for the body.', true, 44),

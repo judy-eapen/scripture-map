@@ -2005,3 +2005,15 @@ Format: `book chapter · prior database ID · rule · action · summary`.
 - Mark 14 · a59b8636-8208-4404-8ccb-aa68b8382e0f · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 14 · b185bb45-ff6f-4af0-9ba0-22c3d5013c35 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
 - Mark 14 · 2bd1614c-7a27-4b63-90cb-42dfc07b8205 · R5 · retired · Balanced answer specificity while preserving the cited Orthodox Bible fact.
+## Mark 15 semantic review
+
+- Mark 15 · 5c361e48-00b3-4dd4-bfb4-ae20ebed43df · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · 46cedd63-9294-47f4-abe9-8cd285b9063f · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · d8742bb6-ad88-466a-914c-d6e82a615aa7 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · 78dd73c4-770f-4e01-9e9a-bf64a32c9fe6 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · 1ca4e4d7-a28f-4b78-8b86-22d1b7250163 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · f83260b8-8f4c-420e-ac7b-2ef6d9029d61 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · 3c187e4f-4f05-495f-8558-c9315d25eaa8 · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · 184f376a-d3c5-40cc-868b-94ea55dea28f · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · 7db34cb1-0bf2-4424-9bcf-efd113530f7f · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
+- Mark 15 · eed258cf-93bd-4156-b1bd-6401c2884e8a · R4/R5 · retired · Balanced the true/false split or answer specificity while preserving the cited Orthodox Bible fact.
