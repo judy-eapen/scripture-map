@@ -12,7 +12,7 @@ const bank: ChapterBank = {
     blank(3, 'As the LORD lives, and as you yourself live, I will not _____ you.', 'leave', 2),
     word(2, 'Who refused to leave Elijah?', 'Elisha', 2, ["Eli'sha"]),
     tf(1, 'Elijah asked Elisha to remain behind while he went to Bethel.', true, 2),
-    mc(2, 'What oath accompanied Elisha’s refusal to remain at Gilgal?', ['As the LORD lives, and as you yourself live', 'By the prophets at Bethel', 'By the waters of the Jordan', 'As surely as Ahab is dead'], 2),
+    mc(2, 'What oath accompanied Elisha’s refusal to remain at Gilgal?', ['“As the LORD lives, and as you yourself live”', '“As the sons of the prophets live at Bethel”', '“As surely as the waters flow in the Jordan”', '“As surely as Ahab has died in Samaria”'], 2),
 
     mc(1, 'Who approached Elisha at Bethel?', ['The sons of the prophets', 'The king’s captains', 'The men of Jericho', 'The priests of Baal'], 3),
     blank(2, 'Do you know that today the LORD will take away your _____ from over you?', 'master', 3),
@@ -30,7 +30,7 @@ const bank: ChapterBank = {
     blank(2, 'Yes, I know it; hold your _____.', 'peace', 5),
     word(1, 'From over whom would Elisha’s master be taken?', 'Elisha', 5, ["Eli'sha", 'him']),
     tf(3, 'The prophets at Jericho were unaware of Elijah’s coming departure.', false, 5, 'They asked Elisha whether he knew the LORD would take his master away that day.'),
-    mc(2, 'How did Elisha respond to the prophets at Jericho?', ['He acknowledged that he knew and asked for silence', 'He denied their report', 'He asked them to search for Elijah', 'He told them to go to Bethel'], 5),
+    mc(2, 'How did Elisha respond when the prophets at Jericho mentioned Elijah’s departure?', ['He acknowledged that he knew and told them to hold their peace', 'He denied knowing anything about the LORD taking his master', 'He immediately asked them to send fifty men to search for Elijah', 'He told them to return to Bethel and question the prophets there'], 5),
 
     mc(1, 'Where did the LORD send Elijah after Jericho?', ['The Jordan', 'Mount Carmel', 'Samaria', 'Ekron'], 6),
     blank(3, 'So the _____ of them went on.', 'two', 6, ['2']),
@@ -40,7 +40,7 @@ const bank: ChapterBank = {
 
     mc(1, 'How many sons of the prophets went to observe?', ['Fifty', 'Twelve', 'Forty-two', 'One hundred'], 7),
     blank(2, 'and stood at some _____ from them', 'distance', 7),
-    word(1, 'Beside what river were Elijah and Elisha standing?', 'the Jordan', 7, ['Jordan']),
+    word(1, 'Beside what river were Elijah and Elisha standing?', 'Jordan', 7, ['the Jordan']),
     tf(3, 'The fifty prophets stood beside Elijah and Elisha at the riverbank.', false, 7, 'They stood at some distance while the two men stood by the Jordan.'),
     mc(2, 'What did the fifty observers do as Elijah and Elisha reached the Jordan?', ['They stood at a distance', 'They crossed ahead of them', 'They returned to Jericho', 'They brought a new bowl'], 7),
 
@@ -67,10 +67,10 @@ const bank: ChapterBank = {
     blank(2, 'And Eli’jah went up by a _____ into heaven.', 'whirlwind', 11),
     sa(1, 'Where did Elijah go?', 'into heaven', 11, ['heaven']),
     tf(3, 'The chariot of fire carried both Elijah and Elisha into heaven.', false, 11, 'The fiery chariot and horses separated them; Elijah went up in a whirlwind.'),
-    mc(3, 'How does the RSV describe Elijah’s departure?', ['Fire-like chariot and horses separated the men, and Elijah ascended in a whirlwind', 'Elijah crossed the Jordan and disappeared into a cave', 'An angel carried Elijah away from Bethel', 'Elijah climbed Carmel and vanished in a cloud'], 11),
+    mc(3, 'How does the account describe Elijah’s departure?', ['A chariot and horses of fire separated the men, and Elijah went up in a whirlwind', 'Elijah crossed the Jordan alone and disappeared inside a mountain cave', 'An angel carried Elijah away from the sons of the prophets at Bethel', 'Elijah climbed Mount Carmel and vanished inside a rain cloud'], 11),
     sa(3, 'What were Elijah and Elisha doing immediately before the fiery appearance?', 'walking and talking', 11, ['going on and talking', 'they went on and talked']),
 
-    mc(1, 'What did Elisha cry when he saw Elijah taken?', ['My father, my father! the chariots of Israel and its horsemen!', 'Where is the LORD, the God of Elijah?', 'Go up, you baldhead!', 'Bring me a new bowl!'], 12),
+    mc(1, 'What did Elisha cry when he saw Elijah taken?', ['“My father, my father! The chariots of Israel and its horsemen!”', '“Where is the LORD, the God of Elijah who divided the Jordan?”', '“Go up, you baldhead! Go up, and leave the sons of the prophets!”', '“Bring me a new bowl, and put salt in it for the water!”'], 12),
     blank(3, 'Then he took hold of his own clothes and _____ them in two pieces.', 'rent', 12),
     word(2, 'How many pieces did Elisha tear his clothes into?', 'two', 12, ['2']),
     tf(1, 'After Elijah disappeared from sight, Elisha tore his own clothes.', true, 12),
@@ -86,7 +86,7 @@ const bank: ChapterBank = {
     blank(3, 'Where is the LORD, the God of _____?', 'Eli’jah', 14, ['Elijah']),
     sa(2, 'What happened to the water when Elisha struck it?', 'it parted to both sides', 14, ['the water parted', 'it was parted']),
     tf(1, 'Elisha crossed the Jordan after the water divided.', true, 14),
-    mc(3, 'What demonstrated that Elijah’s prophetic ministry continued through Elisha?', ['Elisha struck the Jordan with the mantle and the water parted', 'Elisha found Elijah on a mountain', 'The prophets gave Elisha a new mantle', 'The king appointed Elisha at Samaria'], 14),
+    mc(3, 'What sign showed the sons of the prophets that Elijah’s spirit rested on Elisha?', ['Elisha struck the Jordan with Elijah’s mantle, and the water parted', 'Elisha found Elijah alive on a mountain after a three-day search', 'The sons of the prophets presented Elisha with a newly made mantle', 'The king of Israel appointed Elisha as prophet when he reached Samaria'], 14),
     tf(2, 'The Jordan parted for Elisha as it had for Elijah.', true, 14),
 
     mc(1, 'What did the prophets at Jericho conclude about Elisha?', ['The spirit of Elijah rested on him', 'He had lost Elijah’s mantle', 'He should return to Gilgal', 'He had become king'], 15),
@@ -105,7 +105,7 @@ const bank: ChapterBank = {
     blank(2, 'They sent therefore fifty men; and for _____ days they sought him', 'three', 17, ['3']),
     word(1, 'Did the searchers find Elijah?', 'no', 17, ['they did not find him', 'no they did not']),
     tf(3, 'The fifty men found Elijah on the third day.', false, 17, 'They searched for three days but did not find him.'),
-    mc(2, 'What was the outcome of the search for Elijah?', ['Fifty men searched three days without finding him', 'They found him in a valley', 'They found him on Carmel', 'They stopped after one day'], 17),
+    mc(2, 'What was the outcome of the search for Elijah?', ['Fifty men searched for three days without finding him', 'The searchers found Elijah alive in a valley near the Jordan', 'The searchers found Elijah waiting for them on Mount Carmel', 'The fifty men abandoned the search after looking for only one day'], 17),
 
     mc(1, 'Where was Elisha when the searchers returned?', ['Jericho', 'Bethel', 'Gilgal', 'Samaria'], 18),
     blank(3, 'Did I not say to you, Do not _____?', 'go', 18),
@@ -113,7 +113,7 @@ const bank: ChapterBank = {
     tf(1, 'The failed search confirmed Elisha’s earlier warning.', true, 18),
     mc(2, 'What did Elisha say when the search party came back?', ['Did I not say to you, Do not go?', 'Where is the LORD, the God of Elijah?', 'Bring me a new bowl', 'Hold your peace'], 18),
 
-    mc(1, 'What problem did the men of the city report?', ['The water was bad and the land unfruitful', 'The city walls had fallen', 'The Jordan had flooded', 'The prophets had departed'], 19),
+    mc(1, 'What problem did the men of Jericho report to Elisha?', ['The water was bad and the land was unfruitful', 'The city walls had fallen and left the people unprotected', 'The Jordan had flooded and cut off the road to Bethel', 'The sons of the prophets had departed and left no teacher'], 19),
     blank(2, 'the water is bad, and the land is _____.', 'unfruitful', 19),
     word(1, 'How did the men describe the city’s location?', 'pleasant', 19, ['the situation was pleasant']),
     tf(3, 'The men said both the city’s situation and its water were pleasant.', false, 19, 'They called the situation pleasant but said the water was bad.'),
@@ -129,7 +129,7 @@ const bank: ChapterBank = {
     blank(2, 'I have made this water _____.', 'wholesome', 21),
     sa(1, 'What two harms would no longer come from the water?', 'death or miscarriage', 21, ['death and miscarriage', 'neither death nor miscarriage']),
     tf(3, 'Elisha claimed that the salt itself, apart from the LORD, healed the spring.', false, 21, 'Elisha announced, “Thus says the LORD, I have made this water wholesome.”'),
-    mc(3, 'How did Elisha heal Jericho’s bad water?', ['He threw salt from a new bowl into the spring and proclaimed the LORD’s healing', 'He struck it with Elijah’s mantle', 'He poured oil into the Jordan', 'He asked the prophets to dig another well'], 21),
+    mc(3, 'What did Elisha do at Jericho’s spring?', ['He threw in salt from a new bowl and proclaimed that the LORD had made the water wholesome', 'He struck the spring with Elijah’s mantle until the water divided to each side', 'He poured oil into the Jordan and redirected its water toward the city', 'He ordered the sons of the prophets to abandon it and dig another well'], 21),
 
     mc(1, 'How long did the water remain wholesome according to the narrator?', ['To the day the account was written', 'For three days', 'Until Elisha left Jericho', 'For forty-two years'], 22),
     blank(3, 'according to the word which Eli’sha _____.', 'spoke', 22),
@@ -145,7 +145,7 @@ const bank: ChapterBank = {
     blank(3, 'And two she-bears came out of the _____', 'woods', 24),
     word(2, 'How many boys were torn by the she-bears?', 'forty-two', 24, ['42']),
     tf(1, 'Two she-bears came out of the woods after Elisha cursed the boys.', true, 24),
-    mc(3, 'What followed the boys’ repeated taunt against Elisha?', ['He cursed them in the LORD’s name, and two she-bears tore forty-two of them', 'Fire descended and consumed the whole city', 'The prophets arrested the boys', 'Elisha returned immediately to Jericho'], 24),
+    mc(3, 'What followed the boys’ repeated taunt against Elisha?', ['He cursed them in the LORD’s name, and two she-bears tore forty-two of them', 'Fire descended from heaven and consumed the entire city of Bethel', 'The sons of the prophets arrested the boys and took them to Jericho', 'Elisha abandoned his journey to Carmel and returned immediately to Jericho'], 24),
 
     mc(1, 'Where did Elisha go before returning to Samaria?', ['Mount Carmel', 'Gilgal', 'Ekron', 'Jerusalem'], 25),
     blank(2, 'and thence he returned to _____.', 'Sama’ria', 25, ['Samaria']),
