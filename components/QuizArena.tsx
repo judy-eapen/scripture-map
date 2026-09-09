@@ -18,6 +18,9 @@ import { markSectionForVerse } from '@/lib/mark-sections';
 import UnsupportedQuizQuestion from '@/components/UnsupportedQuizQuestion';
 import QuestionSource from '@/components/QuestionSource';
 import FillBlankContext from '@/components/FillBlankContext';
+import QuestionReportForm from '@/components/QuestionReportForm';
+import QuizReportsPanel from '@/components/QuizReportsPanel';
+import type { QuizReport } from '@/app/actions/quiz-reports';
 
 type Phase = 'setup' | 'loading' | 'question' | 'revealed' | 'complete' | 'browse';
 type Level = 1 | 2 | 3 | 'mixed';
@@ -29,6 +32,7 @@ type Props = {
   collections: QuizCollectionSummary[];
   isAuthenticated: boolean;
   allowAdminBrowse: boolean;
+  adminReports: QuizReport[] | null;
   progress: Record<string, ChapterProgress>;
   initialBook?: string;
 };
@@ -58,7 +62,7 @@ function saveLocalStats(chapterId: string, stats: StatsMap) {
   try { sessionStorage.setItem(localKey(chapterId), JSON.stringify(stats)); } catch { /* ignore */ }
 }
 
-export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, progress: initialProgress, initialBook }: Props) {
+export default function QuizArena({ chapters, collections, isAuthenticated, allowAdminBrowse, adminReports, progress: initialProgress, initialBook }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [progress, setProgress] = useState(initialProgress);
   const [selectedChapterId, setSelectedChapterId] = useState<string | null>(null);
@@ -234,6 +238,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
     const selectedChapter = withQuestions.find(ch => ch.id === selectedChapterId) ?? null;
     return (
       <>
+        {adminReports !== null && <QuizReportsPanel initialReports={adminReports} />}
         <div className="mb-8">
           <h1 className="text-3xl font-medium mb-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Quiz</h1>
           <p className="text-sm" style={{ color: 'var(--muted-400)' }}>
@@ -653,6 +658,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           {!lastCorrect && current.review_topic && <p className="text-xs mt-3 font-medium" style={{ color: 'var(--gold-300)' }}>What to review: {current.review_topic}</p>}
           {!lastCorrect && current.review_guidance && <p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>{current.review_guidance}</p>}
           <QuestionSource question={current} chapter={chapter ? { bookSlug:chapter.bookSlug, chapterNumber:chapter.chapterNumber } : undefined} showTopic />
+          <QuestionReportForm questionId={current.id} />
         </div>
       )}
 
