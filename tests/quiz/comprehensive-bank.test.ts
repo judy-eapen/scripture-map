@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import bank from '../../scripts/quiz-bank/all-kings'
+import markBank from '../../scripts/quiz-bank/all-mark'
 import { gradeMultipleChoice, gradeTrueFalse } from '../../lib/quiz-grading'
 import type { QuizQuestion } from '../../lib/types'
 import { maskContextAnswers } from '../../lib/fill-blank-context'
+import markSource from '../../data/mark-source.json'
 
 describe('All of Kings comprehensive bank', () => {
   it('contains only unique questions with supporting passages', () => {
@@ -51,5 +53,43 @@ describe('All of Kings comprehensive bank', () => {
     // famine coverage grows with the bank; require the two siege famines at minimum
     const covered = ['1 Kings 17', '2 Kings 4', '2 Kings 6', '2 Kings 7', '2 Kings 25'].filter(c => refs.has(c))
     expect(covered.length, `famine chapters covered: ${covered.join(', ')}`).toBeGreaterThanOrEqual(2)
+  })
+})
+
+describe('All of Mark comprehensive bank', () => {
+  it('uses unique, self-contained questions and covers every Mark chapter', () => {
+    expect(markBank.rows.length).toBeGreaterThanOrEqual(50)
+    const normalized = markBank.rows.map(row => row.question.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim())
+    expect(new Set(normalized).size).toBe(markBank.rows.length)
+    const chapters = new Set(markBank.rows.flatMap(row => row.supporting_refs.map(ref => ref.chapter)))
+    expect([...chapters].sort((a,b) => a-b)).toEqual(Array.from({length:16},(_,index)=>index+1))
+    for (const [index,row] of markBank.rows.entries()) {
+      expect(row.supporting_refs.length, `row ${index + 1}`).toBeGreaterThanOrEqual(2)
+      expect(row.review_topic.trim(), `row ${index + 1}`).not.toBe('')
+      expect(row.review_guidance.trim(), `row ${index + 1}`).not.toBe('')
+      expect(row.question, `row ${index + 1}`).not.toMatch(/\b(?:the|these|two) passages?\b/i)
+      if (row.type === 'multiple_choice') {
+        expect(row.options).toHaveLength(4)
+        expect(new Set(row.options!.map(option => option.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim())).size).toBe(4)
+        const question = { id:String(index), accepted_answers:[], verse_ref:null, verse_number:null, ...row, options:row.options!, correct_index:0 } as QuizQuestion
+        expect(gradeMultipleChoice(question,0)).toBe(true)
+        for (let choice=1; choice<4; choice++) expect(gradeMultipleChoice(question,choice)).toBe(false)
+      }
+    }
+  })
+
+  it('points every supporting reference to a verse in the stored Orthodox Study Bible text', () => {
+    const verseCounts = new Map(markSource.chapters.map(chapter => [chapter.chapter, chapter.verses.length]))
+    for (const [index,row] of markBank.rows.entries()) {
+      for (const ref of row.supporting_refs) {
+        expect(ref.book, `row ${index + 1}: ${ref.label}`).toBe('Mark')
+        expect(ref.book_slug, `row ${index + 1}: ${ref.label}`).toBe('mark')
+        const count = verseCounts.get(ref.chapter)
+        expect(count, `row ${index + 1}: ${ref.label}`).toBeTruthy()
+        expect(ref.verse_start, `row ${index + 1}: ${ref.label}`).toBeGreaterThanOrEqual(1)
+        expect(ref.verse_start, `row ${index + 1}: ${ref.label}`).toBeLessThanOrEqual(count!)
+        expect(ref.verse_end ?? ref.verse_start, `row ${index + 1}: ${ref.label}`).toBeLessThanOrEqual(count!)
+      }
+    }
   })
 })

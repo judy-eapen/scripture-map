@@ -1,7 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { createClient } from '@supabase/supabase-js'
-import bank, { type ComprehensiveRow } from './quiz-bank/all-kings'
+import kingsBank, { type ComprehensiveRow } from './quiz-bank/all-kings'
+import markBank from './quiz-bank/all-mark'
 
 for (const line of fs.readFileSync(path.resolve('.env.local'), 'utf8').split('\n')) {
   const value = line.trim(); if (!value || value.startsWith('#')) continue
@@ -11,6 +12,7 @@ for (const line of fs.readFileSync(path.resolve('.env.local'), 'utf8').split('\n
 }
 const dry = process.argv.includes('--dry')
 const retireDraft = process.argv.includes('--retire-draft')
+const bank = process.argv.includes('--bank=all-mark') ? markBank : kingsBank
 const norm = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 
 function shuffled(options: string[]) {
@@ -25,7 +27,8 @@ async function main() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!url || !key) throw new Error('Missing Supabase environment variables')
   const supabase = createClient(url, key)
-  const { data: books } = await supabase.from('books').select('id, name').in('name', ['1 Kings', '2 Kings'])
+  const requestedBooks = [...new Set(bank.rows.flatMap(row => row.supporting_refs.map(ref => ref.book)))]
+  const { data: books } = await supabase.from('books').select('id, name').in('name', requestedBooks)
   const bookIds = new Map((books ?? []).map(book => [book.name, book.id]))
   const { data: chapters } = await supabase.from('chapters').select('chapter_number, verses, book_id').in('book_id', [...bookIds.values()])
   const verseCounts = new Map<string, number>()
@@ -70,8 +73,21 @@ async function main() {
   const tally = bank.rows.reduce((out, row) => { out[row.difficulty] += 1; return out }, { 1: 0, 2: 0, 3: 0 })
   console.log(`${bank.slug}: ${bank.rows.length} verified cross-chapter questions (easy ${tally[1]}, medium ${tally[2]}, hard ${tally[3]})`)
 
+  if (!dry && bank.slug === 'all-mark') {
+    const { error } = await supabase.from('quiz_collections').upsert({
+      slug:'all-mark', title:'All of Mark',
+      description:'Questions that connect themes, people, events, teachings, and the Passion across all sixteen chapters of Mark.',
+      books:['Mark'], position:2,
+    }, { onConflict:'slug' })
+    if (error) throw error
+  }
   const { data: collection, error: collectionError } = await supabase.from('quiz_collections').select('id').eq('slug', bank.slug).single()
-  if (collectionError || !collection) throw new Error('Apply supabase/migrations/012_comprehensive_quizzes.sql before loading this bank')
+  if (dry && (collectionError || !collection) && bank.slug === 'all-mark') {
+    console.log('dry-run safety: collection does not exist yet; live load will create it, 0 rows to delete')
+    console.log('dry run — nothing written')
+    return
+  }
+  if (collectionError || !collection) throw new Error(`Create the ${bank.slug} quiz collection before loading this bank`)
   const canRetire = !(await supabase.from('quiz_questions').select('retired_at').limit(1)).error
   const canLeadIn = !(await supabase.from('quiz_questions').select('lead_in').limit(1)).error
   if (retireDraft) {

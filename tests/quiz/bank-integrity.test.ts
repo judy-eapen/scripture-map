@@ -164,7 +164,8 @@ describe('All of Kings draft quality', () => {
     const verses = { '1 Kings': first, '2 Kings': second }
     for (const [index, row] of bank.rows.entries()) {
       for (const ref of row.supporting_refs) {
-        const chapter = verses[ref.book].get(ref.chapter) ?? []
+        expect(ref.book).not.toBe('Mark')
+        const chapter = verses[ref.book as '1 Kings' | '2 Kings'].get(ref.chapter) ?? []
         const verseNumbers = new Set(chapter.map(verse => verse.verse_number))
         expect(verseNumbers.has(ref.verse_start), `row ${index + 1}: missing ${ref.label} start`).toBe(true)
         expect(verseNumbers.has(ref.verse_end ?? ref.verse_start), `row ${index + 1}: missing ${ref.label} end`).toBe(true)

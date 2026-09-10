@@ -1,6 +1,6 @@
 import type { QuizDifficulty, QuizType, ScriptureBookSlug } from '../../lib/types'
 
-export type CrossReference = { book:'1 Kings'|'2 Kings'; book_slug:ScriptureBookSlug; chapter:number; verse_start:number; verse_end?:number; label:string }
+export type CrossReference = { book:'1 Kings'|'2 Kings'|'Mark'; book_slug:ScriptureBookSlug; chapter:number; verse_start:number; verse_end?:number; label:string }
 export type ComprehensiveRow = { type:QuizType; difficulty:QuizDifficulty; question:string; options?:string[]; answer?:string; accepted_answers?:string[]; explanation:string; supporting_refs:CrossReference[]; review_topic:string; review_guidance:string; lead_in?:string }
 const r=(book:'1 Kings'|'2 Kings',chapter:number,verse_start:number,verse_end?:number):CrossReference=>({book,book_slug:book==='1 Kings'?'1-kings':'2-kings',chapter,verse_start,verse_end,label:`${book} ${chapter}:${verse_start}${verse_end&&verse_end!==verse_start?`–${verse_end}`:''}`})
 const mc=(difficulty:QuizDifficulty,question:string,correct:string,distractors:[string,string,string],explanation:string,supporting_refs:CrossReference[],review_topic:string,review_guidance:string):ComprehensiveRow=>({type:'multiple_choice',difficulty,question,options:[correct,...distractors],explanation,supporting_refs,review_topic,review_guidance})

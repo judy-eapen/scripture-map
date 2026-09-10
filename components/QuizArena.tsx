@@ -108,7 +108,8 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   })), [chapters]);
   const collectionSources = useMemo<QuizSource[]>(() => collections.map(collection => ({
     id: collection.id, scopeKind: 'collection', slug: collection.slug, title: collection.title,
-    description: collection.description, bookName: collection.title, bookSlug: '1-kings', chapterNumber: 0,
+    description: collection.description, bookName: collection.title,
+    bookSlug: collection.books.length === 1 && collection.books[0] === 'Mark' ? 'mark' : '1-kings', chapterNumber: 0,
     counts: collection.counts,
   })), [collections]);
   const withQuestions = useMemo(() => [...collectionSources, ...chapterSources].filter(c => c.counts.total > 0), [collectionSources, chapterSources]);
@@ -302,8 +303,8 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
         </div>
 
         <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Quiz books">
-          {collectionSources.filter(collection => collection.slug === 'all-kings' || collection.title === 'All of Kings').map(collection => (
-            <button key={collection.id} role="tab" aria-selected={bookFilter === 'all-kings'} onClick={() => { setBookFilter('all-kings'); setSelectedChapterId(null); }} className="rounded-full px-3.5 py-2 text-xs font-medium" style={bookFilter === 'all-kings' ? goldBtn : ghostBtn}>All of Kings</button>
+          {collectionSources.map(collection => (
+            <button key={collection.id} role="tab" aria-selected={bookFilter === collection.slug} onClick={() => { setBookFilter(collection.slug ?? ''); setSelectedChapterId(null); }} className="rounded-full px-3.5 py-2 text-xs font-medium" style={bookFilter === collection.slug ? goldBtn : ghostBtn}>{collection.title}</button>
           ))}
           {bookTabs.map(([slug, name]) => <button key={slug} role="tab" aria-selected={bookFilter === slug} onClick={() => { setBookFilter(slug); setSelectedChapterId(null); }} className="rounded-full px-3.5 py-2 text-xs font-medium" style={bookFilter === slug ? goldBtn : ghostBtn}>{name}</button>)}
         </div>
@@ -312,7 +313,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
           <div className="rounded-2xl px-5 py-6 text-sm" style={{ ...card, color: 'var(--muted-400)' }}>No quiz questions loaded yet.</div>
         ) : !selectedChapter ? (
           <div className="space-y-8">
-            {bookFilter === 'all-kings' && collectionSources.filter(collection => collection.counts.total > 0).map(collection => {
+            {collectionSources.filter(collection => collection.slug === bookFilter && collection.counts.total > 0).map(collection => {
               const p = progress[collection.id];
               return (
                 <section key={collection.id} className="rounded-2xl px-5 py-5" style={{ ...card, borderColor: 'rgba(201,168,76,0.38)', background: 'rgba(201,168,76,0.06)' }}>
@@ -326,7 +327,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
                       </p>
                     </div>
                     <button onClick={() => setSelectedChapterId(collection.id)} className="rounded-xl px-4 py-2.5 text-sm font-medium" style={goldBtn}>
-                      {(p?.attempted ?? 0) > 0 ? 'Continue All of Kings' : 'Choose All of Kings'}
+                      {(p?.attempted ?? 0) > 0 ? `Continue ${collection.title}` : `Choose ${collection.title}`}
                     </button>
                   </div>
                 </section>
@@ -630,7 +631,7 @@ export default function QuizArena({ chapters, collections, isAuthenticated, allo
   const answeredCount = index + (revealed ? 1 : 0);
   const runningCorrect = priorCorrect + answered.filter(a => a.correct).length;
   const quizReturnHref = chapter
-    ? `/quiz?book=${encodeURIComponent(chapter.scopeKind === 'collection' ? 'all-kings' : chapter.bookSlug)}&resume=${encodeURIComponent(sessionId ?? 'local')}&source=${encodeURIComponent(chapter.id)}`
+    ? `/quiz?book=${encodeURIComponent(chapter.scopeKind === 'collection' ? (chapter.slug ?? 'all-kings') : chapter.bookSlug)}&resume=${encodeURIComponent(sessionId ?? 'local')}&source=${encodeURIComponent(chapter.id)}`
     : '/quiz';
   async function prepareStudyNavigation() {
     if (chapter && !isAuthenticated) {
