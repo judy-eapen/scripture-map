@@ -46,7 +46,7 @@ export default function QuestionSource({ question, chapter, showTopic = false, q
           const passage = passages.find(item => item.label === ref.label)
           const studyHref = verseHrefWithQuizReturn(verseHref(ref.book_slug, ref.chapter, ref.verse_start), quizReturnHref)
           return (
-            <details key={`${ref.label}-${index}`} open={index === 0} className="rounded-lg px-3 py-2" style={{ background:'rgba(0,0,0,0.12)' }}>
+            <details key={`${ref.label}-${index}`} className="rounded-lg px-3 py-2" style={{ background:'rgba(0,0,0,0.12)' }}>
               <summary className="text-xs cursor-pointer" style={{ color:'var(--gold-300)' }}>{ref.label}</summary>
               <div className="mt-2 space-y-1">
                 {passage?.verses.map(verse => <p key={verse.verse_number} className="text-xs leading-relaxed" style={{ color:'var(--ivory-200)' }}><sup style={{ color:'var(--gold-400)' }}>{verse.verse_number}</sup> {verse.text}</p>)}
