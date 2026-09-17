@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { MARK_6_FLASHCARDS, MARK_6_FLASHCARD_SCENES, type Mark6FlashcardScene } from '@/data/mark-6-flashcards'
+import { getMarkFlashcards, getMarkFlashcardScenes } from '@/data/mark-flashcards'
 
-type Filter = 'All scenes' | Mark6FlashcardScene
+type Filter = string
 
 function shuffled<T>(items: T[]) {
   const copy = [...items]
@@ -15,15 +15,17 @@ function shuffled<T>(items: T[]) {
   return copy
 }
 
-export default function Mark6FlashcardDeck({ embedded = false }: { embedded?: boolean }) {
+export default function Mark6FlashcardDeck({ embedded = false, chapter = 6 }: { embedded?: boolean; chapter?: number }) {
+  const sourceCards = useMemo(() => getMarkFlashcards(chapter), [chapter])
+  const scenes = useMemo(() => getMarkFlashcardScenes(chapter), [chapter])
   const [filter, setFilter] = useState<Filter>('All scenes')
-  const [order, setOrder] = useState(() => MARK_6_FLASHCARDS.map(card => card.id))
+  const [order, setOrder] = useState(() => sourceCards.map(card => card.id))
   const [index, setIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
 
   const cards = useMemo(() => order
-    .map(id => MARK_6_FLASHCARDS.find(card => card.id === id)!)
-    .filter(card => filter === 'All scenes' || card.scene === filter), [filter, order])
+    .map(id => sourceCards.find(card => card.id === id)!)
+    .filter(card => filter === 'All scenes' || card.scene === filter), [filter, order, sourceCards])
   const card = cards[index] ?? cards[0]
   const understandingCount = cards.filter(item => item.kind === 'understanding').length
 
@@ -45,7 +47,7 @@ export default function Mark6FlashcardDeck({ embedded = false }: { embedded?: bo
   }
 
   function reset() {
-    setOrder(MARK_6_FLASHCARDS.map(item => item.id))
+    setOrder(sourceCards.map(item => item.id))
     setFilter('All scenes')
     setIndex(0)
     setRevealed(false)
@@ -73,15 +75,15 @@ export default function Mark6FlashcardDeck({ embedded = false }: { embedded?: bo
   return <div className={embedded ? 'h-full overflow-y-auto px-4 py-5 pb-10' : 'max-w-4xl mx-auto px-4 md:px-7 py-8 pt-14 md:pt-8 pb-24'}>
     <div className={`flex flex-wrap items-start justify-between gap-4 ${embedded ? 'mb-5' : 'mb-7'}`}>
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--gold-400)' }}>Mark 6 · Quiz preparation</p>
+        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--gold-400)' }}>Mark {chapter} · Quiz preparation</p>
         <h1 className={`${embedded ? 'text-2xl' : 'text-3xl md:text-4xl'} mt-2`} style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>End-to-end flashcards</h1>
-        <p className="text-sm mt-2 max-w-2xl" style={{ color: 'var(--muted-400)' }}>{MARK_6_FLASHCARDS.length} cards covering Mark 6:1–56 in sequence.</p>
+        <p className="text-sm mt-2 max-w-2xl" style={{ color: 'var(--muted-400)' }}>{sourceCards.length} cards covering the major events, teachings, names, numbers, and sequence of Mark {chapter}.</p>
       </div>
-      {!embedded && <Link href="/study/mark/6" className="rounded-xl px-4 py-2 text-sm" style={{ color: 'var(--gold-300)', border: '1px solid rgba(201,168,76,0.25)' }}>Read Mark 6 →</Link>}
+      {!embedded && <Link href={`/study/mark/${chapter}`} className="rounded-xl px-4 py-2 text-sm" style={{ color: 'var(--gold-300)', border: '1px solid rgba(201,168,76,0.25)' }}>Read Mark {chapter} →</Link>}
     </div>
 
     <div className="flex gap-2 overflow-x-auto pb-2 mb-4" aria-label="Filter cards by scene">
-      {(['All scenes', ...MARK_6_FLASHCARD_SCENES] as Filter[]).map(scene => <button key={scene} onClick={() => changeFilter(scene)} className="shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold" style={{ color: filter === scene ? 'var(--navy-950)' : 'var(--muted-400)', background: filter === scene ? 'var(--gold-400)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>{scene}</button>)}
+      {(['All scenes', ...scenes] as Filter[]).map(scene => <button key={scene} onClick={() => changeFilter(scene)} className="shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold" style={{ color: filter === scene ? 'var(--navy-950)' : 'var(--muted-400)', background: filter === scene ? 'var(--gold-400)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>{scene}</button>)}
     </div>
 
     <div className="flex flex-wrap items-center justify-between gap-3 mb-4 text-xs" style={{ color: 'var(--muted-500)' }}>

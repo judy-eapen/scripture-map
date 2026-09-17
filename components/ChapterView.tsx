@@ -365,14 +365,14 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               </button>
             )}
 
-            {chapter.book === 'Mark' && chapter.chapter_number === 6 && (
+            {chapter.book === 'Mark' && chapter.chapter_number >= 6 && (
               <button onClick={openFlashcards}
                 className="w-full flex items-center gap-3 rounded-xl px-4 py-3 mb-4 text-left transition-all"
                 style={{ background: flashcardsOpen ? 'rgba(59,130,246,0.14)' : 'rgba(59,130,246,0.07)', border: '1px solid rgba(96,165,250,0.24)' }}>
                 <span className="text-lg leading-none">◫</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold" style={{ color: '#93c5fd' }}>Mark 6 Flashcards</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>90 exhaustive question-and-answer cards</p>
+                  <p className="text-xs font-semibold" style={{ color: '#93c5fd' }}>Mark {chapter.chapter_number} Flashcards</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>Comprehensive questions on the important facts and teachings</p>
                 </div>
                 <span className="text-xs" style={{ color: '#93c5fd' }}>{flashcardsOpen ? 'Open →' : 'Study →'}</span>
               </button>
@@ -584,14 +584,14 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
             style={{ width: `${mapWidth}px`, borderLeft: '1px solid rgba(255,255,255,0.06)', isolation: 'isolate' }}>
             <div className="shrink-0 flex items-center gap-2 px-3 py-2" style={{ background: 'var(--navy-900)', borderBottom: '1px solid rgba(255,255,255,0.07)' }} role="toolbar" aria-label="Study panel controls">
               <button onClick={showMap} aria-pressed={!slidesOpen && !flashcardsOpen} className="rounded-lg px-3 py-1.5 text-xs font-semibold" style={{ color: !slidesOpen && !flashcardsOpen ? '#93c5fd' : 'var(--muted-400)', background: !slidesOpen && !flashcardsOpen ? 'rgba(96,165,250,0.12)' : 'transparent' }}>Map</button>
-              {chapter.book === 'Mark' && chapter.chapter_number === 6 && <button onClick={openFlashcards} aria-pressed={flashcardsOpen} className="rounded-lg px-3 py-1.5 text-xs font-semibold" style={{ color: flashcardsOpen ? '#93c5fd' : 'var(--muted-400)', background: flashcardsOpen ? 'rgba(96,165,250,0.12)' : 'transparent' }}>Cards</button>}
+              {chapter.book === 'Mark' && chapter.chapter_number >= 6 && <button onClick={openFlashcards} aria-pressed={flashcardsOpen} className="rounded-lg px-3 py-1.5 text-xs font-semibold" style={{ color: flashcardsOpen ? '#93c5fd' : 'var(--muted-400)', background: flashcardsOpen ? 'rgba(96,165,250,0.12)' : 'transparent' }}>Cards</button>}
               <button onClick={hideStudyPanel} className="ml-auto rounded-lg px-3 py-1.5 text-xs" style={{ color: 'var(--muted-400)' }}>Hide panel</button>
             </div>
             <div className="flex-1 min-h-0 overflow-hidden">
             {slidesOpen && slideDeck ? (
               <MarkSlidesPanel deck={slideDeck} slide={currentSlide} onSlideChange={setCurrentSlide} onClose={closeSlides} />
-            ) : flashcardsOpen && chapter.book === 'Mark' && chapter.chapter_number === 6 ? (
-              <Mark6FlashcardDeck embedded />
+            ) : flashcardsOpen && chapter.book === 'Mark' && chapter.chapter_number >= 6 ? (
+              <Mark6FlashcardDeck embedded chapter={chapter.chapter_number} />
             ) : (
               <MapPanel
                 places={chapter.places}
@@ -612,13 +612,13 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           <MarkSlidesPanel deck={slideDeck} slide={currentSlide} onSlideChange={setCurrentSlide} onClose={closeSlides} />
         </div>
       )}
-      {!isLargeScreen && flashcardsOpen && chapter.book === 'Mark' && chapter.chapter_number === 6 && (
+      {!isLargeScreen && flashcardsOpen && chapter.book === 'Mark' && chapter.chapter_number >= 6 && (
         <div className="fixed inset-0 z-[70] flex flex-col" style={{ background: 'var(--navy-950)' }}>
           <div className="shrink-0 flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
             <button onClick={() => setFlashcardsOpen(false)} className="rounded-lg px-3 py-2 text-sm" style={{ color: 'var(--ivory-200)', background: 'rgba(255,255,255,0.05)' }}>← Back to reading</button>
             <button onClick={showMap} className="ml-auto rounded-lg px-3 py-2 text-sm" style={{ color: '#93c5fd', background: 'rgba(96,165,250,0.1)' }}>Show map</button>
           </div>
-          <div className="flex-1 min-h-0"><Mark6FlashcardDeck embedded /></div>
+          <div className="flex-1 min-h-0"><Mark6FlashcardDeck embedded chapter={chapter.chapter_number} /></div>
         </div>
       )}
       {activeCard?.type === 'person' && (
