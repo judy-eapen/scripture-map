@@ -4,7 +4,7 @@ import { MARK_LESSON_GEOGRAPHY } from '../lib/mark-lesson-geography'
 import { markSlideDeck } from '../lib/mark-slides'
 
 const expectedRanges: Record<number, string[]> = {
-  7: ['1–23', '24–30', '31–37'],
+  7: ['1–8', '9–13', '14–23', '24–30', '31–37'],
   8: ['1–10', '11–21', '22–26', '27–38'],
   9: ['1–13', '14–29', '30–37', '38–50'],
   10: ['1–16', '17–31', '32–45', '46–52'],
@@ -35,6 +35,7 @@ describe('Mark 7–16 guided lessons', () => {
     }
     expect(MARK_LESSONS_7_16[14]).toHaveLength(7)
     expect(MARK_LESSONS_7_16[15]).toHaveLength(6)
+    expect(MARK_LESSONS_7_16[7]).toHaveLength(7)
   })
 
   it('gives every chapter two labeled historical reconstructions', () => {
@@ -59,7 +60,11 @@ describe('Mark 7–16 guided lessons', () => {
 
   it('preserves critical textual and pastoral cautions', () => {
     const content = JSON.stringify(MARK_LESSONS_7_16)
-    expect(content).toContain('ritual handwashing, not ordinary hygiene')
+    expect(content).toContain('question about a religious purity custom')
+    expect(content).toContain('A simple hypothetical example')
+    expect(content).toContain('We cannot use a religious promise as an excuse')
+    expect(content).toContain('not opposing sincere gifts to God')
+    expect(content).toContain('Outward religious observance cannot substitute for a good heart')
     expect(content).toContain('second feeding')
     expect(content).toContain('does not name the mountain')
     expect(content).toContain('wrong to blame Jewish people collectively')

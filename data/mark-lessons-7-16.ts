@@ -13,6 +13,57 @@ export const MARK_7_LESSON: MarkLessonSlide[] = [
   review(7, 'From the lips to the heart', ['Hands — the purity dispute.', 'Corban — tradition must not cancel God’s command.', 'Heart — the source of defiling sins.', 'Crumbs — persistent Gentile faith.', 'Ephphatha — ears opened and speech restored.']),
 ]
 
+MARK_7_LESSON.splice(1, 1,
+  scene({
+    eyebrow: 'Scene 1A',
+    title: 'Why are they asking about washing?',
+    passage: 'Mark 7:1–8',
+    summary: 'Pharisees and scribes notice that some disciples eat without first performing the customary ritual washing. Jesus answers that outward religious actions must agree with a heart that truly honors God.',
+    details: [
+      'This is a question about a religious purity custom before eating—not whether ordinary handwashing or cleanliness matters.',
+      'Mark explains several inherited washing practices because some of his readers may not know them.',
+      'Jesus quotes Isaiah: people can honor God with their lips while their hearts are far from Him.',
+      'His criticism is not that every tradition is wrong. The problem comes when a human rule replaces what God commands or becomes an outward performance without faithful love.',
+    ],
+    carefulNote: 'Do not turn this dispute into a caricature of Jewish people or their traditions. Jesus, His disciples, and His first hearers are Jewish. He is confronting hypocrisy and command-overriding practice in this specific exchange.',
+    culture: [{ title: 'Ritual washing is not a hygiene debate', body: 'The washing in this scene expresses inherited purity practice. Mark is not arguing against washing dirt or germs from hands.' }],
+    connections: [{ label: 'Scripture cross-reference', references: 'Isaiah 29:13', explanation: 'Jesus directly quotes Isaiah to show the danger of outward worship separated from a faithful heart.' }],
+    recall: ['What kind of washing starts the dispute?', 'Does Jesus say that every tradition is wrong? Explain the specific problem He identifies.'],
+  }),
+  scene({
+    eyebrow: 'Scene 1B',
+    title: 'Corban: a promise must not cancel care',
+    passage: 'Mark 7:9–13',
+    summary: 'Jesus gives a concrete example of a tradition overriding God’s command. “Corban” means a gift dedicated to God. He criticizes a use of that declaration that blocks someone from supporting parents in need.',
+    details: [
+      'God commands, “Honor your father and your mother.” Honoring them includes taking seriously the care they are owed.',
+      'Corban means that money or property has been declared dedicated to God.',
+      'A simple hypothetical example: imagine an adult has savings that could buy food or medicine for an elderly parent. He declares those savings Corban—dedicated to God—and the rule is then used to say he may not use them to help the parent.',
+      'Jesus’ objection is that the human rule has now overridden God’s command. Religious words are being used as an excuse to neglect a person God says to honor.',
+      'Child takeaway: We cannot use a religious promise as an excuse to neglect people God tells us to care for.',
+    ],
+    carefulNote: 'The example above is hypothetical; Mark does not describe a particular family doing this. Jesus is not opposing sincere gifts to God, declaring every vow fraudulent, or rejecting all tradition. He condemns this specific conflict and misuse.',
+    culture: [{ title: 'A dedicatory declaration', body: 'Calling resources Corban marked them as dedicated to God. The issue in Jesus’ example is not generosity to God, but a rule that lets that declaration cancel a prior divine duty to one’s parents.' }],
+    connections: [{ label: 'Scripture cross-reference', references: 'Exodus 20:12; Deuteronomy 5:16', explanation: 'Jesus explicitly appeals to God’s command to honor father and mother.' }],
+    recall: ['What does Corban mean?', 'In the hypothetical savings example, which command is the person neglecting?', 'What exactly does Jesus criticize—and what does He not condemn?'],
+  }),
+  scene({
+    eyebrow: 'Scene 1C',
+    title: 'What comes from the heart',
+    passage: 'Mark 7:14–23',
+    summary: 'Jesus calls the crowd to listen: food entering from outside does not create the moral evil He is describing. Evil thoughts and actions proceed from within—from the human heart.',
+    details: [
+      'The disciples ask Jesus to explain the saying privately.',
+      'Food enters the body and passes through it; it does not enter the heart.',
+      'Jesus lists sins such as theft, deceit, pride, envy, and foolishness as things that arise from within.',
+      'Outward religious observance cannot substitute for a good heart and right actions. God cares about both our inner choices and how we treat people.',
+    ],
+    carefulNote: 'Jesus is teaching about moral defilement. This does not make hygiene, bodily care, or thoughtful religious practice unimportant; it locates the source of sinful thoughts and actions in the heart.',
+    connections: [{ label: 'Thematic parallel', references: '1 Samuel 16:7; Psalm 51:10', explanation: 'These passages emphasize that God sees the heart and that a clean heart is God’s work in us. Mark does not quote them here.' }, { label: 'Parallel Gospel account', references: 'Matthew 15:10–20', explanation: 'Matthew preserves a close parallel to the teaching about what enters the mouth and what proceeds from the heart.' }],
+    recall: ['According to Jesus, where do evil thoughts and actions come from?', 'Why can an outward religious action never replace a good heart and right treatment of others?'],
+  }),
+)
+
 export const MARK_8_LESSON: MarkLessonSlide[] = [
   scene({ eyebrow: 'Chapter map', title: 'Seeing—but not yet clearly', passage: 'Mark 8:1–38', summary: 'A second wilderness meal, demands for a sign, a two-stage healing, Peter’s confession, and the first Passion prediction ask what it means truly to see Jesus.', details: ['Four thousand fed and seven baskets left (1–10).', 'A warning about leaven (11–21).', 'Sight restored in stages at Bethsaida (22–26).', 'Peter confesses Christ; Jesus teaches the cross (27–38).'], image: image(8, 'chapter-overview', 'Jesus and the disciples on the road north near Caesarea Philippi'), recall: ['Put 4,000 and seven baskets in context.', 'Where does Peter confess Jesus as the Christ?'] }),
   scene({ eyebrow: 'Scene 1', title: 'Compassion and seven baskets', passage: 'Mark 8:1–10', summary: 'Jesus has compassion on a crowd that has remained with Him three days and has nothing to eat. Seven loaves and a few small fish become enough for about four thousand people.', details: ['Jesus worries they may faint on the way home; some came from far away.', 'The crowd sits on the ground. Jesus gives thanks, breaks, and gives through the disciples.', 'Seven large baskets of pieces remain.', 'Jesus departs by boat for the region of Dalmanutha.'], carefulNote: 'This is narrated as a second feeding, with different numbers from Mark 6. Do not merge the two accounts.', connections: [{ label: 'Scripture cross-reference', references: 'Mark 6:35–44', explanation: 'Mark expects readers to compare the two feedings while preserving their distinct numbers.' }] }),
@@ -122,7 +173,7 @@ MARK_15_LESSON.splice(3, 1,
 )
 
 const highlights: Array<[MarkLessonSlide[], number, number, string]> = [
-  [MARK_7_LESSON, 2, 7, 'a Syrophoenician mother speaking persistently with Jesus inside a modest house'],
+  [MARK_7_LESSON, 4, 7, 'a Syrophoenician mother speaking persistently with Jesus inside a modest house'],
   [MARK_8_LESSON, 3, 8, 'Jesus gently holding the hands of a blind man outside Bethsaida'],
   [MARK_9_LESSON, 2, 9, 'a relieved father and restored child beside Jesus after the healing'],
   [MARK_10_LESSON, 4, 10, 'Bartimaeus rising from the roadside and reaching toward Jesus near Jericho'],
