@@ -24,6 +24,7 @@ import type { VerseNote } from '@/lib/types';
 import { QUIZ_ENABLED } from '@/lib/flags';
 import MarkSlidesPanel from '@/components/MarkSlidesPanel';
 import { markSlideDeck } from '@/lib/mark-slides';
+import Mark6FlashcardDeck from '@/components/Mark6FlashcardDeck';
 
 type Props = {
   chapter: ChapterData;
@@ -86,6 +87,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mobileMapOpen, setMobileMapOpen] = useState(false);
   const [slidesOpen, setSlidesOpen] = useState(false);
+  const [flashcardsOpen, setFlashcardsOpen] = useState(false);
+  const [panelHidden, setPanelHidden] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
   // Only mount MapPanel when container is visible — Leaflet crashes in display:none containers
   // Match the server's first render; the effect applies the real viewport immediately after hydration.
@@ -141,10 +144,13 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   const yearLabel = chapter.year_start_bc ? `~${Math.abs(chapter.year_start_bc)} BC` : null;
   const totalChapters = chapter.book === '1 Kings' ? 22 : chapter.book === '2 Kings' ? 25 : 16;
   const slideDeck = chapter.book === 'Mark' ? markSlideDeck(chapter.chapter_number) : undefined;
+  const studyPanelVisible = isLargeScreen ? !panelHidden : mobileMapOpen;
 
   function openSlides() {
     setCurrentSlide(1);
     setSlidesOpen(true);
+    setFlashcardsOpen(false);
+    setPanelHidden(false);
     setMobileMapOpen(false);
     if (isLargeScreen) {
       mapWidthBeforeSlides.current = mapWidth;
@@ -155,6 +161,28 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
   function closeSlides() {
     setSlidesOpen(false);
     if (isLargeScreen) setMapWidth(mapWidthBeforeSlides.current);
+  }
+
+  function openFlashcards() {
+    setSlidesOpen(false);
+    setFlashcardsOpen(true);
+    setPanelHidden(false);
+    setMobileMapOpen(false);
+    if (isLargeScreen) setMapWidth(width => Math.max(width, 500));
+  }
+
+  function showMap() {
+    setSlidesOpen(false);
+    setFlashcardsOpen(false);
+    setPanelHidden(false);
+    if (!isLargeScreen) setMobileMapOpen(true);
+  }
+
+  function hideStudyPanel() {
+    setSlidesOpen(false);
+    setFlashcardsOpen(false);
+    setPanelHidden(true);
+    setMobileMapOpen(false);
   }
 
   return (
@@ -208,16 +236,16 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                       <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </button>
-                  {/* Mobile map toggle */}
+                  {/* Study panel toggle */}
                   <button
-                    className="md:hidden mt-1 shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
+                    className="mt-1 shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
                     style={{
-                      background: mobileMapOpen ? 'rgba(96,165,250,0.15)' : 'rgba(255,255,255,0.05)',
-                      color: mobileMapOpen ? 'var(--kingdom-north)' : 'var(--muted-400)',
-                      border: mobileMapOpen ? '1px solid rgba(96,165,250,0.3)' : '1px solid transparent',
+                      background: studyPanelVisible ? 'rgba(96,165,250,0.15)' : 'rgba(255,255,255,0.05)',
+                      color: studyPanelVisible ? 'var(--kingdom-north)' : 'var(--muted-400)',
+                      border: studyPanelVisible ? '1px solid rgba(96,165,250,0.3)' : '1px solid transparent',
                     }}
-                    onClick={() => setMobileMapOpen(o => !o)}
-                    aria-label="Toggle map">
+                    onClick={() => isLargeScreen ? (panelHidden ? showMap() : hideStudyPanel()) : setMobileMapOpen(o => !o)}
+                    aria-label={isLargeScreen ? (panelHidden ? 'Show study panel' : 'Hide study panel') : 'Toggle map'}>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
                       <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0 0 21 18.382V7.618a1 1 0 0 0-.553-.894L15 4m0 13V4m0 0L9 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -338,16 +366,16 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
             )}
 
             {chapter.book === 'Mark' && chapter.chapter_number === 6 && (
-              <Link href="/flashcards/mark/6"
+              <button onClick={openFlashcards}
                 className="w-full flex items-center gap-3 rounded-xl px-4 py-3 mb-4 text-left transition-all"
-                style={{ background: 'rgba(59,130,246,0.07)', border: '1px solid rgba(96,165,250,0.24)' }}>
+                style={{ background: flashcardsOpen ? 'rgba(59,130,246,0.14)' : 'rgba(59,130,246,0.07)', border: '1px solid rgba(96,165,250,0.24)' }}>
                 <span className="text-lg leading-none">◫</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-semibold" style={{ color: '#93c5fd' }}>Mark 6 Flashcards</p>
                   <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>90 exhaustive question-and-answer cards</p>
                 </div>
-                <span className="text-xs" style={{ color: '#93c5fd' }}>Study →</span>
-              </Link>
+                <span className="text-xs" style={{ color: '#93c5fd' }}>{flashcardsOpen ? 'Open →' : 'Study →'}</span>
+              </button>
             )}
 
             {/* People in this chapter */}
@@ -536,7 +564,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
         </div>
 
         {/* Drag handle — desktop only */}
-        {isLargeScreen && (
+        {isLargeScreen && !panelHidden && (
           <div
             onMouseDown={startResize}
             className="shrink-0 flex items-center justify-center cursor-col-resize group"
@@ -550,12 +578,20 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
           </div>
         )}
 
-        {/* Right panel — teacher slides temporarily replace the map. */}
-        {isLargeScreen && (
+        {/* Right panel — lesson and cards temporarily replace the map. */}
+        {isLargeScreen && !panelHidden && (
           <div className="shrink-0 flex flex-col overflow-hidden"
             style={{ width: `${mapWidth}px`, borderLeft: '1px solid rgba(255,255,255,0.06)', isolation: 'isolate' }}>
+            <div className="shrink-0 flex items-center gap-2 px-3 py-2" style={{ background: 'var(--navy-900)', borderBottom: '1px solid rgba(255,255,255,0.07)' }} role="toolbar" aria-label="Study panel controls">
+              <button onClick={showMap} aria-pressed={!slidesOpen && !flashcardsOpen} className="rounded-lg px-3 py-1.5 text-xs font-semibold" style={{ color: !slidesOpen && !flashcardsOpen ? '#93c5fd' : 'var(--muted-400)', background: !slidesOpen && !flashcardsOpen ? 'rgba(96,165,250,0.12)' : 'transparent' }}>Map</button>
+              {chapter.book === 'Mark' && chapter.chapter_number === 6 && <button onClick={openFlashcards} aria-pressed={flashcardsOpen} className="rounded-lg px-3 py-1.5 text-xs font-semibold" style={{ color: flashcardsOpen ? '#93c5fd' : 'var(--muted-400)', background: flashcardsOpen ? 'rgba(96,165,250,0.12)' : 'transparent' }}>Cards</button>}
+              <button onClick={hideStudyPanel} className="ml-auto rounded-lg px-3 py-1.5 text-xs" style={{ color: 'var(--muted-400)' }}>Hide panel</button>
+            </div>
+            <div className="flex-1 min-h-0 overflow-hidden">
             {slidesOpen && slideDeck ? (
               <MarkSlidesPanel deck={slideDeck} slide={currentSlide} onSlideChange={setCurrentSlide} onClose={closeSlides} />
+            ) : flashcardsOpen && chapter.book === 'Mark' && chapter.chapter_number === 6 ? (
+              <Mark6FlashcardDeck embedded />
             ) : (
               <MapPanel
                 places={chapter.places}
@@ -565,6 +601,7 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                 onPlaceClick={place => setActiveCard({ type: 'place', place })}
               />
             )}
+            </div>
           </div>
         )}
       </main>
@@ -573,6 +610,15 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
       {!isLargeScreen && slidesOpen && slideDeck && (
         <div className="fixed inset-0 z-[70]" style={{ background: 'var(--navy-950)' }}>
           <MarkSlidesPanel deck={slideDeck} slide={currentSlide} onSlideChange={setCurrentSlide} onClose={closeSlides} />
+        </div>
+      )}
+      {!isLargeScreen && flashcardsOpen && chapter.book === 'Mark' && chapter.chapter_number === 6 && (
+        <div className="fixed inset-0 z-[70] flex flex-col" style={{ background: 'var(--navy-950)' }}>
+          <div className="shrink-0 flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <button onClick={() => setFlashcardsOpen(false)} className="rounded-lg px-3 py-2 text-sm" style={{ color: 'var(--ivory-200)', background: 'rgba(255,255,255,0.05)' }}>← Back to reading</button>
+            <button onClick={showMap} className="ml-auto rounded-lg px-3 py-2 text-sm" style={{ color: '#93c5fd', background: 'rgba(96,165,250,0.1)' }}>Show map</button>
+          </div>
+          <div className="flex-1 min-h-0"><Mark6FlashcardDeck embedded /></div>
         </div>
       )}
       {activeCard?.type === 'person' && (

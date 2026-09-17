@@ -15,7 +15,7 @@ function shuffled<T>(items: T[]) {
   return copy
 }
 
-export default function Mark6FlashcardDeck() {
+export default function Mark6FlashcardDeck({ embedded = false }: { embedded?: boolean }) {
   const [filter, setFilter] = useState<Filter>('All scenes')
   const [order, setOrder] = useState(() => MARK_6_FLASHCARDS.map(card => card.id))
   const [index, setIndex] = useState(0)
@@ -70,14 +70,14 @@ export default function Mark6FlashcardDeck() {
 
   if (!card) return null
 
-  return <div className="max-w-4xl mx-auto px-4 md:px-7 py-8 pt-14 md:pt-8 pb-24">
-    <div className="flex flex-wrap items-start justify-between gap-4 mb-7">
+  return <div className={embedded ? 'h-full overflow-y-auto px-4 py-5 pb-10' : 'max-w-4xl mx-auto px-4 md:px-7 py-8 pt-14 md:pt-8 pb-24'}>
+    <div className={`flex flex-wrap items-start justify-between gap-4 ${embedded ? 'mb-5' : 'mb-7'}`}>
       <div>
         <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--gold-400)' }}>Mark 6 · Quiz preparation</p>
-        <h1 className="text-3xl md:text-4xl mt-2" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>End-to-end flashcards</h1>
-        <p className="text-sm mt-2 max-w-2xl" style={{ color: 'var(--muted-400)' }}>{MARK_6_FLASHCARDS.length} cards covering Mark 6:1–56 in sequence—facts, quotations, numbers, reasons, reactions, and understanding.</p>
+        <h1 className={`${embedded ? 'text-2xl' : 'text-3xl md:text-4xl'} mt-2`} style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>End-to-end flashcards</h1>
+        <p className="text-sm mt-2 max-w-2xl" style={{ color: 'var(--muted-400)' }}>{MARK_6_FLASHCARDS.length} cards covering Mark 6:1–56 in sequence.</p>
       </div>
-      <Link href="/study/mark/6" className="rounded-xl px-4 py-2 text-sm" style={{ color: 'var(--gold-300)', border: '1px solid rgba(201,168,76,0.25)' }}>Read Mark 6 →</Link>
+      {!embedded && <Link href="/study/mark/6" className="rounded-xl px-4 py-2 text-sm" style={{ color: 'var(--gold-300)', border: '1px solid rgba(201,168,76,0.25)' }}>Read Mark 6 →</Link>}
     </div>
 
     <div className="flex gap-2 overflow-x-auto pb-2 mb-4" aria-label="Filter cards by scene">
@@ -91,9 +91,9 @@ export default function Mark6FlashcardDeck() {
 
     <div className="h-1.5 rounded-full overflow-hidden mb-5" style={{ background: 'rgba(255,255,255,0.06)' }}><div className="h-full rounded-full" style={{ width: `${((index + 1) / cards.length) * 100}%`, background: 'var(--gold-400)' }} /></div>
 
-    <button onClick={() => setRevealed(value => !value)} aria-expanded={revealed} className="w-full text-left rounded-2xl p-6 md:p-9 min-h-[340px] flex flex-col transition-colors" style={{ background: 'linear-gradient(145deg, rgba(201,168,76,0.08), rgba(255,255,255,0.025))', border: '1px solid rgba(201,168,76,0.2)' }}>
+    <button onClick={() => setRevealed(value => !value)} aria-expanded={revealed} className={`w-full text-left rounded-2xl p-6 ${embedded ? 'min-h-[300px]' : 'md:p-9 min-h-[340px]'} flex flex-col transition-colors`} style={{ background: 'linear-gradient(145deg, rgba(201,168,76,0.08), rgba(255,255,255,0.025))', border: '1px solid rgba(201,168,76,0.2)' }}>
       <div className="flex flex-wrap justify-between gap-2 text-[11px] font-semibold uppercase tracking-wider"><span style={{ color: 'var(--gold-400)' }}>{card.scene} · {card.kind === 'understanding' ? 'Explain in your own words' : 'Fact recall'}</span><span style={{ color: 'var(--muted-500)' }}>{card.passage}</span></div>
-      <div className="flex-1 flex items-center justify-center py-8"><p className="text-2xl md:text-3xl text-center leading-relaxed" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>{card.question}</p></div>
+      <div className="flex-1 flex items-center justify-center py-8"><p className={`${embedded ? 'text-xl' : 'text-2xl md:text-3xl'} text-center leading-relaxed`} style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>{card.question}</p></div>
       {revealed ? <div className="pt-5" style={{ borderTop: '1px solid rgba(201,168,76,0.16)' }}><p className="text-[11px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'var(--gold-400)' }}>{card.kind === 'understanding' ? 'Sample answer / key ideas' : 'Answer'}</p><p className="text-base leading-relaxed" style={{ color: 'var(--ivory-200)' }}>{card.answer.replace(/^Sample answer \/ key ideas: /, '')}</p></div> : <p className="text-center text-sm" style={{ color: 'var(--gold-300)' }}>Tap card or press Space / Enter to reveal</p>}
     </button>
 
