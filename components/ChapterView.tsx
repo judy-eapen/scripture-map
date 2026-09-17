@@ -330,8 +330,8 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
                 style={{ background: slidesOpen ? 'rgba(201,168,76,0.12)' : 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.22)' }}>
                 <span className="text-lg leading-none">▣</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold" style={{ color: 'var(--gold-300)' }}>Teacher Slides</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>{slideDeck.title} · {slideDeck.pages} slides</p>
+                  <p className="text-xs font-semibold" style={{ color: 'var(--gold-300)' }}>{slideDeck.kind === 'lesson' ? 'Guided Lesson' : 'Teacher Slides'}</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>{slideDeck.title} · {slideDeck.pages} {slideDeck.kind === 'lesson' ? 'scenes' : 'slides'}</p>
                 </div>
                 <span className="text-xs" style={{ color: 'var(--gold-300)' }}>{slidesOpen ? 'Open →' : 'View →'}</span>
               </button>

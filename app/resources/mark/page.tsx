@@ -5,12 +5,14 @@ import { createClient } from '@/lib/supabase/server'
 import { defaultNavData, getNavChapters } from '@/lib/db'
 import { MARK_SLIDE_DECKS as decks, markSlideImage } from '@/lib/mark-slides'
 
-export default async function MarkResourcesPage({ searchParams }: { searchParams: Promise<{ chapter?: string; slide?: string }> }) {
+export default async function MarkResourcesPage({ searchParams }: { searchParams: Promise<{ chapter?: string; slide?: string; view?: string }> }) {
   const params = await searchParams
   const requested = Number(params.chapter ?? 1)
   const selected = decks.find(deck => deck.chapter === requested) ?? decks[0]
   const slide = Math.max(1, Math.min(selected.pages, Number(params.slide ?? 1) || 1))
-  const slideImage = markSlideImage(selected, slide)
+  const slideImage = selected.kind === 'images' ? markSlideImage(selected, slide) : null
+  const lesson = selected.kind === 'lesson' ? selected.slides[slide - 1] : null
+  const lessonView = ['read', 'connections', 'recall'].includes(params.view ?? '') ? params.view! : 'read'
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   const navData = user ? await getNavChapters(user.id) : defaultNavData()
@@ -25,13 +27,13 @@ export default async function MarkResourcesPage({ searchParams }: { searchParams
           <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--gold-400)' }}>Mark resources</p>
-              <h1 className="text-3xl font-medium" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Teacher Slide Decks</h1>
-              <p className="text-sm mt-2" style={{ color: 'var(--muted-400)' }}>Original teacher-provided slides, preserved without rewriting.</p>
+              <h1 className="text-3xl font-medium" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>Teaching Guides</h1>
+              <p className="text-sm mt-2" style={{ color: 'var(--muted-400)' }}>Chapter slides and guided lessons to use alongside the biblical text.</p>
             </div>
-            <a href={selected.file} target="_blank" rel="noreferrer" className="rounded-xl px-4 py-2 text-sm font-medium"
+            {selected.kind === 'images' ? <a href={selected.file} target="_blank" rel="noreferrer" className="rounded-xl px-4 py-2 text-sm font-medium"
               style={{ color: 'var(--gold-300)', border: '1px solid rgba(201,168,76,0.25)', background: 'rgba(201,168,76,0.07)' }}>
               Open full screen
-            </a>
+            </a> : <Link href={`/study/mark/${selected.chapter}`} className="rounded-xl px-4 py-2 text-sm font-medium" style={{ color: 'var(--gold-300)', border: '1px solid rgba(201,168,76,0.25)', background: 'rgba(201,168,76,0.07)' }}>Read alongside chapter</Link>}
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 mb-5">
@@ -43,7 +45,7 @@ export default async function MarkResourcesPage({ searchParams }: { searchParams
                   style={{ background: active ? 'rgba(201,168,76,0.12)' : 'var(--navy-800)', border: `1px solid ${active ? 'rgba(201,168,76,0.35)' : 'rgba(255,255,255,0.06)'}` }}>
                   <p className="text-xs font-semibold" style={{ color: active ? 'var(--gold-300)' : 'var(--muted-400)' }}>MARK {deck.chapter}</p>
                   <p className="text-sm mt-1 leading-snug" style={{ color: 'var(--ivory-100)' }}>{deck.title}</p>
-                  <p className="text-xs mt-2" style={{ color: 'var(--muted-500)' }}>{deck.pages} slides</p>
+                  <p className="text-xs mt-2" style={{ color: 'var(--muted-500)' }}>{deck.pages} {deck.kind === 'lesson' ? 'scenes' : 'slides'}</p>
                 </Link>
               )
             })}
@@ -61,9 +63,7 @@ export default async function MarkResourcesPage({ searchParams }: { searchParams
                 <Link href={`/study/mark/${selected.chapter}`} className="text-xs ml-1" style={{ color: 'var(--gold-300)' }}>Study chapter →</Link>
               </div>
             </div>
-            <div className="flex items-center justify-center p-2 md:p-4" style={{ background: '#090e1c' }}>
-              <Image src={slideImage} alt={`Mark ${selected.chapter} teacher slide ${slide}`} width={1600} height={900} priority className="block w-full h-auto rounded-lg" />
-            </div>
+            {selected.kind === 'images' && slideImage ? <div className="flex items-center justify-center p-2 md:p-4" style={{ background: '#090e1c' }}><Image src={slideImage} alt={`Mark ${selected.chapter} teacher slide ${slide}`} width={1600} height={900} priority className="block w-full h-auto rounded-lg" /></div> : lesson && <div className="p-4 md:p-8" style={{ background: '#090e1c' }}><article className="max-w-3xl mx-auto rounded-2xl p-5 md:p-8" style={{ background: 'linear-gradient(145deg, rgba(201,168,76,0.08), rgba(255,255,255,0.025))', border: '1px solid rgba(201,168,76,0.2)' }}><div className="flex flex-wrap items-center justify-between gap-2"><p className="text-xs uppercase tracking-widest" style={{ color: 'var(--gold-400)' }}>{lesson.eyebrow}</p><strong className="text-sm" style={{ color: 'var(--ivory-200)' }}>{lesson.passage}</strong></div><h2 className="text-3xl mt-3" style={{ fontFamily: 'var(--font-playfair)', color: 'var(--ivory-100)' }}>{lesson.title}</h2><p className="mt-3 leading-relaxed" style={{ color: 'var(--ivory-200)' }}>{lesson.summary}</p><div className="flex gap-2 mt-6">{['read', 'connections', 'recall'].map(view => <Link key={view} href={`/resources/mark?chapter=6&slide=${slide}&view=${view}`} className="rounded-full px-3 py-1.5 text-xs font-semibold capitalize" style={{ color: lessonView === view ? 'var(--navy-950)' : 'var(--muted-400)', background: lessonView === view ? 'var(--gold-400)' : 'rgba(255,255,255,0.05)' }}>{view}</Link>)}</div>{lessonView === 'read' && <div className="mt-6 space-y-3"><ul className="space-y-3">{lesson.details.map(detail => <li key={detail} className="flex gap-3 text-sm leading-relaxed" style={{ color: 'var(--muted-300)' }}><span style={{ color: 'var(--gold-400)' }}>◆</span>{detail}</li>)}</ul>{lesson.carefulNote && <p className="rounded-xl p-4 text-sm leading-relaxed" style={{ background: 'rgba(96,165,250,0.08)', border: '1px solid rgba(96,165,250,0.2)', color: '#bfdbfe' }}><strong>Read carefully:</strong> {lesson.carefulNote}</p>}</div>}{lessonView === 'connections' && <div className="mt-6 space-y-3">{lesson.connections.map(connection => <div key={connection.references} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}><p className="text-xs font-semibold" style={{ color: 'var(--gold-300)' }}>{connection.label} · {connection.references}</p><p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--muted-400)' }}>{connection.explanation}</p></div>)}</div>}{lessonView === 'recall' && <ol className="mt-6 space-y-3">{lesson.recall.map((question, index) => <li key={question} className="rounded-xl p-4 text-sm" style={{ background: 'rgba(255,255,255,0.035)', color: 'var(--ivory-200)' }}><span className="mr-2" style={{ color: 'var(--gold-400)' }}>{index + 1}.</span>{question}</li>)}</ol>}</article></div>}
             <div className="flex gap-1.5 overflow-x-auto px-3 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
               {Array.from({ length: selected.pages }, (_, index) => index + 1).map(number => (
                 <Link key={number} href={`/resources/mark?chapter=${selected.chapter}&slide=${number}`}
