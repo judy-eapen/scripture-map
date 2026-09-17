@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { MARK_6_LESSON } from '../data/mark-6-lesson'
 import { markSlideDeck } from '../lib/mark-slides'
+import { MARK_6_PLACES, straightLineKm } from '../lib/mark-6-geography'
 
 describe('Mark 6 guided lesson', () => {
   it('is available through the existing Mark lesson entry point', () => {
@@ -29,5 +30,19 @@ describe('Mark 6 guided lesson', () => {
     const allowed = new Set(['Parallel Gospel account', 'Scripture cross-reference', 'Old Testament background', 'Thematic parallel', 'Orthodox study note', 'Text note'])
     expect(MARK_6_LESSON.flatMap(slide => slide.connections)).not.toHaveLength(0)
     for (const connection of MARK_6_LESSON.flatMap(slide => slide.connections)) expect(allowed.has(connection.label)).toBe(true)
+  })
+
+  it('labels every generated scene as an imagined reconstruction with useful alt text', () => {
+    const images = MARK_6_LESSON.flatMap(slide => slide.image ? [slide.image] : [])
+    expect(images).toHaveLength(5)
+    for (const image of images) {
+      expect(image.alt.length).toBeGreaterThan(40)
+      expect(image.caption.toLowerCase()).toContain('imagined historical reconstruction')
+    }
+  })
+
+  it('uses straight-line geography only as approximate scale', () => {
+    expect(straightLineKm(MARK_6_PLACES.nazareth, MARK_6_PLACES.gennesaret)).toBeCloseTo(26.3, 0)
+    expect(straightLineKm(MARK_6_PLACES.bethsaidaCandidateArea, MARK_6_PLACES.gennesaret)).toBeCloseTo(12.2, 0)
   })
 })
