@@ -1,0 +1,33 @@
+export type LessonPlace = {
+  id: string
+  name: string
+  modernName: string
+  lat: number
+  lng: number
+  isActive?: boolean
+}
+
+export type ChapterGeography = {
+  places: LessonPlace[]
+  center: [number, number]
+  zoom: number
+  named: string
+  unknown: string
+  scale: string
+}
+
+const p = (id: string, name: string, modernName: string, lat: number, lng: number): LessonPlace => ({ id, name, modernName, lat, lng })
+
+export const MARK_LESSON_GEOGRAPHY: Record<number, ChapterGeography> = {
+  6: { places: [p('nazareth', 'Nazareth', 'Nazareth', 32.6996, 35.3035), p('sea', 'Sea of Galilee', 'Lake Kinneret', 32.82, 35.59), p('bethsaida', 'Bethsaida?', 'Et-Tell / El-Araj candidates', 32.91, 35.63), p('gennesaret', 'Gennesaret', 'Ginosar plain', 32.85, 35.52)], center: [32.8, 35.47], zoom: 9, named: 'Nazareth, the Sea, intended direction toward Bethsaida, and Gennesaret.', unknown: 'The feeding site, the walking-on-water point, and the boat’s course.', scale: 'Markers show regional scale, not a reconstructed itinerary. Bethsaida’s identification remains debated.' },
+  7: { places: [p('gennesaret', 'Gennesaret region', 'Ginosar plain', 32.85, 35.52), p('tyre', 'Region of Tyre', 'Coastal Lebanon', 33.27, 35.2), p('sidon', 'Sidon', 'Saida', 33.56, 35.37), p('decapolis', 'Decapolis region', 'East/southeast of the lake', 32.65, 35.75)], center: [33.05, 35.48], zoom: 8, named: 'The region of Tyre, Sidon, the Sea of Galilee, and the Decapolis.', unknown: 'Mark does not provide the precise house, travel roads, or healing location.', scale: 'The pins explain the chapter’s broad movement through Jewish and Gentile regions; they are not a turn-by-turn route.' },
+  8: { places: [p('decapolis', 'Decapolis region', 'East/southeast of the lake', 32.65, 35.75), p('dalmanutha', 'Dalmanutha?', 'Location uncertain', 32.83, 35.53), p('bethsaida', 'Bethsaida?', 'Candidate area', 32.91, 35.63), p('caesarea-philippi', 'Villages of Caesarea Philippi', 'Banias region', 33.25, 35.69)], center: [32.94, 35.63], zoom: 9, named: 'Dalmanutha, Bethsaida, and the villages of Caesarea Philippi.', unknown: 'Dalmanutha and Bethsaida are debated; the feeding site and boat route are not identified.', scale: 'The map shows the large northward movement in the chapter without claiming an exact road or shoreline landing.' },
+  9: { places: [p('caesarea-philippi', 'Caesarea Philippi region', 'Banias region', 33.25, 35.69), p('galilee', 'Galilee', 'Northern Israel', 32.85, 35.45), p('capernaum', 'Capernaum', 'Kefar Nahum', 32.88, 35.58)], center: [33.02, 35.56], zoom: 9, named: 'Galilee and Capernaum; the previous scene was near Caesarea Philippi.', unknown: 'Mark never names the mountain of the Transfiguration or the village where the boy is healed.', scale: 'The mountain marker is intentionally omitted because proposals cannot establish the site from Mark’s text.' },
+  10: { places: [p('judea', 'Judea beyond the Jordan', 'Perea/Jordan corridor', 31.9, 35.55), p('jericho', 'Jericho', 'Tell es-Sultan vicinity', 31.87, 35.44), p('jerusalem', 'Jerusalem', 'Old City area', 31.78, 35.23)], center: [31.86, 35.42], zoom: 10, named: 'Judea beyond the Jordan, Jericho, and the road toward Jerusalem.', unknown: 'Mark does not give every stopping place or Bartimaeus’s exact roadside location.', scale: 'The map shows the southward setting of the journey, not a fully reconstructed route.' },
+  11: { places: [p('bethany', 'Bethany', 'Al-Eizariya area', 31.77, 35.26), p('bethphage', 'Bethphage?', 'Mount of Olives area', 31.78, 35.25), p('jerusalem', 'Jerusalem', 'Old City area', 31.78, 35.23), p('mount-olives', 'Mount of Olives', 'East of Jerusalem', 31.78, 35.25)], center: [31.78, 35.245], zoom: 13, named: 'Bethany, Bethphage, Jerusalem, and the Mount of Olives.', unknown: 'The colt’s village location and the exact tree location are not securely identified.', scale: 'The close pins show how the final week centers on Jerusalem and the Mount of Olives; boundaries are approximate.' },
+  12: { places: [p('jerusalem', 'Jerusalem', 'Old City area', 31.78, 35.23), p('temple', 'Temple Mount', 'Haram al-Sharif', 31.778, 35.235)], center: [31.779, 35.233], zoom: 14, named: 'Jerusalem and the temple precinct where Mark places the teaching.', unknown: 'Mark does not identify exact courts or positions for each exchange.', scale: 'One regional marker avoids pretending that modern coordinates can recover each conversation’s precise spot.' },
+  13: { places: [p('temple', 'Temple', 'Temple Mount area', 31.778, 35.235), p('mount-olives', 'Mount of Olives', 'East of Jerusalem', 31.779, 35.245)], center: [31.779, 35.24], zoom: 14, named: 'The temple and the Mount of Olives opposite it.', unknown: 'The discourse describes future events but does not supply a mappable timetable or all modern identifications.', scale: 'The map shows the two stated locations only; it does not turn the discourse into a geographic prediction chart.' },
+  14: { places: [p('bethany', 'Bethany', 'Al-Eizariya area', 31.77, 35.26), p('jerusalem', 'Jerusalem', 'Old City area', 31.78, 35.23), p('gethsemane', 'Gethsemane', 'Mount of Olives foot', 31.779, 35.239), p('high-priest', 'High priest’s residence?', 'Traditional area; uncertain', 31.772, 35.229)], center: [31.776, 35.242], zoom: 13, named: 'Bethany, Jerusalem, and Gethsemane.', unknown: 'The guest room and the high priest’s residence cannot be fixed with certainty from Mark.', scale: 'Traditional and approximate pins orient the story; they are not archaeological proof of the exact rooms.' },
+  15: { places: [p('praetorium', 'Praetorium?', 'Jerusalem; location debated', 31.778, 35.232), p('golgotha', 'Golgotha', 'Traditional Holy Sepulchre area', 31.7785, 35.2297), p('tomb', 'Tomb area', 'Traditional Holy Sepulchre area', 31.7785, 35.2296)], center: [31.7783, 35.231], zoom: 15, named: 'The praetorium, Golgotha, and the tomb are all placed in or near Jerusalem.', unknown: 'The praetorium’s location is debated, and map precision cannot prove the ancient street sequence.', scale: 'Markers are orientation aids. Golgotha and the tomb use the principal ancient Christian traditional area without claiming GPS certainty.' },
+  16: { places: [p('tomb', 'The tomb', 'Traditional Holy Sepulchre area', 31.7785, 35.2296), p('jerusalem', 'Jerusalem', 'Old City area', 31.78, 35.23), p('galilee', 'Galilee', 'Northern Israel', 32.85, 35.45)], center: [32.31, 35.34], zoom: 8, named: 'The tomb near Jerusalem and Galilee, where the disciples are told Jesus will meet them.', unknown: 'Mark does not narrate the route to Galilee or locate later appearances precisely.', scale: 'The wide view shows the distance between Jerusalem and Galilee, not a reconstructed Resurrection itinerary.' },
+}

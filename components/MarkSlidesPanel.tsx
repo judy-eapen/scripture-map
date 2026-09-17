@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import Mark6PlacesPanel from '@/components/Mark6PlacesPanel'
+import MarkLessonPlacesPanel from '@/components/MarkLessonPlacesPanel'
 import type { MarkSlideDeck } from '@/lib/mark-slides'
 import { markSlideImage } from '@/lib/mark-slides'
 
@@ -51,7 +51,7 @@ export default function MarkSlidesPanel({ deck, slide, onSlideChange, onClose }:
             {view === 'culture' && <div className="mt-5 space-y-3">{lesson.culture?.length ? lesson.culture.map(item => <article key={item.title} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}><h4 className="text-sm font-semibold" style={{ color: 'var(--ivory-100)' }}>{item.title}</h4><p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--muted-400)' }}>{item.body}</p>{item.source && <a href={item.source.href} target="_blank" rel="noreferrer" className="inline-block text-[11px] mt-2 underline underline-offset-2" style={{ color: 'var(--gold-300)' }}>Source: {item.source.label} ↗</a>}</article>) : <p className="text-sm" style={{ color: 'var(--muted-400)' }}>No additional cultural note for this overview. Choose a scene for focused context.</p>}</div>}
             {view === 'connections' && <div className="mt-5 space-y-3">{lesson.connections.map(connection => { const isCrossReference = connection.label === 'Parallel Gospel account' || connection.label === 'Scripture cross-reference'; return <article key={`${connection.label}-${connection.references}`} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}><div className="flex flex-wrap gap-2 items-center"><span className="text-[10px] uppercase tracking-wider rounded-full px-2 py-1" style={{ color: isCrossReference ? '#86efac' : 'var(--gold-300)', background: isCrossReference ? 'rgba(34,197,94,0.09)' : 'rgba(201,168,76,0.09)' }}>{connection.label}</span><strong className="text-xs" style={{ color: 'var(--ivory-100)' }}>{connection.references}</strong></div><p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--muted-400)' }}>{connection.explanation}</p></article> })}</div>}
             {view === 'recall' && <div className="mt-5"><p className="text-xs mb-3" style={{ color: 'var(--muted-500)' }}>Optional—answer aloud, then check the chapter text.</p><ol className="space-y-3">{lesson.recall.map((question, index) => <li key={question} className="rounded-xl p-4 text-sm leading-relaxed" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--ivory-200)' }}><span className="font-semibold mr-2" style={{ color: 'var(--gold-400)' }}>{index + 1}.</span>{question}</li>)}</ol></div>}
-            {view === 'places' && <Mark6PlacesPanel />}
+            {view === 'places' && <MarkLessonPlacesPanel chapter={deck.chapter} />}
           </div>
         </div>}
       </div>
