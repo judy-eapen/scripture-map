@@ -337,6 +337,19 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               </button>
             )}
 
+            {chapter.book === 'Mark' && chapter.chapter_number === 6 && (
+              <Link href="/flashcards/mark/6"
+                className="w-full flex items-center gap-3 rounded-xl px-4 py-3 mb-4 text-left transition-all"
+                style={{ background: 'rgba(59,130,246,0.07)', border: '1px solid rgba(96,165,250,0.24)' }}>
+                <span className="text-lg leading-none">◫</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold" style={{ color: '#93c5fd' }}>Mark 6 Flashcards</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted-500)' }}>90 exhaustive question-and-answer cards</p>
+                </div>
+                <span className="text-xs" style={{ color: '#93c5fd' }}>Study →</span>
+              </Link>
+            )}
+
             {/* People in this chapter */}
             {chapter.people.length > 0 && (
               <div className="mb-4 pb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { getDeckSummaries, getDueFlashcards, type DeckSummary, type FlashcardWithState } from '@/app/actions/flashcards';
 import FlashcardStudy from '@/components/FlashcardStudy';
 
@@ -59,6 +60,11 @@ export default function FlashcardsClient() {
                 Spaced repetition study. Cards due today are shown first.
               </p>
             </div>
+
+            <Link href="/flashcards/mark/6" className="block rounded-2xl px-5 py-4 mb-5" style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.25)' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gold-400)' }}>Featured chapter deck</p>
+              <div className="flex items-center justify-between gap-4 mt-1"><div><p className="text-base font-medium" style={{ color: 'var(--ivory-100)' }}>Mark 6 · End-to-end recall</p><p className="text-xs mt-1" style={{ color: 'var(--muted-400)' }}>90 cards · all 56 verses · works without sign-in</p></div><span style={{ color: 'var(--gold-300)' }}>Study →</span></div>
+            </Link>
 
             {loading ? (
               <div className="space-y-3">

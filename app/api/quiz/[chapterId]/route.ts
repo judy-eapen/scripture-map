@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
-export const QUIZ_SELECT =
+const QUIZ_SELECT =
   'id, type, difficulty, question, options, correct_index, answer, accepted_answers, verse_ref, verse_number, explanation, supporting_refs, review_topic, review_guidance'
 const QUIZ_SELECT_WITH_LEAD_IN = `${QUIZ_SELECT}, lead_in`
 
