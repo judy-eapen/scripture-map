@@ -31,11 +31,12 @@ type Props = {
   navData: { book: string; chapters: NavChapter[] }[];
   initialIsRead: boolean;
   isAuthenticated: boolean;
+  learnerId?: string;
   initialNotes: VerseNote[];
   quizReturnHref?: string;
 };
 
-export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes = [], quizReturnHref }: Props) {
+export default function ChapterView({ chapter, navData, initialIsRead, isAuthenticated, initialNotes = [], quizReturnHref, learnerId = 'guest' }: Props) {
   // Resizable map panel
   const [mapWidth, setMapWidth] = useState(500);
   const mapWidthBeforeSlides = useRef(500);
@@ -509,8 +510,10 @@ export default function ChapterView({ chapter, navData, initialIsRead, isAuthent
               )}
             </div>
 
+            <p className="mb-3 text-xs text-muted-400">Select words in a verse to highlight them. Highlights save in this browser. {isAuthenticated ? 'Click a verse number to add a note.' : <a href="/login" className="text-gold-300 underline">Sign in to add verse notes.</a>}</p>
             {/* Verse text */}
             <VerseText
+              highlightScope={`${learnerId}:${chapter.book_slug}:${chapter.chapter_number}`}
               verses={chapter.verses}
               people={chapter.people}
               places={chapter.places}

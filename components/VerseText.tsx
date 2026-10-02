@@ -1,5 +1,7 @@
 'use client';
 
+import StudyHighlighter from '@/components/StudyHighlighter';
+
 import type { VerseEntry, TappablePerson, TappablePlace, Person, Place, DifficultPassage, ChapterConnection } from '@/lib/types';
 
 type Segment =
@@ -84,6 +86,7 @@ function buildSegments(
 
 type Props = {
   verses: VerseEntry[];
+  highlightScope?: string;
   people: TappablePerson[];
   places: TappablePlace[];
   onPersonClick: (person: Person) => void;
@@ -149,7 +152,7 @@ function DifficultPassageCallout({ passage }: { passage: DifficultPassage }) {
 
 export default function VerseText({
   verses, people, places, onPersonClick, onPlaceClick, activePersonId, activePlaceId,
-  difficultPassages = [], connections = [], notedVerses, onVerseClick,
+  difficultPassages = [], connections = [], notedVerses, onVerseClick, highlightScope,
 }: Props) {
   // Build a map: verse_number → callback connections for that verse
   const callbacksByVerse = new Map<number, ChapterConnection[]>()
@@ -168,13 +171,15 @@ export default function VerseText({
         const verseCallbacks = callbacksByVerse.get(verse.verse_number) ?? []
         return (
           <div key={verse.verse_number} id={`v${verse.verse_number}`} className="verse-anchor rounded-lg transition-colors">
-            <p className="flex gap-3 leading-relaxed">
+            <div className="flex gap-3 leading-relaxed">
               {/* Verse number — clickable to add/edit note */}
               <button
                 onClick={() => onVerseClick?.(verse.verse_number)}
                 className="shrink-0 text-xs font-semibold mt-[5px] w-5 text-right select-none relative group"
                 style={{ color: notedVerses?.has(verse.verse_number) ? 'var(--gold-400)' : 'var(--gold-500)', fontVariantNumeric: 'tabular-nums' }}
-                title={notedVerses?.has(verse.verse_number) ? 'Edit note' : 'Add note'}
+                title={onVerseClick ? (notedVerses?.has(verse.verse_number) ? 'Edit note' : 'Add note') : 'Sign in to add verse notes'}
+                aria-label={`Verse ${verse.verse_number}: ${onVerseClick ? 'add or edit note' : 'sign in to add notes'}`}
+                disabled={!onVerseClick}
               >
                 {verse.verse_number}
                 {notedVerses?.has(verse.verse_number) && (
@@ -186,10 +191,10 @@ export default function VerseText({
               </button>
 
               {/* Verse text */}
-              <span>
-                {segments.map((seg, i) => {
+              <StudyHighlighter key={`${highlightScope}:${verse.verse_number}`} storageId={`${highlightScope ?? "guest"}:verse:${verse.verse_number}`} text={verse.text}>{paint => <>{segments.map((seg, i) => {
+                  const offset = segments.slice(0,i).reduce((sum,item)=>sum+item.text.length,0);
                   if (seg.type === 'plain') {
-                    return <span key={i}>{seg.text}</span>;
+                    return <span key={i}>{paint(seg.text,offset)}</span>;
                   }
                   if (seg.type === 'person') {
                     const isActive = activePersonId === seg.person.id;
@@ -206,7 +211,7 @@ export default function VerseText({
                           borderBottomWidth: '2px',
                           fontWeight: '600',
                         }}>
-                        {seg.text}
+                        {paint(seg.text,offset)}
                       </button>
                     );
                   }
@@ -237,13 +242,12 @@ export default function VerseText({
                             (e.currentTarget as HTMLElement).style.color = 'rgba(96,165,250,0.85)';
                           }
                         }}>
-                        {seg.text}
+                        {paint(seg.text,offset)}
                       </button>
                     );
                   }
-                })}
-              </span>
-            </p>
+                })}</>}</StudyHighlighter>
+            </div>
 
             {callouts.map(p => (
               <DifficultPassageCallout key={p.id} passage={p} />

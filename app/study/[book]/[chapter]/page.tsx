@@ -33,6 +33,7 @@ export default async function ChapterPage({ params, searchParams }: { params: Pr
       navData={navData}
       initialIsRead={initialIsRead}
       isAuthenticated={!!user}
+      learnerId={user?.id ?? 'guest'}
       initialNotes={initialNotes}
       quizReturnHref={quizReturnHref}
     />
