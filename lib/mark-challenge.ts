@@ -5,6 +5,7 @@ export type ChallengeQuestion = QuizQuestion & {
   chapter: typeof CHAPTERS[number]
   points: typeof POINTS[number]
   source: { kind: 'user-provided'; conversationId: string; image: string; item: string }
+    | { kind: 'user-requested'; reference: string; item: string; authorization: string }
   // Reserved extension point; no bonus cards are enabled in this release.
   special?: { kind: 'double-points' | 'second-chance' | 'grace' }
 }

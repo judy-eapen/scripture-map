@@ -4,11 +4,20 @@ import { markChallengeQuestions as bank } from '../../data/mark-challenge'
 import { availableQuestions, challengeTotals, emptyChallenge, recordAnswer, restoreChallenge } from '../../lib/mark-challenge'
 
 describe('Mark Challenge', () => {
-  it('contains only the 49 screenshot questions with traceable sources and no Mark 10 additions', () => {
-    expect(bank).toHaveLength(49)
-    expect(new Set(bank.map(q=>q.id)).size).toBe(49)
-    expect([6,7,8,9,10].map(c=>bank.filter(q=>q.chapter===c).length)).toEqual([25,11,8,5,0])
-    expect(bank.every(q=>q.source.kind==='user-provided' && q.source.item && q.source.image && q.answer && q.explanation && !q.special)).toBe(true)
+  it('preserves the 49 supplied questions and identifies the 39 requested additions', () => {
+    expect(bank).toHaveLength(88)
+    expect(new Set(bank.map(q=>q.id)).size).toBe(88)
+    const original = bank.filter(q=>q.source.kind==='user-provided')
+    expect(original).toHaveLength(49)
+    expect([6,7,8,9,10].map(c=>original.filter(q=>q.chapter===c).length)).toEqual([25,11,8,5,0])
+    expect(original.every(q=>q.source.kind==='user-provided' && q.source.item && q.source.image)).toBe(true)
+    const additions = bank.filter(q=>q.source.kind==='user-requested')
+    expect(additions).toHaveLength(39)
+    expect(additions.every(q=>q.source.kind==='user-requested' && q.source.reference==='data/mark-source.json' && q.source.authorization)).toBe(true)
+    expect(bank.every(q=>q.answer && q.explanation && !q.special)).toBe(true)
+    for (const chapter of [6,7,8,9,10]) for (const points of [100,200,300,400,500]) {
+      expect(availableQuestions(bank,emptyChallenge(),chapter,points).length).toBeGreaterThanOrEqual(3)
+    }
     expect(bank.find(q=>q.id==='mark-challenge-8-01')?.question).toContain('Four loaves')
     expect(bank.find(q=>q.id==='mark-challenge-8-03')?.options).toEqual(['Magadan','Dalmanutha','Bethsaida','Capernaum'])
   })

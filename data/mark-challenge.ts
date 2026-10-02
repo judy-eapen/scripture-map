@@ -1,8 +1,8 @@
 import type { ChallengeQuestion } from '../lib/mark-challenge'
 
-// Only prompts transcribed from Judy’s two screenshots. Never import a generated bank here.
-// The screenshot headed ‘Ch 2’ contains Mark 7 material; spelling has been lightly corrected.
-// Answers and feedback are checked against the existing Orthodox Study Bible source.
+// Original 49 user-supplied questions remain unchanged.
+// Additional questions were written at the user's request in the same style.
+// Answers and feedback use the existing Orthodox Study Bible source.
 export const markChallengeQuestions: ChallengeQuestion[] = [
   {
     "id": "mark-challenge-6-01",
@@ -1036,6 +1036,825 @@ export const markChallengeQuestions: ChallengeQuestion[] = [
       "conversationId": "6abfc8b3-a04c-83e9-967b-27d641d70d21",
       "image": "questions-transfiguration",
       "item": "Mark 9, question 5"
+    }
+  },
+  {
+    "id": "mark-challenge-osb-6-01",
+    "chapter": 6,
+    "points": 500,
+    "type": "short_answer",
+    "difficulty": 3,
+    "question": "Why did Herod fear John and protect him?",
+    "answer": "He knew that John was a just and holy man.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 20,
+    "verse_ref": "Mark 6:20",
+    "explanation": "for Herod feared John, knowing that he was a just and holy man, and he protected him. And when he heard him, he did many things, and heard him gladly.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 6:20",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-6-02",
+    "chapter": 6,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “And Jesus, when He came out, saw a great multitude and was moved with ____ for them, because they were like ____ not having a ____.”",
+    "answer": "compassion; sheep; shepherd",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 34,
+    "verse_ref": "Mark 6:34",
+    "explanation": "And Jesus, when He came out, saw a great multitude and was moved with compassion for them, because they were like sheep not having a shepherd. So He began to teach them many things.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 6:34",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-7-01",
+    "chapter": 7,
+    "points": 100,
+    "type": "true_false",
+    "difficulty": 1,
+    "question": "True or false: The woman’s young daughter had an unclean spirit.",
+    "answer": "true",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 25,
+    "verse_ref": "Mark 7:25",
+    "explanation": "For a woman whose young daughter had an unclean spirit heard about Him, and she came and fell at His feet.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 7:25",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-7-02",
+    "chapter": 7,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What did the Syro-Phoenician woman find when she returned to her house?",
+    "answer": "The demon had gone out, and her daughter was lying on the bed.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 30,
+    "verse_ref": "Mark 7:30",
+    "explanation": "And when she had come to her house, she found the demon gone out, and her daughter lying on the bed.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 7:30",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-7-03",
+    "chapter": 7,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What happened to the deaf man’s ears and tongue after Jesus healed him?",
+    "answer": "His ears were opened, his tongue was loosed, and he spoke plainly.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 35,
+    "verse_ref": "Mark 7:35",
+    "explanation": "Immediately his ears were opened, and the impediment of his tongue was loosed, and he spoke plainly.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 7:35",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-7-04",
+    "chapter": 7,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "When Jesus told the people to tell no one about the healing, what did they do?",
+    "answer": "The more He commanded them, the more widely they proclaimed it.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 36,
+    "verse_ref": "Mark 7:36",
+    "explanation": "Then He commanded them that they should tell no one; but the more He commanded them, the more widely they proclaimed it.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 7:36",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-7-05",
+    "chapter": 7,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “He has done all things well. He makes both the ____ to hear and the ____ to speak.”",
+    "answer": "deaf; mute",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 37,
+    "verse_ref": "Mark 7:37",
+    "explanation": "And they were astonished beyond measure, saying, “He has done all things well. He makes both the deaf to hear and the mute to speak.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 7:37",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-01",
+    "chapter": 8,
+    "points": 100,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "How many days had the multitude stayed with Jesus without anything to eat?",
+    "answer": "Three days.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 2,
+    "verse_ref": "Mark 8:2",
+    "explanation": "“I have compassion on the multitude, because they have now continued with Me three days and have nothing to eat.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:2",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-02",
+    "chapter": 8,
+    "points": 200,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "How many loaves did the disciples have with them in the boat after forgetting to take bread?",
+    "answer": "One loaf.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 14,
+    "verse_ref": "Mark 8:14",
+    "explanation": "Now the disciples had forgotten to take bread, and they did not have more than one loaf with them in the boat.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:14",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-03",
+    "chapter": 8,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What did the blind man say he saw when Jesus first asked if he saw anything?",
+    "answer": "I see men like trees, walking.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 24,
+    "verse_ref": "Mark 8:24",
+    "explanation": "And he looked up and said, “I see men like trees, walking.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:24",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-04",
+    "chapter": 8,
+    "points": 400,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "After how many days did Jesus say the Son of Man would rise again?",
+    "answer": "After three days.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 31,
+    "verse_ref": "Mark 8:31",
+    "explanation": "And He began to teach them that the Son of Man must suffer many things, and be rejected by the elders and chief priests and scribes, and be killed, and after three days rise again.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:31",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-05",
+    "chapter": 8,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “Whoever desires to come after Me, let him ____ himself, and take up his ____, and ____ Me.”",
+    "answer": "deny; cross; follow",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 34,
+    "verse_ref": "Mark 8:34",
+    "explanation": "When He had called the people to Himself, with His disciples also, He said to them, “Whoever desires to come after Me, let him deny himself, and take up his cross, and follow Me.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:34",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-06",
+    "chapter": 8,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “For whoever desires to save his life will ____ it, but whoever loses his life for My sake and the ____ will save it.”",
+    "answer": "lose; gospel’s",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 35,
+    "verse_ref": "Mark 8:35",
+    "explanation": "For whoever desires to save his life will lose it, but whoever loses his life for My sake and the gospel’s will save it.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:35",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-8-07",
+    "chapter": 8,
+    "points": 500,
+    "type": "short_answer",
+    "difficulty": 3,
+    "question": "Of whom did Jesus say the Son of Man would be ashamed when He comes in His Father’s glory?",
+    "answer": "Whoever is ashamed of Him and His words in this adulterous and sinful generation.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 38,
+    "verse_ref": "Mark 8:38",
+    "explanation": "For whoever is ashamed of Me and My words in this adulterous and sinful generation, of him the Son of Man also will be ashamed when He comes in the glory of His Father with the holy angels.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 8:38",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-01",
+    "chapter": 9,
+    "points": 100,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "What color did Jesus’ clothes become during the transfiguration?",
+    "answer": "Exceedingly white, like snow.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 3,
+    "verse_ref": "Mark 9:3",
+    "explanation": "His clothes became shining, exceedingly white, like snow, such as no launderer on earth can whiten them.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:3",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-02",
+    "chapter": 9,
+    "points": 100,
+    "type": "true_false",
+    "difficulty": 1,
+    "question": "True or false: The disciples were able to cast the spirit out of the boy before Jesus arrived.",
+    "answer": "false",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 18,
+    "verse_ref": "Mark 9:18",
+    "explanation": "And wherever it seizes him, it throws him down; he foams at the mouth, gnashes his teeth, and becomes rigid. So I spoke to Your disciples, that they should cast it out, but they could not.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:18",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-03",
+    "chapter": 9,
+    "points": 200,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "How long had the boy been troubled by the spirit, according to his father?",
+    "answer": "From childhood.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 21,
+    "verse_ref": "Mark 9:21",
+    "explanation": "So He asked his father, “How long has this been happening to him?” And he said, “From childhood.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:21",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-04",
+    "chapter": 9,
+    "points": 200,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "In which place did Jesus ask the disciples what they had disputed about on the road?",
+    "answer": "Capernaum.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 33,
+    "verse_ref": "Mark 9:33",
+    "explanation": "Then He came to Capernaum. And when He was in the house He asked them, “What was it you disputed among yourselves on the road?”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:33",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-05",
+    "chapter": 9,
+    "points": 300,
+    "type": "fill_blank",
+    "difficulty": 2,
+    "question": "Fill in the blanks: “Lord, I ____; help my ____!”",
+    "answer": "believe; unbelief",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 24,
+    "verse_ref": "Mark 9:24",
+    "explanation": "Immediately the father of the child cried out and said with tears, “Lord, I believe; help my unbelief!”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:24",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-06",
+    "chapter": 9,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What had the disciples disputed among themselves on the road?",
+    "answer": "Who would be the greatest.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 34,
+    "verse_ref": "Mark 9:34",
+    "explanation": "But they kept silent, for on the road they had disputed among themselves who would be the greatest.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:34",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-07",
+    "chapter": 9,
+    "points": 400,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "Until when did Jesus tell the disciples not to speak about what they had seen on the mountain?",
+    "answer": "Until the Son of Man had risen from the dead.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 9,
+    "verse_ref": "Mark 9:9",
+    "explanation": "Now as they came down from the mountain, He commanded them that they should tell no one the things they had seen, till the Son of Man had risen from the dead.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:9",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-08",
+    "chapter": 9,
+    "points": 400,
+    "type": "fill_blank",
+    "difficulty": 2,
+    "question": "Fill in the blanks: “This kind can come out by nothing but ____ and ____.”",
+    "answer": "prayer; fasting",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 29,
+    "verse_ref": "Mark 9:29",
+    "explanation": "So He said to them, “This kind can come out by nothing but prayer and fasting.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:29",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-09",
+    "chapter": 9,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “If anyone desires to be ____, he shall be ____ of all and ____ of all.”",
+    "answer": "first; last; servant",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 35,
+    "verse_ref": "Mark 9:35",
+    "explanation": "And He sat down, called the twelve, and said to them, “If anyone desires to be first, he shall be last of all and servant of all.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:35",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-9-10",
+    "chapter": 9,
+    "points": 500,
+    "type": "short_answer",
+    "difficulty": 3,
+    "question": "What did Jesus say about whoever receives one of the little children in His name?",
+    "answer": "Whoever receives one of these little children in His name receives Him; whoever receives Him receives Him who sent Him.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 37,
+    "verse_ref": "Mark 9:37",
+    "explanation": "“Whoever receives one of these little children in My name receives Me; and whoever receives Me, receives not Me but Him who sent Me.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 9:37",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-01",
+    "chapter": 10,
+    "points": 100,
+    "type": "true_false",
+    "difficulty": 1,
+    "question": "True or false: The disciples rebuked those who brought little children to Jesus.",
+    "answer": "true",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 13,
+    "verse_ref": "Mark 10:13",
+    "explanation": "Then they brought little children to Him, that He might touch them; but the disciples rebuked those who brought them.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:13",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-02",
+    "chapter": 10,
+    "points": 100,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "What was the name of the blind man who sat begging by the road near Jericho?",
+    "answer": "Bartimaeus.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 46,
+    "verse_ref": "Mark 10:46",
+    "explanation": "Now they came to Jericho. As He went out of Jericho with His disciples and a great multitude, blind Bartimaeus, the son of Timaeus, sat by the road begging.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:46",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-03",
+    "chapter": 10,
+    "points": 100,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "Why did the man who asked about eternal life go away sorrowful?",
+    "answer": "He had great possessions.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 22,
+    "verse_ref": "Mark 10:22",
+    "explanation": "But he was sad at this word, and went away sorrowful, for he had great possessions.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:22",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-04",
+    "chapter": 10,
+    "points": 200,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "Which two sons of Zebedee came to Jesus with a request?",
+    "answer": "James and John.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 35,
+    "verse_ref": "Mark 10:35",
+    "explanation": "Then James and John, the sons of Zebedee, came to Him, saying, “Teacher, we want You to do for us whatever we ask.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:35",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-05",
+    "chapter": 10,
+    "points": 200,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "What did Jesus do to the little children who were brought to Him?",
+    "answer": "He took them in His arms, laid His hands on them, and blessed them.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 16,
+    "verse_ref": "Mark 10:16",
+    "explanation": "And He took them up in His arms, laid His hands on them, and blessed them.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:16",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-06",
+    "chapter": 10,
+    "points": 200,
+    "type": "short_answer",
+    "difficulty": 1,
+    "question": "What did Bartimaeus throw aside when he rose and came to Jesus?",
+    "answer": "His garment.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 50,
+    "verse_ref": "Mark 10:50",
+    "explanation": "And throwing aside his garment, he rose and came to Jesus.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:50",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-07",
+    "chapter": 10,
+    "points": 300,
+    "type": "fill_blank",
+    "difficulty": 2,
+    "question": "Fill in the blanks: “Let the little ____ come to Me, and do not ____ them; for of such is the ____ of God.”",
+    "answer": "children; forbid; kingdom",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 14,
+    "verse_ref": "Mark 10:14",
+    "explanation": "But when Jesus saw it, He was greatly displeased and said to them, “Let the little children come to Me, and do not forbid them; for of such is the kingdom of God.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:14",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-08",
+    "chapter": 10,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What did Jesus say was easier than for a rich man to enter the kingdom of God?",
+    "answer": "For a camel to go through the eye of a needle.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 25,
+    "verse_ref": "Mark 10:25",
+    "explanation": "It is easier for a camel to go through the eye of a needle than for a rich man to enter the kingdom of God.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:25",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-09",
+    "chapter": 10,
+    "points": 300,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What did Bartimaeus cry out when he heard that Jesus of Nazareth was passing by?",
+    "answer": "Jesus, Son of David, have mercy on me!",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 47,
+    "verse_ref": "Mark 10:47",
+    "explanation": "And when he heard that it was Jesus of Nazareth, he began to cry out and say, “Jesus, Son of David, have mercy on me!”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:47",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-10",
+    "chapter": 10,
+    "points": 400,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What did Jesus tell the man who asked about eternal life to do with his possessions?",
+    "answer": "Sell whatever he had and give to the poor; then come, take up the cross, and follow Him.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 21,
+    "verse_ref": "Mark 10:21",
+    "explanation": "Then Jesus, looking at him, loved him, and said to him, “One thing you lack: Go your way, sell whatever you have and give to the poor, and you will have treasure in heaven; and come, take up the cross, and follow Me.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:21",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-11",
+    "chapter": 10,
+    "points": 400,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "Where did James and John ask to sit when Jesus was in His glory?",
+    "answer": "One on His right hand and the other on His left.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 37,
+    "verse_ref": "Mark 10:37",
+    "explanation": "They said to Him, “Grant us that we may sit, one on Your right hand and the other on Your left, in Your glory.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:37",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-12",
+    "chapter": 10,
+    "points": 400,
+    "type": "short_answer",
+    "difficulty": 2,
+    "question": "What did Jesus say had made Bartimaeus well, and what did Bartimaeus do after receiving his sight?",
+    "answer": "His faith had made him well. He followed Jesus on the road.",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 52,
+    "verse_ref": "Mark 10:52",
+    "explanation": "Then Jesus said to him, “Go your way; your faith has made you well.” And immediately he received his sight and followed Jesus on the road.",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:52",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-13",
+    "chapter": 10,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “With men it is ____, but not with God; for with God all things are ____.”",
+    "answer": "impossible; possible",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 27,
+    "verse_ref": "Mark 10:27",
+    "explanation": "But Jesus looked at them and said, “With men it is impossible, but not with God; for with God all things are possible.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:27",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-14",
+    "chapter": 10,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “For even the Son of Man did not come to be ____, but to ____, and to give His life a ____ for many.”",
+    "answer": "served; serve; ransom",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 45,
+    "verse_ref": "Mark 10:45",
+    "explanation": "For even the Son of Man did not come to be served, but to serve, and to give His life a ransom for many.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:45",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
+    }
+  },
+  {
+    "id": "mark-challenge-osb-10-15",
+    "chapter": 10,
+    "points": 500,
+    "type": "fill_blank",
+    "difficulty": 3,
+    "question": "Fill in the blanks: “Therefore what ____ has joined together, let not ____ separate.”",
+    "answer": "God; man",
+    "accepted_answers": [],
+    "options": null,
+    "correct_index": null,
+    "verse_number": 9,
+    "verse_ref": "Mark 10:9",
+    "explanation": "Therefore what God has joined together, let not man separate.”",
+    "source": {
+      "kind": "user-requested",
+      "reference": "data/mark-source.json",
+      "item": "Mark 10:9",
+      "authorization": "User requested additional OSB questions framed like the supplied questions."
     }
   }
 ]

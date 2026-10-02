@@ -6,13 +6,14 @@ helpers are reused. Existing quizzes, lessons, flashcards, and database records 
 
 ## Question provenance
 
-`data/mark-challenge.ts` contains only 49 questions transcribed from the two user
+`data/mark-challenge.ts` preserves 49 original questions transcribed from the two user
 screenshots attached to conversation `6abfc8b3-a04c-83e9-967b-27d641d70d21`:
 
 - September 24 screenshot: Mark 6 (25), the block labeled “Ch 2” that actually
   covers Mark 7 (11), and the first two Mark 8 true/false questions.
 - Transfiguration screenshot: remaining Mark 8 questions (6), Mark 9 (5).
-- Mark 10 is deliberately empty. No assistant-suggested questions are included.
+- At the user’s subsequent explicit request, 39 additional OSB questions were written in the same short-answer, true/false, and fill-in style. Their provenance is `user-requested`, separate from the screenshot originals.
+- There are now 88 questions: Mark 6 (27), Mark 7 (16), Mark 8 (15), Mark 9 (15), and Mark 10 (15). Every chapter/point bucket has at least three questions.
 
 Grammar and obvious transcription typos have been lightly corrected. Fill-in
 prompts have blanks restored, inline answers removed, and the two context-dependent
@@ -24,11 +25,9 @@ use the Orthodox Study Bible wording from that source, including “Take heed,�
 Question IDs and points are unchanged, preserving saved progress.
 The original multiple-choice alternatives are preserved; no distractors were invented.
 
-To add questions, append user-supplied prompts with unique, stable IDs, source image
-and item, chapter, points, answer, and verse evidence. Never import existing generated
-quiz banks. Multiple questions can share a chapter/point value; totals are computed
+To add questions, append supplied prompts or explicitly requested new questions with unique, stable IDs, accurate provenance, chapter, points, answer, and verse evidence. Never identify authored additions as user-supplied screenshots. Multiple questions can share a chapter/point value; totals are computed
 from the complete bank, and old attempts survive additions. Keep existing IDs stable.
-Update the provenance count test intentionally when new supplied questions are added.
+Update the provenance count and board coverage tests intentionally when questions are added.
 
 ## Play and persistence
 

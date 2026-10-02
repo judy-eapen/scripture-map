@@ -78,7 +78,7 @@ export default function MarkChallenge({ learnerId }: { learnerId: string }) {
         </section>
       })}
     </div>
-    <div className="mt-6 flex items-start gap-3 rounded-xl border border-gold-400/15 p-4 text-sm leading-6 text-muted-400"><Sparkles size={20} className="mt-1 shrink-0 text-gold-300" /><p>More questions can be added at any time. Only your supplied questions appear here. Special cards are coming later.</p></div>
+    <div className="mt-6 flex items-start gap-3 rounded-xl border border-gold-400/15 p-4 text-sm leading-6 text-muted-400"><Sparkles size={20} className="mt-1 shrink-0 text-gold-300" /><p>More questions can be added at any time. Your original questions and additional questions written in the same style use Orthodox Study Bible answers. Special cards are coming later.</p></div>
     <p className="mt-4 text-xs text-muted-400">Progress saves on this browser for {learnerId === 'guest' ? 'this guest player' : 'your account'}. A new round resets the score and makes all questions available again.</p>
 
     <dialog ref={dialogRef} onCancel={event => { if(revealed && !result) event.preventDefault(); else closeQuestion() }} onClose={closeQuestion} className="m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl overflow-y-auto rounded-2xl border border-gold-400/30 bg-navy-900 p-6 text-ivory-100 shadow-2xl backdrop:bg-black/75" aria-labelledby="challenge-question-title">
