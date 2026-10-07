@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 type Slide = { title: string; body: string[]; ref: string; notes: string; image: string }
-export type TalmidoDeck = { chapter: number; title: string; file: string; slides: Slide[] }
+export type TalmidoDeck = { chapter: number; title: string; file: string; layout?: string; slides: Slide[] }
 
 export default function TalmidoSlides({ deck }: { deck: TalmidoDeck }) {
   const [index, setIndex] = useState(0)
@@ -21,7 +21,11 @@ export default function TalmidoSlides({ deck }: { deck: TalmidoDeck }) {
         setIndex(value => Math.max(0, Math.min(deck.slides.length - 1, value + (event.key === 'ArrowRight' ? 1 : -1))))
       }
     }}>
-      <Image src={slide.image} alt={`${slide.title}. ${slide.body.join(' ')}`} width={1280} height={720} className="h-auto w-full" priority unoptimized />
+      {deck.layout === 'reading' ? <article className="bg-[#fffefa] px-6 py-8 text-[#252421] sm:px-10 sm:py-10" style={{ fontFamily: 'Georgia, serif' }}>
+        <h2 className="text-2xl font-bold leading-snug sm:text-3xl">{slide.title}</h2>
+        <div className="mt-7 space-y-6 text-lg leading-relaxed sm:text-xl sm:leading-relaxed">{slide.body.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</div>
+        <p className="mt-8 text-sm text-[#6b6256]">Talmido Chapter {deck.chapter} · {slide.ref}</p>
+      </article> : <Image src={slide.image} alt={`${slide.title}. ${slide.body.join(' ')}`} width={1280} height={720} className="h-auto w-full" priority unoptimized />}
     </div>
     <div className="flex flex-wrap items-center justify-between gap-3 p-4">
       <button className={button} disabled={index === 0} onClick={() => setIndex(index - 1)}>← Previous</button>

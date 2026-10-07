@@ -125,273 +125,425 @@
   {
     "chapter": 7,
     "title": "The Living Sacrifice",
-    "slug": "the-living-sacrifice",
+    "slug": "the-living-sacrifice-detailed",
     "slides": [
       {
         "title": "The Living Sacrifice",
-        "body": [
-          "TALMIDO / CHAPTER 7",
-          "Understanding the Holy Qurbana",
-          "We gather with Christ—and learn to live His love."
-        ],
         "ref": "pp. 38–46",
-        "notes": "Allow about 20 minutes. Ask what students notice during the Holy Qurbana. Explain that the lesson helps us participate thoughtfully, rather than simply memorize an order.",
-        "image": "/resources/talmido/chapter-7/slide-1.webp"
+        "body": [
+          "Chapter 7 explains what happens during the Holy Qurbana and why it matters. The prayers and actions help us understand our relationship with Christ and with one another.",
+          "We will follow the service step by step, explain unfamiliar words, and connect what happens in church with how we live during the week."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-1.webp"
       },
       {
-        "title": "One worship, two main parts",
-        "body": [
-          "Pre-Anaphora: hear God’s Word.",
-          "Anaphora: enter the Eucharistic offering.",
-          "The Malankara Church mainly uses the Liturgy of St. James."
-        ],
+        "title": "The big picture: two parts of worship",
         "ref": "p. 39",
-        "notes": "Pre-Anaphora includes readings and preparation. Anaphora means offering and centers on the Eucharist. The curriculum connects it with the Upper Room and Christ’s Mystical Supper.",
-        "image": "/resources/talmido/chapter-7/slide-2.webp"
+        "body": [
+          "The first part is the Pre-Anaphora, also called the Liturgy of the Word. We hear hymns, prayers, and Bible readings that prepare us for the Eucharistic offering.",
+          "The second part is the Anaphora, also called the Liturgy of the Upper Room. It centers on the Eucharist and our participation in Christ’s Body and Blood.",
+          "The main liturgy used in the Malankara Church is the Liturgy of St. James. The lesson connects our worship today with the worship of the Apostles."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-2.webp"
       },
       {
-        "title": "Listen with your whole self",
+        "title": "Who were the catechumens?",
+        "ref": "pp. 40–41",
         "body": [
-          "Scripture nourishes our souls.",
-          "We hear the Epistles and the Gospel.",
-          "The sermon helps us understand and respond."
+          "Catechumens are people learning the Christian faith in preparation for baptism. This is why the first part also has the name Liturgy of the Catechumens.",
+          "Historically, catechumens stayed for the hymns and Scripture readings. They left before the Anaphora, while the baptized faithful continued with the Eucharistic worship.",
+          "These names help us remember the movement of the service: we hear God’s Word, then enter the Eucharistic offering."
         ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-3.webp"
+      },
+      {
+        "title": "1. The curtain opens and the hymn begins",
         "ref": "p. 40",
-        "notes": "The readings include Acts or the general epistles, a Pauline epistle, and the Gospel. Explain the candle bearer as a sign of John the Baptist preparing the way for Christ. The Trisagion is the hymn beginning Holy God. Image: worship photograph reproduced in the supplied curriculum, printed p. 40.",
-        "image": "/resources/talmido/chapter-7/slide-3.webp"
+        "body": [
+          "As the curtain opens, the priest asks St. Mary, the mother of Jesus, and St. John the Baptist to intercede for us. Intercede means to pray on someone else’s behalf.",
+          "Then we sing the Maneesa, also called Ma’nitho, of St. Severus. The textbook describes this hymn as a summary of our Orthodox faith and of God’s love for us.",
+          "The unfamiliar name belongs to a familiar action: the Church begins by singing its faith together."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-4.webp"
       },
       {
-        "title": "Mercy, prayer, and shared faith",
+        "title": "2. The procession tells a Gospel story",
+        "ref": "p. 40",
         "body": [
-          "Prayers ask God for mercy.",
-          "Incense reminds us of prayers rising to God.",
-          "The Nicene Creed expresses the Church’s faith."
+          "A server carries a candle ahead of the priest. The candle bearer represents John the Baptist, who prepared the way for Jesus. This is why John is called the Forerunner.",
+          "The priest represents Christ. Servers carrying maravasas accompany the procession around the altar. Maravasas are the ceremonial metal fans used in worship.",
+          "The order helps us remember the Gospel: John prepares the way, then Christ comes. Ask: Why does the candle bearer walk ahead?"
         ],
+        "notes": "The user-supplied teaching reference also explains the maravasas as representing the angels around God’s throne. You may point this out when discussing the procession.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-5.webp"
+      },
+      {
+        "title": "3. The Trisagion: a prayer of holiness",
+        "ref": "p. 40",
+        "body": [
+          "The Trisagion is the prayer beginning “Holy art Thou, O God.” Its name means “three times holy.” The prayer praises God’s holiness and asks for mercy.",
+          "The textbook shares a Church tradition about Joseph of Arimathea and Nicodemus hearing heavenly praise while carrying Jesus’ body. They added the words about Christ’s crucifixion.",
+          "This is why the lesson calls the prayer a combination of angelic and human praise. This account is a liturgical tradition, rather than a scene narrated in the Gospels."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-6.webp"
+      },
+      {
+        "title": "4. The Bible readings, in order",
+        "ref": "p. 40",
+        "body": [
+          "First comes a reading from Acts or the Catholic Epistles, read from the northern step of the sanctuary. Catholic Epistles means the general letters of James, Peter, John, and Jude.",
+          "Second comes a reading from St. Paul’s letters, from the southern step. Then the priest reads the Gospel from the center of the Madbaha, the altar area.",
+          "Here, “catholic” means universal. The name describes the general letters and does not mean that the reading comes from the Roman Catholic Church."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-7.webp"
+      },
+      {
+        "title": "5. Listening and the sermon",
+        "ref": "p. 40",
+        "body": [
+          "Before the Gospel, the deacon calls everyone to attend with stillness, fear, and purity. In plain language: be quiet, be reverent, and give God your attention.",
+          "The sermon explains the Scripture and helps us live it. The lesson places it after the Gospel, while noting that some parishes move it later for practical reasons.",
+          "The textbook compares Scripture to food for the soul. Ask: If a reading teaches us to love our neighbor, what could that change about tomorrow at school?"
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-8.webp"
+      },
+      {
+        "title": "6. Prayers for mercy and the incense",
         "ref": "p. 41",
-        "notes": "Introduce Promion, Husoyo, and Sedro as prayers within the service. Prayers include the priest, the faithful, and the living and departed. Catechumens are people preparing for baptism. Avoid making the vocabulary a memory test.",
-        "image": "/resources/talmido/chapter-7/slide-4.webp"
+        "body": [
+          "Promion, Husoyo, and Sedro are names for prayers in this part of the service. The priest first asks God’s mercy for himself, then for the faithful, both living and departed.",
+          "The priest blesses the censer while proclaiming the holiness of the Father, Son, and Holy Spirit. The censer is the vessel that holds the burning incense.",
+          "As the fragrant smoke rises, it helps us picture our prayers rising to God. The lesson connects this with incense in Scripture and with the prayers of the saints."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-9.webp"
       },
       {
-        "title": "Peace begins in the heart",
+        "title": "7. The Creed: the faith we share",
+        "ref": "p. 41",
         "body": [
-          "The Kiss of Peace calls us to reconciliation.",
-          "Peace is shared from the altar to the people.",
-          "Worship and the way we treat others belong together."
+          "The Nicene Creed is the Church’s statement of faith. We confess what we believe about the Father, the Son, and the Holy Spirit, and about the Church’s life and hope.",
+          "The textbook connects this shared confession with baptism. Historically, those preparing for baptism left at this point, before the Anaphora.",
+          "The Creed helps us recognize that we worship as one community sharing the same faith, even though we bring different needs and experiences."
         ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-10.webp"
+      },
+      {
+        "title": "8. The Kiss of Peace begins the Anaphora",
         "ref": "pp. 38, 42",
-        "notes": "Connect Matthew 5:23–24 with sincere reconciliation. Ask for a fictional example of making peace after an argument. Do not pressure students to disclose conflict. Seeking help and keeping safe can be part of reconciliation.",
-        "image": "/resources/talmido/chapter-7/slide-5.webp"
+        "body": [
+          "The peace begins at the altar and passes through the ministers to the congregation. Each person shares it with others until it reaches the whole church.",
+          "The lesson compares this with Christ giving His peace to the Apostles, who shared it with their disciples and with the world. The peace comes from God.",
+          "It also asks something of us: sincere reconciliation. Jesus teaches us to make peace with another person before bringing our offering. An outward gesture should express an inward intention."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-11.webp"
       },
       {
-        "title": "Stand with attention",
+        "title": "9. The veil and the call to attention",
+        "ref": "p. 42",
         "body": [
-          "The veil is lifted.",
-          "We receive the Trinitarian blessing.",
-          "We join the heavenly hymn: Holy, Holy, Holy."
+          "The Shoshappa, or Shushefo, is the cloth covering the paten and chalice. The paten holds the bread and the chalice holds the wine. The veil also recalls the stone at Christ’s tomb.",
+          "As the veil is lifted, the deacon calls the faithful to stand with reverence, purity, love, and true faith. Our attention turns toward God and thanksgiving.",
+          "The priest gives a Trinitarian blessing, a blessing in the name of the Father, Son, and Holy Spirit. “Trinitarian” refers to the Holy Trinity."
         ],
-        "ref": "pp. 42–43",
-        "notes": "The veil over the paten and chalice is called Shoshappa or Shushefo. The lesson associates it with the stone at Christ’s tomb. The Sanctus joins our praise with heaven. Explain symbolism as helping us understand the mystery, not as a performance.",
-        "image": "/resources/talmido/chapter-7/slide-6.webp"
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-12.webp"
       },
       {
-        "title": "Remember Christ’s saving work",
-        "body": [
-          "The Words of Institution recall the Mystical Supper.",
-          "We remember His death and Resurrection.",
-          "We await His coming again."
-        ],
+        "title": "10. Joining the praise of heaven",
         "ref": "p. 43",
-        "notes": "The Church confesses the Eucharist as Christ’s real Body and Blood. Remembering here is the Church’s participation in His saving work; do not reduce Holy Communion to an ordinary memorial meal.",
-        "image": "/resources/talmido/chapter-7/slide-7.webp"
+        "body": [
+          "The priest calls us to lift our thoughts and hearts toward Christ. The service asks for the attention of our whole person, including our mind and heart.",
+          "We sing the Sanctus, the hymn of “Holy, Holy, Holy.” The lesson connects this with the praise of the seraphim in Isaiah 6:3. Seraphim are heavenly beings who worship God.",
+          "The meaning is that the worship of the Church on earth joins the worship of heaven. We belong to a much larger communion than the people we can see around us."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-13.webp"
       },
       {
-        "title": "The Holy Spirit and the whole Church",
+        "title": "11. The Words of Institution",
+        "ref": "p. 43",
         "body": [
-          "Epiclesis: invocation of the Holy Spirit.",
-          "The gifts are consecrated.",
-          "The Diptychs remember the living and departed."
+          "The Words of Institution recall Christ establishing the Eucharist at the Mystical Supper. We hear the account of His giving the bread and wine as His Body and Blood.",
+          "The Church believes that in Holy Communion we receive the real Body and Blood of Christ. This belief explains the reverence with which we approach the Mysteries.",
+          "We remember His death, confess His Resurrection, and await His coming again. The service brings our attention to the saving work through which Christ gives us life."
         ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-14.webp"
+      },
+      {
+        "title": "12. The Epiclesis: calling on the Spirit",
+        "ref": "p. 43",
+        "body": [
+          "Epiclesis means invocation or calling upon. Here the priest calls upon the Holy Spirit to descend upon the gifts. The lesson describes their consecration as Christ’s Body and Blood.",
+          "The congregation responds with “Kurielaison,” meaning “Lord, have mercy.” Even while the priest prays quietly, the people participate with attention and prayer.",
+          "Consecration means making holy or setting apart for God. In this part of the service, the word refers to the Holy Spirit’s work in the Eucharistic gifts."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-15.webp"
+      },
+      {
+        "title": "13. The Diptychs: prayers for the living",
         "ref": "pp. 43–44",
-        "notes": "Epiclesis means invocation. The six Diptychs remember church leaders; the sick, suffering, and those requesting prayer; civil rulers; Mary and the saints; teachers of the Church; and the faithful departed. Emphasize the communion of the whole Church.",
-        "image": "/resources/talmido/chapter-7/slide-8.webp"
+        "body": [
+          "Diptychs, also called Thubden, are the prayers of remembrance and intercession. Having drawn near to God, we bring the needs of the whole Church before Him.",
+          "The first remembers living Church leaders. The second remembers the sick, the suffering, and people who have requested prayer. The third remembers those in civil authority.",
+          "The congregation continues to respond, “Lord, have mercy.” Sitting during these prayers does not mean our participation has stopped."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-16.webp"
       },
       {
-        "title": "Preparing for Holy Communion",
+        "title": "The Diptychs: saints and the departed",
+        "ref": "p. 44",
         "body": [
-          "The consecrated Bread is broken.",
-          "We pray the Lord’s Prayer.",
-          "We draw near with repentance and reverence."
+          "The fourth Diptych commemorates St. Mary and the saints. The fifth remembers the teachers, or doctors, of the Church who preserved and handed down the faith.",
+          "The sixth remembers all the faithful departed, including our loved ones who have died. “Departed” means those who have passed from this life.",
+          "This answers an important chapter question: the Holy Qurbana is the worship of a communion that includes the living and the departed."
         ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-17.webp"
+      },
+      {
+        "title": "14. The Fraction and the Lord’s Prayer",
+        "ref": "p. 44",
+        "body": [
+          "During the Fraction, the curtain closes and the priest breaks the consecrated Bread. The lesson connects this solemn action with Christ’s death and preparation for burial.",
+          "When the curtain opens again, we pray the Lord’s Prayer. Calling God “Our Father” expresses the closeness with Him that Christ restores.",
+          "The request for daily bread also prepares us to receive Christ, the Bread of Life. We depend on God for our nourishment and life."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-18.webp"
+      },
+      {
+        "title": "15. The Elevation and Holy Communion",
         "ref": "pp. 44–45",
-        "notes": "Fraction is the breaking of the consecrated Bread and recalls Christ’s death and burial. The Lord’s Prayer expresses closeness to our heavenly Father. Preparation includes repentance and guidance from one’s spiritual father; do not give a universal confession schedule.",
-        "image": "/resources/talmido/chapter-7/slide-9.webp"
+        "body": [
+          "The priest lifts the paten and chalice containing the Holy Mysteries. This is the Elevation. The congregation glorifies the Father, Son, and Holy Spirit as holy.",
+          "The priest then brings the Mysteries to the people for Communion. We receive Christ with reverence because of who He is and the holiness of His gift.",
+          "The chapter calls us to approach with a repentant heart. Holy Confession and guidance from our spiritual father help us prepare to receive."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-19.webp"
       },
       {
-        "title": "Receive—and live differently",
+        "title": "What changes after we leave church?",
+        "ref": "pp. 38, 45–46",
         "body": [
-          "Holy Communion unites us with Christ.",
-          "The service sends us into daily life.",
-          "Our words and actions should show His love."
+          "The Holy Qurbana gives us a foundation for everyday life. The love and peace we receive should shape how we speak, forgive, and care for other people.",
+          "For example, someone who shares the Kiss of Peace on Sunday can practice that peace by welcoming a lonely classmate on Monday or making amends after an argument.",
+          "As we grow, familiar prayers can take on deeper meaning. Ask: Which part of the service will you pay closer attention to next Sunday, and why?"
         ],
-        "ref": "pp. 45–46",
-        "notes": "The elevation proclaims holiness belonging to the Trinity. Discuss how receiving Christ calls us to care for others throughout the week. Physical attendance alone is not the lesson’s goal.",
-        "image": "/resources/talmido/chapter-7/slide-10.webp"
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-20.webp"
       },
       {
-        "title": "What would living worship look like?",
+        "title": "Chapter 7: questions to talk through",
+        "ref": "pp. 39–45",
         "body": [
-          "You share the Kiss of Peace on Sunday.",
-          "On Monday, a classmate is left out.",
-          "What could you do to carry Christ’s peace into school?"
+          "1. What are the two main parts of the Holy Qurbana? Why is the first part also called the Liturgy of the Catechumens?",
+          "2. Why does the candle bearer go ahead of the priest? What should sharing the Kiss of Peace mean in our relationships?",
+          "3. What is the Epiclesis? How do the Diptychs show that our worship includes both the living and the departed?"
         ],
-        "ref": "pp. 38, 46",
-        "notes": "New classroom application based on the lesson. Allow one minute of discussion. Possible answers include welcoming the classmate, listening, and refusing cruel jokes. Connect worship with practical love.",
-        "image": "/resources/talmido/chapter-7/slide-11.webp"
+        "notes": "Give students time to explain in their own words. These are curriculum-based practice questions, not a request for exact memorized wording.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-21.webp"
       },
       {
-        "title": "Chapter 7 quick quiz",
+        "title": "Chapter 7: answers with explanations",
+        "ref": "pp. 39–45",
         "body": [
-          "1. What are the two main parts of the liturgy?",
-          "2. What does the Kiss of Peace call us to do?",
-          "3. What is the Epiclesis?"
+          "1. Pre-Anaphora and Anaphora. Catechumens are people preparing for baptism, who historically stayed for the first part and left before the Eucharistic offering.",
+          "2. The candle bearer represents John the Baptist preparing the way for Christ. The Kiss of Peace calls us to share God’s peace and seek sincere reconciliation.",
+          "3. The Epiclesis invokes the Holy Spirit. The Diptychs remember living people, the saints, and the faithful departed, expressing the communion of the whole Church."
         ],
-        "ref": "pp. 39, 42–43",
-        "notes": "Pause before showing the answers. Accept equivalent meaning. These are newly written curriculum-based practice questions.",
-        "image": "/resources/talmido/chapter-7/slide-12.webp"
-      },
-      {
-        "title": "Answers and one idea to remember",
-        "body": [
-          "1. Pre-Anaphora and Anaphora.",
-          "2. Be reconciled and share sincere peace.",
-          "3. The invocation of the Holy Spirit.",
-          "Worship shapes how we live all week."
-        ],
-        "ref": "pp. 38–46",
-        "notes": "Ask students to name one action that connects Sunday worship with Monday life. Review any unfamiliar terms without rewarding pronunciation over understanding.",
-        "image": "/resources/talmido/chapter-7/slide-13.webp"
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-7-detailed/slide-22.webp"
       }
     ],
-    "file": "/resources/talmido/chapter-7-the-living-sacrifice.pptx"
+    "file": "/resources/talmido/chapter-7-the-living-sacrifice-detailed.pptx",
+    "layout": "reading"
   },
   {
     "chapter": 8,
     "title": "Holy Confession",
-    "slug": "holy-confession",
+    "slug": "holy-confession-detailed",
     "slides": [
       {
         "title": "Holy Confession",
-        "body": [
-          "TALMIDO / CHAPTER 8",
-          "Returning to our loving Father",
-          "Repentance, forgiveness, and a new beginning."
-        ],
         "ref": "pp. 47–50",
-        "notes": "Allow 12–15 minutes. Keep discussion about the lesson and fictional examples. Never ask children to confess personal sins to the class.",
-        "image": "/resources/talmido/chapter-8/slide-1.webp"
+        "body": [
+          "Chapter 8 explains how we return to God when sin has wounded our relationship with Him. The Church presents Confession as a sacrament of healing.",
+          "We will look at God’s welcome, the priest’s role, how to prepare, and why repentance includes the way we treat other people."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-1.webp"
       },
       {
-        "title": "Sin wounds our relationship with God",
+        "title": "The big picture: sin and healing",
+        "ref": "pp. 47–48",
         "body": [
-          "The lesson compares sin to spiritual sickness.",
-          "God wants to heal and restore us.",
-          "Confession is a return to His love."
+          "The chapter compares sin with spiritual sickness. When we choose sin, we turn away from God and damage our communion, or shared life, with Him.",
+          "Confession helps us return. We acknowledge our sins, repent, and receive God’s forgiveness through the ministry He has entrusted to the Church.",
+          "The comparison with sickness helps explain our need for care and healing. It does not mean that physical illness is proof that a person has sinned."
         ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-2.webp"
+      },
+      {
+        "title": "The prodigal son: why the story matters",
         "ref": "p. 47",
-        "notes": "Explain that spiritual sickness is an image for sin and our need for healing. Do not equate physical illness or disability with moral failure.",
-        "image": "/resources/talmido/chapter-8/slide-2.webp"
+        "body": [
+          "The prodigal son leaves his father and becomes separated from his family’s love and life. The chapter uses his loneliness as a picture of what sin does to our communion with God.",
+          "When the son turns back, his father welcomes him. The father’s response shows the love with which God receives those who return in repentance.",
+          "The important movement is leaving, recognizing our need, and returning. Ask: What does the father’s welcome teach us about approaching God after doing wrong?"
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-3.webp"
       },
       {
-        "title": "The father welcomes his son",
-        "body": [
-          "The prodigal son turns back toward home.",
-          "His father receives him with love.",
-          "Repentance means turning back to God."
-        ],
+        "title": "Repentance means turning back",
         "ref": "p. 47",
-        "notes": "Briefly retell the prodigal son: leaving, recognizing his need, returning, and being welcomed. The lost sheep likewise shows joy over repentance; see Luke 15:7. Image: prodigal son icon reproduced in the supplied curriculum, printed p. 47.",
-        "image": "/resources/talmido/chapter-8/slide-3.webp"
+        "body": [
+          "Repentance includes recognizing that we have done wrong, being sincerely sorry, and choosing to turn toward God again. It changes the direction we want our life to take.",
+          "The chapter also recalls the lost sheep and the joy in heaven when a sinner repents. God wants our return and restoration, so we can approach Him with hope.",
+          "Feeling embarrassed can make us want to hide. Repentance moves us toward honesty, help, and a renewed relationship with God."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-4.webp"
       },
       {
-        "title": "God forgives; the priest ministers",
-        "body": [
-          "God is the source of forgiveness.",
-          "The priest is a witness and spiritual guide.",
-          "Christ entrusted a ministry of forgiveness to the Apostles."
-        ],
+        "title": "Why do we confess before a priest?",
         "ref": "p. 48",
-        "notes": "Discuss John 20:23 as the lesson’s foundation. Ordained ministry continues through apostolic succession and the laying on of hands. A priest does not replace God; he ministers within Christ’s Church.",
-        "image": "/resources/talmido/chapter-8/slide-4.webp"
+        "body": [
+          "We confess to God in the presence of the priest. God is the source of forgiveness. The priest witnesses our confession, guides us, and ministers God’s forgiveness.",
+          "The chapter compares the priest’s role with a doctor’s care. A doctor helps a sick person seek healing, and a spiritual father helps us recognize and overcome patterns of sin.",
+          "Personal prayer remains important. Sacramental Confession is the particular way the Church gives us this ministry of guidance and absolution."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-5.webp"
       },
       {
-        "title": "Prepare with honesty",
+        "title": "Where does the priest’s authority come from?",
+        "ref": "p. 48",
         "body": [
-          "Examine your thoughts, words, and actions.",
-          "Be sorry and willing to change.",
-          "You may write reminders before confession."
+          "The chapter points to John 20:23, where Christ gives the Apostles authority concerning the forgiveness of sins. Their ministry comes from Christ.",
+          "Through ordination, with the laying on of hands, this ministry continues through bishops and priests. The lesson calls this apostolic succession.",
+          "Absolution means the forgiveness of sins ministered in Confession. The priest serves through the authority Christ gives His Church, rather than through personal power."
         ],
-        "ref": "pp. 48–49",
-        "notes": "Use a quiet examination of conscience privately. Explain that honesty matters more than impressive words. Ask one’s priest for guidance on preparation and frequency. Do not collect students’ written examinations.",
-        "image": "/resources/talmido/chapter-8/slide-5.webp"
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-6.webp"
       },
       {
-        "title": "Repentance becomes action",
+        "title": "Feeling nervous about Confession",
+        "ref": "p. 48",
         "body": [
-          "Ask forgiveness when you hurt someone.",
-          "Try to repair the harm.",
-          "Forgive others and ask God for help to grow."
+          "It is natural to feel nervous when speaking honestly about something shameful or painful. The textbook explains that the priest is there to listen, guide, and pray for forgiveness.",
+          "Getting to know a trusted spiritual father can make it easier to seek help consistently. The chapter recommends a relationship with a priest who knows and can guide you.",
+          "You can tell the priest that you are nervous or unsure how to begin. Asking for help is a sensible first step."
         ],
+        "notes": "Keep classroom discussion general. Do not invite children to disclose their sins to the teacher or class.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-7.webp"
+      },
+      {
+        "title": "1. Preparation: examine yourself",
+        "ref": "p. 49",
+        "body": [
+          "Before Confession, take time to think honestly about your thoughts, words, and actions. Notice where you have turned away from God or hurt other people.",
+          "The textbook suggests writing private reminders so you do not forget what you want to confess. The purpose is honest reflection, not producing impressive words.",
+          "A useful private question is: What happened, what part was my responsibility, and what do I need help to change?"
+        ],
+        "notes": "Do not collect or read students’ private lists. The final question is a teaching aid, not a quotation from the curriculum.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-8.webp"
+      },
+      {
+        "title": "2. Preparation: sincere repentance",
+        "ref": "p. 49",
+        "body": [
+          "Confession asks us to be honest and genuinely sorry. If we hide the very thing for which we need help, it becomes harder to receive useful guidance.",
+          "The textbook suggests prayerful reflection on the penitential Psalms. These prayers help us express sorrow, ask for mercy, and trust in God.",
+          "The goal is to speak truthfully to God and seek healing. We do not need to pretend that we already have everything under control."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-9.webp"
+      },
+      {
+        "title": "3. Preparation: a real intention to change",
+        "ref": "p. 49",
+        "body": [
+          "Repentance includes an intention to resist the sin and work with our priest on ways to overcome it. We take practical steps instead of simply repeating the same apology.",
+          "For example, a person who spreads a rumor can stop repeating it, correct the false statement, and apologize to the person harmed. This example applies the lesson to school life.",
+          "Ask: What would show that this person really wants to change? Look for actions that repair harm and prevent it from happening again."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-10.webp"
+      },
+      {
+        "title": "What if I make the same mistake again?",
         "ref": "pp. 49–50",
-        "notes": "Being forgiven does not make every consequence disappear. Repair might include correcting a rumor or returning something. Forgiveness does not mean hiding harm or avoiding help from a trusted adult.",
-        "image": "/resources/talmido/chapter-8/slide-6.webp"
+        "body": [
+          "The chapter asks whether we should confess when we know we might sin again. Our struggle is a reason to seek help and keep repenting, rather than give up.",
+          "A sincere intention to change does not mean claiming we will never struggle again. We return honestly, accept guidance, and continue making an effort.",
+          "We should also avoid planning to do wrong on the assumption that we can confess afterward. Repentance includes a real desire to turn away from the sin."
+        ],
+        "notes": "This slide explains the textbook’s reflection question in light of its instructions to repent sincerely and work with the priest.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-11.webp"
       },
       {
-        "title": "Confession belongs to our life in Christ",
-        "body": [
-          "It renews our commitment to God.",
-          "It helps restore relationships.",
-          "It supports preparation for Holy Communion."
-        ],
-        "ref": "p. 50",
-        "notes": "Connect confession with renewing baptismal commitments and with peace before the Eucharist. Preparation and frequency should follow guidance from the student’s priest or spiritual father.",
-        "image": "/resources/talmido/chapter-8/slide-7.webp"
-      },
-      {
-        "title": "A chance to begin again",
-        "body": [
-          "Someone spreads an unkind rumor.",
-          "Later, they realize the harm they caused.",
-          "What would sincere repentance look like?"
-        ],
+        "title": "Forgiving and making peace",
         "ref": "pp. 49–50",
-        "notes": "New classroom application. Possible answers: stop repeating the rumor, tell the truth to those misled, apologize, ask God’s forgiveness, and seek guidance. Do not ask whether students have done this.",
-        "image": "/resources/talmido/chapter-8/slide-8.webp"
+        "body": [
+          "The chapter connects asking God’s forgiveness with forgiving other people. It also calls us to seek forgiveness from those we have hurt and work toward reconciliation.",
+          "This is why the Kiss of Peace matters in the Holy Qurbana. We express a willingness to live in peace with others while approaching God together.",
+          "Forgiveness can take effort. If someone is hurting or threatening you, seek help from a trusted adult. Forgiving does not require hiding harm or remaining unsafe."
+        ],
+        "notes": "The last paragraph is age-appropriate pastoral application, rather than a quotation from the textbook.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-12.webp"
       },
       {
-        "title": "Chapter 8 quick quiz",
+        "title": "How often? What about Holy Communion?",
+        "ref": "pp. 49–50; ch. 7 p. 45",
         "body": [
-          "1. Who is the source of forgiveness?",
-          "2. How can we prepare for confession?",
-          "3. Is repentance only saying “sorry”? Explain."
+          "The textbook mentions recommendations about regular Confession, then tells us to discuss frequency with our priest. Our spiritual father helps guide our particular preparation.",
+          "Confession also renews our baptismal commitment to turn away from evil and follow Christ. The Christian life includes returning and growing throughout our lives.",
+          "Chapter 7 connects Confession with preparing for Holy Communion. Repentance and reconciliation help us approach the Holy Mysteries with an attentive heart."
         ],
-        "ref": "pp. 48–50",
-        "notes": "Pause for answers. These are newly written curriculum-based questions. Accept meaning, not exact wording.",
-        "image": "/resources/talmido/chapter-8/slide-9.webp"
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-13.webp"
       },
       {
-        "title": "Answers and one idea to remember",
-        "body": [
-          "1. God; the priest ministers as witness and guide.",
-          "2. Examine ourselves honestly and desire change.",
-          "3. No. We turn back to God and try to repair harm.",
-          "God welcomes us back into His love."
-        ],
+        "title": "Chapter 8: questions to talk through",
         "ref": "pp. 47–50",
-        "notes": "Finish with the father’s welcome in the prodigal son. Repentance involves real effort and trust in God’s mercy, not despair or public shame.",
-        "image": "/resources/talmido/chapter-8/slide-10.webp"
+        "body": [
+          "1. Why does the chapter describe Confession as healing? What does the prodigal son’s father teach us about God?",
+          "2. If God forgives us, what is the priest’s role? What does apostolic succession mean in this lesson?",
+          "3. Name the main steps of preparation. Should someone who struggles with the same sin give up on Confession? Explain why."
+        ],
+        "notes": "Accept explanations in the student’s own words. Keep examples fictional and never ask for personal confessions.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-14.webp"
+      },
+      {
+        "title": "Chapter 8: answers with explanations",
+        "ref": "pp. 47–50",
+        "body": [
+          "1. Sin wounds our communion with God, and Confession helps restore it. The father welcomes his returning son, showing God’s love toward those who repent.",
+          "2. The priest witnesses, guides, and ministers forgiveness. Apostolic succession connects his ordained ministry through the bishops and Apostles to Christ.",
+          "3. Examine yourself, repent honestly, and intend to change while seeking reconciliation. Keep seeking help when you struggle, with a sincere desire to grow."
+        ],
+        "notes": "Read the explanation together. Invite the student to explain the main idea in their own words before continuing.",
+        "image": "/resources/talmido/chapter-8-detailed/slide-15.webp"
       }
     ],
-    "file": "/resources/talmido/chapter-8-holy-confession.pptx"
+    "file": "/resources/talmido/chapter-8-holy-confession-detailed.pptx",
+    "layout": "reading"
   },
   {
     "chapter": 9,
